@@ -12,7 +12,7 @@
 					class="menu-sider"
 			>
 				<a-menu
-						theme="dark"
+						theme="light"
 						mode="vertical"
 						:openKeys="openKeys"
 						:selectedKeys="[$route.name]"
