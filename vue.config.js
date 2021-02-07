@@ -23,19 +23,4 @@ module.exports = {
 					errors: false
 			}
 	},
-	css: {
-    loaderOptions: {
-      less: {
-        lessOptions: {
-          modifyVars: {
-            'primary-color': '#fff',// 全局主色
-            'link-color': '#1DA57A',// 链接色
-						'border-radius-base': '2px',// 组件/浮层圆角
-						'btn-primary-bg':'#fff'
-          },
-          javascriptEnabled: true,
-        },
-      },
-    },
-  },
 }
