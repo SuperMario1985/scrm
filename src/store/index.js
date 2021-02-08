@@ -44,12 +44,12 @@ export default new Vuex.Store({
 			'/verifyPassword',
 			'/workBinding'
 		],
-		commonUrl               : 'https://test-hd-scrm.wemero.cn',//公共的链接
-		siteUrl                 : 'https://test-scrm.wemero.cn',//站点Web地址
-		h5Url                   : 'http://test-m-scrm.wemero.cn',//站点H5地址
+		commonUrl               : 'https://hd-scrm.wemero.cn',//公共的链接
+		siteUrl                 : 'https://scrm.wemero.cn',//站点Web地址
+		h5Url                   : 'http://m-scrm.wemero.cn',//站点H5地址
 		cashierUrl              : 'http://k.pigcms.com.cn',//智慧店铺地址
 		qxyUrl                  : 'https://www.qingxiaoyun.com',//轻小云地址
-		redirectDomain          : 'test-m-scrm.wemero.cn',// 可信域名
+		redirectDomain          : 'm-scrm.wemero.cn',// 可信域名
 		systemIp                : '8.140.108.50,8.140.103.205,8.140.110.193',// 系统ip
 		proCorpId               : 'wwef54c3b926fdf123', // 企业微信服务商ID
 		authorizer_type         : '',//选中的公众号授权状态,authorized：已授权、updateauthorized：更新授权、unauthorized：取消授权

@@ -28,7 +28,7 @@ module.exports = {
 		hotOnly: false,
 		proxy: {
 			'/api': {
-				target: 'https://test-hd-scrm.wemero.cn',
+				target: 'https://hd-scrm.wemero.cn',
 				changeOrigin: true,
 				ws: true,
 				pathRewrite: {
