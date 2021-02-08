@@ -1,26 +1,40 @@
 const CompressionPlugin = require("compression-webpack-plugin")
 
 module.exports = {
-	assetsDir          : 'assets',
+	assetsDir: 'assets',
 	productionSourceMap: false,
-	css                : {
+	css: {
 		extract: false
 	},
-	configureWebpack   : config => {
+	configureWebpack: config => {
 		if (process.env.NODE_ENV === 'production') {
 			return {
 				plugins: [new CompressionPlugin({
-					test                : /\.js$|\.html$|\.css/,    // 匹配文件名称
-					threshold           : 10240,   // 大小限制，对于超过10KB的数据进行压缩处理
+					test: /\.js$|\.html$|\.css/,    // 匹配文件名称
+					threshold: 10240,   // 大小限制，对于超过10KB的数据进行压缩处理
 					deleteOriginalAssets: false,    // 保留删除源文件
 				})]
 			}
 		}
 	},
 	devServer: {
-			overlay: {
-					warnings: false,
-					errors: false
-			}
-	},
+		// overlay: {
+		//   warnings: true,
+		//   errors: true
+		// },
+		host: 'localhost',
+		port: 8080,
+		https: false,
+		hotOnly: false,
+		proxy: {
+			'/api': {
+				target: 'https://test-hd-scrm.wemero.cn',
+				changeOrigin: true,
+				ws: true,
+				pathRewrite: {
+					'^api': '/api'
+				}
+			},
+		}
+	}
 }
