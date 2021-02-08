@@ -2516,7 +2516,7 @@
 		width: calc(100% - 12px);
 		width: -moz-calc(100% - 12px);
 		width: -webkit-calc(100% - 12px);
-		background-color: #E9E9E9;
+		background-color: #F8F8F8;
 	}
 
 	.spinning-true {

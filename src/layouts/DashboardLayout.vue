@@ -6,7 +6,6 @@
 			<a-layout-sider
 					width="200"
 					style="background: #FFF"
-					collapsible
 					v-model="collapsed"
 					@collapse="onLayoutCollapse"
 					class="menu-sider"
@@ -14,9 +13,8 @@
 				<a-menu
 						theme="light"
 						mode="vertical"
-						:subMenuOpenDelay="0"
 						:selectedKeys="[$route.name]"
-						:style="{borderRight: 0,top:0,bottom:'48px',left:0,right:0,position:'absolute',overflowY:'auto' }"
+						:style="{borderRight: 0,top:0,bottom:'1px',left:0,right:0,position:'absolute',overflowY:'auto' }"
 						@openChange="onOpenChange"
 						@click="onItemClick"
 				>

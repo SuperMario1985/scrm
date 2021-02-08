@@ -147,7 +147,9 @@ ul li {
 .ant-menu-submenu-active {
     color: #1890ff!important;
 }
-
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+    background-color: #DEF0E8;
+}
 .ant-empty {
     margin-bottom: 20px;
 }

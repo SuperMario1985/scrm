@@ -2034,7 +2034,7 @@
 		float: left;
 		width: 100%;
 		height: 100%;
-		background-color: #E9E9E9;
+		background-color: #F8F8F8;
 		max-height: 100%;
 	}
 

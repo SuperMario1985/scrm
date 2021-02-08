@@ -8,7 +8,7 @@
 			<span style="margin-left:5px;font-size: 12px;color: #FFFFFF;">有效期：{{$store.state.packageDetail.time}}</span>
 		</div>
 		<a-menu
-				theme="dark"
+				theme="light"
 				mode="horizontal"
 				:style="{ lineHeight: '64px', float: 'right' }"
 		>
@@ -51,9 +51,6 @@
 					</span>
 				<a-menu-item key="setting:1" @click="userUpdate">账号设置</a-menu-item>
 				<a-menu-item key="setting:2" @click="changeAccount" v-show="accountNum > 1">切换账户</a-menu-item>
-				<!--				<a-menu-item key="setting:3">螺蛳粉</a-menu-item>-->
-				<!--				<a-menu-item key="setting:4">双皮奶</a-menu-item>-->
-
 				<a-menu-divider/>
 				<a-menu-item key="setting:5" @click="loginOut">退出</a-menu-item>
 			</a-sub-menu>
@@ -295,7 +292,9 @@
 		text-overflow: ellipsis;
 		white-space: nowrap;
 	}
-
+	.header {
+		background: #fff !important;
+	}
 	/deep/ .ant-radio-button-wrapper {
 		width: 200px;
 		height: 55px;
