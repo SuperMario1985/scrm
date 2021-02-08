@@ -14,7 +14,7 @@
 						theme="light"
 						mode="vertical"
 						:selectedKeys="[$route.name]"
-						:style="{borderRight: 0,top:0,bottom:'1px',left:0,right:0,position:'absolute',overflowY:'auto' }"
+						:style="{borderRight: 0,top:0,bottom:'1px',left:0,right:0,position:'absolute',overflowY:'auto',backgroundColor: '#f8f8f8'}"
 						@openChange="onOpenChange"
 						@click="onItemClick"
 				>
