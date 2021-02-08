@@ -4,98 +4,6 @@
 		<div class="home-left-contain">
 			<a-spin :spinning="spinning" tip="Loading..." size="large"
 			        :class="spinning?'spinning-true':'spinning-false'">
-				<!-- <div style="padding:20px;">
-					<div class="measure#FFFrview">
-						<div class="card-title">
-							<p style="margin-top: -5px;">
-								指标总览
-							</p>
-							<span>（所有认证号昨日指标）</span>
-							<div class="card-title-right">
-								 <div >
-								<a-tooltip placement="top">
-									<template slot="title">
-										<span>一键导出所有认证号昨日指标数据</span>
-									</template>
-									<a-button>
-										<a-icon type="download" style='vertical-align: middle;'/>
-										导出数据
-									</a-button>
-								</a-tooltip>
-								 </div>
-							</div>
-						</div>
-							<div class="spin-content">
-								<div class="card-items-contain">
-									<div class="card-item">
-										<p class="card-item-name">昨日新增</p>
-										<p class="card-item-Numerical" style="color: rgb(255, 86, 45);">
-											{{totalIndicatorsData.add.num}}</p>
-										<div class="card-item-rate">
-											<span>比前日</span>
-											<img v-if="totalIndicatorsData.add.ratio<0"
-												 src="../../../assets/home/img/arrowdown.png"/>
-											<img v-if='totalIndicatorsData.add.ratio>=0'
-												 src="../../../assets/home/img/arrowup.png"/>
-											<span>{{Math.abs(totalIndicatorsData.add.ratio)}}%</span>
-										</div>
-									</div>
-									<div class="card-item">
-										<p class="card-item-name">昨日取关</p>
-										<p class="card-item-Numerical" style="color: rgb(59, 116, 255);">
-											{{totalIndicatorsData.takeOff.num}}</p>
-										<div class="card-item-rate">
-											<span>比前日</span>
-											<img v-if="totalIndicatorsData.takeOff.ratio<0"
-												 src="../../../assets/home/img/arrowdown.png"/>
-											<img v-if='totalIndicatorsData.takeOff.ratio>=0'
-												 src="../../../assets/home/img/arrowup.png"/>
-											<span>{{Math.abs(totalIndicatorsData.takeOff.ratio)}}%</span>
-										</div>
-									</div>
-									<div class="card-item">
-										<p class="card-item-name">昨日净增</p>
-										<p class="card-item-Numerical" style="color: rgb(59, 116, 255);">
-											{{totalIndicatorsData.net.num}}</p>
-										<div class="card-item-rate">
-											<span>比前日</span>
-											<img v-if="totalIndicatorsData.net.ratio<0"
-												 src="../../../assets/home/img/arrowdown.png"/>
-											<img v-if='totalIndicatorsData.net.ratio>=0'
-												 src="../../../assets/home/img/arrowup.png"/>
-											<span>{{Math.abs(totalIndicatorsData.net.ratio)}}%</span>
-										</div>
-									</div>
-									<div class="card-item">
-										<p class="card-item-name">昨日活跃</p>
-										<p class="card-item-Numerical" style="color: rgb(255, 86, 45);">
-											{{totalIndicatorsData.active.num}}</p>
-										<div class="card-item-rate">
-											<span>比前日</span>
-											<img v-if="totalIndicatorsData.active.ratio<0"
-												 src="../../../assets/home/img/arrowdown.png"/>
-											<img v-if='totalIndicatorsData.active.ratio>=0'
-												 src="../../../assets/home/img/arrowup.png"/>
-											<span>{{Math.abs(totalIndicatorsData.active.ratio)}}%</span>
-										</div>
-									</div>
-									<div class="card-item">
-										<p class="card-item-name">总粉丝</p>
-										<p class="card-item-Numerical" style="color: rgb(59, 116, 255);">
-											{{totalIndicatorsData.fansTotal.num}}</p>
-										<div class="card-item-rate">
-											<span>比前日</span>
-											<img v-if="totalIndicatorsData.fansTotal.ratio<0"
-												 src="../../../assets/home/img/arrowdown.png"/>
-											<img v-if='totalIndicatorsData.fansTotal.ratio>=0'
-												 src="../../../assets/home/img/arrowup.png"/>
-											<span>{{Math.abs(totalIndicatorsData.fansTotal.ratio)}}%</span>
-										</div>
-									</div>
-								</div>
-							</div>
-					</div>
-				</div> -->
 				<div class="tabs-contain" style="margin-top: 20px">
 					<div class="account-filter" v-if="wxList && wxList.length > 0">
 						<a-tabs class="wx-list-tab" type="card" v-model="wxId" @change="changeStoreId"
@@ -123,7 +31,7 @@
 						<div class="spin-content">
 							<div class="single-accout-card">
 								<div class="single-accout-cardItem account-type">
-									<span>昨日发起申请数
+									<span style="color:#333333;font-weight: 700;">昨日发起申请数
 										<a-tooltip placement="right">
 						                    <template slot="title">
 						                      <span>发起申请数，成员通过「搜索手机号」、「扫一扫」、「从微信好友中添加」、「从群聊中添加」、「添加共享、分配给我的客户」、「添加单向、双向删除好友关系的好友」、「从新的联系人推荐中添加」等渠道主动向客户发起的好友申请数量。</span>
@@ -131,18 +39,21 @@
 						                    <a-icon type="question-circle" style="margin-left:5px;"/>
 						                  </a-tooltip>
 									</span>
-									<p style="color: rgb(255, 86, 45);">{{storeIndicatorsData.one.count}}</p>
-									<div>
+									<p style="margin:5px 0">{{storeIndicatorsData.one.count}}</p>
+									<div style="display: flex;align-items: center;justify-content: space-between;">
 										<span>比前日</span>
-										<img v-if="storeIndicatorsData.one.status==0"
-										     src="../../../assets/home/img/arrowdown.png"/>
-										<img v-if='storeIndicatorsData.one.status==1'
-										     src="../../../assets/home/img/arrowup.png"/>
-										<span>{{storeIndicatorsData.one.per}}</span>
+										<div>
+											<img v-if="storeIndicatorsData.one.status==0"
+												src="../../../assets/home/img/arrowdown.png"/>
+											<img v-if='storeIndicatorsData.one.status==1'
+													src="../../../assets/home/img/arrowup.png"/>
+											<span v-if="storeIndicatorsData.one.status==0" style="color:#01b065">{{storeIndicatorsData.one.per}}</span>
+											<span v-if='storeIndicatorsData.one.status==1' style="color:#FF2222">{{storeIndicatorsData.one.per}}</span>
+										</div>
 									</div>
 								</div>
-								<div class="single-accout-cardItem account-type">
-									<span>昨日新增客户数
+								<div style="margin: 0 12px" class="single-accout-cardItem account-type">
+									<span style="color:#333333;font-weight: 700;">昨日新增客户数
 									<a-tooltip placement="right">
 						                    <template slot="title">
 						                      <span>新增客户数，成员新添加的客户数量。</span>
@@ -150,18 +61,21 @@
 						                    <a-icon type="question-circle" style="margin-left:5px;"/>
 						                  </a-tooltip>
 									</span>
-									<p style="color: rgb(59, 116, 255);">{{storeIndicatorsData.two.count}}</p>
-									<div>
+									<p style="margin:5px 0">{{storeIndicatorsData.two.count}}</p>
+									<div style="display: flex;align-items: center;justify-content: space-between;">
 										<span>比前日</span>
-										<img v-if="storeIndicatorsData.two.status==0"
+										<div>
+											<img v-if="storeIndicatorsData.two.status==0"
 										     src="../../../assets/home/img/arrowdown.png"/>
-										<img v-if='storeIndicatorsData.two.status==1'
-										     src="../../../assets/home/img/arrowup.png"/>
-										<span>{{storeIndicatorsData.two.per}}</span>
+											<img v-if='storeIndicatorsData.two.status==1'
+													src="../../../assets/home/img/arrowup.png"/>
+											<span v-if="storeIndicatorsData.two.status==0" style="color:#01b065">{{storeIndicatorsData.two.per}}</span>
+											<span v-if='storeIndicatorsData.two.status==1' style="color:#FF2222">{{storeIndicatorsData.two.per}}</span>
+										</div>
 									</div>
 								</div>
 								<div class="single-accout-cardItem account-type">
-									<span>昨日被客户删除/拉黑人数
+									<span style="color:#333333;font-weight: 700;">昨日被客户删除/拉黑人数
 									<a-tooltip placement="right">
 						                    <template slot="title">
 						                      <span>删除/拉黑成员的客户数，即将成员删除或加入黑名单的客户数。</span>
@@ -169,14 +83,17 @@
 						                    <a-icon type="question-circle" style="margin-left:5px;"/>
 						                  </a-tooltip>
 									</span>
-									<p style="color: rgb(59, 116, 255);">{{storeIndicatorsData.three.count}}</p>
-									<div>
+									<p style="margin:5px 0">{{storeIndicatorsData.three.count}}</p>
+									<div style="display: flex;align-items: center;justify-content: space-between;">
 										<span>比前日</span>
-										<img v-if="storeIndicatorsData.three.status==0"
+										<div>
+											<img v-if="storeIndicatorsData.three.status==0"
 										     src="../../../assets/home/img/arrowdown.png"/>
-										<img v-if='storeIndicatorsData.three.status==1'
-										     src="../../../assets/home/img/arrowup.png"/>
-										<span>{{storeIndicatorsData.three.per}}</span>
+											<img v-if='storeIndicatorsData.three.status==1'
+													src="../../../assets/home/img/arrowup.png"/>
+											<span v-if="storeIndicatorsData.three.status==0" style="color:#01b065">{{storeIndicatorsData.three.per}}</span>
+											<span v-if='storeIndicatorsData.three.status==1' style="color:#FF2222">{{storeIndicatorsData.three.per}}</span>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -2284,36 +2201,27 @@
 		-ms-flex-align: center;
 		align-items: center;
 		width: 100%;
-		background: #F9F9F9;
 	}
 
 	.single-accout-card .single-accout-cardItem {
 		width: 100%;
-		height: 111px;
-		padding: 20px 0px 20px 20px;
+		height: 116px;
+		padding: 12px;
 		background: #F9F9F9;
-		border: 1px solid #E9E9E9;
+		/* border: 1px solid #E9E9E9; */
 		border-left: 0;
-	}
-
-	.single-accout-card .single-accout-cardItem:first-child {
-		border: 1px solid #E9E9E9;
-	}
-
-	.single-accout-card .single-accout-cardItem span {
-		font-size: 14px;
-		color: #1A1A1A;
+		border-radius: 4px
 	}
 
 	.single-accout-card .single-accout-cardItem p {
 		font-family: DINAlternate-Bold;
-		font-size: 20px;
+		font-size: 28px;
 		margin-bottom: 0px;
 	}
 
 	.single-accout-card .single-accout-cardItem span {
 		font-size: 12px;
-		color: #1A1A1A;
+		color: #666666;
 	}
 
 	.single-accout-cardItem img {
