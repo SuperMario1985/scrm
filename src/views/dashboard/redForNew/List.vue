@@ -6,7 +6,7 @@
 						style="position: absolute; top:0; bottom:0;left: 0; right:0; overflow-x: hidden; overflow-y: auto;"
 						class="scroll">
 					<!-- 头部 -->
-					<a-layout-header>红包拉新</a-layout-header>
+					<!-- <a-layout-header>红包拉新</a-layout-header> -->
 					<!-- 内容 -->
 					<a-layout-content>
 						<div class="content-msg">
@@ -1282,8 +1282,10 @@
 	#components-layout-demo-basic .ant-layout-content {
 		margin: 0 20px 20px;
 		min-width: 885px;
-		width: 100%;
 		padding-right: 40px;
+		background-color: #ffffff;
+		margin-top: 16px;
+		padding: 16px;
 	}
 
 	.content-hd {
