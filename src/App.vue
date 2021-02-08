@@ -174,8 +174,12 @@
 		text-align: right;
 	}
 
-	/* 覆盖样式 */
+	/* 覆盖menu样式 */
 	.ant-menu-vertical .ant-menu-submenu-selected{
+		color: #01B065!important;
+		background: #DEF0E8;
+	}
+	.ant-menu-vertical .ant-menu-submenu-active{
 		color: #01B065!important;
 		background: #DEF0E8;
 	}
@@ -188,6 +192,15 @@
 	}
 	.ant-menu-submenu-title:hover .ant-menu-submenu-arrow::after{
 		background: #01B065!important;
+	}
+	.ant-menu.ant-menu-vertical{
+		background: #fff!important;
+	}
+	.ant-menu-item-active a{
+		color: #01B065!important;
+	}
+	.ant-menu-item-selected a{
+		color: #01B065!important;
 	}
 
 </style>

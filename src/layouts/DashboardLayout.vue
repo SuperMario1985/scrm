@@ -33,19 +33,22 @@
 					<template v-for="menuInfo in menuData">
 						<a-menu-item v-if="menuInfo.children.length == 0" :key="menuInfo.key">
 							<router-link v-if="menuInfo.link.indexOf('http') == -1" :to="'/' + menuInfo.link">
-								<a-icon :type="menuInfo.icon"></a-icon>
+								<!-- <a-icon :type="menuInfo.icon"></a-icon> -->
+								<i class="icon-base" :class="'icon-'+menuInfo.key"></i>
 								<span>{{menuInfo.title}}</span>
 							</router-link>
 
 							<a v-else :href="menuInfo.link">
-								<a-icon :type="menuInfo.icon"></a-icon>
+								<!-- <a-icon :type="menuInfo.icon"></a-icon> -->
+								<i class="icon-base" :class="'icon-'+menuInfo.key"></i>
 								<span>{{menuInfo.title}}</span>
 							</a>
 						</a-menu-item>
 
 						<a-sub-menu v-if="menuInfo.children.length > 0" :key="menuInfo.key">
                           <span slot="title">
-                            <a-icon :type="menuInfo.icon"></a-icon>
+                            <!-- <a-icon :type="menuInfo.icon"></a-icon> -->
+							<i class="icon-base" :class="'icon-'+menuInfo.key"></i>
                             <span>{{menuInfo.title}}</span>
                           </span>
 
