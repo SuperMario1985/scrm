@@ -12,8 +12,8 @@
 					class="menu-sider"
 			>
 				<a-menu
-						theme="dark"
-						mode="inline"
+						theme="light"
+						mode="vertical"
 						:openKeys="openKeys"
 						:selectedKeys="[$route.name]"
 						:style="{borderRight: 0,top:0,bottom:'48px',left:0,right:0,position:'absolute',overflowY:'auto' }"
