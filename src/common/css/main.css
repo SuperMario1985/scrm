@@ -138,6 +138,12 @@ ul li {
 .ant-modal-footer{
     background-color: #f5f5f5;
 }
+.ant-menu-submenu:first-of-type {
+    margin-top: 4px;
+}
+.ant-menu-submenu-title {
+    margin-top: 0;
+}
 .ant-menu-submenu-active {
     color: #1890ff!important;
 }
