@@ -2,7 +2,7 @@
 	<div class="sider-one">
 		<div class="team-add" style="">
 			<span class="team-add-title">分组管理</span>
-			<span style="color: #1890FF;float: right;margin-right: 10px; cursor: pointer;"
+			<span style="color: #01b065;float: right;margin-right: 10px; cursor: pointer;"
 			      @click="addGroupModal">添加分组</span>
 			<a-icon class="team-add-icon" type="plus" @click="addGroupModal"></a-icon>
 		</div>
@@ -529,7 +529,7 @@
 
 	.team-add-icon {
 		float: right;
-		color: #1E90FF;
+		color: #01b065;
 		margin-top: 18px;
 		margin-right: 5px;
 		cursor: pointer;

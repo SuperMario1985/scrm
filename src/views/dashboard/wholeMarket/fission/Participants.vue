@@ -1322,7 +1322,7 @@
 	}
 
 	/deep/ .ant-collapse-arrow svg {
-		color: #1890FF;
+		color: #01b065;
 		width: 20px;
 		height: 20px;
 		/*display: none !important;*/
@@ -1432,7 +1432,7 @@
 	}
 
 	.activeBtn {
-		color: #1890FF;
+		color: #01b065;
 		background: #FFF;
 	}
 </style>

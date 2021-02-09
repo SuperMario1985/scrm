@@ -4958,15 +4958,6 @@
 		width: 100px;
 	}
 
-	/deep/ .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
-		z-index: 1;
-		color: #FFF;
-		background: #1890FF;
-		border-color: #1890FF;
-		-webkit-box-shadow: none;
-		box-shadow: none;
-	}
-
 	.download-progress /deep/ .ant-progress-inner {
 		transition: 0.5s;
 	}
@@ -4984,7 +4975,7 @@
 	}
 
 	.activeBtn {
-		color: #1890FF;
+		color: #01b065;
 		background: #FFF;
 	}
 

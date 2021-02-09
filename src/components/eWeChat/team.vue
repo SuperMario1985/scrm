@@ -702,7 +702,7 @@
 
 	.team-add-icon {
 		float: right;
-		color: #1E90FF;
+		color: #01b065;
 		margin-top: 18px;
 		margin-right: 20px;
 		cursor: pointer;

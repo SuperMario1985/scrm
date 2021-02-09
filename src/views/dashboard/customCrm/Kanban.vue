@@ -2067,7 +2067,7 @@
 	}
 
 	.activeBtn {
-		color: #1890FF;
+		color: #01b065;
 		background: #FFF;
 	}
 </style>

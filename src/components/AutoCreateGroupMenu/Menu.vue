@@ -522,7 +522,7 @@
 	}
 
 	.team-add-icon {
-		color: #1E90FF;
+		color: #01b065;
 		margin-left: 10px;
 		cursor: pointer;
 		display: inline-block;
