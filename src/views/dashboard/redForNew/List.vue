@@ -9,7 +9,8 @@
 					<!-- <a-layout-header>红包拉新</a-layout-header> -->
 					<!-- 内容 -->
 					<a-layout-content>
-						<div class="content-msg">
+						<div style="font-size:16px;font-weight:700;color:#333333">红包拉新</div>
+						<div class="content-msg"  style="box-shadow: 0px 1px 4px 0px #D7D7D7">
 							<p style="margin-bottom: 2px;">
 								不同于任务裂变发红包（邀请制），新客发红包，即通过渠道活码，在有效的时间段内，加企业成员后，通过欢迎语自动推送红包页面，借助红包激励，快速拉新。
 							</p>

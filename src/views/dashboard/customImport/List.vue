@@ -1,202 +1,205 @@
 <template>
-	<div style="width: 100%;max-height:100%;position: absolute;overflow-y: auto;padding-bottom: 30px;" class="scroll">
-		<div>
-			<a-card style="margin-bottom:20px;padding:10px 20px;">
-				<label class="tpl-title">客户导入分配</label>
-			</a-card>
-			<div class="content-msg" style="margin: 0 20px 20px;">
-				在合规的情况下，以手机号作为客户的线索，下载Ecxel模板表格后输入手机号上传。上传后，表格内手机号将平均分配给选择的员工，分配完成后员工会在企业微信收到添加好友的任务，需要员工手动添加客户。
-			</div>
+	<div style="width: 100%;max-height:100%;position: absolute;overflow-y: auto;padding-bottom: 30px;" class="scroll" id="components-layout-demo-basic">
+		<a-layout-content class="kehuconent">
+			<div style="font-size:16px;font-weight:700;color:#333333;margin-left:16px">客户导入分配</div>
+			<div>
+				<!-- <a-card style="margin-bottom:20px;padding:10px 20px;">
+					<label class="tpl-title">客户导入分配</label>
+				</a-card> -->
+				<div class="content-msg" style="margin: 0 20px 20px;">
+					在合规的情况下，以手机号作为客户的线索，下载Ecxel模板表格后输入手机号上传。上传后，表格内手机号将平均分配给选择的员工，分配完成后员工会在企业微信收到添加好友的任务，需要员工手动添加客户。
+				</div>
 
-			<div style="padding: 0 20px;">
-			<span @click="changeTab(1)" class="tabBtn" :class="{activeBtn:tabKey == 1}"
-			      v-has="'customImportList-all-list'">批量列表</span>
-				<span @click="changeTab(2)" class="tabBtn" :class="{activeBtn:tabKey == 2}"
-				      v-has="'customImportList-people'">客户列表</span>
-			</div>
-			<div v-show="tabKey == 1" style="padding: 15px 0;margin: 0px 20px;background: #FFF;">
-				<a-col style="background: #FFF;padding: 10px;margin: 0 20px;margin-top: 1px;overflow:hidden;">
-					<a-button type="primary" @click="importExcel" style="float: right;"
-					          v-has="'customImportList-all-export'">导入Excel
-					</a-button>
-					<div style="float: left;">
-						<a-input placeholder="请输入Excel名称" @keyup.enter="find" style="width: 170px;"
-						         v-model="ExcelName"
-						         autoComplete="off"/>
-						<a-button type="primary" style="margin-left: 10px;" @click="find">查找</a-button>
-						<a-button style="margin-left: 10px;" @click="clear">清空</a-button>
-					</div>
-				</a-col>
-				<!-- 表格部分 -->
-				<div class="content-bd">
-					<a-spin tip="Loading..." size="large" :spinning="isLoading">
-						<div class="spin-content">
-							<a-table
-									:columns="columns"
-									:dataSource="batchList"
-									:pagination="false"
-									:rowClassName="rowClassName"
-							>
-								<template slot="userName" slot-scope="text, record, index">
-									<div style="max-width: 300px;">
-										<template v-if="record.userName.length>5">
-											<a-popover trigger="hover">
-												<span slot="content"
-												      style="display: inline-block;max-width: 500px;word-wrap: break-word;word-break: break-all;">
-													<template v-for="user in record.userName">
-														<a-tag v-if="user.title == 'name'" color="orange"
-														       style="margin-top: 5px;">{{user.name}}</a-tag>
+				<div style="padding: 0 20px;">
+				<span @click="changeTab(1)" class="tabBtn" :class="{activeBtn:tabKey == 1}"
+							v-has="'customImportList-all-list'">批量列表</span>
+					<span @click="changeTab(2)" class="tabBtn" :class="{activeBtn:tabKey == 2}"
+								v-has="'customImportList-people'">客户列表</span>
+				</div>
+				<div v-show="tabKey == 1" style="padding: 15px 0;margin: 0px 20px;background: #FFF;">
+					<a-col style="background: #FFF;padding: 10px;margin: 0 20px;margin-top: 1px;overflow:hidden;">
+						<a-button type="primary" @click="importExcel" style="float: right;"
+											v-has="'customImportList-all-export'">导入Excel
+						</a-button>
+						<div style="float: left;">
+							<a-input placeholder="请输入Excel名称" @keyup.enter="find" style="width: 170px;"
+											v-model="ExcelName"
+											autoComplete="off"/>
+							<a-button type="primary" style="margin-left: 10px;" @click="find">查找</a-button>
+							<a-button style="margin-left: 10px;" @click="clear">清空</a-button>
+						</div>
+					</a-col>
+					<!-- 表格部分 -->
+					<div class="content-bd">
+						<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<div class="spin-content">
+								<a-table
+										:columns="columns"
+										:dataSource="batchList"
+										:pagination="false"
+										:rowClassName="rowClassName"
+								>
+									<template slot="userName" slot-scope="text, record, index">
+										<div style="max-width: 300px;">
+											<template v-if="record.userName.length>5">
+												<a-popover trigger="hover">
+													<span slot="content"
+																style="display: inline-block;max-width: 500px;word-wrap: break-word;word-break: break-all;">
+														<template v-for="user in record.userName">
+															<a-tag v-if="user.title == 'name'" color="orange"
+																		style="margin-top: 5px;">{{user.name}}</a-tag>
+														</template>
+														<template v-for="user in record.userName">
+															<a-tag v-if="user.title != 'name'" color="blue"
+																		style="margin-top: 5px;">{{user.name}}</a-tag>
+														</template>
+													</span>
+													<template v-for="(user,index) in record.userName">
+														<a-tag v-if="index < 5 && user.title == 'name'" color="orange"
+																	style="margin-top: 5px;">{{user.name}}</a-tag>
 													</template>
 													<template v-for="user in record.userName">
-														<a-tag v-if="user.title != 'name'" color="blue"
-														       style="margin-top: 5px;">{{user.name}}</a-tag>
+														<a-tag v-if="index < 5 && user.title != 'name'" color="blue"
+																	style="margin-top: 5px;">{{user.name}}</a-tag>
 													</template>
-												</span>
-												<template v-for="(user,index) in record.userName">
-													<a-tag v-if="index < 5 && user.title == 'name'" color="orange"
-													       style="margin-top: 5px;">{{user.name}}</a-tag>
+													<span style="cursor: pointer;">等共计{{getUserNum(record.userName)}}位成员、{{record.userName.length - getUserNum(record.userName)}}个部门</span>
+												</a-popover>
+											</template>
+											<template v-else>
+												<template v-for="user in record.userName">
+													<a-tag v-if="user.title == 'name'" color="orange"
+																style="margin-top: 5px;">{{user.name}}</a-tag>
 												</template>
 												<template v-for="user in record.userName">
-													<a-tag v-if="index < 5 && user.title != 'name'" color="blue"
-													       style="margin-top: 5px;">{{user.name}}</a-tag>
+													<a-tag v-if="user.title != 'name'" color="blue"
+																style="margin-top: 5px;">{{user.name}}</a-tag>
 												</template>
-												<span style="cursor: pointer;">等共计{{getUserNum(record.userName)}}位成员、{{record.userName.length - getUserNum(record.userName)}}个部门</span>
-											</a-popover>
-										</template>
-										<template v-else>
-											<template v-for="user in record.userName">
-												<a-tag v-if="user.title == 'name'" color="orange"
-												       style="margin-top: 5px;">{{user.name}}</a-tag>
 											</template>
-											<template v-for="user in record.userName">
-												<a-tag v-if="user.title != 'name'" color="blue"
-												       style="margin-top: 5px;">{{user.name}}</a-tag>
+										</div>
+									</template>
+									<template slot="addNum">
+										添加客户数
+										<a-tooltip placement="bottom">
+											<template slot="title">
+												<div>成功将手机号客户添加到企业微信里</div>
 											</template>
-										</template>
+											<a-icon type="question-circle" style="margin-left:5px;"/>
+										</a-tooltip>
+									</template>
+									<template slot="action" slot-scope="text, record, index">
+										<a-button style="margin: 10px 5px 0 0;" @click="detailList(record.import_id)"
+															v-has="'customImportList-all-info'">
+											详情
+										</a-button>
+										<a-popconfirm
+												title="确定删除吗?"
+												@confirm="deleteList(record.import_id)"
+												okText="确定"
+												cancelText="取消"
+										>
+											<a-button v-has="'customImportList-all-delete'">删除</a-button>
+										</a-popconfirm>
+									</template>
+								</a-table>
+								<!--分页 -->
+								<div class="pagination" style="width: 100%;position: absolute;margin: 20px 0px;"
+										v-show="total > 0">
+									<div style="height: 32px;float: left;line-height: 32px;">
+										共
+										<span style="color: blue">{{total}}</span>
+										条
 									</div>
-								</template>
-								<template slot="addNum">
-									添加客户数
-									<a-tooltip placement="bottom">
-										<template slot="title">
-											<div>成功将手机号客户添加到企业微信里</div>
-										</template>
-										<a-icon type="question-circle" style="margin-left:5px;"/>
-									</a-tooltip>
-								</template>
-								<template slot="action" slot-scope="text, record, index">
-									<a-button style="margin: 10px 5px 0 0;" @click="detailList(record.import_id)"
-									          v-has="'customImportList-all-info'">
-										详情
-									</a-button>
-									<a-popconfirm
-											title="确定删除吗?"
-											@confirm="deleteList(record.import_id)"
-											okText="确定"
-											cancelText="取消"
-									>
-										<a-button v-has="'customImportList-all-delete'">删除</a-button>
-									</a-popconfirm>
-								</template>
-							</a-table>
-							<!--分页 -->
-							<div class="pagination" style="width: 100%;position: absolute;margin: 20px 0px;"
-							     v-show="total > 0">
-								<div style="height: 32px;float: left;line-height: 32px;">
-									共
-									<span style="color: blue">{{total}}</span>
-									条
-								</div>
-								<div class="pagination" style="height: 32px;float: right;">
-									<a-pagination :total="total" showSizeChanger :showQuickJumper="quickJumper"
-									              :current="page"
-									              :pageSize="pageSize"
-									              :pageSizeOptions="['2','3','15','30','50','100']"
-									              @change="changePage"
-									              @showSizeChange="showSizeChange"/>
+									<div class="pagination" style="height: 32px;float: right;">
+										<a-pagination :total="total" showSizeChanger :showQuickJumper="quickJumper"
+																	:current="page"
+																	:pageSize="pageSize"
+																	:pageSizeOptions="['2','3','15','30','50','100']"
+																	@change="changePage"
+																	@showSizeChange="showSizeChange"/>
+									</div>
 								</div>
 							</div>
-						</div>
-					</a-spin>
+						</a-spin>
+					</div>
 				</div>
-			</div>
-			<div v-show="tabKey == 2" style="padding: 15px 0;margin: 0px 20px;background: #FFF;">
-				<a-col style="background: #FFF;padding: 10px;margin: 0 20px;margin-top: 1px;">
-					<a-input
-							style="width: 170px;margin-right: 10px;"
-							@keyup.enter="find2"
-							:value="phone"
-							@change="phoneChange"
-							placeholder="请输入客户电话"
-					/>
-					<a-select
-							showSearch
-							optionFilterProp="children"
-							style="width: 170px;"
-							v-model="addStatus"
-							placeholder="请选择添加状态"
-					>
-						<a-select-option :value="-1">全部状态</a-select-option>
-						<a-select-option :value="1">未添加</a-select-option>
-						<a-select-option :value="2">已添加</a-select-option>
-					</a-select>
-					<a-button type="primary" style="margin-left: 10px;" @click="find2">查找</a-button>
-					<a-button style="margin-left: 10px;" @click="clear2">清空</a-button>
-				</a-col>
-				<!-- 表格部分 -->
-				<div class="content-bd">
-					<a-spin tip="Loading..." size="large" :spinning="isLoading2">
-						<div class="spin-content">
-							<a-table
-									:columns="columns2"
-									:dataSource="customList"
-									:pagination="false"
-									:rowClassName="rowClassName"
-							>
-								<template slot="name" slot-scope="text, record, index">
-									<span v-if="record.name == ''">--/</span>
-									<span v-if="record.name != ''">{{record.name}}/</span>
-									<span v-if="record.sex == ''">--/</span>
-									<span v-if="record.sex != ''">{{record.sex}}/</span>
-									<span v-if="record.area == ''">--</span>
-									<span v-if="record.area != ''">{{record.area}}</span>
-								</template>
-								<template slot="des" slot-scope="text, record, index">
-									<span v-if="record.des == ''">--</span>
-									<span v-if="record.des != ''">{{record.des}}</span>
-								</template>
-								<template slot="userName" slot-scope="text, record, index">
-									<a-tag color="orange">
-										{{text}}
-									</a-tag>
-								</template>
-								<template slot="is_add" slot-scope="text, record, index">
-									<span v-if="record.is_add == 0">未添加</span>
-									<span v-if="record.is_add == 1">已添加</span>
-								</template>
-							</a-table>
-							<!--分页 -->
-							<div class="pagination" style="width: 100%;position: absolute;margin: 20px 0px;"
-							     v-show="total2 > 0">
-								<div style="height: 32px;float: left;line-height: 32px;">
-									共
-									<span style="color: blue">{{total2}}</span>
-									条
-								</div>
-								<div class="pagination" style="height: 32px;float: right;">
-									<a-pagination :total="total2" showSizeChanger :showQuickJumper="quickJumper2"
-									              :current="page2"
-									              :pageSize="pageSize2"
-									              :pageSizeOptions="['15','30','50','100']"
-									              @change="changePage2"
-									              @showSizeChange="showSizeChange2"/>
+				<div v-show="tabKey == 2" style="padding: 15px 0;margin: 0px 20px;background: #FFF;">
+					<a-col style="background: #FFF;padding: 10px;margin: 0 20px;margin-top: 1px;">
+						<a-input
+								style="width: 170px;margin-right: 10px;"
+								@keyup.enter="find2"
+								:value="phone"
+								@change="phoneChange"
+								placeholder="请输入客户电话"
+						/>
+						<a-select
+								showSearch
+								optionFilterProp="children"
+								style="width: 170px;"
+								v-model="addStatus"
+								placeholder="请选择添加状态"
+						>
+							<a-select-option :value="-1">全部状态</a-select-option>
+							<a-select-option :value="1">未添加</a-select-option>
+							<a-select-option :value="2">已添加</a-select-option>
+						</a-select>
+						<a-button type="primary" style="margin-left: 10px;" @click="find2">查找</a-button>
+						<a-button style="margin-left: 10px;" @click="clear2">清空</a-button>
+					</a-col>
+					<!-- 表格部分 -->
+					<div class="content-bd">
+						<a-spin tip="Loading..." size="large" :spinning="isLoading2">
+							<div class="spin-content">
+								<a-table
+										:columns="columns2"
+										:dataSource="customList"
+										:pagination="false"
+										:rowClassName="rowClassName"
+								>
+									<template slot="name" slot-scope="text, record, index">
+										<span v-if="record.name == ''">--/</span>
+										<span v-if="record.name != ''">{{record.name}}/</span>
+										<span v-if="record.sex == ''">--/</span>
+										<span v-if="record.sex != ''">{{record.sex}}/</span>
+										<span v-if="record.area == ''">--</span>
+										<span v-if="record.area != ''">{{record.area}}</span>
+									</template>
+									<template slot="des" slot-scope="text, record, index">
+										<span v-if="record.des == ''">--</span>
+										<span v-if="record.des != ''">{{record.des}}</span>
+									</template>
+									<template slot="userName" slot-scope="text, record, index">
+										<a-tag color="orange">
+											{{text}}
+										</a-tag>
+									</template>
+									<template slot="is_add" slot-scope="text, record, index">
+										<span v-if="record.is_add == 0">未添加</span>
+										<span v-if="record.is_add == 1">已添加</span>
+									</template>
+								</a-table>
+								<!--分页 -->
+								<div class="pagination" style="width: 100%;position: absolute;margin: 20px 0px;"
+										v-show="total2 > 0">
+									<div style="height: 32px;float: left;line-height: 32px;">
+										共
+										<span style="color: blue">{{total2}}</span>
+										条
+									</div>
+									<div class="pagination" style="height: 32px;float: right;">
+										<a-pagination :total="total2" showSizeChanger :showQuickJumper="quickJumper2"
+																	:current="page2"
+																	:pageSize="pageSize2"
+																	:pageSizeOptions="['15','30','50','100']"
+																	@change="changePage2"
+																	@showSizeChange="showSizeChange2"/>
+									</div>
 								</div>
 							</div>
-						</div>
-					</a-spin>
+						</a-spin>
+					</div>
 				</div>
 			</div>
-		</div>
+		</a-layout-content>
 		<!-- 上传表格弹窗 -->
 		<a-modal
 				title="上传表格"
@@ -977,5 +980,13 @@
 		color: #01b065;
 		background: #FFF;
 	}
-
+	#components-layout-demo-basic .kehuconent {
+		background: #FFF;
+		border-bottom: 1px solid #E2E2E2;
+		height: 50px;
+		min-width: 885px;
+		line-height: 50px;
+		height: 100%;
+		margin: 20px 20px;
+	}
 </style>

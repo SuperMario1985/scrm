@@ -5,9 +5,10 @@
 					style="position: absolute; top:0; bottom:0;left: 0; right:0; overflow-x: hidden; overflow-y: auto;"
 					class="scroll">
 				<!-- 头部 -->
-				<a-layout-header>红包规则</a-layout-header>
+				<!-- <a-layout-header>红包规则</a-layout-header> -->
 				<!-- 内容 -->
 				<a-layout-content>
+					<div style="font-size:16px;font-weight:700;color:#333333">红包规则</div>
 					<div class="content-hd">
 						<a-col style="float:left;">
 							<a-input placeholder="搜索规则名称" @keyup.enter="find" v-model="title"

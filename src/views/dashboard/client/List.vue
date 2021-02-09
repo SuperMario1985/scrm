@@ -1,10 +1,10 @@
 <template>
 	<div style="width: 100%;max-height:100%;position: absolute;overflow-y: auto;padding-bottom: 30px;" class="scroll">
 		<div>
-			<a-card style="padding:0 20px;line-height: 50px;border-bottom: 1px solid #E2E2E2;height: 50px;min-width: 760px;width: 100%;margin-bottom: 12px;">
+			<!-- <a-card style="padding:0 20px;line-height: 50px;border-bottom: 1px solid #E2E2E2;height: 50px;min-width: 760px;width: 100%;margin-bottom: 12px;">
 				<label class="tpl-title">客户管理</label>
-			</a-card>
-			<div style="margin:0 20px;margin-bottom:12px;background:#FFF;position: relative;padding: 20px;"
+			</a-card> -->
+			<div style="margin:20px 20px 0;margin-bottom:12px;background:#FFF;position: relative;padding: 20px;"
 			     v-has="'user-add'">
 				<a-form>
 					<a-form-item label="客户手机" :label-col="{ span: 2 }" :wrapper-col="{ span: 22 }">

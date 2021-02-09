@@ -1,15 +1,16 @@
 <template>
 	<div style="width: 100%;max-height:100%;position: absolute;overflow-y: auto;padding-bottom: 30px;" class="scroll">
 		<div>
-			<a-card style="margin-bottom:20px;padding:10px 20px;">
+			<!-- <a-card style="margin-bottom:20px;padding:10px 20px;">
 				<label class="tpl-title">客户公海</label>
-			</a-card>
-			<div style="padding: 0 20px;">
+			</a-card> -->
+			<div style="padding: 20px 20px 0;">
 				<span @click="changeTab(1)" class="tabBtn" :class="{activeBtn:tabKey == 1}">企微客户</span>
 				<span @click="changeTab(2)" class="tabBtn" :class="{activeBtn:tabKey == 2}">非企微客户</span>
 			</div>
 			<div style="background-color: #FFF;margin: 0 20px;padding-top: 10px;" v-if="tabKey == 1">
-				<div class="content-msg" style="margin: 0 20px;">
+				<div style="font-size:16px;font-weight:700;color:#333333;margin:16px">客户公海</div>
+				<div class="content-msg" style="margin: 0 20px; box-shadow: 0px 1px 4px 0px #D7D7D7">
 					<p style="margin-bottom: 2px;">
 						为了避免销售人员长时间沟通无果或是恶意保护占有客户资源，在达到客户回收条件后，则在【客户公海】--【企微客户】--【可认领】列表里生成一条该企微客户数据。
 					</p>

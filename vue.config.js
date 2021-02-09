@@ -45,11 +45,12 @@ module.exports = {
 			}
 		}
 	},
+	lintOnSave: false,
 	devServer: {
-		// overlay: {
-		//   warnings: true,
-		//   errors: true
-		// },
+		overlay: {
+			warnings: false,
+			errors: false
+	 },
 		host: 'localhost',
 		hot: true,
 		port: 8080,

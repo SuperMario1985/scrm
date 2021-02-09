@@ -6,7 +6,7 @@
 						style="position: absolute;left: 0;top:0;bottom:0;right:0; overflow-x: hidden; overflow-y: auto;"
 						class="scroll">
 					<!-- 头部 -->
-					<a-layout-header>客户管理</a-layout-header>
+					<!-- <a-layout-header>客户管理</a-layout-header> -->
 					<!-- 内容 -->
 					<a-layout-content>
 						<div style="margin-top:20px;">
@@ -14,7 +14,8 @@
 							<span @click="changeTab(2)" class="tabBtn" :class="{activeBtn:tabKey == 2}">非企微客户</span>
 						</div>
 						<div v-show="tabKey == 1" style="padding: 15px 20px;background: #FFF;">
-							<div class="content-msg">
+							<div style="font-size:16px;font-weight:700;color:#333333">客户管理</div>
+							<div class="content-msg"  style="box-shadow: 0px 1px 4px 0px #D7D7D7">
 								<p style="margin-bottom: 0px;">
 									1、成员在外部会话中，可通过侧边栏打开【客户详情页】页面，也可以点击外部联系人（客户）头像进入到系统页面【客户信息】，再打开【客户详情页】页面。<a
 										href="https://support.qq.com/products/104790/faqs/59786" target="_blank"
