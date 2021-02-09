@@ -633,9 +633,9 @@ export default {
   background: #d3d3d3;
 }
 
-.active {
+/* .active {
   color: #01b065;
-}
+} */
 
 .operation {
   margin-bottom: 8px;
@@ -652,9 +652,9 @@ export default {
   color: #e2e2e2;
 }
 
-.operation:hover {
+/* .operation:hover {
   color: #01b065;
-}
+} */
 
 /deep/ .ant-tree-node-content-wrapper {
   display: inline-block;
@@ -673,9 +673,9 @@ export default {
   display: none !important;
 }
 
-.more-operation:hover {
+/* .more-operation:hover {
   color: #01b065;
-}
+} */
 
 /deep/ .ant-tree li .ant-tree-node-content-wrapper:hover {
   background-color: #ffffff;
