@@ -725,12 +725,12 @@
 	}
 
 	.active-key {
-		border-bottom: 2px solid #1E90FF;
-		color: #1E90FF;
+		border-bottom: 2px solid #01b065;
+		color: #01b065;
 	}
 
 	.active {
-		background: #1E90FF;
+		background: #01b065;
 		color: white;
 	}
 
