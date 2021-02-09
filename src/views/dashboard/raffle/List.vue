@@ -6,10 +6,11 @@
 						style="position: absolute;top:0;bottom:0;right:0;left: 0;overflow-x: hidden; overflow-y: auto;"
 						class="scroll">
 					<!-- 头部 -->
-					<a-layout-header>抽奖引流</a-layout-header>
+					<!-- <a-layout-header>抽奖引流</a-layout-header> -->
 					<!-- 内容 -->
 					<a-layout-content>
-						<div class="content-msg">
+						<div style="font-size:16px;font-weight:700;color:#333333">抽奖引流</div>
+						<div class="content-msg"  style="box-shadow: 0px 1px 4px 0px #D7D7D7">
 							<div style="margin: 10px 0 2px;">自动发送欢迎语，可能失败的原因
 								<a-tooltip placement="bottom">
 									<template slot="title">

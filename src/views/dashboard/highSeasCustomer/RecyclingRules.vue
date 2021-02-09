@@ -1,113 +1,116 @@
 <template>
-	<div style="width: 100%;height:100%;position: absolute;overflow-y: auto;padding-bottom: 30px;" class="scroll">
-		<a-card style="margin-bottom:20px;padding:10px 20px;">
+	<div style="width: 100%;height:100%;position: absolute;overflow-y: auto;padding-bottom: 30px;"  id="components-layout-demo-basic" class="scroll">
+		<!-- <a-card style="margin-bottom:20px;padding:10px 20px;">
 			<label class="tpl-title">客户回收</label>
-		</a-card>
-		<div class="content-msg">
-			<p style="margin-bottom: 2px;">
-				当通用规则（指所有员工）和特殊化规则（指个人规则）同时存在的情况下，员工则执行某执行特殊化规则。比如，张三既在通用规则，又在特殊化规则，那么，就按特殊化规则执行。</p>
-		</div>
-		<a-row style="margin-bottom:20px;padding:0 20px;">
-			<a-col style="float:left;">
-				<a-select
-						v-if="corpLen > 1"
-						showSearch
-						optionFilterProp="children"
-						style="width: 210px;margin-right: 5px;"
-						@change="handleChange"
-						v-model="corpId"
-				>
-					<template v-for="item in corpInfo">
-						<a-select-option :value="item.corpid">{{item.corp_full_name ||
-							item.corp_name}}
-						</a-select-option>
-					</template>
-				</a-select>
-			</a-col>
-			<a-col style="float:right;">
-				<a-button
-						type="primary"
-						icon="plus" @click="addRules" v-has="'highSeasCustomerRecyclingRules-add'"
-				>客户回收规则
-				</a-button>
-			</a-col>
-		</a-row>
-
-		<!-- 表格部分 -->
-		<div class="content-bd">
-			<a-spin tip="Loading..." size="large" :spinning="isLoading">
-				<div class="spin-content">
-					<a-table
-							:columns="columns"
-							:dataSource="list"
-							:pagination="false"
-							:rowClassName="rowClassName" v-has="'highSeasCustomerRecyclingRules-list'"
+		</a-card> -->
+		<a-layout-content class="kehuconent">
+			<div style="font-size:16px;font-weight:700;color:#333333;margin-left:16px">客户回收</div>
+			<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7">
+				<p style="margin-bottom: 2px;">
+					当通用规则（指所有员工）和特殊化规则（指个人规则）同时存在的情况下，员工则执行某执行特殊化规则。比如，张三既在通用规则，又在特殊化规则，那么，就按特殊化规则执行。</p>
+			</div>
+			<a-row style="margin-bottom:20px;padding:0 20px;">
+				<a-col style="float:left;">
+					<a-select
+							v-if="corpLen > 1"
+							showSearch
+							optionFilterProp="children"
+							style="width: 210px;margin-right: 5px;"
+							@change="handleChange"
+							v-model="corpId"
 					>
-						<template slot="nameArr" slot-scope="text, record, index">
-							<template v-if="record.valid_type == 1">
-								<a-tag color="purple" v-for="item in record.nameArr">
+						<template v-for="item in corpInfo">
+							<a-select-option :value="item.corpid">{{item.corp_full_name ||
+								item.corp_name}}
+							</a-select-option>
+						</template>
+					</a-select>
+				</a-col>
+				<a-col style="float:right;">
+					<a-button
+							type="primary"
+							icon="plus" @click="addRules" v-has="'highSeasCustomerRecyclingRules-add'"
+					>客户回收规则
+					</a-button>
+				</a-col>
+			</a-row>
+
+			<!-- 表格部分 -->
+			<div class="content-bd">
+				<a-spin tip="Loading..." size="large" :spinning="isLoading">
+					<div class="spin-content">
+						<a-table
+								:columns="columns"
+								:dataSource="list"
+								:pagination="false"
+								:rowClassName="rowClassName" v-has="'highSeasCustomerRecyclingRules-list'"
+						>
+							<template slot="nameArr" slot-scope="text, record, index">
+								<template v-if="record.valid_type == 1">
+									<a-tag color="purple" v-for="item in record.nameArr">
+										{{item}}
+									</a-tag>
+								</template>
+								<template v-if="record.valid_type == 2">
+									<template v-for="user in record.user_key">
+										<a-tag v-if="user.scopedSlots && user.scopedSlots.title && user.scopedSlots.title == 'custom'"
+													color="orange"
+													style="margin-top: 5px;">{{user.title}}
+										</a-tag>
+									</template>
+									<template v-for="user in record.user_key">
+										<a-tag v-if="user.scopedSlots && user.scopedSlots.title && user.scopedSlots.title != 'custom'"
+													color="blue"
+													style="margin-top: 5px;">{{user.title}}
+										</a-tag>
+									</template>
+								</template>
+							</template>
+							<template slot="ruleData" slot-scope="text, record, index">
+								<div v-for="item in record.ruleData">
 									{{item}}
-								</a-tag>
+								</div>
 							</template>
-							<template v-if="record.valid_type == 2">
-								<template v-for="user in record.user_key">
-									<a-tag v-if="user.scopedSlots && user.scopedSlots.title && user.scopedSlots.title == 'custom'"
-									       color="orange"
-									       style="margin-top: 5px;">{{user.title}}
-									</a-tag>
-								</template>
-								<template v-for="user in record.user_key">
-									<a-tag v-if="user.scopedSlots && user.scopedSlots.title && user.scopedSlots.title != 'custom'"
-									       color="blue"
-									       style="margin-top: 5px;">{{user.title}}
-									</a-tag>
-								</template>
+							<template slot="userLimit" slot-scope="text, record, index">
+								<div v-for="item in record.userLimit">{{item}}</div>
+								<div>每个员工可保护客户数量{{record.protect_num}}个</div>
 							</template>
-						</template>
-						<template slot="ruleData" slot-scope="text, record, index">
-							<div v-for="item in record.ruleData">
-								{{item}}
+							<template slot="action" slot-scope="text, record, index">
+								<a-button style="margin: 10px 5px 0 0;" @click="editList(record)"
+													v-has="'highSeasCustomerRecyclingRules-edit'">编辑
+								</a-button>
+								<a-popconfirm
+										title="确定删除吗?"
+										@confirm="delList(record.id)"
+										okText="确定"
+										cancelText="取消"
+								>
+									<a-button v-has="'highSeasCustomerRecyclingRules-del'">删除</a-button>
+								</a-popconfirm>
+							</template>
+						</a-table>
+						<!--分页 -->
+						<div class="pagination"
+								style="width: 100%;position: absolute;margin: 20px 0px 80px;"
+								v-show="total > 0" v-has="'highSeasCustomerRecyclingRules-list'">
+							<div style="height: 32px;float: left;line-height: 32px;">
+								共
+								<span style="color: blue">{{total}}</span>
+								条
 							</div>
-						</template>
-						<template slot="userLimit" slot-scope="text, record, index">
-							<div v-for="item in record.userLimit">{{item}}</div>
-							<div>每个员工可保护客户数量{{record.protect_num}}个</div>
-						</template>
-						<template slot="action" slot-scope="text, record, index">
-							<a-button style="margin: 10px 5px 0 0;" @click="editList(record)"
-							          v-has="'highSeasCustomerRecyclingRules-edit'">编辑
-							</a-button>
-							<a-popconfirm
-									title="确定删除吗?"
-									@confirm="delList(record.id)"
-									okText="确定"
-									cancelText="取消"
-							>
-								<a-button v-has="'highSeasCustomerRecyclingRules-del'">删除</a-button>
-							</a-popconfirm>
-						</template>
-					</a-table>
-					<!--分页 -->
-					<div class="pagination"
-					     style="width: 100%;position: absolute;margin: 20px 0px 80px;"
-					     v-show="total > 0" v-has="'highSeasCustomerRecyclingRules-list'">
-						<div style="height: 32px;float: left;line-height: 32px;">
-							共
-							<span style="color: blue">{{total}}</span>
-							条
-						</div>
-						<div class="pagination" style="height: 32px;float: right;">
-							<a-pagination :total="total" showSizeChanger :showQuickJumper="quickJumper"
-							              :current="page"
-							              :pageSize="pageSize"
-							              :pageSizeOptions="['15','30','50','100']"
-							              @change="changePage"
-							              @showSizeChange="showSizeChange"/>
+							<div class="pagination" style="height: 32px;float: right;">
+								<a-pagination :total="total" showSizeChanger :showQuickJumper="quickJumper"
+															:current="page"
+															:pageSize="pageSize"
+															:pageSizeOptions="['15','30','50','100']"
+															@change="changePage"
+															@showSizeChange="showSizeChange"/>
+							</div>
 						</div>
 					</div>
-				</div>
-			</a-spin>
-		</div>
+				</a-spin>
+			</div>
+		</a-layout-content>
 		<!--客户回收规则弹窗 -->
 		<a-modal title="客户回收规则" v-model="addVisible" @ok="handleOk"
 		         :confirmLoading="confirmLoading" @cancel="cancel" width="888px">
@@ -859,7 +862,15 @@
 	/deep/ .ant-input-number-handler-wrap {
 		display: none;
 	}
-
+	#components-layout-demo-basic .kehuconent {
+		background: #FFF;
+		border-bottom: 1px solid #E2E2E2;
+		height: 50px;
+		min-width: 885px;
+		line-height: 50px;
+		height: 100%;
+		margin: 20px 20px;
+	}
 	.content-msg {
 		border: 1px solid @border-color;
 		background: @color-bgc;

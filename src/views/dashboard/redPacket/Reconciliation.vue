@@ -1,10 +1,10 @@
 <template>
 	<div style="width: 100%;height:100%;position: absolute;overflow-y:auto;padding-bottom: 30px;">
 		<div style="height: 100%;">
-			<a-card style="margin-bottom:20px;padding:10px 20px;">
+			<!-- <a-card style="margin-bottom:20px;padding:10px 20px;">
 				<label class="tpl-title">红包统计</label>
-			</a-card>
-			<div style="margin: 0 20px;background: #FFF;padding-bottom: 20px;">
+			</a-card> -->
+			<div style="margin: 20px 20px 0;background: #FFF;padding-bottom: 20px;">
 				<div class="account-filter" v-if="corpInfo && corpInfo.length > 0">
 					<a-tabs class="wx-list-tab" type="card" v-model="corpId" @change="changeCorpId"
 					        style="width: 100%;">

@@ -5,10 +5,11 @@
 				<a-layout style="position: absolute;top:0;bottom:0;right:0;overflow-x: hidden; overflow-y: auto;"
 				          class="scroll">
 					<!-- 头部 -->
-					<a-layout-header>红包裂变</a-layout-header>
+					<!-- <a-layout-header>红包裂变</a-layout-header> -->
 					<!-- 内容 -->
 					<a-layout-content>
-						<div class="content-msg">
+						<div style="font-size:16px;font-weight:700;color:#333333">红包裂变</div>
+						<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7">
 							玩法：用户拆裂变红包时，会获得首拆红包金额，并立刻入账至用户的微信零钱里，此时在规定时间内，若分享给好友帮拆，好友可获得金额不等的红包作为奖励，即刻到账。当凑齐了相应的好友人数，用户可以获得剩下的红包。反之，如果用户没有分享领取完的话，裂变的红包剩余金额在超过规定时间后则会失效。
 							<div style="margin: 10px 0 2px;">自动发送欢迎语，可能失败的原因
 								<a-tooltip placement="bottom">

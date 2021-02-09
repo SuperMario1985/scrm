@@ -1,10 +1,10 @@
 <template>
 	<div style="width: 100%;height:100%;">
 		<div style="height:100%;">
-			<a-card style="margin-bottom:20px;padding:10px 20px;">
+			<!-- <a-card style="margin-bottom:20px;padding:10px 20px;">
 				<label class="tpl-title">客户看板</label>
-			</a-card>
-			<div style="padding: 0 20px;">
+			</a-card> -->
+			<div style="padding: 20px 20px 0;">
 				<span @click="changeTab(1)" class="tabBtn" :class="{activeBtn:tabKey == 1}">企微客户</span>
 				<span @click="changeTab(2)" class="tabBtn" :class="{activeBtn:tabKey == 2}">非企微客户</span>
 			</div>

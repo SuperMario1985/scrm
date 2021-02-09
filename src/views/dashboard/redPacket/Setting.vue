@@ -1,7 +1,7 @@
 <template>
 	<div class="list">
 		<div id="components-layout-demo-basic">
-			<a-layout style="position: relative;">
+			<a-layout style="position: relative;height: 100%;">
 				<!-- 左侧 -->
 				<a-layout-sider v-if="isEWechat">
 					<!-- 企业微信 -->
@@ -10,10 +10,11 @@
 				<a-layout style="position: absolute;top:0;bottom:0;right:0;" class="scroll"
 				          :style="{left:isEWechat?'250px':'0px'}">
 					<!-- 头部 -->
-					<a-layout-header>红包管理</a-layout-header>
+					<!-- <a-layout-header>红包管理</a-layout-header> -->
 					<!-- 内容 -->
 					<a-layout-content>
-						<div class="content-msg">
+						<div style="font-size:16px;font-weight:700;color:#333333">红包管理</div>
+						<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7">
 							<p style="margin-bottom: 2px;">
 								向客户/客户群派发红包，是维护客情关系的利器之一。其不仅能够刺激消费 , 拉近客户感情 , 还能增强互动
 								,维护品牌的忠诚度。鉴于此，我们基于企业微信，通过企业微信聊天侧边栏，快速向客户/客户群派发红包，客户领取后，钱直接进入到客户的微信零钱里。

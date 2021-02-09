@@ -4,10 +4,11 @@
 			<a-layout style="position: relative; height: 100%; overflow: hidden; " >
 				<a-layout style="position: absolute; top:0; bottom:0; right:0; overflow-x: hidden; overflow-y: auto;" class="scroll">
 					<!-- 头部 -->
-					<a-layout-header>裂变引流</a-layout-header>
+					<!-- <a-layout-header>裂变引流</a-layout-header> -->
 					<!-- 内容 -->
 					<a-layout-content>
-						<div class="content-msg">
+						<div style="font-size:16px;font-weight:700;color:#333333">裂变引流</div>
+						<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7">
 							裂变助力引流，通过有吸引力的奖品，邀请多个好友助力，可免费获得，以此诱导用户在自己的社交圈进行传播，一传二、二传四的模式，指数级增长。而使用企业微信去做裂变活动时，助力用户需要先加企业成员为好友，再通过欢迎语推送活动图文，助力用户打开即助力成功。在整个裂变的过程中，企业可以获得更多的用户。
 							<div style="margin: 10px 0 2px;">自动发送欢迎语，可能失败的原因
 								<a-tooltip placement="bottom">

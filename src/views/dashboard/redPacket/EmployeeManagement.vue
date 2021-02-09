@@ -1,7 +1,7 @@
 <template>
 	<div class="list">
 		<div id="components-layout-demo-basic">
-			<a-layout style="position: relative;">
+			<a-layout style="position: relative;height:100%">
 				<!-- 左侧 -->
 				<a-layout-sider v-if="isEWechat">
 					<!-- 企业微信 -->
@@ -10,10 +10,11 @@
 				<a-layout style="position: absolute;top:0;bottom:0;right:0;" class="scroll"
 				          :style="{left:isEWechat?'250px':'0px'}">
 					<!-- 头部 -->
-					<a-layout-header>员工管理</a-layout-header>
+					<!-- <a-layout-header>员工管理</a-layout-header> -->
 					<!-- 内容 -->
 					<a-layout-content>
-						<div class="content-msg">
+						<div style="font-size:16px;font-weight:700;color:#333333">员工管理</div>
+						<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7">
 							<p style="margin-bottom: 2px;color: #FF562D;">
 								1、只展示在企业微信官方后台创建自建应用时，所设置的可见成员，只有他们才拥有发放零钱的权限。
 							</p>

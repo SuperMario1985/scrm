@@ -10,10 +10,11 @@
 				</a-layout-sider>
 				<a-layout style="position: absolute;left:250px;top:0;bottom:0;right:0;" class="fans-content scroll">
 					<!-- 头部 -->
-					<a-layout-header>渠道活码</a-layout-header>
+					<!-- <a-layout-header>渠道活码</a-layout-header> -->
 					<!-- 内容 -->
 					<a-layout-content>
-						<div class="content-msg">
+						<div style="font-size:16px;font-weight:700;color:#333333">渠道活码</div>
+						<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7">
 							<p style="margin-bottom: 2px;">
 								1、可以生成带参数的二维码名片，支持活码功能，即随机选取设置的活码成员推给用户。加企业微信为好友后，可以给微信联系人自动回复相应欢迎消息和打标签。
 							</p>

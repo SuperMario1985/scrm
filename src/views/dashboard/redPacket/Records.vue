@@ -5,9 +5,10 @@
 				<a-layout style="position: absolute;left:0;top:0;bottom:0;right:0;overflow-x: hidden; overflow-y: auto;"
 				          class="scroll">
 					<!-- 头部 -->
-					<a-layout-header>红包记录</a-layout-header>
+					<!-- <a-layout-header>红包记录</a-layout-header> -->
 					<!-- 内容 -->
 					<a-layout-content>
+						<div style="font-size:16px;font-weight:700;color:#333333">红包记录</div>
 						<div class="content-hd">
 							<div style="background-color: #FFFFFF;padding: 20px 0 10px 0; margin-top: 12px;">
 								<span class="select-option" v-if="corpLen > 1">

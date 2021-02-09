@@ -11,10 +11,11 @@
 						style="position: absolute;top:0;left: 0; bottom:0;right:0; overflow-x: hidden; overflow-y: auto;"
 						class="scroll">
 					<!-- 头部 -->
-					<a-layout-header>跟进提醒</a-layout-header>
+					<!-- <a-layout-header>跟进提醒</a-layout-header> -->
 					<!-- 内容 -->
 					<a-layout-content>
-						<div class="content-msg">
+						<div style="font-size:16px;font-weight:700;color:#333333">跟进提醒</div>
+						<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7">
 							<p style="margin-bottom: 0px;">
 								使用场景：一方面可以有效的帮助销售人员把握跟单节奏，系统会自动提醒销售该跟进的客户，让销售做好合理的安排调度，再也不用担心因为工作忙而忘记跟进客户，一方面也有利于管理层每日对销售人员客户跟进的情况了如指掌，在一定程度上起到监督作用。<span
 									style="color:#FF562D;">在设置前，需要先有自建应用，只有在该自建应用下的可见成员才具备接收应用消息通知的能力。</span>
