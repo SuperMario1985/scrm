@@ -14,6 +14,18 @@ module.exports = {
 		},
 		// 启用 CSS modules for all css / pre-processor files.
 		modules: false,
+		loaderOptions: {
+			less: {
+				lessOptions: {
+					modifyVars: {
+						'primary-color': '#01b065',
+						'link-color': '#1DA57A',
+						'border-radius-base': '2px',
+					},
+					javascriptEnabled: true,
+				},
+			},
+		},
 	},
 	chainWebpack: config => {
 		// 修复HMR
