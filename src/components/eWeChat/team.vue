@@ -721,7 +721,7 @@
 	}
 
 	.team-operation:hover {
-		color: #1890FF;
+		color: #01b065;
 	}
 
 	.active-key {

@@ -166,7 +166,7 @@
 													{{text}}</p>
 											</template>
 											<div v-if="text && text != ''"
-											     style="text-align: center;cursor: pointer;color: #1890FF">
+											     style="text-align: center;cursor: pointer;color: #01b065">
 												预览
 											</div>
 										</a-popover>
@@ -179,7 +179,7 @@
 													{{text}}</p>
 											</template>
 											<div v-if="text && text != ''"
-											     style="text-align: center;cursor: pointer;color: #1890FF;">
+											     style="text-align: center;cursor: pointer;color: #01b065;">
 												查看
 											</div>
 										</a-popover>
@@ -983,7 +983,7 @@
 	}
 
 	/deep/ .ant-tag-checkable-checked {
-		background-color: #1890FF;
+		background-color: #01b065;
 	}
 
 	.sider-one {

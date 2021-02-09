@@ -1313,7 +1313,7 @@
                               <span
                                 style="
                                   margin-right: 10px;
-                                  color: #1890ff;
+                                  color: #01b065;
                                   cursor: pointer;
                                 "
                                 v-show="timeIndex == item.time.length - 1"
@@ -1349,7 +1349,7 @@
                             >
                               添加时期
                             </a-button>
-                            <!--														<a-icon style="color: #1890FF;margin-right: 10px" type="plus" v-show="index == info.specialDateList.length - 1"-->
+                            <!--														<a-icon style="color: #01b065;margin-right: 10px" type="plus" v-show="index == info.specialDateList.length - 1"-->
                             <!--														        @click="addSpecialDate(index)"/>-->
                             <a-icon
                               v-show="
@@ -3057,7 +3057,7 @@
             <div>
               <span
                 @click="addTime(index)"
-                style="color: #1890ff; cursor: pointer; margin-right: 10px"
+                style="color: #01b065; cursor: pointer; margin-right: 10px"
                 v-show="index == specialTimeList.length - 1"
                 >添加</span
               >
@@ -6266,13 +6266,13 @@ export default {
 }
 
 .content-msg a:link {
-  color: #1890ff;
+  color: #01b065;
   text-decoration: none;
 }
 
 //未访问：蓝色、无下划线
 .content-msg a:visited {
-  color: #1890ff;
+  color: #01b065;
   text-decoration: none;
 }
 
@@ -6503,7 +6503,7 @@ export default {
   border-radius: 50%;
   box-sizing: border-box;
   position: relative;
-  border: 2px solid #1890ff;
+  border: 2px solid #01b065;
 }
 
 .wifi-symbol {
@@ -6518,7 +6518,7 @@ export default {
 }
 
 .wifi-circle {
-  border: 2px solid #1890ff;
+  border: 2px solid #01b065;
   border-radius: 50%;
   position: absolute;
 }
@@ -6526,7 +6526,7 @@ export default {
 .first {
   width: 5px;
   height: 5px;
-  background: #1890ff;
+  background: #01b065;
   top: 25px;
   left: 25px;
 }
@@ -6794,8 +6794,8 @@ export default {
   span i {
     width: 25px;
     height: 25px;
-    color: #1890ff;
-    border-color: #1890ff;
+    color: #01b065;
+    border-color: #01b065;
   }
 }
 

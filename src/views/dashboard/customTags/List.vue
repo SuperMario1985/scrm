@@ -111,9 +111,9 @@
 						                </span>
 									<span slot="action" slot-scope="text, record">
 										<span @click="showModal2(text, record)"
-										      style="color: #1890FF;margin-right: 25px;cursor: pointer;"
+										      style="color: #01b065;margin-right: 25px;cursor: pointer;"
 										      v-has="'client-tag-edit'">编辑</span>
-										<span @click="showModal3(text, record)" style="color: #1890FF;cursor: pointer;"
+										<span @click="showModal3(text, record)" style="color: #01b065;cursor: pointer;"
 										      v-has="'client-tag-delete'">删除</span>
 					                </span>
 								</a-table>
@@ -966,7 +966,7 @@
 	}
 
 	/deep/ .wxtpl .ant-radio-button-wrapper-checked {
-		border: 2px solid #1890FF !important;
+		border: 2px solid #01b065 !important;
 	}
 
 	/deep/ .ant-dropdown-trigger > .anticon.anticon-down {

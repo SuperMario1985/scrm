@@ -598,7 +598,7 @@
 	}
 
 	.active {
-		color: #1890FF;
+		color: #01b065;
 	}
 
 	.operation {
@@ -615,7 +615,7 @@
 	}
 
 	.operation:hover {
-		color: #1890FF;
+		color: #01b065;
 	}
 
 	/deep/ .ant-tree-node-content-wrapper {
@@ -636,7 +636,7 @@
 	}
 
 	.more-operation:hover {
-		color: #1890FF;
+		color: #01b065;
 	}
 
 	/deep/ .ant-tree li .ant-tree-node-content-wrapper:hover {

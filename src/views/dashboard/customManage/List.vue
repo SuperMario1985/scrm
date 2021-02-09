@@ -218,23 +218,23 @@
 									<a-button type="primary" style="margin-right: 5px;"
 									          @click="searchStaff">查找</a-button>
 									<a-button style="margin-right: 10px;" @click="reset">清空</a-button>
-									<span style="margin-right: 5px;color: #1890FF; cursor: pointer;"
+									<span style="margin-right: 5px;color: #01b065; cursor: pointer;"
 									      @click="seniorSelect">更多筛选</span>
 								</span>
 								</div>
 								<div style="height: 40px;line-height: 40px;margin-top: 6px;">
 								<span v-if="showCustomData">
 									共
-									<span style="color: #1890FF">{{total}}</span>
+									<span style="color: #01b065">{{total}}</span>
 									位客户，实际客户
-									<span style="color: #1890FF">{{uniqueCount}}</span>
+									<span style="color: #01b065">{{uniqueCount}}</span>
 									位。
 									<!--									，重复客户-->
-									<!--									<span style="color: #1890FF">{{repeatCount}}</span>-->
+									<!--									<span style="color: #01b065">{{repeatCount}}</span>-->
 									<!--									位。-->
 								</span>
-									<!--								<span @click="lookUniqueCustom(1)" v-if="showCustomData && fromUnique == 0" style="color: #1890ff; cursor: pointer">查看重复客户</span>-->
-									<!--								<span @click="lookUniqueCustom(0)" v-if="showCustomData && fromUnique == 1" style="color: #1890ff; cursor: pointer">查看全部客户</span>-->
+									<!--								<span @click="lookUniqueCustom(1)" v-if="showCustomData && fromUnique == 0" style="color: #01b065; cursor: pointer">查看重复客户</span>-->
+									<!--								<span @click="lookUniqueCustom(0)" v-if="showCustomData && fromUnique == 1" style="color: #01b065; cursor: pointer">查看全部客户</span>-->
 									<a-button style="width: 140px;" class="btn-primary1" @click="lookUniqueCustom"
 									          icon="swap">
 										查看重复客户
@@ -541,7 +541,7 @@
 												      v-if="record.customerInfo.update_time != ''">{{record.customerInfo.follow_status}}</span>
 											</a-popover>
 											<span style="cursor: pointer;" v-if="record.customerInfo.update_time == ''">{{record.customerInfo.follow_status}}</span>
-											<div>（跟进<span style="color: #1890FF;">{{record.follow_num}}</span>次）</div>
+											<div>（跟进<span style="color: #01b065;">{{record.follow_num}}</span>次）</div>
 										</div>
 										<div slot="phone" slot-scope="text, record, index">
 											<span v-if="!record.customerInfo.phone || record.customerInfo.phone == ''">--</span>
@@ -753,7 +753,7 @@
 								<div style="height: 40px;line-height: 40px;margin-top: 6px;">
 								<span v-if="showCustomData">
 									共
-									<span style="color: #1890FF">{{total4}}</span>
+									<span style="color: #01b065">{{total4}}</span>
 									位客户
 								</span>
 									<span style="float:right;">
@@ -1650,7 +1650,7 @@
 				<a-progress class="download-progress" stroke-linecap="square" :percent="progressNum" type="circle"
 				            :width="progressWidth"/>
 				<p style="margin: 20px auto;" v-if="progressNum == 100">已导出成功，请点击<span
-						style="color: #1890FF;cursor: pointer;" @click="progressDownload">下载</span></p>
+						style="color: #01b065;cursor: pointer;" @click="progressDownload">下载</span></p>
 			</div>
 		</a-modal>
 
@@ -1792,7 +1792,7 @@
 					<corpChooseTag :callback="modalVisibleChange4"
 					               :hasChoose="tag_arr" v-if="isShowTag"></corpChooseTag>
 					<template v-if="!isShowTag">
-						<a-tag color="#1890FF" v-for="item in tagData">
+						<a-tag color="#01b065" v-for="item in tagData">
 							{{item.tname}}
 						</a-tag>
 						<span v-if="tagData.length == 0">暂无</span>
@@ -4939,7 +4939,7 @@
 	}
 
 	/deep/ .ant-tag-checkable-checked {
-		background-color: #1890FF;
+		background-color: #01b065;
 	}
 
 	/deep/ .bind-table thead .ant-checkbox-wrapper {

@@ -240,7 +240,7 @@
 									      v-if="part.chat == '一直未沟通'">{{part.chat}}</span>
 											<span style="float: left;"
 											      v-if="part.chat != '一直未沟通'"><span
-													style="color: #1890FF;">{{part.chat}}</span>  沟通过</span>
+													style="color: #01b065;">{{part.chat}}</span>  沟通过</span>
 											<span style="float: right;" v-if="!part.has_remark">{{part.employee}}</span>
 											<span style="float: right;width: calc(100% - 100px);white-space: nowrap;text-overflow: ellipsis;overflow: hidden;word-break: break-all;"
 											      v-else>{{part.employee + '（备注：' + part.remark + '）'}}</span>
@@ -429,7 +429,7 @@
 									      v-if="part.chat == '一直未沟通'">{{part.chat}}</span>
 											<span style="float: left;"
 											      v-if="part.chat != '一直未沟通'"><span
-													style="color: #1890FF;">{{part.chat}}</span>  沟通过</span>
+													style="color: #01b065;">{{part.chat}}</span>  沟通过</span>
 											<span style="float: right;" v-if="!part.remark">{{part.employee}}</span>
 											<span style="float: right;width: calc(100% - 100px);white-space: nowrap;text-overflow: ellipsis;overflow: hidden;word-break: break-all;"
 											      v-else>{{part.employee + '（备注：' + part.remark + '）'}}</span>
@@ -1373,7 +1373,7 @@
 						this.$nextTick(() => {
 							const card = this.$refs['part_body_card_' + this.cid][0]
 							card.style.boxShadow = '0 2px 8px 0 rgba(0, 0, 0, .12)'
-							card.style.border = '2px solid #1890ff'
+							card.style.border = '2px solid #01b065'
 						})
 					}
 				}
@@ -1656,7 +1656,7 @@
 						this.$nextTick(() => {
 							const card = this.$refs['part_body2_card_' + this.cid2][0]
 							card.style.boxShadow = '0 2px 8px 0 rgba(0, 0, 0, .12)'
-							card.style.border = '2px solid #1890ff'
+							card.style.border = '2px solid #01b065'
 						})
 					}
 				}
@@ -1993,7 +1993,7 @@
 	}
 
 	.url-btn:hover, .part-title-right:hover {
-		color: #1890FF;
+		color: #01b065;
 	}
 
 	.textArea {

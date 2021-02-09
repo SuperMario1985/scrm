@@ -140,7 +140,7 @@
 												</div>
 											</span>
 											<span
-													style="color: #1890FF; cursor: pointer;">预览</span>
+													style="color: #01b065; cursor: pointer;">预览</span>
 										</a-popover>
 
 										<span v-if="record.send_content.length == 0">--</span>
@@ -190,9 +190,9 @@
 										</a-button>
 										<!--										<a-popover placement="bottom">-->
 										<!--											<span slot="content">-->
-										<!--												<p :style="{color: batchType == 0 ? '#1890FF': ''}" style="margin: 2px 2px 4px 2px;"-->
+										<!--												<p :style="{color: batchType == 0 ? '#01b065': ''}" style="margin: 2px 2px 4px 2px;"-->
 										<!--												   @click="changeBatchType(0)">选择当前页</p>-->
-										<!--												<p :style="{color: batchType == 1 ? '#1890FF': ''}" style="margin: 2px;"-->
+										<!--												<p :style="{color: batchType == 1 ? '#01b065': ''}" style="margin: 2px;"-->
 										<!--												   @click="changeBatchType(1)">选择所有</p>-->
 										<!--											</span>-->
 										<!--											<a-icon style="margin-left: 5px; color: rgba(0, 0, 0, 0.85);"-->

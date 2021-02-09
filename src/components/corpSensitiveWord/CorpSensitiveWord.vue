@@ -49,7 +49,7 @@
 		<a-button icon="plus" style="font-size:13px; height: 28px;padding: 3px 15px;margin-right: 10px;margin-left: 16.7%;" @click="addWordGroup" v-if="groupList.length > 0" v-has="'sensitive-words-group-add'">
 			新建敏感词分组
 		</a-button>
-		<div style="font-size:13px; height: 26px; color: #1890FF;text-align: center;cursor: pointer;"
+		<div style="font-size:13px; height: 26px; color: #01b065;text-align: center;cursor: pointer;"
 		     @click="showMore" v-if="groupList.length > 5">
 			<template v-if="!isMore">更多</template>
 			<template v-if="isMore">收起</template>
@@ -402,8 +402,8 @@
 
 <style lang='less' scoped>
 	/deep/ .ant-tag-checkable-checked {
-		background-color: #1890FF !important;
-		border-color: #1890FF !important;
+		background-color: #01b065 !important;
+		border-color: #01b065 !important;
 		color: #FFFFFF !important;
 	}
 	/deep/ .ant-tag-checkable {

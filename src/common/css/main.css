@@ -145,7 +145,7 @@ ul li {
     margin-top: 0;
 }
 .ant-menu-submenu-active {
-    color: #1890ff!important;
+    color: #01b065!important;
 }
 .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
     background-color: #DEF0E8;

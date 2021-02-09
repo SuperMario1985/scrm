@@ -259,7 +259,7 @@
 	}
 
 	/deep/ .wxtpl .ant-radio-button-wrapper-checked {
-		border: 2px solid #1890FF !important;
+		border: 2px solid #01b065 !important;
 	}
 
 	.text {

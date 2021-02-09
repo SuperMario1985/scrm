@@ -92,7 +92,7 @@
 										<template v-else>{{text}}</template>
 									</span>
 									<span slot="user" slot-scope="text, record">
-										<span style="color: #1890FF; cursor: pointer;"
+										<span style="color: #01b065; cursor: pointer;"
 										      @click="preview(record.id, record.type, 0)">预览</span>
 									</span>
 
@@ -788,7 +788,7 @@
 							                   :callback="selectStaffCallback"
 							                   :disabled="staffSelectDisabled"></chooseStaffSelect>
 							<div>
-								<span style="color:#1890FF; cursor: pointer; margin-right: 10px;"
+								<span style="color:#01b065; cursor: pointer; margin-right: 10px;"
 								      v-show="batchEditType && timeIndex == item.time.length - 1"
 								      @click="addSpecialDateTimeList(index,timeIndex)">
 									 添加
@@ -1481,7 +1481,7 @@
 								</span>
 						</a-tooltip>
 						<div>
-							<span @click="addTime(index)" style="color:#1890FF; cursor: pointer;margin-right: 10px;"
+							<span @click="addTime(index)" style="color:#01b065; cursor: pointer;margin-right: 10px;"
 							      v-show="index == specialTimeList.length - 1">添加</span>
 							<span style="cursor: pointer;color:#F56C6C;" v-show="index != 0"
 							      @click="deleteTime(index)">删除
@@ -4809,7 +4809,7 @@
 	}
 
 	.active1 {
-		color: #1890FF;
+		color: #01b065;
 	}
 
 	/deep/ .ant-tree-switcher-icon {
@@ -4843,7 +4843,7 @@
 	}
 
 	/deep/ .ant-tag-checkable-checked {
-		background-color: #1890FF;
+		background-color: #01b065;
 	}
 
 	.pull-right {
@@ -5000,7 +5000,7 @@
 	}
 
 	.batch-edit:hover {
-		color: #1890FF;
+		color: #01b065;
 	}
 
 	/deep/ .ant-tabs-tab {
@@ -5023,8 +5023,8 @@
 		span i {
 			width: 25px;
 			height: 25px;
-			color: #1890FF;
-			border-color: #1890FF;
+			color: #01b065;
+			border-color: #01b065;
 		}
 	}
 </style>

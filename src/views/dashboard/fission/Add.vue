@@ -198,7 +198,7 @@
 								@input.native="inputFissionNum"
 								v-model="activity.fission_num"></a-input-number>
 						好友可领礼物
-						<span style="color: #1890FF;height: 24px;line-height: 24px;">
+						<span style="color: #01b065;height: 24px;line-height: 24px;">
 							<span style="color: #F56C6C">（一旦发布，不可更改）</span>
 						</span>
 					</a-form-item>
@@ -214,7 +214,7 @@
 								class="brush-input"
 								v-model="activity.help_limit" placeholder="不填，默认为不限制"
 								style="width: 150px;"></a-input-number>
-						<span style="color: #1890FF;height: 24px;line-height: 24px;">
+						<span style="color: #01b065;height: 24px;line-height: 24px;">
 							<span style="color: #F56C6C">（不填写，则默认为不限制。一旦发布，不可修改）</span>
 						</span>
 					</a-form-item>
@@ -264,7 +264,7 @@
 									@input.native="inputPrizeNum"
 									v-model="activity.prize_num"></a-input-number>
 							件
-							<span style="color: #1890FF;height: 24px;line-height: 24px;">
+							<span style="color: #01b065;height: 24px;line-height: 24px;">
 							<span style="color: #F56C6C">（一旦发布后，只可增加不可减少。奖品已无库存情况下，活动自动结束）</span>
 						</span>
 						</a-form-item>
@@ -295,14 +295,14 @@
 									@input.native="inputPrizeNum"
 									v-model="activity.prize_num"></a-input-number>
 							个
-							<span style="color: #1890FF;height: 24px;line-height: 24px;">
+							<span style="color: #01b065;height: 24px;line-height: 24px;">
 							<span style="color: #F56C6C">（一旦发布后，只可增加不可减少。奖品已无库存情况下，活动自动结束）</span>
 						</span>
 						</a-form-item>
 					</template>
 				</div>
 				<div v-show="current == 2" style="margin: 20px;">
-					<span style="border-left: 4px solid #1890FF;padding-left: 10px;margin-left: 10px;">参与限制<span
+					<span style="border-left: 4px solid #01b065;padding-left: 10px;margin-left: 10px;">参与限制<span
 							style="color: #F56C6C;">（不论是个人拆领红包，还是其好友拆领，无法满足下列要求，均拆领失败）</span></span>
 					<a-divider/>
 					<a-form-item class="current0" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
@@ -343,15 +343,15 @@
 								            :disabled="item.disabled"
 								/>
 								<span v-if="index == province.length - 1"
-								      style="color: #1890FF;margin-left: 10px;cursor: pointer;"
+								      style="color: #01b065;margin-left: 10px;cursor: pointer;"
 								      @click="addArea">添加</span>
 								<span v-if="!item.disabled && province.length > 1"
-								      style="color: #1890FF;margin-left: 10px;cursor: pointer;"
+								      style="color: #01b065;margin-left: 10px;cursor: pointer;"
 								      @click="delArea(index)">删除</span>
 							</div>
 						</template>
 					</a-form-item>
-					<span style="border-left: 4px solid #1890FF;padding-left: 10px;margin-left: 10px;">客户标签<span
+					<span style="border-left: 4px solid #01b065;padding-left: 10px;margin-left: 10px;">客户标签<span
 							style="color: #F56C6C;">（不论邀请人，还是助力者，只要参与该场活动，则自动打上选中的客户标签）</span></span>
 					<a-divider/>
 					<div class="current0 ant-col-20">
@@ -1559,7 +1559,7 @@
 	}
 
 	.shape-active {
-		background-color: #1890FF;
+		background-color: #01b065;
 		color: #FFFFFF;
 	}
 
@@ -1697,18 +1697,18 @@
 	}
 
 	.el-link--inner a:link {
-		color: #1890FF;
+		color: #01b065;
 		text-decoration: none;
 	}
 
 	//未访问：蓝色、无下划线
 	.el-link--inner a:visited {
-		color: #1890FF;
+		color: #01b065;
 		text-decoration: none;
 	}
 
 	.el-link--inner a:visited {
-		color: #1890FF;
+		color: #01b065;
 		text-decoration: none;
 	}
 

@@ -210,7 +210,7 @@
 	.title {
 		font-size: 20px;
 		font-weight: 600;
-		color: #1890FF;
+		color: #01b065;
 	}
 
 	.desc {

@@ -413,7 +413,7 @@
 									<div class="col2">
 										<div class="half" v-for="(item, index) in field_list"
 										     v-if="item.key == 'phone' && is_hide_phone != 1 || item.key != 'phone'">
-											<a-tag color="#1890FF">{{item.title}}</a-tag>
+											<a-tag color="#01b065">{{item.title}}</a-tag>
 											<span class="half-text"
 											      v-if="!badicInfoVisible && item.value != '' && item.type != 8 && item.key != 'phone' && item.key != 'company'">{{item.value}}</span>
 											<span class="half-text"

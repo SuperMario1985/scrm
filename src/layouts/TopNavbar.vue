@@ -3,7 +3,7 @@
 		<img alt="Vue logo" src="../assets/logo.png" height="32" style="margin-bottom: 10px;">
 		<span style="margin-left:15px;padding-left: 12px;font-size: 14px;color: #C0C0C0;font-weight:700;border-left: 1px solid #696969;">用{{$store.state.shortName}} 连接客户</span>
 		<div v-if="$store.state.packageDetail.name"
-		     style="margin-left:15px;border: 1px solid #1890FF; background-color: #1890FF;border-radius: 14px;padding: 0px 10px;height: 22px;line-height: 18px;display: inline-block;">
+		     style="margin-left:15px;border: 1px solid #01b065; background-color: #01b065;border-radius: 14px;padding: 0px 10px;height: 22px;line-height: 18px;display: inline-block;">
 			<span style="font-size: 12px;color: #FFFFFF;">{{$store.state.packageDetail.name}}</span>
 			<span style="margin-left:5px;font-size: 12px;color: #FFFFFF;">有效期：{{$store.state.packageDetail.time}}</span>
 		</div>
@@ -280,7 +280,7 @@
 
 <style scoped>
 	/deep/ .wxtpl .ant-radio-button-wrapper-checked {
-		border: 2px solid #1890FF !important;
+		border: 2px solid #01b065 !important;
 	}
 
 	.text {

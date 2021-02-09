@@ -117,7 +117,7 @@
 					        :title="item.title"/>
 				</a-steps>
 				<div v-show="current == 0" style="margin: 20px;">
-					<span style="border-left: 4px solid #1890FF;padding-left: 10px;margin-left: 10px;">活动信息</span>
+					<span style="border-left: 4px solid #01b065;padding-left: 10px;margin-left: 10px;">活动信息</span>
 					<a-divider/>
 					<a-form-item v-if="$store.state.corpArr.length > 1" class="current0"
 					             :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
@@ -259,7 +259,7 @@
 					</a-form-item>
 				</div>
 				<div v-show="current == 1" style="margin: 20px;">
-					<span style="border-left: 4px solid #1890FF;padding-left: 10px;margin-left: 10px;">初始次数</span>
+					<span style="border-left: 4px solid #01b065;padding-left: 10px;margin-left: 10px;">初始次数</span>
 					<a-divider/>
 					<a-form-item class="current0" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
 						<template slot="label">
@@ -268,7 +268,7 @@
 						<a-input-number :min="1" :max="99999999" v-model="init_num" :disabled="currentStatus == 1"/>
 						次
 					</a-form-item>
-					<span style="border-left: 4px solid #1890FF;padding-left: 10px;margin-left: 10px;">参与设置</span>
+					<span style="border-left: 4px solid #01b065;padding-left: 10px;margin-left: 10px;">参与设置</span>
 					<a-divider/>
 					<a-form-item class="current0" :label-col="{ width:'100px' }" :wrapper-col="{ width:'300px' }">
 						<template slot="label">
@@ -298,7 +298,7 @@
 						次
 					</a-form-item>
 
-					<span style="border-left: 4px solid #1890FF;padding-left: 10px;margin-left: 10px;">中奖设置</span>
+					<span style="border-left: 4px solid #01b065;padding-left: 10px;margin-left: 10px;">中奖设置</span>
 					<div style="color: red;display: inline-block;width: calc(100% - 90px);vertical-align: text-top;">
 						（当奖品中奖率设置100%，请将中奖次数设置为“不限制”，否则在抽奖页面，会出现因缺少“谢谢参与”转盘字样，而导致有奖品但抽不到。）
 					</div>
@@ -340,7 +340,7 @@
 						</a-radio-group>
 					</a-form-item>
 
-					<span style="border-left: 4px solid #1890FF;padding-left: 10px;margin-left: 10px;">分享设置</span>
+					<span style="border-left: 4px solid #01b065;padding-left: 10px;margin-left: 10px;">分享设置</span>
 					<a-divider/>
 					<a-form-item class="current0" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
 						<template slot="label">
@@ -511,7 +511,7 @@
 					</a-tabs>
 				</div>
 				<div v-show="current == 3" style="margin: 20px;">
-					<span style="border-left: 4px solid #1890FF;padding-left: 10px;margin-left: 10px;">参与限制</span>
+					<span style="border-left: 4px solid #01b065;padding-left: 10px;margin-left: 10px;">参与限制</span>
 					<a-divider/>
 					<a-form-item class="current0" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
 						<template slot="label">
@@ -551,15 +551,15 @@
 								            :disabled="item.disabled"
 								/>
 								<span v-if="index == province.length - 1"
-								      style="color: #1890FF;margin-left: 10px;cursor: pointer;"
+								      style="color: #01b065;margin-left: 10px;cursor: pointer;"
 								      @click="addArea">添加</span>
 								<span v-if="!item.disabled && province.length > 1"
-								      style="color: #1890FF;margin-left: 10px;cursor: pointer;"
+								      style="color: #01b065;margin-left: 10px;cursor: pointer;"
 								      @click="delArea(index)">删除</span>
 							</div>
 						</template>
 					</a-form-item>
-					<span style="border-left: 4px solid #1890FF;padding-left: 10px;margin-left: 10px;">客户标签<span
+					<span style="border-left: 4px solid #01b065;padding-left: 10px;margin-left: 10px;">客户标签<span
 							style="color: #F56C6C;">（不论邀请人，还是助力者，只要参与该场活动，则自动打上选中的客户标签）</span></span>
 					<a-divider/>
 					<div class="current0 ant-col-20 corp-choose-tag" style="width: 100%;">
@@ -2005,7 +2005,7 @@
 	}
 
 	.shape-active {
-		background-color: #1890FF;
+		background-color: #01b065;
 		color: #FFFFFF;
 	}
 

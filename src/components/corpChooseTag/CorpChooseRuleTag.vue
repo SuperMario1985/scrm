@@ -34,7 +34,7 @@
 				</span>
 			</a-form-item>
 		</template>
-		<div style="font-size:13px; height: 26px; color: #1890FF;text-align: center;cursor: pointer;"
+		<div style="font-size:13px; height: 26px; color: #01b065;text-align: center;cursor: pointer;"
 		     @click="showMore" v-if="groupList.length > 5">
 			<template v-if="!isMore">更多</template>
 			<template v-if="isMore">收起</template>

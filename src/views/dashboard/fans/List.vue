@@ -1629,13 +1629,13 @@
 	}
 
 	.help a:link {
-		color: #1890FF;
+		color: #01b065;
 		text-decoration: none;
 	}
 
 	//未访问：蓝色、无下划线
 	.help a:visited {
-		color: #1890FF;
+		color: #01b065;
 		text-decoration: none;
 	}
 
@@ -1758,7 +1758,7 @@
 	}
 
 	/deep/ .ant-tag-checkable-checked {
-		background-color: #1890FF;
+		background-color: #01b065;
 	}
 
 	.sider-footer {

@@ -400,7 +400,7 @@
 										<a-radio-group v-model="sendTime" @change="changeSendTime">
 											<a-radio :value="1">立即发送</a-radio>
 											<a-radio :value="2">指定时间发送</a-radio>
-											<!--											<span style="color:#1890FF;margin-left: 15px;">（实际发送时间因系统排队等原因，可能会与设定的时间发送有误差）</span>-->
+											<!--											<span style="color:#01b065;margin-left: 15px;">（实际发送时间因系统排队等原因，可能会与设定的时间发送有误差）</span>-->
 										</a-radio-group>
 										<div v-show="sendTime == 2">
 											<a-date-picker @change="selectDate"
@@ -1744,7 +1744,7 @@
 		border-radius: 50%;
 		box-sizing: border-box;
 		position: relative;
-		border: 2px solid #1890FF;
+		border: 2px solid #01b065;
 	}
 
 	.wifi-symbol {
@@ -1759,7 +1759,7 @@
 	}
 
 	.wifi-circle {
-		border: 2px solid #1890FF;
+		border: 2px solid #01b065;
 		border-radius: 50%;
 		position: absolute;
 	}
@@ -1767,7 +1767,7 @@
 	.first {
 		width: 5px;
 		height: 5px;
-		background: #1890FF;
+		background: #01b065;
 		top: 25px;
 		left: 25px;
 	}
@@ -1837,7 +1837,7 @@
 	}
 
 	/deep/ .ant-tag-checkable-checked {
-		background-color: #1890FF;
+		background-color: #01b065;
 	}
 
 	i {

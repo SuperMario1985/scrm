@@ -125,7 +125,7 @@
 									</div>
 									<div style="text-align: right;padding-right: 15px;">
 										<span style="text-align: right;">转化人数</span>
-										<p style="color: #1890FF;text-align: right">{{item.next_num}}</p>
+										<p style="color: #01b065;text-align: right">{{item.next_num}}</p>
 									</div>
 								</a-col>
 							</a-row>
@@ -137,7 +137,7 @@
 							<!--									</div>-->
 							<!--									<div style="width:50%; float: left; text-align: right;padding-right: 15px;margin-top: 28px;">-->
 							<!--										<span style="text-align: right;">转到下一阶段</span>-->
-							<!--										<p style="color: #1890FF;text-align: right">{{item.next_num}}</p>-->
+							<!--										<p style="color: #01b065;text-align: right">{{item.next_num}}</p>-->
 							<!--									</div>-->
 							<!--									&lt;!&ndash;									<p style="color: rgb(255, 86, 45);">{{item.next_num}}</p>&ndash;&gt;-->
 							<!--								</div>-->
@@ -2210,7 +2210,7 @@
 	.fans-active-avg {
 		font-weight: 700;
 		background-color: #FFF;
-		color: #1890FF;
+		color: #01b065;
 		border-bottom: 1px solid #E9E9E9;
 	}
 

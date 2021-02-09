@@ -1099,7 +1099,7 @@
 				if (!text) {
 					return ''
 				}
-				return text.replace(/(&nbsp;)?;<span contenteditable="false" class="ant-tag ant-tag-orange"([^>]*)>员工姓名<\/span>(&nbsp;)?/g, '<span style="color: #1890FF">张三</span>').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange"([^>]*)>发送时间点<\/span>(&nbsp;)?/g, '<span style="color: #1890FF">' + moment(this.times[0]).format('HH：mm') + '</span>').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange"([^>]*)>可见员工<\/span>(&nbsp;)?/g, '<span style="color: #1890FF">李四</span>').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange"([^>]*)>新增客户数<\/span>(&nbsp;)?/g, '<span style="color: #1890FF">1</span>').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange"([^>]*)>已跟进人数<\/span>(&nbsp;)?/g, '<span style="color: #1890FF">1</span>').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange"([^>]*)>已跟进条数<\/span>(&nbsp;)?/g, '<span style="color: #1890FF">1</span>').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange"([^>]*)>当前状态变化人数<\/span>(&nbsp;)?/g, '<span style="color: #1890FF">1</span>').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange"([^>]*)>当前阶段状态未改人数<\/span>(&nbsp;)?/g, '<span style="color: #1890FF">1</span>').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange"([^>]*)>超过([\d]*)天数未跟进人数<\/span>(&nbsp;)?/g, '<span style="color: #1890FF">1</span>').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange"([^>]*)>当前状态<\/span>(&nbsp;)?/g, '<span style="color: #1890FF">' + this.follows[index == 0 ? 0 : index - 1].title + '</span>')
+				return text.replace(/(&nbsp;)?;<span contenteditable="false" class="ant-tag ant-tag-orange"([^>]*)>员工姓名<\/span>(&nbsp;)?/g, '<span style="color: #01b065">张三</span>').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange"([^>]*)>发送时间点<\/span>(&nbsp;)?/g, '<span style="color: #01b065">' + moment(this.times[0]).format('HH：mm') + '</span>').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange"([^>]*)>可见员工<\/span>(&nbsp;)?/g, '<span style="color: #01b065">李四</span>').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange"([^>]*)>新增客户数<\/span>(&nbsp;)?/g, '<span style="color: #01b065">1</span>').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange"([^>]*)>已跟进人数<\/span>(&nbsp;)?/g, '<span style="color: #01b065">1</span>').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange"([^>]*)>已跟进条数<\/span>(&nbsp;)?/g, '<span style="color: #01b065">1</span>').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange"([^>]*)>当前状态变化人数<\/span>(&nbsp;)?/g, '<span style="color: #01b065">1</span>').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange"([^>]*)>当前阶段状态未改人数<\/span>(&nbsp;)?/g, '<span style="color: #01b065">1</span>').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange"([^>]*)>超过([\d]*)天数未跟进人数<\/span>(&nbsp;)?/g, '<span style="color: #01b065">1</span>').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange"([^>]*)>当前状态<\/span>(&nbsp;)?/g, '<span style="color: #01b065">' + this.follows[index == 0 ? 0 : index - 1].title + '</span>')
 			},
 			// 新建按钮插入不算字数
 			replaceBtn1 (text) {
@@ -1283,13 +1283,13 @@
 	}
 
 	.content-msg a:link {
-		color: #1890FF;
+		color: #01b065;
 		text-decoration: none;
 	}
 
 	//未访问：蓝色、无下划线
 	.content-msg a:visited {
-		color: #1890FF;
+		color: #01b065;
 		text-decoration: none;
 	}
 

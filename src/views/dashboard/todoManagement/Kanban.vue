@@ -146,7 +146,7 @@
 													      :style="{'border-color':part.level_color,'color':part.level_color}">{{part.level}}</span>
 													<a-progress :percent="Number(part.per)" size="small"
 													            style="font-size:12px;width: 100px;vertical-align: top;float: right;"
-													            strokeColor="#1890ff"/>
+													            strokeColor="#01b065"/>
 												</p>
 											</div>
 										</div>
@@ -180,7 +180,7 @@
 										</div>
 										<div style="background: #F3F3F3;padding: 7px 10px;overflow:hidden;font-size: 12px;">
 											<div style="float: left;line-height: 24px;">处理人：<span
-													style="color: #1890FF;margin-right: 5px;">{{part.user_name}}</span>
+													style="color: #01b065;margin-right: 5px;">{{part.user_name}}</span>
 											</div>
 											<a-button style="float: right;height: 24px;" type="primary"
 											          @click="startRecord(part.id)"
@@ -775,7 +775,7 @@
 						that.$nextTick(() => {
 							const card = that.$refs['part_body_card_' + that.cid][0]
 							card.style.boxShadow = '0 2px 8px 0 rgba(0, 0, 0, .12)'
-							card.style.border = '2px solid #1890ff'
+							card.style.border = '2px solid #01b065'
 						})
 					}
 				}
@@ -1138,7 +1138,7 @@
 	}
 
 	.url-btn:hover, .part-title-right:hover {
-		color: #1890FF;
+		color: #01b065;
 	}
 
 	.textArea {
@@ -1217,6 +1217,6 @@
 	}
 
 	/deep/ .ant-progress-status-success .ant-progress-text {
-		color: #1890FF;
+		color: #01b065;
 	}
 </style>

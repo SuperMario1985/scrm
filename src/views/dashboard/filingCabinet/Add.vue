@@ -1088,7 +1088,7 @@
 	}
 
 	.choose-sketch {
-		border: 2px solid #1890FF;
+		border: 2px solid #01b065;
 	}
 
 	.no-choose-sketch {

@@ -234,18 +234,18 @@
 												<span slot="action" slot-scope="text, record">
 													<span v-if="record.is_forbid != 1 && record.status == 2"
 													      @click="openStatus(text, record)"
-													      style="color: #1890FF;cursor: pointer;margin: 5px;"
+													      style="color: #01b065;cursor: pointer;margin: 5px;"
 													      v-has="'sensitive-words-close'">开启</span>
 													<span v-if="record.is_forbid != 1 && record.status == 1"
 													      @click="closeStatus(text, record)"
-													      style="color: #1890FF;cursor: pointer;margin: 5px;"
+													      style="color: #01b065;cursor: pointer;margin: 5px;"
 													      v-has="'sensitive-words-close'">关闭</span>
 													<span v-if="record.is_forbid != 1" @click="showModal3(text, record)"
-													      style="color: #1890FF;cursor: pointer;margin: 5px;"
+													      style="color: #01b065;cursor: pointer;margin: 5px;"
 													      v-has="'sensitive-words-delete'">删除</span>
 													<span v-if="record.is_forbid != 1"
 													      @click="showModalGroup(record.key)"
-													      style="color: #1890FF;cursor: pointer;margin: 5px;"
+													      style="color: #01b065;cursor: pointer;margin: 5px;"
 													      v-has="'sensitive-words-remove'">移动</span>
 								                </span>
 											</a-table>
@@ -1223,7 +1223,7 @@
 	}
 
 	/deep/ .wxtpl .ant-radio-button-wrapper-checked {
-		border: 2px solid #1890FF !important;
+		border: 2px solid #01b065 !important;
 	}
 
 	/deep/ .ant-dropdown-trigger > .anticon.anticon-down {

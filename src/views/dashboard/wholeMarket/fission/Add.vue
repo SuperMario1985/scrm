@@ -239,7 +239,7 @@
 												@input.native="inputFissionNum"
 												v-model="item.number"></a-input-number>
 										好友可领礼物
-										<span style="color: #1890FF;height: 24px;line-height: 24px;">
+										<span style="color: #01b065;height: 24px;line-height: 24px;">
 								<span style="color: #F56C6C">（一旦发布，不可更改）</span>
 							</span>
 									</a-form-item>
@@ -410,7 +410,7 @@
 							<!--							</a-form-item>-->
 						</div>
 						<div v-show="current == 2" style="margin: 20px;">
-							<!--						<span style="border-left: 4px solid #1890FF;padding-left: 10px;margin-left: 10px;">参与限制<span-->
+							<!--						<span style="border-left: 4px solid #01b065;padding-left: 10px;margin-left: 10px;">参与限制<span-->
 							<!--								style="color: #F56C6C;">（不论是个人拆领红包，还是其好友拆领，无法满足下列要求，均拆领失败）</span></span>-->
 							<!--							<a-divider/>-->
 							<a-form-item class="current0" :label-col="{ span: 3 }" :wrapper-col="{ span: 21 }">
@@ -426,7 +426,7 @@
 								</a-radio-group>
 								<div style="color: #F56C6C;">（一旦发布，不可修改。以在本系统的性别数据为准）</div>
 							</a-form-item>
-							<!--														<span style="border-left: 4px solid #1890FF;padding-left: 10px;margin-left: 10px;">客户标签<span-->
+							<!--														<span style="border-left: 4px solid #01b065;padding-left: 10px;margin-left: 10px;">客户标签<span-->
 							<!--																style="color: #F56C6C;">（不论邀请人，还是助力者，只要参与该场活动，则自动打上选中的客户标签）</span></span>-->
 							<!--														<a-divider/>-->
 							<a-form-item class="current0" :label-col="{ span: 3 }" :wrapper-col="{ span: 21 }">
@@ -945,19 +945,19 @@
 							</div>
 							<template v-for="(item,index) in reply">
 								<div v-show="index == 0" style="margin: 20px 20px 20px 0; width: 100%;">
-									<span style="display: inline-block;padding-left: 10px;border-left: 4px solid #1890FF;font-weight: 700;">参与者提醒</span>
+									<span style="display: inline-block;padding-left: 10px;border-left: 4px solid #01b065;font-weight: 700;">参与者提醒</span>
 									<a-divider/>
 								</div>
 								<!--								<div v-show="index == 6" style="margin: 20px 20px 20px 0;width: 100%;">-->
-								<!--									<span style="display: inline-block;padding-left: 10px;border-left: 4px solid #1890FF;font-weight: 700;">重复参加提醒</span>-->
+								<!--									<span style="display: inline-block;padding-left: 10px;border-left: 4px solid #01b065;font-weight: 700;">重复参加提醒</span>-->
 								<!--									<a-divider/>-->
 								<!--								</div>-->
 								<div v-show="index == 7" style="margin: 20px 20px 20px 0;width: 100%;">
-									<span style="display: inline-block;padding-left: 10px;border-left: 4px solid #1890FF;font-weight: 700;">好友提醒</span>
+									<span style="display: inline-block;padding-left: 10px;border-left: 4px solid #01b065;font-weight: 700;">好友提醒</span>
 									<a-divider/>
 								</div>
 								<div v-show="index == 10" style="margin: 20px 20px 20px 0;width: 100%;">
-									<span style="display: inline-block;padding-left: 10px;border-left: 4px solid #1890FF;font-weight: 700;">其他提醒</span>
+									<span style="display: inline-block;padding-left: 10px;border-left: 4px solid #01b065;font-weight: 700;">其他提醒</span>
 									<a-divider/>
 								</div>
 								<div style="margin-right: 2%; width: 48%; display: inline-block; vertical-align: top;">
@@ -1328,7 +1328,7 @@
 												@input.native="inputFissionNum"
 												v-model="item.number"></a-input-number>
 										好友可领礼物
-										<span style="color: #1890FF;height: 24px;line-height: 24px;">
+										<span style="color: #01b065;height: 24px;line-height: 24px;">
 										<span style="color: #F56C6C">（一旦发布，不可更改）</span>
 									</span>
 									</a-form-item>
@@ -1408,7 +1408,7 @@
 													@input.native="e => inputPrizeNum(e, index)"
 													v-model="item.money_count"></a-input-number>
 											个
-											<span style="color: #1890FF;height: 24px;line-height: 24px;">
+											<span style="color: #01b065;height: 24px;line-height: 24px;">
 							</span>
 										</a-form-item>
 									</template>
@@ -1578,10 +1578,10 @@
 										            :disabled="item.disabled"
 										/>
 										<span v-if="index == province.length - 1"
-										      style="color: #1890FF;margin-left: 10px;cursor: pointer;"
+										      style="color: #01b065;margin-left: 10px;cursor: pointer;"
 										      @click="addArea">添加</span>
 										<span v-if="!item.disabled && province.length > 1"
-										      style="color: #1890FF;margin-left: 10px;cursor: pointer;"
+										      style="color: #01b065;margin-left: 10px;cursor: pointer;"
 										      @click="delArea(index)">删除</span>
 									</div>
 								</template>
@@ -3914,7 +3914,7 @@
 	}
 
 	.shape-active {
-		background-color: #1890FF;
+		background-color: #01b065;
 		color: #FFFFFF;
 	}
 
@@ -4052,18 +4052,18 @@
 	}
 
 	.el-link--inner a:link {
-		color: #1890FF;
+		color: #01b065;
 		text-decoration: none;
 	}
 
 	//未访问：蓝色、无下划线
 	.el-link--inner a:visited {
-		color: #1890FF;
+		color: #01b065;
 		text-decoration: none;
 	}
 
 	.el-link--inner a:visited {
-		color: #1890FF;
+		color: #01b065;
 		text-decoration: none;
 	}
 

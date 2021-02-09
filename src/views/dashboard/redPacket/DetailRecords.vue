@@ -164,7 +164,7 @@
 												<p style="max-width: 200px;word-break:break-all;word-wrapL:break-word;">
 													{{text}}</p>
 											</template>
-											<div v-if="text && text != ''" style="text-align: center;cursor: pointer;color: #1890FF;">预览</div>
+											<div v-if="text && text != ''" style="text-align: center;cursor: pointer;color: #01b065;">预览</div>
 										</a-popover>
 									</template>
 									<template slot="message" slot-scope="text, record, index">
@@ -174,7 +174,7 @@
 												<p style="max-width: 200px;word-break:break-all;word-wrapL:break-word;">
 													{{text}}</p>
 											</template>
-											<div v-if="text && text != ''" style="text-align: center;cursor: pointer;color: #1890FF;">查看</div>
+											<div v-if="text && text != ''" style="text-align: center;cursor: pointer;color: #01b065;">查看</div>
 										</a-popover>
 									</template>
 								</a-table>
@@ -772,7 +772,7 @@
 	}
 
 	/deep/ .ant-tag-checkable-checked {
-		background-color: #1890FF;
+		background-color: #01b065;
 	}
 
 	.sider-one {

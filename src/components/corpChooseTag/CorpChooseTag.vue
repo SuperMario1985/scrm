@@ -43,7 +43,7 @@
 		          @click="addTagGroup" v-has="'client-tag-group-add'" v-if="groupList.length > 0 && isNotAdd != 1">
 			新建标签组
 		</a-button>
-		<div style="font-size:13px; height: 26px; color: #1890FF;text-align: center;cursor: pointer;"
+		<div style="font-size:13px; height: 26px; color: #01b065;text-align: center;cursor: pointer;"
 		     @click="showMore" v-if="groupList.length > 5">
 			<template v-if="!isMore">更多</template>
 			<template v-if="isMore">收起</template>
@@ -482,7 +482,7 @@
 	}
 
 	/deep/ .ant-tag-checkable-checked {
-		background-color: #1890FF;
+		background-color: #01b065;
 	}
 
 	/deep/ .ant-col-20 {

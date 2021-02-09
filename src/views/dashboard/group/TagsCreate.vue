@@ -69,7 +69,7 @@
 									<span slot="chat_name" slot-scope="text, record,index">
 											<div v-for="item in record.chat_name">
 											<a-tag style="padding: 3px;">
-												<span style="background: #1890FF;width: 18px;height:18px;display: inline-block;margin-right: 5px;vertical-align: middle;">
+												<span style="background: #01b065;width: 18px;height:18px;display: inline-block;margin-right: 5px;vertical-align: middle;">
 													<img :src="img" style="width: 14px;margin: 2px;"/>
 												</span>
 												<span style="width: 110px;display:inline-block;vertical-align: middle;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
@@ -78,7 +78,7 @@
 														      style="display: inline-block;max-width: 500px;word-wrap: break-word;word-break: break-all;">
 															{{item}}
 														</span>
-														<span style="color:#1890FF; cursor: pointer;">{{item}}</span>
+														<span style="color:#01b065; cursor: pointer;">{{item}}</span>
 													</a-popover>
 												</span>
 											</a-tag>
@@ -411,7 +411,7 @@
 							</span>
 								<span slot="title2" slot-scope="text, record,index">
 											<a-tag style="padding: 3px;">
-												<span style="background: #1890FF;width: 18px;height:18px;display: inline-block;margin-right: 5px;vertical-align: middle;">
+												<span style="background: #01b065;width: 18px;height:18px;display: inline-block;margin-right: 5px;vertical-align: middle;">
 													<img :src="img" style="width: 14px;margin: 2px;"/>
 												</span>
 												<span style="width: 110px;display:inline-block;vertical-align: middle;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
@@ -420,7 +420,7 @@
 														      style="display: inline-block;max-width: 500px;word-wrap: break-word;word-break: break-all;">
 															{{record.title}}
 														</span>
-														<span style="color:#1890FF; cursor: pointer;">{{record.title}}</span>
+														<span style="color:#01b065; cursor: pointer;">{{record.title}}</span>
 													</a-popover>
 												</span>
 											</a-tag>

@@ -164,7 +164,7 @@
 						</div>
 						<div class="col2">
 							<div class="half" v-for="(item, index) in field_list">
-								<a-tag color="#1890ff">{{item.title}}</a-tag>
+								<a-tag color="#01b065">{{item.title}}</a-tag>
 								<span class="half-text"
 								      v-if="!badicInfoVisible && item.value != '' && item.type != 8 ">{{item.value}}</span>
 								<span class="half-text"

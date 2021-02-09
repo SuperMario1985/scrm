@@ -155,7 +155,7 @@
 										:class="activeChat == chatRoom.chat_id ? 'chat-list-active' : ''"
 										@click="changeChat(chatRoom.chat_id, (chatRoom.chat && chatRoom.chat.length > 0) ? chatRoom.chat : '群聊')">
 									<div class="chat-left" style="height: 35px;width: 35px;">
-										<div style="background: #1890FF;width: 36px;height:36px;border-radius: 4px;"
+										<div style="background: #01b065;width: 36px;height:36px;border-radius: 4px;"
 										      v-if="chatRoom.avatarData && chatRoom.avatarData.length == 0">
 											<img :src="groupAvatar"
 									     style="width: 20px;margin: 8px;height: 20px;" :data-id="chatRoom.chat_id"/>
@@ -349,7 +349,7 @@
 												<div class="chat-item-name" v-if="type == 2 && !isFromUser(chatItem)"
 												     style="margin-bottom: 6px;">
 													<span style="margin: 0 8px 0 10px;">{{chatItem.from_info.name}}</span>
-													<!--													<span :style="{color:chatItem.from_type == 1? '#1890FF' : 'orange'}">{{chatItem.from_type == 1 ? '@内部' : '@外部'}}</span>-->
+													<!--													<span :style="{color:chatItem.from_type == 1? '#01b065' : 'orange'}">{{chatItem.from_type == 1 ? '@内部' : '@外部'}}</span>-->
 													<a-tag v-if="chatItem.from_type == 1" color="blue">内部</a-tag>
 													<a-tag v-else color="orange">外部</a-tag>
 												</div>
@@ -1695,9 +1695,9 @@
 
 					&.msg-type-active {
 						cursor: default;
-						color: #1890FF;
+						color: #01b065;
 						font-weight: 700;
-						/*border-color: #1890FF;*/
+						/*border-color: #01b065;*/
 					}
 				}
 			}
@@ -1725,8 +1725,8 @@
 
 					&.chat-list-active {
 						color: white;
-						background-color: #1890FF;
-						border-color: #1890FF;
+						background-color: #01b065;
+						border-color: #01b065;
 						cursor: default;
 
 						.chat-right-content {
@@ -1742,7 +1742,7 @@
 						.chat-img {
 							width: 40px;
 							height: 40px;
-							/*background: #1890FF;*/
+							/*background: #01b065;*/
 						}
 					}
 
@@ -1817,7 +1817,7 @@
 					}
 
 					.msg-type-active {
-						color: #1890FF;
+						color: #01b065;
 						font-weight: 700;
 					}
 				}

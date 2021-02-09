@@ -998,7 +998,7 @@
 													         :pagination="false"
 													         :rowClassName="rowClassName">
 														<span slot="chatName" slot-scope="text, record, index">
-															<span style="background: #1890FF;width: 36px;height:36px;margin-right: 5px;vertical-align: top;border-radius: 4px;float: left;"
+															<span style="background: #01b065;width: 36px;height:36px;margin-right: 5px;vertical-align: top;border-radius: 4px;float: left;"
 															      v-if="record.avatarData.length == 0">
 									<img :src="chatImg"
 									     style="width: 20px;margin: 8px;height: 20px;"/>
@@ -1185,7 +1185,7 @@
 			<div style="height: 300px;" class="chat-checkbox">
 				<div style="width: 100%;display: inline-block;">
 					<a-row v-for="item in chatList">
-						<span style="background: #1890FF;width: 36px;height:36px;margin-right: 8px;vertical-align: top;border-radius: 4px;float: left;"
+						<span style="background: #01b065;width: 36px;height:36px;margin-right: 8px;vertical-align: top;border-radius: 4px;float: left;"
 						      v-if="item.avatarData.length == 0">
 									<img :src="chatImg"
 									     style="width: 20px;margin: 8px;height: 20px;"/>

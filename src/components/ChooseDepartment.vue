@@ -31,13 +31,13 @@
             >
             <span
               v-if="isAudit == 1 || isAudit == 2"
-              style="color: #1890ff; cursor: pointer"
+              style="color: #01b065; cursor: pointer"
               @click="confirm"
             >
               <a-icon type="redo" v-if="!loading" /><a-icon
                 v-if="loading"
                 type="sync"
-                style="color: #1890ff"
+                style="color: #01b065"
                 spin
               />同步成员</span
             >
@@ -87,7 +87,7 @@
                       {{ item.title }}
                       <a-icon
                         type="check"
-                        style="margin-left: 10px; color: #1890ff"
+                        style="margin-left: 10px; color: #01b065"
                         v-if="rightIdList.indexOf(item.id) > -1"
                       />
                     </div>
@@ -210,7 +210,7 @@
               <span>{{ title }}</span>
               <a-icon
                 type="check"
-                style="margin-left: 10px; color: #1890ff"
+                style="margin-left: 10px; color: #01b065"
                 v-if="rightIdList.indexOf(id) > -1"
               />
             </div>
@@ -736,7 +736,7 @@ export default {
 }
 
 .title-type {
-  background: #1890ff;
+  background: #01b065;
   color: #fff;
   padding: 5px;
 }

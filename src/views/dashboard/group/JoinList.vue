@@ -112,7 +112,7 @@
 													<span v-if="item.is_add == 0">未填写</span>
 													<span v-if="item.is_add == 1">已填写【<span
 															@click="e=>lookAddress(e,record.key)"
-															style="color: #1890FF;cursor: pointer;">查看</span>】</span>--
+															style="color: #01b065;cursor: pointer;">查看</span>】</span>--
 												</template>
 												<span v-if="item.status == 1">未发放</span>
 												<span v-if="item.status == 2">已发放</span>
@@ -750,7 +750,7 @@
 
 	.detail-one {
 		border: 1px solid #91D5FF;
-		color: #1890FF;
+		color: #01b065;
 		background: #E6F7FF;
 		overflow: hidden;
 		padding: 20px;
@@ -796,7 +796,7 @@
 	}
 
 	/deep/ .ant-fullcalendar-selected-day .ant-fullcalendar-value, .ant-fullcalendar-month-panel-selected-cell .ant-fullcalendar-value {
-		color: #1890FF;
+		color: #01b065;
 		background: transparent;
 	}
 </style>

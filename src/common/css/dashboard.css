@@ -5,7 +5,7 @@
 .ant-menu-inline-collapsed.ant-menu-dark .ant-menu-submenu-open,
 .ant-menu-inline-collapsed.ant-menu-dark .ant-menu-submenu-selected,
 .ant-menu-submenu-title .ant-menu-inline-collapsed.ant-menu-dark:hover {
-  background-color: #1890ff;
+  background-color: #01b065;
 }
 .tabMenu {
   width: 45% !important;
@@ -17,7 +17,7 @@
   margin-right: 10% !important;
 }
 .tabMenuBorder {
-  border-bottom: 2px solid #1890ff !important;
+  border-bottom: 2px solid #01b065 !important;
 }
  /deep/ .ant-input-search-enter-button /deep/ .ant-input-affix-wrapper + .ant-input-group-addon {
   padding: 0;
