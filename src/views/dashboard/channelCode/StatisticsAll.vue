@@ -1,7 +1,7 @@
 <template>
 	<div style="width: 100%; height: 100%; overflow-y: scroll;position: absolute;" class="scroll">
 		<div class="home-left-contain">
-			<a-spin :spinning="spinning" tip="Loading..." size="large"
+			<a-spin :spinning="spinning" tip="加载中..." size="large"
 			        :class="spinning?'spinning-true':'spinning-false'">
 				<div class="tabs-contain" style="margin-top: 20px">
 					<div class="account-filter" v-if="wxList && wxList.length > 0">

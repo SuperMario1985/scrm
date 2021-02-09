@@ -35,8 +35,8 @@
 									<a-select-option value="1">单人</a-select-option>
 									<a-select-option value="2">多人</a-select-option>
 								</a-select>
-								<a-button style="margin-left: 10px;" @click="selectTitle" type="primary">查找</a-button>
-								<a-button style="margin-left: 10px;" @click="clearTitle">清空</a-button>
+								<a-button style="margin-left: 10px;" @click="selectTitle" type="primary">查询</a-button>
+								<a-button style="margin-left: 10px;" @click="clearTitle">重置</a-button>
 							</a-col>
 							<a-col style="float:right;">
 								<a-button class="btn-primary" icon="setting"
@@ -56,7 +56,7 @@
 						</div>
 						<!-- 表格部分 -->
 						<div class="content-bd">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<a-table :columns="columns" :dataSource="wayList" :pagination="false"
 								         :rowClassName="rowClassName" v-has="'channelCodeBaidu-list'">
 									<span slot="local_path" slot-scope="text, record, index">
@@ -195,7 +195,7 @@
 						</a-modal>
 						<!-- 用户列表弹窗 -->
 						<a-modal title="扫码用户" v-model="usersVisible" :footer="null" width="550">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading3">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading3">
 								<a-table :columns="columns2" :dataSource="usersList2" :pagination="false"
 								         :rowClassName="rowClassName">
 								</a-table>

@@ -1,7 +1,7 @@
 <template>
 	<div class="template-list list">
 		<div id="components-layout-demo-basic" v-if="this.$store.state.wxArr.length !=0">
-			<a-spin tip="Loading..." size="large" :spinning="isLoading">
+			<a-spin tip="加载中..." size="large" :spinning="isLoading">
 				<a-layout>
 					<!-- 头部 -->
 					<a-layout-header>

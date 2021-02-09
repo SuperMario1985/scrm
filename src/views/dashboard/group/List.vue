@@ -66,7 +66,7 @@
 								<a-button type="primary" style="margin: 0 10px 0 0;" @click="getGroupChat(1, pageSize)">
 									查找
 								</a-button>
-								<a-button @click="clear">清空</a-button>
+								<a-button @click="clear">重置</a-button>
 								<a-popconfirm
 										placement="bottomRight"
 										okText="确认"
@@ -84,7 +84,7 @@
 						</div>
 						<!-- 表格部分 -->
 						<div class="content-bd" style="border: 1px solid #E2E2E2;">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<a-table :columns="columns" :dataSource="groupChatList" :pagination="false"
 								         :rowClassName="rowClassName" v-has="'groupList-list'">
 									<span slot="noticeTitle">
@@ -258,7 +258,7 @@
 			</a-layout>
 		</div>
 		<a-modal title="选择分组" v-model="visibleGroup" @ok="handleGroupOk" @cancel="handleCancelTeam" width="888">
-			<a-spin tip="Loading..." size="large" :spinning="handleLoading">
+			<a-spin tip="加载中..." size="large" :spinning="handleLoading">
 				<div style="height: 340px;">
 					<a-select
 							showSearch
@@ -362,7 +362,7 @@
 					<a-button type="primary" style="margin: 0 10px 0 0;" @click="getMemberList(1, pageSize1)">
 						查找
 					</a-button>
-					<a-button @click="clearSelect">清空</a-button>
+					<a-button @click="clearSelect">重置</a-button>
 				</div>
 				<div v-if="btnType == 1" style="color: #F56C6C;line-height: 30px;">
 					当前群成员：{{joinNum}}人；累计退群成员：{{leaveNum}}人
@@ -371,7 +371,7 @@
 
 			<!-- 表格部分 -->
 			<div class="content-bd" style="padding: 1px 10px;">
-				<a-spin tip="Loading..." size="large" :spinning="isLoading1">
+				<a-spin tip="加载中..." size="large" :spinning="isLoading1">
 					<a-table :columns="isAudit == 1 ? memberColumns : memberColumns1" :dataSource="groupMemberList"
 					         :pagination="false"
 					         :rowClassName="rowClassName">
@@ -461,7 +461,7 @@
 			<template slot="title">
 				群详情
 			</template>
-			<a-spin tip="Loading..." size="large" :spinning="isLoading2">
+			<a-spin tip="加载中..." size="large" :spinning="isLoading2">
 				<div class="content-hd"
 				     style="margin: 10px;border: 1px solid #E2E2E2;width: auto;padding: 10px;line-height: inherit;">
 					<span style="background: #01b065;width: 60px;height:60px;margin-right: 10px;vertical-align: top;border-radius: 4px;float: left;"

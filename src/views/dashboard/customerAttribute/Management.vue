@@ -35,7 +35,7 @@
 			</a-row>
 			<!-- 表格部分 -->
 			<div class="content-bd">
-				<a-spin tip="Loading..." size="large" :spinning="isLoading">
+				<a-spin tip="加载中..." size="large" :spinning="isLoading">
 					<div class="spin-content">
 						<a-table :key="tableKey"
 						         :columns="columns"
@@ -367,7 +367,7 @@
 				          style="margin-right: 20px;vertical-align: middle;float: right;">新增
 				</a-button>
 			</div>
-			<a-spin tip="Loading..." size="large" :spinning="isLoading1">
+			<a-spin tip="加载中..." size="large" :spinning="isLoading1">
 				<a-table :columns="columns1" :dataSource="follows" class="follow-table" style="margin: 20px;"
 				         :pagination="false" :rowClassName="rowClassName">
 					<span slot="sort" slot-scope="text, record,index">

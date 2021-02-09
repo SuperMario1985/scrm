@@ -45,8 +45,8 @@
 									<span style="text-align: center;" v-if="chooseNum > 0">已选择{{chooseNum}}个群</span>
 									<span style="text-align: center;" v-else>选择群聊</span>
 								</a-button>
-								<a-button style="margin-left: 10px;" @click="selectTitle" type="primary">查找</a-button>
-								<a-button style="margin-left: 10px;" @click="clearTitle">清空</a-button>
+								<a-button style="margin-left: 10px;" @click="selectTitle" type="primary">查询</a-button>
+								<a-button style="margin-left: 10px;" @click="clearTitle">重置</a-button>
 							</a-col>
 							<a-col style="float: right;">
 								<a-button icon="plus" @click="create" type="primary" v-has="'groupTags-add'">
@@ -60,7 +60,7 @@
 						</div>
 						<!-- 表格部分 -->
 						<div class="content-bd">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<a-table :columns="columns" :dataSource="groupList" :pagination="false"
 								         :rowClassName="rowClassName" v-has="'groupTags-list'">
 									<span slot="title2" slot-scope="text, record,index">
@@ -360,11 +360,11 @@
 								<a-button type="primary" style="margin-right: 5px;margin-left: 15px;"
 								          @click="searchRecord">查找
 								</a-button>
-								<a-button style="margin-right: 10px;" @click="resetRecord">清空</a-button>
+								<a-button style="margin-right: 10px;" @click="resetRecord">重置</a-button>
 							</div>
 						</div>
 
-						<a-spin tip="Loading..." size="large" :spinning="isLoading2">
+						<a-spin tip="加载中..." size="large" :spinning="isLoading2">
 							<a-table :columns="columns2" :dataSource="massMessageRecordList" :pagination="false"
 							         :rowClassName="rowClassName">
 								<div slot="customer" slot-scope="text, record, index">
@@ -474,10 +474,10 @@
 								<a-button type="primary" style="margin-right: 5px;"
 								          @click="searchStaff">查找
 								</a-button>
-								<a-button style="margin-right: 10px;" @click="resetStaff">清空</a-button>
+								<a-button style="margin-right: 10px;" @click="resetStaff">重置</a-button>
 							</div>
 						</div>
-						<a-spin tip="Loading..." size="large" :spinning="isLoading3">
+						<a-spin tip="加载中..." size="large" :spinning="isLoading3">
 							<a-table :columns="columns3" :dataSource="staffList" :pagination="false"
 							         :rowClassName="rowClassName">
 								<div slot="name" slot-scope="text, record, index">

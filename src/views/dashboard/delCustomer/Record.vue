@@ -49,7 +49,7 @@
 			</div>
 			<!-- 表格部分 -->
 			<div class="content-bd">
-				<a-spin tip="Loading..." size="large" :spinning="isLoading">
+				<a-spin tip="加载中..." size="large" :spinning="isLoading">
 					<a-table :columns="columns" :dataSource="deleteList" :pagination="false"
 					         :rowClassName="rowClassName">
 						<div slot="userName" slot-scope="text, record, index">

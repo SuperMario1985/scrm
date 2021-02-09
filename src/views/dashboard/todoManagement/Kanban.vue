@@ -77,17 +77,17 @@
 							@change="changeTime"
 					/>
 				</span>
-					<a-button type="primary" style="margin: 0 10px 10px 0;" @click="find">查找</a-button>
-					<a-button @click="clear">清空</a-button>
+					<a-button type="primary" style="margin: 0 10px 10px 0;" @click="find">查询</a-button>
+					<a-button @click="clear">重置</a-button>
 				</a-row>
 
 				<!-- 表格部分 -->
 				<div class="content-bd" ref="scroll">
 					<!--				@mousedown="scroLineDown" @mouseup="scroLineUp"-->
-					<a-spin tip="Loading..." size="large" :spinning="isLoading">
+					<a-spin tip="加载中..." size="large" :spinning="isLoading">
 						<a-empty v-show="list.length == 0" style="margin: 100px auto 0;"/>
 						<div class="part" v-for="(item,index) in list" :id="'part'+ item.id" v-show="list.length > 0">
-							<a-spin tip="Loading..." :spinning="isSpinning[index]">
+							<a-spin tip="加载中..." :spinning="isSpinning[index]">
 								<div class="part-title">
 									<span class="part-title-left">{{item.title}}（{{item.count}}）</span>
 									<!--							<a-icon type="export" class="part-title-right" v-if="item.status != 0"-->

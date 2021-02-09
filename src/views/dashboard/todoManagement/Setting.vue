@@ -108,7 +108,7 @@
 								          style="margin-right: 20px;vertical-align: middle;float: right;">新增待办项目
 								</a-button>
 							</div>
-							<!--							<a-spin tip="Loading..." size="large" :spinning="isLoading1">-->
+							<!--							<a-spin tip="加载中..." size="large" :spinning="isLoading1">-->
 							<a-table class="follow-table3" :columns="stateAll ? columns2 : columns1"
 							         :dataSource="projectList"
 							         :pagination="false"
@@ -252,7 +252,7 @@
 										>
 											<div slot="dropdownRender" slot-scope="menu">
 												<v-nodes :vnodes="menu"/>
-												<a-spin tip="Loading..." size="large" :spinning="isLoading5"
+												<a-spin tip="加载中..." size="large" :spinning="isLoading5"
 												        style="position: absolute;bottom: 50%;left: 0;right: 0;">
 												</a-spin>
 											</div>
@@ -343,7 +343,7 @@
 							<!--									添加任务-->
 							<!--								</a-button>-->
 							<!--							</div>-->
-							<!--							<a-spin tip="Loading..." size="large" :spinning="isLoadingb">-->
+							<!--							<a-spin tip="加载中..." size="large" :spinning="isLoadingb">-->
 							<a-table :columns="stateAll ? columns4 : columns3" :dataSource="customList" bordered
 							         :pagination="false"
 							>

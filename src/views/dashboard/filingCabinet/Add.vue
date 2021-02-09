@@ -276,7 +276,7 @@
 				<a-button style="margin-left: 10px;" @click="selectMusic(1, pageSize)" type="primary">搜索歌曲</a-button>
 			</div>
 			<div style="margin-top: 20px;">
-				<a-spin tip="Loading..." size="large" :spinning="isLoading">
+				<a-spin tip="加载中..." size="large" :spinning="isLoading">
 					<div class="spin-content">
 						<a-table
 								:columns="columns"

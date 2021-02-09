@@ -47,7 +47,7 @@
 							v-perfect-scroll-bar="perfectScrollBarOptions"
 							@ps-scroll-down="handleInfiniteOnLoad">
 						<a-col :span="24">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<a-list :dataSource="list" class="quick-text-box">
 									<a-list-item slot="renderItem" slot-scope="item, index" class="quick-box">
 										<a-list-item-meta>
@@ -110,7 +110,7 @@
 							v-perfect-scroll-bar="perfectScrollBarOptions"
 							@ps-scroll-down="handleInfiniteOnLoad">
 						<a-col :span="24">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<a-list :dataSource="list" class="quick-text-box">
 									<a-list-item slot="renderItem" slot-scope="item, index" class="quick-box">
 										<a-list-item-meta>
@@ -173,7 +173,7 @@
 							v-perfect-scroll-bar="perfectScrollBarOptions"
 							@ps-scroll-down="handleInfiniteOnLoad">
 						<a-col :span="24">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<a-list :dataSource="list" class="quick-text-box">
 									<a-list-item slot="renderItem" slot-scope="item, index" class="quick-box">
 										<a-list-item-meta>
@@ -238,7 +238,7 @@
 							v-perfect-scroll-bar="perfectScrollBarOptions"
 							@ps-scroll-down="handleInfiniteOnLoad">
 						<a-col :span="24">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<a-list :dataSource="list" class="quick-text-box">
 									<a-list-item slot="renderItem" slot-scope="item, index" class="quick-box">
 										<a-list-item-meta>
@@ -291,7 +291,7 @@
 							v-perfect-scroll-bar="perfectScrollBarOptions"
 							@ps-scroll-down="handleInfiniteOnLoad">
 						<a-col :span="24">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<a-list :dataSource="list" class="quick-text-box">
 									<a-list-item slot="renderItem" slot-scope="item, index" class="quick-box">
 										<a-list-item-meta>
@@ -344,7 +344,7 @@
 							v-perfect-scroll-bar="perfectScrollBarOptions"
 							@ps-scroll-down="handleInfiniteOnLoad">
 						<a-col :span="24">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<a-list :dataSource="list" class="quick-text-box">
 									<a-list-item slot="renderItem" slot-scope="item, index" class="quick-box">
 										<a-list-item-meta>

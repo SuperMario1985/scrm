@@ -1,7 +1,7 @@
 <template>
 	<div class="list">
 		<div id="components-layout-demo-basic">
-			<a-spin tip="Loading..." size="large" :spinning="isLoading">
+			<a-spin tip="加载中..." size="large" :spinning="isLoading">
 				<a-layout>
 					<!-- 头部 -->
 					<a-layout-header>
@@ -197,7 +197,7 @@
 						<!-- 内容 -->
 						<a-layout-content>
 							<div class="content">
-								<!-- <a-spin tip="Loading..." size="large" :spinning="isLoading"></a-spin> -->
+								<!-- <a-spin tip="加载中..." size="large" :spinning="isLoading"></a-spin> -->
 								<!-- 选择企业微信 -->
 								<div class="content-hd" v-if="$store.state.corpArr.length > 1">
 									<a-form>
@@ -308,7 +308,7 @@
 										</a-form-item>
 										<a-form-item label="群发客户" v-show="validity == 1" :label-col="{ span: 3 }"
 										             :wrapper-col="{ span: 21 }">
-											<a-spin tip="Loading..." size="large" :spinning="selectLoading">
+											<a-spin tip="加载中..." size="large" :spinning="selectLoading">
 												<div>
 													<a-radio-group name="radioGroup" v-model="correctness"
 													               @change="changeCorrectness"

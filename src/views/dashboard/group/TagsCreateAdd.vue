@@ -1,7 +1,7 @@
 <template>
 	<div class="list">
 		<div id="components-layout-demo-basic">
-			<a-spin tip="Loading..." size="large" :spinning="isLoading">
+			<a-spin tip="加载中..." size="large" :spinning="isLoading">
 				<a-layout>
 					<!-- 头部 -->
 					<a-layout-header>
@@ -88,7 +88,7 @@
 										</a-form-item>
 										<a-form-item label="成员客户筛选" :label-col="{ span: 3 }"
 										             :wrapper-col="{ span: 21 }">
-											<a-spin tip="Loading..." size="large" :spinning="selectLoading">
+											<a-spin tip="加载中..." size="large" :spinning="selectLoading">
 												<div>
 													<a-radio-group name="radioGroup" v-model="correctness"
 													               @change="changeCorrectness">

@@ -5,7 +5,7 @@
 			<a-button style="float: right;margin: 9px 20px 0;" type="primary" icon="rollback" @click="rollback">返回列表</a-button>
 		</div>
 		<div style="margin: 10px 20px; background-color: #FFFFFF">
-			<a-spin tip="Loading..." size="large" :spinning="isLoading2">
+			<a-spin tip="加载中..." size="large" :spinning="isLoading2">
 				<a-table :columns="columns3" :dataSource="hlepRecordList" :pagination="false"
 				         :rowClassName="rowClassName">
 				<span slot="user" slot-scope="text, record">

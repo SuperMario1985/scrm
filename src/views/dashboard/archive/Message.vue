@@ -11,7 +11,7 @@
 
 		<!-- 表格部分 -->
 		<div class="content-bd">
-			<a-spin tip="Loading..." size="large" :spinning="isLoading">
+			<a-spin tip="加载中..." size="large" :spinning="isLoading">
 				<div style="text-align: center;font-size: 18px;margin: 40px 0;color: #000;">完成以下步骤就可以成功开通啦！</div>
 				<a-steps :current="currentStep" style="padding: 0 150px 40px;cursor: pointer;">
 					<!--					@click="changeCurrentStep(index)"-->

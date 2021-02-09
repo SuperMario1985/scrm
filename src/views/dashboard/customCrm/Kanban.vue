@@ -120,16 +120,16 @@
 							@change="changeTime"
 					/>
 				</span>
-					<a-button type="primary" style="margin: 0 10px 10px 0;" @click="find">查找</a-button>
-					<a-button @click="clear">清空</a-button>
+					<a-button type="primary" style="margin: 0 10px 10px 0;" @click="find">查询</a-button>
+					<a-button @click="clear">重置</a-button>
 				</a-row>
 
 				<!-- 表格部分 -->
 				<div class="content-bd" ref="scroll">
-					<a-spin tip="Loading..." size="large" :spinning="isLoading">
+					<a-spin tip="加载中..." size="large" :spinning="isLoading">
 						<a-empty v-show="list.length == 0" style="margin: 100px auto 0;"/>
 						<div class="part" v-for="(item,index) in list" :id="'part'+ item.id" v-show="list.length > 0">
-							<a-spin tip="Loading..." :spinning="item.isLoading">
+							<a-spin tip="加载中..." :spinning="item.isLoading">
 								<div class="part-title">
 									<span class="part-title-left">{{item.title}}（{{item.count}}）</span>
 									<a-tag color="red" v-if="item.status == 0" style="margin: 3px;">已删除</a-tag>
@@ -334,16 +334,16 @@
 							@change="changeTime"
 					/>
 				</span>
-					<a-button type="primary" style="margin: 0 10px 10px 0;" @click="find2">查找</a-button>
-					<a-button @click="clear2">清空</a-button>
+					<a-button type="primary" style="margin: 0 10px 10px 0;" @click="find2">查询</a-button>
+					<a-button @click="clear2">重置</a-button>
 				</a-row>
 
 				<!-- 表格部分 -->
 				<div class="content-bd" ref="scroll2">
-					<a-spin tip="Loading..." size="large" :spinning="isLoading2">
+					<a-spin tip="加载中..." size="large" :spinning="isLoading2">
 						<a-empty v-show="list2.length == 0" style="margin: 100px auto 0;"/>
 						<div class="part" v-for="(item,index) in list2" :id="'part'+ item.id" v-show="list2.length > 0">
-							<a-spin tip="Loading..." :spinning="item.isLoading">
+							<a-spin tip="加载中..." :spinning="item.isLoading">
 								<div class="part-title">
 									<span class="part-title-left">{{item.title}}（{{item.count}}）</span>
 									<a-tag color="red" v-if="item.status == 0" style="margin: 3px;">已删除</a-tag>

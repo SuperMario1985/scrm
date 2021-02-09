@@ -1,7 +1,7 @@
 <template>
 	<div style="width: 100%; height: 100%; overflow-y: scroll;position: absolute;" class="scroll">
 		<div class="home-left-contain">
-			<a-spin :spinning="spinning" tip="Loading..." size="large"
+			<a-spin :spinning="spinning" tip="加载中..." size="large"
 			        :class="spinning?'spinning-true':'spinning-false'">
 				<div style="height: 50px;font-size: 16px;background-color: #FFFFFF; line-height: 50px;padding: 0 20px;">
 					{{title}}

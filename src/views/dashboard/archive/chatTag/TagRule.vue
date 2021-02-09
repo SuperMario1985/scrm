@@ -20,8 +20,8 @@
 				<span v-if="tags.length > 0">已选择{{tags.length}}个标签</span>
 				<span v-else>选择标签</span>
 			</a-button>
-			<a-button type="primary" style="margin: 0px 5px;" @click="find">查找</a-button>
-			<a-button @click="clear">清空</a-button>
+			<a-button type="primary" style="margin: 0px 5px;" @click="find">查询</a-button>
+			<a-button @click="clear">重置</a-button>
 			<a-button @click="addTagRules" class="btn-primary" style="float: right;" icon="plus" type="primary" v-has="'chatTag-rule-add'">
 				添加标签规则
 			</a-button>
@@ -33,7 +33,7 @@
 		</div>
 		<!-- 表格部分 -->
 		<div class="content-bd">
-			<a-spin tip="Loading..." size="large" :spinning="isLoading">
+			<a-spin tip="加载中..." size="large" :spinning="isLoading">
 				<a-table :columns="columns" :dataSource="tagRuleList" :pagination="false"
 				         :rowClassName="rowClassName" v-has="'chatTag-rule-list'">
 					<span slot="checkedBoxTitle">

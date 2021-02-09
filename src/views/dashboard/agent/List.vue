@@ -24,7 +24,7 @@
 			</a-row>
 
 			<div class="content-bd">
-				<a-spin tip="Loading..." size="large" :spinning="isLoading">
+				<a-spin tip="加载中..." size="large" :spinning="isLoading">
 					<div class="spin-content">
 						<a-row style="margin-bottom:20px;padding:0 20px;">
 							<a-col :span="24">

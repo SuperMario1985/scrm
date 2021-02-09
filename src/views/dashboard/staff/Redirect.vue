@@ -7,7 +7,7 @@
 			</a-card>
 
 			<div class="content-bd">
-				<a-spin tip="Loading..." size="large" :spinning="isLoading">
+				<a-spin tip="加载中..." size="large" :spinning="isLoading">
 					<div class="spin-content">
 						<a-row>
 							<div class="content-msg">
@@ -54,7 +54,7 @@
 							<a-col>
 								<!-- 表格部分 -->
 								<div class="content-bd">
-									<a-spin tip="Loading..." size="large" :spinning="isTabLoading">
+									<a-spin tip="加载中..." size="large" :spinning="isTabLoading">
 										<a-table :columns="columns" :dataSource="relationList" :pagination="false"
 										         :rowClassName="rowClassName" v-has="'redirect-list'">
 											<template slot="name" slot-scope="text, record, index">

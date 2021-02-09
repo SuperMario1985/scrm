@@ -39,13 +39,13 @@
 									<a-select-option :value="1">未发放</a-select-option>
 									<a-select-option :value="2">已发放</a-select-option>
 								</a-select>
-								<a-button type="primary" style="margin: 0px 10px;" @click="find">查找</a-button>
-								<a-button @click="clear">清空</a-button>
+								<a-button type="primary" style="margin: 0px 10px;" @click="find">查询</a-button>
+								<a-button @click="clear">重置</a-button>
 							</a-col>
 						</div>
 						<!-- 表格部分 -->
 						<div class="content-bd">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<a-table :columns="columns" :dataSource="joinList" :pagination="false"
 								         :rowClassName="rowClassName">
 									<template slot="checkedBox" slot-scope="text, record, index">

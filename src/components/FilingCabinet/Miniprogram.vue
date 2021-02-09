@@ -3,7 +3,7 @@
 		<!-- 选择消息弹窗 -->
 		<a-modal :visible="showVisible" title="选择素材" @ok="handleOk" @cancel="handleCancel" width="888">
 			<div style="height: 600px;width: 840px;" class="choose-msg">
-				<a-spin tip="Loading..." size="large" :spinning="isLoading">
+				<a-spin tip="加载中..." size="large" :spinning="isLoading">
 					<a-tree-select
 							style="width: 350px"
 							:dropdownStyle="{ maxHeight: '150px', overflow: 'auto' }"

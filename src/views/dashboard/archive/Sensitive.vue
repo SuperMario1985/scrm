@@ -68,7 +68,7 @@
 									<a-button type="primary" style="margin: 0px 5px;"
 									          @click="getSensitiveList(1, 15)">查找
 									</a-button>
-									<a-button @click="clearSensitive">清空</a-button>
+									<a-button @click="clearSensitive">重置</a-button>
 								</div>
 								<div v-if="total1 > 0" style="font-size: 14px; height: 40px;line-height: 40px;">
 									共有
@@ -83,7 +83,7 @@
 								<!-- 表格部分 -->
 								<div class="page-spinning" style="margin-top: 10px;">
 									<a-empty v-if="sensitiveList.length == 0 && !isLoading" style="margin-top: 100px;"/>
-									<a-spin tip="Loading..." size="large" :spinning="isLoading">
+									<a-spin tip="加载中..." size="large" :spinning="isLoading">
 										<div class="spin-content">
 											<div v-for="item in sensitiveList"
 											     style="width: 100%;background-color: #FFFFFF;margin-bottom: 10px;box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);">
@@ -163,7 +163,7 @@
 										<a-button type="primary" style="margin: 0px 5px;"
 										          @click="getSensitiveWords(1, 15)">查找
 										</a-button>
-										<a-button @click="clear">清空</a-button>
+										<a-button @click="clear">重置</a-button>
 									</div>
 									<div class="content-hd-right">
 										<a-button class="btn-primary" icon="plus" @click="showModal('add')"
@@ -210,7 +210,7 @@
 							<a-layout-content style="overflow-x: hidden; overflow-y: auto;" class="scroll">
 								<!-- 表格部分 -->
 								<div class="content-bd" style="margin-top: 10px;">
-									<a-spin tip="Loading..." size="large" :spinning="isLoading">
+									<a-spin tip="加载中..." size="large" :spinning="isLoading">
 										<div class="spin-content">
 											<a-table :columns="columns" :dataSource="wordsList" :pagination="false"
 											         :rowClassName="rowClassName" v-has="'sensitive-words-list'">

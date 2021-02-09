@@ -79,7 +79,7 @@
 											</a-select-option>
 										</a-select>
 									</a-form-item>
-									<a-spin tip="Loading..." size="large" :spinning="tagLoading">
+									<a-spin tip="加载中..." size="large" :spinning="tagLoading">
 										<a-checkbox-group @change="onChange2" :defaultValue="tagCheckValue"
 										                  :key="tagCheckIndex">
 											<a-row>
@@ -131,7 +131,7 @@
 						</div>
 						<!-- 表格部分 -->
 						<div class="content-bd">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<div class="spin-content">
 									<a-table
 											:rowSelection="rowSelection"

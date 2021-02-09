@@ -86,8 +86,8 @@
 										<a-select-option :value="item">{{item}}</a-select-option>
 									</template>
 								</a-select>
-								<a-button type="primary" style="margin-right:15px;" @click="find">查找</a-button>
-								<a-button @click="clear">清空</a-button>
+								<a-button type="primary" style="margin-right:15px;" @click="find">查询</a-button>
+								<a-button @click="clear">重置</a-button>
 							</a-col>
 							<a-col style="float:right;">
 								<a-button
@@ -110,7 +110,7 @@
 						</div>
 						<!-- 表格部分 -->
 						<div class="content-bd">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<a-table :columns="columns" :dataSource="seniorList" :pagination="false"
 								         :rowClassName="rowClassName" v-has="'senior-send-list'">
                   <span slot="status" slot-scope="text, record">

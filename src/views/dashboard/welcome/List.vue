@@ -21,8 +21,8 @@
 							<!--							<a-col style="float:left;">-->
 							<!--								<a-input placeholder="搜索欢迎语" v-model="welcomeText"-->
 							<!--								         style="width: 174px;margin-right:15px;"/>-->
-							<!--								<a-button type="primary" style="margin-right:15px;" @click="find">查找</a-button>-->
-							<!--								<a-button @click="clear">清空</a-button>-->
+							<!--								<a-button type="primary" style="margin-right:15px;" @click="find">查询</a-button>-->
+							<!--								<a-button @click="clear">重置</a-button>-->
 							<!--							</a-col>-->
 							<a-col v-if="corpInfo.length > 1" style="float:left;">
 								<a-select
@@ -48,7 +48,7 @@
 						</div>
 						<!-- 表格部分 -->
 						<div class="content-bd">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<a-table :columns="columns" :dataSource="welcomeList" :pagination="false"
 								         :rowClassName="rowClassName" v-has="'welcome-list'">
 									<span slot="content" slot-scope="text, record, index">

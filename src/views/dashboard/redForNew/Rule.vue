@@ -13,8 +13,8 @@
 						<a-col style="float:left;">
 							<a-input placeholder="搜索规则名称" @keyup.enter="find" v-model="title"
 							         style="width: 150px;margin-right: 10px;"/>
-							<a-button type="primary" style="margin: 0px 10px;" @click="find">查找</a-button>
-							<a-button @click="clear">清空</a-button>
+							<a-button type="primary" style="margin: 0px 10px;" @click="find">查询</a-button>
+							<a-button @click="clear">重置</a-button>
 						</a-col>
 						<a-col style="float:right;" v-has="'redRuleList-add'">
 							<a-button class="btn-primary" icon="plus" @click="addRule" type="primary">
@@ -24,7 +24,7 @@
 					</div>
 					<!-- 表格部分 -->
 					<div class="content-bd">
-						<a-spin tip="Loading..." size="large" :spinning="isLoading">
+						<a-spin tip="加载中..." size="large" :spinning="isLoading">
 							<a-table :columns="columns" :dataSource="ruleList" :pagination="false"
 							         :rowClassName="rowClassName" v-has="'redRuleList-list'">
 								<span slot="type" slot-scope="text, record">

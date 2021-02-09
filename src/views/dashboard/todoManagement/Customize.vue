@@ -64,7 +64,7 @@
 								          style="margin-right: 20px;vertical-align: middle;float: right;">新增处理阶段
 								</a-button>
 							</div>
-							<a-spin tip="Loading..." size="large" :spinning="isLoading1">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading1">
 								<!--								<a-table class="follow-table" :columns="columns" :dataSource="executionStatusList"-->
 								<!--								         :pagination="false"-->
 								<!--								         :rowClassName="rowClassName"-->
@@ -206,7 +206,7 @@
 									</a-button>
 								</div>
 							</div>
-							<!--							<a-spin tip="Loading..." size="large" :spinning="isLoading1">-->
+							<!--							<a-spin tip="加载中..." size="large" :spinning="isLoading1">-->
 							<!--							<a-table class="follow-table2" :columns="columns2" :dataSource="priorityList"-->
 							<!--							         :pagination="false"-->
 							<!--							         :rowClassName="rowClassName"-->

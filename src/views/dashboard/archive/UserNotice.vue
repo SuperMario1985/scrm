@@ -47,8 +47,8 @@
 						<span v-if="chooseNum1 > 0">已选择{{chooseUserNum1}}名成员，{{chooseDepartmentNum1}}个部门</span>
 						<span v-else>选择部门成员</span>
 					</a-button>
-					<a-button type="primary" style="margin: 0px 5px;" @click="find">查找</a-button>
-					<a-button @click="clear">清空</a-button>
+					<a-button type="primary" style="margin: 0px 5px;" @click="find">查询</a-button>
+					<a-button @click="clear">重置</a-button>
 				</a-col>
 				<a-col style="float:right;">
 					<a-button class="btn-primary" icon="plus"
@@ -64,7 +64,7 @@
 			</div>
 			<!-- 表格部分 -->
 			<div class="content-bd">
-				<a-spin tip="Loading..." size="large" :spinning="isLoading">
+				<a-spin tip="加载中..." size="large" :spinning="isLoading">
 					<a-table :columns="columns" :dataSource="userList" :pagination="false"
 					         :rowClassName="rowClassName" v-has="'violations-employee-list'">
 									<span slot="checkedBoxTitle">

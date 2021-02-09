@@ -70,8 +70,8 @@
 									<a-select-option value="1">已过期</a-select-option>
 									<a-select-option value="2">可用</a-select-option>
 								</a-select>
-								<a-button type="primary" style="margin-right:15px;" @click="find">查找</a-button>
-								<a-button @click="clear">清空</a-button>
+								<a-button type="primary" style="margin-right:15px;" @click="find">查询</a-button>
+								<a-button @click="clear">重置</a-button>
 							</a-col>
 							<a-col style="float:right;">
 								<a-button type="primary" icon="plus" style="width: 150px;font-size:14px;" @click="add"
@@ -96,7 +96,7 @@
 						<wxModal :show="showModal2" :callback="modalVisibleChange" hasName="code-add"></wxModal>
 						<!-- 表格部分 -->
 						<div class="content-bd">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<a-table :columns="columns" :dataSource="sceneList" :pagination="false"
 								         :rowClassName="rowClassName" v-has="'code-list'">
 									<span slot="customerTitle">
@@ -178,7 +178,7 @@
 								<a-button key="back" @click="handleCancel">关闭</a-button>
 							</template>
 							<div class="detailBox">
-								<a-spin tip="Loading..." size="large" :spinning="isLoading2">
+								<a-spin tip="加载中..." size="large" :spinning="isLoading2">
 									<div class="detailBox-left">
 										<div class="left-one">
 											<div class="one-img">
@@ -303,7 +303,7 @@
 						<!-- 用户列表弹窗 -->
 						<a-modal title="扫码用户" v-model="usersVisible" :footer="null">
 							<p style="color: red;">显示当前通过该渠道二维码关注的新粉丝 和 扫该渠道二维码前，通过其他渠道已关注的老粉丝</p>
-							<a-spin tip="Loading..." size="large" :spinning="isLoading3">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading3">
 								<a-table :columns="columns2" :dataSource="usersList" :pagination="false"
 								         :rowClassName="rowClassName">
                   <span slot="is_new" slot-scope="text, record,index">

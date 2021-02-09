@@ -276,7 +276,7 @@
 						</div>
 						<!-- 表格部分 -->
 						<div class="content-bd">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<div class="spin-content">
 									<a-table :columns="momentStatus===1?columns:columns3"
 									         style="border: 1px solid #E2E2E2;"
@@ -595,7 +595,7 @@
 
 									</div>
 									<div style="margin-top:1rem;background: #F0F2F5;padding: 0px 20px 135px 20px">
-										<a-spin tip="Loading..." size="large" :spinning="isLoading2">
+										<a-spin tip="加载中..." size="large" :spinning="isLoading2">
 											<a-table :columns="columns2" :data-source="userList" :pagination="false"
 											         :rowClassName="rowClassName">
 											<span slot="sort" slot-scope="text, record,index">

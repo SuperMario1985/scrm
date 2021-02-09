@@ -1,7 +1,7 @@
 <template>
 	<div class="list">
 		<div id="components-layout-demo-basic">
-			<a-spin tip="Loading..." size="large" :spinning="isLoading">
+			<a-spin tip="加载中..." size="large" :spinning="isLoading">
 				<a-layout>
 					<!-- 头部 -->
 					<a-layout-header>
@@ -22,7 +22,7 @@
 								        :title="item.title"/>
 							</a-steps>
 							<div class="content steps-content">
-								<!-- <a-spin tip="Loading..." size="large" :spinning="isLoading"></a-spin> -->
+								<!-- <a-spin tip="加载中..." size="large" :spinning="isLoading"></a-spin> -->
 								<!-- 公众号选择 -->
 								<!--								<div class="content-hd" v-if="current == 0">-->
 								<!--									<a-form>-->
@@ -1362,7 +1362,7 @@
 					<a-button style="margin-left: 10px;" type="primary" @click="searchName">搜索</a-button>
 					<a-button style="margin-left: 10px;" @click="clear">清除</a-button>
 				</div>
-				<a-spin tip="Loading..." size="large" :spinning="isTableLoading">
+				<a-spin tip="加载中..." size="large" :spinning="isTableLoading">
 					<a-table :columns="columns" :dataSource="codeList" :pagination="false"
 					         :rowClassName="rowClassName"
 					         :rowSelection="{selectedRowKeys: codeId,onChange: onSelectChange,type:'radio'}">

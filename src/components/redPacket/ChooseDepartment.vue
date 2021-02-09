@@ -3,7 +3,7 @@
 		<!--部门选择框-->
 		<a-modal :visible="showModal" title="选择企业成员" @ok="handleDepartment"
 		         @cancel="handleCancelDepartment" width="800px">
-			<a-spin tip="Loading..." size="large" :spinning="isLoading2">
+			<a-spin tip="加载中..." size="large" :spinning="isLoading2">
 				<div style="width: 50%;height: 450px;float: left;border-right:1px solid #D9D9D9;overflow-y: auto;overflow-x: hidden;">
 					<div class="content-msg" v-if="tipType == '0'">
 						只展示在企业微信官方后台创建自建应用时，所设置的可见成员，只有他们才拥有发放零钱的权限。

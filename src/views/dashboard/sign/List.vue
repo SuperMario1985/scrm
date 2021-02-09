@@ -13,13 +13,13 @@
 							:maxLength="8"
 					/>
 					<a-button type="primary" style="margin-right:15px;" @click="addSign" v-has="'sign-add'">申请</a-button>
-					<a-button style="margin-right:15px;" @click="clear">清空</a-button>
+					<a-button style="margin-right:15px;" @click="clear">重置</a-button>
 				</a-col>
 			</a-row>
 
 			<!-- 表格部分 -->
 			<div class="content-bd">
-				<a-spin tip="Loading..." size="large" :spinning="isLoading">
+				<a-spin tip="加载中..." size="large" :spinning="isLoading">
 					<div class="spin-content">
 						<a-table
 								:columns="columns"

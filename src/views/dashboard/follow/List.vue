@@ -61,8 +61,8 @@
 								</a-select>
 								<a-input style="width: 165px;margin: 0 5px;" @keyup.enter="find" v-model="name"
 								         placeholder="员工姓名搜索"></a-input>
-								<a-button type="primary" style="margin: 0px 5px;" @click="find">查找</a-button>
-								<a-button @click="clear">清空</a-button>
+								<a-button type="primary" style="margin: 0px 5px;" @click="find">查询</a-button>
+								<a-button @click="clear">重置</a-button>
 							</a-col>
 							<a-col style="float:right;">
 								<a-button class="btn-primary" icon="setting"
@@ -82,7 +82,7 @@
 						</div>
 						<!-- 表格部分 -->
 						<div class="content-bd">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<a-table :columns="columns" :dataSource="userList" :pagination="false"
 								         :rowClassName="rowClassName" v-has="'follow-list'">
 									<span slot="checkedBoxTitle">

@@ -113,8 +113,8 @@
 											@change="changeTime"
 									/>
 									<a-button type="primary" style="margin-right: 5px;"
-									          @click="searchStaff">查找</a-button>
-									<a-button style="margin-right: 10px;" @click="reset">清空</a-button>
+									          @click="searchStaff">查询</a-button>
+									<a-button style="margin-right: 10px;" @click="reset">重置</a-button>
 								</span>
 							</div>
 							<div style="height: 60px;line-height: 60px;text-align: right;">
@@ -131,7 +131,7 @@
 						</div>
 						<!-- 表格部分 -->
 						<div class="content-bd">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<a-table
 										:columns="columns"
 										:dataSource="recordsList"

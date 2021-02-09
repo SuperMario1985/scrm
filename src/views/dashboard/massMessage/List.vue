@@ -129,8 +129,8 @@
 											v-model="sendDate"
 									/>
 								</span>
-								<a-button type="primary" style="margin-right: 5px;" @click="find">查找</a-button>
-								<a-button @click="clear">清空</a-button>
+								<a-button type="primary" style="margin-right: 5px;" @click="find">查询</a-button>
+								<a-button @click="clear">重置</a-button>
 								<a-col style="float:right;margin-right: 20px;">
 									<a-button class="btn-primary" icon="plus" @click="addMessageText()" type="primary"
 									          v-has="'group-sending-add'">
@@ -145,7 +145,7 @@
 						</div>
 						<!-- 表格部分 -->
 						<div class="content-bd">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<a-table :columns="columns" :dataSource="messageList" :pagination="false"
 								         :rowClassName="rowClassName" v-has="'group-sending-list'">
 									<span slot="title2" slot-scope="text, record, index">
@@ -778,7 +778,7 @@
 													</div>
 												</div>
 
-												<a-spin tip="Loading..." size="large" :spinning="isLoading2">
+												<a-spin tip="加载中..." size="large" :spinning="isLoading2">
 													<a-table :columns="columns2" :dataSource="massMessageRecordList"
 													         :pagination="false"
 													         :rowClassName="rowClassName">
@@ -886,7 +886,7 @@
 														</a-button>
 													</div>
 												</div>
-												<a-spin tip="Loading..." size="large" :spinning="isLoading3">
+												<a-spin tip="加载中..." size="large" :spinning="isLoading3">
 													<a-table :columns="columns3" :dataSource="staffList"
 													         :pagination="false"
 													         :rowClassName="rowClassName">
@@ -993,7 +993,7 @@
 													</div>
 												</div>
 
-												<a-spin tip="Loading..." size="large" :spinning="isLoading4">
+												<a-spin tip="加载中..." size="large" :spinning="isLoading4">
 													<a-table :columns="columns4" :dataSource="groupChatList"
 													         :pagination="false"
 													         :rowClassName="rowClassName">
@@ -1102,7 +1102,7 @@
 														</a-button>
 													</div>
 												</div>
-												<a-spin tip="Loading..." size="large" :spinning="isLoading5">
+												<a-spin tip="加载中..." size="large" :spinning="isLoading5">
 													<a-table :columns="columns5" :dataSource="groupLeaderConfirmList"
 													         :pagination="false"
 													         :rowClassName="rowClassName">

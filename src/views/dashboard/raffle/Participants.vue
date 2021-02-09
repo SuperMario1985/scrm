@@ -36,7 +36,7 @@
 					</a-popconfirm>
 				</div>
 				<div class="content-bd">
-					<a-spin tip="Loading..." size="large" :spinning="isLoading">
+					<a-spin tip="加载中..." size="large" :spinning="isLoading">
 						<a-table
 								:rowSelection="rowSelection"
 								:columns="columns1"
@@ -96,7 +96,7 @@
 			<div v-show="tabKey == 2" v-has="'player-list'">
 				<a-input-search placeholder="请输入关键字" @search="onSearch" v-model="nick_name2" enterButton="搜索"
 				                style="width: 270px;margin-bottom: 16px;"/>
-				<a-spin tip="Loading..." size="large" :spinning="isLoading">
+				<a-spin tip="加载中..." size="large" :spinning="isLoading">
 					<a-table :columns="columns2" :dataSource="participantsList2" :pagination="false"
 					         :rowClassName="rowClassName">
 							<span slot="nick_name" slot-scope="text, record">

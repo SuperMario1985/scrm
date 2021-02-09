@@ -27,8 +27,8 @@
 							<a-select-option value="1">已通过</a-select-option>
 							<a-select-option value="2">未通过</a-select-option>
 						</a-select>
-						<a-button type="primary" style="margin-right:15px;" @click="find">查找</a-button>
-						<a-button style="margin-right:15px;" @click="clear">清空</a-button>
+						<a-button type="primary" style="margin-right:15px;" @click="find">查询</a-button>
+						<a-button style="margin-right:15px;" @click="clear">重置</a-button>
 					</a-col>
 					<a-button icon="plus" type="primary" style="float:right;margin-right:15px;" @click="addPush"
 					          v-has="'sms-template-add'">新建模版申请
@@ -37,7 +37,7 @@
 
 				<!-- 表格部分 -->
 				<div class="content-bd">
-					<a-spin tip="Loading..." size="large" :spinning="isLoading">
+					<a-spin tip="加载中..." size="large" :spinning="isLoading">
 						<div class="spin-content">
 							<a-table
 									:columns="columns"

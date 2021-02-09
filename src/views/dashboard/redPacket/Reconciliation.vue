@@ -90,8 +90,8 @@
 								@changeSelect="selectStaffCallback1"></chooseChat>
 					</a-col>
 					<a-col style="float: left;margin-left: 15px;">
-						<a-button type="primary" style="margin-right:15px;" @click="find">查找</a-button>
-						<a-button @click="clear">清空</a-button>
+						<a-button type="primary" style="margin-right:15px;" @click="find">查询</a-button>
+						<a-button @click="clear">重置</a-button>
 					</a-col>
 				</a-row>
 				<a-row style="margin-bottom:10px;padding:20px;background: #F7F7F7;border: 1px solid #E9E9E9;"
@@ -134,8 +134,8 @@
 								@changeSelect="selectStaffCallback2"></chooseChat>
 					</a-col>
 					<a-col style="float: left;margin-left: 15px;">
-						<a-button type="primary" style="margin-right:15px;" @click="find">查找</a-button>
-						<a-button @click="clear">清空</a-button>
+						<a-button type="primary" style="margin-right:15px;" @click="find">查询</a-button>
+						<a-button @click="clear">重置</a-button>
 					</a-col>
 				</a-row>
 				<div class="content-bd-head">
@@ -151,7 +151,7 @@
 				</div>
 				<!-- 表格部分 -->
 				<div class="content-bd">
-					<a-spin tip="Loading..." size="large" :spinning="isLoading">
+					<a-spin tip="加载中..." size="large" :spinning="isLoading">
 						<div class="spin-content">
 							<a-table
 									:columns="columns"

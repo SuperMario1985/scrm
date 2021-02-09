@@ -69,8 +69,8 @@
 								<a-input placeholder="搜索活动名称" @keyup.enter="find" v-model="title"
 								         style="width: 150px;margin: 0px 10px;"/>
 								<a-range-picker style="width: 300px" v-model="activityTime" @change="changeTime"/>
-								<a-button type="primary" style="margin: 0px 10px;" @click="find">查找</a-button>
-								<a-button @click="clear">清空</a-button>
+								<a-button type="primary" style="margin: 0px 10px;" @click="find">查询</a-button>
+								<a-button @click="clear">重置</a-button>
 							</a-col>
 							<a-col style="float:right;" v-has="'redForNewList-add'">
 								<a-button class="btn-primary" icon="plus" @click="addRedActivity" type="primary">
@@ -80,7 +80,7 @@
 						</div>
 						<!-- 表格部分 -->
 						<div class="content-bd">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<a-table :columns="columns" :dataSource="activityList" :pagination="false"
 								         :rowClassName="rowClassName" v-has="'redForNewList-list'">
 									<span slot="qr_code" slot-scope="text, record, index">

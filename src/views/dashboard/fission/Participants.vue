@@ -28,7 +28,7 @@
 				</div>
 			</div>
 			<div style="padding: 0 20px 20px;">
-				<a-spin tip="Loading..." size="large" :spinning="isLoading1">
+				<a-spin tip="加载中..." size="large" :spinning="isLoading1">
 					<a-table v-if="participantsType == 0" :columns="columns1" :dataSource="participantsList"
 					         :pagination="false"
 					         :rowClassName="rowClassName">

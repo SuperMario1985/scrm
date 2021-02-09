@@ -31,11 +31,11 @@
 						v-model="joinTime"
 						@change="changeTime"
 				/>
-				<a-button style="margin-right: 5px;" type="primary" @click="searchFans">查找</a-button>
+				<a-button style="margin-right: 5px;" type="primary" @click="searchFans">查询</a-button>
 				<a-button @click="reloadParticipants">清除</a-button>
 			</div>
 			<div style="padding: 0 20px 20px;">
-				<a-spin tip="Loading..." size="large" :spinning="isLoading1">
+				<a-spin tip="加载中..." size="large" :spinning="isLoading1">
 					<a-table :columns="columns1" :dataSource="participantsList"
 					         :pagination="false"
 					         :rowClassName="rowClassName">

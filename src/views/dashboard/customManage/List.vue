@@ -217,8 +217,8 @@
 											@change="changeTime"
 									/>
 									<a-button type="primary" style="margin-right: 5px;"
-									          @click="searchStaff">查找</a-button>
-									<a-button style="margin-right: 10px;" @click="reset">清空</a-button>
+									          @click="searchStaff">查询</a-button>
+									<a-button style="margin-right: 10px;" @click="reset">重置</a-button>
 									<span style="margin-right: 5px;color: #01b065; cursor: pointer;"
 									      @click="seniorSelect">更多筛选</span>
 								</span>
@@ -316,7 +316,7 @@
 												</a-select-option>
 											</a-select>
 										</a-form-item>
-										<a-spin tip="Loading..." size="large" :spinning="tagLoading">
+										<a-spin tip="加载中..." size="large" :spinning="tagLoading">
 											<a-checkbox-group @change="onChange2" :defaultValue="tagCheckValue"
 											                  :key="tagCheckIndex">
 												<a-row>
@@ -369,7 +369,7 @@
 							</div>
 							<!-- 表格部分 -->
 							<div class="content-bd">
-								<a-spin tip="Loading..." size="large" :spinning="isLoading">
+								<a-spin tip="加载中..." size="large" :spinning="isLoading">
 									<a-table
 											:rowSelection="rowSelection"
 											:columns="columns"
@@ -749,7 +749,7 @@
 									<a-button type="primary" style="margin-right: 5px;"
 									          @click="searchStaff2">查找
 									</a-button>
-									<a-button style="margin-right: 10px;" @click="reset2">清空</a-button>
+									<a-button style="margin-right: 10px;" @click="reset2">重置</a-button>
 								</div>
 								<div style="height: 40px;line-height: 40px;margin-top: 6px;">
 								<span v-if="showCustomData">
@@ -775,7 +775,7 @@
 							</div>
 							<!-- 表格部分 -->
 							<div class="content-bd">
-								<a-spin tip="Loading..." size="large" :spinning="isLoading4">
+								<a-spin tip="加载中..." size="large" :spinning="isLoading4">
 									<a-table
 											:rowSelection="rowSelection"
 											:columns="noCustomerColumns"
@@ -1386,12 +1386,12 @@
 											@change="changeTime1"
 									/>
 									<a-button type="primary" style="margin-right: 5px;"
-									          @click="searchStaff1">查找</a-button>
-									<a-button style="margin-right: 10px;" @click="reset1">清空</a-button>
+									          @click="searchStaff1">查询</a-button>
+									<a-button style="margin-right: 10px;" @click="reset1">重置</a-button>
 								</span>
 							</div>
 							<div class="content-bd" style="padding: 10px;">
-								<a-spin tip="Loading..." size="large" :spinning="isLoading1">
+								<a-spin tip="加载中..." size="large" :spinning="isLoading1">
 									<a-table
 											:columns="columns1"
 											:dataSource="customList1"
@@ -1593,7 +1593,7 @@
 			</div>
 			<div v-if="memberList.length != 0" style="margin-top: 10px;">搜索结果</div>
 			<div style="width: 100%;">
-				<a-spin tip="Loading..." size="large" v-if="memberList.length != 0" :spinning="memberLoading">
+				<a-spin tip="加载中..." size="large" v-if="memberList.length != 0" :spinning="memberLoading">
 					<a-table
 							class="bind-table"
 							style="margin-top: 10px;"
