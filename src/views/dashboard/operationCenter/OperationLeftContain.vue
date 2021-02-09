@@ -2272,7 +2272,7 @@
 	}
 
 	.fansgrow-contain .card-caledar .picker-contain .caledar-btn-selected {
-		boder: 0;
+		border: 0;
 		border-right: 1px solid #01B065;
 		background: rgba(1, 176, 101, 0.1);;
 		border-radius: 4px;

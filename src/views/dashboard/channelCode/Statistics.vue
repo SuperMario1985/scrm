@@ -552,9 +552,9 @@
 	}
 
 	.caledar-btn-selected {
-		boder: 0;
-		border-right: 1px solid #3B74FF;
-		background: #3B74FF;
+		border: 0;
+		border-right: 1px solid #01b065;
+		background: #01b065;
 		color: #FFF;
 	}
 
@@ -604,9 +604,9 @@
 	}
 
 	.picker-contain .caledar-btn-selected {
-		boder: 0;
-		border-right: 1px solid #3B74FF;
-		background: #3B74FF;
+		border: 0;
+		border-right: 1px solid #01b065;
+		background: #01b065;
 		border-radius: 0;
 		color: #FFF;
 	}

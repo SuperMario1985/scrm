@@ -211,17 +211,22 @@ export default {
   // table
   .ant-table {
     color: #333;
-    td{
-      .ant-btn{
-
+    td {
+      .ant-btn {
+        border: none;
+        background: none;
+        box-shadow: none;
+        color: #335588;
       }
     }
     .ant-table-thead > tr > th {
       color: #666;
     }
     .ant-empty-image {
+      height: 100px;
+      background: url("./assets/base/table-empty.png") center center no-repeat;
       svg {
-        // display: none;
+        display: none;
       }
     }
   }
