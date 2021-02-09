@@ -10,10 +10,11 @@
 				<a-layout style="position: absolute; top:0; bottom:0; right:0;  overflow-x: hidden; overflow-y: auto;"
 				          :style="corpLen > 1 ? {left: '250px'} : {left: '0px'}" class="scroll">
 					<!-- 头部 -->
-					<a-layout-header>被客户删除记录</a-layout-header>
+					<!-- <a-layout-header>被客户删除记录</a-layout-header> -->
 					<!-- 内容 -->
 					<a-layout-content>
-						<div class="content-msg">
+						<div style="font-size:16px;font-weight:700;color:#333333">被客户删除记录</div>
+						<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7;padding:16px">
 							当你被微信联系人从好友列表中删除，企业微信营销工具会自动发一条消息通知你。你也可以在企业微信营销工具后台查看历史被删除记录，知道是谁在什么时间把你删除。配合带参数的对外名片功能，也可以知道这个人是从什么渠道来的。
 						</div>
 						<div class="content-hd">

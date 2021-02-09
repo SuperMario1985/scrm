@@ -1,92 +1,117 @@
 <template>
-	<div style="width: 100%;max-height:100%;position: absolute;overflow-y:auto;padding: 20px 0;">
-		<div style="padding: 0 20px;">
-			<span @click="changeTab('1')" class="tabBtn" :class="{activeBtn:tabKey == 1}"
-			      v-has="hasHignAttribute">高级属性</span>
-			<span @click="changeTab('2')" class="tabBtn" :class="{activeBtn:tabKey == 2}"
-			      v-has="hasFollowStatus">跟进状态</span>
-		</div>
-		<div v-show="tabKey == 1" style="padding: 15px 0;margin: 0px 20px;background: #FFF;">
-			<div class="content-msg">
-<!--				{{$store.state.siteName}}-->
-				<p style="margin-bottom: 0;">
+	<div style="width: 100%;max-height:100%;position: absolute;overflow-y:auto;padding: 20px 0;" id="components-layout-demo-basic">
+		<a-layout-content>	
+			<div style="font-size:16px;font-weight:700;color:#333333">自定义属性</div>
+			<div style="padding: 20px 20px 0 ;">
+				<span @click="changeTab('1')" class="tabBtn" :class="{activeBtn:tabKey == 1}"
+							v-has="hasHignAttribute">高级属性</span>
+				<span @click="changeTab('2')" class="tabBtn" :class="{activeBtn:tabKey == 2}"
+							v-has="hasFollowStatus">跟进状态</span>
+			</div>
+			<div v-show="tabKey == 1" style="background: #FFF;">
+				<div class="content-msg">
+	<!--				{{$store.state.siteName}}-->
+				<p style="margin-bottom: 0;box-shadow: 0px 1px 4px 0px #D7D7D7;padding:16px">
 					本系统提供手机号、姓名、公司、年龄、性别、行业、爱好、生日及所在区域等15个通用属性字段，属性类型包括文本、单选、多选、日期等。系统通用字段只可修改使用状态和排序顺序（数值越大，在手机端展示越靠前）。</p>
 			</div>
-			<a-row style="margin-bottom:20px;padding:0 20px;">
-				<a-col style="float: left;">
-					<a-select defaultValue="2" style="width: 120px" @change="selectStatus">
-						<a-select-option value="2">全部状态</a-select-option>
-						<a-select-option value="1">开启</a-select-option>
-						<a-select-option value="0">关闭</a-select-option>
-					</a-select>
-				</a-col>
-				<a-col style="float: right;">
-					<a-button @click="addModel" v-if="allVisible" v-has="hasAddName" style="margin-right: 15px;">新增属性
-					</a-button>
-					<a-button type="primary" @click="editAll" v-if="allVisible" v-has="hasEditName">批量修改
-					</a-button>
-					<a-button type="primary"
-					          @click="submit"
-					          v-if="!allVisible" style="margin-right:15px;" :disabled="submitDisabled">提交
-					</a-button>
-					<a-button @click="cancelEditAll" v-if="!allVisible">取消
-					</a-button>
-				</a-col>
-			</a-row>
-			<!-- 表格部分 -->
-			<div class="content-bd">
-				<a-spin tip="Loading..." size="large" :spinning="isLoading">
-					<div class="spin-content">
-						<a-table :key="tableKey"
-						         :columns="columns"
-						         :dataSource="managentList"
-						         :pagination="false"
-						         :rowClassName="rowClassName"
-						         v-has="hasListName"
-						>
-							<template
-									v-for="col in ['status', 'chat_status', 'titleMsg','type','optionVal','sort','action']"
-									:slot="col"
-									slot-scope="text, record, index"
+				<a-row style="margin-bottom:20px;padding:0 20px;">
+					<a-col style="float: left;">
+						<a-select defaultValue="2" style="width: 120px" @change="selectStatus">
+							<a-select-option value="2">全部状态</a-select-option>
+							<a-select-option value="1">开启</a-select-option>
+							<a-select-option value="0">关闭</a-select-option>
+						</a-select>
+					</a-col>
+					<a-col style="float: right;">
+						<a-button @click="addModel" v-if="allVisible" v-has="hasAddName" style="margin-right: 15px;">新增属性
+						</a-button>
+						<a-button type="primary" @click="editAll" v-if="allVisible" v-has="hasEditName">批量修改
+						</a-button>
+						<a-button type="primary"
+											@click="submit"
+											v-if="!allVisible" style="margin-right:15px;" :disabled="submitDisabled">提交
+						</a-button>
+						<a-button @click="cancelEditAll" v-if="!allVisible">取消
+						</a-button>
+					</a-col>
+				</a-row>
+				<!-- 表格部分 -->
+				<div class="content-bd">
+					<a-spin tip="Loading..." size="large" :spinning="isLoading">
+						<div class="spin-content">
+							<a-table :key="tableKey"
+											:columns="columns"
+											:dataSource="managentList"
+											:pagination="false"
+											:rowClassName="rowClassName"
+											v-has="hasListName"
 							>
-								<div :key="col">
-									<template v-if="col == 'status'">
-										<a-switch :defaultChecked="text == 0 ? false : true"
-										          @click="e => changeStatus(e, index)"
-										          v-if="!record.flag && record.key != 'sex'"/>
-										<template v-else>
-											<span v-if="text == 1">开启</span>
-											<span v-if="text == 0">关闭</span>
+								<template
+										v-for="col in ['status', 'chat_status', 'titleMsg','type','optionVal','sort','action']"
+										:slot="col"
+										slot-scope="text, record, index"
+								>
+									<div :key="col">
+										<template v-if="col == 'status'">
+											<a-switch :defaultChecked="text == 0 ? false : true"
+																@click="e => changeStatus(e, index)"
+																v-if="!record.flag && record.key != 'sex'"/>
+											<template v-else>
+												<span v-if="text == 1">开启</span>
+												<span v-if="text == 0">关闭</span>
+											</template>
 										</template>
-									</template>
-									<template v-if="col == 'chat_status'">
-										<a-switch :defaultChecked="text == 0 ? false : true"
-										          @click="e => changeChatStatus(e, index)"
-										          v-if="!record.flag && record.key != 'sex'"/>
-										<template v-else>
-											<span v-if="text == 1">开启</span>
-											<span v-if="text == 0">关闭</span>
+										<template v-if="col == 'chat_status'">
+											<a-switch :defaultChecked="text == 0 ? false : true"
+																@click="e => changeChatStatus(e, index)"
+																v-if="!record.flag && record.key != 'sex'"/>
+											<template v-else>
+												<span v-if="text == 1">开启</span>
+												<span v-if="text == 0">关闭</span>
+											</template>
 										</template>
-									</template>
-									<template v-if="col == 'titleMsg'">
-										<template v-if="!record.flag">
-											<span v-if="record.is_define == 0">{{text}}</span>
-											<a-input :value="text" placeholder="请输入字段名称"
-											         v-if="record.is_define == 1"
-											         :maxLength="8"
-											         @change="e => handleChange(e.target.value, record.key)">
-																<span slot="suffix">
-                    <span>{{managentList[index].title.length}}</span>/8
-                  </span>
-											</a-input>
+										<template v-if="col == 'titleMsg'">
+											<template v-if="!record.flag">
+												<span v-if="record.is_define == 0">{{text}}</span>
+												<a-input :value="text" placeholder="请输入字段名称"
+																v-if="record.is_define == 1"
+																:maxLength="8"
+																@change="e => handleChange(e.target.value, record.key)">
+																	<span slot="suffix">
+											<span>{{managentList[index].title.length}}</span>/8
+										</span>
+												</a-input>
+											</template>
+											<template v-else>
+												{{text}}
+											</template>
 										</template>
-										<template v-else>
-											{{text}}
-										</template>
-									</template>
-									<template v-if="col == 'type'">
-										<template v-if="!record.flag">
-											<span v-if="!record.addFlag">
+										<template v-if="col == 'type'">
+											<template v-if="!record.flag">
+												<span v-if="!record.addFlag">
+													<span v-if="text == 1">文本</span>
+													<span v-if="text == 2">单选</span>
+													<span v-if="text == 3">多选</span>
+													<span v-if="text == 4">日期</span>
+													<span v-if="text == 5">手机号</span>
+													<span v-if="text == 6">邮箱</span>
+													<span v-if="text == 7">区域</span>
+													<span v-if="text == 8">图片</span>
+												</span>
+												<a-select :defaultValue="text" style="width: 120px;"
+																	@change="e => handleChange2(e, record.key, col)"
+																	v-if="record.addFlag && record.is_define == 1">
+													<a-select-option value="1">文本</a-select-option>
+													<a-select-option value="2">单选</a-select-option>
+													<a-select-option value="3">多选</a-select-option>
+													<a-select-option value="4">日期</a-select-option>
+													<a-select-option value="5">手机号</a-select-option>
+													<a-select-option value="6">邮箱</a-select-option>
+													<a-select-option value="7">区域</a-select-option>
+													<a-select-option value="8">图片</a-select-option>
+												</a-select>
+											</template>
+											<template v-else>
 												<span v-if="text == 1">文本</span>
 												<span v-if="text == 2">单选</span>
 												<span v-if="text == 3">多选</span>
@@ -95,237 +120,214 @@
 												<span v-if="text == 6">邮箱</span>
 												<span v-if="text == 7">区域</span>
 												<span v-if="text == 8">图片</span>
-											</span>
-											<a-select :defaultValue="text" style="width: 120px;"
-											          @change="e => handleChange2(e, record.key, col)"
-											          v-if="record.addFlag && record.is_define == 1">
-												<a-select-option value="1">文本</a-select-option>
-												<a-select-option value="2">单选</a-select-option>
-												<a-select-option value="3">多选</a-select-option>
-												<a-select-option value="4">日期</a-select-option>
-												<a-select-option value="5">手机号</a-select-option>
-												<a-select-option value="6">邮箱</a-select-option>
-												<a-select-option value="7">区域</a-select-option>
-												<a-select-option value="8">图片</a-select-option>
-											</a-select>
-										</template>
-										<template v-else>
-											<span v-if="text == 1">文本</span>
-											<span v-if="text == 2">单选</span>
-											<span v-if="text == 3">多选</span>
-											<span v-if="text == 4">日期</span>
-											<span v-if="text == 5">手机号</span>
-											<span v-if="text == 6">邮箱</span>
-											<span v-if="text == 7">区域</span>
-											<span v-if="text == 8">图片</span>
-										</template>
-									</template>
-									<template v-if="col == 'optionVal'">
-										<template v-if="!record.flag">
-											<span v-if="record.is_define == 0">
-												<span v-show="text == '' || text == null">--</span>
-												<a-tooltip>
-												<template slot="title">
-													{{text}}
-												</template>
-												<span v-show="text != '' && text != null"
-												      class="optionVal-text">{{text}}</span>
-											</a-tooltip>
-											</span>
-											<span v-if="record.is_define == 1">
-												<span v-if="record.type == 2 || record.type == 3">
-													<a-tag closable @close="e => delTag(e, tag,record.key)"
-													       v-for="tag in record.optionVal2" style="margin-bottom: 5px;">{{tag}}</a-tag>
-													<a-textarea :rows="2"
-													            @change="e => handleChange3(e.target.value, record.key,col)"
-													            placeholder="请输入选项内容"/>
-													<div>用“,”新增选项内容，每个选项内容不超过12个字</div>
-												</span>
-												<span v-else>--</span>
-											</span>
-										</template>
-										<template v-if="record.flag">
-											<span v-if="text == '' || text == null">--</span>
-											<a-tooltip>
-												<template slot="title">
-													{{text}}
-												</template>
-												<span v-if="text != '' && text != null"
-												      class="optionVal-text">{{text}}</span>
-											</a-tooltip>
-										</template>
-									</template>
-									<template v-if="col == 'sort'">
-										<template v-if="!record.flag">
-											<a-input :value="text" placeholder="请输入排序展示"
-											         @change="e => handleChange4(e.target.value, record.key)">
-											</a-input>
-											<span style="color: red;">数值越大，在手机端展示越靠前</span>
-										</template>
-										<template v-else>
-											{{text}}
-										</template>
-									</template>
-									<template v-if="col == 'action'">
-										<template v-if="!record.flag">
-											<template v-if="!allVisible && record.is_define == 1">
-												<a-button
-														style="margin-left:5px;"
-														@click="deleteOne(index)"
-														v-has="hasDeleteName">
-													删除
-												</a-button>
 											</template>
 										</template>
-										<template v-else>
-											<a-popconfirm
-													title="确定开启吗?"
-													@confirm="submitOne(record, 1, 0)"
-													okText="确定"
-													cancelText="取消"
-											>
-												<a-button style="margin:0 0px 5px 5px;"
-												          v-if="record.status == 0 && record.key != 'sex'">客户开启
-												</a-button>
-											</a-popconfirm>
-											<a-popconfirm
-													title="确定关闭吗?"
-													@confirm="submitOne(record, 0, 0)"
-													okText="确定"
-													cancelText="取消"
-											>
-												<a-button style="margin:0 0px 5px 5px;"
-												          v-if="record.status == 1 && record.key != 'sex'">客户关闭
-												</a-button>
-											</a-popconfirm>
-											<a-popconfirm
-													title="确定开启吗?"
-													@confirm="submitOne(record, 1, 1)"
-													okText="确定"
-													cancelText="取消"
-											>
-												<a-button style="margin:0 0px 5px 5px;"
-												          v-if="record.chat_status == 0 && record.key != 'sex'">群开启
-												</a-button>
-											</a-popconfirm>
-											<a-popconfirm
-													title="确定关闭吗?"
-													@confirm="submitOne(record,0, 1)"
-													okText="确定"
-													cancelText="取消"
-											>
-												<a-button style="margin:0 0px 5px 5px;"
-												          v-if="record.chat_status == 1 && record.key != 'sex'">群关闭
-												</a-button>
-											</a-popconfirm>
-											<a-button style="margin:0 0px 5px 5px;" @click="edit(record,index)"
-											          v-has="hasEditName">编辑
-											</a-button>
-											<a-popconfirm
-													title="确定删除吗?"
-													@confirm="submitOne(record,2)"
-													okText="确定"
-													cancelText="取消"
-											>
-												<a-button style="margin:0 0px 5px 5px;"
-												          v-if="record.is_define == 1" v-has="hasDeleteName">
-													删除
-												</a-button>
-											</a-popconfirm>
+										<template v-if="col == 'optionVal'">
+											<template v-if="!record.flag">
+												<span v-if="record.is_define == 0">
+													<span v-show="text == '' || text == null">--</span>
+													<a-tooltip>
+													<template slot="title">
+														{{text}}
+													</template>
+													<span v-show="text != '' && text != null"
+																class="optionVal-text">{{text}}</span>
+												</a-tooltip>
+												</span>
+												<span v-if="record.is_define == 1">
+													<span v-if="record.type == 2 || record.type == 3">
+														<a-tag closable @close="e => delTag(e, tag,record.key)"
+																	v-for="tag in record.optionVal2" style="margin-bottom: 5px;">{{tag}}</a-tag>
+														<a-textarea :rows="2"
+																				@change="e => handleChange3(e.target.value, record.key,col)"
+																				placeholder="请输入选项内容"/>
+														<div>用“,”新增选项内容，每个选项内容不超过12个字</div>
+													</span>
+													<span v-else>--</span>
+												</span>
+											</template>
+											<template v-if="record.flag">
+												<span v-if="text == '' || text == null">--</span>
+												<a-tooltip>
+													<template slot="title">
+														{{text}}
+													</template>
+													<span v-if="text != '' && text != null"
+																class="optionVal-text">{{text}}</span>
+												</a-tooltip>
+											</template>
 										</template>
-									</template>
-								</div>
+										<template v-if="col == 'sort'">
+											<template v-if="!record.flag">
+												<a-input :value="text" placeholder="请输入排序展示"
+																@change="e => handleChange4(e.target.value, record.key)">
+												</a-input>
+												<span style="color: red;">数值越大，在手机端展示越靠前</span>
+											</template>
+											<template v-else>
+												{{text}}
+											</template>
+										</template>
+										<template v-if="col == 'action'">
+											<template v-if="!record.flag">
+												<template v-if="!allVisible && record.is_define == 1">
+													<a-button
+															style="margin-left:5px;"
+															@click="deleteOne(index)"
+															v-has="hasDeleteName">
+														删除
+													</a-button>
+												</template>
+											</template>
+											<template v-else>
+												<a-popconfirm
+														title="确定开启吗?"
+														@confirm="submitOne(record, 1, 0)"
+														okText="确定"
+														cancelText="取消"
+												>
+													<a-button style="margin:0 0px 5px 5px;"
+																		v-if="record.status == 0 && record.key != 'sex'">客户开启
+													</a-button>
+												</a-popconfirm>
+												<a-popconfirm
+														title="确定关闭吗?"
+														@confirm="submitOne(record, 0, 0)"
+														okText="确定"
+														cancelText="取消"
+												>
+													<a-button style="margin:0 0px 5px 5px;"
+																		v-if="record.status == 1 && record.key != 'sex'">客户关闭
+													</a-button>
+												</a-popconfirm>
+												<a-popconfirm
+														title="确定开启吗?"
+														@confirm="submitOne(record, 1, 1)"
+														okText="确定"
+														cancelText="取消"
+												>
+													<a-button style="margin:0 0px 5px 5px;"
+																		v-if="record.chat_status == 0 && record.key != 'sex'">群开启
+													</a-button>
+												</a-popconfirm>
+												<a-popconfirm
+														title="确定关闭吗?"
+														@confirm="submitOne(record,0, 1)"
+														okText="确定"
+														cancelText="取消"
+												>
+													<a-button style="margin:0 0px 5px 5px;"
+																		v-if="record.chat_status == 1 && record.key != 'sex'">群关闭
+													</a-button>
+												</a-popconfirm>
+												<a-button style="margin:0 0px 5px 5px;" @click="edit(record,index)"
+																	v-has="hasEditName">编辑
+												</a-button>
+												<a-popconfirm
+														title="确定删除吗?"
+														@confirm="submitOne(record,2)"
+														okText="确定"
+														cancelText="取消"
+												>
+													<a-button style="margin:0 0px 5px 5px;"
+																		v-if="record.is_define == 1" v-has="hasDeleteName">
+														删除
+													</a-button>
+												</a-popconfirm>
+											</template>
+										</template>
+									</div>
+								</template>
+							</a-table>
+
+							<div v-if="managentList.length > 0" style="margin-top: 20px;">
+								<a-button type="link"
+													@click="addLine"
+													v-if="!allVisible" v-has="hasAddName">+ 增加自定义注册项
+								</a-button>
+							</div>
+							<div v-if="managentList.length > 0" style="text-align: center;">
+								<a-button @click="cancelEditAll" v-if="!allVisible"
+													style="width: 100px;margin: 20px 20px 20px 0;z-index:999;">取消
+								</a-button>
+								<a-button type="primary"
+													style="width: 100px;margin: 20px;z-index:999;"
+													@click="submit"
+													v-if="!allVisible" :disabled="submitDisabled">提交
+								</a-button>
+							</div>
+						</div>
+					</a-spin>
+				</div>
+				<!-- 新增弹窗 -->
+				<a-modal :title="modelTitle" v-model="addVisible" @ok="addHandleOk" @cancel="addHandleCancel"
+								width="565px">
+					<a-form-model :model="form" :label-col="{ span: 6 }" :wrapper-col="{ span: 14 }">
+						<a-form-model-item label="字段名称">
+							<a-input v-model="form.title" placeholder="请输入字段名称"
+											:maxLength="8" v-if="form.is_define == 1">
+								<span slot="suffix">
+																	<span>{{form.title.length}}</span>/8
+								</span>
+							</a-input>
+							<span v-if="form.is_define == 0">{{form.title}}</span>
+						</a-form-model-item>
+						<a-form-model-item label="字段类型">
+							<a-select v-model="form.type" v-if="!form.addFlag && form.is_define == 1">
+								<a-select-option value="1">文本</a-select-option>
+								<a-select-option value="2">单选</a-select-option>
+								<a-select-option value="3">多选</a-select-option>
+								<a-select-option value="4">日期</a-select-option>
+								<a-select-option value="5">手机号</a-select-option>
+								<a-select-option value="6">邮箱</a-select-option>
+								<a-select-option value="7">区域</a-select-option>
+								<a-select-option value="8">图片</a-select-option>
+							</a-select>
+							<template v-if="form.addFlag || form.is_define == 0">
+								<span v-if="form.type == 1">文本</span>
+								<span v-if="form.type == 2">单选</span>
+								<span v-if="form.type == 3">多选</span>
+								<span v-if="form.type == 4">日期</span>
+								<span v-if="form.type == 5">手机号</span>
+								<span v-if="form.type == 6">邮箱</span>
+								<span v-if="form.type == 7">区域</span>
+								<span v-if="form.type == 8">图片</span>
 							</template>
-						</a-table>
-
-						<div v-if="managentList.length > 0" style="margin-top: 20px;">
-							<a-button type="link"
-							          @click="addLine"
-							          v-if="!allVisible" v-has="hasAddName">+ 增加自定义注册项
-							</a-button>
-						</div>
-						<div v-if="managentList.length > 0" style="text-align: center;">
-							<a-button @click="cancelEditAll" v-if="!allVisible"
-							          style="width: 100px;margin: 20px 20px 20px 0;z-index:999;">取消
-							</a-button>
-							<a-button type="primary"
-							          style="width: 100px;margin: 20px;z-index:999;"
-							          @click="submit"
-							          v-if="!allVisible" :disabled="submitDisabled">提交
-							</a-button>
-						</div>
-					</div>
-				</a-spin>
+						</a-form-model-item>
+						<a-form-model-item label="选项内容" v-if="form.type == 2 || form.type == 3">
+							<a-tag closable @close="e => delTag(e, tag)" v-for="tag in form.optionVal2"
+										style="margin-bottom: 5px;" v-if="form.is_define == 1">{{tag}}
+							</a-tag>
+							<a-tag v-for="tag in form.optionVal2"
+										style="margin-bottom: 5px;" v-if="form.is_define == 0">{{tag}}
+							</a-tag>
+							<a-input v-model="form.optionVal" type="textarea" placeholder="请输入选项内容"
+											style="margin-top:3px;" v-if="form.is_define == 1"/>
+							<div v-if="form.is_define == 1">用“,”新增选项内容，每个选项内容不超过12个字</div>
+						</a-form-model-item>
+						<a-form-model-item label="排序展示">
+							<a-input v-model="form.sort" placeholder="请输入排序展示"
+											style="margin-top:3px;"/>
+							<span style="color: red;">数值越大，在手机端展示越靠前</span>
+						</a-form-model-item>
+						<a-form-model-item label="客户画像显示">
+							<a-radio-group v-model="form.status" v-if="form.key != 'sex'">
+								<a-radio value="1">开启</a-radio>
+								<a-radio value="0">关闭</a-radio>
+							</a-radio-group>
+							<span v-if="form.key == 'sex'">开启</span>
+						</a-form-model-item>
+						<a-form-model-item label="群画像显示">
+							<a-radio-group v-model="form.chat_status" v-if="form.key != 'sex'">
+								<a-radio value="1">开启</a-radio>
+								<a-radio value="0">关闭</a-radio>
+							</a-radio-group>
+							<span v-if="form.key == 'sex'">关闭</span>
+						</a-form-model-item>
+					</a-form-model>
+				</a-modal>
 			</div>
-
-			<!-- 新增弹窗 -->
-			<a-modal :title="modelTitle" v-model="addVisible" @ok="addHandleOk" @cancel="addHandleCancel"
-			         width="565px">
-				<a-form-model :model="form" :label-col="{ span: 6 }" :wrapper-col="{ span: 14 }">
-					<a-form-model-item label="字段名称">
-						<a-input v-model="form.title" placeholder="请输入字段名称"
-						         :maxLength="8" v-if="form.is_define == 1">
-							 <span slot="suffix">
-                                <span>{{form.title.length}}</span>/8
-							 </span>
-						</a-input>
-						<span v-if="form.is_define == 0">{{form.title}}</span>
-					</a-form-model-item>
-					<a-form-model-item label="字段类型">
-						<a-select v-model="form.type" v-if="!form.addFlag && form.is_define == 1">
-							<a-select-option value="1">文本</a-select-option>
-							<a-select-option value="2">单选</a-select-option>
-							<a-select-option value="3">多选</a-select-option>
-							<a-select-option value="4">日期</a-select-option>
-							<a-select-option value="5">手机号</a-select-option>
-							<a-select-option value="6">邮箱</a-select-option>
-							<a-select-option value="7">区域</a-select-option>
-							<a-select-option value="8">图片</a-select-option>
-						</a-select>
-						<template v-if="form.addFlag || form.is_define == 0">
-							<span v-if="form.type == 1">文本</span>
-							<span v-if="form.type == 2">单选</span>
-							<span v-if="form.type == 3">多选</span>
-							<span v-if="form.type == 4">日期</span>
-							<span v-if="form.type == 5">手机号</span>
-							<span v-if="form.type == 6">邮箱</span>
-							<span v-if="form.type == 7">区域</span>
-							<span v-if="form.type == 8">图片</span>
-						</template>
-					</a-form-model-item>
-					<a-form-model-item label="选项内容" v-if="form.type == 2 || form.type == 3">
-						<a-tag closable @close="e => delTag(e, tag)" v-for="tag in form.optionVal2"
-						       style="margin-bottom: 5px;" v-if="form.is_define == 1">{{tag}}
-						</a-tag>
-						<a-tag v-for="tag in form.optionVal2"
-						       style="margin-bottom: 5px;" v-if="form.is_define == 0">{{tag}}
-						</a-tag>
-						<a-input v-model="form.optionVal" type="textarea" placeholder="请输入选项内容"
-						         style="margin-top:3px;" v-if="form.is_define == 1"/>
-						<div v-if="form.is_define == 1">用“,”新增选项内容，每个选项内容不超过12个字</div>
-					</a-form-model-item>
-					<a-form-model-item label="排序展示">
-						<a-input v-model="form.sort" placeholder="请输入排序展示"
-						         style="margin-top:3px;"/>
-						<span style="color: red;">数值越大，在手机端展示越靠前</span>
-					</a-form-model-item>
-					<a-form-model-item label="客户画像显示">
-						<a-radio-group v-model="form.status" v-if="form.key != 'sex'">
-							<a-radio value="1">开启</a-radio>
-							<a-radio value="0">关闭</a-radio>
-						</a-radio-group>
-						<span v-if="form.key == 'sex'">开启</span>
-					</a-form-model-item>
-					<a-form-model-item label="群画像显示">
-						<a-radio-group v-model="form.chat_status" v-if="form.key != 'sex'">
-							<a-radio value="1">开启</a-radio>
-							<a-radio value="0">关闭</a-radio>
-						</a-radio-group>
-						<span v-if="form.key == 'sex'">关闭</span>
-					</a-form-model-item>
-				</a-form-model>
-			</a-modal>
-		</div>
+		</a-layout-content>
 		<div v-show="tabKey == 2" style="background: #FFF;padding: 20px 0;margin: 0 20px;">
 			<a-row style="margin-top: 10px; margin-left: 4.16%;">
 				<template v-for="(item,index) in follows">
@@ -1143,7 +1145,6 @@
 	.content-msg {
 		border: 1px solid @border-color;
 		background: @color-bgc;
-		padding: 10px;
 		text-align: left;
 		margin: 0 20px 20px;
 	}
@@ -1276,5 +1277,14 @@
 
 	/deep/ .ant-input-affix-wrapper .ant-input:not(:last-child) {
 		padding-right: 50px;
+	}
+
+	#components-layout-demo-basic .ant-layout-content {
+		margin: 0 20px 20px;
+		min-width: 885px;
+		padding-right: 40px;
+		background-color: #ffffff;
+		margin-top: 16px;
+		padding: 16px;
 	}
 </style>

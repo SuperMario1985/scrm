@@ -10,10 +10,11 @@
 				</a-layout-sider>
 				<a-layout style="position: absolute;left:250px;top:0;bottom:0;right:0;" class="scroll">
 					<!-- 头部 -->
-					<a-layout-header>自动拉群</a-layout-header>
+					<!-- <a-layout-header>自动拉群</a-layout-header> -->
 					<!-- 内容 -->
 					<a-layout-content>
-						<div class="content-msg">
+						<div style="font-size:16px;font-weight:700;color:#333333">自动拉群</div>
+						<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7;padding:16px">
 							<p style="margin-bottom: 2px;">
 								<span style="color: #FF562D;">自动拉群，不仅可以完全实现不需要员工手工拉客户进群，而且完全打破企业微信官方只能选择5个群聊的局限，流程如下：</span>
 								<a-popover placement="bottom">

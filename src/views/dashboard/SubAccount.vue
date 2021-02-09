@@ -1,195 +1,194 @@
 <template>
 	<div style="width: 100%;max-height:100%;position: absolute;overflow-y: auto;padding-bottom: 30px;" class="scroll">
-		<div>
-			<a-card style="margin-bottom:20px;padding:10px 20px;">
-				<label class="tpl-title">子账户列表</label>
-			</a-card>
-			<div class="content-msg">
-				<p style="margin-bottom: 2px;color: #FF562D;">
-					1、针对已绑定在本系统的企业微信，可前往通讯录管理-企业成员-同步企业微信通讯录，同步后的企业成员名单在子账户未启用列表展示，再对其进行相关操作。与此同时，日后每新增一个企业成员，则自动进入到子账户未启用列表。</p>
-				<p style="margin-bottom: 2px;">
-					2、当某手机号存在子账户未启用列表中，若依然使用该手机号手动添加子账户，添加后，自动将该未启用的子账户去除。</p>
-				<p style="margin-bottom: 2px;">
-					3、当某手机号存在多个企业微信，若同步多个企业微信的通讯录，未启用的子账户列表以手机号作为唯一性去重展示。</p>
-				<p style="margin-bottom: 2px;">
-					4、若在尚未“同步企业微信通讯录”的名单时，手动添加子账户（进入子账户启用列表），再去“同步”，此时只要两边手机号为一致，则该子账户的原有状态不变。</p>
-			</div>
-			<a-col style="position: absolute;right: 20px;z-index: 999;">
-				<a-button
-						type="primary"
-						icon="plus"
-						style="width: 150px;font-size:14px;"
-						@click="addSubAccount" v-has="'subAccount-add'"
-				>添加子账户
-				</a-button>
-			</a-col>
-			<a-tabs @change="changeStatus" type="card">
-				<a-tab-pane tab="启用" key="1">
-					<a-col style="border: 1px solid #E2E2E2;background: #FFF;padding: 10px;margin: 0 20px;border-bottom: 0;">
-						<a-input placeholder="请输入手机号或名称" @keyup.enter="find" style="width: 170px;margin-left: 5px;"
-						         v-model="inputValue"
-						         autoComplete="off"/>
-						<a-button type="primary" style="margin-left: 10px;" @click="find">查找</a-button>
-						<a-button style="margin-left: 10px;" @click="clear">清空</a-button>
-					</a-col>
-					<!-- 表格部分 -->
-					<div class="content-bd">
-						<a-spin tip="Loading..." size="large" :spinning="isLoading">
-							<div class="spin-content">
-								<a-table
-										:columns="columns"
-										:dataSource="subAccountList"
-										:pagination="false"
-										:rowClassName="rowClassName" v-has="'subAccount-list'"
-								>
-									<template slot="name" slot-scope="text, record, index">
-										{{record.name}}
-										<a-icon slot="prefix" type="man" style="margin-left: 10px;color: #427EBA;"
-										        v-if="record.sex==1"/>
-										<a-icon
-												slot="prefix"
-												type="woman"
-												style="margin-left: 10px;color: #ED4997;"
-												v-if="record.sex==2"
+		<div id="components-layout-demo-basic"> 
+			<a-layout-content>
+				<div style="font-size:16px;font-weight:700;color:#333333">子账户列表</div>
+				<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7;padding:16px">
+					<p style="margin-bottom: 2px;color: #FF562D;">
+						1、针对已绑定在本系统的企业微信，可前往通讯录管理-企业成员-同步企业微信通讯录，同步后的企业成员名单在子账户未启用列表展示，再对其进行相关操作。与此同时，日后每新增一个企业成员，则自动进入到子账户未启用列表。</p>
+					<p style="margin-bottom: 2px;">
+						2、当某手机号存在子账户未启用列表中，若依然使用该手机号手动添加子账户，添加后，自动将该未启用的子账户去除。</p>
+					<p style="margin-bottom: 2px;">
+						3、当某手机号存在多个企业微信，若同步多个企业微信的通讯录，未启用的子账户列表以手机号作为唯一性去重展示。</p>
+					<p style="margin-bottom: 2px;">
+						4、若在尚未“同步企业微信通讯录”的名单时，手动添加子账户（进入子账户启用列表），再去“同步”，此时只要两边手机号为一致，则该子账户的原有状态不变。</p>
+				</div>
+				<a-col style="position: absolute;right: 20px;z-index: 999;">
+					<a-button
+							type="primary"
+							icon="plus"
+							style="width: 150px;font-size:14px;"
+							@click="addSubAccount" v-has="'subAccount-add'"
+					>添加子账户
+					</a-button>
+				</a-col>
+				<a-tabs @change="changeStatus" type="card">
+					<a-tab-pane tab="启用" key="1">
+						<a-col style="border: 1px solid #E2E2E2;background: #FFF;padding: 10px;margin: 0 20px;border-bottom: 0;">
+							<a-input placeholder="请输入手机号或名称" @keyup.enter="find" style="width: 170px;margin-left: 5px;"
+											v-model="inputValue"
+											autoComplete="off"/>
+							<a-button type="primary" style="margin-left: 10px;" @click="find">查找</a-button>
+							<a-button style="margin-left: 10px;" @click="clear">清空</a-button>
+						</a-col>
+						<!-- 表格部分 -->
+						<div class="content-bd">
+							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+								<div class="spin-content">
+									<a-table
+											:columns="columns"
+											:dataSource="subAccountList"
+											:pagination="false"
+											:rowClassName="rowClassName" v-has="'subAccount-list'"
+									>
+										<template slot="name" slot-scope="text, record, index">
+											{{record.name}}
+											<a-icon slot="prefix" type="man" style="margin-left: 10px;color: #427EBA;"
+															v-if="record.sex==1"/>
+											<a-icon
+													slot="prefix"
+													type="woman"
+													style="margin-left: 10px;color: #ED4997;"
+													v-if="record.sex==2"
+											/>
+										</template>
+										<template slot="department" slot-scope="text, record, index">
+											<span v-if="text == ''">--</span>
+											<span v-if="text != ''">{{text}}</span>
+										</template>
+										<template slot="position" slot-scope="text, record, index">
+											<span v-if="text == ''">--</span>
+											<span v-if="text != ''">{{text}}</span>
+										</template>
+										<template slot="status" slot-scope="text, record, index">
+											<span v-if="record.type == 0 && text == 0">未启用</span>
+											<span v-if="record.type == 0 && text == 1">正常</span>
+											<span v-if="record.type == 0 && text == 2">禁用</span>
+											<span v-if="record.type == 1 && text == 1">正常（永远正常）</span>
+										</template>
+										<template slot="action" slot-scope="text, record, index">
+											<a-button style="margin-left:5px;" @click="detail(record)"
+																v-has="'subAccount-info'">详情
+											</a-button>
+											<a-button style="margin-left:5px;" @click="editSubAccount(record)"
+																v-has="'subAccount-modify'"
+																v-if="isMasterAccount == 1 || isMasterAccount == 2 && record.type == 0">
+												修改
+											</a-button>
+											<a-button style="margin-left:5px;"
+																v-if="masterAccountId != record.id && record.id != sub_id && record.status == 1"
+																@click="showWarnVisible(record)" v-has="'subAccount-status'">禁用
+											</a-button>
+											<a-button style="margin-left:5px;"
+																v-if="masterAccountId != record.id && record.id != sub_id && record.status == 2"
+																@click="showStartVisible(record)" v-has="'subAccount-status'">启用
+											</a-button>
+											<a-button style="margin-left:5px;" @click="editPassword(record.id)"
+																v-has="'subAccount-modify-pass'"
+																v-if="record.password != '' && isMasterAccount == 1 || isMasterAccount == 2 && record.type == 0 && record.password != ''">
+												重置密码
+											</a-button>
+										</template>
+									</a-table>
+
+									<!-- 分页 -->
+									<div class="pagination" style="margin: 20px auto;height: 32px;" v-show="total > 0"
+											v-has="'subAccount-list'">
+										<span style="float:left;margin-left: 20px;">共{{total}}条</span>
+										<a-pagination
+												:total="total"
+												showSizeChanger
+												:showQuickJumper="quickJumper"
+												:current="page"
+												:pageSize="page_size"
+												:pageSizeOptions="['1','2','15','30','50','100']"
+												@change="changePage"
+												@showSizeChange="showSizeChange"
+												style="float: right;margin-right: 20px;"
 										/>
-									</template>
-									<template slot="department" slot-scope="text, record, index">
-										<span v-if="text == ''">--</span>
-										<span v-if="text != ''">{{text}}</span>
-									</template>
-									<template slot="position" slot-scope="text, record, index">
-										<span v-if="text == ''">--</span>
-										<span v-if="text != ''">{{text}}</span>
-									</template>
-									<template slot="status" slot-scope="text, record, index">
-										<span v-if="record.type == 0 && text == 0">未启用</span>
-										<span v-if="record.type == 0 && text == 1">正常</span>
-										<span v-if="record.type == 0 && text == 2">禁用</span>
-										<span v-if="record.type == 1 && text == 1">正常（永远正常）</span>
-									</template>
-									<template slot="action" slot-scope="text, record, index">
-										<a-button style="margin-left:5px;" @click="detail(record)"
-										          v-has="'subAccount-info'">详情
-										</a-button>
-										<a-button style="margin-left:5px;" @click="editSubAccount(record)"
-										          v-has="'subAccount-modify'"
-										          v-if="isMasterAccount == 1 || isMasterAccount == 2 && record.type == 0">
-											修改
-										</a-button>
-										<a-button style="margin-left:5px;"
-										          v-if="masterAccountId != record.id && record.id != sub_id && record.status == 1"
-										          @click="showWarnVisible(record)" v-has="'subAccount-status'">禁用
-										</a-button>
-										<a-button style="margin-left:5px;"
-										          v-if="masterAccountId != record.id && record.id != sub_id && record.status == 2"
-										          @click="showStartVisible(record)" v-has="'subAccount-status'">启用
-										</a-button>
-										<a-button style="margin-left:5px;" @click="editPassword(record.id)"
-										          v-has="'subAccount-modify-pass'"
-										          v-if="record.password != '' && isMasterAccount == 1 || isMasterAccount == 2 && record.type == 0 && record.password != ''">
-											重置密码
-										</a-button>
-									</template>
-								</a-table>
-
-								<!-- 分页 -->
-								<div class="pagination" style="margin: 20px auto;height: 32px;" v-show="total > 0"
-								     v-has="'subAccount-list'">
-									<span style="float:left;margin-left: 20px;">共{{total}}条</span>
-									<a-pagination
-											:total="total"
-											showSizeChanger
-											:showQuickJumper="quickJumper"
-											:current="page"
-											:pageSize="page_size"
-											:pageSizeOptions="['1','2','15','30','50','100']"
-											@change="changePage"
-											@showSizeChange="showSizeChange"
-											style="float: right;margin-right: 20px;"
-									/>
+									</div>
 								</div>
-							</div>
-						</a-spin>
-					</div>
-				</a-tab-pane>
-				<a-tab-pane tab="未启用" key="2">
-					<a-col style="border: 1px solid #E2E2E2;background: #FFF;padding: 10px;margin: 0 20px;border-bottom: 0;">
-						<a-input placeholder="请输入手机号或名称" @keyup.enter="find" style="width: 170px;margin-left: 5px;"
-						         v-model="inputValue2"
-						         autoComplete="off"/>
-						<a-button type="primary" style="margin-left: 10px;" @click="find">查找</a-button>
-						<a-button style="margin-left: 10px;" @click="clear">清空</a-button>
-					</a-col>
-					<!-- 表格部分 -->
-					<div class="content-bd">
-						<a-spin tip="Loading..." size="large" :spinning="isLoading2">
-							<div class="spin-content">
-								<a-table
-										:columns="columns"
-										:dataSource="subAccountList2"
-										:pagination="false"
-										:rowClassName="rowClassName" v-has="'subAccount-list'"
-								>
-									<template slot="name" slot-scope="text, record, index">
-										{{record.name}}
-										<a-icon slot="prefix" type="man" style="margin-left: 10px;color: #427EBA;"
-										        v-if="record.sex==1"/>
-										<a-icon
-												slot="prefix"
-												type="woman"
-												style="margin-left: 10px;color: #ED4997;"
-												v-if="record.sex==2"
+							</a-spin>
+						</div>
+					</a-tab-pane>
+					<a-tab-pane tab="未启用" key="2">
+						<a-col style="border: 1px solid #E2E2E2;background: #FFF;padding: 10px;margin: 0 20px;border-bottom: 0;">
+							<a-input placeholder="请输入手机号或名称" @keyup.enter="find" style="width: 170px;margin-left: 5px;"
+											v-model="inputValue2"
+											autoComplete="off"/>
+							<a-button type="primary" style="margin-left: 10px;" @click="find">查找</a-button>
+							<a-button style="margin-left: 10px;" @click="clear">清空</a-button>
+						</a-col>
+						<!-- 表格部分 -->
+						<div class="content-bd">
+							<a-spin tip="Loading..." size="large" :spinning="isLoading2">
+								<div class="spin-content">
+									<a-table
+											:columns="columns"
+											:dataSource="subAccountList2"
+											:pagination="false"
+											:rowClassName="rowClassName" v-has="'subAccount-list'"
+									>
+										<template slot="name" slot-scope="text, record, index">
+											{{record.name}}
+											<a-icon slot="prefix" type="man" style="margin-left: 10px;color: #427EBA;"
+															v-if="record.sex==1"/>
+											<a-icon
+													slot="prefix"
+													type="woman"
+													style="margin-left: 10px;color: #ED4997;"
+													v-if="record.sex==2"
+											/>
+										</template>
+										<template slot="department" slot-scope="text, record, index">
+											<span v-if="text == ''">--</span>
+											<span v-if="text != ''">{{text}}</span>
+										</template>
+										<template slot="position" slot-scope="text, record, index">
+											<span v-if="text == ''">--</span>
+											<span v-if="text != ''">{{text}}</span>
+										</template>
+										<template slot="status" slot-scope="text, record, index">
+											<span v-if="text == 0">未启用</span>
+											<span v-if="text == 1">正常</span>
+											<span v-if="text == 2">禁用</span>
+										</template>
+										<template slot="action" slot-scope="text, record, index">
+											<a-button style="margin-left:5px;" @click="detail(record)"
+																v-has="'subAccount-info'">详情
+											</a-button>
+											<a-button style="margin-left:5px;" @click="editSubAccount(record)"
+																v-has="'subAccount-modify'">修改
+											</a-button>
+											<a-button style="margin-left:5px;"
+																v-if="masterAccountId != record.id && record.id != sub_id && record.status == 0"
+																@click="editSubAccount(record)" v-has="'subAccount-status'">启用
+											</a-button>
+										</template>
+									</a-table>
+
+									<!-- 分页 -->
+									<div class="pagination" style="margin: 20px auto;height: 32px;" v-show="total2 > 0"
+											v-has="'subAccount-list'">
+										<span style="float:left;margin-left: 20px;">共{{total2}}条</span>
+										<a-pagination
+												:total="total2"
+												showSizeChanger
+												:showQuickJumper="quickJumper2"
+												:current="page2"
+												:pageSize="page_size2"
+												:pageSizeOptions="['1','2','15','30','50','100']"
+												@change="changePage"
+												@showSizeChange="showSizeChange"
+												style="float: right;margin-right: 20px;"
 										/>
-									</template>
-									<template slot="department" slot-scope="text, record, index">
-										<span v-if="text == ''">--</span>
-										<span v-if="text != ''">{{text}}</span>
-									</template>
-									<template slot="position" slot-scope="text, record, index">
-										<span v-if="text == ''">--</span>
-										<span v-if="text != ''">{{text}}</span>
-									</template>
-									<template slot="status" slot-scope="text, record, index">
-										<span v-if="text == 0">未启用</span>
-										<span v-if="text == 1">正常</span>
-										<span v-if="text == 2">禁用</span>
-									</template>
-									<template slot="action" slot-scope="text, record, index">
-										<a-button style="margin-left:5px;" @click="detail(record)"
-										          v-has="'subAccount-info'">详情
-										</a-button>
-										<a-button style="margin-left:5px;" @click="editSubAccount(record)"
-										          v-has="'subAccount-modify'">修改
-										</a-button>
-										<a-button style="margin-left:5px;"
-										          v-if="masterAccountId != record.id && record.id != sub_id && record.status == 0"
-										          @click="editSubAccount(record)" v-has="'subAccount-status'">启用
-										</a-button>
-									</template>
-								</a-table>
-
-								<!-- 分页 -->
-								<div class="pagination" style="margin: 20px auto;height: 32px;" v-show="total2 > 0"
-								     v-has="'subAccount-list'">
-									<span style="float:left;margin-left: 20px;">共{{total2}}条</span>
-									<a-pagination
-											:total="total2"
-											showSizeChanger
-											:showQuickJumper="quickJumper2"
-											:current="page2"
-											:pageSize="page_size2"
-											:pageSizeOptions="['1','2','15','30','50','100']"
-											@change="changePage"
-											@showSizeChange="showSizeChange"
-											style="float: right;margin-right: 20px;"
-									/>
+									</div>
 								</div>
-							</div>
-						</a-spin>
-					</div>
-				</a-tab-pane>
-			</a-tabs>
-
+							</a-spin>
+						</div>
+					</a-tab-pane>
+				</a-tabs>
+			</a-layout-content>
 
 			<!--修改密码弹窗-->
 			<a-modal
@@ -3350,5 +3349,14 @@
 
 	.draw-loading, .draw-loading /deep/ .ant-spin-container {
 		height: 100%;
+	}
+
+	#components-layout-demo-basic .ant-layout-content {
+		margin: 0 20px 20px;
+		min-width: 885px;
+		padding-right: 40px;
+		background-color: #ffffff;
+		margin-top: 16px;
+		padding: 16px;
 	}
 </style>

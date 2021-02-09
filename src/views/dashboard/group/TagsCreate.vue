@@ -6,10 +6,11 @@
 						style="position: absolute; left:0; top:0; bottom:0; right:0; overflow-x: hidden; overflow-y: auto;"
 						class="scroll">
 					<!-- 头部 -->
-					<a-layout-header>标签拉群</a-layout-header>
+					<!-- <a-layout-header>标签拉群</a-layout-header> -->
 					<!-- 内容 -->
 					<a-layout-content>
-						<div class="content-msg">
+						<div style="font-size:16px;font-weight:700;color:#333333">标签拉群</div>
+						<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7;padding:16px">
 							<p>
 								<span style="font-weight: 700;">标签拉群：</span>将同一标签层次的客户拉入同一个客户群内，比如将带有“吃货”标签的客户，拉入到“吃货群”，这样他们因具有相同的话题和兴趣爱好，企业就可以有针对性地对该特征的客户群制定社群运营方案，社群运营起来不仅高效，也方便管理，更利于群转化。
 							</p>

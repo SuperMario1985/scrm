@@ -5,11 +5,10 @@
 				<a-layout
 						style="position: absolute;top:0;bottom:0;right:0;left: 0;overflow-x: hidden; overflow-y: auto;"
 						class="fans-content scroll">
-					<!-- 头部 -->
-					<a-layout-header>群发消息</a-layout-header>
 					<!-- 内容 -->
 					<a-layout-content>
-						<div class="content-msg">
+						<div style="font-size:16px;font-weight:700;color:#333333">群发消息</div>
+						<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7;padding:16px">
 							<a-collapse expand-icon-position="right">
 								<a-collapse-panel key="1">
 									<template slot="header">

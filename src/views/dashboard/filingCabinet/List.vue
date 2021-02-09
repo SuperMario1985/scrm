@@ -11,11 +11,9 @@
 						style="position: absolute;left:250px;top:0;bottom:0;right:0;overflow-x: hidden; overflow-y: auto;"
 						class="scroll fans-content"
 				>
-					<!-- 头部 -->
-					<a-layout-header>
-						<label style="font-size: 16px;">内容引擎</label>
-					</a-layout-header>
 					<!--添加到企微侧边栏弹窗-->
+					<a-layout-content>
+						<div style="font-size:16px;font-weight:700;color:#333333">内容引擎</div>
 					<a-modal v-model="sidebarVisible" title="添加到企微侧边栏">
 						<template slot="footer">
 							<a-upload
@@ -37,7 +35,7 @@
 						</template>
 						<p>Some contents...</p>
 					</a-modal>
-					<div class="content-msg">
+					<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7;padding:16px">
 						<p style="margin-bottom: 2px;">
 							1、本系统仅支持创建单图文。
 						</p>
@@ -81,7 +79,7 @@
 						</p>
 					</div>
 					<!-- 内容 -->
-					<a-layout-content>
+				
 						<!-- 表格部分 -->
 						<div class="content-bd">
 							<div class="account-filter">

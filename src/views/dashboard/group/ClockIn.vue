@@ -4,8 +4,9 @@
 			<a-layout style="position: relative;height: 100%; overflow: hidden">
 				<a-layout style="position: absolute;top:0;bottom:0;left:0;right:0;overflow-x: hidden; overflow-y: auto;"
 				          class="scroll">
-					<!-- 头部 -->
-					<a-layout-header>群打卡
+					<!-- 内容 -->
+					<a-layout-content>
+						<div style="font-size:16px;font-weight:700;color:#333333;display: inline-block;">群打卡</div>
 						<div class="help"
 						     :class="showTransition == 0 ?'help-transition': (showTransition== 1 ? 'help-transition1' : '')">
 							<a href="https://support.qq.com/products/104790/faqs/85022"
@@ -14,10 +15,7 @@
 								<span style="float:right;">点我帮助</span>
 							</a>
 						</div>
-					</a-layout-header>
-					<!-- 内容 -->
-					<a-layout-content>
-						<div class="content-msg">
+						<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7;padding:16px">
 							群打卡，作为运营社群的常规方式之一，其不仅可以提升老客户的积极性，而且在一定程度上还可以增加用户粘性，提升群聊活跃度及转化率，尤其对于教育、电商非常适用。
 							<p style="margin: 10px 0 2px;">
 								流程如下：

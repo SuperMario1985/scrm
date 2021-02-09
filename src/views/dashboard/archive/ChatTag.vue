@@ -1,24 +1,27 @@
 <template>
 	<div class="list">
 		<div id="components-layout-demo-basic">
-			<div class="content-msg">
-				<p style="margin-bottom: 2px;">
-					基于开启会话存档功能，当客户与员工聊天中，客户命中关键词时，该员工可自动打上客户标签，实现对客户标签的自动化管理，客户画像更智能精准。</p>
-				<p style="margin-bottom: 2px;">
-					1、标签规则删除后，其关联的客户标签，在生效员工列表，该标签不再显示。</p>
-				<p style="margin-bottom: 0px;">
-					2、标签规则设置的关键词，当其被修改或是删除，在生效员工列表，查看详情时，依然可看到之前所触发关键词的客户打标签的记录。</p>
-			</div>
-			<div style="height: 100%;padding-top: 20px;">
-				<div style="padding: 0 20px;">
-					<span @click="changeTabs('1')" class="tabBtn" :class="{activeBtn:tabKey == 1}" v-has="'chatTag-employee'">生效员工</span>
-					<span @click="changeTabs('2')" class="tabBtn" :class="{activeBtn:tabKey == 2}" v-has="'chatTag-rule'">标签规则</span>
+			<a-layout-content class="kehuconent">
+				<div style="font-size:16px;font-weight:700;color:#333333">聊天打标签</div>
+				<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7">
+					<p style="margin-bottom: 2px;">
+						基于开启会话存档功能，当客户与员工聊天中，客户命中关键词时，该员工可自动打上客户标签，实现对客户标签的自动化管理，客户画像更智能精准。</p>
+					<p style="margin-bottom: 2px;">
+						1、标签规则删除后，其关联的客户标签，在生效员工列表，该标签不再显示。</p>
+					<p style="margin-bottom: 0px;">
+						2、标签规则设置的关键词，当其被修改或是删除，在生效员工列表，查看详情时，依然可看到之前所触发关键词的客户打标签的记录。</p>
 				</div>
-				<div style="background: #fff;margin: 0 20px 20px;padding: 12px 20px;">
-					<EffectiveEmployee @changeCorpId="changeCorpId" @changeScroll="changeScroll" :id="corpId" ref="employee" v-if="tabKey == 1"></EffectiveEmployee>
-					<TagRule @changeCorpId="changeCorpId" @changeScroll="changeScroll" :id="corpId" ref="tagRule" v-if="tabKey == 2"></TagRule>
+				<div style="height: 100%;padding-top: 20px;">
+					<div style="padding: 0 20px;">
+						<span @click="changeTabs('1')" class="tabBtn" :class="{activeBtn:tabKey == 1}" v-has="'chatTag-employee'">生效员工</span>
+						<span @click="changeTabs('2')" class="tabBtn" :class="{activeBtn:tabKey == 2}" v-has="'chatTag-rule'">标签规则</span>
+					</div>
+					<div style="background: #fff;margin: 0 20px 20px;padding: 12px 20px;">
+						<EffectiveEmployee @changeCorpId="changeCorpId" @changeScroll="changeScroll" :id="corpId" ref="employee" v-if="tabKey == 1"></EffectiveEmployee>
+						<TagRule @changeCorpId="changeCorpId" @changeScroll="changeScroll" :id="corpId" ref="tagRule" v-if="tabKey == 2"></TagRule>
+					</div>
 				</div>
-			</div>
+			</a-layout-content>
 		</div>
 	</div>
 </template>
@@ -127,6 +130,15 @@
 	.activeBtn {
 		color: #01b065;
 		background: #FFF;
+	}
+	#components-layout-demo-basic .kehuconent {
+		background: #FFF;
+		border-bottom: 1px solid #E2E2E2;
+		height: 50px;
+		min-width: 885px;
+		line-height: 50px;
+		height: 100%;
+		margin: 20px 20px;
 	}
 	.content-msg {
 		min-width: 845px;

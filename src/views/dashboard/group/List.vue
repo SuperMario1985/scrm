@@ -9,10 +9,11 @@
 				</a-layout-sider>
 				<a-layout style="position: absolute;left:250px;top:0;bottom:0;right:0;" class="scroll">
 					<!-- 头部 -->
-					<a-layout-header>客户群管理</a-layout-header>
+					<!-- <a-layout-header>客户群管理</a-layout-header> -->
 					<!-- 内容 -->
 					<a-layout-content>
-						<div class="content-msg">
+						<div style="font-size:16px;font-weight:700;color:#333333">客户群管理</div>
+						<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7;padding:16px">
 							客户群，是由具有<span style="color: #FF562D;">客户群使用权限</span>的<span style="color: #FF562D;">成员</span>创建的外部群。成员在手机端创建群后，自动显示在后台列表中，群聊上限人数<span
 								style="color: #FF562D;">200人</span>，包含成员+外部联系人。
 						</div>

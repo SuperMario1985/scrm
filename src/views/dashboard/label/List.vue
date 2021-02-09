@@ -10,10 +10,11 @@
 				<a-layout style="position: absolute;left:250px;top:0;bottom:0;right:0;overflow-x: hidden; overflow-y: auto;"
 				          class="scroll">
 					<!-- 头部 -->
-					<a-layout-header>企业标签管理</a-layout-header>
+					<!-- <a-layout-header>企业标签管理</a-layout-header> -->
 					<!-- 内容 -->
 					<a-layout-content>
-						<div class="content-msg">
+						<div style="font-size:16px;font-weight:700;color:#333333">企业标签管理</div>
+						<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7;padding:16px">
 							<p style="margin-bottom: 2px;">
 								1、标签分组名称不能重复。</p>
 							<p style="margin-bottom: 2px;">
@@ -595,6 +596,7 @@
 </script>
 
 <style lang='less' scoped>
+@import '../../../style/_style.less';
 	.wx-info {
 		width: 100%;
 		position: absolute;
@@ -669,10 +671,11 @@
 
 	.content-msg {
 		width: 100%;
-		border: 1px solid #FFDDA6;
-		background: #FFF2DB;
+		border: 1px solid @border-color;
+		background: @color-bgc;
 		padding: 10px;
 		margin-top: 12px;
+		text-align: left;
 	}
 
 	.msg-info {

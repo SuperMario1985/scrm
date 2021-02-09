@@ -10,10 +10,11 @@
 				<a-layout style="position: absolute;top:0;bottom:0;right:0;overflow-x: hidden; overflow-y: auto;" :style="corpLen > 1 ? {left: '250px'} : {left: '0'}"
 				          class="scroll">
 					<!-- 头部 -->
-					<a-layout-header>群欢迎语</a-layout-header>
+					<!-- <a-layout-header>群欢迎语</a-layout-header> -->
 					<!-- 内容 -->
 					<a-layout-content>
-						<div class="content-msg">
+						<div style="font-size:16px;font-weight:700;color:#333333">群欢迎语</div>
+						<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7;padding:16px">
 							<p style="margin-bottom: 0px;">
 								具有客户群使用权限的群主可在外部群聊中自行创建或选择已有的欢迎语素材，设置完成后，客户将在加入外部群聊后收到该欢迎语。<span style="color: #FF562D;">相比官方自带的欢迎语素材管理，本系统是可以调取【内容引擎】的素材，存入至欢迎语素材管理。</span>
 							</p>

@@ -5,10 +5,11 @@
 				<a-layout style="position: absolute;left:0;top:0;bottom:0;right:0;overflow-x: hidden; overflow-y: auto;"
 				          class="fans-content scroll">
 					<!-- 头部 -->
-					<a-layout-header>离职继承</a-layout-header>
+					<!-- <a-layout-header>离职继承</a-layout-header> -->
 					<!-- 内容 -->
 					<a-layout-content>
-						<div class="content-msg">
+						<div style="font-size:16px;font-weight:700;color:#333333">离职继承</div>
+						<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7;padding:16px">
 							从通讯录将离职员工删除后，可以分配他的客户及客户群给其他员工继续跟进，<span style="color: #FF562D;">且客户及客户群信息也一并给接替的员工。</span>
 						</div>
 						<div class="content-hd">
