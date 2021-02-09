@@ -146,7 +146,7 @@
 					<!-- 内容 -->
 					<a-layout-content>
 						<div class="content">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<!-- 公众号选择 -->
 								<div class="content-hd" v-if="$store.state.wxArr.length > 1">
 									<a-form>

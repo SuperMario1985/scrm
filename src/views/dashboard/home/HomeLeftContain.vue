@@ -5,7 +5,7 @@
 	     @mouseover="scroll" @mouseout="scrollOut" @mousemove="scroLineMove" @mouseup="scroLineUp">
 		<!--	页面内容    -->
 		<div ref="scroLeft" class="home-left-contain">
-			<a-spin :spinning="spinning" tip="Loading..." size="large"
+			<a-spin :spinning="spinning" tip="加载中..." size="large"
 			        :class="spinning?'spinning-true':'spinning-false'">
 				<!-- <div style="padding:20px;">
 					<div class="measure#FFFrview">

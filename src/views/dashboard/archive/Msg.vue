@@ -19,7 +19,7 @@
 		</a-card>
 		<!-- 正文内容 -->
 		<div class="content-bd">
-			<a-spin tip="Loading..." size="large" :spinning="isLoading" wrapperClassName="msg-box">
+			<a-spin tip="加载中..." size="large" :spinning="isLoading" wrapperClassName="msg-box">
 				<a-row style="height: 100%; background-color: white">
 					<a-col
 							:xs="5" :sm="5" :md="5" :lg="5" :xl="5" :xxl="4"
@@ -103,7 +103,7 @@
 
 						<!-- 与成员对应的会话成员 -->
 						<div class="chat-list-box">
-							<a-spin tip="Loading..." size="large" :spinning="isChatUserLoading" style="height: 100%">
+							<a-spin tip="加载中..." size="large" :spinning="isChatUserLoading" style="height: 100%">
 								<a-empty
 										style="position: absolute; left: 50%; top: 50%;transform: translate(-50%, -50%);"
 										v-show="chatList.length == 0 && !isChatUserLoading"/>
@@ -208,7 +208,7 @@
 					</a-col>
 
 					<a-col :xs="19" :sm="19" :md="19" :lg="19" :xl="19" :xxl="20" style="height: 100%">
-						<a-spin tip="Loading..." size="large" :spinning="isChatListLoading" style="height: 100%">
+						<a-spin tip="加载中..." size="large" :spinning="isChatListLoading" style="height: 100%">
 							<div class="chat-info-box">
 								<div
 										class="chat-info-title"
@@ -295,7 +295,7 @@
 										/>
 										<a-button @click="findContent" type="primary" style="margin-right: 10px;">搜索
 										</a-button>
-										<a-button @click="clearContent" style="margin-right: 10px;">清空</a-button>
+										<a-button @click="clearContent" style="margin-right: 10px;">重置</a-button>
 									</div>
 								</div>
 								<a-empty

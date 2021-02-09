@@ -41,8 +41,8 @@
 									<span v-if="chooseNum > 0">已选择{{chooseUserNum1}}名成员，{{chooseDepartmentNum1}}个部门</span>
 									<span v-else>选择成员</span>
 								</a-button>
-								<a-button style="margin-left: 10px;" @click="selectTitle" type="primary">查找</a-button>
-								<a-button style="margin-left: 10px;" @click="clearTitle">清空</a-button>
+								<a-button style="margin-left: 10px;" @click="selectTitle" type="primary">查询</a-button>
+								<a-button style="margin-left: 10px;" @click="clearTitle">重置</a-button>
 							</a-col>
 							<a-col style="float:right;z-index: 9999">
 								<a-button class="btn-primary" icon="reload" @click="syncFollowUser">
@@ -56,7 +56,7 @@
 						</div>
 						<!-- 表格部分 -->
 						<div class="content-bd">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<a-table :columns="columns" :dataSource="wayList" :pagination="false"
 								         :rowClassName="rowClassName" v-has="'channel-list'">
 									<span slot="add_num">
@@ -208,7 +208,7 @@
 						</div>
 						<!-- 用户列表弹窗 -->
 						<a-modal title="扫码用户" v-model="usersVisible" :footer="null" width="550">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading3">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading3">
 								<a-table :columns="columns2" :dataSource="usersList2" :pagination="false"
 								         :rowClassName="rowClassName">
 								</a-table>
@@ -874,7 +874,7 @@
 				>提交
 				</a-button>
 			</template>
-			<a-spin tip="Loading..." size="large" :spinning="limitLoading">
+			<a-spin tip="加载中..." size="large" :spinning="limitLoading">
 				<a-table
 						:scroll="{ y: 450 }"
 						:columns="limitUserColumns"

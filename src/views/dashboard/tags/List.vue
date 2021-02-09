@@ -74,7 +74,7 @@
 						</div>
 						<!-- 表格部分 -->
 						<div class="content-bd">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<a-table :columns="columns" :dataSource="tagsList" :pagination="false"
 								         :rowClassName="rowClassName" v-has="'tag-list'">
                 <span slot="customTitle">

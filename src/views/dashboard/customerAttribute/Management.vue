@@ -37,7 +37,7 @@
 				</a-row>
 				<!-- 表格部分 -->
 				<div class="content-bd">
-					<a-spin tip="Loading..." size="large" :spinning="isLoading">
+					<a-spin tip="加载中..." size="large" :spinning="isLoading">
 						<div class="spin-content">
 							<a-table :key="tableKey"
 											:columns="columns"
@@ -136,8 +136,8 @@
 												</span>
 												<span v-if="record.is_define == 1">
 													<span v-if="record.type == 2 || record.type == 3">
-														<a-tag closable @close="e => delTag(e, tag,record.key)"
-																	v-for="tag in record.optionVal2" style="margin-bottom: 5px;">{{tag}}</a-tag>
+														<a-tag closable @close="e => delTag(e, tag,record.key)" v-for="tag in record.optionVal2" style="margin-bottom: 5px;">{{tag}}
+														</a-tag>
 														<a-textarea :rows="2"
 																				@change="e => handleChange3(e.target.value, record.key,col)"
 																				placeholder="请输入选项内容"/>
@@ -369,7 +369,7 @@
 				          style="margin-right: 20px;vertical-align: middle;float: right;">新增
 				</a-button>
 			</div>
-			<a-spin tip="Loading..." size="large" :spinning="isLoading1">
+			<a-spin tip="加载中..." size="large" :spinning="isLoading1">
 				<a-table :columns="columns1" :dataSource="follows" class="follow-table" style="margin: 20px;"
 				         :pagination="false" :rowClassName="rowClassName">
 					<span slot="sort" slot-scope="text, record,index">

@@ -143,7 +143,7 @@
 
 								</div>
 							</div>
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 
 								<!-- 图文 -->
 								<div v-show="material_type == 4">

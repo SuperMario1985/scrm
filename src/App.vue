@@ -230,5 +230,70 @@ export default {
       }
     }
   }
+  //icon
+  .anticon {
+    &.anticon-question-circle {
+      width: 14px;
+      height: 14px;
+      background: url("./assets/base/icon-info.png") center center no-repeat;
+      background-size: 100% 100%;
+      svg {
+        display: none !important;
+      }
+    }
+    &.anticon-user {
+      width: 14px;
+      height: 14px;
+      background: url("./assets/base/icon-avatar.png") center center no-repeat;
+      background-size: 100% 100%;
+      svg {
+        display: none !important;
+      }
+    }
+  }
+  .fans-data-trend {
+    .ant-empty-image {
+      height: 100px;
+      background: url("./assets/base/table-empty.png") center center no-repeat;
+      svg {
+        display: none;
+      }
+    }
+  }
+  .ant-empty {
+    height: 100px;
+    background: url("./assets/base/table-empty.png") center center no-repeat;
+    svg {
+      display: none;
+    }
+  }
+}
+.ant-message {
+  .ant-message-notice-content {
+    padding: 0px;
+    .ant-message-custom-content {
+      padding: 10px 16px;
+    }
+    .ant-message-success {
+      background: #eeffee;
+      border-radius: 4px;
+      border: 1px solid #00bb00;
+    }
+    .ant-message-warning {
+      background: #ffeedd;
+      border-radius: 4px;
+      border: 1px solid #ffaa00;
+    }
+    .ant-message-info {
+      background: #eeffff;
+      border-radius: 4px;
+      border: 1px solid #0099ff;
+    }
+    .ant-message-error {
+      background: #ffdddd;
+      border-radius: 4px;
+      border: 1px solid #ff5555;
+    }
+  }
 }
 </style>

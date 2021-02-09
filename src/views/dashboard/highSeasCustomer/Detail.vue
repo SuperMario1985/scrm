@@ -9,7 +9,7 @@
 
 			<!-- 表格部分 -->
 			<div class="content-bd">
-				<a-spin tip="Loading..." size="large" :spinning="isLoading">
+				<a-spin tip="加载中..." size="large" :spinning="isLoading">
 					<div class="custom-info">
 						<a-avatar shape="square" :size="132"
 						          :src="avatar"
@@ -554,7 +554,7 @@
 					</a-select-option>
 				</a-select>
 			</a-form-item>
-			<a-spin tip="Loading..." size="large" :spinning="tagLoading">
+			<a-spin tip="加载中..." size="large" :spinning="tagLoading">
 				<a-checkbox-group @change="onChange2" v-model="tagCheckValue">
 					<a-row>
 						<a-col

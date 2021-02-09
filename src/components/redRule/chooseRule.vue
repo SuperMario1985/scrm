@@ -8,7 +8,7 @@
 		>
 			<div slot="dropdownRender" slot-scope="menu">
 				<v-nodes :vnodes="menu"/>
-				<a-spin tip="Loading..." size="large" :spinning="isLoading"
+				<a-spin tip="加载中..." size="large" :spinning="isLoading"
 				        style="position: absolute;bottom: 50%;left: 0;right: 0;">
 				</a-spin>
 			</div>

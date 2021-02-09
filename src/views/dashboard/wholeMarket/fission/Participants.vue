@@ -124,7 +124,7 @@
 				</a-select>
 				<a-input placeholder="搜索参与者名称" v-model="name" @keydown.enter="searchFans"
 				         style="width: 170px;margin-right: 10px;"/>
-				<a-button type="primary" @click="searchFans">查找</a-button>
+				<a-button type="primary" @click="searchFans">查询</a-button>
 				<a-button style="margin-left: 10px;" @click="reloadParticipants">清除</a-button>
 <!--				<div style="height: 60px;line-height: 60px;float: right">-->
 <!--					<a-dropdown>-->
@@ -143,7 +143,7 @@
 				<span style="color: blue">{{total2}}</span>条
 			</div>
 			<div style="padding: 0 20px 20px;">
-				<a-spin tip="Loading..." size="large" :spinning="isLoading1">
+				<a-spin tip="加载中..." size="large" :spinning="isLoading1">
 					<a-table
 							:columns="type == 1 && action_type == 1 ? columns0 : (type == 1 && action_type != 1 ? columns : (type == 3 && action_type == 1 ? columns1 : (type == 3 && action_type != 1) ? columns2 : (type == 2 && action_type == 1 ? columns7 : columns8)))"
 							:dataSource="participantsList"
@@ -291,7 +291,7 @@
 					<span @click="changeTabs('2')" class="tabBtn" :class="{activeBtn:tabKey == 2}">裂变层级</span>
 				</div>
 				<div style="padding: 10px 20px; margin: 0 20px; border: 1px solid #E8E8E8">
-					<a-spin tip="Loading..." size="large" :spinning="isLoading2">
+					<a-spin tip="加载中..." size="large" :spinning="isLoading2">
 						<div class="content-msg1" v-if="tabKey == 2">
 							<p style="margin-bottom: 2px;">裂变层级越多，代表参与者的人脉越广，传播效果越好。</p>
 							<p style="margin-bottom: 2px;">活动裂变层级一级：在公众号后台回复关键词参加活动+扫描推广码参加活动。在助力记录中不显示该层级。</p>

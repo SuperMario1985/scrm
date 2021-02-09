@@ -1,7 +1,7 @@
 <template>
   <div class="list">
     <div id="components-layout-demo-basic">
-      <a-spin tip="Loading..." size="large" :spinning="isLoading">
+      <a-spin tip="加载中..." size="large" :spinning="isLoading">
         <a-layout>
           <!-- 头部 -->
           <a-layout-header>
@@ -36,7 +36,7 @@
                 />
               </a-steps>
               <div class="content steps-content">
-                <!-- <a-spin tip="Loading..." size="large" :spinning="isLoading"></a-spin> -->
+                <!-- <a-spin tip="加载中..." size="large" :spinning="isLoading"></a-spin> -->
                 <!-- 公众号选择 -->
                 <!--								<div class="content-hd" v-if="current == 0">-->
                 <!--									<a-form>-->

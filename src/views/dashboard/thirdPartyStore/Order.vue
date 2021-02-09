@@ -10,7 +10,7 @@
 			<a-button type="primary" class="empty-btn" @click="goStore">去绑定</a-button>
 		</div>
 		<div class="home-left-contain" v-if="storeList.length != 0">
-			<a-spin :spinning="spinning" tip="Loading..." size="large"
+			<a-spin :spinning="spinning" tip="加载中..." size="large"
 			        :class="spinning?'spinning-true':'spinning-false'">
 				<div class="tabs-contain" style="margin-top: 20px">
 					<div class="account-filter" v-if="storeList && storeList.length > 0">
@@ -186,8 +186,8 @@
 												v-model="payTime"
 												@change="changeTime"
 										/>
-										<a-button type="primary" style="margin: 0 15px;" @click="find">查找</a-button>
-										<a-button @click="clear">清空</a-button>
+										<a-button type="primary" style="margin: 0 15px;" @click="find">查询</a-button>
+										<a-button @click="clear">重置</a-button>
 									</a-col>
 								</a-row>
 							</div>

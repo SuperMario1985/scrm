@@ -105,12 +105,12 @@
 								@change="changeTime"
 						/>
 						</span>
-						<a-button type="primary" @click="find">查找</a-button>
-						<a-button style="margin-left: 10px;" @click="clear">清空</a-button>
+						<a-button type="primary" @click="find">查询</a-button>
+						<a-button style="margin-left: 10px;" @click="clear">重置</a-button>
 					</a-col>
 					<!-- 表格部分 -->
 					<div class="content-bd">
-						<a-spin tip="Loading..." size="large" :spinning="isLoading">
+						<a-spin tip="加载中..." size="large" :spinning="isLoading">
 							<div class="spin-content">
 								<a-table
 										:rowSelection="rowSelection"
@@ -261,12 +261,12 @@
 								@change="changeTime3"
 						/>
 						</span>
-						<a-button type="primary" @click="find3">查找</a-button>
-						<a-button style="margin-left: 10px;" @click="clear3">清空</a-button>
+						<a-button type="primary" @click="find3">查询</a-button>
+						<a-button style="margin-left: 10px;" @click="clear3">重置</a-button>
 					</a-col>
 					<!-- 表格部分 -->
 					<div class="content-bd">
-						<a-spin tip="Loading..." size="large" :spinning="isLoading3">
+						<a-spin tip="加载中..." size="large" :spinning="isLoading3">
 							<div class="spin-content">
 								<a-table
 										:columns="columns3"
@@ -431,8 +431,8 @@
 								@change="changeTime"
 						/>
 						</span>
-							<a-button type="primary" @click="find2">查找</a-button>
-							<a-button style="margin-left: 10px;" @click="clear2">清空</a-button>
+							<a-button type="primary" @click="find2">查询</a-button>
+							<a-button style="margin-left: 10px;" @click="clear2">重置</a-button>
 						</div>
 					</div>
 					<div style="overflow:hidden;">
@@ -449,7 +449,7 @@
 				</a-col>
 				<!-- 表格部分 -->
 				<div class="content-bd">
-					<a-spin tip="Loading..." size="large" :spinning="isLoading2">
+					<a-spin tip="加载中..." size="large" :spinning="isLoading2">
 						<div class="spin-content">
 							<a-table
 									:rowSelection="rowSelection"
@@ -795,7 +795,7 @@
 					@search="changeRecheckingSearch"
 			/>
 			<div style="height: 300px;margin: 15px 0;">
-				<a-spin tip="Loading..." size="large" :spinning="recheckingLoading">
+				<a-spin tip="加载中..." size="large" :spinning="recheckingLoading">
 					<div class="spin-content">
 						<a-table
 								:columns="columns4"

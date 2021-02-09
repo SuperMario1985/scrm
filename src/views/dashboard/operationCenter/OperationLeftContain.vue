@@ -2,7 +2,7 @@
 	<!--	首页（内容+滚动条）	-->
 	<div>
 		<div class="home-left-contain">
-			<a-spin :spinning="spinning" tip="Loading..." size="large"
+			<a-spin :spinning="spinning" tip="加载中..." size="large"
 			        :class="spinning?'spinning-true':'spinning-false'">
 				<div class="tabs-contain" style="margin-top: 20px">
 					<div class="account-filter" v-if="wxList && wxList.length > 0">

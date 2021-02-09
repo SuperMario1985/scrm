@@ -60,7 +60,7 @@
 						</div>
 						<!-- 表格部分 -->
 						<div class="content-bd">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<a-table :columns="reply.columns" :dataSource="reply.list" :pagination="false"
 								         :rowClassName="rowClassName" v-has="'message-list'">
 									<span slot="status" slot-scope="text, record,index">

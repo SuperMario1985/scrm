@@ -91,7 +91,7 @@
 						</div>
 						<!-- 表格部分 -->
 						<div class="content-bd">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<a-table :columns="columns" :dataSource="tagsList" :pagination="false"
 								         :rowSelection="rowSelection" :rowClassName="rowClassName"
 								         v-has="'client-tag-list'">
@@ -181,7 +181,7 @@
 			</a-layout>
 		</div>
 		<a-modal title="选择分组" v-model="visibleGroup" @ok="handleGroupOk" @cancel="handleCancel" width="888">
-			<a-spin tip="Loading..." size="large" :spinning="handleLoading">
+			<a-spin tip="加载中..." size="large" :spinning="handleLoading">
 				<div style="height: 340px;">
 					<a-select
 							showSearch

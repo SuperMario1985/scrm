@@ -57,8 +57,8 @@
 									<a-select-option value="2">已结束</a-select-option>
 								</a-select>
 								<a-range-picker style="width: 300px" v-model="activityTime" @change="changeTime"/>
-								<a-button type="primary" style="margin: 0px 10px;" @click="find">查找</a-button>
-								<a-button @click="clear">清空</a-button>
+								<a-button type="primary" style="margin: 0px 10px;" @click="find">查询</a-button>
+								<a-button @click="clear">重置</a-button>
 							</a-col>
 							<a-col style="float:right;">
 								<a-button v-has="'groupClockIn-add'" class="btn-primary" icon="plus"
@@ -69,7 +69,7 @@
 						</div>
 						<!-- 表格部分 -->
 						<div class="content-bd">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<a-table :columns="columns" :dataSource="activityList" :pagination="false"
 								         :rowClassName="rowClassName" v-has="'groupClockIn-list'">
 									<span slot="url" slot-scope="text, record, index">

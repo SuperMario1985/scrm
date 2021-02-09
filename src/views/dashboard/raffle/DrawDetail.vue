@@ -11,7 +11,7 @@
 			</div>
 		</div>
 		<div class="participants">
-			<a-spin tip="Loading..." size="large" :spinning="isLoading">
+			<a-spin tip="加载中..." size="large" :spinning="isLoading">
 				<a-table :columns="columns" :dataSource="drawList" :pagination="false"
 				         :rowClassName="rowClassName">
 												<span slot="avatar" slot-scope="text, record">

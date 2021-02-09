@@ -26,7 +26,7 @@
 
 					<!-- 表格部分 -->
 					<div class="content-bd" style="border-top: 0;">
-						<a-spin tip="Loading..." size="large" :spinning="isLoading">
+						<a-spin tip="加载中..." size="large" :spinning="isLoading">
 							<div class="spin-content">
 								<a-button type="primary" style="float: right;margin: 8px 20px;z-index:999;"
 								          @click="editAll"
@@ -210,7 +210,7 @@
 					</a-col>
 					<!-- 表格部分 -->
 					<div class="content-bd" style="border-top: 0;">
-						<a-spin tip="Loading..." size="large" :spinning="isLoading">
+						<a-spin tip="加载中..." size="large" :spinning="isLoading">
 							<div class="spin-content">
 								<a-button type="primary" style="float: right;margin: 8px 20px;z-index:999;"
 								          @click="editAll"
@@ -381,7 +381,7 @@
 					</a-col>
 					<!-- 表格部分 -->
 					<div class="content-bd" style="border-top: 0;">
-						<a-spin tip="Loading..." size="large" :spinning="isLoading">
+						<a-spin tip="加载中..." size="large" :spinning="isLoading">
 							<div class="spin-content">
 								<a-button type="primary" style="float: right;margin: 8px 20px;z-index:999;"
 								          @click="editAll"

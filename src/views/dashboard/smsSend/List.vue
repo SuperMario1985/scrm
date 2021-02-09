@@ -39,8 +39,8 @@
 							<a-select-option value="2">发送失败</a-select-option>
 							<a-select-option value="3">发送中</a-select-option>
 						</a-select>
-						<a-button type="primary" style="margin-right:15px;" @click="find">查找</a-button>
-						<a-button style="margin-right:15px;" @click="clear">清空</a-button>
+						<a-button type="primary" style="margin-right:15px;" @click="find">查询</a-button>
+						<a-button style="margin-right:15px;" @click="clear">重置</a-button>
 					</a-col>
 					<a-button type="primary" style="float:right;margin-right:15px;" @click="addPush" icon="plus" v-has="'sending-add'">
 						新建短信发送
@@ -49,7 +49,7 @@
 
 				<!-- 表格部分 -->
 				<div class="content-bd">
-					<a-spin tip="Loading..." size="large" :spinning="isLoading">
+					<a-spin tip="加载中..." size="large" :spinning="isLoading">
 						<div class="spin-content">
 							<a-table
 									:columns="columns"

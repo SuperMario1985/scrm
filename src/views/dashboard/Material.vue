@@ -86,7 +86,7 @@
 								<p style="margin-bottom: 0px;">
 									3、在本系统里删除素材的同时，也同步将微信公平台素材库删除了。反之，在微信公平台素材库删除的素材，本系统不删除，可以手动更新同步微信素材库。</p>
 							</div>
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<!--								<a-tabs :defaultActiveKey="material_type" @change="callback">-->
 								<!--									<a-tab-pane tab="图文" key="1">-->
 								<div v-show="material_type == 1">

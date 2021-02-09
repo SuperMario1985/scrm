@@ -75,8 +75,8 @@
 									<a-select-option value="3">发送失败</a-select-option>
 								</a-select>
 								<a-date-picker @change="changeDate" style="margin-right: 15px;" v-model="date"/>
-								<a-button type="primary" style="margin-right:15px;" @click="find">查找</a-button>
-								<a-button @click="clear">清空</a-button>
+								<a-button type="primary" style="margin-right:15px;" @click="find">查询</a-button>
+								<a-button @click="clear">重置</a-button>
 							</a-col>
 							<a-col style="float:right;">
 								<a-button type="primary" icon="plus" style="width: 150px;font-size:14px;" @click="add"
@@ -100,7 +100,7 @@
 						<wxModal :show="showModal2" :callback="modalVisibleChange" hasName="template-add"></wxModal>
 						<!-- 表格部分 -->
 						<div class="content-bd">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<a-table :columns="columns" :dataSource="templateList" :pagination="false"
 								         :rowClassName="rowClassName" v-has="'template-list'">
                   <span slot="status" slot-scope="text, record">

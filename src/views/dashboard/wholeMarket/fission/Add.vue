@@ -1,6 +1,6 @@
 <template>
 	<div class="fission-add" :key="pageKey">
-		<a-spin tip="Loading..." size="large" :spinning="isLoading">
+		<a-spin tip="加载中..." size="large" :spinning="isLoading">
 			<a-card style="margin-bottom:20px;padding:10px 20px;">
 				<label style="font-size: 16px;line-height: 32px;">
 					<span v-if="id == ''">新建裂变引流</span>

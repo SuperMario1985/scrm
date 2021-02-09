@@ -37,8 +37,8 @@
 							<a-col style="float: left;">
 								<a-input style="width: 180px;" @keyup.enter="selectTitle" placeholder="搜索群活码名称"
 								         allowClear v-model="title"/>
-								<a-button style="margin-left: 10px;" @click="selectTitle" type="primary">查找</a-button>
-								<a-button style="margin-left: 10px;" @click="clearTitle">清空</a-button>
+								<a-button style="margin-left: 10px;" @click="selectTitle" type="primary">查询</a-button>
+								<a-button style="margin-left: 10px;" @click="clearTitle">重置</a-button>
 							</a-col>
 							<a-col style="float: right;">
 								<a-button icon="plus" @click="create" type="primary" v-has="'groupAutoCreate-add'">
@@ -48,7 +48,7 @@
 						</div>
 						<!-- 表格部分 -->
 						<div class="content-bd">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<a-table :columns="columns" :dataSource="groupList" :pagination="false"
 								         :rowClassName="rowClassName" :rowSelection="rowSelection"
 								         v-has="'groupAutoCreate-list'">
@@ -163,7 +163,7 @@
 							<a-button key="back" @click="handleCancel">关闭</a-button>
 						</template>
 						<div class="detailBox">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading2">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading2">
 								<div class="detailBox-left">
 									<div class="left-one">
 										<div class="one-img">
@@ -415,12 +415,12 @@
 										<a-button type="primary" style="margin-right: 5px;margin-left: 15px;"
 										          @click="searchRecord">查找
 										</a-button>
-										<a-button style="margin-right: 10px;" @click="resetRecord">清空</a-button>
+										<a-button style="margin-right: 10px;" @click="resetRecord">重置</a-button>
 									</div>
 								</div>
 							</div>
 
-							<a-spin tip="Loading..." size="large" :spinning="isLoading3" style="margin-bottom: 110px;">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading3" style="margin-bottom: 110px;">
 								<a-table :columns="columns2" :dataSource="definiteList"
 								         :pagination="false"
 								         :rowClassName="rowClassName">

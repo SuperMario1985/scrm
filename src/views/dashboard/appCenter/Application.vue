@@ -1,6 +1,6 @@
 <template>
 	<div class="app-center">
-		<a-spin tip="Loading..." size="large" :spinning="isLoading">
+		<a-spin tip="加载中..." size="large" :spinning="isLoading">
 			<div class="app-list">
 				<div class="app" :style="{width : width}" v-for="item in ourAppList">
 					<div class="app-cover" :style="{'height': height}">
@@ -225,16 +225,16 @@
 						type   : 4,
 						isHas  : 0
 					},
-					{
-						backImg: require('../../../assets/appCenter/pigBack.png'),
-						icon   : require('../../../assets/appCenter/pigIcon.png'),
-						title  : '小猪智慧店铺',
-						title1 : '管理智慧店铺订单',
-						title2 : '小猪智慧店铺',
-						title3 : '自动同步客户购买过的智慧店铺订单至本系统',
-						type   : 1,
-						isHas  : 0
-					}
+					// {
+					// 	backImg: require('../../../assets/appCenter/pigBack.png'),
+					// 	icon   : require('../../../assets/appCenter/pigIcon.png'),
+					// 	title  : '小猪智慧店铺',
+					// 	title1 : '管理智慧店铺订单',
+					// 	title2 : '小猪智慧店铺',
+					// 	title3 : '自动同步客户购买过的智慧店铺订单至本系统',
+					// 	type   : 1,
+					// 	isHas  : 0
+					// }
 				],
 				title           : '创建店铺',
 				showStoreVisible: false,
@@ -271,7 +271,7 @@
 					this.ourAppList[0].isHas = res.data.hasYouzan
 					this.ourAppList[1].isHas = res.data.hasTb
 					this.ourAppList[2].isHas = res.data.hasTm
-					this.ourAppList[3].isHas = res.data.hasPig
+					// this.ourAppList[3].isHas = res.data.hasPig
 					that.isLoading = false;
 					this.$nextTick(() => {
 						that.setWidth()

@@ -17,11 +17,11 @@
 				<a-select-option value="1">已发放</a-select-option>
 			</a-select>
 			<a-button style="margin-left: 10px;" @click="searchFans" type="primary">搜索</a-button>
-			<a-button style="margin-left: 10px;" @click="reloadParticipants">清空</a-button>
+			<a-button style="margin-left: 10px;" @click="reloadParticipants">重置</a-button>
 		</div>
 		<div class="participants">
 			<div style="padding: 0 20px 20px;">
-				<a-spin tip="Loading..." size="large" :spinning="isLoading1">
+				<a-spin tip="加载中..." size="large" :spinning="isLoading1">
 					<a-table :columns="columns1" :dataSource="participantsList"
 					         :pagination="false"
 					         :rowClassName="rowClassName"

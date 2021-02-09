@@ -79,8 +79,8 @@
 									<a-input placeholder="搜索活动名称" @keyup.enter="find" v-model="title"
 									         style="width: 174px;margin: 0px 10px;"/>
 									<a-range-picker @change="changeTime" style="width:250px;" v-model="activityTime"/>
-									<a-button type="primary" style="margin: 0px 10px;" @click="find">查找</a-button>
-									<a-button @click="clear">清空</a-button>
+									<a-button type="primary" style="margin: 0px 10px;" @click="find">查询</a-button>
+									<a-button @click="clear">重置</a-button>
 								</a-col>
 								<a-col style="float:right;" v-has="'raffle-add'">
 									<a-button class="btn-primary" icon="plus" @click="addWelcomeText" type="primary">
@@ -95,7 +95,7 @@
 						</div>
 						<!-- 表格部分 -->
 						<div class="content-bd">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<a-table :columns="columns" :dataSource="activityList" :pagination="false"
 								         :rowClassName="rowClassName" v-has="'raffle-list'">
 									<span slot="qr_code" slot-scope="text, record,index">

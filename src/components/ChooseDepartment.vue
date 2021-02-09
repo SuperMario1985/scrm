@@ -10,7 +10,7 @@
       @cancel="handleCancelDepartment"
       width="800px"
     >
-      <a-spin tip="Loading..." size="large" :spinning="isLoading2">
+      <a-spin tip="加载中..." size="large" :spinning="isLoading2">
         <div
           style="
             width: 50%;

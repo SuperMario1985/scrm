@@ -1,7 +1,7 @@
 <template>
 	<div class="page-spinning">
 		<!--部门选择框-->
-		<a-spin tip="Loading..." size="large" :spinning="isLoading">
+		<a-spin tip="加载中..." size="large" :spinning="isLoading">
 			<div style="width: 100%;">
 				<a-input-search style="margin-bottom: 8px;width: 75%;" placeholder="搜索"
 				                @change="onChange" v-model="searchVal"/>

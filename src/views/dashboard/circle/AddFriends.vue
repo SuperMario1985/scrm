@@ -1,7 +1,7 @@
 <template>
 	<div class="list">
 		<div id="components-layout-demo-basic">
-			<a-spin tip="Loading..." size="large" :spinning="isLoading">
+			<a-spin tip="加载中..." size="large" :spinning="isLoading">
 				<a-layout>
 					<!-- 头部 -->
 					<a-layout-header>
@@ -69,7 +69,7 @@
 						<!-- 内容 -->
 						<a-layout-content>
 							<div class="content">
-								<!-- <a-spin tip="Loading..." size="large" :spinning="isLoading"></a-spin> -->
+								<!-- <a-spin tip="加载中..." size="large" :spinning="isLoading"></a-spin> -->
 								<!-- 选择企业微信 -->
 								<a-form-model>
 									<div class="content-hd" v-if="audit==0">
@@ -199,7 +199,7 @@
 													<!--视频-->
 													<div class="video_upload"
 													     v-if="publishType ==2">
-														<a-spin tip="Loading..." size="large"
+														<a-spin tip="加载中..." size="large"
 														        :spinning="uploadLoading"></a-spin>
 														<a-upload v-if="addType==1&&!uploadVideo.local_path"
 														          style="height: 100%"

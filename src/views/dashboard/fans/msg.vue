@@ -1,6 +1,6 @@
 <template>
 	<div class="container msg-container" style="top:0; right: 0; bottom: 0; left: 0; position: absolute;">
-		<a-spin tip="Loading..." size="large" :spinning="isLoading">
+		<a-spin tip="加载中..." size="large" :spinning="isLoading">
 			<fans-msg v-if="isWx"></fans-msg>
 			<mini-msg v-if="isMini"></mini-msg>
 		</a-spin>

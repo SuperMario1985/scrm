@@ -6,7 +6,7 @@
 			</a-button>
 		</div>
 		<div style="margin: 10px 20px; background-color: #FFFFFF">
-			<a-spin tip="Loading..." size="large" :spinning="isLoading2">
+			<a-spin tip="加载中..." size="large" :spinning="isLoading2">
 				<a-table :columns="columns3" :dataSource="hlepRecordList" :pagination="false"
 				         :rowClassName="rowClassName" :rowSelection="rowSelection">
 				<span slot="user" slot-scope="text, record">

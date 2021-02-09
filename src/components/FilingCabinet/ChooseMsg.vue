@@ -3,7 +3,7 @@
 		<!-- 选择消息弹窗 -->
 		<a-modal :visible="showVisible" title="选择素材" @ok="handleOk" @cancel="handleCancel" width="888">
 			<div style="height: 600px;width: 860px;background-color: #FFFFFF;" class="choose-msg">
-				<a-spin tip="Loading..." size="large" :spinning="isLoading">
+				<a-spin tip="加载中..." size="large" :spinning="isLoading">
 					<a-layout>
 						<a-layout-sider>
 							<FileMenu @changeGroupId='changeGroup' :comefrom="comefrom" :fileType='type'

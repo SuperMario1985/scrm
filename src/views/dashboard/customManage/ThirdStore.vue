@@ -225,11 +225,11 @@
 							/>
 							<a-button type="primary" style="margin: 0 10px 0 0;" @click="getOrderList(1, pageSize)">搜索
 							</a-button>
-							<a-button @click="clear">清空</a-button>
+							<a-button @click="clear">重置</a-button>
 						</div>
 						<!-- 表格部分 -->
 						<div class="content-bd">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<a-table
 										:columns="type == 1 ? columns : (type == 2 ? columnsYZ : columnsTB)"
 										:dataSource="orderList"

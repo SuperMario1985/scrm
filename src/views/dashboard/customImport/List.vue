@@ -25,13 +25,13 @@
 							<a-input placeholder="请输入Excel名称" @keyup.enter="find" style="width: 170px;"
 											v-model="ExcelName"
 											autoComplete="off"/>
-							<a-button type="primary" style="margin-left: 10px;" @click="find">查找</a-button>
-							<a-button style="margin-left: 10px;" @click="clear">清空</a-button>
+							<a-button type="primary" style="margin-left: 10px;" @click="find">查询</a-button>
+							<a-button style="margin-left: 10px;" @click="clear">重置</a-button>
 						</div>
 					</a-col>
 					<!-- 表格部分 -->
 					<div class="content-bd">
-						<a-spin tip="Loading..." size="large" :spinning="isLoading">
+						<a-spin tip="加载中..." size="large" :spinning="isLoading">
 							<div class="spin-content">
 								<a-table
 										:columns="columns"
@@ -142,12 +142,12 @@
 							<a-select-option :value="1">未添加</a-select-option>
 							<a-select-option :value="2">已添加</a-select-option>
 						</a-select>
-						<a-button type="primary" style="margin-left: 10px;" @click="find2">查找</a-button>
-						<a-button style="margin-left: 10px;" @click="clear2">清空</a-button>
+						<a-button type="primary" style="margin-left: 10px;" @click="find2">查询</a-button>
+						<a-button style="margin-left: 10px;" @click="clear2">重置</a-button>
 					</a-col>
 					<!-- 表格部分 -->
 					<div class="content-bd">
-						<a-spin tip="Loading..." size="large" :spinning="isLoading2">
+						<a-spin tip="加载中..." size="large" :spinning="isLoading2">
 							<div class="spin-content">
 								<a-table
 										:columns="columns2"
@@ -316,12 +316,12 @@
 						<a-select-option :value="1">未添加</a-select-option>
 						<a-select-option :value="2">已添加</a-select-option>
 					</a-select>
-					<a-button type="primary" style="margin-left: 10px;" @click="find2">查找</a-button>
-					<a-button style="margin-left: 10px;" @click="clear2">清空</a-button>
+					<a-button type="primary" style="margin-left: 10px;" @click="find2">查询</a-button>
+					<a-button style="margin-left: 10px;" @click="clear2">重置</a-button>
 				</a-col>
 				<!-- 表格部分 -->
 				<div class="content-bd">
-					<!--					<a-spin tip="Loading..." size="large" :spinning="isLoading2">-->
+					<!--					<a-spin tip="加载中..." size="large" :spinning="isLoading2">-->
 					<a-table
 							:columns="columns2"
 							:dataSource="customList"

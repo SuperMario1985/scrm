@@ -13,7 +13,7 @@
 				</p>
 			</div>
 			<div class="content-bd" style="margin-top: 10px;">
-				<a-spin tip="Loading..." size="large" :spinning="isLoading">
+				<a-spin tip="加载中..." size="large" :spinning="isLoading">
 					<div class="spin-content">
 						<a-row style="margin-bottom:20px;padding:0 20px;">
 							<a-col :span="24">
@@ -94,7 +94,7 @@
 													搜索详情
 												</span>
 
-												<a-spin tip="Loading..." size="large" :spinning="attachmentLoading">
+												<a-spin tip="加载中..." size="large" :spinning="attachmentLoading">
 													<div class="spin-content">
 														<a-empty v-if="!attachmentLoading && searchList.length == 0"/>
 														<template v-if="!attachmentLoading && searchList.length > 0">
@@ -129,7 +129,7 @@
 													发送详情
 												</span>
 
-												<a-spin tip="Loading..." size="large" :spinning="attachmentLoading">
+												<a-spin tip="加载中..." size="large" :spinning="attachmentLoading">
 													<div class="spin-content">
 														<a-empty v-if="!attachmentLoading && sendList.length == 0"/>
 														<template v-if="!attachmentLoading && sendList.length > 0">
@@ -164,7 +164,7 @@
 													打开详情
 												</span>
 
-												<a-spin tip="Loading..." size="large" :spinning="attachmentLoading">
+												<a-spin tip="加载中..." size="large" :spinning="attachmentLoading">
 													<div class="spin-content">
 														<a-empty v-if="!attachmentLoading && openList.length == 0"/>
 														<template v-if="!attachmentLoading && openList.length > 0">

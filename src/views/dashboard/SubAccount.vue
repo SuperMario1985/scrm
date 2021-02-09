@@ -28,12 +28,12 @@
 							<a-input placeholder="请输入手机号或名称" @keyup.enter="find" style="width: 170px;margin-left: 5px;"
 											v-model="inputValue"
 											autoComplete="off"/>
-							<a-button type="primary" style="margin-left: 10px;" @click="find">查找</a-button>
-							<a-button style="margin-left: 10px;" @click="clear">清空</a-button>
+							<a-button type="primary" style="margin-left: 10px;" @click="find">查询</a-button>
+							<a-button style="margin-left: 10px;" @click="clear">重置</a-button>
 						</a-col>
 						<!-- 表格部分 -->
 						<div class="content-bd">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<div class="spin-content">
 									<a-table
 											:columns="columns"
@@ -116,12 +116,12 @@
 							<a-input placeholder="请输入手机号或名称" @keyup.enter="find" style="width: 170px;margin-left: 5px;"
 											v-model="inputValue2"
 											autoComplete="off"/>
-							<a-button type="primary" style="margin-left: 10px;" @click="find">查找</a-button>
-							<a-button style="margin-left: 10px;" @click="clear">清空</a-button>
+							<a-button type="primary" style="margin-left: 10px;" @click="find">查询</a-button>
+							<a-button style="margin-left: 10px;" @click="clear">重置</a-button>
 						</a-col>
 						<!-- 表格部分 -->
 						<div class="content-bd">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading2">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading2">
 								<div class="spin-content">
 									<a-table
 											:columns="columns"
@@ -216,7 +216,7 @@
 					:visible="detailVisible"
 					width="700px!important"
 			>
-				<a-spin tip="Loading..." size="large" :spinning="isDrawLoading" class="draw-loading">
+				<a-spin tip="加载中..." size="large" :spinning="isDrawLoading" class="draw-loading">
 					<a-tabs v-model="activeKey" @change="changeTab2">
 						<a-tab-pane tab="基本信息" key="1">
 							<!--详情-->

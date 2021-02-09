@@ -35,8 +35,8 @@
 					<a-select-option :value="2">开启</a-select-option>
 					<a-select-option :value="1">关闭</a-select-option>
 				</a-select>
-				<a-button type="primary" style="margin: 0px 5px;" @click="find">查找</a-button>
-				<a-button @click="clear">清空</a-button>
+				<a-button type="primary" style="margin: 0px 5px;" @click="find">查询</a-button>
+				<a-button @click="clear">重置</a-button>
 				<a-button @click="setEmployee([])" class="btn-primary" style="float: right;" icon="plus" type="primary" v-has="'chatTag-employee-add'">
 					生效员工
 				</a-button>
@@ -48,7 +48,7 @@
 			</div>
 			<!-- 表格部分 -->
 			<div class="content-bd">
-				<a-spin tip="Loading..." size="large" :spinning="isLoading">
+				<a-spin tip="加载中..." size="large" :spinning="isLoading">
 					<a-table :columns="columns" :dataSource="employeeList" :pagination="false"
 					         :rowClassName="rowClassName" v-has="'chatTag-employee-list'">
 						<span slot="checkedBoxTitle">
@@ -275,10 +275,10 @@
 						<a-button type="primary" style="margin-right: 10px;"
 						          @click="searchStaff">查找
 						</a-button>
-						<a-button style="margin-right: 10px;" @click="reset">清空</a-button>
+						<a-button style="margin-right: 10px;" @click="reset">重置</a-button>
 					</div>
 					<div class="content-bd" style="padding: 10px;">
-						<a-spin tip="Loading..." size="large" :spinning="isLoading1">
+						<a-spin tip="加载中..." size="large" :spinning="isLoading1">
 							<a-table
 									:columns="columns1"
 									:dataSource="customList"

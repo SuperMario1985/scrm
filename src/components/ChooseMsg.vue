@@ -4,7 +4,7 @@
 		<a-modal :visible="showVisible" class="msg-modal" title="选择素材" @ok="handleOk" @cancel="handleCancel"
 		         width="888">
 			<div style="height: 600px;width: 840px;" class="choose-msg">
-				<a-spin tip="Loading..." size="large" :spinning="isLoading && type != 1">
+				<a-spin tip="加载中..." size="large" :spinning="isLoading && type != 1">
 					<a-tree-select
 							style="width: 350px"
 							:dropdownStyle="{ maxHeight: '150px', overflow: 'auto' }"
@@ -549,7 +549,7 @@
 				</a-spin>
 			</div>
 			<a-spin class="skethLoading"
-			        tip="Loading..."
+			        tip="加载中..."
 			        size="large"
 			        style="position: absolute;top: 50%; left: 50%; width: 100%;transform: translate(-50%, -50%); padding-top: 35%; height: 100%;background-color: rgba(0, 0, 0, 0); z-index: 99999999999999;"
 			        :spinning="isLoading && type == 1">

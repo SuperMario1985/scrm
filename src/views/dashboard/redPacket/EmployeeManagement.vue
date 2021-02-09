@@ -42,7 +42,7 @@
 							                format="YYYY-MM-DD" style="margin-left: 15px;"/>
 							<a-button type="primary" style="margin-left:15px;" @click="find">查找
 							</a-button>
-							<a-button @click="clear" style="margin-left:15px;">清空</a-button>
+							<a-button @click="clear" style="margin-left:15px;">重置</a-button>
 							<a-button style="margin-top: 14px;float:right;margin-left:15px;padding:0 1rem;"
 							          @click="openChangeApp()" type="primary" v-if="canChangeAgent==1||have_agent==0"
 							>
@@ -63,7 +63,7 @@
 						</div>
 						<!-- 表格部分 -->
 						<div class="content-bd">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<a-table
 										:rowSelection="rowSelection"
 										:columns="columns"

@@ -1,7 +1,7 @@
 <template>
   <div style="width:100%;height:100%;">
     <div class="example">
-      <a-spin tip="Loading..." size="large">
+      <a-spin tip="加载中..." size="large">
         <div class="spin-content">
           <slot></slot>
         </div>

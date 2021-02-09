@@ -29,7 +29,7 @@
 						</div>
 						<!-- 表格部分 -->
 						<div class="content-bd">
-							<a-spin tip="Loading..." size="large" :spinning="isLoading">
+							<a-spin tip="加载中..." size="large" :spinning="isLoading">
 								<a-table :columns="columns" :dataSource="welcomeList" :pagination="false"
 								         :rowClassName="rowClassName" v-has="'groupWelcome-list'">
 									<span slot="content" slot-scope="text, record, index">

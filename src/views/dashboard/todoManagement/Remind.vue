@@ -49,8 +49,8 @@
 							</a-select>
 							<a-input style="width: 170px;margin-bottom: 20px;margin-right: 5px;" placeholder="员工姓名搜索"
 							         v-model="name" @keydown.enter="find"></a-input>
-							<a-button type="primary" style="margin: 0px 5px;" @click="find">查找</a-button>
-							<a-button @click="clear">清空</a-button>
+							<a-button type="primary" style="margin: 0px 5px;" @click="find">查询</a-button>
+							<a-button @click="clear">重置</a-button>
 						</a-col>
 						<a-col style="float:right;" v-has="'todoManagementRemind-add'">
 							<a-button class="btn-primary" icon="plus"
@@ -66,7 +66,7 @@
 					</div>
 					<!-- 表格部分 -->
 					<div class="content-bd">
-						<a-spin tip="Loading..." size="large" :spinning="isLoading">
+						<a-spin tip="加载中..." size="large" :spinning="isLoading">
 							<a-table :columns="columns" :dataSource="userList" :pagination="false"
 							         :rowClassName="rowClassName" v-has="'todoManagementRemind-list'">
 									<span slot="checkedBoxTitle">

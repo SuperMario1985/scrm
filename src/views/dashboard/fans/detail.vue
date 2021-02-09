@@ -150,7 +150,7 @@
 					<!--					</div>-->
 				</div>
 				<div v-show="selectedTab==0" class="content">
-					<a-spin tip="Loading..." size="large" :spinning="isLoading">
+					<a-spin tip="加载中..." size="large" :spinning="isLoading">
 						<div style="overflow:hidden;margin-bottom: 10px;">
 							<div style="float:right;">
 								<a-button type="primary" @click="editBadicInfo" v-if="!badicInfoVisible">编辑
@@ -319,7 +319,7 @@
 						<LineCharts v-if="selectedTab==1" :options="analysisData"></LineCharts>
 					</div>
 					<div class="analysis-table">
-						<a-spin tip="Loading..." size="large"
+						<a-spin tip="加载中..." size="large"
 						        :spinning="analysisTable.tableLoading">
 							<a-table :columns="analysisTable.columns"
 							         :dataSource="analysisTable.list"
@@ -346,7 +346,7 @@
 					</div>
 				</div>
 				<div v-show="selectedTab==2" class="content">
-					<a-spin tip="Loading..." :spinning="loading">
+					<a-spin tip="加载中..." :spinning="loading">
 						<div class="fans-inter-active">
 							<a-timeline class="time-line">
 								<a-timeline-item v-for="item in timeLines">
@@ -385,7 +385,7 @@
 					</a-spin>
 				</div>
 				<div v-show="selectedTab==3" class="content">
-					<a-spin tip="Loading..." size="large" :spinning="followRecordLoading">
+					<a-spin tip="加载中..." size="large" :spinning="followRecordLoading">
 						<div class="time">
 							<div style="margin: 20px 0;">
 								跟进状态：
