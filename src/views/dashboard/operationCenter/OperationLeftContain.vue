@@ -12,10 +12,10 @@
 								<div slot="tab">
 									<a-tooltip placement="top">
 										<template slot="title">
-											<span>{{item.corp_name}}</span>
+											<span >{{item.corp_name}}</span>
 										</template>
 										<img style="width: 24px; height: 24px;" src="../../../assets/WeChatLogo.png"/>
-										{{item.corp_name}}
+										<span style="color:#222222">{{item.corp_name}}</span>
 									</a-tooltip>
 								</div>
 							</a-tab-pane>
@@ -111,6 +111,20 @@
 														          @click="changeFansTimeType1(2)">
 															按日
 														</a-button>
+													</div>
+													<div class="week-picker-contain picker-contain">
+														<a-button :class="timeType== '3'? 'caledar-btn-selected': '' "
+														          @click="changeFansTimeType1(3)">
+															按周
+														</a-button>
+													</div>
+													<div class="month-picker-contain picker-contain">
+														<a-button :class="timeType== '4'? 'caledar-btn-selected': '' "
+														          @click="changeFansTimeType1(4)">
+															按月
+														</a-button>
+													</div>
+													<div class="month-picker-contain picker-contain" style="margin-left:5px">
 														<a-range-picker
 																:allowClear='false'
 																:disabledDate="disabledDateDay"
@@ -120,12 +134,6 @@
 																v-model="dayDate"
 																@change="changeFansTime1"
 														/>
-													</div>
-													<div class="week-picker-contain picker-contain">
-														<a-button :class="timeType== '3'? 'caledar-btn-selected': '' "
-														          @click="changeFansTimeType1(3)">
-															按周
-														</a-button>
 														<a-week-picker
 																:allowClear='false'
 																:value='weekStart'
@@ -141,27 +149,21 @@
 																@change="changeFansEndWeek1"
 														/>
 													</div>
-													<div class="month-picker-contain picker-contain">
-														<a-button :class="timeType== '4'? 'caledar-btn-selected': '' "
-														          @click="changeFansTimeType1(4)">
-															按月
-														</a-button>
-													</div>
 												</div>
 											</div>
 											<div class="fans-data-trend">
 												<div style="text-align: center;">
 													<span style="cursor: pointer;" @click="changeBarType(1)">
 														<span style="width: 20px;height: 12px;display: inline-block;margin: 0 5px 0 10px;"
-														      :style="{ 'background': fansAdd.data_Type == 1 ? '#3398DB' : '#CCC' }"></span>
+														      :style="{ 'background': fansAdd.data_Type == 1 ? '#3398DB' : '#F2F2F2' }"></span>
 														发起申请数</span>
 													<span style="cursor: pointer;" @click="changeBarType(2)">
 														<span style="width: 20px;height: 12px;display: inline-block;margin: 0 5px 0 10px;"
-														      :style="{ 'background': fansAdd.data_Type == 2 ? '#AD85F4' : '#CCC' }"></span>
+														      :style="{ 'background': fansAdd.data_Type == 2 ? '#AD85F4' : '#F2F2F2' }"></span>
 														新增客户数</span>
 													<span style="cursor: pointer;" @click="changeBarType(3)">
 														<span style="width: 20px;height: 12px;display: inline-block;margin: 0 5px 0 10px;"
-														      :style="{ 'background': fansAdd.data_Type == 3 ? '#FFC71B' : '#CCC' }"></span>
+														      :style="{ 'background': fansAdd.data_Type == 3 ? '#FFC71B' : '#F2F2F2' }"></span>
 														被客户删除/拉黑人数</span>
 												</div>
 												<BarCharts v-if="tabKey == 1" style="width:100%;" :options="fansAdd"
@@ -214,6 +216,28 @@
 														          @click="changeFansTimeType2(2)">
 															按日
 														</a-button>
+														
+													</div>
+													<div class="week-picker-contain picker-contain">
+														<a-button :class="timeType2== '3'? 'caledar-btn-selected': '' "
+														          @click="changeFansTimeType2(3)">
+															按周
+														</a-button>
+														
+													</div>
+													<div class="month-picker-contain picker-contain">
+														<a-button :class="timeType2== '4'? 'caledar-btn-selected': '' "
+														          @click="changeFansTimeType2(4)">
+															按月
+														</a-button>
+													</div>
+													<div class="month-picker-contain picker-contain">
+														<a-button @click="showDepartmentList">
+															<span v-if="chooseNum2 == 0">选择成员</span>
+															<span v-if="chooseNum2 > 0">已选择{{chooseUserNum2}}名成员，{{chooseDepartmentNum2}}个部门</span>
+														</a-button>
+													</div>
+													<div  class="month-picker-contain picker-contain" style="margin-left:5px">
 														<a-range-picker
 																:allowClear='false'
 																:disabledDate="disabledDateDay"
@@ -223,12 +247,6 @@
 																v-model="dayDate2"
 																@change="changeFansTime2"
 														/>
-													</div>
-													<div class="week-picker-contain picker-contain">
-														<a-button :class="timeType2== '3'? 'caledar-btn-selected': '' "
-														          @click="changeFansTimeType2(3)">
-															按周
-														</a-button>
 														<a-week-picker
 																:allowClear='false'
 																:value='weekStart2'
@@ -243,18 +261,6 @@
 																v-if="timeType2=='3'"
 																@change="changeFansEndWeek2"
 														/>
-													</div>
-													<div class="month-picker-contain picker-contain">
-														<a-button :class="timeType2== '4'? 'caledar-btn-selected': '' "
-														          @click="changeFansTimeType2(4)">
-															按月
-														</a-button>
-													</div>
-													<div class="month-picker-contain picker-contain">
-														<a-button @click="showDepartmentList">
-															<span v-if="chooseNum2 == 0">选择成员</span>
-															<span v-if="chooseNum2 > 0">已选择{{chooseUserNum2}}名成员，{{chooseDepartmentNum2}}个部门</span>
-														</a-button>
 													</div>
 												</div>
 											</div>
@@ -305,6 +311,28 @@
 														          @click="changeFansTimeType3(2)">
 															按日
 														</a-button>
+														
+													</div>
+													<div class="week-picker-contain picker-contain">
+														<a-button :class="timeType3== '3'? 'caledar-btn-selected': '' "
+														          @click="changeFansTimeType3(3)">
+															按周
+														</a-button>
+														
+													</div>
+													<div class="month-picker-contain picker-contain">
+														<a-button :class="timeType3== '4'? 'caledar-btn-selected': '' "
+														          @click="changeFansTimeType3(4)">
+															按月
+														</a-button>
+													</div>
+													<div class="month-picker-contain picker-contain">
+														<a-button @click="showDepartmentList">
+															<span v-if="chooseNum3 == 0">选择成员</span>
+															<span v-if="chooseNum3 > 0">已选择{{chooseUserNum3}}名成员，{{chooseDepartmentNum3}}个部门</span>
+														</a-button>
+													</div>
+													<div class="month-picker-contain picker-contain" style="margin-left:5px">
 														<a-range-picker
 																:allowClear='false'
 																:disabledDate="disabledDateDay"
@@ -314,12 +342,6 @@
 																v-model="dayDate3"
 																@change="changeFansTime3"
 														/>
-													</div>
-													<div class="week-picker-contain picker-contain">
-														<a-button :class="timeType3== '3'? 'caledar-btn-selected': '' "
-														          @click="changeFansTimeType3(3)">
-															按周
-														</a-button>
 														<a-week-picker
 																:allowClear='false'
 																:value='weekStart3'
@@ -334,18 +356,6 @@
 																v-if="timeType3=='3'"
 																@change="changeFansEndWeek3"
 														/>
-													</div>
-													<div class="month-picker-contain picker-contain">
-														<a-button :class="timeType3== '4'? 'caledar-btn-selected': '' "
-														          @click="changeFansTimeType3(4)">
-															按月
-														</a-button>
-													</div>
-													<div class="month-picker-contain picker-contain">
-														<a-button @click="showDepartmentList">
-															<span v-if="chooseNum3 == 0">选择成员</span>
-															<span v-if="chooseNum3 > 0">已选择{{chooseUserNum3}}名成员，{{chooseDepartmentNum3}}个部门</span>
-														</a-button>
 													</div>
 												</div>
 											</div>
@@ -396,6 +406,28 @@
 														          @click="changeFansTimeType4(2)">
 															按日
 														</a-button>
+														
+													</div>
+													<div class="week-picker-contain picker-contain">
+														<a-button :class="timeType4== '3'? 'caledar-btn-selected': '' "
+														          @click="changeFansTimeType4(3)">
+															按周
+														</a-button>
+														
+													</div>
+													<div class="month-picker-contain picker-contain">
+														<a-button :class="timeType4== '4'? 'caledar-btn-selected': '' "
+														          @click="changeFansTimeType4(4)">
+															按月
+														</a-button>
+													</div>
+													<div class="month-picker-contain picker-contain">
+														<a-button @click="showDepartmentList">
+															<span v-if="chooseNum4 == 0">选择成员</span>
+															<span v-if="chooseNum4 > 0">已选择{{chooseUserNum4}}名成员，{{chooseDepartmentNum4}}个部门</span>
+														</a-button>
+													</div>
+													<div class="month-picker-contain picker-contain" style="margin-left:5px">
 														<a-range-picker
 																:allowClear='false'
 																:disabledDate="disabledDateDay"
@@ -405,12 +437,6 @@
 																v-model="dayDate4"
 																@change="changeFansTime4"
 														/>
-													</div>
-													<div class="week-picker-contain picker-contain">
-														<a-button :class="timeType4== '3'? 'caledar-btn-selected': '' "
-														          @click="changeFansTimeType4(3)">
-															按周
-														</a-button>
 														<a-week-picker
 																:allowClear='false'
 																:value='weekStart4'
@@ -425,18 +451,6 @@
 																v-if="timeType4=='3'"
 																@change="changeFansEndWeek4"
 														/>
-													</div>
-													<div class="month-picker-contain picker-contain">
-														<a-button :class="timeType4== '4'? 'caledar-btn-selected': '' "
-														          @click="changeFansTimeType4(4)">
-															按月
-														</a-button>
-													</div>
-													<div class="month-picker-contain picker-contain">
-														<a-button @click="showDepartmentList">
-															<span v-if="chooseNum4 == 0">选择成员</span>
-															<span v-if="chooseNum4 > 0">已选择{{chooseUserNum4}}名成员，{{chooseDepartmentNum4}}个部门</span>
-														</a-button>
 													</div>
 												</div>
 											</div>
@@ -2259,10 +2273,10 @@
 
 	.fansgrow-contain .card-caledar .picker-contain .caledar-btn-selected {
 		boder: 0;
-		border-right: 1px solid #3B74FF;
-		background: #3B74FF;
-		border-radius: 0;
-		color: #FFF;
+		border-right: 1px solid #01B065;
+		background: rgba(1, 176, 101, 0.1);;
+		border-radius: 4px;
+		color: #01B065;
 	}
 
 	.fansgrow-contain .card-caledar .picker-contain button {
