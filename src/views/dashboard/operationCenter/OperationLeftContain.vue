@@ -12,10 +12,10 @@
 								<div slot="tab">
 									<a-tooltip placement="top">
 										<template slot="title">
-											<span>{{item.corp_name}}</span>
+											<span >{{item.corp_name}}</span>
 										</template>
 										<img style="width: 24px; height: 24px;" src="../../../assets/WeChatLogo.png"/>
-										{{item.corp_name}}
+										<span style="color:#222222">{{item.corp_name}}</span>
 									</a-tooltip>
 								</div>
 							</a-tab-pane>
