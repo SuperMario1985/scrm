@@ -206,13 +206,29 @@ export default {
   color: #01b065 !important;
 }
 
+// 覆盖默认样式
 .ant-layout {
   // table
   .ant-table {
     color: #333;
-  }
-  .ant-table-thead > tr > th {
-    color: #666;
+    td {
+      .ant-btn {
+        border: none;
+        background: none;
+        box-shadow: none;
+        color: #335588;
+      }
+    }
+    .ant-table-thead > tr > th {
+      color: #666;
+    }
+    .ant-empty-image {
+      height: 100px;
+      background: url("./assets/base/table-empty.png") center center no-repeat;
+      svg {
+        display: none;
+      }
+    }
   }
 }
 </style>
