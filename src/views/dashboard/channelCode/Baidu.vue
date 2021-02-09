@@ -84,7 +84,7 @@
 									</span>
 
 									<span slot="user" slot-scope="text, record">
-										<span style="color: #1890FF; cursor: pointer;"
+										<span style="color: #01b065; cursor: pointer;"
 										      @click="preview(record.id, record.type, 0)">预览</span>
 										<!--										<template v-if="record.type == 1">-->
 										<!--											<a-tag style="margin-bottom: 5px;" v-for="(user,uindex) in record.user"-->
@@ -184,7 +184,7 @@
 							<label style="width: 100px;">token：</label>
 							<a-input style="width: calc(100% - 50px);" v-model="editToken"
 							         placeholder="请输入token"></a-input>
-							<p style="color: #1890FF;margin: 10px 0;">如何获取：</p>
+							<p style="color: #01b065;margin: 10px 0;">如何获取：</p>
 							<img style="width: 650px;" src="../../../assets/baidu/token.png">
 							<p style="margin: 10px 0;">广告主可以在百度商业开发者中心的个人中心获取oCPC API转化数据接入的token授权码。</p>
 							<p style="margin: 0;">百度商业开发者中心的个人中心URL：<a
@@ -773,7 +773,7 @@
 							<!--							重置-->
 							<!--						</a>-->
 							<div>
-								<span style="color:#1890FF; cursor: pointer; margin-right: 10px;"
+								<span style="color:#01b065; cursor: pointer; margin-right: 10px;"
 								      v-show="batchEditType && timeIndex == item.time.length - 1"
 								      @click="addSpecialDateTimeList(index,timeIndex)">
 									 添加
@@ -976,7 +976,7 @@
 								</span>
 						</a-tooltip>
 						<div>
-							<span @click="addTime(index)" style="color:#1890FF; cursor: pointer;margin-right: 10px;"
+							<span @click="addTime(index)" style="color:#01b065; cursor: pointer;margin-right: 10px;"
 							      v-show="index == specialTimeList.length - 1">添加</span>
 							<span style="cursor: pointer;color:#F56C6C;" v-show="index != 0"
 							      @click="deleteTime(index)">删除
@@ -3494,7 +3494,7 @@
 	}
 
 	.active1 {
-		color: #1890FF;
+		color: #01b065;
 	}
 
 	/deep/ .ant-tree-switcher-icon {
@@ -3528,7 +3528,7 @@
 	}
 
 	/deep/ .ant-tag-checkable-checked {
-		background-color: #1890FF;
+		background-color: #01b065;
 	}
 
 	.pull-right {

@@ -714,7 +714,7 @@
 	}
 
 	.active {
-		background: #1E90FF;
+		background: #01b065;
 		color: white;
 	}
 
@@ -796,13 +796,13 @@
 	}
 
 	.content-msg a:link {
-		/*color: #1890FF;*/
+		/*color: #01b065;*/
 		text-decoration: none;
 	}
 
 	//未访问：蓝色、无下划线
 	.content-msg a:visited {
-		/*color: #1890FF;*/
+		/*color: #01b065;*/
 		text-decoration: none;
 	}
 
@@ -833,13 +833,13 @@
 	}
 
 	.help a:link {
-		color: #1890FF;
+		color: #01b065;
 		text-decoration: none;
 	}
 
 	//未访问：蓝色、无下划线
 	.help a:visited {
-		color: #1890FF;
+		color: #01b065;
 		text-decoration: none;
 	}
 

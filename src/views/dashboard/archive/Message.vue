@@ -58,7 +58,7 @@
 				<div v-show="currentStep == 2" class="enterprise-info">
 					<div class="enterprise-info-part">
 						<div class="enterprise-info-part-title">
-							复制以下信息并填入到<span style="color: #1890FF;">企业微信后台</span>
+							复制以下信息并填入到<span style="color: #01b065;">企业微信后台</span>
 							<a-popover placement="right">
 								<template slot="content">
 									<img src="../../../assets/archive/2.png" alt="" style="width: 500px;">
@@ -69,7 +69,7 @@
 						<div class="enterprise-info-part-content">
 							<a-form-item label="可信IP地址" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
 								{{$store.state.systemIp}}
-								<a style="margin-left: 8px;background: #1890FF;color: #FFF;padding: 3px 5px;border-radius: 3px;font-size: 12px;"
+								<a style="margin-left: 8px;background: #01b065;color: #FFF;padding: 3px 5px;border-radius: 3px;font-size: 12px;"
 								   @click="copyText($store.state.systemIp)">复制</a>
 							</a-form-item>
 							<a-form-item label="信息加密公钥" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
@@ -77,7 +77,7 @@
 								<template v-if="key_list.length > 0">
 									<div>
 										<span class="list-content">私钥内容</span>
-										<a style="margin-left: 8px;background: #1890FF;color: #FFF;padding: 3px 5px;border-radius: 3px;font-size: 12px;"
+										<a style="margin-left: 8px;background: #01b065;color: #FFF;padding: 3px 5px;border-radius: 3px;font-size: 12px;"
 										   @click="copyText(key_list[0].private_key)">复制</a>
 									</div>
 									<div>
@@ -85,13 +85,13 @@
 										<a-popover placement="top">
 											<template slot="content">下载</template>
 											<a-icon type="download"
-											        style="margin-left: 8px;cursor: pointer;color: #1890FF;"
+											        style="margin-left: 8px;cursor: pointer;color: #01b065;"
 											        @click="upLoadFile(commonUrl+key_list[0].private_key_path)"/>
 										</a-popover>
 									</div>
 									<div>
 										<span class="list-content">公钥内容</span>
-										<a style="margin-left: 8px;background: #1890FF;color: #FFF;padding: 3px 5px;border-radius: 3px;font-size: 12px;"
+										<a style="margin-left: 8px;background: #01b065;color: #FFF;padding: 3px 5px;border-radius: 3px;font-size: 12px;"
 										   @click="copyText(key_list[0].public_key)">复制</a>
 									</div>
 									<div>
@@ -99,7 +99,7 @@
 										<a-popover placement="top">
 											<template slot="content">下载</template>
 											<a-icon type="download"
-											        style="margin-left: 8px;cursor: pointer;color: #1890FF;"
+											        style="margin-left: 8px;cursor: pointer;color: #01b065;"
 											        @click="upLoadFile(commonUrl+key_list[0].public_key_path)"/>
 										</a-popover>
 									</div>
@@ -109,7 +109,7 @@
 					</div>
 					<div class="enterprise-info-part">
 						<div class="enterprise-info-part-title">
-							将<span style="color: #1890FF;">企业微信后台会话存档</span>配置页面的Secret复制粘贴到下框中
+							将<span style="color: #01b065;">企业微信后台会话存档</span>配置页面的Secret复制粘贴到下框中
 							<a-popover placement="right">
 								<template slot="content">
 									<img src="../../../assets/archive/1.png" alt="" style="width: 500px;">

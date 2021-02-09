@@ -517,7 +517,7 @@
 											:beforeUpload="beforeUploadFile"
 											:customRequest="selfUploadFile">
 										<div style="cursor: pointer;">
-											<div class="ant-upload-text;" style="margin-top: 5px; color: #1890FF;">
+											<div class="ant-upload-text;" style="margin-top: 5px; color: #01b065;">
 												重新上传
 											</div>
 										</div>
@@ -1520,7 +1520,7 @@
 		border-radius: 50%;
 		box-sizing: border-box;
 		position: relative;
-		border: 2px solid #1890FF;
+		border: 2px solid #01b065;
 	}
 
 	.wifi-symbol {
@@ -1535,7 +1535,7 @@
 	}
 
 	.wifi-circle {
-		border: 2px solid #1890FF;
+		border: 2px solid #01b065;
 		border-radius: 50%;
 		position: absolute;
 	}
@@ -1543,7 +1543,7 @@
 	.first {
 		width: 5px;
 		height: 5px;
-		background: #1890FF;
+		background: #01b065;
 		top: 25px;
 		left: 25px;
 	}

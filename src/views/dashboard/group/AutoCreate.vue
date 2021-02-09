@@ -77,7 +77,7 @@
 									<span slot="chat_list" slot-scope="text, record,index">
 										<div v-for="item in text">
 											<a-tag style="padding: 3px;">
-												<span style="background: #1890FF;width: 18px;height:18px;display: inline-block;margin-right: 5px;vertical-align: middle;">
+												<span style="background: #01b065;width: 18px;height:18px;display: inline-block;margin-right: 5px;vertical-align: middle;">
 													<img :src="img" style="width: 14px;margin: 2px;"/>
 												</span>
 												<span style="width: 60px;display:inline-block;vertical-align: middle;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
@@ -90,7 +90,7 @@
 															{{item.name}}
 														</span>
 														<span v-if="item.name && item.name != ''"
-														      style="color:#1890FF; cursor: pointer;">{{item.name}}</span>
+														      style="color:#01b065; cursor: pointer;">{{item.name}}</span>
 													</a-popover>
 												</span>
 												<span>（{{item.member_num}}）</span>
@@ -195,7 +195,7 @@
 										<div class="three-input">
 											<template v-for="item in detailData.chat_list">
 												<a-tag style="padding: 8px;">
-													<span style="background: #1890FF;width: 36px;height:36px;margin-right: 5px;vertical-align: top;border-radius: 4px;float: left;"
+													<span style="background: #01b065;width: 36px;height:36px;margin-right: 5px;vertical-align: top;border-radius: 4px;float: left;"
 													      v-if="item.avatarData && item.avatarData.length == 0">
 											<img :src="img"
 											     style="width: 20px;margin: 8px;height: 20px;"/>
@@ -469,7 +469,7 @@
 									</span>
 									<span slot="chat_name" slot-scope="text, record,index">
 									<a-tag style="padding: 3px;">
-												<span style="background: #1890FF;width: 18px;height:18px;display: inline-block;margin-right: 5px;vertical-align: middle;">
+												<span style="background: #01b065;width: 18px;height:18px;display: inline-block;margin-right: 5px;vertical-align: middle;">
 													<img :src="img" style="width: 14px;margin: 2px;"/>
 												</span>
 												<span style="width: 110px;display:inline-block;vertical-align: middle;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
@@ -478,7 +478,7 @@
 														      style="display: inline-block;max-width: 500px;word-wrap: break-word;word-break: break-all;">
 															{{record.chat_name}}
 														</span>
-														<span style="color:#1890FF; cursor: pointer;">{{record.chat_name}}</span>
+														<span style="color:#01b065; cursor: pointer;">{{record.chat_name}}</span>
 													</a-popover>
 												</span>
 											</a-tag>
@@ -1441,7 +1441,7 @@
 	}
 
 	.active1 {
-		color: #1890FF;
+		color: #01b065;
 	}
 
 	/deep/ .ant-tree-switcher-icon {

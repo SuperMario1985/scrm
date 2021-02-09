@@ -117,7 +117,7 @@
 					        :title="item.title"/>
 				</a-steps>
 				<div v-show="current == 0" style="margin: 20px;">
-					<span style="border-left: 4px solid #1890FF;padding-left: 10px;margin-left: 10px;">活动信息</span>
+					<span style="border-left: 4px solid #01b065;padding-left: 10px;margin-left: 10px;">活动信息</span>
 					<a-divider/>
 					<a-form-item class="current0" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }"
 					             v-if="$store.state.corpArr.length > 1">
@@ -228,7 +228,7 @@
 					</a-form-item>
 				</div>
 				<div v-show="current == 1" style="margin: 20px;">
-					<span style="border-left: 4px solid #1890FF;padding-left: 10px;margin-left: 10px;">红包设置</span>
+					<span style="border-left: 4px solid #01b065;padding-left: 10px;margin-left: 10px;">红包设置</span>
 					<a-divider/>
 					<a-form-item class="current0" :label-col="{ span: 5 }" :wrapper-col="{ span: 19 }">
 						<span slot="label">
@@ -314,7 +314,7 @@
 								:disabled="currentStatus == 2"
 								style="width: 150px;margin: 0 5px;"
 								v-model="help_limit" placeholder="不填，默认为不限制"></a-input-number>
-						<span style="color: #1890FF;height: 24px;line-height: 24px;">
+						<span style="color: #01b065;height: 24px;line-height: 24px;">
 							<span style="color: #F56C6C">（不填写，则默认为不限制。一旦发布，不可修改）</span>
 						</span>
 					</a-form-item>
@@ -379,7 +379,7 @@
 					</a-form-item>
 				</div>
 				<div v-show="current == 2" style="margin: 20px;">
-					<span style="border-left: 4px solid #1890FF;padding-left: 10px;margin-left: 10px;">参与限制<span
+					<span style="border-left: 4px solid #01b065;padding-left: 10px;margin-left: 10px;">参与限制<span
 							style="color: #F56C6C;">（不论是个人拆领红包，还是其好友拆领，无法满足下列要求，均拆领失败）</span></span>
 					<a-divider/>
 					<a-form-item class="current0" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
@@ -420,15 +420,15 @@
 								            :disabled="item.disabled"
 								/>
 								<span v-if="index == province.length - 1"
-								      style="color: #1890FF;margin-left: 10px;cursor: pointer;"
+								      style="color: #01b065;margin-left: 10px;cursor: pointer;"
 								      @click="addArea">添加</span>
 								<span v-if="!item.disabled && province.length > 1"
-								      style="color: #1890FF;margin-left: 10px;cursor: pointer;"
+								      style="color: #01b065;margin-left: 10px;cursor: pointer;"
 								      @click="delArea(index)">删除</span>
 							</div>
 						</template>
 					</a-form-item>
-					<span style="border-left: 4px solid #1890FF;padding-left: 10px;margin-left: 10px;">客户标签<span
+					<span style="border-left: 4px solid #01b065;padding-left: 10px;margin-left: 10px;">客户标签<span
 							style="color: #F56C6C;">（不论邀请人，还是助力者，只要参与该场活动，则自动打上选中的客户标签）</span></span>
 					<a-divider/>
 					<div class="current0 ant-col-20">
@@ -437,7 +437,7 @@
 					</div>
 				</div>
 				<div v-show="current == 3" style="margin: 20px;">
-					<span style="border-left: 4px solid #1890FF;padding-left: 10px;margin-left: 10px;">海报设置</span>
+					<span style="border-left: 4px solid #01b065;padding-left: 10px;margin-left: 10px;">海报设置</span>
 					<a-divider/>
 					<a-form-item class="current0" :label-col="{ span: 3 }" :wrapper-col="{ span: 21 }">
 						<template slot="label">
@@ -553,7 +553,7 @@
 					</a-form-item>
 				</div>
 				<div v-show="current == 4" style="margin: 20px;">
-					<span style="border-left: 4px solid #1890FF;padding-left: 10px;margin-left: 10px;">引流设置<span
+					<span style="border-left: 4px solid #01b065;padding-left: 10px;margin-left: 10px;">引流设置<span
 							style="color: #F56C6C;">（海报将展示对应带参数的二维码， 扫码后将引流到对应的企业成员）</span></span>
 					<a-divider/>
 					<a-form-item class="current0" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
@@ -1700,7 +1700,7 @@
 	}
 
 	.shape-active {
-		background-color: #1890FF;
+		background-color: #01b065;
 		color: #FFFFFF;
 	}
 

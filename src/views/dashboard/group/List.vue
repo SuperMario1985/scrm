@@ -95,9 +95,9 @@
 											      style="display: inline-block;word-wrap: break-word;word-break: break-all;">
 												手动更新公告
 											</span>
-											<a-icon style="color: #1890FF;" type="redo" @click="updateNotice"/>
+											<a-icon style="color: #01b065;" type="redo" @click="updateNotice"/>
 										</a-popover>
-										<a-icon v-if="spinning" type="sync" style="color: #1890FF;" spin/>
+										<a-icon v-if="spinning" type="sync" style="color: #01b065;" spin/>
 									</span>
 									<span slot="checkedBox" slot-scope="text, record, index">
 										<a-checkbox style="float: right"
@@ -105,7 +105,7 @@
 										            @click="changeSelectKey(record.chat_id)"></a-checkbox>
 					                </span>
 									<span slot="name" slot-scope="text, record, index">
-										<span style="background: #1890FF;width: 36px;height:36px;margin-right: 5px;vertical-align: top;border-radius: 4px;float: left;"
+										<span style="background: #01b065;width: 36px;height:36px;margin-right: 5px;vertical-align: top;border-radius: 4px;float: left;"
 										      v-if="record.avatarData.length == 0">
 											<img :src="img"
 											     style="width: 20px;margin: 8px;height: 20px;"/>
@@ -175,7 +175,7 @@
 												{{record.notice}}
 											</span>
 											<span v-if="record.notice && record.notice != ''"
-											      style="color:#1890FF; cursor: pointer;">预览</span>
+											      style="color:#01b065; cursor: pointer;">预览</span>
 										</a-popover>
 										<span v-if="!record.notice || record.notice == ''">--</span>
 					                </span>
@@ -464,7 +464,7 @@
 			<a-spin tip="Loading..." size="large" :spinning="isLoading2">
 				<div class="content-hd"
 				     style="margin: 10px;border: 1px solid #E2E2E2;width: auto;padding: 10px;line-height: inherit;">
-					<span style="background: #1890FF;width: 60px;height:60px;margin-right: 10px;vertical-align: top;border-radius: 4px;float: left;"
+					<span style="background: #01b065;width: 60px;height:60px;margin-right: 10px;vertical-align: top;border-radius: 4px;float: left;"
 					      v-if="avatarData.length == 0">
 						<img :src="img" style="width: 40px;margin: 10px;height: 40px;"/>
 					</span>
@@ -760,7 +760,7 @@
 							<div>
 								<div class="half" v-for="(item, index) in field_list"
 								     v-if="item.key == 'phone' && is_hide_phone != 1 || item.key != 'phone'">
-									<a-tag color="#1890FF">{{item.title}}</a-tag>
+									<a-tag color="#01b065">{{item.title}}</a-tag>
 									<span class="half-text"
 									      v-if="!badicInfoVisible && item.value != '' && item.type != 8 && item.key != 'phone' && item.key != 'company'">{{item.value}}</span>
 									<span class="half-text"
@@ -2482,7 +2482,7 @@
 	}
 
 	.active {
-		background: #1E90FF;
+		background: #01b065;
 		color: white;
 	}
 
@@ -2512,7 +2512,7 @@
 	}
 
 	/deep/ .wxtpl .ant-radio-button-wrapper-checked {
-		border: 2px solid #1890FF !important;
+		border: 2px solid #01b065 !important;
 	}
 
 	/deep/ .ant-dropdown-trigger > .anticon.anticon-down {

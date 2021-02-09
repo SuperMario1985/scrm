@@ -287,7 +287,7 @@
 														</a-form-item>
 													</a-tab-pane>
 												</template>
-												<div style="line-height: 30px;text-align:center;border: 1px solid #1890ff;color: #1890ff;border-radius: 4px;cursor: pointer;padding: 0 10px;" slot="tabBarExtraContent" @click="addSetting">
+												<div style="line-height: 30px;text-align:center;border: 1px solid #01b065;color: #01b065;border-radius: 4px;cursor: pointer;padding: 0 10px;" slot="tabBarExtraContent" @click="addSetting">
 													新增阶段
 												</div>
 											</a-tabs>
@@ -828,7 +828,7 @@
 	}
 
 	/deep/ .ant-tag-checkable-checked {
-		background-color: #1890FF;
+		background-color: #01b065;
 	}
 
 	.msg_content_txt {

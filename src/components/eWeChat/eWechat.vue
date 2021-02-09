@@ -132,7 +132,7 @@
 	}
 
 	.active {
-		background: #1E90FF;
+		background: #01b065;
 		color: white;
 	}
 </style>

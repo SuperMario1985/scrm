@@ -471,8 +471,8 @@
 					<template slot="label">IP地址
 					</template>
 					<div>
-						<span style="color: #1890FF;">{{$store.state.systemIp}}</span>
-						<a style="margin-left: 10px;background: #1890FF;color: #FFF;padding: 3px 5px;border-radius: 3px;font-size: 12px;"
+						<span style="color: #01b065;">{{$store.state.systemIp}}</span>
+						<a style="margin-left: 10px;background: #01b065;color: #FFF;padding: 3px 5px;border-radius: 3px;font-size: 12px;"
 						   @click="copyText($store.state.systemIp)">复制</a>
 					</div>
 					<div style="color: #00000073;line-height:16px;font-size: 13px;">

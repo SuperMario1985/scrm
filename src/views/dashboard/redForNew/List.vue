@@ -91,7 +91,7 @@
 										<span v-if="record.rule_type == 2">拼手气{{record.rule_min_random_amount}}-{{record.rule_max_random_amount}}元</span>
 									</span>
 									<span slot="member_str" slot-scope="text, record">
-										<span style="color: #1890FF; cursor: pointer;"
+										<span style="color: #01b065; cursor: pointer;"
 										      @click="preview(record.id, record.corp_id)">预览</span>
 									</span>
 									<span slot="time" slot-scope="text, record">

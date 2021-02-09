@@ -476,7 +476,7 @@ export default {
         border-radius: 2px;
     }
     .update-log-title .ant-btn:hover{
-        background: #1890ff;
+        background: #01b065;
         color: #fff;
     }
     /* .update-log-items-contain {
@@ -608,6 +608,6 @@ export default {
         color: #1a1a1a;
     }
     .common-problem .common-problem-items-contain .common-problem-item p a:hover {
-        color: #1890ff;
+        color: #01b065;
     }
 </style>

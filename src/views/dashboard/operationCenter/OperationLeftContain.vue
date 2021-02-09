@@ -2339,7 +2339,7 @@
 	.fans-active-avg {
 		font-weight: 700;
 		background-color: #FFF;
-		color: #1890FF;
+		color: #01b065;
 		border-bottom: 1px solid #E9E9E9;
 	}
 

@@ -304,7 +304,7 @@
 							         :rowClassName="rowClassName">
 								<div slot="chat_name" slot-scope="text, record, index">
 									<div style="max-width: 400px;overflow: hidden;">
-										<span style="background: #1890FF;width: 36px;height:36px;margin-right: 5px;border-radius: 4px;float: left;"
+										<span style="background: #01b065;width: 36px;height:36px;margin-right: 5px;border-radius: 4px;float: left;"
 										      v-if="record.avatarData.length == 0">
 									<img :src="img"
 									     style="width: 20px;margin: 8px;height: 20px;"/>

@@ -297,7 +297,7 @@
 																		{{record.name}}
 																	</span>
 																	<span v-if="record.name && record.name != ''"
-																	      style="color:#1890FF; cursor: pointer;display: inline-block;max-width: calc(100% - 70px);white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
+																	      style="color:#01b065; cursor: pointer;display: inline-block;max-width: calc(100% - 70px);white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
 																		{{record.name}}
 																	</span>
 																</a-popover>
@@ -366,7 +366,7 @@
 										<a-form-item label="过滤客户" :label-col="{ span: 3 }" :wrapper-col="{ span: 21 }">
 											<a-switch v-model="switchChecked" style="margin-right: 10px;"/>
 											开启后已在群聊中的客户将不会收到邀请<span @click="getPersonsNum(1)"
-											                        style="cursor: pointer;color: #1890FF;"
+											                        style="cursor: pointer;color: #01b065;"
 											                        v-if="switchChecked">（点击查看预计送达人数<span
 												v-if="sendPersonNum != -1">：<span style="color: #F56C6C;">{{sendPersonNum}}</span></span>）</span>
 										</a-form-item>
@@ -399,7 +399,7 @@
 					<a-row v-for="item in chatList">
 						<a-checkbox :value="item.chat_id" :disabled="item.disabled"
 						            @click="chooseChat(item,item.chat_id)">
-							<span style="background: #1890FF;width: 36px;height:36px;margin-right: 5px;vertical-align: top;border-radius: 4px;float: left;"
+							<span style="background: #01b065;width: 36px;height:36px;margin-right: 5px;vertical-align: top;border-radius: 4px;float: left;"
 							      v-if="item.avatarData.length == 0">
 									<img :src="img"
 									     style="width: 20px;margin: 8px;height: 20px;"/>
@@ -1243,7 +1243,7 @@
 	}
 
 	/deep/ .ant-tag-checkable-checked {
-		background-color: #1890FF;
+		background-color: #01b065;
 	}
 
 	.msg_content_txt {

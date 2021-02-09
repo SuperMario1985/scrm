@@ -68,7 +68,7 @@
 										          @click="changeStatus(record.id,text)"/>
 									</span>
 									<span slot="preview" slot-scope="text, record,index">
-										<span style="color: #1890FF; cursor: pointer;"
+										<span style="color: #01b065; cursor: pointer;"
 										      @click="preview(record.id, record.title)">预览</span>
 									</span>
 									<span slot="push_time" slot-scope="text, record,index">
@@ -991,7 +991,7 @@
 	}
 
 	.active {
-		background: #1E90FF;
+		background: #01b065;
 		color: white;
 	}
 
@@ -1045,13 +1045,13 @@
 	}
 
 	.help a:link {
-		color: #1890FF;
+		color: #01b065;
 		text-decoration: none;
 	}
 
 	//未访问：蓝色、无下划线
 	.help a:visited {
-		color: #1890FF;
+		color: #01b065;
 		text-decoration: none;
 	}
 
@@ -1148,7 +1148,7 @@
 		border-radius: 50%;
 		box-sizing: border-box;
 		position: relative;
-		border: 2px solid #1890FF;
+		border: 2px solid #01b065;
 	}
 
 	.wifi-symbol {
@@ -1163,7 +1163,7 @@
 	}
 
 	.wifi-circle {
-		border: 2px solid #1890FF;
+		border: 2px solid #01b065;
 		border-radius: 50%;
 		position: absolute;
 	}
@@ -1171,7 +1171,7 @@
 	.first {
 		width: 5px;
 		height: 5px;
-		background: #1890FF;
+		background: #01b065;
 		top: 25px;
 		left: 25px;
 	}

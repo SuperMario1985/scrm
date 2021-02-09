@@ -78,7 +78,7 @@
 									</a-form-item>
 									<a-form-item label="选择适用客户群" :label-col="{ span: 4 }"
 									             :wrapper-col="{ span: 20 }">
-										<!--										<span style="border-left: 4px solid #1890FF;padding-left: 10px;">选择适用客户群：</span>-->
+										<!--										<span style="border-left: 4px solid #01b065;padding-left: 10px;">选择适用客户群：</span>-->
 										<!--										<a-divider/>-->
 										<div style="margin-bottom: 15px;">
 											<a-button @click="showChatVisible" style="width: 210px;margin-right: 5px;">
@@ -89,7 +89,7 @@
 									</a-form-item>
 									<a-form-item label="设置提醒行为" :label-col="{ span: 4 }"
 									             :wrapper-col="{ span: 20 }">
-										<!--										<span style="border-left: 4px solid #1890FF;padding-left: 10px;margin-top: 15px;">设置提醒行为：</span>-->
+										<!--										<span style="border-left: 4px solid #01b065;padding-left: 10px;margin-top: 15px;">设置提醒行为：</span>-->
 										<!--										<a-divider/>-->
 										<div>
 											<a-checkbox v-model="isImage">发送带二维码的图片</a-checkbox>
@@ -113,7 +113,7 @@
 									</a-form-item>
 									<a-form-item label="通知人" :label-col="{ span: 4 }"
 									             :wrapper-col="{ span: 20 }">
-										<!--								<span style="border-left: 4px solid #1890FF;padding-left: 10px;margin-top: 15px;">通知人：</span>-->
+										<!--								<span style="border-left: 4px solid #01b065;padding-left: 10px;margin-top: 15px;">通知人：</span>-->
 										<!--								<a-divider/>-->
 										<a-checkbox :checked="true" :disabled="true">
 											群主
@@ -550,13 +550,13 @@
 	}
 
 	.content-msg a:link {
-		color: #1890FF;
+		color: #01b065;
 		text-decoration: none;
 	}
 
 	//未访问：蓝色、无下划线
 	.content-msg a:visited {
-		color: #1890FF;
+		color: #01b065;
 		text-decoration: none;
 	}
 
@@ -771,7 +771,7 @@
 		border-radius: 50%;
 		box-sizing: border-box;
 		position: relative;
-		border: 2px solid #1890FF;
+		border: 2px solid #01b065;
 	}
 
 	.mt {
@@ -843,7 +843,7 @@
 		display: inline-block;
 		cursor: pointer;
 		margin-left: 10px;
-		color: #1890FF;
+		color: #01b065;
 	}
 
 	/deep/ .ant-form-item-control {

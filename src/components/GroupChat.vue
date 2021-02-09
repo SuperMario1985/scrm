@@ -12,7 +12,7 @@
 						<a-checkbox :value="item.chat_id"
 						            :disabled="item.isRemind == 1 && isDisable == 1 && content(chatIds, item.chat_id)"
 						            @click="chooseChat(item.chat_id)">
-								<span style="background: #1890FF;width: 36px;height:36px;margin-right: 5px;vertical-align: top;border-radius: 4px;float: left;"
+								<span style="background: #01b065;width: 36px;height:36px;margin-right: 5px;vertical-align: top;border-radius: 4px;float: left;"
 								      v-if="item.avatarData.length == 0">
 									<img :src="img"
 												     style="width: 20px;margin: 8px;height: 20px;"/>

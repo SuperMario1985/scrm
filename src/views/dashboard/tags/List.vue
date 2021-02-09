@@ -91,10 +91,10 @@
                 </span>
 				<span slot="action" slot-scope="text, record">
                   <span @click="showModal2(text, record)"
-                        style="color: #1890FF;margin-right: 25px;cursor: pointer;" v-if="$store.state.authorizer_type != 'unauthorized' && verify_service" v-has="'tag-edit'">编辑</span>
-					<span @click="showConfirmWx" style="color: #1890FF;margin-right: 25px;cursor: pointer;" v-if="$store.state.authorizer_type == 'unauthorized' || !verify_service" v-has="'tag-edit'">编辑</span>
-                  <span @click="showModal3(text, record)" style="color: #1890FF;cursor: pointer;" v-if="$store.state.authorizer_type != 'unauthorized' && verify_service" v-has="'tag-delete'">删除</span>
-					<span @click="showConfirmWx" style="color: #1890FF;cursor: pointer;" v-if="$store.state.authorizer_type == 'unauthorized' || !verify_service" v-has="'tag-delete'">删除</span>
+                        style="color: #01b065;margin-right: 25px;cursor: pointer;" v-if="$store.state.authorizer_type != 'unauthorized' && verify_service" v-has="'tag-edit'">编辑</span>
+					<span @click="showConfirmWx" style="color: #01b065;margin-right: 25px;cursor: pointer;" v-if="$store.state.authorizer_type == 'unauthorized' || !verify_service" v-has="'tag-edit'">编辑</span>
+                  <span @click="showModal3(text, record)" style="color: #01b065;cursor: pointer;" v-if="$store.state.authorizer_type != 'unauthorized' && verify_service" v-has="'tag-delete'">删除</span>
+					<span @click="showConfirmWx" style="color: #01b065;cursor: pointer;" v-if="$store.state.authorizer_type == 'unauthorized' || !verify_service" v-has="'tag-delete'">删除</span>
                 </span>
 								</a-table>
 
@@ -610,7 +610,7 @@
 	}
 
 	.active {
-		background: #1E90FF;
+		background: #01b065;
 		color: white;
 	}
 

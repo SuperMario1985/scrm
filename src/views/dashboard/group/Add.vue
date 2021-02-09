@@ -142,7 +142,7 @@
 																		{{record.name}}
 																	</span>
 																	<span v-if="record.name && record.name != ''"
-																	      style="color:#1890FF; cursor: pointer;display: inline-block;max-width: 100px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
+																	      style="color:#01b065; cursor: pointer;display: inline-block;max-width: 100px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
 																		{{record.name}}
 																	</span>
 																</a-popover>
@@ -235,7 +235,7 @@
 					<a-row v-for="item in chatList">
 						<a-checkbox :value="item.chat_id" :disabled="item.disabled"
 						            @click="chooseChat(item,item.chat_id)">
-								<span style="background: #1890FF;width: 36px;height:36px;margin-right: 8px;vertical-align: top;border-radius: 4px;float: left;"
+								<span style="background: #01b065;width: 36px;height:36px;margin-right: 8px;vertical-align: top;border-radius: 4px;float: left;"
 								      v-if="item.avatarData.length == 0">
 									<img :src="img"
 									     style="width: 20px;margin: 8px;height: 20px;"/>
@@ -940,7 +940,7 @@
 	}
 
 	/deep/ .ant-tag-checkable-checked {
-		background-color: #1890FF;
+		background-color: #01b065;
 	}
 
 	.msg_content_txt {

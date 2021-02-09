@@ -769,14 +769,14 @@
 						<corpChooseTag :callback="modalVisibleChange4"
 						               :hasChoose="tag_arr" v-if="isShowTag"></corpChooseTag>
 						<template v-if="!isShowTag">
-							<a-tag color="#1890FF" v-for="item in tagData">
+							<a-tag color="#01b065" v-for="item in tagData">
 								{{item.tname}}
 							</a-tag>
 							<span v-if="tagData.length == 0">暂无</span>
 						</template>
 					</template>
 					<template v-if="detailVisible">
-						<a-tag color="#1890FF" v-for="item in tagData">
+						<a-tag color="#01b065" v-for="item in tagData">
 							{{item.tname}}
 						</a-tag>
 						<span v-if="tagData.length == 0">暂无</span>
@@ -2102,7 +2102,7 @@
 	}
 
 	.activeBtn {
-		color: #1890FF;
+		color: #01b065;
 		background: #FFF;
 	}
 

@@ -430,7 +430,7 @@
 								             :wrapper-col="{ span: 24}">
 									<template>
 										<span
-												style="padding-left: 5px; border-left: 5px solid #1890FF;font-weight: 700;">待办项目{{index + 1}}</span>
+												style="padding-left: 5px; border-left: 5px solid #01b065;font-weight: 700;">待办项目{{index + 1}}</span>
 									</template>
 									<a-icon v-if="!((content.length == 1 && content[0].title == '请选择项目名称') && index == 0)"
 									        @click="delProjectIndex(index)"
@@ -2446,7 +2446,7 @@
 		width: 0;
 		height: 0;
 		border: 5px solid;
-		border-color: transparent #1890FF transparent transparent;
+		border-color: transparent #01b065 transparent transparent;
 	}
 
 	.arrow-right {
@@ -2455,21 +2455,21 @@
 		width: 0;
 		height: 0;
 		border: 5px solid;
-		border-color: transparent transparent transparent #1890FF;
+		border-color: transparent transparent transparent #01b065;
 	}
 
 	.line {
 		display: inline-block;
 		height: 0;
 		width: calc(100% - 10px);
-		border-top: 2px solid #1890FF;
+		border-top: 2px solid #01b065;
 		vertical-align: middle;
 	}
 
 	.line-right {
 		height: 20px;
 		width: 0;
-		border-right: 2px solid #1890FF;
+		border-right: 2px solid #01b065;
 		margin-right: 4.17%;
 		float: right;
 	}
@@ -2477,7 +2477,7 @@
 	.line-left {
 		height: 20px;
 		width: 0;
-		border-right: 2px solid #1890FF;
+		border-right: 2px solid #01b065;
 		margin-left: 4.17%;
 		float: left;
 	}
@@ -2492,7 +2492,7 @@
 		width: 0;
 		height: 0;
 		border: 5px solid;
-		border-color: transparent transparent transparent #1890FF;
+		border-color: transparent transparent transparent #01b065;
 	}
 
 	.arrow-bottom-right {
@@ -2517,8 +2517,8 @@
 	}
 
 	.btn-tag {
-		border: 1px solid #1890FF;
-		color: #1890FF;
+		border: 1px solid #01b065;
+		color: #01b065;
 		width: 100%;
 		overflow: hidden;
 		text-overflow: ellipsis;

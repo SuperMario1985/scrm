@@ -232,7 +232,7 @@
 						</span>
 						<span slot="is_form" slot-scope="text, record, index">
 							<span v-if="!record.is_form">未填写</span>
-							<span v-else>已填写（<span style="cursor: pointer; color: #1890FF;"
+							<span v-else>已填写（<span style="cursor: pointer; color: #01b065;"
 							                       @click="lookForm(index)">查看</span>）</span>
 						</span>
 					</a-table>
@@ -392,7 +392,7 @@
 				<a-progress class="download-progress" stroke-linecap="square" :percent="progressNum" type="circle"
 				            :width="progressWidth"/>
 				<p style="margin: 20px auto;" v-if="progressNum == 100">已导出成功，请点击<span
-						style="color: #1890FF;cursor: pointer;" @click="progressDownload">下载</span></p>
+						style="color: #01b065;cursor: pointer;" @click="progressDownload">下载</span></p>
 			</div>
 		</a-modal>
 	</div>
@@ -1322,7 +1322,7 @@
 	}
 
 	/deep/ .ant-collapse-arrow svg {
-		color: #1890FF;
+		color: #01b065;
 		width: 20px;
 		height: 20px;
 		/*display: none !important;*/
@@ -1402,7 +1402,7 @@
 	.sign {
 		margin-top: 5px;
 		margin-bottom: 0px;
-		color: #1890FF;
+		color: #01b065;
 		cursor: pointer;
 	}
 
@@ -1432,7 +1432,7 @@
 	}
 
 	.activeBtn {
-		color: #1890FF;
+		color: #01b065;
 		background: #FFF;
 	}
 </style>

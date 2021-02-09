@@ -2,7 +2,7 @@
 	<div class="group-tree1" style="position: absolute; width: 100%; height: 100%; overflow: auto;">
 		<div class="team-add" style="">
 			<span class="team-add-title" style="position:absolute;" :style="{'left': getClientWidth + 'px'}">分组管理</span>
-			<span style="color: #1890FF;margin-left: 5px; cursor: pointer;position:absolute;margin-right: 5px;"
+			<span style="color: #01b065;margin-left: 5px; cursor: pointer;position:absolute;margin-right: 5px;"
 			      :style="{'right':'-'+ getClientWidth + 'px'}"
 			      @click="addGroupModal('')" v-has="'content-add'"><a-icon class="team-add-icon" type="plus"
 			                                                               @click="addGroupModal('')"></a-icon>添加分组</span>
@@ -445,7 +445,7 @@
 	}
 
 	.team-add-icon {
-		color: #1E90FF;
+		color: #01b065;
 		margin-left: 10px;
 		cursor: pointer;
 		display: inline-block;
@@ -466,7 +466,7 @@
 	}
 
 	.active {
-		color: #1890FF;
+		color: #01b065;
 	}
 
 	.operation {
@@ -480,7 +480,7 @@
 	}
 
 	.operation:hover {
-		color: #1890FF;
+		color: #01b065;
 	}
 
 	/deep/ .ant-tree-node-content-wrapper {
@@ -501,7 +501,7 @@
 	}
 
 	.more-operation:hover {
-		color: #1890FF;
+		color: #01b065;
 	}
 
 	/deep/ .ant-tree li .ant-tree-node-content-wrapper:hover {

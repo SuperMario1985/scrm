@@ -1345,13 +1345,13 @@
 	}
 
 	.content-msg a:link {
-		color: #1890FF;
+		color: #01b065;
 		text-decoration: none;
 	}
 
 	//未访问：蓝色、无下划线
 	.content-msg a:visited {
-		color: #1890FF;
+		color: #01b065;
 		text-decoration: none;
 	}
 
@@ -1584,7 +1584,7 @@
 		border-radius: 50%;
 		box-sizing: border-box;
 		position: relative;
-		border: 2px solid #1890FF;
+		border: 2px solid #01b065;
 	}
 
 	.mt {
@@ -1656,7 +1656,7 @@
 		display: inline-block;
 		cursor: pointer;
 		margin-left: 10px;
-		color: #1890FF;
+		color: #01b065;
 	}
 
 	/deep/ .ant-form-item-control {
@@ -1731,7 +1731,7 @@
 	}
 
 	/deep/ .ant-tag-checkable-checked {
-		background-color: #1890FF;
+		background-color: #01b065;
 	}
 
 	.audio {
@@ -1748,7 +1748,7 @@
 		border-radius: 50%;
 		box-sizing: border-box;
 		position: relative;
-		border: 2px solid #1890FF;
+		border: 2px solid #01b065;
 	}
 
 	.wifi-symbol {
@@ -1763,7 +1763,7 @@
 	}
 
 	.wifi-circle {
-		border: 2px solid #1890FF;
+		border: 2px solid #01b065;
 		border-radius: 50%;
 		position: absolute;
 	}
@@ -1771,7 +1771,7 @@
 	.first {
 		width: 5px;
 		height: 5px;
-		background: #1890FF;
+		background: #01b065;
 		top: 25px;
 		left: 25px;
 	}

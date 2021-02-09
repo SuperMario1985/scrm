@@ -133,7 +133,7 @@
 										</div>
 												</div>
 											</template>
-										<span style="color: #1890FF;cursor: pointer;">预览</span>
+										<span style="color: #01b065;cursor: pointer;">预览</span>
 										</a-popover>
 									</span>
 									<span slot="share_setting" slot-scope="text, record">

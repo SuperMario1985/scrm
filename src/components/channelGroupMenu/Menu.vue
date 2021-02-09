@@ -35,7 +35,7 @@
         >
         <span
           style="
-            color: #1890ff;
+            color: #01b065;
             margin-left: 5px;
             cursor: pointer;
             position: absolute;
@@ -612,7 +612,7 @@ export default {
 }
 
 .team-add-icon {
-  color: #1e90ff;
+  color: #01b065;
   margin-left: 10px;
   cursor: pointer;
   display: inline-block;
