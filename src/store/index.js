@@ -373,6 +373,9 @@ export default new Vuex.Store({
 				menuType       : 0,
 			},
 		],//子页面对应权限，为了子账户在地址栏输入地址时，跳转对应有权限页面
+		activeMenu              :1, //1 首页 2，企业微信 3.公众号
+		isShowWX                :false, //是否显示微信
+		isShowCgh               :false, //是否显示公众号
 	},
 	mutations: {
 		//修改环境
@@ -503,6 +506,18 @@ export default new Vuex.Store({
 		//修改套餐信息
 		changePackageDetail (state, pd) {
 			state.packageDetail = pd;
+		},
+		// 调用方法
+		changeActiveMenu (state, type) {
+			state.activeMenu = type
+		},
+		// 修改是否显示微信
+		changeActiveWX (state, type) {
+			state.isShowWX = type
+		},
+		// 修改是否显示公众号
+		changeActiveCro (state, type) {
+			state.isShowCgh = type
 		},
 	},
 	actions  : {
@@ -816,6 +831,15 @@ export default new Vuex.Store({
 		},
 		changePackageDetail (context, pd) {
 			context.commit("changePackageDetail", pd);
+		},
+		changeMenu(context, type) {
+			context.commit("changeActiveMenu", type);
+		},
+		chanegWx (context, type) {
+			context.commit("changeActiveWX", type);
+		},
+		chanegCro (context, type) {
+			context.commit("changeActiveCro", type);
 		},
 	}
 })

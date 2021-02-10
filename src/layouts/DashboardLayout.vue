@@ -19,7 +19,7 @@
 						@click="onItemClick"
 				>
 				<!-- :openKeys="openKeys" -->
-					<template v-if="!collapsed && showMenuLabel">
+					<!-- <template v-if="!collapsed && showMenuLabel">
 						<a-menu-item class="tabMenu" @click="enterEnterpriseWechat" :class="type==1?'tabMenuBorder':''"
 						             key="1" v-if="showWorkLabel">
 							<span>企业微信</span>
@@ -28,7 +28,7 @@
 						             key="0" v-if="showWxLabel">
 							<span>公众号</span>
 						</a-menu-item>
-					</template>
+					</template> -->
 
 					<template v-for="menuInfo in menuData">
 						<a-menu-item v-if="menuInfo.children.length == 0" :key="menuInfo.key">
@@ -403,11 +403,15 @@
 						if (wxArr.length > 1 || localStorage.getItem('showAccount') == 1) {
 							wxAllPub = false
 							this.showWxLabel = true
+							console.log(1,this.showWxLabel);
+							this.$store.dispatch('chanegCro',true)
 						}
 
 						if (corpArr.length > 1) {
 							workAllPub = false
 							this.showWorkLabel = true
+							console.log(2,this.showWorkLabel);
+							this.$store.dispatch('chanegWx',true)
 						}
 
 						let hasPermission = false
@@ -417,9 +421,13 @@
 									if (menuKey == 0) {
 										wxAllPub = false
 										this.showWxLabel = true
+										console.log(3,this.showWxLabel);
+										this.$store.dispatch('chanegCro',true)
 									} else if (menuKey == 1) {
 										workAllPub = false
 										this.showWorkLabel = true
+										console.log(4,this.showWorkLabel);
+										this.$store.dispatch('chanegWx',true)
 									}
 								}
 
@@ -564,6 +572,14 @@
 					this.oldCorp = oldValue
 					this.hasPermission = false
 					this.init()
+				}
+			},
+			'$store.state.activeMenu' (newValue, oldValue) {
+				console.log(newValue);
+				if (newValue === 2) {
+					this.enterEnterpriseWechat()
+				}else if (newValue === 3) {
+					this.enterAccountMarketing()
 				}
 			},
 		},
