@@ -131,7 +131,7 @@
 								<a-button type="primary" style="margin-right: 5px;" @click="find">查询</a-button>
 								<a-button @click="clear">重置</a-button>
 								<a-col style="float:right;margin-right: 20px;">
-									<a-button class="btn-primary" icon="plus" @click="addMessageText()" type="primary"
+									<a-button class="btn-primary"@click="addMessageText()" type="primary"
 									          v-has="'group-sending-add'">
 										新建消息
 									</a-button>

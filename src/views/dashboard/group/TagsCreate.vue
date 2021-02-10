@@ -50,7 +50,7 @@
 								<a-button style="margin-left: 10px;" @click="clearTitle">重置</a-button>
 							</a-col>
 							<a-col style="float: right;">
-								<a-button icon="plus" @click="create" type="primary" v-has="'groupTags-add'">
+								<a-button @click="create" type="primary" v-has="'groupTags-add'">
 									新建拉群
 								</a-button>
 								<a-button icon="reload" @click="refresh" style="margin-left: 10px;width: 110px;"

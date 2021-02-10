@@ -144,7 +144,7 @@
 							<a-menu-item key="0">当前页导出</a-menu-item>
 							<a-menu-item key="1">全部导出</a-menu-item>
 						</a-menu>
-						<a-button icon="download" style="float: right;margin-top: 9px;" v-has="'redReconciliation-export'">导出
+						<a-button  style="float: right;margin-top: 9px;" v-has="'redReconciliation-export'">导出
 							<a-icon type="down"/>
 						</a-button>
 					</a-dropdown>

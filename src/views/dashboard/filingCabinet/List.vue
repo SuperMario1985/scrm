@@ -186,11 +186,11 @@
 										</a-button>
 										<a-button @click='addSketchList' style="float: right;margin-right: 10px;"
 										          type="primary"
-										          icon="plus" v-has="'material-add'">快速创建
+										         v-has="'material-add'">快速创建
 										</a-button>
 										<a-button @click='addFilingCabinetSketch'
 										          style="float: right;margin-right: 10px;" type="primary"
-										          icon="plus" v-has="'material-add'">添加图文
+										         v-has="'material-add'">添加图文
 										</a-button>
 										<!--										<a-popover v-show="sketchType == 0" placement="top">-->
 										<!--											<template slot="content">-->

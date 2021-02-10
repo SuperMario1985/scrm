@@ -571,7 +571,7 @@
 				</a-checkbox-group>
 			</a-spin>
 			<a-empty v-show="tagsList.length == 0"/>
-			<a-button icon="plus" @click="showAddTagModal()" type="primary" v-has="'client-tag-add'">
+			<a-button @click="showAddTagModal()" type="primary" v-has="'client-tag-add'">
 				新建标签
 			</a-button>
 		</a-modal>

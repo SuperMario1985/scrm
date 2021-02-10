@@ -40,13 +40,13 @@
 					{{word.title}}
 				</a-checkable-tag>
 				<!--				<span v-if="item.data.length == 0" style="margin-right:8px;">暂无</span>-->
-				<a-button icon="plus" style="font-size:13px; height: 28px; padding: 3px 15px;"
+				<a-button style="font-size:13px; height: 28px; padding: 3px 15px;"
 				          @click="createWord(item.id)" v-has="'sensitive-words-add'">
 					新建敏感词
 				</a-button>
 			</a-form-item>
 		</template>
-		<a-button icon="plus" style="font-size:13px; height: 28px;padding: 3px 15px;margin-right: 10px;margin-left: 16.7%;" @click="addWordGroup" v-if="groupList.length > 0" v-has="'sensitive-words-group-add'">
+		<a-button style="font-size:13px; height: 28px;padding: 3px 15px;margin-right: 10px;margin-left: 16.7%;" @click="addWordGroup" v-if="groupList.length > 0" v-has="'sensitive-words-group-add'">
 			新建敏感词分组
 		</a-button>
 		<div style="font-size:13px; height: 26px; color: #01b065;text-align: center;cursor: pointer;"

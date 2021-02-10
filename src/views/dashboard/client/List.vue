@@ -33,9 +33,9 @@
 						</div>
 					</a-form-item>
 					<div style="margin-top: 15px;text-align: center;">
-						<a-button icon="plus" v-show="is_import == 0" type="primary" @click="postPhone()">新增客户资源
+						<a-button v-show="is_import == 0" type="primary" @click="postPhone()">新增客户资源
 						</a-button>
-						<a-button icon="plus" v-show="is_import == 1" type="primary" @click="postFile()">新增客户资源
+						<a-button v-show="is_import == 1" type="primary" @click="postFile()">新增客户资源
 						</a-button>
 					</div>
 				</a-form>

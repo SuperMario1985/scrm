@@ -83,7 +83,7 @@
 									<a-button @click="clear">重置</a-button>
 								</a-col>
 								<a-col style="float:right;">
-									<a-button class="btn-primary" icon="plus" @click="addWelcomeText" type="primary"
+									<a-button class="btn-primary"@click="addWelcomeText" type="primary"
 									          v-has="'redFission-add'">
 										新建活动
 									</a-button>

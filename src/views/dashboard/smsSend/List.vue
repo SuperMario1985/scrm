@@ -42,7 +42,7 @@
 						<a-button type="primary" style="margin-right:15px;" @click="find">查询</a-button>
 						<a-button style="margin-right:15px;" @click="clear">重置</a-button>
 					</a-col>
-					<a-button type="primary" style="float:right;margin-right:15px;" @click="addPush" icon="plus" v-has="'sending-add'">
+					<a-button type="primary" style="float:right;margin-right:15px;" @click="addPush"v-has="'sending-add'">
 						新建短信发送
 					</a-button>
 				</a-row>

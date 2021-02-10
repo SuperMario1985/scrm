@@ -104,7 +104,7 @@
 							<div style="height: 40px; line-height: 40px;margin: 20px 0 10px 0;"
 							     v-has="'todoManagementSetting-all'">
 								<!--								<span style="color: #FF562D;margin-left: 20px;">鼠标移动面板更改状态排序</span>-->
-								<a-button v-show="stateAll==true" type="primary" icon="plus" @click="addProject"
+								<a-button v-show="stateAll==true" type="primary"@click="addProject"
 								          style="margin-right: 20px;vertical-align: middle;float: right;">新增待办项目
 								</a-button>
 							</div>
@@ -338,7 +338,7 @@
 						<div style="background: #FFF;padding: 20px 0;">
 							<!--							<div style="height: 40px; line-height: 40px;margin: 20px 0 10px 0;">-->
 							<!--								&lt;!&ndash;								<span style="color: #FF562D;margin-left: 20px;">鼠标移动面板更改状态排序</span>&ndash;&gt;-->
-							<!--								<a-button v-show="stateAll==true" type="primary" icon="plus" @click="addCustom"-->
+							<!--								<a-button v-show="stateAll==true" type="primary"@click="addCustom"-->
 							<!--								          style="margin-right: 20px;vertical-align: middle;float: right;">-->
 							<!--									添加任务-->
 							<!--								</a-button>-->

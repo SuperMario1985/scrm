@@ -179,7 +179,7 @@
 												<div class="title-contain">
 													<p>详细数据</p>
 													<a-button @click="exportFansIncrease1" type="primary"
-													          icon="download">
+													          >
 														导出数据
 													</a-button>
 												</div>
@@ -274,7 +274,7 @@
 												<div class="title-contain">
 													<p>详细数据</p>
 													<a-button @click="exportFansIncrease2" type="primary"
-													          icon="download">
+													          >
 														导出数据
 													</a-button>
 												</div>
@@ -369,7 +369,7 @@
 												<div class="title-contain">
 													<p>详细数据</p>
 													<a-button @click="exportFansIncrease3" type="primary"
-													          icon="download">
+													          >
 														导出数据
 													</a-button>
 												</div>
@@ -464,7 +464,7 @@
 												<div class="title-contain">
 													<p>详细数据</p>
 													<a-button @click="exportFansIncrease4" type="primary"
-													          icon="download">
+													          >
 														导出数据
 													</a-button>
 												</div>

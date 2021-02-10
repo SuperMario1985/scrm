@@ -30,7 +30,7 @@
 						<a-button type="primary" style="margin-right:15px;" @click="find">查询</a-button>
 						<a-button style="margin-right:15px;" @click="clear">重置</a-button>
 					</a-col>
-					<a-button icon="plus" type="primary" style="float:right;margin-right:15px;" @click="addPush"
+					<a-button type="primary" style="float:right;margin-right:15px;" @click="addPush"
 					          v-has="'sms-template-add'">新建模版申请
 					</a-button>
 				</a-row>

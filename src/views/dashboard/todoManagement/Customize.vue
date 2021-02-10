@@ -60,7 +60,7 @@
 							</a-row>
 							<div style="height: 40px; line-height: 40px;margin: 20px 0 10px 0;">
 								<span style="color: #FF562D;margin-left: 20px;">鼠标移动面板更改阶段排序，但第一个和最后一个的阶段顺序不可移动，亦不能删除。</span>
-								<a-button type="primary" icon="plus" @click="addFollow" v-has="'todoManagementCustomizeNew-add'"
+								<a-button type="primary"@click="addFollow" v-has="'todoManagementCustomizeNew-add'"
 								          style="margin-right: 20px;vertical-align: middle;float: right;">新增处理阶段
 								</a-button>
 							</div>
@@ -201,7 +201,7 @@
 							<div style="height: 40px; line-height: 40px;margin: 20px 0 10px 0;">
 								<span style="color: #FF562D;margin-left: 20px;">鼠标移动面板更改优先级排序</span>
 								<div style="display:inline-block;float:right;">
-									<a-button type="primary" icon="plus" @click="addPriority" v-has="'todoLevel-add'"
+									<a-button type="primary"@click="addPriority" v-has="'todoLevel-add'"
 									          style="margin-right: 20px;vertical-align: middle;">新增优先级
 									</a-button>
 								</div>

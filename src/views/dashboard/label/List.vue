@@ -38,7 +38,7 @@
 								          v-has="'work-tag-remove'">
 									移动标签
 								</a-button>
-								<a-button class="btn-primary" icon="plus" @click="showModal('add')" type="primary"
+								<a-button class="btn-primary"@click="showModal('add')" type="primary"
 								          v-has="'work-tag-add'">
 									新建标签
 								</a-button>

@@ -55,11 +55,11 @@
 								          v-if="this.$store.state.authorizer_type == 'unauthorized' || !verify_service" v-has="'tag-wx-sync'">
 									同步微信标签
 								</a-button>
-								<a-button class="btn-primary" icon="plus" @click="showModal('add')" type="primary"
+								<a-button class="btn-primary"@click="showModal('add')" type="primary"
 								          v-if="this.$store.state.authorizer_type != 'unauthorized' && verify_service" v-has="'tag-add'">
 									新建标签
 								</a-button>
-								<a-button class="btn-primary" icon="plus" @click="showConfirmWx" type="primary"
+								<a-button class="btn-primary"@click="showConfirmWx" type="primary"
 								          v-if="this.$store.state.authorizer_type == 'unauthorized' || !verify_service" v-has="'tag-add'">
 									新建标签
 								</a-button>

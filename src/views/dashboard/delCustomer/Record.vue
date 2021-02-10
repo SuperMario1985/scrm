@@ -41,7 +41,7 @@
 							<a-menu-item key="0">当前页导出</a-menu-item>
 							<a-menu-item key="1">全部导出</a-menu-item>
 						</a-menu>
-						<a-button type="primary" icon="download" style="float: right;">导出
+						<a-button type="primary"  style="float: right;">导出
 							<a-icon style="color: #FFFFFF;" type="down"/>
 						</a-button>
 					</a-dropdown>

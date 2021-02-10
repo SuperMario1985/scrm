@@ -96,7 +96,7 @@
 										</a-checkbox-group>
 									</a-spin>
 									<a-empty v-show="tagsList.length == 0"/>
-									<a-button icon="plus" @click="showAddTagModal()" type="primary"
+									<a-button @click="showAddTagModal()" type="primary"
 									          v-has="'work-tag-add'">
 										新建标签
 									</a-button>

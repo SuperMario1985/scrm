@@ -179,7 +179,7 @@
 												</a-checkable-tag>
 											</template>
 											</span>
-											<a-button icon="plus" style="font-size:13px; height: 26px"
+											<a-button style="font-size:13px; height: 26px"
 											          @click="createTag"
 											          :disabled="typeof urlId=='undefined'?false:true"
 											          v-has="'tag-add'">

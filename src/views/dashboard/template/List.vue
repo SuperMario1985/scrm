@@ -79,16 +79,16 @@
 								<a-button @click="clear">重置</a-button>
 							</a-col>
 							<a-col style="float:right;">
-								<a-button type="primary" icon="plus" style="width: 150px;font-size:14px;" @click="add"
+								<a-button type="primary"style="width: 150px;font-size:14px;" @click="add"
 								          v-if="$store.state.authorizer_type != 'unauthorized' && verify_service"
 								          v-has="'template-add'">新建模板消息
 								</a-button>
-								<a-button type="primary" icon="plus" style="width: 150px;font-size:14px;"
+								<a-button type="primary"style="width: 150px;font-size:14px;"
 								          @click="showConfirmWx" v-if="$store.state.authorizer_type == 'unauthorized'"
 								          v-has="'template-add'">
 									新建模板消息
 								</a-button>
-								<a-button type="primary" icon="plus" style="width: 150px;font-size:14px;"
+								<a-button type="primary"style="width: 150px;font-size:14px;"
 								          @click="showVerify"
 								          v-if="$store.state.authorizer_type != 'unauthorized' && !verify_service"
 								          v-has="'template-add'">

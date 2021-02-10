@@ -48,7 +48,7 @@
 								<a-button class="btn-primary" icon="reload" @click="syncFollowUser">
 									同步配置了外部联系权限的联系人
 								</a-button>
-								<a-button class="btn-primary" icon="plus" @click="showModal('add')" type="primary"
+								<a-button class="btn-primary"@click="showModal('add')" type="primary"
 								          v-has="'channel-add'">
 									新建
 								</a-button>
@@ -803,7 +803,7 @@
 						<div style="float: right;margin-right: 240px">
 							<a-button type="primary"
 							          style="height: 26px;width: 94px;padding: 0px 5px;margin-right: 10px; font-size: 12px;"
-							          icon="plus" v-show="index == specialDateList.length - 1 && batchEditType"
+							         v-show="index == specialDateList.length - 1 && batchEditType"
 							          @click="addSpecialDate(index)">
 								添加时期
 							</a-button>
