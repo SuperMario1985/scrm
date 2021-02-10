@@ -1,19 +1,16 @@
 <template>
 	<a-layout-header class="header">
 		<img alt="Vue logo" src="../assets/logo.png" height="32" style="margin-bottom: 10px;">
-		<span style="margin-left:15px;padding-left: 12px;font-size: 14px;color: #C0C0C0;font-weight:700;border-left: 1px solid #696969;">用{{$store.state.shortName}} 连接客户</span>
-		<div v-if="$store.state.packageDetail.name"
-		     style="margin-left:15px;border: 1px solid #01b065; background-color: #01b065;border-radius: 14px;padding: 0px 10px;height: 22px;line-height: 18px;display: inline-block;">
-			<span style="font-size: 12px;color: #FFFFFF;">{{$store.state.packageDetail.name}}</span>
-			<span style="margin-left:5px;font-size: 12px;color: #FFFFFF;">有效期：{{$store.state.packageDetail.time}}</span>
-		</div>
+		<span @click="activeMenu(1)" :class="isActive === 1 ? 'active-home' : ''" style="margin-left:70px;padding: 3px;font-size: 14px;color: #333333;font-weight:700;cursor: pointer;">首页</span>
+		<span v-if="showWorkLabel" @click="activeMenu(2)" :class="isActive === 2 ? 'active-home' : ''" style="margin-left:15px;padding: 3px;font-size: 14px;color: #333333;font-weight:700;cursor: pointer;">企业微信</span>
+		<span v-if="showWxLabel" @click="activeMenu(3)" :class="isActive === 3 ? 'active-home' : ''" style="margin-left:15px;padding: 3px;font-size: 14px;color: #333333;font-weight:700;cursor: pointer;">公众号</span>
 		<a-menu
 				theme="light"
 				mode="horizontal"
 				:style="{ lineHeight: '64px', float: 'right' }"
 		>
 			<a-sub-menu v-show="wxType == 0 && $store.state.wxArr.length > 1" key="wx">
-				<span slot="title" class="submenu-title-wrapper" style="min-width: 128px;">
+				<span slot="title" class="submenu-title-wrapper" style="min-width: 128px;padding: 5px;border-radius: 2px;border: 1px solid #EEEEEE;">
 					{{$store.state.wxNickName}}
 					<a-icon type="down" style="margin-left: 6px"/>
 				</span>
@@ -29,7 +26,7 @@
 			</a-sub-menu>
 
 			<a-sub-menu v-show="wxType == 1 && $store.state.corpArr.length > 1" key="corp">
-				<span slot="title" class="submenu-title-wrapper" style="min-width: 128px;">
+				<span slot="title" class="submenu-title-wrapper" style="min-width: 128px;padding: 5px;border-radius: 2px;border: 1px solid #EEEEEE;">
 					{{$store.state.corpName}}
 					<a-icon type="down" style="margin-left: 6px"/>
 				</span>
@@ -45,7 +42,7 @@
 			</a-sub-menu>
 
 			<a-sub-menu key="setting">
-					<span slot="title" class="submenu-title-wrapper" style="min-width: 128px;">
+					<span slot="title" class="submenu-title-wrapper" style="min-width: 128px;padding: 5px;border-radius: 2px;border: 1px solid #EEEEEE;">
 						<a-icon type="user"/>ID：{{showUid(uid)}}
 						<a-icon type="down" style="margin-left: 6px"/>
 					</span>
@@ -55,7 +52,14 @@
 				<a-menu-item key="setting:5" @click="loginOut">退出</a-menu-item>
 			</a-sub-menu>
 		</a-menu>
-
+		<div v-if="$store.state.packageDetail.name"
+		     style="margin-left:15px;background: #F8F8F8;border-radius: 2px;padding: 5px 12px;height: 28px;line-height: 18px;display: inline-block;float: right;margin-top: 18px;">
+			<img style="width: 12px;margin-right: 5px;margin-top: -3px;" src="../assets/base/vipLogo.png" alt="">
+			<span style="font-size: 12px;">{{$store.state.packageDetail.name}}</span>
+			<span style="font-size: 12px;">
+				<span style="margin:0px 8px 0 9px;border-left: 1px solid;height: 10px;display: inline-block;"></span>
+				 有效期：{{$store.state.packageDetail.time}}</span>
+		</div>
 		<a-modal
 				title="切换账户"
 				:visible="visible"
@@ -117,6 +121,9 @@
 				phone           : changeBackground,//手机号
 				password        : localStorage.getItem('password'),//密码
 				commonUrl       : this.$store.state.commonUrl,//公共的链接
+				isActive        :0,//1 首页 2，企业微信 3.公众号
+				showWxLabel     : false, //是否显示公众号菜单
+				showWorkLabel   : false, //是否显示企业微信菜单
 			}
 		},
 		methods: {
@@ -253,6 +260,14 @@
 				this.global.clearLocalStorage()
 				this.$store.commit('clear');
 				this.$router.push("/login");
+			},
+			// 点击菜单切换
+			activeMenu (type) {
+				this.isActive = type
+				this.$store.dispatch('changeMenu',type)
+				if (type === 1) {
+					// 跳转到首页
+				}
 			}
 		},
 		watch  : {
@@ -261,7 +276,15 @@
 					console.log(newVal, 555)
 				},
 				deep: true
-			}
+			},
+			'$store.state.isShowWX' (newValue, oldValue) {
+				this.showWorkLabel = newValue
+				console.log('wx',newValue);
+			},
+			'$store.state.isShowCgh' (newValue, oldValue) {
+				this.showWxLabel = newValue
+				console.log('cro',newValue);
+			},
 		},
 		mounted () {
 			let that = this
@@ -273,6 +296,10 @@
 					}
 				}
 			})
+			this.isActive = this.$store.state.activeMenu;
+			this.showWxLabel  = this.$store.state.isShowCgh;
+			this.showWorkLabel  = this.$store.state.isShowWX; 
+				 
 		},
 	}
 
@@ -294,6 +321,7 @@
 	}
 	.header {
 		background: #fff !important;
+		padding: 0 30px 0 0 ;
 	}
 	/deep/ .ant-radio-button-wrapper {
 		width: 200px;
@@ -312,5 +340,9 @@
 		line-height: 30px;
 		right: 0;
 		top: -15px;
+	}
+	.active-home {
+		border-bottom: 2px solid;
+    color: #01B065 !important;
 	}
 </style>
