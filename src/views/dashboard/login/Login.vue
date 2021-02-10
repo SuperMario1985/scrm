@@ -1,6 +1,13 @@
 <template>
 	<div class="login">
-		<div class="login-header">
+		<div>
+			<img src="../../../assets/login_bg.png" alt="">
+		</div>
+		<div>
+			<p>云 美 来 </p>
+			<p>私 域 流 量 运 营 时 代 的 全 新 增 长 引 擎</p>
+		</div>
+		<!-- <div class="login-header">
 			<div class="login-header-left">
 				<a href="/home" class="login-header-left-img">
 					<img src="../../../assets/logo.png" alt/>
@@ -31,7 +38,7 @@
 					  <button @click="vuex">测试vuex</button>
 					  <button @click="vuex2">测试vuex2</button>
 					<button @click="login">登录</button>-->
-					<div class="alert" v-show="isShow">{{this.message}}</div>
+					<!-- <div class="alert" v-show="isShow">{{this.message}}</div>
 					<div class="two" :class="isActive ? 'border-blue' : 'border-grey'" @focusin="inDiv"
 					     @focusout="outDiv">
 						<span>手机号码</span>
@@ -67,9 +74,8 @@
 					<a-button block class="register-button" @click="register">免费注册</a-button>
 				</div>
 			</div>
-		</a-spin>
+		</a-spin> --> 
 		<!--		<div class="footer">Copyright © 安徽小猪科技有限公司 All Rights Reserved</div>-->
-	</div>
 </template>
 
 <script>
