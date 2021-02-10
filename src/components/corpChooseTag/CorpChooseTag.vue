@@ -33,13 +33,13 @@
 					</a-button>
 				</span>
 				<!--				<span v-if="item.data.length == 0" style="margin-right:8px;">暂无</span>-->
-				<a-button icon="plus" style="font-size:13px; height: 26px"
+				<a-button style="font-size:13px; height: 26px"
 				          @click="createTag(item.id)" v-has="'client-tag-add'" v-if="isNotAdd != 1">
 					新建标签
 				</a-button>
 			</a-form-item>
 		</template>
-		<a-button icon="plus" style="font-size:13px; height: 26px;margin-right: 10px;margin-left: 16.7%;"
+		<a-button style="font-size:13px; height: 26px;margin-right: 10px;margin-left: 16.7%;"
 		          @click="addTagGroup" v-has="'client-tag-group-add'" v-if="groupList.length > 0 && isNotAdd != 1">
 			新建标签组
 		</a-button>

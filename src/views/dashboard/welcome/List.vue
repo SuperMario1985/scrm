@@ -41,7 +41,7 @@
 								</a-select>
 							</a-col>
 							<a-col style="float:right;">
-								<a-button class="btn-primary" icon="plus" @click="addWelcomeText()" type="primary"
+								<a-button class="btn-primary"@click="addWelcomeText()" type="primary"
 								          v-has="'welcome-add'">
 									新建欢迎语
 								</a-button>

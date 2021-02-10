@@ -52,7 +52,7 @@
 						</div>
 						<div class="content-hd">
 							<a-col style="float: right;">
-								<a-button type="primary" icon="plus" style="width: 150px;font-size:14px;"
+								<a-button type="primary"style="width: 150px;font-size:14px;"
 								          @click="replyAdd" v-has="'message-add'">
 									创建推送计划
 								</a-button>

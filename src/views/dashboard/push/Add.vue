@@ -241,7 +241,7 @@
 												</a-tooltip>
 											</div>
 											<!--										<div style="margin-top: 15px;">-->
-											<!--											<a-button @click="addList" type="primary" icon="plus" style="width: 80px;">-->
+											<!--											<a-button @click="addList" type="primary"style="width: 80px;">-->
 											<!--												增加-->
 											<!--											</a-button>-->
 											<!--											<a-button v-show="lists.length > 1" @click="removeList" icon="minus"-->

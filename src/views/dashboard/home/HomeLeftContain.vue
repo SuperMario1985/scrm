@@ -296,7 +296,7 @@
 												<div class="title-contain">
 													<p>详细数据</p>
 													<a-button @click="exportFansIncrease" type="primary"
-													          icon="download">
+													          >
 														导出数据
 													</a-button>
 												</div>
@@ -402,7 +402,7 @@
 												<div class="title-contain">
 													<p class="title">详细数据</p>
 													<a-button type="primary" @click="exportFansAttribute"
-													          icon="download">
+													          >
 														导出数据
 													</a-button>
 												</div>
@@ -520,7 +520,7 @@
 										<div class="fans-data-detail">
 											<div class="title-contain">
 												<p>详细数据</p>
-												<a-button type="primary" @click="exportFansActive" icon="download">导出数据
+												<a-button type="primary" @click="exportFansActive" >导出数据
 												</a-button>
 											</div>
 											<div class="content-bd fans-active-table">
@@ -618,7 +618,7 @@
 														显示关注数
 													</button>
 												</p>
-												<a-button type="primary" @click="exportFansLoyalty" icon="download">导出数据
+												<a-button type="primary" @click="exportFansLoyalty" >导出数据
 												</a-button>
 											</div>
 
@@ -696,7 +696,7 @@
 										<div class="fans-data-detail" v-show="interactiveType">
 											<div class="title-contain">
 												<p>详细数据</p>
-												<a-button type="primary" @click="exportInteractive" icon="download">导出数据
+												<a-button type="primary" @click="exportInteractive" >导出数据
 												</a-button>
 											</div>
 											<div class="content-bd">

@@ -54,7 +54,7 @@
 								<a-select-option value="2">禁用</a-select-option>
 							</a-select>
 							<a-col style="float:right;">
-								<a-button style="margin: 0 10px;" icon="plus" @click="addFixedAmount(1)" type="primary"
+								<a-button style="margin: 0 10px;"@click="addFixedAmount(1)" type="primary"
 								          v-has="'redPack-add-money'">
 									添加固定金额
 								</a-button>

@@ -166,7 +166,7 @@
 										<a-button @click="clear">重置</a-button>
 									</div>
 									<div class="content-hd-right">
-										<a-button class="btn-primary" icon="plus" @click="showModal('add')"
+										<a-button class="btn-primary"@click="showModal('add')"
 										          type="primary" v-has="'sensitive-words-add'">
 											新建敏感词
 										</a-button>

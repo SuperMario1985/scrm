@@ -17,7 +17,7 @@
 							<a-button @click="clear">重置</a-button>
 						</a-col>
 						<a-col style="float:right;" v-has="'redRuleList-add'">
-							<a-button class="btn-primary" icon="plus" @click="addRule" type="primary">
+							<a-button class="btn-primary"@click="addRule" type="primary">
 								新增红包规则
 							</a-button>
 						</a-col>

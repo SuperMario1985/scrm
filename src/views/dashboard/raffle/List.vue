@@ -83,7 +83,7 @@
 									<a-button @click="clear">重置</a-button>
 								</a-col>
 								<a-col style="float:right;" v-has="'raffle-add'">
-									<a-button class="btn-primary" icon="plus" @click="addWelcomeText" type="primary">
+									<a-button class="btn-primary"@click="addWelcomeText" type="primary">
 										新建活动
 									</a-button>
 								</a-col>

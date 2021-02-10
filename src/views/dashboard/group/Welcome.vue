@@ -21,7 +21,7 @@
 						</div>
 						<div class="content-hd">
 							<a-col style="float:right;">
-								<a-button class="btn-primary" icon="plus" @click="addWelcomeText()" type="primary"
+								<a-button class="btn-primary"@click="addWelcomeText()" type="primary"
 								          v-has="'groupWelcome-add'">
 									新建群欢迎语
 								</a-button>

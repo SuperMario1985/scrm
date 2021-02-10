@@ -365,7 +365,7 @@
 			</a-row>
 			<div style="height: 40px; line-height: 40px;margin: 20px 0 10px 0;">
 				<span style="color: #FF562D;margin-left: 20px;">鼠标移动面板更改状态排序</span>
-				<a-button type="primary" icon="plus" @click="addFollow"
+				<a-button type="primary"@click="addFollow"
 				          style="margin-right: 20px;vertical-align: middle;float: right;">新增
 				</a-button>
 			</div>

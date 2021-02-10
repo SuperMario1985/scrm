@@ -117,7 +117,7 @@
 										<a-menu-item key="1">全部导出</a-menu-item>
 									</a-menu>
 
-										<a-button icon="download" style="margin: 14px 0px;">导出
+										<a-button  style="margin: 14px 0px;">导出
 											<a-icon type="down"/>
 										</a-button>
 								</a-dropdown>

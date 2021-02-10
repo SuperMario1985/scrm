@@ -255,7 +255,7 @@
 										打标签
 									</a-button>
 									<a-button class="btn-primary1" @click="leadOut" type="primary"
-									          icon="download" v-has="'client-export'">
+									           v-has="'client-export'">
 										导出客户
 									</a-button>
 									<a-button class="btn-primary1" @click="setOptions" type="primary"
@@ -333,7 +333,7 @@
 											</a-checkbox-group>
 										</a-spin>
 										<a-empty v-show="tagsList.length == 0"/>
-										<a-button icon="plus" @click="showAddTagModal()" type="primary"
+										<a-button @click="showAddTagModal()" type="primary"
 										          v-has="'client-tag-add'">
 											新建标签
 										</a-button>

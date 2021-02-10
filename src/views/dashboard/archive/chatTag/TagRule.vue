@@ -22,7 +22,7 @@
 			</a-button>
 			<a-button type="primary" style="margin: 0px 5px;" @click="find">查询</a-button>
 			<a-button @click="clear">重置</a-button>
-			<a-button @click="addTagRules" class="btn-primary" style="float: right;" icon="plus" type="primary" v-has="'chatTag-rule-add'">
+			<a-button @click="addTagRules" class="btn-primary" style="float: right;"type="primary" v-has="'chatTag-rule-add'">
 				添加标签规则
 			</a-button>
 		</a-col>

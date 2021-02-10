@@ -56,7 +56,7 @@
 								          v-has="'client-tag-remove'">
 									移动标签
 								</a-button>
-								<a-button class="btn-primary" icon="plus" @click="showModal('add')" type="primary"
+								<a-button class="btn-primary"@click="showModal('add')" type="primary"
 								          v-has="'client-tag-add'">
 									新建标签
 								</a-button>

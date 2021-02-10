@@ -37,7 +37,7 @@
 				</a-select>
 				<a-button type="primary" style="margin: 0px 5px;" @click="find">查询</a-button>
 				<a-button @click="clear">重置</a-button>
-				<a-button @click="setEmployee([])" class="btn-primary" style="float: right;" icon="plus" type="primary" v-has="'chatTag-employee-add'">
+				<a-button @click="setEmployee([])" class="btn-primary" style="float: right;"type="primary" v-has="'chatTag-employee-add'">
 					生效员工
 				</a-button>
 			</a-col>

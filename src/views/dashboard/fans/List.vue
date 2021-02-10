@@ -218,7 +218,7 @@
 										style="text-align: center;"
 										type="primary"
 										@click="start"
-										icon="download"
+										
 										:disabled="hasSelect"
 										:loading="loading1"
 										v-if="$store.state.authorizer_type != 'unauthorized' && verify_service"
@@ -231,7 +231,7 @@
 										style="text-align: center;"
 										type="primary"
 										@click="showConfirmWx"
-										icon="download"
+										
 										:disabled="hasSelect"
 										:loading="loading1"
 										v-if="$store.state.authorizer_type == 'unauthorized' || !verify_service"

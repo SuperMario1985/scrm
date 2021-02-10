@@ -73,7 +73,7 @@
 								<a-button @click="clear">重置</a-button>
 							</a-col>
 							<a-col style="float:right;" v-has="'redForNewList-add'">
-								<a-button class="btn-primary" icon="plus" @click="addRedActivity" type="primary">
+								<a-button class="btn-primary"@click="addRedActivity" type="primary">
 									新建红包拉新
 								</a-button>
 							</a-col>
