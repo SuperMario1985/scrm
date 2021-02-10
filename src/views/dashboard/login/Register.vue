@@ -1,6 +1,19 @@
 <template>
 	<div class="login">
-		<div class="login-header">
+		<img src="~@/assets/login_logo.png" alt="">
+		<div class="box">
+			<div class="item">
+				<p>还没有企业微信？</p>
+				<div>注册包含云美来SCRM的企业微信</div>
+				<a-button type="primary">注册企业微信</a-button>
+			</div>
+			<div class="item">
+				<p>已有企业微信？</p>
+				<div>极速安装云美来SCRM到企业微信</div>
+				<a-button type="primary">安装到企业微信</a-button>
+			</div>
+		</div>
+		<!-- <div class="login-header">
 			<div class="login-header-left">
 				<a href="/home" class="login-header-left-img">
 					<img src="../../../assets/logo.png" alt/>
@@ -47,7 +60,7 @@
 			</div>
 			<a-button type="primary" block class="login-button" @click="sureRegister" :loading="iconLoading">确认注册
 			</a-button>
-		</div>
+		</div> -->
 		<!--        <div class="footer">Copyright © 安徽小猪科技有限公司 All Rights Reserved</div>-->
 	</div>
 </template>
@@ -210,8 +223,43 @@
 	.login {
 		width: 100%;
 		height: 100%;
-		min-width: 1200px;
-		overflow-y: auto;
+		position: relative;
+		img{
+			width: 77px;
+			height: 28px;
+			position: absolute;
+			left: 160px;
+			top: 60px;
+		}
+		.box{
+			width: 900px;
+			height: 438px;
+			box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+			border-radius: 20px;
+			display: flex;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			.item{
+				flex: 1;
+				text-align: center;
+				color: #666;
+				font-size: 14px;
+				p{
+					font-weight: 500;
+					color: #01B065;
+					font-size: 20px;
+					margin-top: 120px;
+					margin-bottom: 40px;
+				}
+				/deep/.ant-btn{
+					height: 40px;
+					margin-top: 86px;
+					border-radius: 8px;
+				}
+			}
+		}
 	}
 
 	.login-header {
@@ -367,11 +415,11 @@
 		margin-top: 50px;
 	}
 
-	.login-button:hover,
-	.ant-btn-primary:focus {
-		border-color: #4C69FC !important;
-		background-color: #4C69FC !important;
-	}
+	// .login-button:hover,
+	// .ant-btn-primary:focus {
+	// 	border-color: #4C69FC !important;
+	// 	background-color: #4C69FC !important;
+	// }
 
 	.footer {
 		text-align: center;

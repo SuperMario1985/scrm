@@ -1,12 +1,55 @@
 <template>
 	<div class="login">
-		<div>
-			<img src="../../../assets/login_bg.png" alt="">
+		<div class="login-left">
+			<img src="~@/assets/login_bg.png" alt="">
+			<div class="text">
+				<p>云 美 来 <span>SCRM</span> </p>
+				<p>私 域 流 量 运 营 时 代 的 全 新 增 长 引 擎</p>
+			</div>
 		</div>
-		<div>
-			<p>云 美 来 </p>
-			<p>私 域 流 量 运 营 时 代 的 全 新 增 长 引 擎</p>
+		<div class="login-right">
+			<div class="content">
+				<div class="top">
+					<div class="back"><img src="~@/assets/logo_back.png" alt=""> 返回SCRM主页</div>
+					<img src="~@/assets/login_logo.png" alt="">
+				</div>
+				<div class="form">
+					<div class="title">账号登录</div>
+					<a-form :form="form">
+						<a-form-item>
+							<a-input
+							  v-decorator="[
+									'userName',
+									{ rules: [{ required: true, validator: checkPhone,trigger:'blur' }] },
+								]"
+							 placeholder="请输入用户手机号码"
+							 v-model="loginForm.account"
+							 ></a-input>
+						</a-form-item>
+						<a-form-item>
+							<a-input
+								 v-decorator="[
+									'password',
+									{ rules: [{ required: true, message: '请输入登录密码!' }] },
+								]"
+							  placeholder="请输入登录密码"
+								type="password"
+								v-model="loginForm.password"
+							></a-input>
+						</a-form-item>
+						<div class="operate">
+							<a-checkbox @change="onChange" class="checkbox" :checked="loginForm.autoLogin">三天内自动登录
+							</a-checkbox>
+							<a href="/forgetPass" class="forget">忘记密码？</a>
+						</div>
+						<a-button type="primary" @click="submit" class="login-form-button">登 录</a-button>
+						<a-button @click="toWork" class="login-form-button">企业微信登录</a-button>
+						<div class="register">还没有账号？<a href="/register">立即注册</a></div>
+					</a-form>
+				</div>
+			</div>
 		</div>
+	</div>
 		<!-- <div class="login-header">
 			<div class="login-header-left">
 				<a href="/home" class="login-header-left-img">
@@ -32,7 +75,7 @@
 						<!--				<span class="one-erweima" @click="taggerScancode">-->
 						<!--          <img src="../../../assets/erweima.png" alt/>-->
 						<!--        </span>-->
-					</div>
+					<!-- </div> -->
 					<!-- <span>{{$store.state.username}}</span>
 					  <button @click="press">测试全局js</button>
 					  <button @click="vuex">测试vuex</button>
@@ -88,6 +131,7 @@
 		},
 		data () {
 			return {
+				form:this.$form.createForm(this, { name: 'dynamic_rule' }),
 				loginSpinning: false,
 				loginForm    : {
 					account  : "", //手机号
@@ -102,7 +146,6 @@
 				redirectUrl  : '',//重新跳转链接
 			};
 		},
-
 		methods: {
 			encode (_str) {
 				var staticchars = "PXhw7UT1B0a9kQDKZsjIASmOezxYG4CHo5Jyfg2b8FLpEvRr3WtVnlqMidu6cN";
@@ -123,6 +166,18 @@
 			toWork () {
 				location.href = 'https://open.work.weixin.qq.com/wwopen/sso/3rd_qrConnect?appid=' + this.$store.state.proCorpId + '&redirect_uri=' + encodeURIComponent(this.$store.state.siteUrl + '/login') + '&state=web_login&usertype=member'
 			},
+			checkPhone(rule, value, callback){
+				 // 验证手机号
+				 if(!value.trim()){
+					 callback("手机号码不能为空")
+				 }
+				let reg=/^1\d{10}$/
+				if (!reg.exec(value)){
+					callback("手机号码格式不正确")
+				}else{
+					callback()
+				}
+			},
 			// press() {
 			//   this.utils.text();
 			// },
@@ -135,26 +190,26 @@
 			// async login() {
 			//   var { data: res } = await this.axios.get('login', this.loginForm)
 			// }
-			phoneChange (e) {
-				const {value} = e.target;
-				const reg = /^-?(0|[1-9][0-9]*)(\.[0-9]*)?$/;
-				if ((!isNaN(value) && reg.test(value)) || value === '' || value === '-') {
-					this.loginForm.account = value;
-				}
-			},
+			// phoneChange (e) {
+			// 	const {value} = e.target;
+			// 	const reg = /^-?(0|[1-9][0-9]*)(\.[0-9]*)?$/;
+			// 	if ((!isNaN(value) && reg.test(value)) || value === '' || value === '-') {
+			// 		this.loginForm.account = value;
+			// 	}
+			// },
 			//点击输入框，外部div下边框变蓝
-			inDiv  : function (event) {
-				this.isActive = true;
-			},
-			outDiv : function (event) {
-				this.isActive = false;
-			},
-			inDiv2 : function (event) {
-				this.isActive2 = true;
-			},
-			outDiv2: function (event) {
-				this.isActive2 = false;
-			},
+			// inDiv  : function (event) {
+			// 	this.isActive = true;
+			// },
+			// outDiv : function (event) {
+			// 	this.isActive = false;
+			// },
+			// inDiv2 : function (event) {
+			// 	this.isActive2 = true;
+			// },
+			// outDiv2: function (event) {
+			// 	this.isActive2 = false;
+			// },
 			//三天自动登录
 			onChange (e) {
 				this.loginForm.autoLogin = e.target.checked
@@ -168,25 +223,18 @@
 			register () {
 				this.$router.push({path: "/register"});
 			},
+			// 提交表单
+			submit(){
+				this.form.validateFields(err => {
+					if (!err) {
+						this.login();
+					}
+				});
+			},
 			//登录
 			async login () {
 				this.redirectUrl = this.$route.query.redirect
-				var regPhone = /^(86)?(1[3,4,5,6,7,8,9]\d{9})$/;
-				// console.log(this.$store.state.account)
-				// console.log(this.loginForm.account, this.loginForm.password);
-				if (this.loginForm.account == "") {
-					this.message = "请填写您的手机号码";
-					this.isShow = true;
-				} else if (this.loginForm.account.replace(/(^\s*)|(\s*$)/g, "").split("").length < 11) {
-					this.message = "手机号不能低于11个字符";
-					this.isShow = true;
-				} else if (this.loginForm.account.replace(/(^\s*)|(\s*$)/g, "").split("").length > 11) {
-					this.message = "手机号不能高于11个字符";
-					this.isShow = true;
-				} else if (this.loginForm.password == "") {
-					this.message = "密码不能为空";
-					this.isShow = true;
-				} else {
+				console.log(this.loginForm);
 					//手机号正确发送登录请求
 					this.isShow = false;
 					const {data: res} = await this.axios.post('login/sign', this.loginForm)
@@ -261,7 +309,6 @@
 						this.message = res.error_msg;
 						this.isShow = true;
 					}
-				}
 			},
 			async workLogin () {
 				this.redirectUrl = this.$route.query.redirect
@@ -366,261 +413,377 @@
 
 <style lang='less' scoped>
 	.login {
+		display: flex;
 		width: 100%;
-		height: 100%;
-		min-width: 1200px;
-		overflow-y: auto;
-	}
-
-	.login-header {
-		width: 100%;
-		height: 78px;
-		padding-top: 24px;
-	}
-
-	.login-header-left {
-		height: 31px;
-		margin-left: 18.5%;
-		float: left;
-
-		img {
-			height: 31px;
-			width: auto;
+		height: 100vh;
+		.login-left{
+			width: 63%;
+			img{
+				width: 100%;
+				height: calc(100vh - 140px);
+			}
+			.text{
+				background: #01B065;
+				color: #FFFFFF;
+				font-size: 16px;
+				padding-top: 20px;
+				height: 140px;
+				text-align: center;
+				p:first-child{
+					font-size: 24px;
+					span{
+						letter-spacing: 10px;
+					}
+				}
+			}
+		}
+		.login-right{
+			width: 37%;
+			.content{
+				width: 320px;
+				margin: 53px auto 0;
+				.top{
+					display: flex;
+					justify-content: space-between;
+					.back{
+						color: #666;
+						font-size: 14px;
+						line-height: 28px;
+						cursor: pointer;
+						img{
+							width: 14px;
+							height: 14px;
+							vertical-align: -2px;
+						}
+					}
+					img{
+						width: 77px;
+						height: 28px;
+					}
+				}
+				.form{
+					margin-top: 60px;
+					.title{
+						font-size: 18px;
+						display: inline-block;
+						line-height: 34px;
+						color: #01B065;
+						border-bottom: 2px solid;
+					}
+					/deep/.ant-form{
+						margin-top: 30px;
+						.ant-form-item{
+							margin-bottom: 24px;
+							position: relative;
+							&::before{
+								content:'';
+								position: absolute;
+								left: 4px;
+								top: 0;
+								z-index: 1;
+								width: 38px;
+								height: 46px;
+								background-position: center;
+								background-size: 14px;
+								background-repeat: no-repeat;
+							}
+							&:first-child::before{
+								background-image: url('~@/assets/login-icon5.png');
+							}
+							&:nth-child(2)::before{
+								background-image: url('~@/assets/login-icon2.png');
+							}
+							.ant-input{
+								height: 44px;
+								border-radius: 22px;
+								padding-left: 38px;
+							}
+							input:-webkit-autofill{
+								box-shadow:0 0 0 1000px #fff inset;
+							}
+						}
+					}
+					.operate{
+						padding: 0 15px;
+						margin-bottom: 40px;
+						display: flex;
+						justify-content: space-between;
+						span{
+							color: #666
+						}
+						.forget{
+							color: #01B065;
+						}
+					}
+					/deep/.ant-btn{
+						display: block;
+						width: 100%;
+						height: 44px;
+						border-radius: 22px;
+						margin-bottom: 12px;
+					}
+					.register{
+						margin-top: 24px;
+						color: #666;
+						font-size: 14px;
+						a{
+							color: #01B065;
+						}
+					}
+				}
+			}
 		}
 	}
 
-	.login-header-left-img {
-		float: left;
-		height: 31px;
-		width: auto;
-	}
+	// .login-header {
+	// 	width: 100%;
+	// 	height: 78px;
+	// 	padding-top: 24px;
+	// }
 
-	.login-header-left-line {
-		width: 1px;
-		height: 20px;
-		background-color: #DFDFDF;
-		display: inline-block;
-		margin: 6px 15px 5px 19px;
-		float: left;
-	}
+	// .login-header-left {
+	// 	height: 31px;
+	// 	margin-left: 18.5%;
+	// 	float: left;
 
-	.login-header-left-login {
-		height: 17px;
-		font-family: MicrosoftYaHei;
-		font-size: 16px;
-		line-height: 30px;
-		color: #666666;
-		float: left;
-	}
+	// 	img {
+	// 		height: 31px;
+	// 		width: auto;
+	// 	}
+	// }
 
-	.login-header-right {
-		width: 72px;
-		height: 17px;
-		font-family: MicrosoftYaHei;
-		font-size: 16px;
-		line-height: 30px;
-		color: #4C69FC;
-		cursor: pointer;
-		float: right;
-		margin-right: 18.5%;
-	}
+	// .login-header-left-img {
+	// 	float: left;
+	// 	height: 31px;
+	// 	width: auto;
+	// }
 
-	.login-swiper {
-		width: 100%;
-		height: 100px;
-		background-image: url("../../../assets/background.png");
-		background-size: 100%;
-		background-repeat: no-repeat;
-		padding-top: 8px;
+	// .login-header-left-line {
+	// 	width: 1px;
+	// 	height: 20px;
+	// 	background-color: #DFDFDF;
+	// 	display: inline-block;
+	// 	margin: 6px 15px 5px 19px;
+	// 	float: left;
+	// }
 
-		img {
-			width: 482px;
-			height: 59px;
-			margin: 0 auto;
-			margin-top: 15px;
-			display: block;
-		}
-	}
+	// .login-header-left-login {
+	// 	height: 17px;
+	// 	font-family: MicrosoftYaHei;
+	// 	font-size: 16px;
+	// 	line-height: 30px;
+	// 	color: #666666;
+	// 	float: left;
+	// }
 
-	.login-body {
-		width: 435px;
-		height: 455px;
-		margin: 0 auto;
-		margin-top: 94px;
-	}
+	// .login-header-right {
+	// 	width: 72px;
+	// 	height: 17px;
+	// 	font-family: MicrosoftYaHei;
+	// 	font-size: 16px;
+	// 	line-height: 30px;
+	// 	color: #4C69FC;
+	// 	cursor: pointer;
+	// 	float: right;
+	// 	margin-right: 18.5%;
+	// }
 
-	.one {
-		height: 52px;
-		border-bottom: 1px solid #E5E5E5;
-		position: relative;
-	}
+	// .login-swiper {
+	// 	width: 100%;
+	// 	height: 100px;
+	// 	background-image: url("../../../assets/background.png");
+	// 	background-size: 100%;
+	// 	background-repeat: no-repeat;
+	// 	padding-top: 8px;
 
-	.one-txt {
-		height: 52px;
-		font-family: MicrosoftYaHei-Bold;
-		font-size: 16px;
-		line-height: 54px;
-		letter-spacing: 0px;
-		color: #4C69FC;
-		float: left;
-		border-bottom: 2px solid #4C69FC;
-	}
+	// 	img {
+	// 		width: 482px;
+	// 		height: 59px;
+	// 		margin: 0 auto;
+	// 		margin-top: 15px;
+	// 		display: block;
+	// 	}
+	// }
 
-	.one-erweima {
-		cursor: pointer;
+	// .login-body {
+	// 	width: 435px;
+	// 	height: 455px;
+	// 	margin: 0 auto;
+	// 	margin-top: 94px;
+	// }
 
-		img {
-			width: 54px;
-			height: 54px;
-			float: right;
-		}
-	}
+	// .one {
+	// 	height: 52px;
+	// 	border-bottom: 1px solid #E5E5E5;
+	// 	position: relative;
+	// }
 
-	.one-paopao {
-		cursor: pointer;
-		width: 120px;
-		height: 35px;
-		background-color: #FFB637;
-		border-radius: 4px;
-		display: inline-block;
-		position: absolute;
-		right: 50px;
-		top: 10px;
-		color: #FFF;
-		font-size: 14px;
-		box-sizing: border-box;
-		padding-top: 6px;
+	// .one-txt {
+	// 	height: 52px;
+	// 	font-family: MicrosoftYaHei-Bold;
+	// 	font-size: 16px;
+	// 	line-height: 54px;
+	// 	letter-spacing: 0px;
+	// 	color: #4C69FC;
+	// 	float: left;
+	// 	border-bottom: 2px solid #4C69FC;
+	// }
 
-		img {
-			margin-left: 20px;
-		}
-	}
+	// .one-erweima {
+	// 	cursor: pointer;
 
-	.one-paopao::after {
-		content: "";
-		width: 10px;
-		height: 10px;
-		background-color: #FFB637;
-		display: inline-block;
-		transform: rotate(45deg);
-		position: absolute;
-		right: -5px;
-		top: 10px;
-	}
+	// 	img {
+	// 		width: 54px;
+	// 		height: 54px;
+	// 		float: right;
+	// 	}
+	// }
 
-	.two,
-	.three {
-		height: 60px;
-		width: 100%;
-		margin-top: 45px;
+	// .one-paopao {
+	// 	cursor: pointer;
+	// 	width: 120px;
+	// 	height: 35px;
+	// 	background-color: #FFB637;
+	// 	border-radius: 4px;
+	// 	display: inline-block;
+	// 	position: absolute;
+	// 	right: 50px;
+	// 	top: 10px;
+	// 	color: #FFF;
+	// 	font-size: 14px;
+	// 	box-sizing: border-box;
+	// 	padding-top: 6px;
 
-		span {
-			line-height: 60px;
-			float: left;
-		}
+	// 	img {
+	// 		margin-left: 20px;
+	// 	}
+	// }
 
-		input {
-			float: right;
-			width: 330px;
-			height: 58px;
-			border: none;
-			padding: 4px 11px;
-		}
+	// .one-paopao::after {
+	// 	content: "";
+	// 	width: 10px;
+	// 	height: 10px;
+	// 	background-color: #FFB637;
+	// 	display: inline-block;
+	// 	transform: rotate(45deg);
+	// 	position: absolute;
+	// 	right: -5px;
+	// 	top: 10px;
+	// }
 
-		input:focus {
-			outline: none;
-		}
-	}
+	// .two,
+	// .three {
+	// 	height: 60px;
+	// 	width: 100%;
+	// 	margin-top: 45px;
 
-	::-webkit-input-placeholder {
-		/* WebKit browsers */
-		color: #CACACA;
-	}
+	// 	span {
+	// 		line-height: 60px;
+	// 		float: left;
+	// 	}
 
-	::-moz-placeholder {
-		/* Mozilla Firefox 19+ */
-		color: #CACACA;
-	}
+	// 	input {
+	// 		float: right;
+	// 		width: 330px;
+	// 		height: 58px;
+	// 		border: none;
+	// 		padding: 4px 11px;
+	// 	}
 
-	:-ms-input-placeholder {
-		/* Internet Explorer 10+ */
-		color: #CACACA;
-	}
+	// 	input:focus {
+	// 		outline: none;
+	// 	}
+	// }
 
-	.border-blue {
-		border-bottom: 2px solid #4C69FC !important;
-	}
+	// ::-webkit-input-placeholder {
+	// 	/* WebKit browsers */
+	// 	color: #CACACA;
+	// }
 
-	.border-grey {
-		border-bottom: 1px solid #E5E5E5 !important;
-	}
+	// ::-moz-placeholder {
+	// 	/* Mozilla Firefox 19+ */
+	// 	color: #CACACA;
+	// }
 
-	.four {
-		height: 80px;
-		width: 100%;
-		line-height: 80px;
+	// :-ms-input-placeholder {
+	// 	/* Internet Explorer 10+ */
+	// 	color: #CACACA;
+	// }
 
-		.checkbox {
-			float: left;
-			color: #999;
-		}
+	// .border-blue {
+	// 	border-bottom: 2px solid #4C69FC !important;
+	// }
 
-		a {
-			float: right;
-			cursor: pointer;
-		}
+	// .border-grey {
+	// 	border-bottom: 1px solid #E5E5E5 !important;
+	// }
 
-		span:hover {
-			color: red;
-		}
-	}
+	// .four {
+	// 	height: 80px;
+	// 	width: 100%;
+	// 	line-height: 80px;
 
-	.login-button {
-		height: 52px;
-		background-color: #4C69FC;
-		font-family: MicrosoftYaHei;
-		font-size: 16px;
-	}
+	// 	.checkbox {
+	// 		float: left;
+	// 		color: #999;
+	// 	}
 
-	.login-button:hover,
-	.ant-btn-primary:focus {
-		border-color: #4C69FC !important;
-		background-color: #4C69FC !important;
-	}
+	// 	a {
+	// 		float: right;
+	// 		cursor: pointer;
+	// 	}
 
-	.register-button,
-	.work-login-button {
-		height: 52px;
-		font-family: MicrosoftYaHei;
-		font-size: 16px;
-		margin-top: 20px;
-	}
+	// 	span:hover {
+	// 		color: red;
+	// 	}
+	// }
 
-	.footer {
-		text-align: center;
-		width: 100%;
-		font-family: MicrosoftYaHei;
-		font-size: 12px;
-		font-weight: normal;
-		font-stretch: normal;
-		line-height: 22px;
-		letter-spacing: 0px;
-		color: #9E9E9E;
-		margin-top: 90px;
-	}
+	// .login-button {
+	// 	height: 52px;
+	// 	background-color: #4C69FC;
+	// 	font-family: MicrosoftYaHei;
+	// 	font-size: 16px;
+	// }
 
-	.alert {
-		margin-top: 20px;
-		width: 100%;
-		height: 30px;
-		background-color: rgba(234, 106, 90, 0.8);
-		font-size: 16px;
-		color: #FFF;
-		text-align: center;
-		line-height: 30px;
-	}
+	// .login-button:hover,
+	// .ant-btn-primary:focus {
+	// 	border-color: #4C69FC !important;
+	// 	background-color: #4C69FC !important;
+	// }
 
-	/deep/ .ant-input:focus {
-		box-shadow: none;
-	}
+	// .register-button,
+	// .work-login-button {
+	// 	height: 52px;
+	// 	font-family: MicrosoftYaHei;
+	// 	font-size: 16px;
+	// 	margin-top: 20px;
+	// }
+
+	// .footer {
+	// 	text-align: center;
+	// 	width: 100%;
+	// 	font-family: MicrosoftYaHei;
+	// 	font-size: 12px;
+	// 	font-weight: normal;
+	// 	font-stretch: normal;
+	// 	line-height: 22px;
+	// 	letter-spacing: 0px;
+	// 	color: #9E9E9E;
+	// 	margin-top: 90px;
+	// }
+
+	// .alert {
+	// 	margin-top: 20px;
+	// 	width: 100%;
+	// 	height: 30px;
+	// 	background-color: rgba(234, 106, 90, 0.8);
+	// 	font-size: 16px;
+	// 	color: #FFF;
+	// 	text-align: center;
+	// 	line-height: 30px;
+	// }
+
+	// /deep/ .ant-input:focus {
+	// 	box-shadow: none;
+	// }
 </style>
