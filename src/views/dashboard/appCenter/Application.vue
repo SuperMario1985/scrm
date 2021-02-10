@@ -17,7 +17,7 @@
 							{{item.title2}}
 						</div>
 						<div class="detail-desc">{{item.title3}}</div>
-						<div style="margin-top: 12px;text-align: right;">
+						<div style="margin-top: 20px;text-align: left;">
 							<a-button @click="goStore(item.type)" v-if="item.isHas == 1">
 								店铺管理
 							</a-button>
@@ -41,7 +41,7 @@
 				</div>
 				<div class="app" :style="{width : width}" v-for="item in appList">
 					<div class="app-cover" :style="{'height': height}">
-						<img :src="commonUrl + item.img_square" style="position: absolute; z-index: 1; top: 0;" :style="{'width': width, 'heitht': height}"/>
+						<!-- <img :src="commonUrl + item.img_square" style="position: absolute; z-index: 1; top: 0;" :style="{'width': width, 'heitht': height}"/> -->
 						<div class="icon-title">
 							<img :src="commonUrl + item.img_circle" class="icon"/>
 							<span class="title">{{item.name}}</span>
@@ -587,6 +587,6 @@
 		font-size: 14px;
 		font-weight: 400;
 		color: #8D8D8D;
-		margin-top: 10px;
+		margin-top: 6px;
 	}
 </style>
