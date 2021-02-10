@@ -261,8 +261,10 @@ export default {
     }
   }
   .ant-empty {
+    width: 100%;
     height: 100px;
     background: url("./assets/base/table-empty.png") center center no-repeat;
+    background-size: auto 100%;
     svg {
       display: none;
     }
