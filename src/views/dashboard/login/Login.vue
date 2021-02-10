@@ -19,11 +19,10 @@
 						<a-form-item>
 							<a-input
 							  v-decorator="[
-									'userName',
+									'account',
 									{ rules: [{ required: true, validator: checkPhone,trigger:'blur' }] },
 								]"
 							 placeholder="请输入用户手机号码"
-							 v-model="loginForm.account"
 							 ></a-input>
 						</a-form-item>
 						<a-form-item>
@@ -34,11 +33,10 @@
 								]"
 							  placeholder="请输入登录密码"
 								type="password"
-								v-model="loginForm.password"
 							></a-input>
 						</a-form-item>
 						<div class="operate">
-							<a-checkbox @change="onChange" class="checkbox" :checked="loginForm.autoLogin">三天内自动登录
+							<a-checkbox @change="onChange" class="checkbox" :checked="autoLogin">三天内自动登录
 							</a-checkbox>
 							<a href="/forgetPass" class="forget">忘记密码？</a>
 						</div>
@@ -133,15 +131,7 @@
 			return {
 				form:this.$form.createForm(this, { name: 'dynamic_rule' }),
 				loginSpinning: false,
-				loginForm    : {
-					account  : "", //手机号
-					password : "", //密码
-					autoLogin: localStorage.getItem('autoLogin') == "true", // 三天内自动登录
-				},
-				isActive     : false, //控制输入框下底边是否变蓝
-				isActive2    : false, //控制输入框下底边是否变蓝
-				message      : "", //警告信息内容
-				isShow       : false, //消息提示框的显示与隐藏
+				autoLogin: localStorage.getItem('autoLogin') == "true", // 三天内自动登录
 				token        : '',//登录状态
 				redirectUrl  : '',//重新跳转链接
 			};
@@ -212,8 +202,8 @@
 			// },
 			//三天自动登录
 			onChange (e) {
-				this.loginForm.autoLogin = e.target.checked
-				localStorage.setItem('autoLogin', this.loginForm.autoLogin)
+				this.autoLogin = e.target.checked
+				localStorage.setItem('autoLogin', this.autoLogin)
 			},
 			//点击跳转到Scancode页面
 			taggerScancode () {
@@ -234,15 +224,17 @@
 			//登录
 			async login () {
 				this.redirectUrl = this.$route.query.redirect
-				console.log(this.loginForm);
 					//手机号正确发送登录请求
 					this.isShow = false;
-					const {data: res} = await this.axios.post('login/sign', this.loginForm)
+					let {account,password} = this.form.getFieldsValue();
+					let autoLogin = this.autoLogin
+					let data = {account,password,autoLogin}
+					const {data: res} = await this.axios.post('login/sign', data)
 					// console.log(res)
 					if (res.error == 0) {
-						localStorage.setItem('phoneNumber', this.loginForm.account)
+						localStorage.setItem('phoneNumber', account)
 
-						let encryptPassword = this.encode(this.loginForm.password);
+						let encryptPassword = this.encode(password);
 
 						localStorage.setItem('password', encryptPassword)
 						localStorage.setItem('accountNum', res.data.num)
@@ -250,8 +242,8 @@
 
 						this.token = res.data.access_token
 
-						this.$store.commit('changeAccount', this.loginForm.account);
-						this.$store.commit('changePassword', this.loginForm.password);
+						this.$store.commit('changeAccount', account);
+						this.$store.commit('changePassword', password);
 
 						if (res.data.num == 1) {
 							// 更新websocket中的登录信息
@@ -306,8 +298,7 @@
 						}
 						// console.log(this.$store.state.account)
 					} else {
-						this.message = res.error_msg;
-						this.isShow = true;
+						this.$message.error(res.error_msg)
 					}
 			},
 			async workLogin () {
@@ -402,8 +393,6 @@
 					}))
 				}
 			}, 300)
-
-			console.log(this.loginForm.autoLogin)
 			if (this.$route.query.auth_code) {
 				this.workLogin()
 			}
@@ -441,7 +430,7 @@
 			width: 37%;
 			.content{
 				width: 320px;
-				margin: 53px auto 0;
+				margin: 8% auto 0;
 				.top{
 					display: flex;
 					justify-content: space-between;

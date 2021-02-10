@@ -7,6 +7,7 @@ import DashboardLayout from "./layouts/DashboardLayout";
 
 import Home from './views/dashboard/Home.vue'
 import Login from './views/dashboard/login/Login.vue'
+import Forget from './views/dashboard/login/Forget.vue'
 import PassLogin from './views/dashboard/login/PassLogin.vue'
 import ScanCode from './views/dashboard/login/Scancode.vue'
 import Binding from './views/dashboard/login/Binding.vue'
@@ -48,7 +49,7 @@ var router = new Router({
 		{path: '/passLogin', component: PassLogin},
 		{path: '/scancode', component: ScanCode},
 		{path: '/binding', component: Binding},
-		{path: '/forgetPass', component: ForgetPass},
+		{path: '/forgetPass', component: Forget},
 		{path: '/verifyPassword', component: VerifyPassword},
 		{path: '/workBinding', component: WorkBinding},
 		{path: '/freeRegister', component: FreeRegister},

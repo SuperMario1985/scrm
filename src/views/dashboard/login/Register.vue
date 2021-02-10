@@ -224,6 +224,8 @@
 		width: 100%;
 		height: 100%;
 		position: relative;
+		background: url('~@/assets/register_bg.png') no-repeat bottom;
+		background-size: 100% auto;
 		img{
 			width: 77px;
 			height: 28px;
@@ -246,6 +248,9 @@
 				text-align: center;
 				color: #666;
 				font-size: 14px;
+				&:first-child{
+					border-right: 2px solid #EEEEEE;
+				}
 				p{
 					font-weight: 500;
 					color: #01B065;
