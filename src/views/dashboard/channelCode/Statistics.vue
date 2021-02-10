@@ -605,7 +605,7 @@
 
 	.picker-contain .caledar-btn-selected {
 		border: 0;
-		border-right: 1px solid #01b065;
+		border: 1px solid #01b065;
 		background: #01b065;
 		border-radius: 0;
 		color: #FFF;
