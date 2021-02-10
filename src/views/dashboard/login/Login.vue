@@ -430,7 +430,7 @@
 			width: 37%;
 			.content{
 				width: 320px;
-				margin: 8% auto 0;
+				margin: 60px auto 0;
 				.top{
 					display: flex;
 					justify-content: space-between;
