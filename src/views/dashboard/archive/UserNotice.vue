@@ -167,12 +167,12 @@
 							          v-has="'violations-employee-edit'">
 								批量修改通知人
 							</a-button>
-							<a-button class="btn-primary" icon="unlock"
+							<a-button class="btn-primary" 
 							          :disabled="selectedRowKeys.length == 0"
 							          @click="releaseFollow" type="primary" v-has="'violations-employee-close'">
 								批量开启
 							</a-button>
-							<a-button class="btn-primary" icon="lock"
+							<a-button class="btn-primary" 
 							          :disabled="selectedRowKeys.length == 0"
 							          @click="failure" type="primary" v-has="'violations-employee-close'">
 								批量关闭

@@ -171,12 +171,12 @@
 									          @click="batchEdit" type="primary" v-has="'todoManagementRemind-edit'">
 										批量编辑
 									</a-button>
-									<a-button class="btn-primary" icon="unlock"
+									<a-button class="btn-primary" 
 									          :disabled="selectedRowKeys.length == 0"
 									          @click="releaseFollow" type="primary" v-has="'todoManagementRemind-open'">
 										批量开启
 									</a-button>
-									<a-button class="btn-primary" icon="lock"
+									<a-button class="btn-primary" 
 									          :disabled="selectedRowKeys.length == 0"
 									          @click="failure" type="primary" v-has="'todoManagementRemind-open'">
 										批量关闭

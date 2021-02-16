@@ -139,18 +139,18 @@
 								<a-select-option value="0">选择当前页</a-select-option>
 								<a-select-option value="1">选择所有</a-select-option>
 							</a-select>
-							<a-button v-has="'deleteCustomer-edit'" class="btn-primary" icon="unlock"
+							<a-button v-has="'deleteCustomer-edit'" class="btn-primary" 
 							          :disabled="selectedRowKeys.length == 0"
 							          @click="batchEdit" type="primary">
 								批量编辑
 							</a-button>
-							<a-button class="btn-primary" icon="unlock"
+							<a-button class="btn-primary" 
 							          v-has="'deleteCustomer-taggle'"
 							          :disabled="selectedRowKeys.length == 0"
 							          @click="releaseFollow" type="primary">
 								批量开启
 							</a-button>
-							<a-button v-has="'deleteCustomer-taggle'" class="btn-primary" icon="lock"
+							<a-button v-has="'deleteCustomer-taggle'" class="btn-primary" 
 							          :disabled="selectedRowKeys.length == 0"
 							          @click="failure" type="primary">
 								批量关闭

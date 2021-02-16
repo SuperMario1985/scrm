@@ -13,7 +13,7 @@
 					<p style="margin-bottom: 2px;">
 						4、若在尚未“同步企业微信通讯录”的名单时，手动添加子账户（进入子账户启用列表），再去“同步”，此时只要两边手机号为一致，则该子账户的原有状态不变。</p>
 				</div>
-				<a-col style="position: absolute;right: 20px;z-index: 999;">
+				<a-col style="position: absolute;right: 56px;z-index: 999;">
 					<a-button
 							type="primary"
 							
