@@ -211,6 +211,9 @@ export default {
   // table
   .ant-table {
     color: #333;
+    table{
+      box-shadow: none;
+    }
     td {
       .ant-btn {
         border: none;

@@ -140,13 +140,13 @@
     padding: 0;
 
     li {
-      background-color: #f5f7ff;
+      background-color: #fff;
       width: 49.5%;
       height: 109px;
       float: left;
       margin-bottom: 8px;
       border-radius: 4px;
-      border: solid 1px #c9daff;
+      border: solid 1px #dddddd;
 
       img {
         width: 48px;
