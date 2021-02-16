@@ -37,7 +37,7 @@
 				<a-col style="float:right;">
 					<a-button
 							type="primary"
-							icon="plus"
+							
 							style="width: 150px;font-size:14px;"
 							@click="addAccount" v-has="'mini-add'"
 					>添加小程序

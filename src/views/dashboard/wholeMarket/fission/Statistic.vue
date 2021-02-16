@@ -5,7 +5,7 @@
 			        :class="spinning?'spinning-true':'spinning-false'">
 				<div style="height: 50px;font-size: 16px;background-color: #FFFFFF; line-height: 50px;padding: 0 20px;">
 					{{title}}
-					<a-button style="float:right;margin-top: 9px;" type="primary" @click="goBack" icon="rollback">返回列表
+					<a-button style="float:right;margin-top: 9px;" type="primary" @click="goBack" >返回列表
 					</a-button>
 				</div>
 				<div class="tabs-contain" style="margin-top: 20px">

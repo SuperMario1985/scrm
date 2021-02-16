@@ -6,7 +6,7 @@
 					<!-- 头部 -->
 					<a-layout-header>
 						<template>{{isEdit == 0 ? '新建消息' : '修改消息'}}</template>
-						<a-button type="primary" icon="rollback" @click="goBack" style="float: right;margin-top: 9px;">
+						<a-button type="primary"  @click="goBack" style="float: right;margin-top: 9px;">
 							返回列表
 						</a-button>
 					</a-layout-header>

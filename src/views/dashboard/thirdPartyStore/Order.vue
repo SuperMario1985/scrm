@@ -2,7 +2,7 @@
 	<div style="width: 100%; height: 100%; overflow-y: scroll;position: absolute" class="scroll">
 		<div class="page-title">
 			店铺订单
-			<a-button type="primary" style="font-size: 14px;float: right;margin-top: 9px;margin-right: 20px;" @click="goAppCenter" icon="rollback">返回</a-button>
+			<a-button type="primary" style="font-size: 14px;float: right;margin-top: 9px;margin-right: 20px;" @click="goAppCenter" >返回</a-button>
 		</div>
 		<div v-if="storeList.length == 0 && isShow" class="empty-img">
 			<img src="../../../assets/thirdPartyStore/empty.png" alt="">

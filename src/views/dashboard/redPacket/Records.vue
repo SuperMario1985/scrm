@@ -251,7 +251,7 @@
 			scopedSlots: {customRender: "statusName"},
 		},
 		{
-			title      : "零钱金额",
+			title      : "红包金额",
 			dataIndex  : "money",
 			key        : "money",
 			scopedSlots: {customRender: "money"},

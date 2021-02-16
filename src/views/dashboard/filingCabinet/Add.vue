@@ -107,7 +107,7 @@
 						<label v-if="!this.urlId" class="template-title">添加素材</label>
 						<label v-if="this.urlId" class="template-title">编辑素材</label>
 						<router-link to="/filingCabinet/list" style="font-size: 16px;float: right;margin-right: 15px;">
-							<a-button type="primary" icon="rollback">返回列表</a-button>
+							<a-button type="primary" >返回列表</a-button>
 						</router-link>
 					</a-layout-header>
 					<!-- 内容 -->

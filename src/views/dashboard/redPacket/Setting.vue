@@ -23,7 +23,7 @@
 								若红包已发送到客户/客户群里，但客户尚未领取，此时微信支付商户平台出现账户余额不足时，客户打开红包页面无法领取，请务必保证账户余额充足，避免客户投诉。
 							</p>
 							<p style="margin-bottom: 2px;color: #FF562D;">
-								在使用派发红包功能前，需要商户完成以下配置：
+								商户需完成以下配置，才能使用派发红包功能：：
 							</p>
 							<p style="margin-bottom: 2px;">
 								1、前往<a href="https://pay.weixin.qq.com/index.php/core/home/login?return_url=%2F"
@@ -248,7 +248,7 @@
 
 	const columns = [
 		{
-			title      : "零钱金额",
+			title      : "红包金额",
 			dataIndex  : "money",
 			key        : "money",
 			scopedSlots: {customRender: "money"},

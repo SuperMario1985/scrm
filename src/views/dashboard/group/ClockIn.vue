@@ -61,9 +61,9 @@
 								<a-button @click="clear">重置</a-button>
 							</a-col>
 							<a-col style="float:right;">
-								<a-button v-has="'groupClockIn-add'" class="btn-primary" icon="plus"
+								<a-button v-has="'groupClockIn-add'" class="btn-primary" 
 								          @click="addWelcomeText" type="primary">
-									新建活动
+									创建活动
 								</a-button>
 							</a-col>
 						</div>

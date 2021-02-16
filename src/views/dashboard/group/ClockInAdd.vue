@@ -8,7 +8,7 @@
 						<template v-if="typeof urlId == 'undefined'">新建</template>
 						<template v-if="typeof urlId != 'undefined'">修改</template>
 						打卡活动
-						<a-button type="primary" icon="rollback"
+						<a-button type="primary" 
 						          style="float: right;margin-top: 9px;" @click="goBack">返回列表
 						</a-button>
 					</a-layout-header>
@@ -241,7 +241,7 @@
 																	兑换链接
 																	<a-tooltip placement="bottom">
 																		<template slot="title">
-																			<span>主要适用于需要快递物流的奖品</span>
+																			<span>当奖品是需要快递物流的奖品时，使用链接的方式。</span>
 																		</template>
 																		<a-icon type="question-circle"
 																		        style="margin-left:5px;"/>
@@ -253,7 +253,7 @@
 																	联系客服
 																	<a-tooltip placement="bottom">
 																		<template slot="title">
-																			<span>主要适用于需要到店自提的奖品、或是以线下发放为主的虚拟奖品。如“XXX运营干货PPT”</span>
+																			<span>当奖品是需要到店自提的奖品、或是以线下发放为主的虚拟奖品时，需要联系客服。</span>
 																		</template>
 																		<a-icon type="question-circle"
 																		        style="margin-left:5px;"/>

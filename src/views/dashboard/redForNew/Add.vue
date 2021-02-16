@@ -8,7 +8,7 @@
 						<template v-if="typeof urlId == 'undefined'">新建</template>
 						<template v-if="typeof urlId != 'undefined'">修改</template>
 						红包渠道活码
-						<a-button type="primary" icon="rollback" @click="goBack"
+						<a-button type="primary"  @click="goBack"
 						          style="float: right;margin-top: 9px;">返回列表
 						</a-button>
 					</a-layout-header>
@@ -58,7 +58,7 @@
 											<span style="display: inline-block; width: 50px; margin-left: 10px;color: #F56C6C">{{rule.name === null ? 0 : rule.name.length}} / 30</span>
 											<span style="color: #F56C6C;margin-left: 20px;">（一旦创建，不可修改）</span>
 										</a-form-item>
-										<a-form-item label="结束设置" :label-col="{ span: 3 }"
+										<a-form-item label="活动时间" :label-col="{ span: 3 }"
 										             :wrapper-col="{ span: 21 }"
 										             style="padding-top: 15px;">
 											<a-radio-group v-model="rule.time_type"
@@ -345,7 +345,7 @@
 											<div>
 												<a-button
 														v-show="info.specialWeekList[0].mon.length == 0 || info.specialWeekList[0].tues.length == 0 || info.specialWeekList[0].wednes.length == 0 || info.specialWeekList[0].thurs.length == 0 || info.specialWeekList[0].fri.length == 0 || info.specialWeekList[0].satur.length == 0 || info.specialWeekList[0].sun.length == 0 "
-														@click="addSpecialTime" icon="plus">
+														@click="addSpecialTime" >
 													添加
 												</a-button>
 												<!--												<a-icon @click="addSpecialTime" style="font-size: 20px;cursor: pointer;"-->
@@ -865,7 +865,7 @@
 													<div style="float: right;">
 														<a-button type="primary"
 														          style="height: 26px;width: 94px;padding: 0px 5px;margin-right: 10px; font-size: 12px;"
-														          icon="plus"
+														          
 														          v-show="index == info.specialDateList.length - 1"
 														          @click="addSpecialDate(index)">
 															添加时期
@@ -988,7 +988,7 @@
 										             :label-col="{ span: 3 }" :wrapper-col="{ span: 21 }">
 											<span slot="label">
 										        客户标签&nbsp;
-										        <a-tooltip title="客户通过该渠道活码扫码添加企业成员后，其将会被自动打上选中的客户标签">
+										        <a-tooltip title="客户通过扫描该渠道活码添加企业成员后，会被自动打上设置的客户标签">
 										          <a-icon type="question-circle"/>
 										        </a-tooltip>
 											</span>
@@ -1000,7 +1000,7 @@
 										<div class="content-msg">
 											<p style="margin-bottom: 0px;line-height: 20px;color: #F56C6C;">
 												欢迎语推送规则：在通用、周期及特殊时期欢迎语共存情况下，推送优先顺序为特殊时期的欢迎语 > 按周期的欢迎语 >
-												通用欢迎语。若企业微信官方后台已配置了欢迎语，则在第三方系统配置的欢迎语均失效，客户收到的依然是官方推送的。
+												通用欢迎语。如果企业微信后台已配置了可用的欢迎语，第三方系统配置欢迎语则不会推送，优先推送企业微信官方的。。
 											</p>
 										</div>
 										<!-- 渠道欢迎语 -->

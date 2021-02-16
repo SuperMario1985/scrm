@@ -8,7 +8,7 @@
 						<span v-show="typeof urlId == 'undefined'">新建</span>
 						<span v-show="typeof urlId != 'undefined'">编辑</span>
 						模板消息
-						<a-button type="primary" icon="rollback" @click="goBack" style="float: right;margin-top: 9px;">
+						<a-button type="primary"  @click="goBack" style="float: right;margin-top: 9px;">
 							返回列表
 						</a-button>
 					</a-layout-header>

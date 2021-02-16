@@ -18,13 +18,13 @@
 						<div style="font-size:16px;font-weight:700;color:#333333">百度统计</div>
 						<div class="content-msg"  style="box-shadow: 0px 1px 4px 0px #D7D7D7">
 							<p style="margin-bottom: 2px;">
-								1、可以生成带参数的二维码名片，支持活码功能，即随机选取设置的活码成员推给用户。加企业微信为好友后，可以给微信联系人自动回复相应欢迎消息和打标签。
+								1、生成带参数的二维码名片，支持活码功能，即随机选取设置的活码成员推给用户。当客户加企业微信为好友后，可以给客户自动发送欢迎语和打标签。
 							</p>
 							<p style="margin-bottom: 2px;">
 								2、<span style="color: #F56C6C;">受限于官方，单人类型的渠道码创建后尽量不要再修改成员，否则会造成列表中，该二维码中间的头像与配置的成员头像不一致，但是并不影响功能使用。</span>
 							</p>
 							<p style="margin-bottom: 0px;">
-								3、<span style="color: #F56C6C;">如果企业在企业微信后台为相关成员配置了可用的欢迎语，使用第三方系统配置欢迎语，则均不起效，推送的还是企业微信官方的。</span>
+								3、<span style="color: #F56C6C;">如果在企业微信后台为相关成员配置了可用的欢迎语，第三方系统配置欢迎语则不会推送，优先推送企业微信官方的。</span>
 							</p>
 						</div>
 						<div class="content-hd">
@@ -39,11 +39,11 @@
 								<a-button style="margin-left: 10px;" @click="clearTitle">重置</a-button>
 							</a-col>
 							<a-col style="float:right;">
-								<a-button class="btn-primary" icon="setting"
+								<a-button class="btn-primary" 
 								          @click="addSetting" type="primary" v-has="'channelCodeBaidu-add'">
 									配置token
 								</a-button>
-								<a-button class="btn-primary" icon="reload" @click="syncFollowUser"
+								<a-button class="btn-primary"  @click="syncFollowUser"
 								          v-has="'channelCodeBaidu-sync'">
 									同步配置了外部联系权限的联系人
 								</a-button>
@@ -239,7 +239,7 @@
 					<div>
 						<a-button
 								v-show="batchEditType && specialWeekList[0].mon.length == 0 || specialWeekList[0].tues.length == 0 || specialWeekList[0].wednes.length == 0 || specialWeekList[0].thurs.length == 0 || specialWeekList[0].fri.length == 0 || specialWeekList[0].satur.length == 0 || specialWeekList[0].sun.length == 0 "
-								@click="addSpecialTime" icon="plus">
+								@click="addSpecialTime" >
 							添加
 						</a-button>
 					</div>

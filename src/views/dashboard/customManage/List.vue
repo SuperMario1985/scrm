@@ -237,21 +237,21 @@
 									<!--								<span @click="lookUniqueCustom(1)" v-if="showCustomData && fromUnique == 0" style="color: #01b065; cursor: pointer">查看重复客户</span>-->
 									<!--								<span @click="lookUniqueCustom(0)" v-if="showCustomData && fromUnique == 1" style="color: #01b065; cursor: pointer">查看全部客户</span>-->
 									<a-button style="width: 140px;" class="btn-primary1" @click="lookUniqueCustom"
-									          icon="swap">
+									          >
 										查看重复客户
 									</a-button>
-									<!--								<a-button class="btn-primary1" @click="confirm" icon="reload" v-has="'sync-client'">-->
+									<!--								<a-button class="btn-primary1" @click="confirm"  v-has="'sync-client'">-->
 									<!--									同步客户-->
 									<!--								</a-button>-->
-									<a-button class="btn-primary1" @click="confirm" icon="reload" v-has="'sync-client'">
+									<a-button class="btn-primary1" @click="confirm"  v-has="'sync-client'">
 										同步客户
 									</a-button>
-									<a-button class="btn-primary1" @click="showModal1" type="primary" icon="tags"
+									<a-button class="btn-primary1" @click="showModal1" type="primary" 
 									          v-has="'client-remove-tag'">
 										移除标签
 									</a-button>
 									<a-button class="btn-primary1" @click="showModal" type="primary"
-									          icon="tags" v-has="'client-add-tag'">
+									           v-has="'client-add-tag'">
 										打标签
 									</a-button>
 									<a-button class="btn-primary1" @click="leadOut" type="primary"
@@ -259,7 +259,7 @@
 										导出客户
 									</a-button>
 									<a-button class="btn-primary1" @click="setOptions" type="primary"
-									          icon="tool" v-has="'client-setOptions'">
+									           v-has="'client-setOptions'">
 										高级设置
 									</a-button>
 
@@ -758,12 +758,12 @@
 									位客户
 								</span>
 									<span style="float:right;">
-									<a-button class="btn-primary2" @click="showModal1" type="primary" icon="tags"
+									<a-button class="btn-primary2" @click="showModal1" type="primary" 
 									          v-has="'client-remove-tag'">
 										移除标签
 									</a-button>
 									<a-button class="btn-primary2" @click="showModal" type="primary"
-									          icon="tags" v-has="'client-add-tag'">
+									           v-has="'client-add-tag'">
 										打标签
 									</a-button>
 									<a-button type="primary" @click="recordCustomer"

@@ -35,7 +35,7 @@
 							<a-col style="float:right;">
 								<a-button
 										type="primary"
-										icon="plus"
+										
 										:disabled="forbidden"
 										@click="add"
 										style="width: 150px;font-size:14px;" v-has="'redirect-add'">

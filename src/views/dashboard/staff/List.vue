@@ -25,15 +25,15 @@
 							<div class="content-hd-right">
 								最后一次同步时间：{{top.last_syn_time}}
 								<a-button class="btn-primary1"
-								          icon="reload" @click="confirm" v-has="'sync-address'">
+								           @click="confirm" v-has="'sync-address'">
 									同步企业微信通讯录
 								</a-button>
 								<!--								</a-popconfirm>-->
 								<a-button class="btn-primary1" @click="showModal" type="primary"
-								          icon="tags" v-has="'staff-add-tag'">
+								           v-has="'staff-add-tag'">
 									打标签
 								</a-button>
-								<a-button class="btn-primary1" @click="showModal1" type="primary" icon="tags"
+								<a-button class="btn-primary1" @click="showModal1" type="primary" 
 								          v-has="'staff-remove-tag'">
 									移除标签
 								</a-button>

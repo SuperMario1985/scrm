@@ -5,7 +5,7 @@
 				<label style="margin-left: 20px;">
 					{{title}}：
 				</label>
-				<a-button type="primary" style="float: right; margin: 9px 20px 0 0;" icon="rollback" @click="rollback">
+				<a-button type="primary" style="float: right; margin: 9px 20px 0 0;"  @click="rollback">
 					返回列表
 				</a-button>
 			</div>

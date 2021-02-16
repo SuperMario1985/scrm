@@ -8,7 +8,7 @@
 						<template v-if="typeof urlId == 'undefined'">新建</template>
 						<template v-if="typeof urlId != 'undefined'">修改</template>
 						渠道二维码
-						<a-button type="primary" icon="rollback" @click="goBack" style="float: right;margin-top: 9px;">
+						<a-button type="primary"  @click="goBack" style="float: right;margin-top: 9px;">
 							返回列表
 						</a-button>
 					</a-layout-header>

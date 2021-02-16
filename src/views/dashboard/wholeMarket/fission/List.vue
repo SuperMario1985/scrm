@@ -53,7 +53,7 @@
 											</a-tooltip>
 										</div>
 										<p style="margin: 10px 0 2px;color: #FF562D;">
-											在使用派发红包功能前，需要商户完成以下配置：
+											商户需完成以下配置，才能使用派发红包功能：：
 										</p>
 									</template>
 									<p style="margin-bottom: 2px;">
@@ -127,7 +127,7 @@
 								<a-col style="float:right;">
 									<a-button class="btn-primary"@click="addWelcomeText" type="primary"
 									          v-has="type == 1 ? 'wholeMarketFission-add' : 'wxWholeMarketFission-add'">
-										新建活动
+										创建活动
 									</a-button>
 								</a-col>
 							</div>
@@ -146,7 +146,7 @@
 										总参与人
 										<a-tooltip placement="bottom">
 						                    <template slot="title">
-						                      <span>生成了自己的专属海报即算参与人</span>
+						                      <span>生成自己的专属海报则参与人数+1</span>
 						                    </template>
 						                    <a-icon type="question-circle" style="margin-left:5px;"/>
 										</a-tooltip>
@@ -155,7 +155,7 @@
 										新增粉丝
 										<a-tooltip placement="bottom">
 						                    <template slot="title">
-						                      <span>参加活动且首次新关注的粉丝（在活动前，关注再取关，然后在活动期间再关注，不计入）</span>
+						                      <span>参加活动且首次关注公众号的粉丝（在参与活动之前关注了公众号再取消关注，然后在活动期间再次关注的不计入人数）</span>
 						                    </template>
 						                    <a-icon type="question-circle" style="margin-left:5px;"/>
 										</a-tooltip>
@@ -164,8 +164,8 @@
 										新增好友数
 										<a-tooltip placement="bottom">
 						                    <template slot="title">
-							                     <p style="margin-bottom: 2px">企业微信：添加员工企业微信的好友数量</p>
-						                      <p style="margin-bottom: 0px">企业微信+公众号：通过公众号添加企业微信的好友数量</p>
+							                     <p style="margin-bottom: 2px">企业微信：添加员工企业微信的客户数量</p>
+						                      <p style="margin-bottom: 0px">企业微信+公众号：过公众号添加企业微信的客户数量</p>
 						                    </template>
 						                    <a-icon type="question-circle" style="margin-left:5px;"/>
 					                    </a-tooltip>
@@ -174,7 +174,7 @@
 										流失好友数
 										<a-tooltip placement="bottom">
 						                    <template slot="title">
-						                      <span>通过该场活动，新客户添加引流成员后，客户又将引流成员删除/拉黑的流失人数。（不包含老客户，即之前通过别的方式添加引流成员）</span>
+						                      <span>通过该场活动，新客户添加企业引流成员后，客户又将企业引流成员删除/拉黑的人数，即为流失人数。（不包含老客户，即之前通过别的活动或方式添加引流成员的客户）</span>
 						                    </template>
 						                    <a-icon type="question-circle" style="margin-left:5px;"/>
 					                    </a-tooltip>
@@ -478,7 +478,7 @@
 				this.corpId = localStorage.getItem('corpId') ? localStorage.getItem('corpId') : ""
 				this.getActivityList()
 			},
-			// 新建活动
+			// 创建活动
 			addWelcomeText () {
 				if (localStorage.getItem('type') == 1) {
 					this.$router.push('/wholeMarket/fissionAdd')

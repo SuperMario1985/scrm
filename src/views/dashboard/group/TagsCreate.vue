@@ -53,7 +53,7 @@
 								<a-button @click="create" type="primary" v-has="'groupTags-add'">
 									新建拉群
 								</a-button>
-								<a-button icon="reload" @click="refresh" style="margin-left: 10px;width: 110px;"
+								<a-button  @click="refresh" style="margin-left: 10px;width: 110px;"
 								          v-has="'groupTags-list'">
 									更新数据
 								</a-button>

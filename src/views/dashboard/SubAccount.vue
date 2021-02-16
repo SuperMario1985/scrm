@@ -16,7 +16,7 @@
 				<a-col style="position: absolute;right: 20px;z-index: 999;">
 					<a-button
 							type="primary"
-							icon="plus"
+							
 							style="width: 150px;font-size:14px;"
 							@click="addSubAccount" v-has="'subAccount-add'"
 					>添加子账户

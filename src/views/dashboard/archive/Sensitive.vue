@@ -273,13 +273,13 @@
 													          v-has="'sensitive-words-close'">
 														批量关闭
 													</a-button>
-													<a-button class="btn-primary" icon="delete"
+													<a-button class="btn-primary" 
 													          @click="deleteCoustomTags()"
 													          :disabled="selectedRowKeys.length == 0" type="primary"
 													          v-has="'sensitive-words-delete'">
 														删除敏感词
 													</a-button>
-													<a-button class="btn-primary" icon="retweet"
+													<a-button class="btn-primary" 
 													          @click="showModalGroup(0)"
 													          :disabled="selectedRowKeys.length == 0" type="primary"
 													          v-has="'sensitive-words-remove'">

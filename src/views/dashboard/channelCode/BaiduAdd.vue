@@ -8,7 +8,7 @@
 						<template v-if="typeof urlId == 'undefined'">新建</template>
 						<template v-if="typeof urlId != 'undefined'">修改</template>
 						百度统计
-						<a-button type="primary" icon="rollback" @click="goBack"
+						<a-button type="primary"  @click="goBack"
 						          style="float: right;margin-top: 9px;">返回列表
 						</a-button>
 					</a-layout-header>
@@ -130,7 +130,7 @@
 											<div>
 												<a-button
 														v-show="info.specialWeekList[0].mon.length == 0 || info.specialWeekList[0].tues.length == 0 || info.specialWeekList[0].wednes.length == 0 || info.specialWeekList[0].thurs.length == 0 || info.specialWeekList[0].fri.length == 0 || info.specialWeekList[0].satur.length == 0 || info.specialWeekList[0].sun.length == 0 "
-														@click="addSpecialTime" icon="plus">
+														@click="addSpecialTime" >
 													添加
 												</a-button>
 												<!--												<a-icon @click="addSpecialTime" style="font-size: 20px;cursor: pointer;"-->
@@ -644,7 +644,7 @@
 													<div style="float: right;">
 														<a-button type="primary"
 														          style="height: 26px;width: 94px;padding: 0px 5px;margin-right: 10px; font-size: 12px;"
-														          icon="plus"
+														          
 														          v-show="index == info.specialDateList.length - 1"
 														          @click="addSpecialDate(index)">
 															添加时期

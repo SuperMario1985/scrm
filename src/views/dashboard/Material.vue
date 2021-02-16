@@ -103,19 +103,19 @@
 													v-if="$store.state.authorizer_type != 'unauthorized' && verify_service"
 											>
 												<a-button
-														icon="reload"
+														
 														:loading="loading1"
 														style="margin-left: 10px;"
 														@click="showPop"
 												>同步微信素材库
 												</a-button>
 											</a-popconfirm>
-											<a-button icon="reload" style="margin-left: 10px;"
+											<a-button  style="margin-left: 10px;"
 											          @click="showConfirmWx"
 											          v-if="$store.state.authorizer_type == 'unauthorized'">
 												同步微信素材库
 											</a-button>
-											<a-button icon="reload" style="margin-left: 10px;"
+											<a-button  style="margin-left: 10px;"
 											          @click="showVerify"
 											          v-if="$store.state.authorizer_type != 'unauthorized' && !verify_service">
 												同步微信素材库
@@ -304,19 +304,19 @@
 														v-if="$store.state.authorizer_type != 'unauthorized' && verify_service"
 												>
 													<a-button
-															icon="reload"
+															
 															:loading="loading1"
 															style="margin-left: 10px;"
 															@click="showPop"
 													>同步微信素材库
 													</a-button>
 												</a-popconfirm>
-												<a-button icon="reload" style="margin-left: 10px;"
+												<a-button  style="margin-left: 10px;"
 												          @click="showConfirmWx"
 												          v-if="$store.state.authorizer_type == 'unauthorized'">
 													同步微信素材库
 												</a-button>
-												<a-button icon="reload" style="margin-left: 10px;"
+												<a-button  style="margin-left: 10px;"
 												          @click="showVerify"
 												          v-if="$store.state.authorizer_type != 'unauthorized' && !verify_service">
 													同步微信素材库
@@ -436,19 +436,19 @@
 													v-if="$store.state.authorizer_type != 'unauthorized' && verify_service"
 											>
 												<a-button
-														icon="reload"
+														
 														:loading="loading1"
 														style="margin-left: 10px;"
 														@click="showPop"
 												>同步微信素材库
 												</a-button>
 											</a-popconfirm>
-											<a-button icon="reload" style="margin-left: 10px;"
+											<a-button  style="margin-left: 10px;"
 											          @click="showConfirmWx"
 											          v-if="$store.state.authorizer_type == 'unauthorized'">
 												同步微信素材库
 											</a-button>
-											<a-button icon="reload" style="margin-left: 10px;"
+											<a-button  style="margin-left: 10px;"
 											          @click="showVerify"
 											          v-if="$store.state.authorizer_type != 'unauthorized' && !verify_service">
 												同步微信素材库
@@ -542,19 +542,19 @@
 													v-if="$store.state.authorizer_type != 'unauthorized' && verify_service"
 											>
 												<a-button
-														icon="reload"
+														
 														:loading="loading1"
 														style="margin-left: 10px;"
 														@click="showPop"
 												>同步微信素材库
 												</a-button>
 											</a-popconfirm>
-											<a-button icon="reload" style="margin-left: 10px;"
+											<a-button  style="margin-left: 10px;"
 											          @click="showConfirmWx"
 											          v-if="$store.state.authorizer_type == 'unauthorized'">
 												同步微信素材库
 											</a-button>
-											<a-button icon="reload" style="margin-left: 10px;"
+											<a-button  style="margin-left: 10px;"
 											          @click="showVerify"
 											          v-if="$store.state.authorizer_type != 'unauthorized' && !verify_service">
 												同步微信素材库

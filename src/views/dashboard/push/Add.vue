@@ -8,7 +8,7 @@
 						<template v-if="typeof urlId == 'undefined'">新建</template>
 						<template v-if="typeof urlId != 'undefined'">修改</template>
 						推送计划
-						<a-button type="primary" icon="rollback" @click="goBack" style="float: right;margin-top: 9px;">
+						<a-button type="primary"  @click="goBack" style="float: right;margin-top: 9px;">
 							返回列表
 						</a-button>
 					</a-layout-header>
@@ -244,7 +244,7 @@
 											<!--											<a-button @click="addList" type="primary"style="width: 80px;">-->
 											<!--												增加-->
 											<!--											</a-button>-->
-											<!--											<a-button v-show="lists.length > 1" @click="removeList" icon="minus"-->
+											<!--											<a-button v-show="lists.length > 1" @click="removeList" -->
 											<!--											          style="width: 80px; margin-left: 20px;">删除-->
 											<!--											</a-button>-->
 											<!--										</div>-->
@@ -276,7 +276,7 @@
 														                @focus="getPushMinutes"/>
 														分钟后
 														<a-button v-show="lists.length > 1" @click="removeList"
-														          icon="minus"
+														          
 														          style="width: 80px; float: right;margin-right: 52px;">
 															删除
 														</a-button>

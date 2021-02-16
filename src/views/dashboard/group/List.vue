@@ -77,7 +77,7 @@
 									<template slot="title">
 										<p>确定同步吗？</p>
 									</template>
-								<a-button icon="reload" style="float: right;">
+								<a-button  style="float: right;">
 										同步群
 									</a-button>
 								</a-popconfirm>

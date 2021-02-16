@@ -588,7 +588,7 @@
 												</a-button>
 											</a-dropdown>
 											<a-button style="margin-left: 15px" class="btn-primary1"
-											          icon="reload" @click="syncFollowUser">
+											           @click="syncFollowUser">
 												同步配置了外部联系权限的联系人
 											</a-button>
 										</div>

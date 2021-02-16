@@ -3,7 +3,7 @@
 		<a-spin tip="加载中..." size="large" :spinning="isLoading">
 			<div style="height: 50px; line-height: 50px;background-color: #FFFFFF; padding: 0 20px;font-size: 16px">
 				<span v-if="!editId">新建</span><span v-if="editId">编辑</span>红包规则
-				<a-button type="primary" icon="rollback" style="font-size: 14px;float: right;margin-top: 9px;"
+				<a-button type="primary"  style="font-size: 14px;float: right;margin-top: 9px;"
 				          @click="goBack">返回列表
 				</a-button>
 			</div>

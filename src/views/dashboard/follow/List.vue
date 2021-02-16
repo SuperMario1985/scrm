@@ -65,11 +65,11 @@
 								<a-button @click="clear">重置</a-button>
 							</a-col>
 							<a-col style="float:right;">
-								<a-button class="btn-primary" icon="setting"
+								<a-button class="btn-primary" 
 								          @click="addSetting" type="primary" v-has="'follow-hign'">
 									高级设置
 								</a-button>
-								<a-button class="btn-primary" icon="plus"
+								<a-button class="btn-primary" 
 								          @click="addFollow" type="primary" v-has="'follow-rule'">
 									新增
 								</a-button>
@@ -174,7 +174,7 @@
 											<a-select-option value="0">选择当前页</a-select-option>
 											<a-select-option value="1">选择所有</a-select-option>
 										</a-select>
-										<a-button class="btn-primary" icon="edit"
+										<a-button class="btn-primary" 
 										          :disabled="selectedRowKeys.length == 0"
 										          @click="addFollowMore" type="primary" v-has="'follow-edit'">
 											批量编辑

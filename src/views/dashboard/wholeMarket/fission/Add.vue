@@ -5,7 +5,7 @@
 				<label style="font-size: 16px;line-height: 32px;">
 					<span v-if="id == ''">新建裂变引流</span>
 					<span v-else>【{{title}}】编辑</span></label>
-				<a-button type="primary" icon="rollback" style="font-size: 14px;float: right;" @click="goBack">返回列表
+				<a-button type="primary"  style="font-size: 14px;float: right;" @click="goBack">返回列表
 				</a-button>
 			</a-card>
 			<div class="content-msg" style="margin: 0 20px;width: auto;margin-bottom: 20px;"
@@ -37,7 +37,7 @@
 						<div v-show="current == 0" style="margin: 20px;">
 							<div class="content-msg" style="width: 100%;margin-bottom: 20px;" v-if="tabKey == 3">
 								<p style="margin-bottom: 2px;">
-									【企业微信+公众号】模式，需要关注公众号并且加员工企业微信为好友才算助力成功，故前提需将公众号和企业微信进行授权绑定，统一用户身份，才能判断出粉丝与客户（即好友）是否是同一人。
+									企业微信+公众号模式，需客户关注公众号且添加员工企业微信为好友才算助力成功，所以需提前将公众号与企业微信进行授权绑定，便于确认客户身份
 								</p>
 								<p style="margin-bottom: 0px;">
 									<span style="color: #FF562D;">由于官方接口限制，当系统存在多个公众号和企业微信，在创建活动时，只能人工仔细选择对应的已绑定上的企业微信和公众号，否则所有参与人无法完成活动，造成活动无效。</span><a
@@ -128,7 +128,7 @@
 							</a-form-item>
 							<a-form-item class="current0" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
 								<template slot="label"><span
-										style="color: red">*</span>结束设置
+										style="color: red">*</span>活动时间
 								</template>
 								<div>
 									<a-date-picker
@@ -466,7 +466,7 @@
 										好友助力次数
 										<a-tooltip placement="right" style="vertical-align: inherit;">
 											<template slot="title">
-												<span>在本场活动中，好友给某人助力后，再给其他人助力。如设置2次，本人给A人助力后，又可以给B人再助力1次。</span>
+												<span>在本场活动中，好友给某人助力后，再给其他人助力。如设置2次，本人给用户A助力后，又可以给用户B再助力。</span>
 											</template>
 											<a-icon type="question-circle" style="margin-left:5px;"/>
 										</a-tooltip>
@@ -790,7 +790,7 @@
 									<template slot="label">
 										引流设置
 									</template>
-									海报将展示对应带参数的二维码， 扫码后将引流到对应的企业成员
+									海报二维码自带对应参数，扫码后会将客户引流至对应的企业成员
 								</a-form-item>
 								<a-form-item class="current0" :label-col="{ span: 3 }" :wrapper-col="{ span: 21 }">
 									<template slot="label"><span
@@ -1236,7 +1236,7 @@
 							</a-form-item>
 							<a-form-item class="current0" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
 								<template slot="label"><span
-										style="color: red">*</span>结束设置
+										style="color: red">*</span>活动时间
 								</template>
 								<div>
 									<a-date-picker
@@ -1607,7 +1607,7 @@
 										好友助力次数
 										<a-tooltip placement="right" style="vertical-align: inherit;">
 											<template slot="title">
-												<span>在本场活动中，好友给某人助力后，再给其他人助力。如设置2次，本人给A人助力后，又可以给B人再助力1次。</span>
+												<span>在本场活动中，好友给某人助力后，再给其他人助力。如设置2次，本人给用户A助力后，又可以给用户B再助力。</span>
 											</template>
 											<a-icon type="question-circle" style="margin-left:5px;"/>
 										</a-tooltip>
@@ -1846,7 +1846,7 @@
 									<template slot="label">
 										引流设置
 									</template>
-									海报将展示对应带参数的二维码， 扫码后将引流到对应的企业成员
+									海报二维码自带对应参数，扫码后会将客户引流至对应的企业成员
 								</a-form-item>
 								<a-form-item class="current0" :label-col="{ span: 3 }" :wrapper-col="{ span: 21 }">
 									<template slot="label"><span
@@ -3385,7 +3385,7 @@
 				let hex = "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 				return hex;
 			},
-			// 新建活动
+			// 创建活动
 			async createActivity () {
 				this.createLoading = true
 				if (!this.checkout(0)) {

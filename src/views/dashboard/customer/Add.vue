@@ -6,7 +6,7 @@
 				<a-layout-header>
 					新建客服消息
 					<router-link to="/customer/list" style="font-size: 16px;float: right;margin-right: 15px;">
-						<a-button type="primary" icon="rollback">返回列表</a-button>
+						<a-button type="primary" >返回列表</a-button>
 					</router-link>
 				</a-layout-header>
 				<a-layout  class="fans-content">

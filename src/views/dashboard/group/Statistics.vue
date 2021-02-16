@@ -3,7 +3,7 @@
 		<a-spin tip="加载中..." size="large" :spinning="isLoading">
 			<div class="view-title">{{title}}
 				<router-link to="/group/list" style="font-size: 16px;float: right;margin-right: 15px;">
-					<a-button type="primary" icon="rollback">返回列表</a-button>
+					<a-button type="primary" >返回列表</a-button>
 				</router-link>
 			</div>
 			<div style="padding: 20px;">

@@ -3,7 +3,7 @@
 		<div>
 			<a-card style="margin-bottom:20px;padding:10px 20px;">
 				<label class="tpl-title">客户详情</label>
-				<a-button type="primary" icon="rollback" style="font-size: 14px;float: right;" @click="goBack">返回列表
+				<a-button type="primary"  style="font-size: 14px;float: right;" @click="goBack">返回列表
 				</a-button>
 			</a-card>
 

@@ -41,7 +41,7 @@
 									</a-menu>
 									<a-button
 											type="primary"
-											icon="plus"
+											
 											style="width: 150px;font-size:14px;" v-has="'redirect-add'">
 										新建
 										<a-icon type="down"/>

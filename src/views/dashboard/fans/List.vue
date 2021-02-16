@@ -195,22 +195,22 @@
 							<div class="content-hd-right">
 								<a-button class="btn-primary1" @click="showModal" type="primary"
 								          v-if="$store.state.authorizer_type != 'unauthorized' && verify_service"
-								          icon="tags" v-has="'fans-add-tag'">
+								           v-has="'fans-add-tag'">
 									打标签
 								</a-button>
 								<a-button class="btn-primary1" @click="showConfirmWx" type="primary"
 								          v-if="$store.state.authorizer_type == 'unauthorized' || !verify_service"
-								          icon="tags" v-has="'fans-add-tag'">
+								           v-has="'fans-add-tag'">
 									打标签
 								</a-button>
 								<a-button class="btn-primary1" @click="showModal1" type="primary"
 								          v-if="$store.state.authorizer_type != 'unauthorized' && verify_service"
-								          icon="tags" v-has="'fans-remove-tag'">
+								           v-has="'fans-remove-tag'">
 									移除标签
 								</a-button>
 								<a-button class="btn-primary1" @click="showConfirmWx" type="primary"
 								          v-if="$store.state.authorizer_type == 'unauthorized' || !verify_service"
-								          icon="tags" v-has="'fans-remove-tag'">
+								           v-has="'fans-remove-tag'">
 									移除标签
 								</a-button>
 								<a-button
@@ -310,13 +310,13 @@
 									</template>
 									<a-button class="btn-primary1"
 									          v-if="$store.state.authorizer_type != 'unauthorized' && verify_service "
-									          icon="reload" v-has="'fans-sync'">
+									           v-has="'fans-sync'">
 										同步粉丝
 									</a-button>
 								</a-popconfirm>
 								<a-button class="btn-primary1"
 								          v-if="$store.state.authorizer_type == 'unauthorized' || !verify_service"
-								          icon="reload"
+								          
 								          @click="showConfirmWx" v-has="'fans-sync'">
 									同步粉丝
 								</a-button>

@@ -3,7 +3,7 @@
 		<div style="height: 60px; line-height: 60px;background-color: #FFFFFF;border-bottom: 1px solid #E2E2E2;font-size: 16px;padding: 0px 20px;">
 			粉丝详情
 			<router-link to="/fans/list" style="font-size: 16px;float: right;">
-				<a-button type="primary" icon="rollback">返回列表</a-button>
+				<a-button type="primary" >返回列表</a-button>
 			</router-link>
 		</div>
 		<div class="layout-left">

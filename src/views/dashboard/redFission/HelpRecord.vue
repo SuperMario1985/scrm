@@ -2,7 +2,7 @@
 	<div style="width: 100%;height:100%;position: absolute;overflow-y: auto;" class="scroll">
 		<div style="height: 50px; line-height: 50px;background-color: #FFFFFF;">
 			<label style="margin-left: 20px">{{name}}</label>
-			<a-button style="float: right;margin: 9px 20px 0;" type="primary" icon="rollback" @click="rollback">返回列表
+			<a-button style="float: right;margin: 9px 20px 0;" type="primary"  @click="rollback">返回列表
 			</a-button>
 		</div>
 		<div style="margin: 10px 20px; background-color: #FFFFFF">

@@ -29,7 +29,7 @@
 				<a-col style="float:right;">
 					<a-button
 							type="primary"
-							icon="plus" @click="addRules" v-has="'highSeasCustomerRecyclingRules-add'"
+							 @click="addRules" v-has="'highSeasCustomerRecyclingRules-add'"
 					>客户回收规则
 					</a-button>
 				</a-col>

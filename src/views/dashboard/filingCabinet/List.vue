@@ -179,7 +179,7 @@
 										<a-button @click="clearInput" style="margin-left: 10px;">
 											清空
 										</a-button>
-										<a-button style="float: right;margin-right: 10px;" icon="reload"
+										<a-button style="float: right;margin-right: 10px;" 
 										          @click="showPop"
 										          :loading="sketchWxLoading" v-has="'material-sync'">
 											同步公众号
@@ -955,7 +955,7 @@
 													清空
 												</a-button>
 												<a-button v-show="!isMoveType" style="float: right;margin-right: 10px;"
-												          icon="reload"
+												          
 												          @click="showPop"
 												          :loading="picWxLoading" v-has="'material-sync'">
 													同步公众号
@@ -1264,7 +1264,7 @@
 											<a-button @click="clearInput" style="margin-left: 10px;">
 												清空
 											</a-button>
-											<a-button style="float: right;margin-right: 10px;" icon="reload"
+											<a-button style="float: right;margin-right: 10px;" 
 											          @click="showPop"
 											          :loading="voiceWxLoading" v-has="'material-sync'">
 												同步公众号
@@ -1524,7 +1524,7 @@
 											<a-button @click="clearInput" style="margin-left: 10px;">
 												清空
 											</a-button>
-											<a-button style="float: right;margin-right: 10px;" icon="reload"
+											<a-button style="float: right;margin-right: 10px;" 
 											          @click="showPop"
 											          :loading="videoWxLoading" v-has="'material-sync'">
 												同步公众号

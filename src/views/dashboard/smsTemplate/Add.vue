@@ -6,7 +6,7 @@
 				<a-layout-header>
 					新建模版申请
 					<router-link to="/smsTemplate/list" style="font-size: 16px;float: right;margin-right: 15px;">
-						<a-button type="primary" icon="rollback">返回列表</a-button>
+						<a-button type="primary" >返回列表</a-button>
 					</router-link>
 				</a-layout-header>
 				<a-layout style class="fans-content">

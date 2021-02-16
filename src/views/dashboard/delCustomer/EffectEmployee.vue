@@ -51,7 +51,7 @@
 					<a-button @click="clear">重置</a-button>
 				</a-col>
 				<a-col style="float:right;" v-has="'deleteCustomer-add'">
-					<a-button class="btn-primary" icon="plus"
+					<a-button class="btn-primary" 
 					          @click="addNotice" type="primary">
 						生效员工
 					</a-button>
