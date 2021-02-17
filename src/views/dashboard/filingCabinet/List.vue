@@ -197,7 +197,6 @@
 										<a-button @click="batchMove" style="float: right;margin-right: 10px;"
 										          :disabled="selectedRowKeys.length == 0"
 										          v-has="'material-remove'">
-											<a-icon type="retweet"/>
 											批量移动
 										</a-button>
 										<!--												<p @click="batchDelete" style="cursor: pointer;"-->
@@ -549,12 +548,10 @@
 												<a-button @click="batchMove" style="margin-right: 5px"
 												          :disabled="selectedRowKeys.length == 0"
 												          v-has="'material-remove'">
-													<a-icon type="retweet"/>
 													批量移动
 												</a-button>
 												<a-button @click="batchDelete" :disabled="selectedRowKeys.length == 0"
 												          v-has="'material-delete'">
-													<a-icon type="delete"/>
 													批量删除
 												</a-button>
 											</div>
@@ -899,7 +896,6 @@
 											</a-select>
 											<a-button @click="batchMove" style="margin-right: 5px"
 											          :disabled="selectedRowKeys.length == 0" v-has="'material-remove'">
-												<a-icon type="retweet"/>
 												批量移动
 											</a-button>
 										</div>
@@ -963,7 +959,6 @@
 												<a-button type="primary" @click="showModal"
 												          style="float: right;margin-right: 10px;"
 												          v-has="'material-add'">
-													<a-icon type="upload"/>
 													上传图片
 												</a-button>
 											</div>
@@ -1200,17 +1195,14 @@
 											</a-select>
 											<a-button @click="batchMove" style="margin-right: 5px"
 											          :disabled="selectedRowKeys.length == 0" v-has="'material-remove'">
-												<a-icon type="retweet"/>
 												批量移动
 											</a-button>
 											<a-button @click="batchDelete" :disabled="selectedRowKeys.length == 0"
 											          v-has="'material-delete'">
-												<a-icon type="delete"/>
 												批量删除
 											</a-button>
 											<a-button style="margin-left: 5px;" @click="batchUpload"
 											          :disabled="selectedRowKeys.length == 0">
-												<a-icon type="delete"/>
 												批量下载
 											</a-button>
 										</div>
@@ -1271,7 +1263,6 @@
 											</a-button>
 											<a-button type="primary" @click="showModalVoice"
 											          style="float: right;margin-right: 10px;" v-has="'material-add'">
-												<a-icon type="upload"/>
 												上传音频
 											</a-button>
 										</div>
@@ -1465,12 +1456,10 @@
 											</a-select>
 											<a-button @click="batchMove" style="margin-right: 5px"
 											          :disabled="selectedRowKeys.length == 0" v-has="'material-remove'">
-												<a-icon type="retweet"/>
 												批量移动
 											</a-button>
 											<a-button @click="batchDelete" :disabled="selectedRowKeys.length == 0"
 											          v-has="'material-delete'">
-												<a-icon type="delete"/>
 												批量删除
 											</a-button>
 										</div>
@@ -1531,7 +1520,6 @@
 											</a-button>
 											<a-button type="primary" @click="showModalVideo"
 											          style="float: right;margin-right: 10px;" v-has="'material-add'">
-												<a-icon type="upload"/>
 												上传视频
 											</a-button>
 										</div>
@@ -1680,12 +1668,10 @@
 											</a-select>
 											<a-button @click="batchMove" style="margin-right: 5px"
 											          :disabled="selectedRowKeys.length == 0" v-has="'material-remove'">
-												<a-icon type="retweet"/>
 												批量移动
 											</a-button>
 											<a-button @click="batchDelete" :disabled="selectedRowKeys.length == 0"
 											          v-has="'material-delete'">
-												<a-icon type="delete"/>
 												批量删除
 											</a-button>
 										</div>
@@ -1744,7 +1730,6 @@
 											</div>
 											<a-button type="primary" @click="showModalMiniprogram"
 											          style="float: right;margin-right: 10px;" v-has="'material-add'">
-												<a-icon type="plus"/>
 												添加小程序
 											</a-button>
 										</div>
@@ -1931,12 +1916,10 @@
 											</a-select>
 											<a-button @click="batchMove" style="margin-right: 5px"
 											          :disabled="selectedRowKeys.length == 0" v-has="'material-remove'">
-												<a-icon type="retweet"/>
 												批量移动
 											</a-button>
 											<a-button @click="batchDelete" :disabled="selectedRowKeys.length == 0"
 											          v-has="'material-delete'">
-												<a-icon type="delete"/>
 												批量删除
 											</a-button>
 										</div>
@@ -1994,7 +1977,6 @@
 											</div>
 											<a-button type="primary" @click="showModalFile"
 											          style="float: right; margin-right: 10px;" v-has="'material-add'">
-												<a-icon type="upload"/>
 												上传文件
 											</a-button>
 										</div>
@@ -2201,12 +2183,10 @@
 											</a-select>
 											<a-button @click="batchMove" style="margin-right: 5px"
 											          :disabled="selectedRowKeys.length == 0" v-has="'material-remove'">
-												<a-icon type="retweet"/>
 												批量移动
 											</a-button>
 											<a-button @click="batchDelete" :disabled="selectedRowKeys.length == 0"
 											          v-has="'material-delete'">
-												<a-icon type="delete"/>
 												批量删除
 											</a-button>
 										</div>
@@ -2248,12 +2228,10 @@
 
 											<a-button type="primary" @click="showModalText"
 											          style="float: right;margin-right: 10px;" v-has="'material-add'">
-												<a-icon type="plus"/>
 												添加文本
 											</a-button>
 											<a-button type="primary" @click="importExcel"
 											                     style="float: right;margin-right: 10px;" v-has="'material-add'">
-												<a-icon type="plus"/>
 												导入文本
 											</a-button>
 										</div>
@@ -2349,12 +2327,10 @@
 											</a-select>
 											<a-button @click="batchMove" style="margin-right: 5px"
 											          :disabled="selectedRowKeys.length == 0" v-has="'material-remove'">
-												<a-icon type="retweet"/>
 												批量移动
 											</a-button>
 											<a-button @click="batchDelete" :disabled="selectedRowKeys.length == 0"
 											          v-has="'material-delete'">
-												<a-icon type="delete"/>
 												批量删除
 											</a-button>
 										</div>
@@ -6571,11 +6547,9 @@
 	.account-filter-item.active {
 		background: #FFF;
 		border: 1px solid #E9E9E9;
-		height: 56px;
-		margin-top: -8px;
 		border: 1px solid #E0E0E0;
 		border-bottom: 0;
-		padding-top: 19px;
+		padding-top: 14px;
 	}
 
 	.content-msg1 {
