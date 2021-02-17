@@ -74,7 +74,7 @@
 									                    <p style="margin-bottom: 0;line-height: 25px;">未发送：未到指定的时间点，尚不发送</p>
 								                        <p style="margin-bottom: 0;line-height: 25px;">发送中：在跑队列，还没全部发送完</p>
 								                        <p style="margin-bottom: 0;line-height: 25px;">发送失败：所有人的短信发送都失败了</p>
-								                        <p style="margin-bottom: 0;line-height: 25px;">已发送：全部人都发送过了，不论这人是否是什么样的状态</p>
+								                        <p style="margin-bottom: 0;line-height: 25px;">已发送：全部人都发送过了，不论这些人的发送状态是成功还是失败</p>
 								                    </div>
 							                    </template>
 							                    <a-icon type="question-circle" style="margin-left:5px;"/>

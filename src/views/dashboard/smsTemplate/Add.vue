@@ -65,10 +65,12 @@
 										</div>
 										<div class="content-msg">
 											<p style="margin-bottom: 0px;line-height: 25px;">模板内容填写注意：</p>
-											<p style="margin-bottom: 0px;line-height: 25px;">1、内容需语意明确，不得有粗话、脏话不文明内容；</p>
-											<p style="margin-bottom: 0px;line-height: 25px;">2、链接前后需加空格，以保证手机接收短信能正常打开；</p>
-											<p style="margin-bottom: 0px;line-height: 25px;">3、不得含有"加QQ"，"微信"等字眼；</p>
-											<p style="margin-bottom: 0px;line-height: 25px;">4、营销短信类型系统会在短信末尾统一添加“退订回T”。</p>
+											<p style="margin-bottom: 0px;line-height: 25px;">1、禁止发送金融、地产、教育、招聘、股票、相关的所有内容。</p>
+											<p style="margin-bottom: 0px;line-height: 25px;">2、验证码以及系统通知类短信不支持营销内容。</p>
+											<p style="margin-bottom: 0px;line-height: 25px;">3、营销推广短信不支持给非会员用户发送营销短信；</p>
+											<p style="margin-bottom: 0px;line-height: 25px;">4、链接前后需加空格，以保证手机短信能够正常接收。</p>
+											<p style="margin-bottom: 0px;line-height: 25px;">5、营销短信发送时间：每日9：00-20:00，尽量避免夜间发送，减少用户投诉。</p>
+											<p style="margin-bottom: 0px;line-height: 25px;">6、营销短信类型系统会在短信末尾统一添加“退订回T”。</p>
 										</div>
 										<div style="height: 20px;border-bottom: 1px solid #E0E0E0;"></div>
 										<div style="margin-top: 15px;">

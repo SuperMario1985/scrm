@@ -68,16 +68,16 @@
 <script>
 	const columns = [
 		{
-			title      : "申请时间",
-			dataIndex  : "apply_time",
-			width      : "15%",
-			key        : "apply_time"
-		},
-		{
 			title      : "签名",
 			dataIndex  : "title",
 			width      : "8%",
 			key        : "title"
+		},
+		{
+			title      : "申请时间",
+			dataIndex  : "apply_time",
+			width      : "15%",
+			key        : "apply_time"
 		},
 		{
 			title      : "审核状态",

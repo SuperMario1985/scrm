@@ -15,10 +15,10 @@
 								<a-collapse-panel key="1">
 									<template slot="header">
 										<p style="margin-bottom: 10px; font-weight: 700">
-											任务裂变，为奖励式分享任务机制，通过有吸引力的奖品，邀请多个好友助力，可免费获得，以此诱导用户在自己的社交圈进行传播，一传二、二传四的模式，指数级增长。
+											任务裂变，通过完成分享任务来领取奖励的任务机制，邀请多个好友可免费获得奖品，以此来吸引用户在自己的社交圈进行传播,一传二、二传四的模式，指数级增长。
 										</p>
 										<p style="margin-bottom: 2px;">
-											<span style="color: #FF562D;">目前我们云美来SCRM系统存在三种裂变模式：至于使用哪种裂变模式，商家可根据自身情况而定。任务裂变目前公众号仅支持认证服务号。</span>
+											<span style="color: #FF562D;">目前我们SCRM系统存在三种裂变模式：商家根据自身需求确定使用哪种裂变模式。任务裂变目前公众号仅支持认证服务号。</span>
 
 										</p>
 										<p style="margin-bottom: 2px;">
@@ -165,7 +165,7 @@
 										<a-tooltip placement="bottom">
 						                    <template slot="title">
 							                     <p style="margin-bottom: 2px">企业微信：添加员工企业微信的客户数量</p>
-						                      <p style="margin-bottom: 0px">企业微信+公众号：过公众号添加企业微信的客户数量</p>
+						                      <p style="margin-bottom: 0px">企业微信+公众号：通过公众号添加企业微信的客户数量</p>
 						                    </template>
 						                    <a-icon type="question-circle" style="margin-left:5px;"/>
 					                    </a-tooltip>
