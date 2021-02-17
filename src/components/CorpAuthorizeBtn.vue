@@ -1,7 +1,7 @@
 <template>
 	<div v-show="need" style="width: 100%;padding: 100px;">
-		<img src="../assets/corpAuthorize1.png" alt="" class="authorize">
-		<a-button type="primary" class="btn" @click="addAccount">立即授权</a-button>
+		<img src="../assets/authorize.png" alt="" class="authorize">
+		<div style="color: #666666;text-align: center;margin: 40px 0 32px;">尚未授权已认证的企业微信/公众号，该功能无法使用～</div>
 		<!-- 点击添加公众号弹窗 -->
 		<corpAuthorize :show="showWxModal" @cancel="cancel"></corpAuthorize>
 	</div>
@@ -45,8 +45,8 @@
 
 <style lang='less' scoped>
 	.authorize {
-		width: 283px;
-		height: 230px;
+		width: 380px;
+		height: 224px;
 		display: block;
 		margin: auto;
 	}
