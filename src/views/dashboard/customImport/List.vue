@@ -6,7 +6,7 @@
 				<!-- <a-card style="margin-bottom:20px;padding:10px 20px;">
 					<label class="tpl-title">客户导入分配</label>
 				</a-card> -->
-				<div class="content-msg" style="margin: 0 20px 20px;">
+				<div class="content-msg" style="margin: 0 20px 20px;box-shadow: 0px 1px 4px 0px #D7D7D7">
 					下载Ecxel模板表格后输入手机号上传，表格内手机号将随机配给企业员工，分配完成后员工会在企业微信收到添加好友的任务，需要企业员工手动添加客户。
 				</div>
 
@@ -16,7 +16,7 @@
 					<span @click="changeTab(2)" class="tabBtn" :class="{activeBtn:tabKey == 2}"
 								v-has="'customImportList-people'">客户列表</span>
 				</div>
-				<div v-show="tabKey == 1" style="padding: 15px 0;margin: 0px 20px;background: #FFF;">
+				<div v-show="tabKey == 1" style="padding: 15px 0;background: #FFF;">
 					<a-col style="background: #FFF;padding: 10px;margin: 0 20px;margin-top: 1px;overflow:hidden;">
 						<a-button type="primary" @click="importExcel" style="float: right;"
 											v-has="'customImportList-all-export'">导入Excel
@@ -122,7 +122,7 @@
 						</a-spin>
 					</div>
 				</div>
-				<div v-show="tabKey == 2" style="padding: 15px 0;margin: 0px 20px;background: #FFF;">
+				<div v-show="tabKey == 2" style="padding: 15px 0;background: #FFF;">
 					<a-col style="background: #FFF;padding: 10px;margin: 0 20px;margin-top: 1px;">
 						<a-input
 								style="width: 170px;margin-right: 10px;"
