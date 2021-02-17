@@ -176,24 +176,12 @@
   background: url(../../assets/menu/icon-address-active.png) center center no-repeat;
   background-size: 14px 14px;
 }
-.menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-agent {
-  background: url(../../assets/menu/icon-agent-active.png) center center no-repeat;
-  background-size: 14px 14px;
-}
-.menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-appCenterList {
-  background: url(../../assets/menu/icon-appCenterList-active.png) center center no-repeat;
-  background-size: 14px 14px;
-}
 .menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-archive {
   background: url(../../assets/menu/icon-archive-active.png) center center no-repeat;
   background-size: 14px 14px;
 }
 .menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-channel {
   background: url(../../assets/menu/icon-channel-active.png) center center no-repeat;
-  background-size: 14px 14px;
-}
-.menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-circleOfFriends {
-  background: url(../../assets/menu/icon-circleOfFriends-active.png) center center no-repeat;
   background-size: 14px 14px;
 }
 .menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-drainage {
@@ -212,10 +200,6 @@
   background: url(../../assets/menu/icon-manage-active.png) center center no-repeat;
   background-size: 14px 14px;
 }
-.menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-massMessage {
-  background: url(../../assets/menu/icon-massMessage-active.png) center center no-repeat;
-  background-size: 14px 14px;
-}
 .menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-red {
   background: url(../../assets/menu/icon-red-active.png) center center no-repeat;
   background-size: 14px 14px;
@@ -224,32 +208,12 @@
   background: url(../../assets/menu/icon-redForNew-active.png) center center no-repeat;
   background-size: 14px 14px;
 }
-.menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-redirect {
-  background: url(../../assets/menu/icon-redirect-active.png) center center no-repeat;
-  background-size: 14px 14px;
-}
-.menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-sidebar {
-  background: url(../../assets/menu/icon-sidebar-active.png) center center no-repeat;
-  background-size: 14px 14px;
-}
 .menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-sms {
   background: url(../../assets/menu/icon-sms-active.png) center center no-repeat;
   background-size: 14px 14px;
 }
-.menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-subAccount {
-  background: url(../../assets/menu/icon-subAccount-active.png) center center no-repeat;
-  background-size: 14px 14px;
-}
 .menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-todoManagement {
   background: url(../../assets/menu/icon-todoManagement-active.png) center center no-repeat;
-  background-size: 14px 14px;
-}
-.menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-wechatManagement {
-  background: url(../../assets/menu/icon-wechatManagement-active.png) center center no-repeat;
-  background-size: 14px 14px;
-}
-.menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-welcome {
-  background: url(../../assets/menu/icon-welcome-active.png) center center no-repeat;
   background-size: 14px 14px;
 }
 .menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-wxDrainage {
@@ -258,10 +222,6 @@
 }
 .menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-team {
   background: url(../../assets/menu/icon-team-active.png) center center no-repeat;
-  background-size: 14px 14px;
-}
-.menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-fansMsg {
-  background: url(../../assets/menu/icon-fansMsg-active.png) center center no-repeat;
   background-size: 14px 14px;
 }
 .menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-message {
@@ -276,14 +236,6 @@
   background: url(../../assets/menu/icon-filingCabinet-active.png) center center no-repeat;
   background-size: 14px 14px;
 }
-.menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-account {
-  background: url(../../assets/menu/icon-account-active.png) center center no-repeat;
-  background-size: 14px 14px;
-}
-.menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-mini {
-  background: url(../../assets/menu/icon-mini-active.png) center center no-repeat;
-  background-size: 14px 14px;
-}
 .menu-sider /deep/ .ant-menu-item-selected {
   color: #28352f !important;
   background: #DEF0E8;
@@ -294,6 +246,54 @@
 }
 .menu-sider /deep/ .ant-menu-item-selected .icon-base.icon-operationCenter {
   background: url(../../assets/menu/icon-operationCenter-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-item-selected .icon-base.icon-redirect {
+  background: url(../../assets/menu/icon-redirect-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-item-selected .icon-base.icon-circleOfFriends {
+  background: url(../../assets/menu/icon-circleOfFriends-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-item-selected .icon-base.icon-welcome {
+  background: url(../../assets/menu/icon-welcome-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-item-selected .icon-base.icon-sidebar {
+  background: url(../../assets/menu/icon-sidebar-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-item-selected .icon-base.icon-massMessage {
+  background: url(../../assets/menu/icon-massMessage-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-item-selected .icon-base.icon-appCenterList {
+  background: url(../../assets/menu/icon-appCenterList-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-item-selected .icon-base.icon-agent {
+  background: url(../../assets/menu/icon-agent-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-item-selected .icon-base.icon-fansMsg {
+  background: url(../../assets/menu/icon-fansMsg-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-item-selected .icon-base.icon-account {
+  background: url(../../assets/menu/icon-account-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-item-selected .icon-base.icon-mini {
+  background: url(../../assets/menu/icon-mini-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-item-selected .icon-base.icon-subAccount {
+  background: url(../../assets/menu/icon-subAccount-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-item-selected .icon-base.icon-wechatManagement {
+  background: url(../../assets/menu/icon-wechatManagement-active.png) center center no-repeat;
   background-size: 14px 14px;
 }
 .menu-sider .ant-menu-vertical .ant-menu-submenu-active {
