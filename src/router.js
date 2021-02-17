@@ -24,6 +24,7 @@ import WechatManagement from './views/dashboard/WechatManagement.vue'
 import SubAccount from './views/dashboard/SubAccount.vue'
 // import Integration from './views/dashboard/Integration.vue'
 import ChooseAccount from './views/dashboard/ChooseAccount.vue'
+import Index from './layouts/Index.vue'
 
 Vue.use(Router)
 
@@ -56,6 +57,7 @@ var router = new Router({
 		{ path: '/register', component: Register },
 		{ path: '/regist', component: Regist },
 		{ path: '/chooseAccount', component: ChooseAccount },
+		{ path: '/index', component: Index },
 		{
 			path: '/',
 			component: DashboardLayout,
