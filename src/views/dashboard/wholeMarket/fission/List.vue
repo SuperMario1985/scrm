@@ -53,7 +53,7 @@
 											</a-tooltip>
 										</div>
 										<p style="margin: 10px 0 2px;color: #FF562D;">
-											商户需完成以下配置，才能使用派发红包功能：：
+											商户需完成以下配置，才能使用派发红包功能：
 										</p>
 									</template>
 									<p style="margin-bottom: 2px;">

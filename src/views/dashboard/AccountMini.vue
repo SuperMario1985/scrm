@@ -3,7 +3,6 @@
 		<div>
 			<a-card style="margin-bottom:20px;padding:10px 20px;">
 				<label class="tpl-title">小程序管理</label>
-				<help-icon help-url="https://support.qq.com/products/104790/faqs/64259"></help-icon>
 			</a-card>
 			<div class="content-msg">
 				<p style="margin-bottom: 2px;">

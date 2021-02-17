@@ -30,7 +30,7 @@
 								</a-tooltip>
 							</div>
 							<p style="margin: 10px 0 2px;color: red;">
-								商户需完成以下配置，才能使用派发红包功能：：
+								商户需完成以下配置，才能使用派发红包功能：
 							</p>
 							<p style="margin-bottom: 2px;">
 								1、前往<a href="https://pay.weixin.qq.com/index.php/core/home/login?return_url=%2F"

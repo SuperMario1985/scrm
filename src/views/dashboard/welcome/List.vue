@@ -11,7 +11,7 @@
 					<a-layout-content>
 						<div style="font-size:16px;font-weight:700;color:#333333">欢迎语</div>
 						<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7;padding:16px">
-							<p style="margin-bottom: 2px;">1、欢迎语又称新好友自动回复，此处可添加文字、图片、图文链接及小程序，客户来了不用担心冷场！</p>
+							<p style="margin-bottom: 2px;">1、欢迎语可设置文字、图片、图文链接以及小程序，可减少客户距离感</p>
 							<p style="margin-bottom: 2px;">
 								2、每个企业成员均可以拥有不同的欢迎语。当通用的欢迎语和个人专属的欢迎语并存的情况下，优先自动回复个人专属的欢迎语。</p>
 							<p style="margin-bottom: 0px;">
@@ -43,7 +43,7 @@
 							<a-col style="float:right;">
 								<a-button class="btn-primary"@click="addWelcomeText()" type="primary"
 								          v-has="'welcome-add'">
-									新建欢迎语
+									创建欢迎语
 								</a-button>
 							</a-col>
 						</div>

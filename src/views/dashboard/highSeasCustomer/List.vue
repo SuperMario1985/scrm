@@ -11,14 +11,14 @@
 			<div style="background-color: #FFF;margin: 0 20px;padding-top: 10px;" v-if="tabKey == 1">
 				<div style="font-size:16px;font-weight:700;color:#333333;margin:16px">客户公海</div>
 				<div class="content-msg" style="margin: 0 20px; box-shadow: 0px 1px 4px 0px #D7D7D7">
-					<p style="margin-bottom: 2px;">
+					<!-- <p style="margin-bottom: 2px;">
 						为了避免销售人员长时间沟通无果或是恶意保护占有客户资源，在达到客户回收条件后，则在【客户公海】--【企微客户】--【可认领】列表里生成一条该企微客户数据。
-					</p>
+					</p> -->
 					<p style="margin-bottom: 2px;">
 						当被其他员工认领时，该企微客户进入到【已认领】列表。
 					</p>
 					<p style="margin-bottom: 2px;">
-						1、员工在职期间，若该企微客户尚未达被员工分配过2次且原归属关系超过90个自然日，<span style="color: red;">认领后，客户和接替的员工将在24小时后自动成为联系人；如果客户主动拒绝，接替员工还可选择主动添加。</span>
+						1、员工在职期间，如果该企微客户只分配员工1次且归属关系超过90个自然日，<span style="color: red;">认领后，客户和接替的员工将在24小时后自动成为联系人；如果客户主动拒绝，接替员工还可选择主动添加。</span>
 						<a-tooltip placement="right">
 							<template slot="title">
 								<img src="../../../assets/highSeasCustomer/1.png" alt="" style="width: 100%;">
@@ -28,7 +28,7 @@
 						</a-tooltip>
 					</p>
 					<p style="margin-bottom: 2px;">
-						2、员工在职期间，若该企微客户已被员工分配过2次或是在90个自然日的服务关系保护期内，认领即向该客户的原归属员工，发送“共享通知”
+						2、员工在职期间，如果该企微客户已被员工分配过2次或2次以上或是在90个自然日的服务关系保护期内，认领即向该客户的原归属员工，发送“共享通知”。
 						<a-tooltip placement="right">
 							<template slot="title">
 								<img src="../../../assets/highSeasCustomer/3.png" alt="" style="width: 100%;">
@@ -37,7 +37,7 @@
 						</a-tooltip>
 						。
 					</p>
-					<div style="margin-left: 22px;"><span style="color: red;">至于原员工是否愿意共享，客户是否愿意加上认领的员工，认领的员工是否通过共享而加上该客户，均为线下行为，本系统只提供符合共享的客户数据。</span>在期间会存在以下可能：
+					<div style="margin-left: 22px;">在期间会存在以下可能：
 					</div>
 					<p style="margin-bottom: 2px;margin-left: 22px;">
 						a、当同一客户，被不同员工归属时，若均符合共享条件时，会在【客户公海】--【企微客户】列表生成多条企微客户数据，但针对同一客户同一员工，永远只会显示一条数据。

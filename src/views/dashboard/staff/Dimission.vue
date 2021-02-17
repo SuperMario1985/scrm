@@ -10,7 +10,7 @@
 					<a-layout-content>
 						<div style="font-size:16px;font-weight:700;color:#333333">离职继承</div>
 						<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7;padding:16px">
-							从通讯录将离职员工删除后，可以分配他的客户及客户群给其他员工继续跟进，<span style="color: #FF562D;">且客户及客户群信息也一并给接替的员工。</span>
+							将离职员工的客户以及客户群分配给其他员工继续跟进，<span style="color: #FF562D;">且客户与客户群信息也一起交接给接替的员工，防止客户流失。</span>
 						</div>
 						<div class="content-hd">
 							<a-col style="float: left;">

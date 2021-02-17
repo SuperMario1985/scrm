@@ -304,7 +304,7 @@ export default {
 .ant-table {
   color: #333;
   table {
-    box-shadow: none!important;
+    box-shadow: none !important;
   }
   td {
     .ant-btn {
@@ -363,4 +363,16 @@ export default {
     display: none;
   }
 }
+// .ant-tooltip {
+//   .ant-tooltip-inner {
+//     min-width: 30px;
+//     min-height: 32px;
+//     padding: 6px 8px;
+//     color: #000;
+//     text-align: left;
+//     text-decoration: none;
+//     word-wrap: break-word;
+//     background-color: rgba(256, 256, 256, 1);
+//   }
+// }
 </style>

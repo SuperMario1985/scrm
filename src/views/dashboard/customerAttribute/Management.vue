@@ -431,7 +431,7 @@
 			scopedSlots: {customRender: "titleMsg"}
 		},
 		{
-			title      : "填写格式",
+			title      : "字段格式",
 			dataIndex  : "type",
 			key        : "type",
 			width      : '10%',

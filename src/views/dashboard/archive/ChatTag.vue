@@ -5,7 +5,7 @@
 				<div style="font-size:16px;font-weight:700;color:#333333">聊天打标签</div>
 				<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7">
 					<p style="margin-bottom: 2px;">
-						基于开启会话存档功能，当客户与员工聊天中，客户命中关键词时，该员工可自动打上客户标签，实现对客户标签的自动化管理，客户画像更智能精准。</p>
+						首先要开启会话存档功能，当客户与员工聊天时，客户命中关键词时，该客户会被自动打上客户标签，实现对客户标签的自动化管理，客户画像更智能精准。</p>
 					<p style="margin-bottom: 2px;">
 						1、标签规则删除后，其关联的客户标签，在生效员工列表，该标签不再显示。</p>
 					<p style="margin-bottom: 0px;">

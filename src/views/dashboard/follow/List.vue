@@ -71,7 +71,7 @@
 								</a-button>
 								<a-button class="btn-primary" 
 								          @click="addFollow" type="primary" v-has="'follow-rule'">
-									新增
+									新建
 								</a-button>
 							</a-col>
 						</div>
@@ -280,7 +280,7 @@
 			width    : "12%",
 		},
 		{
-			title      : "查看员工数据",
+			title      : "员工数据",
 			dataIndex  : "follow_name",
 			key        : "follow_name",
 			width      : "16%",
@@ -294,7 +294,7 @@
 			scopedSlots: {customRender: "send_time"}
 		},
 		{
-			title      : "提醒文案",
+			title      : "提醒内容",
 			dataIndex  : "send_content",
 			width      : "12.8%",
 			key        : "send_content",

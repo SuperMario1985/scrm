@@ -375,7 +375,7 @@
 			scopedSlots: {customRender: "userinfo"}
 		},
 		{
-			title      : '查看员工待办事项',
+			title      : '查看成员待办事项',
 			dataIndex  : "user_names",
 			width      : "37%",
 			key        : "user_names",

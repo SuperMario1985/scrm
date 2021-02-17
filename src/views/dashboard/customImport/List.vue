@@ -7,7 +7,7 @@
 					<label class="tpl-title">客户导入分配</label>
 				</a-card> -->
 				<div class="content-msg" style="margin: 0 20px 20px;">
-					在合规的情况下，以手机号作为客户的线索，下载Ecxel模板表格后输入手机号上传。上传后，表格内手机号将平均分配给选择的员工，分配完成后员工会在企业微信收到添加好友的任务，需要员工手动添加客户。
+					下载Ecxel模板表格后输入手机号上传，表格内手机号将随机配给企业员工，分配完成后员工会在企业微信收到添加好友的任务，需要企业员工手动添加客户。
 				</div>
 
 				<div style="padding: 0 20px;">
@@ -81,7 +81,7 @@
 										添加客户数
 										<a-tooltip placement="bottom">
 											<template slot="title">
-												<div>成功将手机号客户添加到企业微信里</div>
+												<div>通过手机号成功将客户添加到企业微信的客户数量</div>
 											</template>
 											<a-icon type="question-circle" style="margin-left:5px;"/>
 										</a-tooltip>
@@ -281,7 +281,7 @@
 					   @click="clearDepartmentList">
 						重置
 					</a>
-					<div style="line-height: normal;color: #999;">表格内手机号将平均分配给选择的员工。</div>
+					<div style="line-height: normal;color: #999;">选择企业成员：表格内手机号将随机分配给企业员工。</div>
 				</a-form-item>
 			</div>
 		</a-modal>

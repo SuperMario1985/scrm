@@ -132,8 +132,8 @@
 							<a-tooltip placement="bottom">
 								<template slot="title">
 									<div>企业微信给客户打标签：分公有标签和私有标签</div>
-									<div>1、公有标签：即企业标签。管理员创建，所有员工可见，在本系统定义为“公有标签”。</div>
-									<div>2、私有标签：即个人标签。员工创建，仅自己可见。在本系统定义为“私有标签”）。</div>
+									<div>公有标签：即企业标签。管理员创建，所有员工可见。</div>
+									<div>私有标签：即个人标签。员工创建，仅自己可见。</div>
 								</template>
 								<a-icon type="question-circle" style="margin-left:5px;"/>
 							</a-tooltip>

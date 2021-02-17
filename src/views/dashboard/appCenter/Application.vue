@@ -244,16 +244,16 @@ export default {
       width: "354px",
       height: "188px",
       ourAppList: [
-        {
-          backImg: require("../../../assets/appCenter/yzBack.png"),
-          icon: require("../../../assets/appCenter/yz.png"),
-          title: "有赞订单",
-          title1: "管理有赞订单",
-          title2: "有赞订单",
-          title3: "自动同步客户购买过的有赞订单至本系统",
-          type: 2,
-          isHas: 0,
-        },
+        // {
+        //   backImg: require("../../../assets/appCenter/yzBack.png"),
+        //   icon: require("../../../assets/appCenter/yz.png"),
+        //   title: "有赞订单",
+        //   title1: "管理有赞订单",
+        //   title2: "有赞订单",
+        //   title3: "自动同步客户购买过的有赞订单至本系统",
+        //   type: 2,
+        //   isHas: 0,
+        // },
         {
           backImg: require("../../../assets/appCenter/tbBack.png"),
           icon: require("../../../assets/appCenter/tb.png"),
@@ -317,9 +317,9 @@ export default {
         this.phone = res.data.phone;
         this.logo = res.data.logo;
         let that = this;
-        this.ourAppList[0].isHas = res.data.hasYouzan;
-        this.ourAppList[1].isHas = res.data.hasTb;
-        this.ourAppList[2].isHas = res.data.hasTm;
+        // this.ourAppList[0].isHas = res.data.hasYouzan;
+        this.ourAppList[0].isHas = res.data.hasTb;
+        this.ourAppList[1].isHas = res.data.hasTm;
         // this.ourAppList[3].isHas = res.data.hasPig
         that.isLoading = false;
         this.$nextTick(() => {

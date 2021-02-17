@@ -942,7 +942,7 @@
 		// 	scopedSlots: {customRender: "member_num"}
 		// },
 		{
-			title      : "今日入群/退群",
+			title      : "今日进群/退群",
 			dataIndex  : "new_member_num",
 			key        : "new_member_num",
 			scopedSlots: {customRender: "new_member_num"}
@@ -953,7 +953,7 @@
 			scopedSlots: {customRender: "notice", title: "noticeTitle"}
 		},
 		{
-			title    : "创群时间",
+			title    : "群创建时间",
 			dataIndex: "create_time",
 			key      : "create_time",
 		},

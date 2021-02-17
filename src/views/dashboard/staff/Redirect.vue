@@ -3,7 +3,6 @@
 		<div>
 			<a-card style="margin-bottom:20px;padding:10px 20px;font-size: 16px;">
 				<label class="tpl-title">消息互通</label>
-				<help-icon help-url="https://support.qq.com/products/104790/faqs/64893"></help-icon>
 			</a-card>
 
 			<div class="content-bd">
@@ -12,7 +11,7 @@
 						<a-row>
 							<div class="content-msg">
 								<p style="margin-bottom: 2px;">
-									用于将公众号的粉丝消息和小程序的用户消息自动通过自建应用提醒到相应的企业微信成员。</p>
+									将公众号粉丝的消息和小程序用户的消息通过自建应用自动提醒到所属企业微信成员。</p>
 							</div>
 						</a-row>
 

@@ -189,7 +189,7 @@
 						                  平均首次回复时长
 						                  <a-tooltip placement="bottom">
 						                    <template slot="title">
-						                      <span>平均首次回复时长，单位为分钟，即客户主动发起聊天后，成员在一个自然日内首次回复的时长间隔为首次回复时长，所有聊天的首次回复总时长/已回复的聊天总数即为平均首次回复时长，不包括群聊，仅在确有回复时返回。</span>
+						                      <span>平均首次回复时长，当客户主动发起聊天后，企业成员在一个自然日内首次回复的时长间隔为首次回复时长，平均首次回复时长=所有聊天的首次回复总时长/已回复的聊天总数，不包括群聊，单位为分钟</span>
 						                    </template>
 						                    <a-icon type="question-circle" style="margin-left:5px;"/>
 						                  </a-tooltip>
@@ -198,7 +198,7 @@
 						                  删除/拉黑客户数
 						                  <a-tooltip placement="bottom">
 						                    <template slot="title">
-						                      <span>删除/拉黑成员的客户数，即将成员删除或加入黑名单的客户数。</span>
+						                      <span>删除/拉黑成员的客户数，将企业成员删除或者拉黑的客户数量</span>
 						                    </template>
 						                    <a-icon type="question-circle" style="margin-left:5px;"/>
 						                  </a-tooltip>
