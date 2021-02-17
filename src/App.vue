@@ -363,16 +363,17 @@ export default {
     display: none;
   }
 }
-// .ant-tooltip {
-//   .ant-tooltip-inner {
-//     min-width: 30px;
-//     min-height: 32px;
-//     padding: 6px 8px;
-//     color: #000;
-//     text-align: left;
-//     text-decoration: none;
-//     word-wrap: break-word;
-//     background-color: rgba(256, 256, 256, 1);
-//   }
-// }
+.ant-tooltip {
+  .ant-tooltip-inner {
+    min-width: 30px;
+    min-height: 32px;
+    padding: 6px 8px;
+    color: #666;
+    text-align: left;
+    text-decoration: none;
+    word-wrap: break-word;
+    background: #ffffff;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+  }
+}
 </style>
