@@ -334,10 +334,10 @@
 										               @change="changeActionType"
 										               :disabled="!!id && (status != 1 || status == '')">
 											<a-radio value="2">
-												联系客服
+												联系客服：
 												<a-tooltip placement="bottom">
 													<template slot="title">
-														<span>主要适用于需要到店自提的奖品、或是以线下发放为主的虚拟奖品。如“XXX运营干货PPT”</span>
+														<span>当奖品是需要到店自提的奖品、或是以线下发放为主的虚拟奖品时，需要联系客服。</span>
 													</template>
 													<a-icon type="question-circle" style="margin-left:5px;"/>
 												</a-tooltip>
@@ -347,7 +347,7 @@
 												兑换链接
 												<a-tooltip placement="bottom">
 													<template slot="title">
-														<span>主要适用于需要快递物流的奖品</span>
+														<span>当奖品是需要快递物流的奖品时，使用链接的方式。</span>
 													</template>
 													<a-icon type="question-circle" style="margin-left:5px;"/>
 												</a-tooltip>
@@ -683,9 +683,7 @@
 									</template>
 									关注回复后推送带个人参数二维码海报+对活动的整体描述
 									<div class="changeType-text">
-										如何设置链接：输入文案后，
-										鼠标选中想要插入链接的关键词，点击出现的“设置链接”，即可填入链接。
-										提示：火狐浏览器可能出现无法正确插入粉丝昵称，请使用谷歌、360浏览器
+										如何设置链接：输入文案后， 鼠标选中想要插入链接的关键词，点击出现的“设置链接”，即可填入链接。 提示：请尽量使用Chrome、360浏览器，其他浏览器可能出现无法正确插入粉丝昵称的情况
 									</div>
 									<editor1 v-if="editorFlag" :text="ruleTextContent"
 									         :textValue="ruleTextValue"
@@ -939,9 +937,7 @@
 								</a-col>
 							</a-row>
 							<div class="changeType-text">
-								如何设置链接：输入文案后，
-								鼠标选中想要插入链接的关键词，点击出现的“设置链接”，即可填入链接。
-								提示：火狐浏览器可能出现无法正确插入粉丝昵称，请使用谷歌、360浏览器
+								如何设置链接：输入文案后， 鼠标选中想要插入链接的关键词，点击出现的“设置链接”，即可填入链接。 提示：请尽量使用Chrome、360浏览器，其他浏览器可能出现无法正确插入粉丝昵称的情况
 							</div>
 							<template v-for="(item,index) in reply">
 								<div v-show="index == 0" style="margin: 20px 20px 20px 0; width: 100%;">
