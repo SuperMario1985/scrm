@@ -375,5 +375,9 @@ export default {
     background: #ffffff;
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
   }
+  .ant-tooltip-arrow::before{
+    background: #ffffff;
+    // box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+  }
 }
 </style>
