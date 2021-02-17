@@ -93,7 +93,7 @@
 					<a-layout-header>
 						客户【{{name}}】
 						<router-link to="/customManage/list" style="font-size: 16px;float: right;">
-							<a-button type="primary" icon="rollback">返回列表</a-button>
+							<a-button type="primary" >返回列表</a-button>
 						</router-link>
 					</a-layout-header>
 					<!-- 内容 -->

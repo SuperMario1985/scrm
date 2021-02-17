@@ -8,32 +8,32 @@
       </div>
       <ul class="addAccount-body">
         <li>
-          <img src="//s.weituibao.com/static/1545879105817/3.png" alt />
+          <img src="../assets/authorization/icon_morestyle.png" alt />
           <p class="txt-1">多账号同时管理</p>
           <p class="txt-2">同时登录多个小程序、一键切换，无需重复扫码</p>
         </li>
         <li>
-          <img src="//s.weituibao.com/static/1545879105817/2.png" alt />
+          <img src="../assets/authorization/icon_material.png" alt />
           <p class="txt-1">一键同步素材</p>
           <p class="txt-2">一键同步到多个公众号，无需重复编辑</p>
         </li>
         <li>
-          <img src="//s.weituibao.com/static/1545879105817/5.png" alt />
+          <img src="../assets/authorization/icon_data.png" alt />
           <p class="txt-1">数据实时更新</p>
           <p class="txt-2">粉丝数据实时更新，图文详情及时分析</p>
         </li>
         <li>
-          <img src="//s.weituibao.com/static/1545879105817/1.png" alt />
+          <img src="../assets/authorization/icon_edit.png" alt />
           <p class="txt-1">素材编辑更顺畅</p>
           <p class="txt-2">一键抓取图文、添加模版、精选样式排版</p>
         </li>
         <li>
-          <img src="//s.weituibao.com/static/1545879105817/6.png" alt />
+          <img src="../assets/authorization/icon_push.png" alt />
           <p class="txt-1">多样化推送</p>
           <p class="txt-2">素材定时定向推送&客服消息，服务号可以发送模版消息</p>
         </li>
         <li>
-          <img src="//s.weituibao.com/static/1545879105817/4.png" alt />
+          <img src="../assets/authorization/icon_preview.png" alt />
           <p class="txt-1">发送预览即视</p>
           <p class="txt-2">可随时发送到微信预览，避免发送后再纠正</p>
         </li>
@@ -131,13 +131,13 @@
     padding: 0;
 
     li {
-      background-color: #f5f7ff;
+      background-color: #fff;
       width: 49.5%;
       height: 94px;
       float: left;
       margin-bottom: 8px;
       border-radius: 4px;
-      border: solid 1px #c9daff;
+      border: solid 1px #dddddd;
 
       img {
         width: 48px;

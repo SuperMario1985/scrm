@@ -25,15 +25,15 @@
 						<div class="content-hd">
 							<div class="content-hd-right">
 								<label v-if="lastTagTime">最后一次同步时间：{{lastTagTime}}</label>
-								<a-button class="btn-primary" icon="reload" @click="sysTag()" v-has="'work-tag-sync'">
+								<a-button class="btn-primary"  @click="sysTag()" v-has="'work-tag-sync'">
 									同步企业微信标签
 								</a-button>
-								<a-button class="btn-primary" icon="delete" @click="deleteCoustomTags()"
+								<a-button class="btn-primary"  @click="deleteCoustomTags()"
 								          :disabled="selectedRowKeys.length == 0" type="primary"
 								          v-has="'work-tag-delete'">
 									删除标签
 								</a-button>
-								<a-button class="btn-primary" icon="retweet" @click="showModalGroup()"
+								<a-button class="btn-primary"  @click="showModalGroup()"
 								          :disabled="selectedRowKeys.length == 0" type="primary"
 								          v-has="'work-tag-remove'">
 									移动标签

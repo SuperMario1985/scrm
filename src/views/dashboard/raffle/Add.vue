@@ -4,7 +4,7 @@
 			<label style="font-size: 16px;line-height: 32px;">
 				<span v-if="id == ''">新建</span>
 				<span v-else>编辑</span>抽奖引流</label>
-			<a-button type="primary" icon="rollback" style="font-size: 14px;float: right;" @click="goBack">返回列表
+			<a-button type="primary"  style="font-size: 14px;float: right;" @click="goBack">返回列表
 			</a-button>
 		</a-card>
 		<div class="content-msg" style="margin: 0 20px;" v-if="raffleNum > 0">
@@ -686,7 +686,7 @@
 						<template slot="label">
 							引流设置
 						</template>
-						海报将展示对应带参数的二维码， 扫码后将引流到对应的企业成员
+						海报二维码自带对应参数，扫码后会将客户引流至对应的企业成员
 					</a-form-item>
 					<a-form-item class="current0" :label-col="{ span: 3 }" :wrapper-col="{ span: 21 }">
 						<template slot="label"><span

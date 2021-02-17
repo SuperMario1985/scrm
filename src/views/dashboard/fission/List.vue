@@ -9,12 +9,12 @@
 					<a-layout-content>
 						<div style="font-size:16px;font-weight:700;color:#333333">裂变引流</div>
 						<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7">
-							裂变助力引流，通过有吸引力的奖品，邀请多个好友助力，可免费获得，以此诱导用户在自己的社交圈进行传播，一传二、二传四的模式，指数级增长。而使用企业微信去做裂变活动时，助力用户需要先加企业成员为好友，再通过欢迎语推送活动图文，助力用户打开即助力成功。在整个裂变的过程中，企业可以获得更多的用户。
-							<div style="margin: 10px 0 2px;">自动发送欢迎语，可能失败的原因
+							裂变助力引流，通过完成分享任务来领取奖励的任务机制，邀请多个好友可免费获得奖品，以此来吸引用户在自己的社交圈进行传播,一传二、二传四的模式，指数级增长。而使用企业微信去做裂变活动时，助力用户需要先加企业成员为好友，再通过欢迎语推送活动图文，助力用户打开即助力成功。在整个裂变的过程中，企业可以获得更多的用户。
+							<div style="margin: 10px 0 2px;">自动发送欢迎语失败的原因可能有：
 								<a-tooltip placement="bottom">
 									<template slot="title">
 										<p style="margin-bottom: 2px;font-size: 13px;">
-											1、如果企业在企业微信后台为相关成员配置了可用的欢迎语，使用第三方系统配置欢迎语，均不起效，推送的还是企业微信官方的。</p>
+											1、如果在企业微信后台为相关成员配置了可用的欢迎语，第三方系统配置欢迎语则不会推送，优先推送企业微信官方的。</p>
 										<p style="margin-bottom: 10px;font-size: 13px;"></p>
 										<p style="margin-bottom: 2px;font-size: 13px;">
 											2、客户和企业成员已经开始聊天的场景下，不能发送欢迎语。</p>
@@ -29,7 +29,7 @@
 								</a-tooltip>
 							</div>
 							<p style="margin: 10px 0 2px;color: red;">
-								在使用派发红包功能前，需要商户完成以下配置：
+								商户需完成以下配置，才能使用派发红包功能：
 							</p>
 							<p style="margin-bottom: 2px;">
 								1、前往<a href="https://pay.weixin.qq.com/index.php/core/home/login?return_url=%2F"
@@ -83,7 +83,7 @@
 							<a-col style="float:right;">
 								<a-button class="btn-primary"@click="addWelcomeText" type="primary"
 								          v-has="'fission-add'">
-									新建活动
+									创建活动
 								</a-button>
 							</a-col>
 						</div>

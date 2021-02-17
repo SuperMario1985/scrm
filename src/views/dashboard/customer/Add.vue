@@ -6,7 +6,7 @@
 				<a-layout-header>
 					新建客服消息
 					<router-link to="/customer/list" style="font-size: 16px;float: right;margin-right: 15px;">
-						<a-button type="primary" icon="rollback">返回列表</a-button>
+						<a-button type="primary" >返回列表</a-button>
 					</router-link>
 				</a-layout-header>
 				<a-layout  class="fans-content">
@@ -245,8 +245,7 @@
 												</a-popover>
 											</div>
 											<div class="changeType-text">
-												如何设置链接：输入文案后， 鼠标选中想要插入链接的关键词，点击出现的“设置链接”，即可填入链接。
-												提示：火狐浏览器可能出现无法正确插入粉丝昵称，请使用谷歌、360浏览器
+												如何设置链接：输入文案后， 鼠标选中想要插入链接的关键词，点击出现的“设置链接”，即可填入链接。 提示：请尽量使用Chrome、360浏览器，其他浏览器可能出现无法正确插入粉丝昵称的情况
 											</div>
 										</div>
 									</a-form-item>

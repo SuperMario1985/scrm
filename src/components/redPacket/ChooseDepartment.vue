@@ -6,7 +6,7 @@
 			<a-spin tip="加载中..." size="large" :spinning="isLoading2">
 				<div style="width: 50%;height: 450px;float: left;border-right:1px solid #D9D9D9;overflow-y: auto;overflow-x: hidden;">
 					<div class="content-msg" v-if="tipType == '0'">
-						只展示在企业微信官方后台创建自建应用时，所设置的可见成员，只有他们才拥有发放零钱的权限。
+						对拥有发放红包权限的企业员工配置发放红包限额。只有在企业微信官方后台创建自建应用时所设置的可见成员才拥有发放红包的权限。
 					</div>
 					<div class="content-msg" v-if="tipType == '1'">
 						只展示在企业微信官方后台创建自建应用时，所设置的可见成员，只有他们才拥有接收跟进提醒的权限。

@@ -44,7 +44,7 @@
 					<!-- 内容 -->
 					<a-layout-content>
 						<div class="content-msg">
-							<p style="margin-bottom: 2px;">每新关注一个粉丝，就会按照提前设定好的计划，定时推送给该粉丝。</p>
+							<p style="margin-bottom: 2px;">每一个新关注的粉丝都会收到提前设定好的关注回复内容。</p>
 							<p style="margin-bottom: 2px;">1）向关注公众号的新粉丝立即自动推送消息，含图文、图片、文字（可添加超链接）、音频、视频等。</p>
 							<p style="margin-bottom: 2px;">2）在关注48小时内，根据关注时长，可向粉丝自动推送消息。</p>
 							<p style="margin-bottom: 2px;">3）将通过渠道码扫码推送的内容关闭后，新的粉丝关注后推送的内容即是“关注回复”内容。</p>

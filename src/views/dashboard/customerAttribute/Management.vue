@@ -1,5 +1,5 @@
 <template>
-	<div style="width: 100%;max-height:100%;position: absolute;overflow-y:auto;padding: 20px 0;" id="components-layout-demo-basic">
+	<div style="width: 100%;max-height:100%;position: absolute;overflow-y:auto;" id="components-layout-demo-basic">
 		<a-layout-content>	
 			<div style="font-size:16px;font-weight:700;color:#333333">自定义属性</div>
 			<div style="padding: 20px 20px 0 ;">
@@ -327,69 +327,69 @@
 					</a-form-model>
 				</a-modal>
 			</div>
-		</a-layout-content>
-		<div v-show="tabKey == 2" style="background: #FFF;padding: 20px 0;margin: 0 20px;">
-			<a-row style="margin-top: 10px; margin-left: 4.16%;">
-				<template v-for="(item,index) in follows">
-					<a-col :span="2"
-					       :style="{float : (index % 16 > 7 ? 'right' : 'left' ), marginRight : (index % 16 == 8 ? '4.17%' : '' )}">
-						<a-button
-								style="border: 1px solid #01b065; color: #01b065;width: 100%;overflow: hidden; text-overflow: ellipsis;">
-							{{item.title}}
-						</a-button>
-					</a-col>
-					<a-col :span="1" v-if="index % 8 != 7 && index != follows.length - 1"
-					       style="padding: 2px 0;text-align: center;"
-					       :style="{float : (index % 16 > 7 ? 'right' : 'left' )}">
-						<div v-if="index % 16 > 7"
-						     class="arrow-left"></div>
-						<div class="line"></div>
-						<div v-if="index % 16 < 7"
-						     class="arrow-right"></div>
-					</a-col>
-					<a-col :span="23" v-if="index % 16 == 7 && index != follows.length - 1" style="margin-top: 10px;">
-						<div class="line-right"></div>
-					</a-col>
-					<a-col :span="23" v-if="index % 16 == 7 && index != follows.length - 1"
-					       style="margin-bottom: 5px;">
-						<div class="arrow-bottom arrow-bottom-right"></div>
-					</a-col>
-					<a-col :span="23" v-if="index % 16 == 15 && index != follows.length - 1" style="margin-top: 10px;">
-						<div class="line-left"></div>
-					</a-col>
-					<a-col :span="23" v-if="index % 16 == 15 && index != follows.length - 1"
-					       style="margin-bottom: 5px;">
-						<div class="arrow-bottom arrow-bottom-left"></div>
-					</a-col>
-				</template>
-			</a-row>
-			<div style="height: 40px; line-height: 40px;margin: 20px 0 10px 0;">
-				<span style="color: #FF562D;margin-left: 20px;">鼠标移动面板更改状态排序</span>
-				<a-button type="primary"@click="addFollow"
-				          style="margin-right: 20px;vertical-align: middle;float: right;">新增
-				</a-button>
+			<div v-show="tabKey == 2" style="background: #FFF;padding: 20px 0;margin: 0 20px;">
+				<a-row style="margin-top: 10px; margin-left: 4.16%;">
+					<template v-for="(item,index) in follows">
+						<a-col :span="2"
+									:style="{float : (index % 16 > 7 ? 'right' : 'left' ), marginRight : (index % 16 == 8 ? '4.17%' : '' )}">
+							<a-button
+									style="border: 1px solid #01b065; color: #01b065;width: 100%;overflow: hidden; text-overflow: ellipsis;">
+								{{item.title}}
+							</a-button>
+						</a-col>
+						<a-col :span="1" v-if="index % 8 != 7 && index != follows.length - 1"
+									style="padding: 2px 0;text-align: center;"
+									:style="{float : (index % 16 > 7 ? 'right' : 'left' )}">
+							<div v-if="index % 16 > 7"
+									class="arrow-left"></div>
+							<div class="line"></div>
+							<div v-if="index % 16 < 7"
+									class="arrow-right"></div>
+						</a-col>
+						<a-col :span="23" v-if="index % 16 == 7 && index != follows.length - 1" style="margin-top: 10px;">
+							<div class="line-right"></div>
+						</a-col>
+						<a-col :span="23" v-if="index % 16 == 7 && index != follows.length - 1"
+									style="margin-bottom: 5px;">
+							<div class="arrow-bottom arrow-bottom-right"></div>
+						</a-col>
+						<a-col :span="23" v-if="index % 16 == 15 && index != follows.length - 1" style="margin-top: 10px;">
+							<div class="line-left"></div>
+						</a-col>
+						<a-col :span="23" v-if="index % 16 == 15 && index != follows.length - 1"
+									style="margin-bottom: 5px;">
+							<div class="arrow-bottom arrow-bottom-left"></div>
+						</a-col>
+					</template>
+				</a-row>
+				<div style="height: 40px; line-height: 40px;margin: 20px 0 10px 0;">
+					<span style="color: #FF562D;margin-left: 20px;">鼠标移动面板更改状态排序</span>
+					<a-button type="primary"@click="addFollow"
+										style="margin-right: 20px;vertical-align: middle;float: right;">新增
+					</a-button>
+				</div>
+				<a-spin tip="加载中..." size="large" :spinning="isLoading1">
+					<a-table :columns="columns1" :dataSource="follows" class="follow-table" style="margin: 20px;"
+									:pagination="false" :rowClassName="rowClassName">
+						<span slot="sort" slot-scope="text, record,index">
+							{{index + 1}}
+						</span>
+						<span slot="describe" slot-scope="text, record,index">
+								{{record.describe || '--'}}
+							</span>
+						<span slot="action" slot-scope="text, record,index">
+							<a-button style="margin-right: 5px;"
+												@click="editFollow(record.id, record.title, record.describe)">
+								编辑
+							</a-button>
+							<a-button @click="delFollow(record.id)">
+								删除
+							</a-button>
+							</span>
+					</a-table>
+				</a-spin>
 			</div>
-			<a-spin tip="加载中..." size="large" :spinning="isLoading1">
-				<a-table :columns="columns1" :dataSource="follows" class="follow-table" style="margin: 20px;"
-				         :pagination="false" :rowClassName="rowClassName">
-					<span slot="sort" slot-scope="text, record,index">
-				     {{index + 1}}
-				   </span>
-					<span slot="describe" slot-scope="text, record,index">
-				       {{record.describe || '--'}}
-				    </span>
-					<span slot="action" slot-scope="text, record,index">
-						<a-button style="margin-right: 5px;"
-						          @click="editFollow(record.id, record.title, record.describe)">
-							编辑
-						</a-button>
-						<a-button @click="delFollow(record.id)">
-							删除
-						</a-button>
-				    </span>
-				</a-table>
-			</a-spin>
-		</div>
+		</a-layout-content>
 		<a-modal :visible="followVisible" :title="addOrEditTitle" @cancel="handleCancelFollow"
 		         width="720px">
 			<template slot="footer">
@@ -431,7 +431,7 @@
 			scopedSlots: {customRender: "titleMsg"}
 		},
 		{
-			title      : "填写格式",
+			title      : "字段格式",
 			dataIndex  : "type",
 			key        : "type",
 			width      : '10%',

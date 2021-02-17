@@ -5,18 +5,18 @@
 				<div style="font-size:16px;font-weight:700;color:#333333">子账户列表</div>
 				<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7;padding:16px">
 					<p style="margin-bottom: 2px;color: #FF562D;">
-						1、针对已绑定在本系统的企业微信，可前往通讯录管理-企业成员-同步企业微信通讯录，同步后的企业成员名单在子账户未启用列表展示，再对其进行相关操作。与此同时，日后每新增一个企业成员，则自动进入到子账户未启用列表。</p>
+						1、企业微信已经授权本系统，可在企业微信模块的通讯录管理-企业成员-同步企业微信通讯录，同步之后的企业成员在子账户未启用列表展示，可对其操作启用，配置权限管理，企业成员即可通过手机账号登录新系统后台。</p>
 					<p style="margin-bottom: 2px;">
-						2、当某手机号存在子账户未启用列表中，若依然使用该手机号手动添加子账户，添加后，自动将该未启用的子账户去除。</p>
+						2、如果创建子账号时，使用的手机号已经存在于子账户未启用列表中，会默认合并两个手机号，添加之后，未启用列表中的子账户会自动删除。</p>
 					<p style="margin-bottom: 2px;">
 						3、当某手机号存在多个企业微信，若同步多个企业微信的通讯录，未启用的子账户列表以手机号作为唯一性去重展示。</p>
 					<p style="margin-bottom: 2px;">
 						4、若在尚未“同步企业微信通讯录”的名单时，手动添加子账户（进入子账户启用列表），再去“同步”，此时只要两边手机号为一致，则该子账户的原有状态不变。</p>
 				</div>
-				<a-col style="position: absolute;right: 20px;z-index: 999;">
+				<a-col style="position: absolute;right: 56px;z-index: 999;">
 					<a-button
 							type="primary"
-							icon="plus"
+							
 							style="width: 150px;font-size:14px;"
 							@click="addSubAccount" v-has="'subAccount-add'"
 					>添加子账户

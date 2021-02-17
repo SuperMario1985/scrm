@@ -25,15 +25,15 @@
 							<div class="content-hd-right">
 								最后一次同步时间：{{top.last_syn_time}}
 								<a-button class="btn-primary1"
-								          icon="reload" @click="confirm" v-has="'sync-address'">
+								           @click="confirm" v-has="'sync-address'">
 									同步企业微信通讯录
 								</a-button>
 								<!--								</a-popconfirm>-->
 								<a-button class="btn-primary1" @click="showModal" type="primary"
-								          icon="tags" v-has="'staff-add-tag'">
+								           v-has="'staff-add-tag'">
 									打标签
 								</a-button>
-								<a-button class="btn-primary1" @click="showModal1" type="primary" icon="tags"
+								<a-button class="btn-primary1" @click="showModal1" type="primary" 
 								          v-has="'staff-remove-tag'">
 									移除标签
 								</a-button>
@@ -189,7 +189,7 @@
 						                  平均首次回复时长
 						                  <a-tooltip placement="bottom">
 						                    <template slot="title">
-						                      <span>平均首次回复时长，单位为分钟，即客户主动发起聊天后，成员在一个自然日内首次回复的时长间隔为首次回复时长，所有聊天的首次回复总时长/已回复的聊天总数即为平均首次回复时长，不包括群聊，仅在确有回复时返回。</span>
+						                      <span>平均首次回复时长，当客户主动发起聊天后，企业成员在一个自然日内首次回复的时长间隔为首次回复时长，平均首次回复时长=所有聊天的首次回复总时长/已回复的聊天总数，不包括群聊，单位为分钟</span>
 						                    </template>
 						                    <a-icon type="question-circle" style="margin-left:5px;"/>
 						                  </a-tooltip>
@@ -198,7 +198,7 @@
 						                  删除/拉黑客户数
 						                  <a-tooltip placement="bottom">
 						                    <template slot="title">
-						                      <span>删除/拉黑成员的客户数，即将成员删除或加入黑名单的客户数。</span>
+						                      <span>删除/拉黑成员的客户数，将企业成员删除或者拉黑的客户数量</span>
 						                    </template>
 						                    <a-icon type="question-circle" style="margin-left:5px;"/>
 						                  </a-tooltip>

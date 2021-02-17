@@ -8,7 +8,7 @@
 						<template v-if="typeof urlId == 'undefined'">新建</template>
 						<template v-if="typeof urlId != 'undefined'">修改</template>
 						推送计划
-						<a-button type="primary" icon="rollback" @click="goBack" style="float: right;margin-top: 9px;">
+						<a-button type="primary"  @click="goBack" style="float: right;margin-top: 9px;">
 							返回列表
 						</a-button>
 					</a-layout-header>
@@ -221,7 +221,7 @@
 												1、设置为收到消息回复的，可添加多个图文，但每个图文只能添加1条。
 											</p>
 											<div style="color: #F56C6C;margin: 0;line-height: 20px;padding: 0px 0px 2px 0px;">
-												2、修改推送时间后，对尚未发送的粉丝，推送时间重新计算。以“首次向公众号发送消息时间+推送时间”，小于“当前时间”，则不推送了，反之继续推送。
+												2、修改推送时间之后，对于尚未发送内容的粉丝重新计算推送时间，如果“关注时间+推送时间”小于“当前时间”，则不推送，反之继续推送。
 												<a-tooltip placement="top">
 													<template slot="title">
 														<p style="margin-bottom: 2px;">如：最初设置为收到消息30分钟后推送</p>
@@ -244,7 +244,7 @@
 											<!--											<a-button @click="addList" type="primary"style="width: 80px;">-->
 											<!--												增加-->
 											<!--											</a-button>-->
-											<!--											<a-button v-show="lists.length > 1" @click="removeList" icon="minus"-->
+											<!--											<a-button v-show="lists.length > 1" @click="removeList" -->
 											<!--											          style="width: 80px; margin-left: 20px;">删除-->
 											<!--											</a-button>-->
 											<!--										</div>-->
@@ -276,7 +276,7 @@
 														                @focus="getPushMinutes"/>
 														分钟后
 														<a-button v-show="lists.length > 1" @click="removeList"
-														          icon="minus"
+														          
 														          style="width: 80px; float: right;margin-right: 52px;">
 															删除
 														</a-button>
@@ -562,9 +562,7 @@
 																		</a-popover>
 																	</div>
 																	<div class="changeType-text">
-																		如何设置链接：输入文案后，
-																		鼠标选中想要插入链接的关键词，点击出现的“设置链接”，即可填入链接。
-																		提示：火狐浏览器可能出现无法正确插入粉丝昵称，请使用谷歌、360浏览器
+																		如何设置链接：输入文案后， 鼠标选中想要插入链接的关键词，点击出现的“设置链接”，即可填入链接。 提示：请尽量使用Chrome、360浏览器，其他浏览器可能出现无法正确插入粉丝昵称的情况
 																	</div>
 																	<a-button @click="deleteMaterial(index)">删除该条
 																	</a-button>

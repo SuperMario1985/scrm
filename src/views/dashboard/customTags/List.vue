@@ -36,22 +36,22 @@
 							</p>
 						</div>
 						<div class="content-hd">
-							<a-button v-if="noSecret" type="primary" icon="key" @click="addSecret()"
+							<a-button v-if="noSecret" type="primary"  @click="addSecret()"
 							          v-has="'client-tag-sync'">
 								填写密钥
 							</a-button>
 							<div class="content-hd-right">
 								<label v-if="lastTagTime && !noBindFlag">最后一次同步时间：{{lastTagTime}}</label>
-								<a-button v-if="!noBindFlag" class="btn-primary" icon="reload" @click="sysTag()"
+								<a-button v-if="!noBindFlag" class="btn-primary"  @click="sysTag()"
 								          v-has="'client-tag-sync'">
 									同步企业微信标签
 								</a-button>
-								<a-button class="btn-primary" icon="delete" @click="deleteCoustomTags()"
+								<a-button class="btn-primary"  @click="deleteCoustomTags()"
 								          :disabled="selectedRowKeys.length == 0" type="primary"
 								          v-has="'client-tag-delete'">
 									删除标签
 								</a-button>
-								<a-button class="btn-primary" icon="retweet" @click="showModalGroup()"
+								<a-button class="btn-primary"  @click="showModalGroup()"
 								          :disabled="selectedRowKeys.length == 0" type="primary"
 								          v-has="'client-tag-remove'">
 									移动标签

@@ -8,7 +8,7 @@
 					<!-- 头部 -->
 					<a-layout-header style="margin-bottom:20px;">
 						<label class="tpl-title">历史朋友圈列表</label>
-						<help-icon help-url="https://support.qq.com/products/104790/faqs/82247"></help-icon>
+						<!-- <help-icon help-url="https://support.qq.com/products/104790/faqs/82247"></help-icon> -->
 					</a-layout-header>
 					<div style="padding: 0 1.24rem;" v-if="isTabShow">
 						<span @click="changeTab(1)" style="border:none" class="tabBtn"
@@ -20,7 +20,7 @@
 					<div style="padding: 15px;margin: 0px 20px;background: #FFF;">
 						<div class="content-msg" v-if="momentStatus==2">
 							<p style="margin-bottom: 2px;">
-								使用场景：由于受到企业微信限制，通过企业微信【客户朋友圈】功能发布的朋友圈内容，可以发送到客户个人微信的朋友圈里，但是无法通过企业微信员工名片信息页查看历史朋友圈信息的入口。现在，企业可通过云美来SCRM系统【历史朋友圈】的功能，将朋友圈页面配置到企业微信员工对外信息展示中，方便客户查看历史的朋友圈内容。
+								企业可通过本系统的【历史朋友圈】功能，将朋友圈页面配置到企业微信员工对外信息展示中，方便客户查看历史朋友圈内容
 							</p>
 							<p style="margin-bottom: 2px;">
 								1、需要企业微信管理员在企业微信后台设置成员对外展示信息；
@@ -588,7 +588,7 @@
 												</a-button>
 											</a-dropdown>
 											<a-button style="margin-left: 15px" class="btn-primary1"
-											          icon="reload" @click="syncFollowUser">
+											           @click="syncFollowUser">
 												同步配置了外部联系权限的联系人
 											</a-button>
 										</div>

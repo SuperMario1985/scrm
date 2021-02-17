@@ -34,7 +34,7 @@
 									<span style="color:#333333;font-weight: 700;">昨日发起申请数
 										<a-tooltip placement="right">
 						                    <template slot="title">
-						                      <span>发起申请数，成员通过「搜索手机号」、「扫一扫」、「从微信好友中添加」、「从群聊中添加」、「添加共享、分配给我的客户」、「添加单向、双向删除好友关系的好友」、「从新的联系人推荐中添加」等渠道主动向客户发起的好友申请数量。</span>
+						                      <span>昨日发起申请数：企业成员通过「搜索手机号」、「从微信好友中添加」、「扫一扫」、「从群聊中添加」、「添加共享分配给企业成员的客户」、「添加单向、双向删除企业成员的客户」、「从新的联系人推荐中添加」等渠道主动向客户发起的好友申请数量。</span>
 						                    </template>
 						                    <a-icon type="question-circle" style="margin-left:5px;"/>
 						                  </a-tooltip>
@@ -56,7 +56,7 @@
 									<span style="color:#333333;font-weight: 700;">昨日新增客户数
 									<a-tooltip placement="right">
 						                    <template slot="title">
-						                      <span>新增客户数，成员新添加的客户数量。</span>
+						                      <span>昨日新增客户数：企业成员新添加的客户数量。</span>
 						                    </template>
 						                    <a-icon type="question-circle" style="margin-left:5px;"/>
 						                  </a-tooltip>
@@ -78,7 +78,7 @@
 									<span style="color:#333333;font-weight: 700;">昨日被客户删除/拉黑人数
 									<a-tooltip placement="right">
 						                    <template slot="title">
-						                      <span>删除/拉黑成员的客户数，即将成员删除或加入黑名单的客户数。</span>
+						                      <span>昨日被客户删除/拉黑人数：将企业成员删除或者将企业成员加入黑名单的客户数量。</span>
 						                    </template>
 						                    <a-icon type="question-circle" style="margin-left:5px;"/>
 						                  </a-tooltip>

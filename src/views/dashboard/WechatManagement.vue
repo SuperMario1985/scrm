@@ -18,7 +18,7 @@
 				<a-col style="float:right;">
 					<a-button
 							type="primary"
-							icon="plus"
+							
 							style="width: 150px;font-size:14px;"
 							@click="addAuthAccount" v-has="'work-management-add'"
 					>添加企业微信号

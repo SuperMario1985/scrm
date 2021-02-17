@@ -3,11 +3,10 @@
 		<div>
 			<a-card style="margin-bottom:20px;padding:10px 20px;">
 				<label class="tpl-title">小程序管理</label>
-				<help-icon help-url="https://support.qq.com/products/104790/faqs/64259"></help-icon>
 			</a-card>
 			<div class="content-msg">
 				<p style="margin-bottom: 2px;">
-					1、授权小程序后，可在【企业微信】模块下，进入【消息互通】，将授权的小程序和企业成员通过自建应用进行关联。关联后，但凡通过小程序用户发送消息，都会及时通过企业微信推送消息通知触达到指定的企业成员，点击消息通知，跳转到H5实时对话页，即可与小程序用户实时会话。
+					1、小程序授权之后，可在【企业微信】模块下，进入【消息互通】，将授权的小程序与企业成员通过自建应用进行关联。关联后，用户通过小程序发送的所有消息，都会及时通过企业微信推送消息通知触达到指定的企业成员，点击消息通知，跳转到H5实时对话页，即可与小程序用户实时会话。
 				</p>
 				<p style="margin-bottom: 0px;">
 					2、关联后，也可以在{{$store.state.siteName}}后台【公众号】模块，进入【客服中心】对小程序用户实时会话。
@@ -37,7 +36,7 @@
 				<a-col style="float:right;">
 					<a-button
 							type="primary"
-							icon="plus"
+							
 							style="width: 150px;font-size:14px;"
 							@click="addAccount" v-has="'mini-add'"
 					>添加小程序

@@ -17,7 +17,7 @@
 							<div style="font-size:16px;font-weight:700;color:#333333">客户管理</div>
 							<div class="content-msg"  style="box-shadow: 0px 1px 4px 0px #D7D7D7">
 								<p style="margin-bottom: 0px;">
-									1、成员在外部会话中，可通过侧边栏打开【客户详情页】页面，也可以点击外部联系人（客户）头像进入到系统页面【客户信息】，再打开【客户详情页】页面。<a
+									1、企业成员在与外部联系人（客户）会话中，可通过侧边栏打开【客户详情页】页面，也可以点击外部联系人（客户）头像进入到系统页面【客户信息】，再打开【客户详情页】页面。<a
 										href="https://support.qq.com/products/104790/faqs/59786" target="_blank"
 										class="el-link el-link--primary">
 									<span class="el-link--inner">查看教程</span>
@@ -26,15 +26,15 @@
 								<p style="margin-bottom: 0px;">
 									2、在职员工/已离职员工所持有的客户数分配走后，在客户列表中不再显示原归属员工的客户。
 								</p>
-								<p style="margin-bottom: 0px;color: red;">
+								<!-- <p style="margin-bottom: 0px;color: red;">
 									3、如何判断粉丝是否为企业微信的外部联系人？<a
 										href="https://support.qq.com/products/104790/faqs/78374" target="_blank"
 										class="el-link el-link--primary">
 									<span class="el-link--inner">点击查看</span>
 								</a>
-								</p>
+								</p> -->
 								<p style="margin-bottom: 0px;color: red;">
-									4、为了避免销售人员长时间沟通无果或是恶意保护占有客户资源，在达到客户回收条件时，需要将企微客户分配/共享给其他员工，进行跟踪，从而提高跟进效率，有效利用客户资源，则在【客户公海】--【企微客户】列表里生成一条该企微客户数据。
+									3、为了避免销售人员长时间沟通无果或是恶意保护占有客户资源，在达到客户回收条件时，需要将企微客户分配/共享给其他员工，进行跟踪，从而提高跟进效率，有效利用客户资源，则在【客户公海】--【企微客户】列表里生成一条该企微客户数据。
 								</p>
 							</div>
 							<div class="content-hd">
@@ -237,21 +237,21 @@
 									<!--								<span @click="lookUniqueCustom(1)" v-if="showCustomData && fromUnique == 0" style="color: #01b065; cursor: pointer">查看重复客户</span>-->
 									<!--								<span @click="lookUniqueCustom(0)" v-if="showCustomData && fromUnique == 1" style="color: #01b065; cursor: pointer">查看全部客户</span>-->
 									<a-button style="width: 140px;" class="btn-primary1" @click="lookUniqueCustom"
-									          icon="swap">
+									          >
 										查看重复客户
 									</a-button>
-									<!--								<a-button class="btn-primary1" @click="confirm" icon="reload" v-has="'sync-client'">-->
+									<!--								<a-button class="btn-primary1" @click="confirm"  v-has="'sync-client'">-->
 									<!--									同步客户-->
 									<!--								</a-button>-->
-									<a-button class="btn-primary1" @click="confirm" icon="reload" v-has="'sync-client'">
+									<a-button class="btn-primary1" @click="confirm"  v-has="'sync-client'">
 										同步客户
 									</a-button>
-									<a-button class="btn-primary1" @click="showModal1" type="primary" icon="tags"
+									<a-button class="btn-primary1" @click="showModal1" type="primary" 
 									          v-has="'client-remove-tag'">
 										移除标签
 									</a-button>
 									<a-button class="btn-primary1" @click="showModal" type="primary"
-									          icon="tags" v-has="'client-add-tag'">
+									           v-has="'client-add-tag'">
 										打标签
 									</a-button>
 									<a-button class="btn-primary1" @click="leadOut" type="primary"
@@ -259,7 +259,7 @@
 										导出客户
 									</a-button>
 									<a-button class="btn-primary1" @click="setOptions" type="primary"
-									          icon="tool" v-has="'client-setOptions'">
+									           v-has="'client-setOptions'">
 										高级设置
 									</a-button>
 
@@ -512,8 +512,8 @@
 											<a-tooltip placement="bottom">
 												<template slot="title">
 													<div>企业微信给客户打标签：分公有标签和私有标签</div>
-													<div>1、公有标签：即企业标签。管理员创建，所有员工可见，在本系统定义为“公有标签”。</div>
-													<div>2、私有标签：即个人标签。员工创建，仅自己可见。在本系统定义为“私有标签”）。</div>
+													<div>公有标签：即企业标签。管理员创建，所有员工可见。</div>
+													<div>私有标签：即个人标签。员工创建，仅自己可见。</div>
 												</template>
 												<a-icon type="question-circle" style="margin-left:5px;"/>
 											</a-tooltip>
@@ -758,12 +758,12 @@
 									位客户
 								</span>
 									<span style="float:right;">
-									<a-button class="btn-primary2" @click="showModal1" type="primary" icon="tags"
+									<a-button class="btn-primary2" @click="showModal1" type="primary" 
 									          v-has="'client-remove-tag'">
 										移除标签
 									</a-button>
 									<a-button class="btn-primary2" @click="showModal" type="primary"
-									          icon="tags" v-has="'client-add-tag'">
+									           v-has="'client-add-tag'">
 										打标签
 									</a-button>
 									<a-button type="primary" @click="recordCustomer"
@@ -1526,8 +1526,8 @@
 											<a-tooltip placement="bottom">
 												<template slot="title">
 													<div>企业微信给客户打标签：分公有标签和私有标签</div>
-													<div>1、公有标签：即企业标签。管理员创建，所有员工可见，在本系统定义为“公有标签”。</div>
-													<div>2、私有标签：即个人标签。员工创建，仅自己可见。在本系统定义为“私有标签”）。</div>
+													<div>公有标签：即企业标签。管理员创建，所有员工可见。</div>
+													<div>私有标签：即个人标签。员工创建，仅自己可见。</div>
 												</template>
 												<a-icon type="question-circle" style="margin-left:5px;"/>
 											</a-tooltip>

@@ -6,7 +6,7 @@
 				<a-layout-header>
 					新建高级群发
 					<router-link to="/senior/list" style="font-size: 16px;float: right;margin-right: 15px;">
-						<a-button type="primary" icon="rollback">返回列表</a-button>
+						<a-button type="primary" >返回列表</a-button>
 					</router-link>
 				</a-layout-header>
 				<a-layout style class="fans-content">
@@ -410,7 +410,7 @@
 											</div>
 											<div class="content-msg">
 												<p style="margin-bottom: 0px;line-height: 25px;font-size: 12px;">
-													请控制每日群发频次，勿发送广告营销类内容，以免造成对粉丝的打扰进而被投诉，影响公众号使用。</p>
+													请控制每日群发次数，勿发送广告营销类内容，以免对粉丝造成打扰进而被投诉，影响公众号使用。</p>
 												<p style="margin-bottom: 0px;line-height: 25px;font-size: 12px;">
 													实际发送时间因系统排队等原因，可能会与设定的时间发送有误差</p>
 											</div>

@@ -12,10 +12,10 @@
 						<div style="font-size:16px;font-weight:700;color:#333333">标签拉群</div>
 						<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7;padding:16px">
 							<p>
-								<span style="font-weight: 700;">标签拉群：</span>将同一标签层次的客户拉入同一个客户群内，比如将带有“吃货”标签的客户，拉入到“吃货群”，这样他们因具有相同的话题和兴趣爱好，企业就可以有针对性地对该特征的客户群制定社群运营方案，社群运营起来不仅高效，也方便管理，更利于群转化。
+								<span style="font-weight: 700;">标签拉群：</span>即将具有相同标签的客户拉到一个群内，如有一批客户，他们中有的人被打上了“高频次高消费的”的标签，则将有该标签的客户拉到一个群里面，企业可以针对这个客户群的客户进行精细化运营。
 							</p>
 							<p>
-								<span style="font-weight: 700;">拉群流程：</span>选择需要群发的员工，针对该员工的客户，筛选具有同属性/标签的客户，同时选择多个群聊，并一一上传正确的群二维码，按照群聊顺序，客户群发给相应的员工确认，确认后，员工的客户即会收到该员工推送的入群欢迎语和入群二维码。
+								<span style="font-weight: 700;">拉群流程：</span>根据需求选择企业员工，针对所选择的企业员工的客户，筛选出具有相同标签或者属性的客户，然后选择多个群聊，并一一上传正确的群二维码，按照群聊顺序，客户群发给相应的员工确认，确认后，员工的客户即会收到该员工推送的入群欢迎语和入群二维码。
 							</p>
 							<p style="margin-bottom: 0px;font-weight: 700;">温馨提示：</p>
 							<p style="margin-bottom: 0px;">
@@ -53,7 +53,7 @@
 								<a-button @click="create" type="primary" v-has="'groupTags-add'">
 									新建拉群
 								</a-button>
-								<a-button icon="reload" @click="refresh" style="margin-left: 10px;width: 110px;"
+								<a-button  @click="refresh" style="margin-left: 10px;width: 110px;"
 								          v-has="'groupTags-list'">
 									更新数据
 								</a-button>

@@ -65,13 +65,13 @@
 								<a-button @click="clear">重置</a-button>
 							</a-col>
 							<a-col style="float:right;">
-								<a-button class="btn-primary" icon="setting"
+								<a-button class="btn-primary" 
 								          @click="addSetting" type="primary" v-has="'follow-hign'">
 									高级设置
 								</a-button>
-								<a-button class="btn-primary" icon="plus"
+								<a-button class="btn-primary" 
 								          @click="addFollow" type="primary" v-has="'follow-rule'">
-									新增
+									新建
 								</a-button>
 							</a-col>
 						</div>
@@ -174,17 +174,17 @@
 											<a-select-option value="0">选择当前页</a-select-option>
 											<a-select-option value="1">选择所有</a-select-option>
 										</a-select>
-										<a-button class="btn-primary" icon="edit"
+										<a-button class="btn-primary" 
 										          :disabled="selectedRowKeys.length == 0"
 										          @click="addFollowMore" type="primary" v-has="'follow-edit'">
 											批量编辑
 										</a-button>
-										<a-button class="btn-primary" icon="unlock"
+										<a-button class="btn-primary" 
 										          :disabled="selectedRowKeys.length == 0"
 										          @click="releaseFollow('')" type="primary" v-has="'follow-open'">
 											批量开启
 										</a-button>
-										<a-button class="btn-primary" icon="lock"
+										<a-button class="btn-primary" 
 										          :disabled="selectedRowKeys.length == 0"
 										          @click="failure('')" type="primary" v-has="'follow-open'">
 											批量关闭
@@ -280,7 +280,7 @@
 			width    : "12%",
 		},
 		{
-			title      : "查看员工数据",
+			title      : "员工数据",
 			dataIndex  : "follow_name",
 			key        : "follow_name",
 			width      : "16%",
@@ -294,7 +294,7 @@
 			scopedSlots: {customRender: "send_time"}
 		},
 		{
-			title      : "提醒文案",
+			title      : "提醒内容",
 			dataIndex  : "send_content",
 			width      : "12.8%",
 			key        : "send_content",

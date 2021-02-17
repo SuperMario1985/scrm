@@ -86,7 +86,7 @@
 									<a-card>
 										<span slot="title">
 											<span style="line-height: 32px;">自建应用</span>
-											<a-button style="float: right;" type="primary" icon="reload" @click="updateAgent" :loading="updateLoading">同步应用</a-button>
+											<a-button style="float: right;" type="primary"  @click="updateAgent" :loading="updateLoading">同步应用</a-button>
 										</span>
 										<a-row>
 											<a-col style="padding: 0 32px; ">

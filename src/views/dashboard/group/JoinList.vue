@@ -6,7 +6,7 @@
 				          class="scroll">
 					<!-- 头部 -->
 					<a-layout-header>{{joinTitle}}
-						<a-button type="primary" icon="rollback"
+						<a-button type="primary" 
 						          style="float: right;margin-top: 9px;" @click="goBack">返回列表
 						</a-button>
 					</a-layout-header>
@@ -15,7 +15,7 @@
 						<!--						<div class="content-msg">-->
 						<!--							玩法：用户拆裂变红包时，会获得首拆红包金额，并立刻入账至用户的微信零钱里，此时在规定时间内，若分享给好友帮拆，好友可获得金额不等的红包作为奖励，即刻到账。当凑齐了相应的好友人数，用户可以获得剩下的红包。反之，如果用户没有分享领取完的话，裂变的红包剩余金额在超过规定时间后则会失效。-->
 						<!--							<p style="margin: 10px 0 2px;color: red;">-->
-						<!--								在使用派发红包功能前，需要商户完成以下配置：-->
+						<!--								商户需完成以下配置，才能使用派发红包功能：：-->
 						<!--							</p>-->
 						<!--							<p style="margin-bottom: 2px;">-->
 						<!--								1、前往<a href="https://pay.weixin.qq.com/index.php/core/home/login?return_url=%2F"-->

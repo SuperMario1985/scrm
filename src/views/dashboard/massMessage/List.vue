@@ -13,39 +13,39 @@
 								<a-collapse-panel key="1">
 									<template slot="header">
 										<p style="margin-bottom: 7px;">
-											【客户】群发规则：客户每个月最多接收来自同一企业的管理员的4条群发消息，可在一天内发送4条，到达接收上限后将无法给该客户推送消息。<span
-												style="color: #FF562D;">同一个客户归属于多个员工，群发时该客户随机收到某员工推送的内容，不重复推送。</span>
+											每个客户每个月最多可接收来自同一企业管理员的4条群发消息，可在一天接收4条，达到接收上限后将无法再给该客户推送消息。<span
+												style="color: #FF562D;">同一客户归属于多个员工时，群发时该客户收到某员工的推送内容，其他员工不再重复推送。</span>
 										</p>
 										<p style="margin-bottom: 2px;font-weight: 700; margin-top: 7px;">
 											群发红包给客户
 										</p>
 										<p style="margin-bottom: 2px;">
-											a、客户从对话框打开红包，领取后，再次打开，直接跳到客户自己领取记录的页面。
+											a、客户在对话框领取红包之后，下次再打开该红包，直接查看客户自己的红包领取记录。
 										</p>
 										<p style="margin-bottom: 2px;">
-											b、企业成员（无论该企业成员是否与其个人微信进行绑定）从对话框打开红包，是直接进入到所群发的全部客户的领取记录页面。
-											<span style="color: #FF562D">（由于官方接口受限，无法与客户一样，查看的是该客户的领取记录）
-											</span>
+											b、由于官方接口受限，企业成员在对话框打开红包，只能查看所群发的全部客户的红包领取记录，无法查看某个客户的红包领取记录。
+											<!-- <span style="color: #FF562D">（由于官方接口受限，无法与客户一样，查看的是该客户的领取记录）
+											</span> -->
 										</p>
 										<p style="margin-bottom: 2px;font-weight: 700; margin-top: 7px;">
 											群发红包给客户群：
 										</p>
 										<p style="margin-bottom: 2px;">
-											a、客户从该群对话框打开红包，领取后，再次打开，直接进入到该群的客户领取记录的页面。
+											a、客户在客户群的对话框领取红包之后，下次再打开该红包，直接查看该群的客户红包领取记录。
 										</p>
 										<p style="margin-bottom: 2px;">
-											b、企业成员（无论该企业成员是否与其个人微信进行绑定）从对话框打开红包，直接进入到本次所群发的全部客户群的全部客户的领取记录页面。
-											<span style="color: #FF562D">（由于官方接口受限，无法查看的是该群的客户领取记录）
-											</span>
+											b、由于官方接口受限，企业成员在对话框打开红包，只能查看本次所群发的全部客户群的全部客户的红包领取记录，无法查看某个群的红包领取记录。
+											<!-- <span style="color: #FF562D">（由于官方接口受限，无法查看的是该群的客户领取记录）
+											</span> -->
 										</p>
 										<p style="margin-bottom: 2px;">
-											c、未知客户，即当前为个人微信客户，没有添加过企业成员。从对话框打开红包，提示“您当前为个人微信客户，没有添加过企业成员，无法领取红包”，也无法查看其它人领取情况。
+											c、当没有添加企业成员，只是个人微信客户，无法领取红包，且提示：您当前为个人微信客户，没有添加过企业成员，无法领取红包。
 										</p>
 										<p style="margin-bottom: 2px;font-weight: 700; margin-top: 7px; color: #FF562D;">
 											若红包已发送到客户/客户群里，但客户尚未领取，此时微信支付商户平台出现账户余额不足时，客户打开红包页面无法领取，请务必保证账户余额充足，避免客户投诉。
 										</p>
 										<p style="margin: 10px 0 2px;color: #FF562D;">
-											在使用派发红包功能前，需要商户完成以下配置：
+											商户需完成以下配置，才能使用派发红包功能：
 										</p>
 									</template>
 									<p style="margin-bottom: 2px;">
@@ -135,7 +135,7 @@
 									          v-has="'group-sending-add'">
 										新建消息
 									</a-button>
-									<a-button icon="reload" @click="refresh" style="margin-left: 10px;width: 110px;"
+									<a-button  @click="refresh" style="margin-left: 10px;width: 110px;"
 									          v-has="'group-sending-list'">
 										更新数据
 									</a-button>

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from "./store";
-import {message} from "ant-design-vue"
+import { message } from "ant-design-vue"
 
 import DashboardLayout from "./layouts/DashboardLayout";
 
@@ -25,6 +25,7 @@ import SubAccount from './views/dashboard/SubAccount.vue'
 import HomePage from './views/dashboard/homePage/homePage.vue'
 // import Integration from './views/dashboard/Integration.vue'
 import ChooseAccount from './views/dashboard/ChooseAccount.vue'
+import Index from './layouts/Index.vue'
 
 Vue.use(Router)
 
@@ -37,96 +38,97 @@ routerMothods.map((method) => {
 			return VueRouterCall.call(this, location, onComplete, onAbort)
 		}
 		return VueRouterCall.call(this, location).catch(err => {
-			console.log({path: location, msg: err,})
+			console.log({ path: location, msg: err, })
 		})
 	}
 })
 
 var router = new Router({
-	mode  : 'history',
+	mode: 'history',
 	routes: [
-		{path: '/', redirect: '/home'},
-		{path: '/login', component: Login},
-		{path: '/passLogin', component: PassLogin},
-		{path: '/scancode', component: ScanCode},
-		{path: '/binding', component: Binding},
-		{path: '/forgetPass', component: Forget},
-		{path: '/verifyPassword', component: VerifyPassword},
-		{path: '/workBinding', component: WorkBinding},
-		{path: '/freeRegister', component: FreeRegister},
-		{path: '/register', component: Register},
-		{path: '/regist', component: Regist},
-		{path: '/chooseAccount', component: ChooseAccount},
+		{ path: '/', redirect: '/home' },
+		{ path: '/login', component: Login },
+		{ path: '/passLogin', component: PassLogin },
+		{ path: '/scancode', component: ScanCode },
+		{ path: '/binding', component: Binding },
+		{ path: '/forgetPass', component: Forget },
+		{ path: '/verifyPassword', component: VerifyPassword },
+		{ path: '/workBinding', component: WorkBinding },
+		{ path: '/freeRegister', component: FreeRegister },
+		{ path: '/register', component: Register },
+		{ path: '/regist', component: Regist },
+		{ path: '/chooseAccount', component: ChooseAccount },
+		{ path: '/index', component: Index },
 		{
-			path     : '/',
+			path: '/',
 			component: DashboardLayout,
-			redirect : '/home',
-			children : [
+			redirect: '/home',
+			children: [
 				{
-					path     : 'home',
-					name     : 'home',
+					path: '/home',
+					name: 'home',
 					component: OperationCenter,
 					// 授权页面显示与隐藏,false要展示，true不展示
-					meta     : {
-						corpAlive : true,
+					meta: {
+						corpAlive: true,
 						agentAlive: true
 					}
 				},
 				{
-					path     : 'about',
-					name     : 'about',
+					path: '/about',
+					name: 'about',
 					component: () => import('./views/dashboard/About.vue'),
-					meta     : {
+					meta: {
 						keepAlive: false
 					}
 				},
 				{
-					path     : 'push/list',
-					name     : 'push',
+					path: '/push/list',
+					name: 'push',
 					component: () => import('./views/dashboard/push/List.vue'),
-					meta     : {
+					meta: {
 						keepAlive: false
 					}
 				},
 				{
-					path     : 'push/add',
-					name     : 'push',
+					path: '/push/add',
+					name: 'push',
 					component: () => import('./views/dashboard/push/Add.vue'),
-					meta     : {
+					meta: {
 						keepAlive: false
 					}
 				},
 				{
-					path     : 'fans/list',
-					name     : 'fans',
+					path: '/fans/list',
+					name: 'fans',
 					component: () => import('./views/dashboard/fans/List.vue'),
-					meta     : {
+					meta: {
 						keepAlive: false
 					}
 				},
 				{
-					path     : 'account',
-					name     : 'account',
+					path: '/account',
+					name: 'account',
 					component: Account,
-					meta     : {
+					meta: {
 						keepAlive: true
 					}
 				},
 				{
-					path     : 'mini',
-					name     : 'mini',
+					path: '/mini',
+					name: 'mini',
 					component: () => import('./views/dashboard/AccountMini.vue'),
-					meta     : {
+					meta: {
 						keepAlive: true
 					}
 				},
 				{
-					path     : 'subAccount',
-					name     : 'subAccount',
+					path: '/subAccount',
+					name: 'subAccount',
 					component: SubAccount,
-					meta     : {
-						keepAlive : true,
-						corpAlive : true,
+					meta: {
+						keepAlive: true,
+						corpAlive: true,
 						agentAlive: true
 					}
 				},
@@ -141,949 +143,949 @@ var router = new Router({
 				// 	}
 				// },
 				{
-					path     : 'tags/list',
-					name     : 'tags',
+					path: '/tags/list',
+					name: 'tags',
 					component: () => import('./views/dashboard/tags/List.vue'),
-					meta     : {
+					meta: {
 						keepAlive: false
 					}
 				},
 				{
-					path     : 'template/list',
-					name     : 'template',
+					path: '/template/list',
+					name: 'template',
 					component: () => import('./views/dashboard/template/List.vue'),
-					meta     : {
+					meta: {
 						keepAlive: false
 					}
 				},
 				{
-					path     : 'template/add',
-					name     : 'template',
+					path: '/template/add',
+					name: 'template',
 					component: () => import('./views/dashboard/template/Add.vue'),
-					meta     : {
+					meta: {
 						keepAlive: false
 					}
 				},
 				{
-					path     : 'fans/msg',
-					name     : 'fansMsg',
+					path: '/fans/msg',
+					name: 'fansMsg',
 					component: () => import('./views/dashboard/fans/msg.vue'),
-					meta     : {
+					meta: {
 						keepAlive: false
 					}
 				},
 				{
-					path     : 'fans/detail',
-					name     : 'fans',
+					path: '/fans/detail',
+					name: 'fans',
 					component: () => import('./views/dashboard/fans/detail.vue'),
-					meta     : {
+					meta: {
 						keepAlive: false
 					}
 				},
 				{
-					path     : 'fansCustomerAttribute/management',
-					name     : 'fansCustomerAttribute',
+					path: '/fansCustomerAttribute/management',
+					name: 'fansCustomerAttribute',
 					component: () => import('./views/dashboard/customerAttribute/Management.vue'),
-					meta     : {
+					meta: {
 						keepAlive: false
 					}
 				},
 				{
-					path     : 'corpCustomerAttribute/management',
-					name     : 'corpCustomerAttribute',
+					path: '/corpCustomerAttribute/management',
+					name: 'corpCustomerAttribute',
 					component: () => import('./views/dashboard/customerAttribute/Management.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'user/userUpdate',
-					name     : 'user',
+					path: '/user/userUpdate',
+					name: 'user',
 					component: () => import('./views/dashboard/user/UserUpdate.vue'),
-					meta     : {
-						keepAlive : true,
-						corpAlive : true,
+					meta: {
+						keepAlive: true,
+						corpAlive: true,
 						agentAlive: true
 					}
 				},
 				{
-					path     : 'scene/list',
-					name     : 'scene',
+					path: '/scene/list',
+					name: 'scene',
 					component: () => import('./views/dashboard/scene/List.vue'),
-					meta     : {
+					meta: {
 						keepAlive: false
 					}
 				},
 				{
-					path     : 'scene/add',
-					name     : 'scene',
+					path: '/scene/add',
+					name: 'scene',
 					component: () => import('./views/dashboard/scene/Add.vue'),
-					meta     : {
+					meta: {
 						keepAlive: false
 					}
 				},
 				{
-					path     : 'scene/statistics',
-					name     : 'scene',
+					path: '/scene/statistics',
+					name: 'scene',
 					component: () => import('./views/dashboard/scene/Statistics.vue'),
-					meta     : {
+					meta: {
 						keepAlive: false
 					}
 				},
 				{
-					path     : 'material',
-					name     : 'material',
+					path: '/material',
+					name: 'material',
 					component: Material,
-					meta     : {
+					meta: {
 						keepAlive: false
 					}
 				},
 				{
-					path     : 'senior/list',
-					name     : 'senior',
+					path: '/senior/list',
+					name: 'senior',
 					component: () => import('./views/dashboard/senior/List.vue'),
-					meta     : {
+					meta: {
 						keepAlive: false
 					}
 				},
 				{
-					path     : 'senior/add',
-					name     : 'senior',
+					path: '/senior/add',
+					name: 'senior',
 					component: () => import('./views/dashboard/senior/Add.vue'),
-					meta     : {
+					meta: {
 						keepAlive: false
 					}
 				},
 				{
-					path     : 'customer/list',
-					name     : 'customer',
+					path: '/customer/list',
+					name: 'customer',
 					component: () => import('./views/dashboard/customer/List.vue'),
-					meta     : {
+					meta: {
 						keepAlive: false
 					}
 				},
 				{
-					path     : 'customer/add',
-					name     : 'customer',
+					path: '/customer/add',
+					name: 'customer',
 					component: () => import('./views/dashboard/customer/Add.vue'),
-					meta     : {
+					meta: {
 						keepAlive: false
 					}
 				},
 				{
-					path     : 'reply/list',
-					name     : 'reply',
+					path: '/reply/list',
+					name: 'reply',
 					component: () => import('./views/dashboard/reply/List.vue'),
-					meta     : {
+					meta: {
 						keepAlive: false
 					}
 				},
 				{
-					path     : 'reply/add',
-					name     : 'reply',
+					path: '/reply/add',
+					name: 'reply',
 					component: () => import('./views/dashboard/reply/Add.vue'),
-					meta     : {
+					meta: {
 						keepAlive: false
 					}
 				},
 				{
 
-					path     : 'sign/list',
-					name     : 'sign',
+					path: '/sign/list',
+					name: 'sign',
 					component: () => import('./views/dashboard/sign/List.vue'),
-					meta     : {
-						keepAlive : true,
-						corpAlive : true,
+					meta: {
+						keepAlive: true,
+						corpAlive: true,
 						agentAlive: true
 					}
 				},
 				{
-					path     : 'client/list',
-					name     : 'client',
+					path: '/client/list',
+					name: 'client',
 					component: () => import('./views/dashboard/client/List.vue'),
-					meta     : {
-						keepAlive : true,
-						corpAlive : true,
+					meta: {
+						keepAlive: true,
+						corpAlive: true,
 						agentAlive: true
 					}
 				},
 				{
-					path     : 'smsSend/list',
-					name     : 'smsSend',
+					path: '/smsSend/list',
+					name: 'smsSend',
 					component: () => import('./views/dashboard/smsSend/List.vue'),
-					meta     : {
-						keepAlive : true,
-						corpAlive : true,
+					meta: {
+						keepAlive: true,
+						corpAlive: true,
 						agentAlive: true
 					}
 				},
 				{
-					path     : 'smsSend/detail',
-					name     : 'smsSend',
+					path: '/smsSend/detail',
+					name: 'smsSend',
 					component: () => import('./views/dashboard/smsSend/Detail.vue'),
-					meta     : {
-						keepAlive : true,
-						corpAlive : true,
+					meta: {
+						keepAlive: true,
+						corpAlive: true,
 						agentAlive: true
 					}
 				},
 				{
-					path     : 'smsSend/add',
-					name     : 'smsSend',
+					path: '/smsSend/add',
+					name: 'smsSend',
 					component: () => import('./views/dashboard/smsSend/Add.vue'),
-					meta     : {
-						keepAlive : true,
-						corpAlive : true,
+					meta: {
+						keepAlive: true,
+						corpAlive: true,
 						agentAlive: true
 					}
 				},
 				{
-					path     : 'smsSend/order',
-					name     : 'smsSend',
+					path: '/smsSend/order',
+					name: 'smsSend',
 					component: () => import('./views/dashboard/smsSend/Order.vue'),
-					meta     : {
-						keepAlive : true,
-						corpAlive : true,
+					meta: {
+						keepAlive: true,
+						corpAlive: true,
 						agentAlive: true
 					}
 				},
 				{
-					path     : 'smsTemplate/list',
-					name     : 'smsTemplate',
+					path: '/smsTemplate/list',
+					name: 'smsTemplate',
 					component: () => import('./views/dashboard/smsTemplate/List.vue'),
-					meta     : {
-						keepAlive : true,
-						corpAlive : true,
+					meta: {
+						keepAlive: true,
+						corpAlive: true,
 						agentAlive: true
 					}
 				},
 				{
-					path     : 'smsTemplate/add',
-					name     : 'smsTemplate',
+					path: '/smsTemplate/add',
+					name: 'smsTemplate',
 					component: () => import('./views/dashboard/smsTemplate/Add.vue'),
-					meta     : {
-						keepAlive : true,
-						corpAlive : true,
+					meta: {
+						keepAlive: true,
+						corpAlive: true,
 						agentAlive: true
 					}
 				},
 				{
-					path     : 'operationCenter',
-					name     : 'operationCenter',
+					path: '/operationCenter',
+					name: 'operationCenter',
 					component: Home,
-					meta     : {
+					meta: {
 						keepAlive: true
 					}
 				},
 				{
-					path     : 'staff/list',
-					name     : 'staff',
+					path: '/staff/list',
+					name: 'staff',
 					component: () => import('./views/dashboard/staff/List.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'staff/dimission',
-					name     : 'staffDimission',
+					path: '/staff/dimission',
+					name: 'staffDimission',
 					component: () => import('./views/dashboard/staff/Dimission.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false,
 					}
 				},
 				{
-					path     : 'label/list',
-					name     : 'label',
+					path: '/label/list',
+					name: 'label',
 					component: () => import('./views/dashboard/label/List.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false,
 					}
 				},
 				{
-					path     : 'delCustomer/list',
-					name     : 'deleteCustomer',
+					path: '/delCustomer/list',
+					name: 'deleteCustomer',
 					component: () => import('./views/dashboard/delCustomer/List.vue'),
-					meta     : {
+					meta: {
 						corpAlive: false
 					}
 				},
 				{
-					path     : 'customManage/list',
-					name     : 'customManage',
+					path: '/customManage/list',
+					name: 'customManage',
 					component: () => import('./views/dashboard/customManage/List.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'customManage/detail',
-					name     : 'customManage',
+					path: '/customManage/detail',
+					name: 'customManage',
 					component: () => import('./views/dashboard/customManage/Detail.vue'),
-					meta     : {
+					meta: {
 						keepAlive: false
 					}
 				},
 				{
-					path     : 'customManage/thirdStore',
-					name     : 'customManage',
+					path: '/customManage/thirdStore',
+					name: 'customManage',
 					component: () => import('./views/dashboard/customManage/ThirdStore.vue'),
-					meta     : {
+					meta: {
 						keepAlive: false
 					}
 				},
 				{
-					path     : 'customTags/list',
-					name     : 'customTags',
+					path: '/customTags/list',
+					name: 'customTags',
 					component: () => import('./views/dashboard/customTags/List.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'customRecord/list',
-					name     : 'customRecord',
+					path: '/customRecord/list',
+					name: 'customRecord',
 					component: () => import('./views/dashboard/customRecord/List.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'customRecord/detail',
-					name     : 'customRecord',
+					path: '/customRecord/detail',
+					name: 'customRecord',
 					component: () => import('./views/dashboard/customRecord/Detail.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'channelCode/list',
-					name     : 'channelCode',
+					path: '/channelCode/list',
+					name: 'channelCode',
 					component: () => import('./views/dashboard/channelCode/List.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'channelCode/add',
-					name     : 'channelCode',
+					path: '/channelCode/add',
+					name: 'channelCode',
 					component: () => import('./views/dashboard/channelCode/Add.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : '/channelCode/statistics',
-					name     : 'channelCode',
+					path: '/channelCode/statistics',
+					name: 'channelCode',
 					component: () => import('./views/dashboard/channelCode/Statistics.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : '/channelCode/statisticsAll',
-					name     : 'channelCodeStatistics',
+					path: '/channelCode/statisticsAll',
+					name: 'channelCodeStatistics',
 					component: () => import('./views/dashboard/channelCode/StatisticsAll.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'channelCode/baiduStatistics',
-					name     : 'channelCodeBaidu',
+					path: '/channelCode/baiduStatistics',
+					name: 'channelCodeBaidu',
 					component: () => import('./views/dashboard/channelCode/Baidu.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'channelCode/baiduAdd',
-					name     : 'channelCodeBaidu',
+					path: '/channelCode/baiduAdd',
+					name: 'channelCodeBaidu',
 					component: () => import('./views/dashboard/channelCode/BaiduAdd.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'wholeMarket/fissionList',
-					name     : 'wholeMarketFission',
+					path: '/wholeMarket/fissionList',
+					name: 'wholeMarketFission',
 					component: () => import('./views/dashboard/wholeMarket/fission/List.vue'),
-					meta     : {
+					meta: {
 						corpAlive: false
 					}
 				},
 				{
-					path     : 'wholeMarket/fissionList1',
-					name     : 'wxWholeMarketFission',
+					path: '/wholeMarket/fissionList1',
+					name: 'wxWholeMarketFission',
 					component: () => import('./views/dashboard/wholeMarket/fission/List.vue'),
-					meta     : {
+					meta: {
 						corpAlive: false
 					}
 				},
 				{
-					path     : 'wholeMarket/fissionAdd',
-					name     : 'wholeMarketFission',
+					path: '/wholeMarket/fissionAdd',
+					name: 'wholeMarketFission',
 					component: () => import('./views/dashboard/wholeMarket/fission/Add.vue'),
-					meta     : {
+					meta: {
 						corpAlive: false
 					}
 				},
 				{
-					path     : 'wholeMarket/fissionAdd1',
-					name     : 'wxWholeMarketFission',
+					path: '/wholeMarket/fissionAdd1',
+					name: 'wxWholeMarketFission',
 					component: () => import('./views/dashboard/wholeMarket/fission/Add.vue'),
-					meta     : {
+					meta: {
 						corpAlive: false
 					}
 				},
 				{
-					path     : 'wholeMarket/fissionParticipants',
-					name     : 'wholeMarketFission',
+					path: '/wholeMarket/fissionParticipants',
+					name: 'wholeMarketFission',
 					component: () => import('./views/dashboard/wholeMarket/fission/Participants.vue'),
-					meta     : {
+					meta: {
 						corpAlive: false
 					}
 				},
 				{
-					path     : 'wholeMarket/fissionParticipants1',
-					name     : 'wxWholeMarketFission',
+					path: '/wholeMarket/fissionParticipants1',
+					name: 'wxWholeMarketFission',
 					component: () => import('./views/dashboard/wholeMarket/fission/Participants.vue'),
-					meta     : {
+					meta: {
 						corpAlive: false
 					}
 				},
 				{
-					path     : 'wholeMarket/statistic',
-					name     : 'wholeMarketFission',
+					path: '/wholeMarket/statistic',
+					name: 'wholeMarketFission',
 					component: () => import('./views/dashboard/wholeMarket/fission/Statistic.vue'),
-					meta     : {
+					meta: {
 						corpAlive: false
 					}
 				},
 				{
-					path     : 'wholeMarket/statistic1',
-					name     : 'wxWholeMarketFission',
+					path: '/wholeMarket/statistic1',
+					name: 'wxWholeMarketFission',
 					component: () => import('./views/dashboard/wholeMarket/fission/Statistic.vue'),
-					meta     : {
+					meta: {
 						corpAlive: false
 					}
 				},
 				{
-					path     : 'fission/list',
-					name     : 'fission',
+					path: '/fission/list',
+					name: 'fission',
 					component: () => import('./views/dashboard/fission/List.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'fission/add',
-					name     : 'fission',
+					path: '/fission/add',
+					name: 'fission',
 					component: () => import('./views/dashboard/fission/Add.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : '/fission/participants',
-					name     : 'fission',
+					path: '/fission/participants',
+					name: 'fission',
 					component: () => import('./views/dashboard/fission/Participants.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : '/fission/helpRecord',
-					name     : 'fission',
+					path: '/fission/helpRecord',
+					name: 'fission',
 					component: () => import('./views/dashboard/fission/HelpRecord.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'redForNew/list',
-					name     : 'redForNewList',
+					path: 'redForNew/list',
+					name: 'redForNewList',
 					component: () => import('./views/dashboard/redForNew/List.vue'),
-					meta     : {
+					meta: {
 						corpAlive: false
 					}
 				},
 				{
-					path     : 'redForNew/add',
-					name     : 'redForNewList',
+					path: 'redForNew/add',
+					name: 'redForNewList',
 					component: () => import('./views/dashboard/redForNew/Add.vue'),
-					meta     : {
+					meta: {
 						corpAlive: false
 					}
 				},
 				{
-					path     : 'redForNew/participants',
-					name     : 'redForNewList',
+					path: 'redForNew/participants',
+					name: 'redForNewList',
 					component: () => import('./views/dashboard/redForNew/Participants.vue'),
-					meta     : {
+					meta: {
 						corpAlive: false
 					}
 				},
 				{
-					path     : 'redForNew/statistics',
-					name     : 'redForNewList',
+					path: 'redForNew/statistics',
+					name: 'redForNewList',
 					component: () => import('./views/dashboard/redForNew/Statistics.vue'),
-					meta     : {
+					meta: {
 						corpAlive: false
 					}
 				},
 				{
-					path     : 'redForNew/rule',
-					name     : 'redForNewRule',
+					path: 'redForNew/rule',
+					name: 'redForNewRule',
 					component: () => import('./views/dashboard/redForNew/Rule.vue'),
-					meta     : {
+					meta: {
 						corpAlive: false
 					}
 				},
 				{
-					path     : 'redForNew/ruleAdd',
-					name     : 'redForNewRule',
+					path: 'redForNew/ruleAdd',
+					name: 'redForNewRule',
 					component: () => import('./views/dashboard/redForNew/RuleAdd.vue'),
-					meta     : {
+					meta: {
 						corpAlive: false
 					}
 				},
 				{
-					path     : 'redFission/list',
-					name     : 'redFission',
+					path: 'redFission/list',
+					name: 'redFission',
 					component: () => import('./views/dashboard/redFission/List.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'redFission/add',
-					name     : 'redFission',
+					path: 'redFission/add',
+					name: 'redFission',
 					component: () => import('./views/dashboard/redFission/Add.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'redFission/participants',
-					name     : 'redFission',
+					path: 'redFission/participants',
+					name: 'redFission',
 					component: () => import('./views/dashboard/redFission/Participants.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'redFission/helpRecord',
-					name     : 'redFission',
+					path: 'redFission/helpRecord',
+					name: 'redFission',
 					component: () => import('./views/dashboard/redFission/HelpRecord.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'raffle/list',
-					name     : 'raffle',
+					path: 'raffle/list',
+					name: 'raffle',
 					component: () => import('./views/dashboard/raffle/List.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'raffle/add',
-					name     : 'raffle',
+					path: 'raffle/add',
+					name: 'raffle',
 					component: () => import('./views/dashboard/raffle/Add.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : '/raffle/participants',
-					name     : 'raffle',
+					path: '/raffle/participants',
+					name: 'raffle',
 					component: () => import('./views/dashboard/raffle/Participants.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : '/raffle/drawDetail',
-					name     : 'raffle',
+					path: '/raffle/drawDetail',
+					name: 'raffle',
 					component: () => import('./views/dashboard/raffle/DrawDetail.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : '/raffle/helpDetail',
-					name     : 'raffle',
+					path: '/raffle/helpDetail',
+					name: 'raffle',
 					component: () => import('./views/dashboard/raffle/HelpDetail.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'welcome/list',
-					name     : 'welcome',
+					path: '/welcome/list',
+					name: 'welcome',
 					component: () => import('./views/dashboard/welcome/List.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'welcome/add',
-					name     : 'welcome',
+					path: '/welcome/add',
+					name: 'welcome',
 					component: () => import('./views/dashboard/welcome/Add.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'massMessage/list',
-					name     : 'massMessage',
+					path: '/massMessage/list',
+					name: 'massMessage',
 					component: () => import('./views/dashboard/massMessage/List.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'massMessage/add',
-					name     : 'massMessage',
+					path: '/massMessage/add',
+					name: 'massMessage',
 					component: () => import('./views/dashboard/massMessage/Add.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'filingCabinet/list',
-					name     : 'filingCabinetList',
+					path: '/filingCabinet/list',
+					name: 'filingCabinetList',
 					component: () => import('./views/dashboard/filingCabinet/List.vue'),
-					meta     : {
-						keepAlive : true,
-						corpAlive : true,
+					meta: {
+						keepAlive: true,
+						corpAlive: true,
 						agentAlive: true
 					}
 				},
 				{
-					path     : 'filingCabinet/add',
-					name     : 'filingCabinetList',
+					path: '/filingCabinet/add',
+					name: 'filingCabinetList',
 					component: () => import('./views/dashboard/filingCabinet/Add.vue'),
-					meta     : {
-						keepAlive : true,
-						corpAlive : true,
+					meta: {
+						keepAlive: true,
+						corpAlive: true,
 						agentAlive: true
 					}
 				},
 				{
-					path     : 'filingCabinet/info',
-					name     : 'filingCabinetList',
+					path: '/filingCabinet/info',
+					name: 'filingCabinetList',
 					component: () => import('./views/dashboard/filingCabinet/Info.vue'),
-					meta     : {
-						keepAlive : true,
-						corpAlive : true,
+					meta: {
+						keepAlive: true,
+						corpAlive: true,
 						agentAlive: true
 					}
 				},
 				{
-					path     : 'filingCabinet/statistics',
-					name     : 'filingCabinetStatisticsNew',
+					path: '/filingCabinet/statistics',
+					name: 'filingCabinetStatisticsNew',
 					component: () => import('./views/dashboard/filingCabinet/Statistics.vue'),
-					meta     : {
-						keepAlive : true,
-						corpAlive : true,
+					meta: {
+						keepAlive: true,
+						corpAlive: true,
 						agentAlive: true
 					}
 				},
 				{
-					path     : 'wechatManagement',
-					name     : 'wechatManagement',
+					path: '/wechatManagement',
+					name: 'wechatManagement',
 					component: WechatManagement,
-					meta     : {
-						corpAlive : true,
+					meta: {
+						corpAlive: true,
 						agentAlive: true
 					}
 				},
 				{
-					path     : 'agent/list',
-					name     : 'agent',
+					path: '/agent/list',
+					name: 'agent',
 					component: () => import('./views/dashboard/agent/List.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: true
 					}
 				},
 				{
-					path     : 'sidebar/detail',
-					name     : 'sidebar',
+					path: '/sidebar/detail',
+					name: 'sidebar',
 					component: () => import('./views/dashboard/sidebar/Detail.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'archive/message',
-					name     : 'archiveMessage',
+					path: '/archive/message',
+					name: 'archiveMessage',
 					component: () => import('./views/dashboard/archive/Message.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'appCenter/list',
-					name     : 'appCenterList',
+					path: '/appCenter/list',
+					name: 'appCenterList',
 					component: () => import('./views/dashboard/appCenter/List.vue'),
-					meta     : {
-						keepAlive : true,
-						corpAlive : true,
+					meta: {
+						keepAlive: true,
+						corpAlive: true,
 						agentAlive: true
 					}
 				},
 				// 多余的路由
 				{
-					path     : 'archive/rule',
-					name     : 'archiveRule',
+					path: '/archive/rule',
+					name: 'archiveRule',
 					component: () => import('./views/dashboard/archive/Rule.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				// 多余的路由
 				{
-					path     : 'archive/list',
-					name     : 'archive',
+					path: '/archive/list',
+					name: 'archive',
 					component: () => import('./views/dashboard/archive/List.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'archive/msg',
-					name     : 'archiveMsg',
+					path: '/archive/msg',
+					name: 'archiveMsg',
 					component: () => import('./views/dashboard/archive/Msg.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'archive/sensitive',
-					name     : 'sensitive',
+					path: '/archive/sensitive',
+					name: 'sensitive',
 					component: () => import('./views/dashboard/archive/Sensitive'),
-					meta     : {
-						corpAlive : true,
+					meta: {
+						corpAlive: true,
 						agentAlive: true
 					}
 				},
 
 				{
-					path     : 'archive/violationsNotice',
-					name     : 'violationsNotice',
+					path: '/archive/violationsNotice',
+					name: 'violationsNotice',
 					component: () => import('./views/dashboard/archive/ViolationsNotice'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'archive/userNoticeAdd',
-					name     : 'violationsNotice',
+					path: '/archive/userNoticeAdd',
+					name: 'violationsNotice',
 					component: () => import('./views/dashboard/archive/UserNoticeAdd.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'archive/groupNoticeAdd',
-					name     : 'violationsNotice',
+					path: '/archive/groupNoticeAdd',
+					name: 'violationsNotice',
 					component: () => import('./views/dashboard/archive/GroupNoticeAdd.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'archive/chatTag',
-					name     : 'chatTag',
+					path: '/archive/chatTag',
+					name: 'chatTag',
 					component: () => import('./views/dashboard/archive/ChatTag.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'staff/redirect',
-					name     : 'redirect',
+					path: '/staff/redirect',
+					name: 'redirect',
 					component: () => import('./views/dashboard/staff/Redirect.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'customImport/list',
-					name     : 'customImportList',
+					path: '/customImport/list',
+					name: 'customImportList',
 					component: () => import('./views/dashboard/customImport/List.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'redPacket/records',
-					name     : 'redRecords',
+					path: '/redPacket/records',
+					name: 'redRecords',
 					component: () => import('./views/dashboard/redPacket/Records.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'redPacket/setting',
-					name     : 'redSetting',
+					path: '/redPacket/setting',
+					name: 'redSetting',
 					component: () => import('./views/dashboard/redPacket/Setting.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'redPacket/reconciliation',
-					name     : 'redReconciliation',
+					path: '/redPacket/reconciliation',
+					name: 'redReconciliation',
 					component: () => import('./views/dashboard/redPacket/Reconciliation.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'redPacket/detailRecords',
-					name     : 'redReconciliation',
+					path: '/redPacket/detailRecords',
+					name: 'redReconciliation',
 					component: () => import('./views/dashboard/redPacket/DetailRecords.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'redPacket/employeeManagement',
-					name     : 'redEmployeeManagement',
+					path: '/redPacket/employeeManagement',
+					name: 'redEmployeeManagement',
 					component: () => import('./views/dashboard/redPacket/EmployeeManagement.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'redPacket/userDetailRecords',
-					name     : 'redEmployeeManagement',
+					path: '/redPacket/userDetailRecords',
+					name: 'redEmployeeManagement',
 					component: () => import('./views/dashboard/redPacket/UserDetailRecords.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'thirdPartyStore/store',
-					name     : 'appCenterList',
+					path: '/thirdPartyStore/store',
+					name: 'appCenterList',
 					component: () => import('./views/dashboard/thirdPartyStore/Store.vue'),
-					meta     : {
-						corpAlive : true,
+					meta: {
+						corpAlive: true,
 						agentAlive: true
 					}
 				},
 				{
-					path     : 'thirdPartyStore/order',
-					name     : 'appCenterList',
+					path: '/thirdPartyStore/order',
+					name: 'appCenterList',
 					component: () => import('./views/dashboard/thirdPartyStore/Order.vue'),
-					meta     : {
-						corpAlive : true,
+					meta: {
+						corpAlive: true,
 						agentAlive: true
 					}
 				},
 				{
-					path     : 'thirdPartyStore/members',
-					name     : 'appCenterList',
+					path: '/thirdPartyStore/members',
+					name: 'appCenterList',
 					component: () => import('./views/dashboard/thirdPartyStore/Members.vue'),
-					meta     : {
-						corpAlive : true,
+					meta: {
+						corpAlive: true,
 						agentAlive: true
 					}
 				},
 				{
-					path     : 'follow/list',
-					name     : 'follow',
+					path: '/follow/list',
+					name: 'follow',
 					component: () => import('./views/dashboard/follow/List.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'follow/statistics',
-					name     : 'followStatistics',
+					path: '/follow/statistics',
+					name: 'followStatistics',
 					component: () => import('./views/dashboard/follow/Statistic.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'follow/add',
-					name     : 'follow',
+					path: '/follow/add',
+					name: 'follow',
 					component: () => import('./views/dashboard/follow/Add.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'group/list',
-					name     : 'groupList',
+					path: '/group/list',
+					name: 'groupList',
 					component: () => import('./views/dashboard/group/List.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'group/statistics',
-					name     : 'groupList',
+					path: '/group/statistics',
+					name: 'groupList',
 					component: () => import('./views/dashboard/group/Statistics.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
@@ -1096,186 +1098,186 @@ var router = new Router({
 				// 	}
 				// },
 				{
-					path     : 'group/statisticsAll',
-					name     : 'groupStatistics',
+					path: '/group/statisticsAll',
+					name: 'groupStatistics',
 					component: () => import('./views/dashboard/group/StatisticsAll.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'group/autoCreate',
-					name     : 'groupAutoCreate',
+					path: '/group/autoCreate',
+					name: 'groupAutoCreate',
 					component: () => import('./views/dashboard/group/AutoCreate.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'group/tagsCreate',
-					name     : 'groupTagsCreate',
+					path: '/group/tagsCreate',
+					name: 'groupTagsCreate',
 					component: () => import('./views/dashboard/group/TagsCreate.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'group/welcome',
-					name     : 'groupWelcome',
+					path: '/group/welcome',
+					name: 'groupWelcome',
 					component: () => import('./views/dashboard/group/Welcome.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'group/welcomeAdd',
-					name     : 'groupWelcome',
+					path: '/group/welcomeAdd',
+					name: 'groupWelcome',
 					component: () => import('./views/dashboard/group/WelcomeAdd.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'group/add',
-					name     : 'groupAutoCreate',
+					path: '/group/add',
+					name: 'groupAutoCreate',
 					component: () => import('./views/dashboard/group/Add.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'group/tagsCreateAdd',
-					name     : 'groupTagsCreate',
+					path: '/group/tagsCreateAdd',
+					name: 'groupTagsCreate',
 					component: () => import('./views/dashboard/group/TagsCreateAdd.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'group/clockIn',
-					name     : 'groupClockIn',
+					path: '/group/clockIn',
+					name: 'groupClockIn',
 					component: () => import('./views/dashboard/group/ClockIn.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'group/clockInAdd',
-					name     : 'groupClockIn',
+					path: '/group/clockInAdd',
+					name: 'groupClockIn',
 					component: () => import('./views/dashboard/group/ClockInAdd.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'group/joinList',
-					name     : 'groupClockIn',
+					path: '/group/joinList',
+					name: 'groupClockIn',
 					component: () => import('./views/dashboard/group/JoinList.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'customCrm/kanban',
-					name     : 'customCrmKanban',
+					path: '/customCrm/kanban',
+					name: 'customCrmKanban',
 					component: () => import('./views/dashboard/customCrm/Kanban.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'highSeasCustomer/list',
-					name     : 'highSeasCustomerList',
+					path: '/highSeasCustomer/list',
+					name: 'highSeasCustomerList',
 					component: () => import('./views/dashboard/highSeasCustomer/List.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'highSeasCustomer/detail',
-					name     : 'highSeasCustomerList',
+					path: '/highSeasCustomer/detail',
+					name: 'highSeasCustomerList',
 					component: () => import('./views/dashboard/highSeasCustomer/Detail.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'highSeasCustomer/recyclingRules',
-					name     : 'highSeasCustomerRecyclingRules',
+					path: '/highSeasCustomer/recyclingRules',
+					name: 'highSeasCustomerRecyclingRules',
 					component: () => import('./views/dashboard/highSeasCustomer/RecyclingRules.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'customManage/noCustomDetail',
-					name     : 'customManage',
+					path: '/customManage/noCustomDetail',
+					name: 'customManage',
 					component: () => import('./views/dashboard/customManage/NoCustomDetail.vue'),
-					meta     : {
-						corpAlive : false,
+					meta: {
+						corpAlive: false,
 						agentAlive: false
 					}
-				},{
-					path     : 'todoManagement/setting',
-					name     : 'todoManagementSetting',
+				}, {
+					path: '/todoManagement/setting',
+					name: 'todoManagementSetting',
 					component: () => import('./views/dashboard/todoManagement/Setting.vue'),
-					meta     : {
+					meta: {
 						corpAlive: false,
 						agentAlive: false
 					}
-				},{
-					path     : 'todoManagement/customize',
-					name     : 'todoManagementCustomize',
+				}, {
+					path: '/todoManagement/customize',
+					name: 'todoManagementCustomize',
 					component: () => import('./views/dashboard/todoManagement/Customize.vue'),
-					meta     : {
+					meta: {
 						corpAlive: false,
 						agentAlive: false
 					}
-				},{
-					path     : 'todoManagement/remind',
-					name     : 'todoManagementRemind',
+				}, {
+					path: '/todoManagement/remind',
+					name: 'todoManagementRemind',
 					component: () => import('./views/dashboard/todoManagement/Remind.vue'),
-					meta     : {
+					meta: {
 						corpAlive: false,
 						agentAlive: false
 					}
-				},{
-					path     : 'todoManagement/kanban',
-					name     : 'todoManagementKanban',
+				}, {
+					path: '/todoManagement/kanban',
+					name: 'todoManagementKanban',
 					component: () => import('./views/dashboard/todoManagement/Kanban.vue'),
-					meta     : {
+					meta: {
 						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'circle/circleOfFriends',
-					name     : 'circleOfFriends',
+					path: '/circle/circleOfFriends',
+					name: 'circleOfFriends',
 					component: () => import('./views/dashboard/circle/CircleOfFriends.vue'),
-					meta     : {
+					meta: {
 						corpAlive: false,
 						agentAlive: false
 					}
 				},
 				{
-					path     : 'circle/addFriends',
-					name     : 'circleOfFriends',
+					path: '/circle/addFriends',
+					name: 'circleOfFriends',
 					component: () => import('./views/dashboard/circle/AddFriends.vue'),
-					meta     : {
+					meta: {
 						corpAlive: false,
 						agentAlive: false
 					}
@@ -1287,8 +1289,8 @@ var router = new Router({
 
 //登录状态下判断当前账号有赞店铺绑定状态
 var judgeBindingState = async function (userToken) {
-	const {data: res} = await Vue.prototype.axios.post('third-store/youzan-shop-bind', {
-		uid      : localStorage.getItem('uid'),
+	const { data: res } = await Vue.prototype.axios.post('third-store/youzan-shop-bind', {
+		uid: localStorage.getItem('uid'),
 		userToken: userToken
 	})
 	console.log(res.data.type, '登录状态下')
@@ -1301,7 +1303,7 @@ var judgeBindingState = async function (userToken) {
 
 //未登录状态下判断当前账号有赞店铺绑定状态
 var judgeBindingState2 = async function (userToken) {
-	const {data: res} = await Vue.prototype.axios.post('login/youzan-shop-bind', {
+	const { data: res } = await Vue.prototype.axios.post('login/youzan-shop-bind', {
 		userToken: userToken
 	})
 	console.log(res.data.type, '未登录状态')
@@ -1351,18 +1353,18 @@ router.beforeEach((to, from, next) => {
 				if (e.type == 2) {
 					//未绑定
 					return next({
-						path : '/login',
+						path: '/login',
 						query: {
-							redirect : to.path,
+							redirect: to.path,
 							userToken: encodeURIComponent(userToken)
 						} // 将跳转的路由path作为参数，登录成功后跳转到该路由
 					})
 				} else if (e.type == 1) {
 					//已绑定
 					return next({
-						path : '/verifyPassword',
+						path: '/verifyPassword',
 						query: {
-							ava     : window.btoa(e.account),//对手机号进行加密
+							ava: window.btoa(e.account),//对手机号进行加密
 							redirect: to.path
 						} // 将跳转的路由path作为参数，登录成功后跳转到该路由
 					})
@@ -1371,8 +1373,8 @@ router.beforeEach((to, from, next) => {
 		}
 		if (!localStorage.getItem('token') && typeof userToken == 'undefined' && !store.state.ignorePath.includes(to.path)) {
 			return next({
-				path : '/login',
-				query: {redirect: to.path} // 将跳转的路由path作为参数，登录成功后跳转到该路由
+				path: '/login',
+				query: { redirect: to.path } // 将跳转的路由path作为参数，登录成功后跳转到该路由
 			})
 		}
 

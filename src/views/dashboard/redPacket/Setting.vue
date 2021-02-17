@@ -23,7 +23,7 @@
 								若红包已发送到客户/客户群里，但客户尚未领取，此时微信支付商户平台出现账户余额不足时，客户打开红包页面无法领取，请务必保证账户余额充足，避免客户投诉。
 							</p>
 							<p style="margin-bottom: 2px;color: #FF562D;">
-								在使用派发红包功能前，需要商户完成以下配置：
+								商户需完成以下配置，才能使用派发红包功能：
 							</p>
 							<p style="margin-bottom: 2px;">
 								1、前往<a href="https://pay.weixin.qq.com/index.php/core/home/login?return_url=%2F"
@@ -56,11 +56,11 @@
 							<a-col style="float:right;">
 								<a-button style="margin: 0 10px;"@click="addFixedAmount(1)" type="primary"
 								          v-has="'redPack-add-money'">
-									添加固定金额
+									添加红包金额
 								</a-button>
 								<a-button @click="openSetFixedAmount(2)"
 								          v-has="'redPacket-limit'">
-									客户限额
+									红包限额
 								</a-button>
 								<a-modal title="更换自建应用" v-model="changeAppVisible" @ok="changeAppOk"
 								         :confirmLoading="confirmLoading" style="height: 500px"
@@ -99,7 +99,7 @@
 									<linkAgent :corpId="corpId" :showAddAgent="showAddAgentModal" :agent_is_money='1'
 									           @addOk="addOk" @linkOk="linkOk" @addCancel="addCancel"></linkAgent>
 								</a-modal>
-								<a-modal title="添加固定金额" v-model="addFixedAmountVisible" @ok="handleOk"
+								<a-modal title="添加红包金额" v-model="addFixedAmountVisible" @ok="handleOk"
 								         :confirmLoading="confirmLoading" style="height: 500px" @cancel="cancel">
 									<a-form-item :label-col="{ span: 6 }"
 									             :wrapper-col="{ span: 18 }">
@@ -248,7 +248,7 @@
 
 	const columns = [
 		{
-			title      : "零钱金额",
+			title      : "红包金额",
 			dataIndex  : "money",
 			key        : "money",
 			scopedSlots: {customRender: "money"},
@@ -273,7 +273,7 @@
 		},
 
 		{
-			title      : "使用状态",
+			title      : "红包状态",
 			dataIndex  : "status",
 			key        : "status",
 			scopedSlots: {customRender: "status"},

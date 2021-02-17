@@ -8,7 +8,7 @@
 						class="scroll">
 					<!-- 头部 -->
 					<a-layout-header>【{{userName}}】红包记录
-						<a-button type="primary" style="float: right; margin: 9px 20px 0 0;" icon="rollback"
+						<a-button type="primary" style="float: right; margin: 9px 20px 0 0;" 
 						          @click="rollback">
 							返回列表
 						</a-button>
@@ -255,7 +255,7 @@
 			scopedSlots: {customRender: "statusName"},
 		},
 		{
-			title      : "零钱金额",
+			title      : "红包金额",
 			dataIndex  : "money",
 			key        : "money",
 			scopedSlots: {customRender: "money"},

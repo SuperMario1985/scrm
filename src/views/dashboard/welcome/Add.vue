@@ -8,7 +8,7 @@
 						<template v-if="urlId == ''">新建</template>
 						<template v-if="urlId != ''">修改</template>
 						欢迎语
-						<a-button type="primary" icon="rollback"
+						<a-button type="primary" 
 						          style="font-size: 14px;float: right;margin-right: 15px;margin-top: 7px;height: 32px;line-height: 16px;"
 						          @click="goBack">
 							返回列表

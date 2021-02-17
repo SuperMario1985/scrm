@@ -177,9 +177,9 @@
 					<a-layout-content>
 						<div class="content-msg">
 							<p style="margin-bottom: 2px;">
-								1、新用户接入本系统后可能需要一定时间同步粉丝信息，如公众号粉丝较多，则需要一定时间等待。</p>
+								1、新用户接入本系统之后同步粉丝信息需要一定时间，如果公众号粉丝较多，则需要等待一定时间。</p>
 							<p style="margin-bottom: 2px;">
-								2、当出现个别粉丝的关注状态与微信公众后台的不同，总粉丝数与微信后台不同等情况，此时只需手动同步数据即可。</p>
+								2、当出现总粉丝数与微信后台不同，个别粉丝的关注状态与微信公众后台不同等情况，需要手动数据。</p>
 							<p style="margin-bottom: 2px;">
 								3、在本系统内给某粉丝打/移除标签会自动同步到微信公众平台。同步后，在微信后台查看可能存在延迟，请等待一定时间。</p>
 							<p style="margin-bottom: 2px;">
@@ -195,22 +195,22 @@
 							<div class="content-hd-right">
 								<a-button class="btn-primary1" @click="showModal" type="primary"
 								          v-if="$store.state.authorizer_type != 'unauthorized' && verify_service"
-								          icon="tags" v-has="'fans-add-tag'">
+								           v-has="'fans-add-tag'">
 									打标签
 								</a-button>
 								<a-button class="btn-primary1" @click="showConfirmWx" type="primary"
 								          v-if="$store.state.authorizer_type == 'unauthorized' || !verify_service"
-								          icon="tags" v-has="'fans-add-tag'">
+								           v-has="'fans-add-tag'">
 									打标签
 								</a-button>
 								<a-button class="btn-primary1" @click="showModal1" type="primary"
 								          v-if="$store.state.authorizer_type != 'unauthorized' && verify_service"
-								          icon="tags" v-has="'fans-remove-tag'">
+								           v-has="'fans-remove-tag'">
 									移除标签
 								</a-button>
 								<a-button class="btn-primary1" @click="showConfirmWx" type="primary"
 								          v-if="$store.state.authorizer_type == 'unauthorized' || !verify_service"
-								          icon="tags" v-has="'fans-remove-tag'">
+								           v-has="'fans-remove-tag'">
 									移除标签
 								</a-button>
 								<a-button
@@ -310,13 +310,13 @@
 									</template>
 									<a-button class="btn-primary1"
 									          v-if="$store.state.authorizer_type != 'unauthorized' && verify_service "
-									          icon="reload" v-has="'fans-sync'">
+									           v-has="'fans-sync'">
 										同步粉丝
 									</a-button>
 								</a-popconfirm>
 								<a-button class="btn-primary1"
 								          v-if="$store.state.authorizer_type == 'unauthorized' || !verify_service"
-								          icon="reload"
+								          
 								          @click="showConfirmWx" v-has="'fans-sync'">
 									同步粉丝
 								</a-button>

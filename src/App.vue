@@ -211,6 +211,9 @@ export default {
   // table
   .ant-table {
     color: #333;
+    table {
+      box-shadow: none;
+    }
     td {
       .ant-btn {
         border: none;
@@ -296,6 +299,85 @@ export default {
       border-radius: 4px;
       border: 1px solid #ff5555;
     }
+  }
+}
+.ant-table {
+  color: #333;
+  table {
+    box-shadow: none !important;
+  }
+  td {
+    .ant-btn {
+      border: none;
+      background: none;
+      box-shadow: none;
+      color: #335588;
+    }
+  }
+  .ant-table-thead > tr > th {
+    color: #666;
+  }
+  .ant-empty-image {
+    height: 100px;
+    background: url("./assets/base/table-empty.png") center center no-repeat;
+    svg {
+      display: none;
+    }
+  }
+}
+.anticon {
+  &.anticon-question-circle {
+    width: 14px;
+    height: 14px;
+    background: url("./assets/base/icon-info.png") center center no-repeat;
+    background-size: 100% 100%;
+    svg {
+      display: none !important;
+    }
+  }
+  &.anticon-user {
+    width: 14px;
+    height: 14px;
+    background: url("./assets/base/icon-avatar.png") center center no-repeat;
+    background-size: 100% 100%;
+    svg {
+      display: none !important;
+    }
+  }
+}
+.fans-data-trend {
+  .ant-empty-image {
+    height: 100px;
+    background: url("./assets/base/table-empty.png") center center no-repeat;
+    svg {
+      display: none;
+    }
+  }
+}
+.ant-empty {
+  width: 100%;
+  height: 100px;
+  background: url("./assets/base/table-empty.png") center center no-repeat;
+  background-size: auto 100%;
+  svg {
+    display: none;
+  }
+}
+.ant-tooltip {
+  .ant-tooltip-inner {
+    min-width: 30px;
+    min-height: 32px;
+    padding: 6px 8px;
+    color: #666;
+    text-align: left;
+    text-decoration: none;
+    word-wrap: break-word;
+    background: #ffffff;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+  }
+  .ant-tooltip-arrow::before{
+    background: #ffffff;
+    // box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
   }
 }
 </style>

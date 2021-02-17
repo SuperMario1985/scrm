@@ -188,13 +188,14 @@
 						this.openKeys = [e.keyPath[1]]
 					}
 				}
-				if (!this.menuCollapsed) {
-					if (e.key == 'fansMsg') {
-						this.collapsed = true
-					} else {
-						this.collapsed = false
-					}
-				}
+				// 关闭折叠
+				// if (!this.menuCollapsed) {
+				// 	if (e.key == 'fansMsg') {
+				// 		this.collapsed = true
+				// 	} else {
+				// 		this.collapsed = false
+				// 	}
+				// }
 			},
 			onOpenChange (openKeys) {
 				const latestOpenKey = openKeys.find(
@@ -592,9 +593,9 @@
 			},
 		},
 		mounted () {
-			if (this.$route.name == 'fansMsg') {
-				this.collapsed = true
-			}
+			// if (this.$route.name == 'fansMsg') {
+			// 	this.collapsed = true
+			// }
 			this.init()
 			console.log(this.$store.state)
 		},

@@ -8,7 +8,7 @@
 						<template v-if="typeof urlId == 'undefined'">新建</template>
 						<template v-if="typeof urlId != 'undefined'">修改</template>
 						拉群
-						<a-button type="primary" icon="rollback"
+						<a-button type="primary" 
 						          style="float: right;margin-top: 9px;" @click="goBack">返回列表
 						</a-button>
 					</a-layout-header>
@@ -89,7 +89,7 @@
 										<!-- 使用成员 -->
 										<a-form-item label="使用成员" :label-col="{ span: 3 }"
 										             :wrapper-col="{ span: 21 }">
-											<a-button @click="showDepartmentList" icon="plus">
+											<a-button @click="showDepartmentList" >
 												选择成员
 											</a-button>
 											<template v-if="chooseNum > 0">
@@ -199,7 +199,7 @@
 											</table>
 
 											<div>
-												<a-button @click="showChatVisible" icon="plus">
+												<a-button @click="showChatVisible" >
 													选择群聊
 												</a-button>
 											</div>

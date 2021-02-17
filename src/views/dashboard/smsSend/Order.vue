@@ -4,7 +4,7 @@
 			<a-card style="padding:0 20px;line-height: 50px;border-bottom: 1px solid #E2E2E2;height: 50px;min-width: 760px;width: 100%;margin-bottom: 12px;">
 				<div class="tpl-title">短信充值
 					<router-link to="/smsSend/list" style="font-size: 16px;float: right;margin-right: 15px;">
-						<a-button type="primary" icon="rollback">返回列表</a-button>
+						<a-button type="primary" >返回列表</a-button>
 					</router-link></div>
 			</a-card>
 			<div style="margin:0 20px;background:#fff;padding: 20px;">

@@ -33,7 +33,7 @@
 									<span>昨日搜索次数
 										<a-tooltip placement="right">
 						                    <template slot="title">
-						                      <span>被员工搜索的次数</span>
+						                      <span>员工搜索内容的次数</span>
 						                    </template>
 						                    <a-icon type="question-circle" style="margin-left:5px;"/>
 						                  </a-tooltip>
@@ -53,7 +53,7 @@
 									<span>昨日发送次数
 									<a-tooltip placement="right">
 						                    <template slot="title">
-						                      <span>被员工发送的次数</span>
+						                      <span>员工发送内容的次数</span>
 						                    </template>
 						                    <a-icon type="question-circle" style="margin-left:5px;"/>
 						                  </a-tooltip>
@@ -73,7 +73,7 @@
 									<span>昨日客户打开次数
 									<a-tooltip placement="right">
 						                    <template slot="title">
-						                      <span>被同一客户打开多次，会重复计算</span>
+						                      <span>客户打开内容的次数，被同一客户打开多次，会重复计算</span>
 						                    </template>
 						                    <a-icon type="question-circle" style="margin-left:5px;"/>
 						                  </a-tooltip>

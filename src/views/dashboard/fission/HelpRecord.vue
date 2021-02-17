@@ -2,7 +2,7 @@
 	<div style="width: 100%;height:100%;position: absolute;overflow-y: auto;padding-bottom: 30px;" class="scroll">
 		<div style="height: 50px; line-height: 50px;background-color: #ffffff;">
 			<label style="margin-left: 20px">{{name}}</label>
-			<a-button style="float: right;margin: 9px 20px 0;" type="primary" icon="rollback" @click="rollback">返回列表</a-button>
+			<a-button style="float: right;margin: 9px 20px 0;" type="primary"  @click="rollback">返回列表</a-button>
 		</div>
 		<div style="margin: 10px 20px; background-color: #FFFFFF">
 			<a-spin tip="加载中..." size="large" :spinning="isLoading2">
