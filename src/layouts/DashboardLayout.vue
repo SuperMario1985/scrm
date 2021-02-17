@@ -1,8 +1,10 @@
 <template>
 	<a-layout id="dashboard" style="min-height: 100vh;position:fixed;width:100%;min-width:1360px;">
 		<top-navbar></top-navbar>
-
-		<a-layout>
+		<a-layout v-if="activeMenu==1">
+			<homePage />
+		</a-layout>
+		<a-layout v-else>
 			<a-layout-sider
 					width="200"
 					style="background: #FFF"
@@ -99,7 +101,7 @@
 	import authorizeBtn from "@/components/AuthorizeBtn.vue"
 	import corpAuthorizeBtn from "../components/CorpAuthorizeBtn";
 	import agentAuthorizeBtn from "../components/AgenAuthoeizeBtn"
-
+	import homePage from "@/views/dashboard/homePage/homePage.vue"
 	export default {
 		name      : "DashboardLayout",
 		inject    : ['reload'],
@@ -137,6 +139,7 @@
 				subPagePermission  : '',//子页面权限名
 				faterPagePermission: '',//父页面权限名
 				faterPageUrl       : '',//父页面链接地址
+				activeMenu         : this.$store.state.activeMenu
 			};
 		},
 		components: {
@@ -144,7 +147,8 @@
 			DashboardContent,
 			authorizeBtn,
 			corpAuthorizeBtn,
-			agentAuthorizeBtn
+			agentAuthorizeBtn,
+			homePage
 		},
 		methods   : {
 			initData (menuData) {
@@ -577,9 +581,13 @@
 			'$store.state.activeMenu' (newValue, oldValue) {
 				console.log(newValue);
 				if (newValue === 2) {
+					this.activeMenu = 2;
 					this.enterEnterpriseWechat()
 				}else if (newValue === 3) {
-					this.enterAccountMarketing()
+					this.enterAccountMarketing();
+					this.activeMenu = 3;
+				}else if (newValue === 1) {
+					this.activeMenu = 1;
 				}
 			},
 		},
@@ -588,10 +596,14 @@
 				this.collapsed = true
 			}
 			this.init()
+			console.log(this.$store.state)
 		},
 	};
 </script>
 
 <style lang="less">
 	@import "../common/css/dashboard.less";
+	.ant-layout {
+		height: calc(100% - 64px);
+	}
 </style>

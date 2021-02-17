@@ -22,6 +22,7 @@ import Material from './views/dashboard/Material.vue'
 import OperationCenter from './views/dashboard/OperationCenter.vue'
 import WechatManagement from './views/dashboard/WechatManagement.vue'
 import SubAccount from './views/dashboard/SubAccount.vue'
+import HomePage from './views/dashboard/homePage/homePage.vue'
 // import Integration from './views/dashboard/Integration.vue'
 import ChooseAccount from './views/dashboard/ChooseAccount.vue'
 
@@ -1278,7 +1279,7 @@ var router = new Router({
 						corpAlive: false,
 						agentAlive: false
 					}
-				},
+				}		
 			]
 		}
 	]
