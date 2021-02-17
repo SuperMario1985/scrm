@@ -1,6 +1,6 @@
 <template>
 	<a-layout-header class="header">
-		<img alt="Vue logo" src="../assets/logo.png" height="32" style="margin-bottom: 10px;">
+		<img alt="Vue logo" src="../assets/logo.png" height="32" style="margin-bottom: 10px;padding-left: 15px;">
 		<span @click="activeMenu(1)" :class="isActive === 1 ? 'active-home' : ''" style="margin-left:70px;padding: 3px;font-size: 14px;color: #333333;font-weight:700;cursor: pointer;">首页</span>
 		<span v-if="showWorkLabel" @click="activeMenu(2)" :class="isActive === 2 ? 'active-home' : ''" style="margin-left:15px;padding: 3px;font-size: 14px;color: #333333;font-weight:700;cursor: pointer;">企业微信</span>
 		<span v-if="showWxLabel" @click="activeMenu(3)" :class="isActive === 3 ? 'active-home' : ''" style="margin-left:15px;padding: 3px;font-size: 14px;color: #333333;font-weight:700;cursor: pointer;">公众号</span>
