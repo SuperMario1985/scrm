@@ -1,5 +1,5 @@
 <template>
-	<div style="width: 100%;max-height:100%;position: absolute;overflow-y:auto;padding: 20px 0;" id="components-layout-demo-basic">
+	<div style="width: 100%;max-height:100%;position: absolute;overflow-y:auto;" id="components-layout-demo-basic">
 		<a-layout-content>	
 			<div style="font-size:16px;font-weight:700;color:#333333">自定义属性</div>
 			<div style="padding: 20px 20px 0 ;">
