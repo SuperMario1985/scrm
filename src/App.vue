@@ -272,6 +272,9 @@ export default {
       display: none;
     }
   }
+  #components-layout-demo-basic .ant-layout-content{
+    overflow: hidden auto;
+  }
 }
 .ant-message {
   .ant-message-notice-content {

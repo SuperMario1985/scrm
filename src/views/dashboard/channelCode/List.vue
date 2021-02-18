@@ -154,12 +154,10 @@
 										<a-button @click="moveQrcode(0, groupId.length > 0 ? groupId[0] : '',1)"
 										          style="margin-right: 5px"
 										          :disabled="selectedRowKeys.length == 0" v-has="'channel-group-move'">
-											<a-icon type="retweet"/>
 											批量移动
 										</a-button>
 										<a-button @click="downLoad()" style="margin-right: 5px"
 										          :disabled="selectedRowKeys.length == 0" v-has="'channel-down'">
-											<a-icon type="download"/>
 											批量下载
 										</a-button>
 										<a-popover trigger="hover">
@@ -173,23 +171,19 @@
 											</template>
 											<a-button style="margin-right: 5px"
 											          v-if="selectedRowKeys.length != 0" v-has="'channel-edit'">
-												<a-icon type="team"/>
 												批量编辑成员
 											</a-button>
 										</a-popover>
 										<a-button v-if="selectedRowKeys.length == 0" style="margin-right: 5px"
 										          :disabled="selectedRowKeys.length == 0" v-has="'channel-edit'">
-											<a-icon type="team"/>
 											批量编辑成员
 										</a-button>
 										<a-button @click="setUserLimit" style="margin-right: 5px"
 										          :disabled="selectedRowKeys.length == 0" v-has="'channel-edit'">
-											<a-icon type="to-top"/>
 											批量编辑成员上限
 										</a-button>
 										<a-button @click="batchEditWelCome()" style="margin-right: 5px"
 										          :disabled="selectedRowKeys.length == 0" v-has="'channel-edit'">
-											<a-icon type="message"/>
 											批量编辑欢迎语
 										</a-button>
 										<!--										<a-button @click="batchDelete" :disabled="selectedRowKeys.length == 0">-->
