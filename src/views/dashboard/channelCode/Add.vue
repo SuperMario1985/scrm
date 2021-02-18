@@ -1153,7 +1153,7 @@
                         >
                           <label>特殊时期{{ index + 1 }}：</label>
                           <a-range-picker
-                            style="width: 200px"
+                            style="width: 218px"
                             :allowClear="false"
                             :disabledDate="disabledDateDay"
                             :value="item.specialDate"
