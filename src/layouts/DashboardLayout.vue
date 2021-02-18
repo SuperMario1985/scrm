@@ -1,10 +1,7 @@
 <template>
-	<a-layout id="dashboard" style="min-height: 100vh;position:fixed;width:100%;min-width:1360px;">
+	<a-layout id="dashboard" style="min-height: 100vh;position:fixed;width:100%;">
 		<top-navbar></top-navbar>
-		<a-layout v-if="activeMenu==1">
-			<homePage />
-		</a-layout>
-		<a-layout v-else>
+		<a-layout>
 			<a-layout-sider
 					width="200"
 					style="background: #FFF"
@@ -604,7 +601,4 @@
 
 <style lang="less">
 	@import "../common/css/dashboard.less";
-	.ant-layout {
-		height: calc(100% - 64px);
-	}
 </style>

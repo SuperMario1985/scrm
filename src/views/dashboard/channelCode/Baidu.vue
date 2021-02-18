@@ -145,18 +145,15 @@
 											</template>
 											<a-button style="margin-right: 5px"
 											          v-if="selectedRowKeys.length != 0">
-												<a-icon type="team"/>
 												批量编辑成员
 											</a-button>
 										</a-popover>
 										<a-button v-if="selectedRowKeys.length == 0" style="margin-right: 5px"
 										          :disabled="selectedRowKeys.length == 0">
-											<a-icon type="team"/>
 											批量编辑成员
 										</a-button>
 										<a-button @click="batchEditWelCome()" style="margin-right: 5px"
 										          :disabled="selectedRowKeys.length == 0">
-											<a-icon type="message"/>
 											批量编辑欢迎语
 										</a-button>
 									</div>

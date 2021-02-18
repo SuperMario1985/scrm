@@ -286,7 +286,7 @@
 									this.$router.push(this.redirectUrl)
 								}
 							} else {
-								this.$router.push('/home')
+								this.$router.push('/index')
 							}
 
 						} else if (res.data.num > 1) {
@@ -375,7 +375,7 @@
 							this.$router.push(this.redirectUrl)
 						}
 					} else {
-						this.$router.push('/home')
+						this.$router.push('/index')
 					}
 				}
 			}

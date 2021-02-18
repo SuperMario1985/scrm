@@ -26,18 +26,18 @@
       <div class="version">
         <div class="top">
           <div class="top-l">
-            <div class="title">当前版本：</div>
+            <div class="title">当前版本：</div>  
+          </div>
+          <!-- <div class="more">更多帮助></div> -->
+          <div>
             <span class="type">旗舰版</span>
             <span class="time">{{dateTime}}到期</span>
           </div>
-          <div class="more">更多帮助></div>
         </div>
         <a-carousel autoplay>
-          <div><h3>1</h3></div>
-          <div><h3>2</h3></div>
-          <div><h3>3</h3></div>
+          <div class="banner-box"><img src="~@/assets/homePage/banner.png" alt=""></div>
         </a-carousel>
-        <div class="disc">决胜双十一！微博2020「U微计划」全新合作亮相</div>
+        <div class="disc" @click="goYunmeilai">云美来官网</div>
       </div>
     </div>
     <div class="container">
@@ -73,11 +73,11 @@
         <div class="title">联系我们</div>
         <div class="contact-way">
           <div class="item">
-            <img src="~@/assets/homePage/erweima1.png" alt="">
+            <img src="~@/assets/homePage/erwenma2.png" alt="">
             <p>企业微信（推荐）</p>
           </div>
           <div  class="item">
-            <img src="~@/assets/homePage/erwenma2.png" alt="">
+            <img src="~@/assets/homePage/erweima1.png" alt="">
             <p>云美来</p>
           </div>
         </div>
@@ -110,7 +110,7 @@ export default {
             this.$router.push("/account")
             break;
           case 3:
-            this.$router.push("/staff/list")
+            this.$router.push("/subAccount")
             break;
           case 4:
             this.$router.push("/user/userUpdate")
@@ -124,6 +124,9 @@ export default {
         this.dateTime = res.data.data.package_endtime
       })
     },
+    goYunmeilai(){
+      location.href = 'http://www.wemero.cn/'
+    }
   }
 }
 </script>
@@ -224,6 +227,8 @@ export default {
     color: #797979;
     font-size: 12px;
     line-height: 30px;
+    text-align: center;
+    cursor: pointer;
   }
   .qustion{
     width: 536px;
@@ -272,5 +277,13 @@ export default {
     text-align: center;
     line-height: 12px;
     margin-top: 8px;
+  }
+  .banner-box {
+    width: 376px;
+    height: 161px;
+  }
+  .banner-box img {
+    width: 100%;
+    height: 100%;
   }
 </style>

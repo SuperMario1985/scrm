@@ -1,4 +1,6 @@
 <template>
+<div style="height:100%;">
+  <!-- <TopNavbar/> -->
   <div class="home-page">
     <div class="content">
       <ul class="tabs">
@@ -7,25 +9,27 @@
           <span>云美来</span>
         </li>
         <li :class="{active: currentActive == 2}" @click="changeTab(2, 'company')">
-          <img src="~@/assets/homePage/saaslander.png" alt="">
+          <img src="~@/assets/homePage/qiyeweixin.png" alt="">
           <span>{{wxInfo.corp_name}}</span>
         </li>
         <li :class="{active: currentActive == 3}" @click="changeTab(3, 'mine')" v-if="authrize.nick_name">
-          <img src="~@/assets/homePage/zishuozihua.png" alt="">
+          <img src="~@/assets/homePage/gongzhonghao.png" alt="">
           <span>{{authrize.nick_name}}</span>
         </li>
-        <li class="last">
+        <!-- <li class="last">
           <img src="~@/assets/homePage/setting.png" alt="">
-        </li>
+        </li> -->
       </ul>
       <div class="tab-content">
         <component :is="currentComponent" :corpid="wxInfo.corpid"></component>
       </div>
     </div>
+</div>
   </div>
 </template>
 
 <script>
+import TopNavbar from "@/layouts/TopNavbar.vue"
 import yunmeilai from "./yunmeilai.vue"
 import company from "./company.vue"
 import mine from "./mine.vue"
@@ -46,7 +50,7 @@ export default {
     }
   },
   components:{
-    yunmeilai, company, mine
+    yunmeilai, company, mine, TopNavbar
   },
   mounted() {  
     this.getWxInfo();
@@ -78,11 +82,15 @@ export default {
 </script>
 
 <style scoped>
+  ::-webkit-scrollbar {
+    width: 0;
+  }
   .home-page {
     /* padding: 32px 148px; */
     box-sizing: border-box;
     height: 100%;
     width: 100%;
+    background: #f0f2f5;
   }
   .content {
     width: 1080px;

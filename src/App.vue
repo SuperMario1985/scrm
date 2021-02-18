@@ -272,6 +272,21 @@ export default {
       display: none;
     }
   }
+  .content-msg {
+    width: 100%;
+    min-width: 885px !important;
+  }
+  #components-layout-demo-basic .ant-layout-content {
+    overflow: auto auto !important;
+    width: auto !important;
+    min-width: auto !important;
+  }
+  .ant-layout-content::-webkit-scrollbar{
+    height: 10px;
+  }
+  .ant-table-thead  >  tr  >  th {
+    min-width: 74px;
+  }
 }
 .ant-message {
   .ant-message-notice-content {
@@ -375,7 +390,7 @@ export default {
     background: #ffffff;
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
   }
-  .ant-tooltip-arrow::before{
+  .ant-tooltip-arrow::before {
     background: #ffffff;
     // box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
   }
