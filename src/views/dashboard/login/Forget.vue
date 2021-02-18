@@ -1,7 +1,7 @@
 <template>
 	<div class="login">
 		<div class="login-left">
-			<img src="~@/assets/login_bg.png" alt="">
+			<div class="img"></div>
 			<div class="text">
 				<p>云 美 来 <span>SCRM</span> </p>
 				<p>私 域 流 量 运 营 时 代 的 全 新 增 长 引 擎</p>
@@ -142,7 +142,7 @@
 			},
 			checkPhone(rule, value, callback){
 				 // 验证手机号
-				 if(!value.trim()){
+				 if(!value || !value.trim()){
 					 callback("手机号码不能为空")
 				 }
 				let reg=/^1\d{10}$/
@@ -327,9 +327,11 @@
 		height: 100vh;
 		.login-left{
 			width: 63%;
-			img{
+			.img{
 				width: 100%;
 				height: calc(100vh - 140px);
+				background: url("~@/assets/login_bg.png") no-repeat center bottom;
+		    background-size: cover;
 			}
 			.text{
 				background: #01B065;
@@ -348,9 +350,12 @@
 		}
 		.login-right{
 			width: 37%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
 			.content{
 				width: 320px;
-				margin: 60px auto 0;
+				margin-top: -10vh;
 				.top{
 					display: flex;
 					justify-content: space-between;
@@ -410,7 +415,7 @@
 								.getcode{
 									position: absolute;
 									right: 0px;
-									top: -12px;
+									top: -14px;
 									width: unset;
 									color: #01B065;
 								}
@@ -447,6 +452,7 @@
 						display: block;
 						width: 100%;
 						height: 44px;
+						line-height: 44px;
 						border-radius: 22px;
 						margin-bottom: 12px;
 					}

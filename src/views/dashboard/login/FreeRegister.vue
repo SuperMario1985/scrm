@@ -1,45 +1,19 @@
 <template>
-	<div style="background: #EFEFF4;height: 100%; width: 100%;">
-		<a href="/home" class="login-header-left-img">
-			<img src="../../../assets/logo.png" alt/>
-		</a>
-		<div style="position: fixed; background-color: #FFFFFF; width: 63%; min-width: 1050px;height: 60%;top: 50%; left: 50%; transform: translate(-50%,-50%);box-shadow: 0 8px 16px rgba(0,0,0,.12);">
-			<!--		<span class="one-paopao" @click="taggerPhone">-->
-			<!--            <img src="../../../assets/phone.png" alt/>-->
-			<!--			手机号注册-->
-			<!--		</span>-->
-			<div class="regster-view" style="border-right: 1px solid #F0F0F0;">
-				<div class="register-content">
-					<div class="title">
-						还没有企业微信？
-					</div>
-					<div class="desc">
-						注册包含云美来的企业微信——用云美来，连接客户
-					</div>
-					<a-button type="primary" @click="toggleModal"
-					          style="width: 240px;height: 43px;line-height: 41px;font-size: 17px;">
-						<img src="../../../assets/WeChatLogoWhite.png"
-						     style="width: 20px;margin: -3px 6px 0 0;"/>
-						注册企业微信
-					</a-button>
-				</div>
+	<div class="login">
+		<img src="~@/assets/login_logo.png" alt="">
+		<div class="box">
+			<div class="item">
+				<p>还没有企业微信？</p>
+				<div>注册包含云美来SCRM的企业微信</div>
+				<a-button type="primary" @click="toggleModal">注册企业微信</a-button>
 			</div>
-			<div class="regster-view">
-				<div class="register-content">
-					<div class="title">
-						已经有企业微信？
-					</div>
-					<div class="desc">
-						极速安装云美来到企业微信——用云美来，连接客户
-					</div>
-					<a-button @click="toWork" style="width: 240px;height: 43px;line-height: 41px;font-size: 17px;">
-						<img src="../../../assets/WeChatLogo.png"
-						     style="width: 24px;margin: -3px 6px 0 0;"/>
-						安装到企业微信
-					</a-button>
-				</div>
+			<div class="item">
+				<p>已有企业微信？</p>
+				<div>极速安装云美来SCRM到企业微信</div>
+				<a-button type="primary" @click="toWork">安装到企业微信</a-button>
 			</div>
-			<a-modal :visible="visible" :closable="false" title="" width="400px!important">
+		</div>
+		<a-modal :visible="visible" :closable="false" title="" width="400px!important">
 				<template slot="footer">
 					<!--				<a-button key="submit" type="primary" @click="toRegister">重新注册</a-button>-->
 				</template>
@@ -56,7 +30,6 @@
 					</a-button>
 				</div>
 			</a-modal>
-		</div>
 	</div>
 </template>
 
@@ -183,11 +156,51 @@
 </script>
 
 <style scoped lang='less'>
-	.login-header-left-img {
-		float: left;
-		height: 31px;
-		width: auto;
-		margin: 20px;
+	.login {
+		width: 100%;
+		height: 100%;
+		position: relative;
+		background: url('~@/assets/register_bg.png') no-repeat bottom;
+		background-size: 100% auto;
+		img{
+			width: 77px;
+			height: 28px;
+			position: absolute;
+			left: 160px;
+			top: 60px;
+		}
+		.box{
+			width: 900px;
+			height: 438px;
+			box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+			border-radius: 20px;
+			display: flex;
+			position: absolute;
+			top: 40%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			.item{
+				flex: 1;
+				text-align: center;
+				color: #666;
+				font-size: 14px;
+				&:first-child{
+					border-right: 2px solid #EEEEEE;
+				}
+				p{
+					font-weight: 500;
+					color: #01B065;
+					font-size: 20px;
+					margin-top: 120px;
+					margin-bottom: 40px;
+				}
+				/deep/.ant-btn{
+					height: 40px;
+					margin-top: 86px;
+					border-radius: 8px;
+				}
+			}
+		}
 	}
 
 	/deep/ .ant-modal-footer {
