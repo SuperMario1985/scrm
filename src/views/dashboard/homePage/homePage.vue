@@ -88,7 +88,7 @@ export default {
   .home-page {
     /* padding: 32px 148px; */
     box-sizing: border-box;
-    height: calc(100% - 64px);
+    height: 100%;
     width: 100%;
     background: #f0f2f5;
   }

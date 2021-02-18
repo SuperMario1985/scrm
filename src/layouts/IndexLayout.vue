@@ -1,12 +1,12 @@
 <template>
   <a-layout
     id="dashboard"
-    style="min-height: 100vh; position: fixed; width: 100%; min-width: 1360px"
+    style="min-height: 100vh; position: fixed; width: 100%; min-width: 1360px; height: 100%;"
   >
     <top-navbar></top-navbar>
-    <div>
-		<home-page></home-page>
-	</div>
+    <div style="height:calc(100% - 64px);">
+      <home-page></home-page>
+    </div>
   </a-layout>
 </template>
 
@@ -19,7 +19,7 @@ import agentAuthorizeBtn from "../components/AgenAuthoeizeBtn";
 import homePage from "@/views/dashboard/homePage/homePage.vue";
 export default {
   name: "IndexLayout",
-//   inject: ["reload"],
+  // inject: ["reload"],
   provide() {
     return {
       wxType: this.type,

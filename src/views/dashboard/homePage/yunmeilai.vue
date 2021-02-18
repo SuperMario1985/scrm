@@ -37,7 +37,7 @@
         <a-carousel autoplay>
           <div class="banner-box"><img src="~@/assets/homePage/banner.png" alt=""></div>
         </a-carousel>
-        <div class="disc">决胜双十一！微博2020「U微计划」全新合作亮相</div>
+        <div class="disc" @click="goYunmeilai">云美来官网</div>
       </div>
     </div>
     <div class="container">
@@ -124,6 +124,9 @@ export default {
         this.dateTime = res.data.data.package_endtime
       })
     },
+    goYunmeilai(){
+      location.href = 'http://www.wemero.cn/'
+    }
   }
 }
 </script>
@@ -224,6 +227,8 @@ export default {
     color: #797979;
     font-size: 12px;
     line-height: 30px;
+    text-align: center;
+    cursor: pointer;
   }
   .qustion{
     width: 536px;

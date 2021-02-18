@@ -4,7 +4,7 @@
       <div class="item">
         <div class="top">
           <span class="title">客户统计</span>
-          <span class="look">查看客户></span>
+          <span class="look" @click="$router.push('/customManage/list')">查看客户></span>
         </div>
         <div class="data">
           <div class="data-item">
@@ -24,7 +24,7 @@
       <div class="item">
         <div class="top">
           <span class="title">群统计</span>
-          <span class="look">查看客户群></span>
+          <span class="look" @click="$router.push('/group/list')">查看客户群></span>
         </div>
         <div class="data">
           <div class="data-item">
@@ -49,7 +49,7 @@
           <a-radio-button value="3">客户流失数</a-radio-button>
         </a-radio-group>
         <div>
-          <a-select v-model="dateType" style="width: 105px;height:42px;" @change="getCustomerStatistics">
+          <a-select v-model="dateType" style="width: 105px;height:42px;" @change="changeData">
             <a-select-option value="4">按月</a-select-option>
             <a-select-option value="3">按周</a-select-option>
             <a-select-option value="2">按天</a-select-option>
@@ -113,7 +113,7 @@ export default {
    return {
       customerType: "2",
       dateType: "4",
-      dataTime: [moment(new Date().toLocaleDateString(), 'YYYY-MM-DD'), moment(new Date().toLocaleDateString(), 'YYYY-MM-DD')],
+      dataTime: [moment(moment().subtract(31, 'days').calendar(), 'YYYY-MM-DD'), moment(moment().subtract(1, 'days'), 'YYYY-MM-DD')],
       tableData:{
         title     : '人数',
         xAxisData : [],
@@ -140,7 +140,6 @@ export default {
     LineCharts
   },
   mounted(){
-    console.log(this.corpid)
     this.getCustomertotal();
     this.getCustomerNumber();
     this.getCustomerGroup();
@@ -185,10 +184,10 @@ export default {
         data_Type: this.customerType,
         s_date: new Date(this.dataTime[0]).toLocaleDateString(),
         e_date: new Date(this.dataTime[1]).toLocaleDateString(),
-        type: this.dateType
+        type: 2
       }).then( res => {
         this.tableData.xAxisData = res.data.data.xData;
-        this.tableData.seriesData.data = res.data.data.user_data.map( item => {
+        this.tableData.seriesData[0].data = res.data.data.user_data.map( item => {
           return item.cnt_num
         })
       })
@@ -196,8 +195,20 @@ export default {
     resetData() {
       this.customerType = "2";
       this.dateType = "4";
-      this.dataTime = [moment(new Date().toLocaleDateString(), 'YYYY-MM-DD'), moment(new Date().toLocaleDateString(), 'YYYY-MM-DD')];
+      this.dataTime = [moment(moment().subtract(31, 'days').calendar(), 'YYYY-MM-DD'), moment(moment().subtract(1, 'days'), 'YYYY-MM-DD')];
       this.getCustomerStatistics();
+    },
+    changeData() {
+      if(this.dateType == 4) {
+        this.dataTime = [moment(moment().subtract(31, 'days').calendar(), 'YYYY-MM-DD'), moment(moment().subtract(1, 'days'), 'YYYY-MM-DD')];
+      }
+      if(this.dateType == 3) {
+        this.dataTime = [moment(moment().subtract(8, 'days').calendar(), 'YYYY-MM-DD'), moment(moment().subtract(1, 'days'), 'YYYY-MM-DD')];
+      }
+      if(this.dateType == 2) {
+        this.dataTime = [moment(moment().subtract(1, 'days'), 'YYYY-MM-DD'), moment(moment().subtract(1, 'days'), 'YYYY-MM-DD')];
+      }
+      this.getCustomerStatistics()
     },
     goNewPage(type){
       // this.$store.dispatch('changeMenu',2);
@@ -281,10 +292,8 @@ export default {
 .form-box{
   display: flex;
   justify-content: space-between;
-  height: 64px;
-  align-items: center;
   position: relative;
-  z-index: 999;
+  z-index: 99999;
 }
 .ant-radio-button-wrapper{
   margin: 0;
