@@ -124,6 +124,7 @@
 				isActive        :0,//1 首页 2，企业微信 3.公众号
 				showWxLabel     : false, //是否显示公众号菜单
 				showWorkLabel   : false, //是否显示企业微信菜单
+				wxType:localStorage.getItem('type') ? localStorage.getItem('type') : 1
 			}
 		},
 		methods: {
@@ -269,6 +270,7 @@
 				this.$store.dispatch('changeMenu',type)
 				if (type === 1) {
 					// 跳转到首页
+					this.$router.push("/index")
 				}
 			}
 		},

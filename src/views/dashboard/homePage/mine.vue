@@ -133,7 +133,7 @@ export default {
   justify-content: space-between;
 }
 .statistics .item{
-  width: 460px;
+  width: 500px;
   background: #FAFAFA;
   border-radius: 4px;
   padding: 20px 24px;
