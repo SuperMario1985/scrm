@@ -28,7 +28,6 @@
 						<a-button
 								type="primary"
 								@click="addQuick">
-							<a-icon type="plus"/>
 							添加
 						</a-button>
 					</a-col>
