@@ -3,7 +3,7 @@
 		<div>
 			<a-card style="margin-bottom:20px;padding:10px 20px;">
 				<label style="font-size: 16px;">店铺管理</label>
-				<a-button type="primary" style="font-size: 14px;float: right;" @click="goAppCenter" icon="rollback">返回</a-button>
+				<a-button type="primary" style="font-size: 14px;float: right;" @click="goAppCenter" >返回</a-button>
 			</a-card>
 			<a-row style="padding:0 20px;">
 <!--				<a-col style="float:left;">-->
@@ -48,7 +48,7 @@
 				<a-col style="float:right;">
 					<a-button
 							type="primary"
-							icon="plus"
+							
 							style="width: 150px;font-size:14px;"
 							@click="addStore"
 					>创建店铺

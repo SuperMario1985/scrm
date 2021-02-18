@@ -2,7 +2,7 @@
 	<div style="position: absolute;left: 0;top: 0;right: 0;background: #FFF;">
 		<a-spin tip="加载中..." size="large" :spinning="isLoading">
 			<div class="view-title">{{title}}
-				<a-button type="primary" style="float: right; margin: 9px 20px 0 0;" icon="rollback" @click="rollback">
+				<a-button type="primary" style="float: right; margin: 9px 20px 0 0;"  @click="rollback">
 					返回列表
 				</a-button>
 			</div>

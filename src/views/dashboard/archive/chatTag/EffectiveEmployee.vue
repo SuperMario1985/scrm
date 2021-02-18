@@ -123,22 +123,22 @@
 								<a-select-option value="0">选择当前页</a-select-option>
 								<a-select-option value="1">选择所有</a-select-option>
 							</a-select>
-							<a-button class="btn-primary" icon="edit"
+							<a-button class="btn-primary" 
 							          @click="showModalWord"
 							          :disabled="selectedRowKeys.length == 0" type="primary" v-has="'chatTag-employee-edit'">
 								批量编辑
 							</a-button>
-							<a-button class="btn-primary" icon="delete"
+							<a-button class="btn-primary" 
 							          @click="deleteUser"
 							          :disabled="selectedRowKeys.length == 0" type="primary" v-has="'chatTag-employee-delete'">
 								批量删除
 							</a-button>
-							<a-button class="btn-primary" icon="unlock"
+							<a-button class="btn-primary" 
 							          :disabled="selectedRowKeys.length == 0"
 							          @click="releaseFollow" type="primary" v-has="'chatTag-employee-open'">
 								批量开启
 							</a-button>
-							<a-button class="btn-primary" icon="lock"
+							<a-button class="btn-primary" 
 							          :disabled="selectedRowKeys.length == 0"
 							          @click="failure" type="primary" v-has="'chatTag-employee-open'">
 								批量关闭

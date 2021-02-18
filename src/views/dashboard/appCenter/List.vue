@@ -4,7 +4,7 @@
 			<div style="height: 100%;padding-top: 20px;">
 				<div style="padding: 0 20px;">
 					<span @click="changeTabs('1')" class="tabBtn" :class="{activeBtn:tabKey == 1}" v-has="'chatTag-employee'">应用中心</span>
-					<span @click="changeTabs('2')" class="tabBtn" :class="{activeBtn:tabKey == 2}" v-has="'chatTag-rule'">行业集成</span>
+					<!-- <span @click="changeTabs('2')" class="tabBtn" :class="{activeBtn:tabKey == 2}" v-has="'chatTag-rule'">行业集成</span> -->
 				</div>
 				<div style="background: #fff;margin: 0 20px 20px;padding: 12px 20px;">
 					<Application v-if="tabKey == 1"></Application>

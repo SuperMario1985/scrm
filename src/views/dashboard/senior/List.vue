@@ -92,7 +92,7 @@
 							<a-col style="float:right;">
 								<a-button
 										type="primary"
-										icon="plus"
+										
 										style="width: 150px;font-size:14px;"
 										@click="add" v-if="$store.state.authorizer_type != 'unauthorized' && verify_service"
 										v-has="'senior-send-add'"
@@ -100,7 +100,7 @@
 								</a-button>
 								<a-button
 										type="primary"
-										icon="plus"
+										
 										style="width: 150px;font-size:14px;"
 										@click="showConfirmWx" v-if="$store.state.authorizer_type == 'unauthorized' || !verify_service"
 										v-has="'senior-send-add'"

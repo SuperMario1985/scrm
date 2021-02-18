@@ -7,7 +7,7 @@
 			<div style="font-size:16px;font-weight:700;color:#333333;margin-left:16px">客户回收</div>
 			<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7">
 				<p style="margin-bottom: 2px;">
-					当通用规则（指所有员工）和特殊化规则（指个人规则）同时存在的情况下，员工则执行某执行特殊化规则。比如，张三既在通用规则，又在特殊化规则，那么，就按特殊化规则执行。</p>
+					当通用规则和特殊化规则同时存在的情况下，则执行特殊化规则。比如，李明既在通用规则，又在特殊化规则，按特殊化规则执行。</p>
 			</div>
 			<a-row style="margin-bottom:20px;padding:0 20px;">
 				<a-col style="float:left;">
@@ -29,7 +29,7 @@
 				<a-col style="float:right;">
 					<a-button
 							type="primary"
-							icon="plus" @click="addRules" v-has="'highSeasCustomerRecyclingRules-add'"
+							 @click="addRules" v-has="'highSeasCustomerRecyclingRules-add'"
 					>客户回收规则
 					</a-button>
 				</a-col>
@@ -114,7 +114,7 @@
 		<!--客户回收规则弹窗 -->
 		<a-modal title="客户回收规则" v-model="addVisible" @ok="handleOk"
 		         :confirmLoading="confirmLoading" @cancel="cancel" width="888px">
-			<div style="color: red;margin-bottom: 8px;">当客户满足回收条件后，将其自动回收至公海池，交给新员工认领。</div>
+			<div style="color: red;margin-bottom: 8px;">当客户满足回收规则后，被自动回收至客户公海池，可由其他员工认领。</div>
 			<a-form-item :label-col="{ span: 4 }"
 			             :wrapper-col="{ span: 20 }" v-if="corpLen > 1">
 				<template slot="label">
@@ -303,7 +303,7 @@
 						<span style="color: red;">*</span>员工捡回
 						<a-tooltip placement="top">
 							<template slot="title">
-								在某员工手上丢失的客户，回收至公海池，只可在规定的时间后才可重新认领。如设置7天后可重新捡回，1号回收至公海池，8号00：00该员工才能重新认领。
+								在某员工手上丢失的客户，回收至公海池，只可在规定的时间后才可重新认领。如设置7天后可重新捡回，1号回收至公海池，8号00：00该员工才能重新认领丢失的客户。
 							</template>
 							<span>
 						<a-icon type="question-circle"></a-icon>

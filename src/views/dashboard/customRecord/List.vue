@@ -18,10 +18,10 @@
 							当你被微信联系人从好友列表中删除，企业微信营销工具会自动发一条消息通知你。你也可以在企业微信营销工具后台查看历史被删除记录，知道是谁在什么时间把你删除。配合带参数的对外名片功能，也可以知道这个人是从什么渠道来的。
 						</div>
 						<div class="content-hd">
-							<a-select @change="changeTimeType" v-model="timeType" style="width: 120px;">
+							<a-select @change="changeTimeType" v-model="timeType" style="width: 120px;margin-right:10px">
 								<a-select-option :value="1">删除时间</a-select-option>
 								<a-select-option :value="2">添加时间</a-select-option>
-							</a-select>——
+							</a-select>
 							<a-range-picker
 									style="width: 220px;margin-right: 10px;"
 									:disabledDate="disabledDateDay"
@@ -115,8 +115,8 @@
 										<a-tooltip placement="bottom">
 											<template slot="title">
 												<div>企业微信给客户打标签：分公有标签和私有标签</div>
-												<div>1、公有标签：即企业标签。管理员创建，所有员工可见，在本系统定义为“公有标签”。</div>
-												<div>2、私有标签：即个人标签。员工创建，仅自己可见。在本系统定义为“私有标签”）。</div>
+												<div>公有标签：即企业标签。管理员创建，所有员工可见。</div>
+												<div>私有标签：即个人标签。员工创建，仅自己可见。</div>
 											</template>
 											<a-icon type="question-circle" style="margin-left:5px;"/>
 										</a-tooltip>

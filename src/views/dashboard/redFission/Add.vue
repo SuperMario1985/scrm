@@ -4,7 +4,7 @@
 			<label style="font-size: 16px;line-height: 32px;">
 				<span v-if="id == ''">新建</span>
 				<span v-else>编辑</span>红包裂变</label>
-			<a-button type="primary" icon="rollback" style="font-size: 14px;float: right;" @click="goBack">返回列表
+			<a-button type="primary"  style="font-size: 14px;float: right;" @click="goBack">返回列表
 			</a-button>
 		</a-card>
 		<div class="content-msg" style="margin: 0 20px;" v-if="redFissionNum > 0">
@@ -180,7 +180,7 @@
 					</a-form-item>
 					<a-form-item class="current0" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
 						<template slot="label">
-							<span style="color: red;">*</span>结束设置
+							<span style="color: red;">*</span>活动时间
 						</template>
 						<a-date-picker
 								:disabled="currentStatus == 2"
@@ -244,7 +244,7 @@
 						<span slot="label">
 							<span style="color: red;">*</span>裂变红包个数
 							<a-tooltip
-									title="如填写100个，即代表至少有100人发起，同一用户只可发起1场。谁先裂变成功，谁先获得裂变红包，若未到活动时间，裂变红包个数已用完，则自动结束活动。">
+									title="即发起的裂变红包个数，如填写99个，即代表至少有99人发起，同一用户只可发起1场红包裂变。谁先裂变成功，谁先获得裂变红包，若未到活动时间，裂变红包个数已用完，活动将自动结束。">
 								<a-icon type="question-circle"/>
 							</a-tooltip>
 						</span>
@@ -554,7 +554,7 @@
 				</div>
 				<div v-show="current == 4" style="margin: 20px;">
 					<span style="border-left: 4px solid #01b065;padding-left: 10px;margin-left: 10px;">引流设置<span
-							style="color: #F56C6C;">（海报将展示对应带参数的二维码， 扫码后将引流到对应的企业成员）</span></span>
+							style="color: #F56C6C;">（海报二维码自带对应参数，扫码后会将客户引流至对应的企业成员）</span></span>
 					<a-divider/>
 					<a-form-item class="current0" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
 						<template slot="label"><span

@@ -3,7 +3,7 @@
 		<div>
 			<div class="content-msg">
 				<p style="margin-bottom: 2px;">
-					在企业微信体系里，虽然我们无法防止员工删除客户，但我们可以使用员工删人提醒功能，来监督员工删除客户的行为。
+					为了防止员工恶意删除客户的行为，本系统里采用了员工删除客户提醒功能，来监督员工删除客户的行为。
 				</p>
 				<p style="margin-bottom: 0px;">
 					比如，设置部门负责人监督其部门所有成员删除客户的情况，那么一旦发现，有客户被部门员工删除时，部门负责人会在企业微信端收到一条【员工删人提醒】通知，即哪个员工在什么时间删除了哪个客户，其可以根据成员删人行为的影响程度给予相应的处罚。
@@ -51,7 +51,7 @@
 					<a-button @click="clear">重置</a-button>
 				</a-col>
 				<a-col style="float:right;" v-has="'deleteCustomer-add'">
-					<a-button class="btn-primary" icon="plus"
+					<a-button class="btn-primary" 
 					          @click="addNotice" type="primary">
 						生效员工
 					</a-button>
@@ -139,18 +139,18 @@
 								<a-select-option value="0">选择当前页</a-select-option>
 								<a-select-option value="1">选择所有</a-select-option>
 							</a-select>
-							<a-button v-has="'deleteCustomer-edit'" class="btn-primary" icon="unlock"
+							<a-button v-has="'deleteCustomer-edit'" class="btn-primary" 
 							          :disabled="selectedRowKeys.length == 0"
 							          @click="batchEdit" type="primary">
 								批量编辑
 							</a-button>
-							<a-button class="btn-primary" icon="unlock"
+							<a-button class="btn-primary" 
 							          v-has="'deleteCustomer-taggle'"
 							          :disabled="selectedRowKeys.length == 0"
 							          @click="releaseFollow" type="primary">
 								批量开启
 							</a-button>
-							<a-button v-has="'deleteCustomer-taggle'" class="btn-primary" icon="lock"
+							<a-button v-has="'deleteCustomer-taggle'" class="btn-primary" 
 							          :disabled="selectedRowKeys.length == 0"
 							          @click="failure" type="primary">
 								批量关闭

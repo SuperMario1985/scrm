@@ -12,7 +12,7 @@
 						<div style="font-size:16px;font-weight:700;color:#333333">红包拉新</div>
 						<div class="content-msg"  style="box-shadow: 0px 1px 4px 0px #D7D7D7">
 							<p style="margin-bottom: 2px;">
-								不同于任务裂变发红包（邀请制），新客发红包，即通过渠道活码，在有效的时间段内，加企业成员后，通过欢迎语自动推送红包页面，借助红包激励，快速拉新。
+								新客发红包，在有效的时间段内，通过渠道活码添加企业成员，自动推送红包页面，借助红包激励，实现快速拉新的目的。
 							</p>
 							<p style="margin-bottom: 2px;">
 								1、若用户之前已添加过某员工的企业微信，删除后，通过渠道码再次添加该员工，则不能领取红包。
@@ -21,7 +21,7 @@
 								2、若红包已发送到客户里，但客户尚未领取，此时微信支付商户平台出现账户余额不足时，客户打开红包页面无法领取，请务必保证账户余额充足，避免客户投诉。
 							</p>
 							<p style="margin: 10px 0 2px;color: #FF562D;">
-								在使用派发红包功能前，需要商户完成以下配置：
+								商户需完成以下配置，才能使用派发红包功能：
 							</p>
 							<p style="margin-bottom: 2px;">
 								1、前往<a href="https://pay.weixin.qq.com/index.php/core/home/login?return_url=%2F"

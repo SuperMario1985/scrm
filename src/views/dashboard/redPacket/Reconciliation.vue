@@ -198,12 +198,12 @@
 			key      : "perdate"
 		},
 		{
-			title    : "支出金额（元）",
+			title    : "发放金额",
 			dataIndex: "smoney",
 			key      : "smoney"
 		},
 		{
-			title    : "支付笔数",
+			title    : "发放笔数",
 			dataIndex: "snum",
 			key      : "snum"
 		},

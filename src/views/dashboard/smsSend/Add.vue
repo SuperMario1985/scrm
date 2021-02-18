@@ -7,7 +7,7 @@
 				<a-layout-header>
 						新建短信群发
 						<router-link to="/smsSend/list?isRefresh=1" style="font-size: 16px;float: right;margin-right: 15px;">
-							<a-button type="primary" icon="rollback">返回列表</a-button>
+							<a-button type="primary" >返回列表</a-button>
 						</router-link>
 				</a-layout-header>
 				<a-layout style class="fans-content">

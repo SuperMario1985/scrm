@@ -46,7 +46,7 @@
 				<a-col style="float:right;">
 					<a-button
 							type="primary"
-							icon="plus"
+							
 							style="width: 150px;font-size:14px;"
 							@click="addAccount(false)" v-has="'account-add'"
 					>添加公众号

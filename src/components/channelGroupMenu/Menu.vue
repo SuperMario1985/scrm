@@ -44,11 +44,6 @@
           :style="{ right: '-' + getClientWidth + 'px' }"
           @click="addGroupModal('')"
           v-has="'channel-group-add'"
-          ><a-icon
-            class="team-add-icon"
-            type="plus"
-            @click="addGroupModal('')"
-          ></a-icon
           >添加分组</span
         >
       </div>

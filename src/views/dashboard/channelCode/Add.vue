@@ -10,7 +10,7 @@
             渠道活码
             <a-button
               type="primary"
-              icon="rollback"
+              
               @click="goBack"
               style="float: right; margin-top: 9px"
               >返回列表
@@ -190,7 +190,7 @@
                       <span slot="label">
                         客户标签&nbsp;
                         <a-tooltip
-                          title="客户通过该渠道活码扫码添加企业成员后，其将会被自动打上选中的客户标签"
+                          title="客户通过扫描该渠道活码添加企业成员后，会被自动打上设置的客户标签"
                         >
                           <a-icon type="question-circle" />
                         </a-tooltip>
@@ -249,7 +249,7 @@
                             info.specialWeekList[0].sun.length == 0
                           "
                           @click="addSpecialTime"
-                          icon="plus"
+                          
                         >
                           添加
                         </a-button>
@@ -1343,7 +1343,7 @@
                                 margin-right: 10px;
                                 font-size: 12px;
                               "
-                              icon="plus"
+                              
                               v-show="index == info.specialDateList.length - 1"
                               @click="addSpecialDate(index)"
                             >
@@ -1520,7 +1520,7 @@
                       >
                         欢迎语推送规则：在通用、周期及特殊时期欢迎语共存情况下，推送优先顺序为特殊时期的欢迎语
                         > 按周期的欢迎语 >
-                        通用欢迎语。若企业微信官方后台已配置了欢迎语，则在第三方系统配置的欢迎语均失效，客户收到的依然是官方推送的。
+                        通用欢迎语。如果企业微信后台已配置了可用的欢迎语，第三方系统配置欢迎语则不会推送，优先推送企业微信官方的。。
                       </p>
                     </div>
                     <!-- 渠道欢迎语 -->

@@ -53,7 +53,7 @@
 							<a-button @click="clear">重置</a-button>
 						</a-col>
 						<a-col style="float:right;" v-has="'todoManagementRemind-add'">
-							<a-button class="btn-primary" icon="plus"
+							<a-button class="btn-primary" 
 							          @click="addNotice" type="primary">
 								生效员工
 							</a-button>
@@ -166,17 +166,17 @@
 										<a-select-option value="0">选择当前页</a-select-option>
 										<a-select-option value="1">选择所有</a-select-option>
 									</a-select>
-									<a-button class="btn-primary" icon="edit"
+									<a-button class="btn-primary" 
 									          :disabled="selectedRowKeys.length == 0"
 									          @click="batchEdit" type="primary" v-has="'todoManagementRemind-edit'">
 										批量编辑
 									</a-button>
-									<a-button class="btn-primary" icon="unlock"
+									<a-button class="btn-primary" 
 									          :disabled="selectedRowKeys.length == 0"
 									          @click="releaseFollow" type="primary" v-has="'todoManagementRemind-open'">
 										批量开启
 									</a-button>
-									<a-button class="btn-primary" icon="lock"
+									<a-button class="btn-primary" 
 									          :disabled="selectedRowKeys.length == 0"
 									          @click="failure" type="primary" v-has="'todoManagementRemind-open'">
 										批量关闭
@@ -314,7 +314,7 @@
 										<div v-if="time2.length < 24">
 											<a-button type="primary"
 											          style="height: 26px;width: 94px;padding: 0px 5px;margin-right: 10px; font-size: 12px;"
-											          icon="plus"
+											          
 											          @click="addSpecialDate()">
 												添加时间点
 											</a-button>
@@ -375,7 +375,7 @@
 			scopedSlots: {customRender: "userinfo"}
 		},
 		{
-			title      : '查看员工待办事项',
+			title      : '查看成员待办事项',
 			dataIndex  : "user_names",
 			width      : "37%",
 			key        : "user_names",

@@ -5,7 +5,7 @@
 			        :class="spinning?'spinning-true':'spinning-false'">
 				<div style="height: 50px;font-size: 16px;background-color: #FFFFFF; line-height: 50px;padding: 0 20px;">
 					{{title}}
-					<a-button style="float:right;margin-top: 9px;" type="primary" @click="goBack" icon="rollback">返回列表
+					<a-button style="float:right;margin-top: 9px;" type="primary" @click="goBack" >返回列表
 					</a-button>
 				</div>
 				<div class="tabs-contain" style="margin-top: 20px">
@@ -54,7 +54,7 @@
 										<a-tooltip placement="top">
 						                    <template slot="title">
 							                    <div style="width: 240px;">
-							                        <p style="margin-bottom: 0;line-height: 25px;">今日生成了自己的专属海报即算参与人。</p>
+							                        <p style="margin-bottom: 0;line-height: 25px;">生成自己的专属海报则参与人数+1。</p>
 							                    </div>
 						                    </template>
 						                    <a-icon type="question-circle"
@@ -224,7 +224,7 @@
 										<a-tooltip placement="top">
 						                    <template slot="title">
 							                    <div style="width: 240px;">
-							                        <p style="margin-bottom: 0;line-height: 25px;">今日生成了自己的专属海报即算参与人。</p>
+							                        <p style="margin-bottom: 0;line-height: 25px;">生成自己的专属海报则参与人数+1。</p>
 							                    </div>
 						                    </template>
 						                    <a-icon type="question-circle"
@@ -427,7 +427,7 @@
 															<a-tooltip placement="top">
 											                    <template slot="title">
 												                    <div style="width: 240px;">
-												                        <p style="margin-bottom: 0;line-height: 25px;">参加活动且首次新关注的粉丝（在活动前，关注再取关，然后在活动期间再关注，不计入）</p>
+												                        <p style="margin-bottom: 0;line-height: 25px;">新增粉丝：参加活动且首次关注公众号的粉丝（在参与活动之前关注了公众号再取消关注，然后在活动期间再次关注的不计入人数）</p>
 												                    </div>
 											                    </template>
 											                    <a-icon type="question-circle"
@@ -732,7 +732,7 @@
 															<a-tooltip placement="top">
 											                    <template slot="title">
 												                    <div style="width: 240px;">
-												                        <p style="margin-bottom: 0;line-height: 25px;">参加活动且首次新关注的粉丝（在活动前，关注再取关，然后在活动期间再关注，不计入）。</p>
+												                        <p style="margin-bottom: 0;line-height: 25px;">新增粉丝：参加活动且首次关注公众号的粉丝（在参与活动之前关注了公众号再取消关注，然后在活动期间再次关注的不计入人数）。</p>
 												                    </div>
 											                    </template>
 											                    <a-icon type="question-circle"

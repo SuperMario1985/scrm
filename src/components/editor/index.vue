@@ -31,7 +31,7 @@
 			</a-popover>
 		</div>
 		<div class="changeType-text">
-			提示：火狐浏览器可能出现无法正确插入客户名称，请使用谷歌、360浏览器
+			提示：请尽量使用Chrome、360浏览器，其他浏览器可能出现无法正确插入客户名称的情况
 		</div>
 	</div>
 </template>

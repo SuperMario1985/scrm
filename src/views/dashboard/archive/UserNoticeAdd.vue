@@ -7,7 +7,7 @@
 					<a-layout-header>
 						<template v-if="urlId == ''">员工违规提醒设置</template>
 						<template v-if="urlId != ''">员工<span style="font-weight: 700;">【{{name}}】</span>违规提醒修改</template>
-						<a-button type="primary" icon="rollback"
+						<a-button type="primary" 
 						          style="font-size: 14px;float: right;margin-right: 15px;margin-top: 7px;height: 32px;line-height: 16px;"
 						          @click="goBack">
 							返回列表

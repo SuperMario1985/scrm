@@ -49,7 +49,7 @@
 					<a-button @click="clear">重置</a-button>
 				</a-col>
 				<a-col style="float:right;">
-					<a-button class="btn-primary" icon="plus"
+					<a-button class="btn-primary" 
 					          @click="addNotice" type="primary" v-has="'violations-chat-set'">
 						设置违规群聊
 					</a-button>

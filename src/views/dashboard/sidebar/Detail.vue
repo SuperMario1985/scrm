@@ -3,7 +3,7 @@
 		<div>
 			<a-card style="margin-bottom:20px;padding:10px 20px;">
 				<label class="tpl-title">聊天侧边栏</label>
-				<help-icon help-url="https://support.qq.com/products/104790/faqs/63937"></help-icon>
+				<!-- <help-icon help-url="https://support.qq.com/products/104790/faqs/63937"></help-icon> -->
 			</a-card>
 
 			<div class="content-bd">

@@ -6,7 +6,7 @@
 					<!-- 头部 -->
 					<a-layout-header>
 						新建拉群
-						<a-button type="primary" icon="rollback"
+						<a-button type="primary" 
 						          style="float: right;margin-top: 9px;" @click="goBack">返回列表
 						</a-button>
 					</a-layout-header>
@@ -348,7 +348,7 @@
 											</table>
 
 											<div>
-												<a-button @click="showChatVisible" icon="plus">
+												<a-button @click="showChatVisible" >
 													选择群聊
 												</a-button>
 											</div>

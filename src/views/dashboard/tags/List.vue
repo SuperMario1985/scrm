@@ -47,11 +47,11 @@
 							</div>
 							<div class="content-hd-right">
 								<label v-if="lastTagTime">最后一次同步时间：{{lastTagTime}}</label>
-								<a-button class="btn-primary" icon="reload" @click="sysTag()"
+								<a-button class="btn-primary"  @click="sysTag()"
 								          v-if="this.$store.state.authorizer_type != 'unauthorized' && verify_service" v-has="'tag-wx-sync'">
 									同步微信标签
 								</a-button>
-								<a-button class="btn-primary" icon="reload" @click="showConfirmWx"
+								<a-button class="btn-primary"  @click="showConfirmWx"
 								          v-if="this.$store.state.authorizer_type == 'unauthorized' || !verify_service" v-has="'tag-wx-sync'">
 									同步微信标签
 								</a-button>

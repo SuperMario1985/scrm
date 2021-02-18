@@ -5,7 +5,7 @@
 .ant-menu-inline-collapsed.ant-menu-dark .ant-menu-submenu-open,
 .ant-menu-inline-collapsed.ant-menu-dark .ant-menu-submenu-selected,
 .ant-menu-submenu-title .ant-menu-inline-collapsed.ant-menu-dark:hover {
-  background-color: #01b065;
+  background-color: #DEF0E8;
 }
 .tabMenu {
   width: 45% !important;
@@ -17,7 +17,7 @@
   margin-right: 10% !important;
 }
 .tabMenuBorder {
-  border-bottom: 2px solid #01b065 !important;
+  border-bottom: 2px solid #DEF0E8 !important;
 }
  /deep/ .ant-input-search-enter-button /deep/ .ant-input-affix-wrapper + .ant-input-group-addon {
   padding: 0;
@@ -41,4 +41,262 @@
   width: 0px!important;
   height: 0px!important;
 }
-/*# sourceMappingURL=dashboard.css.map */
+.menu-sider .icon-base {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: 12px;
+  vertical-align: baseline;
+}
+.menu-sider .icon-base.icon-address {
+  background: url(../../assets/menu/icon-address.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider .icon-base.icon-agent {
+  background: url(../../assets/menu/icon-agent.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider .icon-base.icon-appCenterList {
+  background: url(../../assets/menu/icon-appCenterList.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider .icon-base.icon-archive {
+  background: url(../../assets/menu/icon-archive.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider .icon-base.icon-channel {
+  background: url(../../assets/menu/icon-channel.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider .icon-base.icon-circleOfFriends {
+  background: url(../../assets/menu/icon-circleOfFriends.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider .icon-base.icon-drainage {
+  background: url(../../assets/menu/icon-drainage.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider .icon-base.icon-filingCabinetNew {
+  background: url(../../assets/menu/icon-filingCabinetNew.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider .icon-base.icon-group {
+  background: url(../../assets/menu/icon-group.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider .icon-base.icon-home {
+  background: url(../../assets/menu/icon-home.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider .icon-base.icon-manage {
+  background: url(../../assets/menu/icon-manage.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider .icon-base.icon-massMessage {
+  background: url(../../assets/menu/icon-massMessage.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider .icon-base.icon-red {
+  background: url(../../assets/menu/icon-red.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider .icon-base.icon-redForNew {
+  background: url(../../assets/menu/icon-redForNew.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider .icon-base.icon-redirect {
+  background: url(../../assets/menu/icon-redirect.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider .icon-base.icon-sidebar {
+  background: url(../../assets/menu/icon-sidebar.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider .icon-base.icon-sms {
+  background: url(../../assets/menu/icon-sms.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider .icon-base.icon-subAccount {
+  background: url(../../assets/menu/icon-subAccount.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider .icon-base.icon-todoManagement {
+  background: url(../../assets/menu/icon-todoManagement.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider .icon-base.icon-wechatManagement {
+  background: url(../../assets/menu/icon-wechatManagement.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider .icon-base.icon-welcome {
+  background: url(../../assets/menu/icon-welcome.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider .icon-base.icon-operationCenter {
+  background: url(../../assets/menu/icon-operationCenter.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider .icon-base.icon-wxDrainage {
+  background: url(../../assets/menu/icon-wxDrainage.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider .icon-base.icon-team {
+  background: url(../../assets/menu/icon-team.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider .icon-base.icon-fansMsg {
+  background: url(../../assets/menu/icon-fansMsg.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider .icon-base.icon-message {
+  background: url(../../assets/menu/icon-message.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider .icon-base.icon-filter {
+  background: url(../../assets/menu/icon-filter.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider .icon-base.icon-filingCabinet {
+  background: url(../../assets/menu/icon-filingCabinet.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider .icon-base.icon-account {
+  background: url(../../assets/menu/icon-account.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider .icon-base.icon-mini {
+  background: url(../../assets/menu/icon-mini.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-submenu-selected {
+  color: #01B065 !important;
+  background: #DEF0E8;
+}
+.menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-address {
+  background: url(../../assets/menu/icon-address-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-archive {
+  background: url(../../assets/menu/icon-archive-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-channel {
+  background: url(../../assets/menu/icon-channel-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-drainage {
+  background: url(../../assets/menu/icon-drainage-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-filingCabinetNew {
+  background: url(../../assets/menu/icon-filingCabinetNew-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-group {
+  background: url(../../assets/menu/icon-group-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-manage {
+  background: url(../../assets/menu/icon-manage-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-red {
+  background: url(../../assets/menu/icon-red-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-redForNew {
+  background: url(../../assets/menu/icon-redForNew-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-sms {
+  background: url(../../assets/menu/icon-sms-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-todoManagement {
+  background: url(../../assets/menu/icon-todoManagement-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-wxDrainage {
+  background: url(../../assets/menu/icon-wxDrainage-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-team {
+  background: url(../../assets/menu/icon-team-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-message {
+  background: url(../../assets/menu/icon-message-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-filter {
+  background: url(../../assets/menu/icon-filter-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-submenu-selected .icon-base.icon-filingCabinet {
+  background: url(../../assets/menu/icon-filingCabinet-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-item-selected {
+  color: #28352f !important;
+  background: #DEF0E8;
+}
+.menu-sider /deep/ .ant-menu-item-selected .icon-base.icon-home {
+  background: url(../../assets/menu/icon-home-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-item-selected .icon-base.icon-operationCenter {
+  background: url(../../assets/menu/icon-operationCenter-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-item-selected .icon-base.icon-redirect {
+  background: url(../../assets/menu/icon-redirect-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-item-selected .icon-base.icon-circleOfFriends {
+  background: url(../../assets/menu/icon-circleOfFriends-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-item-selected .icon-base.icon-welcome {
+  background: url(../../assets/menu/icon-welcome-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-item-selected .icon-base.icon-sidebar {
+  background: url(../../assets/menu/icon-sidebar-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-item-selected .icon-base.icon-massMessage {
+  background: url(../../assets/menu/icon-massMessage-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-item-selected .icon-base.icon-appCenterList {
+  background: url(../../assets/menu/icon-appCenterList-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-item-selected .icon-base.icon-agent {
+  background: url(../../assets/menu/icon-agent-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-item-selected .icon-base.icon-fansMsg {
+  background: url(../../assets/menu/icon-fansMsg-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-item-selected .icon-base.icon-account {
+  background: url(../../assets/menu/icon-account-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-item-selected .icon-base.icon-mini {
+  background: url(../../assets/menu/icon-mini-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-item-selected .icon-base.icon-subAccount {
+  background: url(../../assets/menu/icon-subAccount-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-item-selected .icon-base.icon-wechatManagement {
+  background: url(../../assets/menu/icon-wechatManagement-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider .ant-menu-vertical .ant-menu-submenu-active {
+  color: #01B065 !important;
+  background: #DEF0E8;
+}

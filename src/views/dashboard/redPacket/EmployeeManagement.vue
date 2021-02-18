@@ -49,7 +49,7 @@
 								{{have_agent==0?'设置自建应用':'更换自建应用'}}
 							</a-button>
 							<a-button @click="changeStaffLimit"
-							          style="margin-top: 14px;float:right;margin-left:15px;padding:0 1rem;">发放员工
+							          style="margin-top: 14px;float:right;margin-left:15px;padding:0 1rem;">员工限额
 							</a-button>
 							<a-dropdown v-has="'employee-export'">
 								<a-menu slot="overlay" @click="chooseDownType">

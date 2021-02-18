@@ -51,7 +51,7 @@
 					<a-button @click="clear">重置</a-button>
 				</a-col>
 				<a-col style="float:right;">
-					<a-button class="btn-primary" icon="plus"
+					<a-button class="btn-primary" 
 					          @click="addNotice" type="primary" v-has="'violations-employee-set'">
 						设置违规员工
 					</a-button>
@@ -155,24 +155,24 @@
 								<a-select-option value="0">选择当前页</a-select-option>
 								<a-select-option value="1">选择所有</a-select-option>
 							</a-select>
-							<a-button class="btn-primary" icon="edit"
+							<a-button class="btn-primary" 
 							          @click="showModalWord"
 							          :disabled="selectedRowKeys.length == 0" type="primary"
 							          v-has="'violations-employee-edit'">
 								批量修改敏感词
 							</a-button>
-							<a-button class="btn-primary" icon="edit"
+							<a-button class="btn-primary" 
 							          @click="showModalUser"
 							          :disabled="selectedRowKeys.length == 0" type="primary"
 							          v-has="'violations-employee-edit'">
 								批量修改通知人
 							</a-button>
-							<a-button class="btn-primary" icon="unlock"
+							<a-button class="btn-primary" 
 							          :disabled="selectedRowKeys.length == 0"
 							          @click="releaseFollow" type="primary" v-has="'violations-employee-close'">
 								批量开启
 							</a-button>
-							<a-button class="btn-primary" icon="lock"
+							<a-button class="btn-primary" 
 							          :disabled="selectedRowKeys.length == 0"
 							          @click="failure" type="primary" v-has="'violations-employee-close'">
 								批量关闭

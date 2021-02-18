@@ -10,12 +10,12 @@
 					<a-layout-content>
 						<div style="font-size:16px;font-weight:700;color:#333333">红包裂变</div>
 						<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7">
-							玩法：用户拆裂变红包时，会获得首拆红包金额，并立刻入账至用户的微信零钱里，此时在规定时间内，若分享给好友帮拆，好友可获得金额不等的红包作为奖励，即刻到账。当凑齐了相应的好友人数，用户可以获得剩下的红包。反之，如果用户没有分享领取完的话，裂变的红包剩余金额在超过规定时间后则会失效。
-							<div style="margin: 10px 0 2px;">自动发送欢迎语，可能失败的原因
+							玩法：当用户拆开裂变红包后，会获得首拆红包金额，并立即到账至用户的微信零钱里，在规定时间内，分享给好友帮拆，好友可获得金额不等的红包作为奖励，即刻到账。当凑齐了相应的好友人数，用户可以获得剩下的红包金额。反之，如果用户凑够帮拆好友人数，裂变的红包剩余金额在超过规定时间后则会失效。
+							<div style="margin: 10px 0 2px;">自动发送欢迎语失败的原因可能有：
 								<a-tooltip placement="bottom">
 									<template slot="title">
 										<p style="margin-bottom: 2px;font-size: 13px;">
-											1、如果企业在企业微信后台为相关成员配置了可用的欢迎语，使用第三方系统配置欢迎语，均不起效，推送的还是企业微信官方的。</p>
+											1、如果在企业微信后台为相关成员配置了可用的欢迎语，第三方系统配置欢迎语则不会推送，优先推送企业微信官方的。</p>
 										<p style="margin-bottom: 10px;font-size: 13px;"></p>
 										<p style="margin-bottom: 2px;font-size: 13px;">
 											2、客户和企业成员已经开始聊天的场景下，不能发送欢迎语。</p>
@@ -30,7 +30,7 @@
 								</a-tooltip>
 							</div>
 							<p style="margin: 10px 0 2px;color: red;">
-								在使用派发红包功能前，需要商户完成以下配置：
+								商户需完成以下配置，才能使用派发红包功能：
 							</p>
 							<p style="margin-bottom: 2px;">
 								1、前往<a href="https://pay.weixin.qq.com/index.php/core/home/login?return_url=%2F"
@@ -85,7 +85,7 @@
 								<a-col style="float:right;">
 									<a-button class="btn-primary"@click="addWelcomeText" type="primary"
 									          v-has="'redFission-add'">
-										新建活动
+										创建活动
 									</a-button>
 								</a-col>
 							</div>
