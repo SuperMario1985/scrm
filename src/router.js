@@ -58,7 +58,7 @@ var router = new Router({
 		{ path: '/register', component: Register },
 		{ path: '/regist', component: Regist },
 		{ path: '/chooseAccount', component: ChooseAccount },
-		{ path: '/index', component: Index },
+		{ path: '/index', component: HomePage },
 		{
 			path: '/',
 			component: DashboardLayout,
@@ -1316,6 +1316,7 @@ var judgeBindingState2 = async function (userToken) {
 
 //挂载路由导航守卫
 router.beforeEach((to, from, next) => {
+	console.log(to)
 	//to 将要访问的路径  from 代表从那个路径跳转而来
 	//next() 放行   next('./login') 强制跳转
 	let userToken = to.query.userToken
@@ -1388,6 +1389,7 @@ router.beforeEach((to, from, next) => {
 			}
 			return next()
 		}
+		if (to.path === '/index') return next()
 		if (to.path === '/passLogin') return next()
 		if (to.path === '/scancode') return next()
 		if (to.path === '/binding') return next()
