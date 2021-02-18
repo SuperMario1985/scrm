@@ -25,7 +25,7 @@ import SubAccount from './views/dashboard/SubAccount.vue'
 import HomePage from './views/dashboard/homePage/homePage.vue'
 // import Integration from './views/dashboard/Integration.vue'
 import ChooseAccount from './views/dashboard/ChooseAccount.vue'
-import Index from './layouts/Index.vue'
+import IndexLayout from './layouts/IndexLayout.vue'
 
 Vue.use(Router)
 
@@ -58,7 +58,7 @@ var router = new Router({
 		{ path: '/register', component: Register },
 		{ path: '/regist', component: Regist },
 		{ path: '/chooseAccount', component: ChooseAccount },
-		{ path: '/index', component: HomePage },
+		{ path: '/index', component: IndexLayout },
 		{
 			path: '/',
 			component: DashboardLayout,

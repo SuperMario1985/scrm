@@ -1,6 +1,6 @@
 <template>
 <div style="height:100%;">
-  <TopNavbar/>
+  <!-- <TopNavbar/> -->
   <div class="home-page">
     <div class="content">
       <ul class="tabs">
