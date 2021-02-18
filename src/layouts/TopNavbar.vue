@@ -261,6 +261,8 @@
 				this.global.clearLocalStorage()
 				this.$store.commit('clear');
 				this.$router.push("/login");
+				window.location.reload();
+				// window.location.href = '/login';
 			},
 			// 点击菜单切换
 			activeMenu (type) {
