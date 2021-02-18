@@ -1,19 +1,6 @@
 <template>
-	<div class="login">
-		<img src="~@/assets/login_logo.png" alt="">
-		<div class="box">
-			<div class="item">
-				<p>还没有企业微信？</p>
-				<div>注册包含云美来SCRM的企业微信</div>
-				<a-button type="primary">注册企业微信</a-button>
-			</div>
-			<div class="item">
-				<p>已有企业微信？</p>
-				<div>极速安装云美来SCRM到企业微信</div>
-				<a-button type="primary">安装到企业微信</a-button>
-			</div>
-		</div>
-		<!-- <div class="login-header">
+	<div>
+		<div class="login-header">
 			<div class="login-header-left">
 				<a href="/home" class="login-header-left-img">
 					<img src="../../../assets/logo.png" alt/>
@@ -60,8 +47,8 @@
 			</div>
 			<a-button type="primary" block class="login-button" @click="sureRegister" :loading="iconLoading">确认注册
 			</a-button>
-		</div> -->
-		<!--        <div class="footer">Copyright © 安徽小猪科技有限公司 All Rights Reserved</div>-->
+		</div>
+		<div class="footer">Copyright © 安徽小猪科技有限公司 All Rights Reserved</div>
 	</div>
 </template>
 
