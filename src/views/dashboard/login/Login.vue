@@ -1,7 +1,7 @@
 <template>
 	<div class="login">
 		<div class="login-left">
-			<img src="~@/assets/login_bg.png" alt="">
+			<div class="img"></div>
 			<div class="text">
 				<p>云 美 来 <span>SCRM</span> </p>
 				<p>私 域 流 量 运 营 时 代 的 全 新 增 长 引 擎</p>
@@ -20,7 +20,7 @@
 							<a-input
 							  v-decorator="[
 									'account',
-									{ rules: [{ required: true, validator: checkPhone,trigger:'blur' }] },
+									{ rules: [{ required: true, validator: checkPhone,}] },
 								]"
 							 placeholder="请输入用户手机号码"
 							 ></a-input>
@@ -41,8 +41,8 @@
 							<a href="/forgetPass" class="forget">忘记密码？</a>
 						</div>
 						<a-button type="primary" @click="submit" class="login-form-button">登 录</a-button>
-						<a-button @click="toWork" class="login-form-button">企业微信登录</a-button>
-						<div class="register">还没有账号？<a href="/register">立即注册</a></div>
+						<a-button @click="toWork" class="login-form-button"><img class="bt-wechat" src="~@/assets/weichat-bg.png" alt=""> 企业微信登录</a-button>
+						<div class="register">还没有账号？<a href="/freeRegister">立即注册</a></div>
 					</a-form>
 				</div>
 			</div>
@@ -158,7 +158,7 @@
 			},
 			checkPhone(rule, value, callback){
 				 // 验证手机号
-				 if(!value.trim()){
+				 if(!value || !value.trim()){
 					 callback("手机号码不能为空")
 				 }
 				let reg=/^1\d{10}$/
@@ -215,9 +215,13 @@
 			},
 			// 提交表单
 			submit(){
+				console.log(this.form);
 				this.form.validateFields(err => {
+					console.log('111')
 					if (!err) {
 						this.login();
+					}else{
+						console.log('校验不通过');
 					}
 				});
 			},
@@ -407,9 +411,11 @@
 		height: 100vh;
 		.login-left{
 			width: 63%;
-			img{
+			.img{
 				width: 100%;
 				height: calc(100vh - 140px);
+				background: url("~@/assets/login_bg.png") no-repeat center bottom;
+				background-size: cover;
 			}
 			.text{
 				background: #01B065;
@@ -428,9 +434,12 @@
 		}
 		.login-right{
 			width: 37%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
 			.content{
 				width: 320px;
-				margin: 60px auto 0;
+				margin-top: -10vh;
 				.top{
 					display: flex;
 					justify-content: space-between;
@@ -504,10 +513,17 @@
 							color: #01B065;
 						}
 					}
+					.bt-wechat{
+						width: 20px;
+						height: 16px;
+						margin-right: 4px;
+						vertical-align: -4px;
+					}
 					/deep/.ant-btn{
 						display: block;
 						width: 100%;
 						height: 44px;
+						line-height: 44px;
 						border-radius: 22px;
 						margin-bottom: 12px;
 					}
