@@ -1,7 +1,7 @@
 <template>
 	<a-layout>
 		<a-layout-content
-				:style="{ background: '#F1F1F1', margin: 0, minHeight: '280px', position: 'relative',height:'100%' }">
+				:style="{ background: '#F1F1F1', margin: 0, minHeight: '280px', position: 'relative',height:'100%','overflow-x':'auto' }">
 			<keep-alive
 					:include="urlList">
 				<router-view>

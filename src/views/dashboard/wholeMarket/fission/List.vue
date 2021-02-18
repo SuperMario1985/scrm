@@ -372,25 +372,33 @@
 			// title    : "总参与粉丝",
 			dataIndex  : "countFans",
 			key        : "countFans",
-			scopedSlots: {title: "countFans"}
+			scopedSlots: {title: "countFans"},
+			align:"center",
+			width:'100px'
 		},
 		{
 			// title    : "新增粉丝",
 			dataIndex  : "newtFans",
 			key        : "newtFans",
-			scopedSlots: {title: "newtFans"}
+			scopedSlots: {title: "newtFans"},
+			align:"center",
+			width:'100px'
 		},
 		{
 			// title    : "总好友数",
 			dataIndex  : "newUser",
 			key        : "newUser",
-			scopedSlots: {title: "newUser", customRender: "new_user"}
+			scopedSlots: {title: "newUser", customRender: "new_user"},
+			align:"center",
+			width:'100px'
 		},
 		{
 			// title    : "流失好友数",
 			dataIndex  : "overUser",
 			key        : "overUser",
-			scopedSlots: {title: "overUser", customRender: "over_user"}
+			scopedSlots: {title: "overUser", customRender: "over_user"},
+			align:"center",
+			width:'100px'
 		},
 		{
 			title      : "引流成员",

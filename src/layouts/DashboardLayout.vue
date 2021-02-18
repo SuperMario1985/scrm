@@ -1,5 +1,5 @@
 <template>
-	<a-layout id="dashboard" style="min-height: 100vh;position:fixed;width:100%;min-width:1360px;">
+	<a-layout id="dashboard" style="min-height: 100vh;position:fixed;width:100%;">
 		<top-navbar></top-navbar>
 		<a-layout>
 			<a-layout-sider
