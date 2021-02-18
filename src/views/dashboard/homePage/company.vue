@@ -65,10 +65,10 @@
       <div class="table-echarts">
         <LineCharts  
           :options="tableData"
-          v-show="tableData.seriesData.length != 0"
+          v-show="tableData.xAxisData.length != 0"
            style="width:100%;">
         </LineCharts>
-        <a-empty v-show="tableData.seriesData.length == 0"
+        <a-empty v-show="tableData.xAxisData.length == 0"
                   style="margin-top: 30px;">
           <span slot="description" style="color: #999;">暂无数据</span>
         </a-empty>								
@@ -144,7 +144,7 @@ export default {
     this.getCustomertotal();
     this.getCustomerNumber();
     this.getCustomerGroup();
-    //this.getCustomerStatistics();
+    this.getCustomerStatistics();
   },
   methods:{
     moment,
@@ -200,7 +200,7 @@ export default {
       this.getCustomerStatistics();
     },
     goNewPage(type){
-      this.$store.dispatch('changeMenu',2);
+      // this.$store.dispatch('changeMenu',2);
       setTimeout(()=>{
         switch(type) {
           case 1:
@@ -231,7 +231,7 @@ export default {
   justify-content: space-between;
 }
 .statistics .item{
-  width: 460px;
+  width: 500px;
   background: #FAFAFA;
   border-radius: 4px;
   padding: 20px 24px;

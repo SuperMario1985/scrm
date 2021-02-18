@@ -82,10 +82,13 @@ export default {
 </script>
 
 <style scoped>
+  ::-webkit-scrollbar {
+    width: 0;
+  }
   .home-page {
     /* padding: 32px 148px; */
     box-sizing: border-box;
-    height: 100%;
+    height: calc(100% - 64px);
     width: 100%;
     background: #f0f2f5;
   }

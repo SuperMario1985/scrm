@@ -601,7 +601,4 @@
 
 <style lang="less">
 	@import "../common/css/dashboard.less";
-	.ant-layout {
-		height: calc(100% - 64px);
-	}
 </style>

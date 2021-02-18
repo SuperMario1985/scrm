@@ -1322,7 +1322,6 @@ router.beforeEach((to, from, next) => {
 	let userToken = to.query.userToken
 	localStorage.removeItem('notAllow')
 	localStorage.removeItem('backUrl')
-
 	//判断是手机登录还是电脑登录
 	var ua = navigator.userAgent;
 	var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
