@@ -267,50 +267,27 @@
 															<!--															手机预览-->
 															<!--															手机预览-->
 															<!--														</a-button>-->
-															<a-tooltip placement="top" style="margin-left: 5px;"
-															           v-has="'material-remove'">
-																<template slot="title">
-																	移动
-																</template>
-																<a-button type="link" @click="changeMaterial(item.id, item.group_id)"
+															<a-button type="link" @click="changeMaterial(item.id, item.group_id)"
 																          v-has="'material-remove'">
-																	<a-icon type="retweet"/>
+																	移动
 																</a-button>
-															</a-tooltip>
-															<a-tooltip placement="top" v-if="item.is_editor==1"
-															           style="margin-left: 5px;"
-															           v-has="'material-preview'">
-																<template slot="title">
-																	预览
-																</template>
-																<a-button type="link" v-if="item.is_appli!=1"
+															<div v-if="item.is_editor==1">
+																<a-button  type="link" v-if="item.is_appli!=1"
 																          @click="previewSketch(index)"
 																          v-has="'material-preview'">
-																	<a-icon type="eye"/>
+																	预览
 																</a-button>
-															</a-tooltip>
-															<a-tooltip v-if="item.is_appli!=1" placement="top"
-															           style="margin-left: 5px;"
-															           v-has="'material-edit'">
-																<template slot="title">
-																	编辑
-																</template>
-																<a-button type="link"
-																          @click="editFilingCabinetSketch(index)"
-																          v-has="'material-edit'">
-																	<a-icon type="edit"/>
-																</a-button>
-															</a-tooltip>
-															<a-tooltip placement="top"
-															           style="margin-left: 5px;">
-																<template slot="title">
-																	统计
-																</template>
-																<a-button type="link"
-																          @click="statistic(item.id, material_type)" v-has="'content-statistic'">
-																	<a-icon type="rise"/>
-																</a-button>
-															</a-tooltip>
+															</div>
+															<a-button type="link"
+																				@click="editFilingCabinetSketch(index)"
+																				v-has="'material-edit'">
+																编辑
+															</a-button>
+															<a-button type="link"
+																				@click="statistic(item.id, material_type)" v-has="'content-statistic'">
+																统计
+															</a-button>
+			
 														</template>
 														<div
 																style="height: 30px;line-height: 30px;background: #0F0F0F;opacity: 0.6;color: #FFF;padding: 0 10px;margin-top: -47px;overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
@@ -374,45 +351,24 @@
 															<!--															<a-icon type="eye"/>-->
 															<!--															手机预览-->
 															<!--														</a-button>-->
-															<a-tooltip placement="top" style="margin-left: 5px;">
-																<template slot="title">
-																	移动
-																</template>
-																<a-button type="link"
-																          @click="changeMaterial(item.id, item.group_id)"
-																          v-has="'material-remove'">
-																	<a-icon type="retweet"/>
-																</a-button>
-															</a-tooltip>
-															<a-tooltip placement="top" style="margin-left: 5px;">
-																<template slot="title">
-																	编辑
-																</template>
-																<a-button type="link"
-																          @click="editFilingCabinetSketch(index)"
-																          v-has="'material-edit'">
-																	<a-icon type="edit"/>
-																</a-button>
-															</a-tooltip>
-															<a-tooltip placement="top"
-															           style="margin-left: 5px;">
-																<template slot="title">
-																	统计
-																</template>
-																<a-button type="link"
-																          @click="statistic(item.id, material_type)" v-has="'content-statistic'">
-																	<a-icon type="rise"/>
-																</a-button>
-															</a-tooltip>
-															<a-tooltip placement="top" style="margin-left: 5px;">
-																<template slot="title">
-																	删除
-																</template>
-																<a-button type="link" @click="delPicTxt(item.id)"
+															<a-button type="link"
+																				@click="changeMaterial(item.id, item.group_id)"
+																				v-has="'material-remove'">
+																移动
+															</a-button>
+															<a-button type="link"
+																				@click="editFilingCabinetSketch(index)"
+																				v-has="'material-edit'">
+																编辑
+															</a-button>
+															<a-button type="link"
+																				@click="statistic(item.id, material_type)" v-has="'content-statistic'">
+																统计
+															</a-button>
+															<a-button type="link" @click="delPicTxt(item.id)"
 																          v-has="'material-delete'">
-																	<a-icon type="delete"/>
+																	删除
 																</a-button>
-															</a-tooltip>
 														</template>
 														<div style="margin: 5px 0px 2px; width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
 															上传者：{{item.username}}
@@ -477,60 +433,27 @@
 												</div>
 											</span>
 											<span slot="action" slot-scope="text, record,index">
-												<a-tooltip placement="top" style="margin-left: 5px;"
-												           v-has="'material-remove'">
-													<template slot="title">
-														移动
-													</template>
-													<a-button type="link" @click="changeMaterial(record.id, record.group_id)"
+												<a-button type="link" @click="changeMaterial(record.id, record.group_id)"
 													          v-has="'material-remove'">
-														<a-icon type="retweet"/>
+														移动
 													</a-button>
-												</a-tooltip>
-												<a-tooltip placement="top" v-if="record.is_editor==1"
-												           style="margin-left: 5px;"
-												           v-has="'material-preview'">
-													<template slot="title">
-														预览
-													</template>
-													<a-button type="link" v-if="record.is_appli!=1"
+												<a-button type="link" v-if="record.is_appli!=1"
 													          @click="previewSketch(index)"
 													          v-has="'material-preview'">
-														<a-icon type="eye"/>
+														预览
 													</a-button>
-												</a-tooltip>
-												<a-tooltip v-if="record.is_appli!=1" placement="top"
-												           style="margin-left: 5px;"
-												           v-has="'material-edit'">
-													<template slot="title">
-														编辑
-													</template>
-													<a-button type="link"
+												<a-button type="link" v-if="record.is_appli!=1"
 													          @click="editFilingCabinetSketch(index)"
 													          v-has="'material-edit'">
-														<a-icon type="edit"/>
+														编辑
 													</a-button>
-												</a-tooltip>
-												<a-tooltip placement="top"
-												           style="margin-left: 5px;">
-													<template slot="title">
+												<a-button type="link" @click="statistic(record.id, material_type)" v-has="'content-statistic'">
 														统计
-													</template>
-													<a-button type="link" @click="statistic(record.id, material_type)" v-has="'content-statistic'">
-														<a-icon type="rise"/>
 													</a-button>
-												</a-tooltip>
-												<a-tooltip v-if="record.is_appli!=1" placement="top"
-												           style="margin-left: 5px;"
-												           v-has="'material-delete'">
-													<template slot="title">
-														删除
-													</template>
-													<a-button type="link" @click="delPicTxt(record.id)"
+												<a-button type="link" @click="delPicTxt(record.id)" v-if="record.is_appli!=1"
 													          v-has="'material-delete'">
-														<a-icon type="delete"/>
+														删除
 													</a-button>
-												</a-tooltip>
 											</span>
 										</a-table>
 										<!-- 图文分页 -->
@@ -720,52 +643,22 @@
 												<div v-if="record.file_type == 7">小程序</div>
 											</span>
 											<span slot="action" slot-scope="text, record,index">
-												<a-tooltip placement="top" v-if="record.file_type == 6"
-												           v-has="'material-edit'">
-													<template slot="title">
-														编辑
-													</template>
-													<a-button type="link" @click="editText(index, 1)"
-													          v-has="'material-edit'">
-														<a-icon type="edit"/>
-													</a-button>
-												</a-tooltip>
-												<a-tooltip v-if="record.is_appli!=1 && record.file_type == 4"
-												           placement="top"
-												           style="margin-left: 5px;"
-												           v-has="'material-edit'">
-													<template slot="title">
-														编辑
-													</template>
-													<a-button type="link"
-													          @click="editFilingCabinetSketch(index, 1)"
-													          v-has="'material-edit'">
-														<a-icon type="edit"/>
-													</a-button>
-												</a-tooltip>
-												<a-tooltip placement="top" v-if="record.file_type == 7"
-												           v-has="'material-edit'">
-													<template slot="title">
-														编辑
-													</template>
-													<a-button type="link" @click="editApplet(index, 1)"
-													          v-has="'material-edit'">
-														<a-icon type="edit"/>
-													</a-button>
-												</a-tooltip>
-												<a-tooltip placement="top"
-												           v-if="record.is_editor==1 && record.file_type == 4"
-												           style="margin-left: 5px;"
-												           v-has="'material-preview'">
-													<template slot="title">
-														预览
-													</template>
-													<a-button type="link"
-													          @click="previewSketch(index, 1)"
-													          v-has="'material-preview'">
-														<a-icon type="eye"/>
-													</a-button>
-												</a-tooltip>
+												<a-button v-if="record.file_type == 6" type="link" @click="editText(index, 1)"
+																	v-has="'material-edit'">
+													编辑
+												</a-button>
+												<a-button v-if="record.is_appli!=1 && record.file_type == 4" type="link" @click="editText(index, 1)"
+																	v-has="'material-edit'">
+													编辑
+												</a-button>
+												<a-button v-if="record.file_type == 7" type="link" @click="editText(index, 1)"
+																	v-has="'material-edit'">
+													编辑
+												</a-button>
+												<a-button v-if="record.is_editor==1 && record.file_type == 4" type="link" @click="editText(index, 1)"
+																	v-has="'material-edit'">
+													编辑
+												</a-button>
 												<!-- 图片预览 -->
 												<a-modal :visible="previewAllVisible" :footer="null"
 												         @cancel="handleCancel3"
@@ -780,105 +673,39 @@
 															/>
 														</div>
 												</a-modal>
-												<a-tooltip placement="top" v-if="record.file_type== 1"
-												           style="margin-left: 5px;"
-												           v-has="'material-preview'">
-													<template slot="title">
-														预览
-													</template>
-													<a-button type="link" @click="previewPic1(index)"
+												<a-button type="link" v-if="record.file_type== 1"  @click="previewPic1(index)"
 													          v-has="'material-preview'">
-														<a-icon type="eye"/>
-													</a-button>
-												</a-tooltip>
-												<a-tooltip placement="top" style="margin-left: 5px;"
-												           v-has="'material-remove'">
-													<template slot="title">
-														移动
-													</template>
-													<a-button type="link" @click="changeMaterial(record.id, record.group_id)"
-													          v-has="'material-remove'">
-														<a-icon type="retweet"/>
-													</a-button>
-												</a-tooltip>
-												<a-tooltip placement="top"
-												           style="margin-left: 5px;">
-													<template slot="title">
-														统计
-													</template>
-													<a-button type="link"
-													          @click="statistic(record.id, record.file_type)" v-has="'content-statistic'">
-														<a-icon type="rise"/>
-													</a-button>
-												</a-tooltip>
-												<a-tooltip placement="top" v-if="record.file_type == 6"
-												           v-has="'material-delete'">
-													<template slot="title">
-														删除
-													</template>
-													<a-button type="link" @click="delText(record.id)">
-														<a-icon type="delete"/>
-													</a-button>
-												</a-tooltip>
-												<a-tooltip placement="top" v-if="record.file_type == 2"
-												           v-has="'material-delete'">
-													<template slot="title">
-														删除
-													</template>
-													<a-button type="link" @click="delAudio(record.id)"
-													          v-has="'material-delete'">
-														<a-icon type="delete"/>
-													</a-button>
-												</a-tooltip>
-												<a-tooltip placement="top" v-if="record.file_type == 3"
-												           v-has="'material-delete'">
-													<template slot="title">
-														删除
-													</template>
-													<a-button type="link" @click="delVideo(record.id)"
-													          v-has="'material-delete'">
-														<a-icon type="delete"/>
-													</a-button>
-												</a-tooltip>
-												<a-tooltip placement="top" v-if="record.file_type == 5"
-												           v-has="'material-delete'">
-													<template slot="title">
-														删除
-													</template>
-													<a-button type="link" @click="delFile(record.id)"
-													          v-has="'material-delete'">
-														<a-icon type="delete"/>
-													</a-button>
-												</a-tooltip>
-												<a-tooltip placement="top" v-if="record.file_type == 7"
-												           v-has="'material-delete'">
-													<template slot="title">
-														删除
-													</template>
-													<a-button type="link" @click="delMiniprogram(record.id)"
-													          v-has="'material-delete'">
-														<a-icon type="delete"/>
-													</a-button>
-												</a-tooltip>
-												<a-tooltip placement="top" v-if="record.file_type == 1"
-												           v-has="'material-delete'">
-													<template slot="title">
-														删除
-													</template>
-													<a-button type="link" @click="delPic(record.id)"
-													          v-has="'material-delete'">
-														<a-icon type="delete"/>
-													</a-button>
-												</a-tooltip>
-												<a-tooltip placement="top" v-if="record.file_type == 1">
-													<template slot="title">
-														下载
-													</template>
-													<a-button type="link"
-													          @click="downLoadWay(record.file_name, record.local_path)">
-														<a-icon type="download"/>
-													</a-button>
-												</a-tooltip>
+														预览
+												</a-button>
+												<a-button type="link" @click="changeMaterial(record.id, record.group_id)"
+																	v-has="'material-remove'">
+													移动
+												</a-button>
+												<a-button type="link"
+																	@click="statistic(record.id, record.file_type)" v-has="'content-statistic'">
+													统计
+												</a-button>
+												<a-button type="link" v-if="record.file_type == 6" @click="delText(record.id)">
+													删除
+												</a-button>
+												<a-button type="link" v-if="record.file_type == 2" @click="delText(record.id)">
+													删除
+												</a-button>
+												<a-button type="link" v-if="record.file_type == 3" @click="delText(record.id)">
+													删除
+												</a-button>
+												<a-button type="link" v-if="record.file_type == 5" @click="delText(record.id)">
+													删除
+												</a-button>
+												<a-button type="link" v-if="record.file_type == 7" @click="delText(record.id)">
+													删除
+												</a-button>
+												<a-button type="link" v-if="record.file_type == 1" @click="delText(record.id)">
+													删除
+												</a-button>
+												<a-button type="link" v-if="record.file_type == 1" @click="downLoadWay(record.file_name, record.local_path)">
+													下载
+												</a-button>
 											</span>
 										</a-table>
 									</div>
@@ -998,55 +825,26 @@
 														@click="previewPic(index)"
 												/>
 												<template class="ant-card-actions" slot="actions">
-													<a-tooltip placement="top" style="margin-left: 5px;"
-													           v-has="'material-preview'">
-														<template slot="title">
-															预览
-														</template>
-														<a-button type="link" @click="previewPic(index)"
+													<a-button type="link" @click="previewPic(index)"
 														          v-has="'material-preview'">
-															<a-icon type="eye"/>
+															预览
 														</a-button>
-													</a-tooltip>
-													<a-tooltip placement="top" style="margin-left: 5px;"
-													           v-has="'material-remove'">
-														<template slot="title">
-															移动
-														</template>
-														<a-button type="link" @click="changeMaterial(item2.id, item2.group_id)"
+													<a-button type="link" @click="changeMaterial(item2.id, item2.group_id)"
 														          v-has="'material-remove'">
-															<a-icon type="retweet"/>
+															移动
 														</a-button>
-													</a-tooltip>
-													<a-tooltip placement="top"
-													           style="margin-left: 5px;">
-														<template slot="title">
-															统计
-														</template>
-														<a-button type="link"
+													<a-button type="link"
 														          @click="statistic(item2.id, material_type)" v-has="'content-statistic'">
-															<a-icon type="rise"/>
+															统计
 														</a-button>
-													</a-tooltip>
-													<a-tooltip placement="top" style="margin-left: 5px;"
-													           v-has="'material-delete'">
-														<template slot="title">
-															删除
-														</template>
-														<a-button type="link" @click="delPic(item2.id)"
+													<a-button type="link" @click="delPic(item2.id)"
 														          v-has="'material-delete'">
-															<a-icon type="delete"/>
+															删除
 														</a-button>
-													</a-tooltip>
-													<a-tooltip placement="top" style="margin-left: 5px;">
-														<template slot="title">
-															下载
-														</template>
-														<a-button type="link"
+													<a-button type="link"
 														          @click="downLoadWay(item2.file_name, item2.local_path)">
-															<a-icon type="download"/>
+															下载
 														</a-button>
-													</a-tooltip>
 												</template>
 												<div
 														style="height: 30px;line-height: 30px;background: #0F0F0F;opacity: 0.6;color: #FFF;padding: 0 10px;margin-top: -47px;overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
@@ -1130,55 +928,26 @@
 												</div>
 											</span>
 											<span slot="action" slot-scope="text, record,index">
-												<a-tooltip placement="top" style="margin-left: 5px;"
-												           v-has="'material-preview'">
-														<template slot="title">
-															预览
-														</template>
-														<a-button type="link" @click="previewPic(index)"
-														          v-has="'material-preview'">
-															<a-icon type="eye"/>
-														</a-button>
-													</a-tooltip>
-													<a-tooltip placement="top" style="margin-left: 5px;"
-													           v-has="'material-remove'">
-														<template slot="title">
-															移动
-														</template>
-														<a-button type="link" @click="changeMaterial(record.id, record.group_id)"
-														          v-has="'material-remove'">
-															<a-icon type="retweet"/>
-														</a-button>
-													</a-tooltip>
-													<a-tooltip placement="top"
-													           style="margin-left: 5px;">
-														<template slot="title">
-															统计
-														</template>
-														<a-button type="link"
-														          @click="statistic(record.id, material_type)" v-has="'content-statistic'">
-															<a-icon type="rise"/>
-														</a-button>
-													</a-tooltip>
-													<a-tooltip placement="top" style="margin-left: 5px;"
-													           v-has="'material-delete'">
-														<template slot="title">
-															删除
-														</template>
-														<a-button type="link" @click="delPic(record.id)"
-														          v-has="'material-delete'">
-															<a-icon type="delete"/>
-														</a-button>
-													</a-tooltip>
-													<a-tooltip placement="top" style="margin-left: 5px;">
-														<template slot="title">
-															下载
-														</template>
-														<a-button type="link"
-														          @click="downLoadWay(record.file_name, record.local_path)">
-															<a-icon type="download"/>
-														</a-button>
-													</a-tooltip>
+												<a-button type="link" @click="previewPic(index)"
+																	v-has="'material-preview'">
+													预览
+												</a-button>
+												<a-button type="link" @click="changeMaterial(record.id, record.group_id)"
+																	v-has="'material-remove'">
+													移动
+												</a-button>
+												<a-button type="link"
+																	@click="statistic(record.id, material_type)" v-has="'content-statistic'">
+													统计
+												</a-button>
+												<a-button type="link" @click="delPic(record.id)"
+																		v-has="'material-delete'">
+														删除
+													</a-button>
+												<a-button type="link"
+																	@click="downLoadWay(record.file_name, record.local_path)">
+													下载
+												</a-button>
 											</span>
 										</a-table>
 									</div>
@@ -1316,36 +1085,17 @@
 											</div>
 
 											<template class="ant-card-actions" slot="actions">
-
-												<a-tooltip placement="top" style="margin-left: 5px;"
-												           v-has="'material-remove'">
-													<template slot="title">
-														移动
-													</template>
-													<a-button type="link" @click="changeMaterial(item3.id, item3.group_id)"
-													          v-has="'material-remove'">
-														<a-icon type="retweet"/>
-													</a-button>
-												</a-tooltip>
-												<a-tooltip placement="top"
-												           style="margin-left: 5px;">
-													<template slot="title">
-														统计
-													</template>
-													<a-button type="link" @click="statistic(item3.id, material_type)" v-has="'content-statistic'">
-														<a-icon type="rise"/>
-													</a-button>
-												</a-tooltip>
-												<a-tooltip placement="top" style="margin-left: 5px;"
-												           v-has="'material-delete'">
-													<template slot="title">
-														删除
-													</template>
-													<a-button type="link" @click="delAudio(item3.id)"
-													          v-has="'material-delete'">
-														<a-icon type="delete"/>
-													</a-button>
-												</a-tooltip>
+												<a-button type="link" @click="changeMaterial(item3.id, item3.group_id)"
+																	v-has="'material-remove'">
+													移动
+												</a-button>
+												<a-button type="link" @click="statistic(item3.id, material_type)" v-has="'content-statistic'">
+													统计
+												</a-button>
+												<a-button type="link" @click="delAudio(item3.id)"
+																	v-has="'material-delete'">
+													删除
+												</a-button>
 											</template>
 											<div style="height: 30px; line-height: 30px; font-size: 14px;background: #0F0F0F;opacity: 0.6;color: #FFF;padding: 0 10px;">
 												{{item3.file_name}}
@@ -1409,35 +1159,17 @@
 												</div>
 											</span>
 											<span slot="action" slot-scope="text, record,index">
-												<a-tooltip placement="top" style="margin-left: 5px;"
-												           v-has="'material-remove'">
-													<template slot="title">
-														移动
-													</template>
-													<a-button type="link" @click="changeMaterial(record.id, record.group_id)"
-													          v-has="'material-remove'">
-														<a-icon type="retweet"/>
-													</a-button>
-												</a-tooltip>
-												<a-tooltip placement="top"
-												           style="margin-left: 5px;">
-													<template slot="title">
-														统计
-													</template>
-													<a-button type="link" @click="statistic(record.id, material_type)" v-has="'content-statistic'">
-														<a-icon type="rise"/>
-													</a-button>
-												</a-tooltip>
-												<a-tooltip placement="top" style="margin-left: 5px;"
-												           v-has="'material-delete'">
-													<template slot="title">
-														删除
-													</template>
-													<a-button type="link" @click="delAudio(record.id)"
-													          v-has="'material-delete'">
-														<a-icon type="delete"/>
-													</a-button>
-												</a-tooltip>
+												<a-button type="link" @click="changeMaterial(record.id, record.group_id)"
+																	v-has="'material-remove'">
+													移动
+												</a-button>
+												<a-button type="link" @click="statistic(record.id, material_type)" v-has="'content-statistic'">
+													统计
+												</a-button>
+												<a-button type="link" @click="delAudio(record.id)"
+																	v-has="'material-delete'">
+													删除
+												</a-button>
 											</span>
 										</a-table>
 									</div>
@@ -1550,35 +1282,17 @@
 													:options="playerOptions[index4]"
 											></video-player>
 											<template class="ant-card-actions" slot="actions">
-												<a-tooltip placement="top" style="margin-left: 5px;"
-												           v-has="'material-remove'">
-													<template slot="title">
-														移动
-													</template>
-													<a-button type="link" @click="changeMaterial(item4.id, item4.group_id)"
-													          v-has="'material-remove'">
-														<a-icon type="retweet"/>
-													</a-button>
-												</a-tooltip>
-												<a-tooltip placement="top"
-												           style="margin-left: 5px;">
-													<template slot="title">
-														统计
-													</template>
-													<a-button type="link" @click="statistic(item4.id, material_type)" v-has="'content-statistic'">
-														<a-icon type="rise"/>
-													</a-button>
-												</a-tooltip>
-												<a-tooltip placement="top" style="margin-left: 5px;"
-												           v-has="'material-delete'">
-													<template slot="title">
-														删除
-													</template>
-													<a-button type="link" @click="delVideo(item4.id)"
-													          v-has="'material-delete'">
-														<a-icon type="delete"/>
-													</a-button>
-												</a-tooltip>
+												<a-button type="link" @click="changeMaterial(item4.id, item4.group_id)"
+																	v-has="'material-remove'">
+													移动
+												</a-button>
+												<a-button type="link" @click="statistic(item4.id, material_type)" v-has="'content-statistic'">
+													统计
+												</a-button>
+												<a-button type="link" @click="delVideo(item4.id)"
+																	v-has="'material-delete'">
+													删除
+												</a-button>
 											</template>
 											<div
 													style="height: 30px;line-height: 30px;background: #0F0F0F;opacity: 0.6;color: #FFF;padding: 0 10px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
@@ -1621,35 +1335,17 @@
 												></video-player>
 											</span>
 											<span slot="action" slot-scope="text, record,index">
-												<a-tooltip placement="top" style="margin-left: 5px;"
-												           v-has="'material-remove'">
-													<template slot="title">
-														移动
-													</template>
-													<a-button type="link" @click="changeMaterial(record.id, record.group_id)"
-													          v-has="'material-remove'">
-														<a-icon type="retweet"/>
-													</a-button>
-												</a-tooltip>
-												<a-tooltip placement="top"
-												           style="margin-left: 5px;">
-													<template slot="title">
-														统计
-													</template>
-													<a-button type="link" @click="statistic(record.id, material_type)" v-has="'content-statistic'">
-														<a-icon type="rise"/>
-													</a-button>
-												</a-tooltip>
-												<a-tooltip placement="top" style="margin-left: 5px;"
-												           v-has="'material-delete'">
-													<template slot="title">
-														删除
-													</template>
-													<a-button type="link" @click="delVideo(record.id)"
-													          v-has="'material-delete'">
-														<a-icon type="delete"/>
-													</a-button>
-												</a-tooltip>
+												<a-button type="link" @click="changeMaterial(record.id, record.group_id)"
+																	v-has="'material-remove'">
+													移动
+												</a-button>
+												<a-button type="link" @click="statistic(record.id, material_type)" v-has="'content-statistic'">
+													统计
+												</a-button>
+												<a-button type="link" @click="delVideo(record.id)"
+																	v-has="'material-delete'">
+													删除
+												</a-button>
 											</span>
 										</a-table>
 									</div>
@@ -1768,46 +1464,22 @@
 												     slot="cover"
 												/>
 												<template class="ant-card-actions" slot="actions">
-													<a-tooltip placement="top" style="margin-left: 5px;"
-													           v-has="'material-remove'">
-														<template slot="title">
-															移动
-														</template>
-														<a-button type="link" @click="changeMaterial(item5.id, record.group_id)"
-														          v-has="'material-remove'">
-															<a-icon type="retweet"/>
-														</a-button>
-													</a-tooltip>
-													<a-tooltip placement="top" style="margin-left: 5px;"
-													           v-has="'material-edit'">
-														<template slot="title">
-															编辑
-														</template>
-														<a-button type="link" @click="editApplet(index)"
-														          v-has="'material-edit'">
-															<a-icon type="edit"/>
-														</a-button>
-													</a-tooltip>
-													<a-tooltip placement="top"
-													           style="margin-left: 5px;">
-														<template slot="title">
-															统计
-														</template>
-														<a-button type="link"
-														          @click="statistic(item5.id, material_type)" v-has="'content-statistic'">
-															<a-icon type="rise"/>
-														</a-button>
-													</a-tooltip>
-													<a-tooltip placement="top" style="margin-left: 5px;"
-													           v-has="'material-delete'">
-														<template slot="title">
-															删除
-														</template>
-														<a-button type="link" @click="delMiniprogram(item5.id)"
-														          v-has="'material-delete'">
-															<a-icon type="delete"/>
-														</a-button>
-													</a-tooltip>
+													<a-button type="link" @click="changeMaterial(item5.id, record.group_id)"
+																		v-has="'material-remove'">
+														移动
+													</a-button>
+													<a-button type="link" @click="editApplet(index)"
+																		v-has="'material-edit'">
+														编辑
+													</a-button>
+													<a-button type="link"
+																		@click="statistic(item5.id, material_type)" v-has="'content-statistic'">
+														统计
+													</a-button>
+													<a-button type="link" @click="delMiniprogram(item5.id)"
+																		v-has="'material-delete'">
+														删除
+													</a-button>
 												</template>
 												<div style="height: 30px; line-height: 30px; font-size: 14px;background: #0F0F0F;opacity: 0.6;color: #FFF;padding: 0 10px;margin-top: -46px;">
 													{{item5.file_name}}
@@ -1856,46 +1528,22 @@
 													</div>
 												</span>
 												<span slot="action" slot-scope="text, record,index">
-													<a-tooltip placement="top" style="margin-left: 5px;"
-													           v-has="'material-remove'">
-														<template slot="title">
-															移动
-														</template>
-														<a-button type="link" @click="changeMaterial(record.id, record.group_id)"
-														          v-has="'material-remove'">
-															<a-icon type="retweet"/>
-														</a-button>
-													</a-tooltip>
-													<a-tooltip placement="top" style="margin-left: 5px;"
-													           v-has="'material-edit'">
-														<template slot="title">
-															编辑
-														</template>
-														<a-button type="link" @click="editApplet(index)"
-														          v-has="'material-edit'">
-															<a-icon type="edit"/>
-														</a-button>
-													</a-tooltip>
-													<a-tooltip placement="top"
-													           style="margin-left: 5px;">
-														<template slot="title">
-															统计
-														</template>
-														<a-button type="link"
-														          @click="statistic(record.id, material_type)" v-has="'content-statistic'">
-															<a-icon type="rise"/>
-														</a-button>
-													</a-tooltip>
-													<a-tooltip placement="top" style="margin-left: 5px;"
-													           v-has="'material-delete'">
-														<template slot="title">
-															删除
-														</template>
-														<a-button type="link" @click="delMiniprogram(record.id)"
-														          v-has="'material-delete'">
-															<a-icon type="delete"/>
-														</a-button>
-													</a-tooltip>
+													<a-button type="link" @click="changeMaterial(record.id, record.group_id)"
+																		v-has="'material-remove'">
+														移动
+													</a-button>
+													<a-button type="link" @click="editApplet(index)"
+																		v-has="'material-edit'">
+														编辑
+													</a-button>
+													<a-button type="link"
+																		@click="statistic(record.id, material_type)" v-has="'content-statistic'">
+														统计
+													</a-button>
+													<a-button type="link" @click="delMiniprogram(record.id)"
+																		v-has="'material-delete'">
+														删除
+													</a-button>
 												</span>
 											</a-table>
 										</div>
@@ -2075,36 +1723,18 @@
 													<div class="file-name">{{item6.file_name}}</div>
 												</div>
 												<template class="ant-card-actions" slot="actions">
-													<a-tooltip placement="top" style="margin-left: 5px;"
-													           v-has="'material-remove'">
-														<template slot="title">
-															移动
-														</template>
-														<a-button type="link" @click="changeMaterial(item6.id, item6.group_id)"
+													<a-button type="link" @click="changeMaterial(item6.id, item6.group_id)"
 														          v-has="'material-remove'">
-															<a-icon type="retweet"/>
+															移动
 														</a-button>
-													</a-tooltip>
-													<a-tooltip placement="top"
-													           style="margin-left: 5px;">
-														<template slot="title">
-															统计
-														</template>
-														<a-button type="link"
+													<a-button type="link"
 														          @click="statistic(item6.id, material_type)" v-has="'content-statistic'">
-															<a-icon type="rise"/>
+															统计
 														</a-button>
-													</a-tooltip>
-													<a-tooltip placement="top" style="margin-left: 5px;"
-													           v-has="'material-delete'">
-														<template slot="title">
-															删除
-														</template>
-														<a-button type="link" @click="delFile(item6.id)"
+													<a-button type="link" @click="delFile(item6.id)"
 														          v-has="'material-delete'">
-															<a-icon type="delete"/>
+															删除
 														</a-button>
-													</a-tooltip>
 												</template>
 												<div style="margin: 5px 0px 2px;width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
 													上传者：{{item6.username}}
@@ -2134,35 +1764,17 @@
 													            @click="changeSelectKey(record.key)"></a-checkbox>
 												</span>
 												<span slot="action" slot-scope="text, record,index">
-													<a-tooltip placement="top" style="margin-left: 5px;"
-													           v-has="'material-remove'">
-														<template slot="title">
-															移动
-														</template>
-														<a-button type="link" @click="changeMaterial(record.id, record.group_id)"
+													<a-button type="link" @click="changeMaterial(record.id, record.group_id)"
 														          v-has="'material-remove'">
-															<a-icon type="retweet"/>
+															移动
 														</a-button>
-													</a-tooltip>
-												<a-tooltip placement="top"
-												           style="margin-left: 5px;">
-													<template slot="title">
-														统计
-													</template>
 													<a-button type="link" @click="statistic(record.id, material_type)" v-has="'content-statistic'">
-														<a-icon type="rise"/>
+														统计
 													</a-button>
-												</a-tooltip>
-													<a-tooltip placement="top" style="margin-left: 5px;"
-													           v-has="'material-delete'">
-														<template slot="title">
-															删除
-														</template>
-														<a-button type="link" @click="delFile(record.id)"
-														          v-has="'material-delete'">
-															<a-icon type="delete"/>
-														</a-button>
-													</a-tooltip>
+													<a-button type="link" @click="delFile(record.id)"
+																		v-has="'material-delete'">
+														删除
+													</a-button>
 												</span>
 											</a-table>
 										</div>
@@ -2270,47 +1882,20 @@
 
 										</span>
 										<span slot="action" slot-scope="text, record,index">
-											<a-tooltip placement="top" v-has="'material-edit'">
-												<template slot="title">
-													编辑
-												</template>
-												<a-button type="link" @click="editText(index)"
+											<a-button type="link" @click="editText(index)"
 												          v-has="'material-edit'">
-													<a-icon type="edit"/>
+													编辑
 												</a-button>
-											</a-tooltip>
-											<a-tooltip placement="top" style="margin-left: 5px;"
-											           v-has="'material-remove'">
-												<template slot="title">
-													移动
-												</template>
-												<a-button type="link" @click="changeMaterial(record.id, record.group_id)"
+											<a-button type="link" @click="changeMaterial(record.id, record.group_id)"
 												          v-has="'material-remove'">
-													<a-icon type="retweet"/>
+													移动
 												</a-button>
-											</a-tooltip>
-											<a-tooltip placement="top"
-											           style="margin-left: 5px;">
-												<template slot="title">
+											<a-button type="link" @click="statistic(record.id, material_type)" v-has="'content-statistic'">
 													统计
-												</template>
-												<a-button type="link" @click="statistic(record.id, material_type)" v-has="'content-statistic'">
-													<a-icon type="rise"/>
 												</a-button>
-												<!--												<a-icon type="rise" style="color: #01b065;cursor: pointer;"-->
-												<!--												        @click="statistic(record.id, material_type)"/>-->
-											</a-tooltip>
-											<a-tooltip placement="top" style="margin-left: 5px;"
-											           v-has="'material-delete'">
-												<template slot="title">
+											<a-button type="link" @click="delText(record.id)">
 													删除
-												</template>
-												<a-button type="link" @click="delText(record.id)">
-													<a-icon type="delete"/>
 												</a-button>
-												<!--												<a-icon type="delete" style="color: #01b065;cursor: pointer;"-->
-												<!--												        @click="delText(record.id)"/>-->
-											</a-tooltip>
 										</span>
 									</a-table>
 									<!-- 文本分页 -->
