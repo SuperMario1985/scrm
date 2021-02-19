@@ -32,14 +32,14 @@
 					<!-- 头部 -->
 					<a-layout-header>
 						<label class="scene-title">关注回复</label>
-						<div class="help"
+						<!-- <div class="help"
 						     :class="showTransition == 0 ?'help-transition': (showTransition== 1 ? 'help-transition1' : '')">
 							<a href="https://support.qq.com/products/104790/faqs/58001"
 							   target="_blank">
 								<a-icon type="question-circle" class="help-icon"/>
 								<span style="float:right;">点我帮助</span>
 							</a>
-						</div>
+						</div> -->
 					</a-layout-header>
 					<!-- 内容 -->
 					<a-layout-content>

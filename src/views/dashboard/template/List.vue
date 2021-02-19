@@ -33,14 +33,14 @@
 					<a-layout-header>
 						<label class="template-title">模板消息</label>
 						<span style="vertical-align: top;font-size: 14px;margin: 0 10px;">仅认证服务号可用</span>
-						<div class="help"
+						<!-- <div class="help"
 						     :class="showTransition == 0 ?'help-transition': (showTransition== 1 ? 'help-transition1' : '')">
 							<a href="https://support.qq.com/products/104790/faqs/57477"
 							   target="_blank">
 								<a-icon type="question-circle" class="help-icon"/>
 								<span style="float:right;">点我帮助</span>
 							</a>
-						</div>
+						</div> -->
 
 					</a-layout-header>
 					<!-- 内容 -->

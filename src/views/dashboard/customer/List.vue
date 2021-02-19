@@ -31,14 +31,14 @@
 					<!-- 头部 -->
 					<a-layout-header>
 						<label class="customer-title">客服消息</label>
-						<div class="help"
+						<!-- <div class="help"
 						     :class="showTransition == 0 ?'help-transition': (showTransition== 1 ? 'help-transition1' : '')">
 							<a href="https://support.qq.com/products/104790/faqs/57058"
 							   target="_blank">
 								<a-icon type="question-circle" class="help-icon"/>
 								<span style="float:right;">点我帮助</span>
 							</a>
-						</div>
+						</div> -->
 					</a-layout-header>
 					<!-- 内容 -->
 					<a-layout-content>

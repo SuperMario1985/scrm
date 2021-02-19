@@ -3,14 +3,14 @@
 		<div>
 			<a-card style="margin-bottom:20px;padding:10px 20px;">
 				<label class="tpl-title">公众号管理</label>
-				<div class="help"
+				<!-- <div class="help"
 				     :class="showTransition == 0 ?'help-transition': (showTransition== 1 ? 'help-transition1' : '')">
 					<a href="https://support.qq.com/products/104790/faqs/57072"
 					   target="_blank">
 						<a-icon type="question-circle" class="help-icon"/>
 						<span style="float:right;">点我帮助</span>
 					</a>
-				</div>
+				</div> -->
 			</a-card>
 			<a-row style="margin-bottom:20px;padding:0 20px;">
 				<a-col style="float:left;">
