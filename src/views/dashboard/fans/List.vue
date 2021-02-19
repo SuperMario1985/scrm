@@ -158,14 +158,14 @@
 					<!-- 头部 -->
 					<a-layout-header>
 						<label class="fans-title">粉丝管理</label>
-						<div class="help"
+						<!-- <div class="help"
 						     :class="showTransition == 0 ?'help-transition': (showTransition== 1 ? 'help-transition1' : '')">
 							<a href="https://support.qq.com/products/104790/faqs/57076"
 							   target="_blank">
 								<a-icon type="question-circle" class="help-icon"/>
 								<span style="float:right;">点我帮助</span>
 							</a>
-						</div>
+						</div> -->
 						<!--						<a-tooltip placement="bottom">-->
 						<!--							<template slot="title">-->
 						<!--								<span>粉丝数量可能与微信后台不符，如需同步请手动点击【同步粉丝】。同步粉丝和打标签等任务完成后，可能需要10分钟左右才能刷新到页面上，请耐心等待。</span>-->
