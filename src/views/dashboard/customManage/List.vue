@@ -17,11 +17,12 @@
 							<div style="font-size:16px;font-weight:700;color:#333333">客户管理</div>
 							<div class="content-msg"  style="box-shadow: 0px 1px 4px 0px #D7D7D7">
 								<p style="margin-bottom: 0px;">
-									1、企业成员在与外部联系人（客户）会话中，可通过侧边栏打开【客户详情页】页面，也可以点击外部联系人（客户）头像进入到系统页面【客户信息】，再打开【客户详情页】页面。<a
+									1、企业成员在与外部联系人（客户）会话中，可通过侧边栏打开【客户详情页】页面，也可以点击外部联系人（客户）头像进入到系统页面【客户信息】，再打开【客户详情页】页面。
+									<!-- <a
 										href="https://support.qq.com/products/104790/faqs/59786" target="_blank"
 										class="el-link el-link--primary">
 									<span class="el-link--inner">查看教程</span>
-								</a>
+								</a> -->
 								</p>
 								<p style="margin-bottom: 0px;">
 									2、在职员工/已离职员工所持有的客户数分配走后，在客户列表中不再显示原归属员工的客户。

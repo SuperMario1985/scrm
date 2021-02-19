@@ -8,10 +8,10 @@
         <span class="login-header-left-line"></span>
         <span class="login-header-left-login">首页</span>
       </div>
-      <a href="/register" class="login-header-right">免费注册</a>
+      <a href="/register" class="login-header-right" style="color:#01b065">免费注册</a>
     </div>
     <div class="login-swiper">
-      <img src="../../../assets/login_head.png" alt="">
+      <!-- <img src="../../../assets/login_head.png" alt=""> -->
     </div>
     <div class="login-body">
       <div class="one">
@@ -137,7 +137,7 @@
     width: 100%;
     height: 100px;
     background-image: url('../../../assets/background.png');
-    background-size: 100%;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     padding-top: 8px;
 
@@ -169,9 +169,9 @@
     font-size: 16px;
     line-height: 54px;
     letter-spacing: 0px;
-    color: #4c69fc;
+    color: #01b065;
     float: left;
-    border-bottom: 2px solid #4c69fc;
+    border-bottom: 2px solid #01b065;
   }
 
   .one-erweima {

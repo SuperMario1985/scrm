@@ -8,7 +8,7 @@
           <img src="~@/assets/homePage/yunmeilai.png" alt="">
           <span>云美来</span>
         </li>
-        <li :class="{active: currentActive == 2}" @click="changeTab(2, 'company')">
+        <li :class="{active: currentActive == 2}" @click="changeTab(2, 'company')" v-if="wxInfo.corp_name">
           <img src="~@/assets/homePage/qiyeweixin.png" alt="">
           <span>{{wxInfo.corp_name}}</span>
         </li>
@@ -76,7 +76,7 @@ export default {
         this.wxInfo.corp_name = res.data.data.info[0].corp_name;
         this.wxInfo.corpid = res.data.data.info[0].corpid;
       })
-    }
+    },
   }
 }
 </script>

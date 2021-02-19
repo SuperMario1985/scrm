@@ -29,9 +29,9 @@
 									上传文件
 								</a-button>
 							</a-upload>
-							<a-button type="primary" @click="handleSidebarOk">
+							<!-- <a-button type="primary" @click="handleSidebarOk">
 								查看使用教程
-							</a-button>
+							</a-button> -->
 						</template>
 						<p>Some contents...</p>
 					</a-modal>
@@ -647,15 +647,15 @@
 																	v-has="'material-edit'">
 													编辑
 												</a-button>
-												<a-button v-if="record.is_appli!=1 && record.file_type == 4" type="link" @click="editText(index, 1)"
+												<a-button v-if="record.is_appli!=1 && record.file_type == 4" type="link" @click="editFilingCabinetSketch(index, 1)"
 																	v-has="'material-edit'">
 													编辑
 												</a-button>
-												<a-button v-if="record.file_type == 7" type="link" @click="editText(index, 1)"
+												<a-button v-if="record.file_type == 7" type="link" @click="editApplet(index, 1)"
 																	v-has="'material-edit'">
 													编辑
 												</a-button>
-												<a-button v-if="record.is_editor==1 && record.file_type == 4" type="link" @click="editText(index, 1)"
+												<a-button v-if="record.is_editor==1 && record.file_type == 4" type="link" @click="previewSketch(index, 1)"
 																	v-has="'material-edit'">
 													编辑
 												</a-button>
@@ -1464,7 +1464,7 @@
 												     slot="cover"
 												/>
 												<template class="ant-card-actions" slot="actions">
-													<a-button type="link" @click="changeMaterial(item5.id, record.group_id)"
+													<a-button type="link" @click="changeMaterial(item5.id, item5.group_id)"
 																		v-has="'material-remove'">
 														移动
 													</a-button>

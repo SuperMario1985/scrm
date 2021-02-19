@@ -45,14 +45,14 @@
     <div class="table">
       <div class="form-box">
         <a-radio-group v-model="customerType" @change="getCustomerStatistics">
-          <a-radio-button value="2">新增库户数</a-radio-button>
+          <a-radio-button value="2">新增客户数</a-radio-button>
           <a-radio-button value="3">客户流失数</a-radio-button>
         </a-radio-group>
         <div>
           <a-select v-model="dateType" style="width: 105px;height:42px;" @change="changeData">
-            <a-select-option value="4">按月</a-select-option>
-            <a-select-option value="3">按周</a-select-option>
-            <a-select-option value="2">按天</a-select-option>
+            <a-select-option value="4">近30天</a-select-option>
+            <a-select-option value="3">近15天</a-select-option>
+            <a-select-option value="2">近7天</a-select-option>
           </a-select>
           <span style="margin-left:8px;">自定义：</span>
           <a-range-picker 
@@ -77,21 +77,21 @@
     <div class="function">
       <div class="title">常用功能</div>
       <ul class="function-con">
-        <li @click="goNewPage(1)">
+        <li @click="goNewPage('massMessage/list')">
           <img src="~@/assets/homePage/quefaxiaoxi.png" alt="">
           <div>
             <div class="name">群发消息</div>
             <p class="text">了解和客户群发相关的限制</p>
           </div>
         </li>
-        <li @click="goNewPage(2)">
+        <li @click="goNewPage('channelCode/list')">
           <img src="~@/assets/homePage/qudaohuoma.png" alt="">
           <div>
             <div class="name">渠道活码</div>
             <p class="text">了解渠道活码的功能和使用</p>
           </div>
         </li>
-        <li @click="goNewPage(3)">
+        <li @click="goNewPage('group/list')">
           <img src="~@/assets/homePage/qunguanli.png" alt="">
           <div>
             <div class="name">群管理</div>
@@ -115,12 +115,14 @@ export default {
       dateType: "4",
       dataTime: [moment(moment().subtract(31, 'days').calendar(), 'YYYY-MM-DD'), moment(moment().subtract(1, 'days'), 'YYYY-MM-DD')],
       tableData:{
-        title     : '人数',
+        title     : '客户数',
         xAxisData : [],
+        groupIndex: 4,
         seriesData: [
           {
             data  : [],
-            type  : "line"
+            type  : "line",
+            name : "客户数"
           }
         ]
      },
@@ -203,30 +205,34 @@ export default {
         this.dataTime = [moment(moment().subtract(31, 'days').calendar(), 'YYYY-MM-DD'), moment(moment().subtract(1, 'days'), 'YYYY-MM-DD')];
       }
       if(this.dateType == 3) {
-        this.dataTime = [moment(moment().subtract(8, 'days').calendar(), 'YYYY-MM-DD'), moment(moment().subtract(1, 'days'), 'YYYY-MM-DD')];
+        this.dataTime = [moment(moment().subtract(16, 'days').calendar(), 'YYYY-MM-DD'), moment(moment().subtract(1, 'days'), 'YYYY-MM-DD')];
       }
       if(this.dateType == 2) {
-        this.dataTime = [moment(moment().subtract(1, 'days'), 'YYYY-MM-DD'), moment(moment().subtract(1, 'days'), 'YYYY-MM-DD')];
+        this.dataTime = [moment(moment().subtract(8, 'days').calendar(), 'YYYY-MM-DD'), moment(moment().subtract(1, 'days'), 'YYYY-MM-DD')];
       }
       this.getCustomerStatistics()
     },
-    goNewPage(type){
-      // this.$store.dispatch('changeMenu',2);
-      setTimeout(()=>{
-        switch(type) {
-          case 1:
-            this.$router.push("/massMessage/list")
-            break;
-          case 2:
-            this.$router.push("/channelCode/list")
-            break;
-           case 3:
-            this.$router.push("/group/list")
-            break;
-        } 
-      },200)
+    goNewPage(link){
+      if (this.checkPower(link)){
+        this.$router.push("/" + link);
+      }else{
+        this.$message.warning("您没有权限,请联系管理员")
+      }
+    },
+      //判断权限
+    checkPower(link) {
+      let menuList = this.$store.state.menuData;
+      return menuList.some( menuListItem => {
+        return  menuListItem.some(menu => {
+          if (menu.link==link) {
+            return true
+          } else {
+            return  menu.children.some( menuChild => menuChild.link==link)
+          }
+        })
+      })
     }
-  }
+  },
 }
 </script>
 

@@ -26,7 +26,7 @@
             >
               群打卡
             </div>
-            <div
+            <!-- <div
               class="help"
               :class="
                 showTransition == 0
@@ -43,7 +43,7 @@
                 <a-icon type="question-circle" class="help-icon" />
                 <span style="float: right">点我帮助</span>
               </a>
-            </div>
+            </div> -->
             <div
               class="content-msg"
               style="box-shadow: 0px 1px 4px 0px #d7d7d7; padding: 16px"

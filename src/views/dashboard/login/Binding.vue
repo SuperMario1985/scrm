@@ -8,10 +8,10 @@
         <span class="login-header-left-line"></span>
         <a href="/forgetPass" class="login-header-left-login">忘记密码</a>
       </div>
-      <div class="login-header-right">已有账号，<a href="#">登录</a></div>
+      <div class="login-header-right">已有账号，<a style="color:#01b065" href="#">登录</a></div>
     </div>
     <div class="login-swiper">
-      <img src="../../../assets/login_head.png" alt="">
+      <!-- <img src="../../../assets/login_head.png" alt=""> -->
     </div>
     <div class="login-body">
       <div class="message">
@@ -172,7 +172,7 @@
     width: 100%;
     height: 100px;
     background-image: url('../../../assets/background.png');
-    background-size: 100%;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     padding-top: 8px;
 
@@ -256,7 +256,7 @@
   }
 
   .border-blue {
-    border-bottom: 2px solid #4c69fc !important;
+    border-bottom: 2px solid #01b065 !important;
   }
 
   .border-grey {
@@ -267,7 +267,7 @@
   .login-button {
     height: 52px;
     width: 350px;
-    background-color: #4c69fc;
+    // background-color: #4c69fc;
     font-family: MicrosoftYaHei;
     font-size: 16px;
     display: block;
@@ -277,8 +277,8 @@
 
   .login-button:hover,
   .ant-btn-primary:focus {
-    border-color: #4c69fc !important;
-    background-color: #4c69fc !important;
+    // border-color: #4c69fc !important;
+    // background-color: #4c69fc !important;
   }
 
   .footer {

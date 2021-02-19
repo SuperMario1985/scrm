@@ -10,7 +10,7 @@
 			</div>
 		</div>
 		<div class="login-swiper">
-			<img src="../../../assets/login_head.png" alt="">
+			<!-- <img src="../../../assets/login_head.png" alt=""> -->
 		</div>
 
 		<div class="login-body">
@@ -207,7 +207,7 @@
 		width: 100%;
 		height: 100px;
 		background-image: url('../../../assets/background.png');
-		background-size: 100%;
+		background-size: 100% 100%;
 		background-repeat: no-repeat;
 		padding-top: 8px;
 
@@ -283,7 +283,7 @@
 	}
 
 	.border-blue {
-		border-bottom: 2px solid #4C69FC !important;
+		border-bottom: 2px solid #01b065 !important;
 	}
 
 	.border-grey {
@@ -292,7 +292,7 @@
 
 	.login-button {
 		height: 52px;
-		background-color: #4C69FC;
+		// background-color: #4C69FC;
 		font-family: MicrosoftYaHei;
 		font-size: 16px;
 		display: block;
@@ -301,8 +301,8 @@
 
 	.login-button:hover,
 	.ant-btn-primary:focus {
-		border-color: #4C69FC !important;
-		background-color: #4C69FC !important;
+		// border-color: #4C69FC !important;
+		// background-color: #4C69FC !important;
 	}
 
 	.alert {

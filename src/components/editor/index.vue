@@ -404,11 +404,21 @@
 		border: 1px solid #D9D9D9;
 		height: 155px;
 		overflow: auto;
-
+		border-radius: 4px;
 	/deep/ p {
 		margin: 0;
 		/*display: inline-block;*/
 		word-break: break-word;
-	}
+		}
+		&:focus {
+			border-color: #20bd74;
+			outline: 0;
+			border-right-width: 1px !important;
+			box-shadow: 0 0 0 2px rgba(1, 176, 101, 0.2);
+		}
+		&:hover {
+			border-color: #20bd74;
+    border-right-width: 1px !important;
+		}
 	}
 </style>

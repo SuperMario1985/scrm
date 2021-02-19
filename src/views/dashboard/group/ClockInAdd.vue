@@ -98,12 +98,9 @@
                               href="https://work.weixin.qq.com/wework_admin/loginpage_wx?from=myhome_baidu"
                             >
                               企业微信后台</a
-                            >创建自建应用。<a
-                              target="_blank"
-                              href="https://support.qq.com/products/104790/faqs/63937"
-                            >
-                              教程</a
-                            >
+                            >创建自建应用。
+                            <!-- <a target="_blank"
+                              href="https://support.qq.com/products/104790/faqs/63937">教程</a> -->
                           </p>
                           <p
                             style="
