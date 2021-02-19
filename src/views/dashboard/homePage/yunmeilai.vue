@@ -5,19 +5,19 @@
       <div class="entrance">
         <div class="title">常用入口</div>
         <ul>
-          <li @click="goNewPage(1)">
+          <li @click="goNewPage('wechatManagement')">
             <img src="~@/assets/homePage/qiyeweixin.png" alt="">
             <span>授权企业微信</span>
           </li>
-          <li @click="goNewPage(2)">
+          <li @click="goNewPage('account')">
             <img src="~@/assets/homePage/gongzhonghao.png" alt="">
             <span>授权公众号</span>
           </li>
-          <li style="margin-top:24px;" @click="goNewPage(3)">
+          <li style="margin-top:24px;" @click="goNewPage('subAccount')">
             <img src="~@/assets/homePage/tianjiachengyuan.png" alt="">
             <span>添加成员</span>
           </li>
-          <li style="margin-top:24px;" @click="goNewPage(4)">
+          <li style="margin-top:24px;" @click="goNewPage('user/userUpdate')">
             <img src="~@/assets/homePage/zhanghaoshezhi.png" alt="">
             <span>账号设置</span>
           </li>
@@ -30,8 +30,8 @@
           </div>
           <!-- <div class="more">更多帮助></div> -->
           <div>
-            <span class="type">旗舰版</span>
-            <span class="time">{{dateTime}}到期</span>
+            <span class="type">{{ package_name }}</span>
+            <span class="time">有效期：{{dateTime}}</span>
           </div>
         </div>
         <a-carousel autoplay>
@@ -47,24 +47,24 @@
           <div class="more">更多帮助></div>
         </div>
         <ul>
-          <li>
-            <span class="text">为什么同步通讯录的时候提示“企业微信未认证，同步失败”？</span>
+          <li @click="goQuestionInfo">
+            <span class="text">如何注册企业微信？企业微信注册常见问题</span>
             <span>></span>
           </li>
-          <li>
-            <span class="text">添加客户的时候可以通知同事么，我们公司需要通知上级。</span>
+          <li @click="goQuestionInfo">
+            <span class="text">公众号授权相关事项和风险提醒</span>
             <span>></span>
           </li>
-          <li>
-            <span class="text">为什么同步通讯录的时候提示“企业微信未认证，同步失败”？</span>
+          <li @click="goQuestionInfo">
+            <span class="text">如何进行【微信支付】的相关配置？</span>
             <span>></span>
           </li>
-          <li>
-            <span class="text">如何群发消息？群发消息有什么限制？</span>
+          <li @click="goQuestionInfo">
+            <span class="text">关于企业微信客户朋友圈的那点事</span>
             <span>></span>
           </li>
-          <li>
-            <span class="text">公众号提示权限不足需要重新授权，如何重新授权？</span>
+          <li @click="goQuestionInfo">
+            <span class="text">社群变“死群” 教你如何起死回生【教程向】</span>
             <span>></span>
           </li>
         </ul>
@@ -92,40 +92,46 @@ export default {
   data() {
     return {
       time: new Date().getHours(),
-      dateTime: ""
+      dateTime: "",
+      package_name: '免费套餐'
     }
   },
   mounted() {
     this.getValidateTime();
   },
   methods:{
-    goNewPage(type){
-      this.$store.dispatch('changeMenu',2);
-      setTimeout(()=>{
-        switch(type) {
-          case 1:
-            this.$router.push("/wechatManagement")
-            break;
-          case 2:
-            this.$router.push("/account")
-            break;
-          case 3:
-            this.$router.push("/subAccount")
-            break;
-          case 4:
-            this.$router.push("/user/userUpdate")
-            break;
-        } 
-      },200)
+    goNewPage(link){
+      if (this.checkPower(link)){
+        this.$router.push("/" + link);
+      }else{
+        this.$message.warning("您没有权限,请联系管理员")
+      }
     },
     getValidateTime() {
       axios.post("/menu/get-menu-list").then( res => {
         console.log(res)
         this.dateTime = res.data.data.package_endtime
+        this.package_name = res.data.data.package_name
       })
     },
     goYunmeilai(){
       location.href = 'http://www.wemero.cn/'
+    },
+    goQuestionInfo(){
+       location.href = 'https://shimo.im/docs/WhYT8D9VQgjRGWJ6'
+    },
+    //判断权限
+    checkPower(link) {
+      let menuList = this.$store.state.menuData;
+      return menuList.some( menuListItem => {
+        return  menuListItem.some(menu => {
+          if (menu.link==link) {
+            return true
+          } else {
+           return  menu.children.some( menuChild => menuChild.link==link)
+          }
+        })
+      })
     }
   }
 }

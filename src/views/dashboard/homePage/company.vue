@@ -77,21 +77,21 @@
     <div class="function">
       <div class="title">常用功能</div>
       <ul class="function-con">
-        <li @click="goNewPage(1)">
+        <li @click="goNewPage('massMessage/list')">
           <img src="~@/assets/homePage/quefaxiaoxi.png" alt="">
           <div>
             <div class="name">群发消息</div>
             <p class="text">了解和客户群发相关的限制</p>
           </div>
         </li>
-        <li @click="goNewPage(2)">
+        <li @click="goNewPage('channelCode/list')">
           <img src="~@/assets/homePage/qudaohuoma.png" alt="">
           <div>
             <div class="name">渠道活码</div>
             <p class="text">了解渠道活码的功能和使用</p>
           </div>
         </li>
-        <li @click="goNewPage(3)">
+        <li @click="goNewPage('group/list')">
           <img src="~@/assets/homePage/qunguanli.png" alt="">
           <div>
             <div class="name">群管理</div>
@@ -210,23 +210,27 @@ export default {
       }
       this.getCustomerStatistics()
     },
-    goNewPage(type){
-      // this.$store.dispatch('changeMenu',2);
-      setTimeout(()=>{
-        switch(type) {
-          case 1:
-            this.$router.push("/massMessage/list")
-            break;
-          case 2:
-            this.$router.push("/channelCode/list")
-            break;
-           case 3:
-            this.$router.push("/group/list")
-            break;
-        } 
-      },200)
+    goNewPage(link){
+      if (this.checkPower(link)){
+        this.$router.push("/" + link);
+      }else{
+        this.$message.warning("您没有权限,请联系管理员")
+      }
+    },
+      //判断权限
+    checkPower(link) {
+      let menuList = this.$store.state.menuData;
+      return menuList.some( menuListItem => {
+        return  menuListItem.some(menu => {
+          if (menu.link==link) {
+            return true
+          } else {
+            return  menu.children.some( menuChild => menuChild.link==link)
+          }
+        })
+      })
     }
-  }
+  },
 }
 </script>
 
