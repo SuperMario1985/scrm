@@ -156,26 +156,27 @@
 						class="scroll"
 				>
 					<!-- 头部 -->
-					<a-layout-header>
-						<label class="fans-title">粉丝管理</label>
-						<div class="help"
+					<!-- <a-layout-header>
+						<label class="fans-title">粉丝管理</label> -->
+						<!-- <div class="help"
 						     :class="showTransition == 0 ?'help-transition': (showTransition== 1 ? 'help-transition1' : '')">
 							<a href="https://support.qq.com/products/104790/faqs/57076"
 							   target="_blank">
 								<a-icon type="question-circle" class="help-icon"/>
 								<span style="float:right;">点我帮助</span>
 							</a>
-						</div>
+						</div> -->
 						<!--						<a-tooltip placement="bottom">-->
 						<!--							<template slot="title">-->
 						<!--								<span>粉丝数量可能与微信后台不符，如需同步请手动点击【同步粉丝】。同步粉丝和打标签等任务完成后，可能需要10分钟左右才能刷新到页面上，请耐心等待。</span>-->
 						<!--							</template>-->
 						<!--							<a-icon type="question-circle" style="margin-left:5px;"/>-->
 						<!--						</a-tooltip>-->
-					</a-layout-header>
+					<!-- </a-layout-header> -->
 					<!-- 内容 -->
 					<a-layout-content>
-						<div class="content-msg">
+						<div style="font-size:16px;font-weight:700;color:#333333;text-align:left">粉丝管理</div>
+						<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7;padding:16px">
 							<p style="margin-bottom: 2px;">
 								1、新用户接入本系统之后同步粉丝信息需要一定时间，如果公众号粉丝较多，则需要等待一定时间。</p>
 							<p style="margin-bottom: 2px;">
@@ -1714,6 +1715,14 @@
 		overflow: hidden;
 	}
 
+	#components-layout-demo-basic .ant-layout-content {
+		margin: 0 20px 20px;
+		min-width: 885px;
+		padding-right: 40px;
+		background-color: #ffffff;
+		margin-top: 16px;
+		padding: 16px;
+	}
 
 	.sider-one {
 		height: 120px;
@@ -1817,7 +1826,7 @@
 		border-color: #F56C6C;
 		color: white;
 	}
-
+	
 	p {
 		margin: 0;
 	}

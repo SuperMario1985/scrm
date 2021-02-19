@@ -1,17 +1,19 @@
 <template>
 	<div style="width: 100%;max-height:100%;position: absolute;overflow-y: auto;padding-bottom: 30px;">
-		<div>
-			<a-card style="margin-bottom:20px;padding:10px 20px;">
-				<label class="tpl-title">公众号管理</label>
-				<div class="help"
+		<div id="components-layout-demo-basic">
+			<!-- <a-card style="margin-bottom:20px;padding:10px 20px;">
+				<label class="tpl-title">公众号管理</label> -->
+				<!-- <div class="help"
 				     :class="showTransition == 0 ?'help-transition': (showTransition== 1 ? 'help-transition1' : '')">
 					<a href="https://support.qq.com/products/104790/faqs/57072"
 					   target="_blank">
 						<a-icon type="question-circle" class="help-icon"/>
 						<span style="float:right;">点我帮助</span>
 					</a>
-				</div>
-			</a-card>
+				</div> -->
+			<!-- </a-card> -->
+			<a-layout-content>
+				<div style="font-size:16px;font-weight:700;color:#333333;text-align:left;margin-bottom:10px">公众号管理</div>
 			<a-row style="margin-bottom:20px;padding:0 20px;">
 				<a-col style="float:left;">
 					<a-select
@@ -115,6 +117,8 @@
 					</div>
 				</a-spin>
 			</div>
+
+			</a-layout-content>
 		</div>
 		<!-- 点击添加公众号弹窗 -->
 		<authorize :show="showWxModal" @cancel="cancel"></authorize>
@@ -419,5 +423,13 @@
 
 	/deep/ .light-row {
 		background: #FFF;
+	}
+	#components-layout-demo-basic .ant-layout-content {
+		margin: 0 20px 20px;
+		min-width: 885px;
+		padding-right: 40px;
+		background-color: #ffffff;
+		margin-top: 16px;
+		padding: 16px;
 	}
 </style>

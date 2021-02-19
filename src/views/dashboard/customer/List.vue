@@ -29,20 +29,21 @@
 				          :style="wxLen > 1 ? {left: '250px'} : {left: '0px'}"
 				          class="scroll">
 					<!-- 头部 -->
-					<a-layout-header>
-						<label class="customer-title">客服消息</label>
-						<div class="help"
+					<!-- <a-layout-header> -->
+						<!-- <label class="customer-title">客服消息</label> -->
+						<!-- <div class="help"
 						     :class="showTransition == 0 ?'help-transition': (showTransition== 1 ? 'help-transition1' : '')">
 							<a href="https://support.qq.com/products/104790/faqs/57058"
 							   target="_blank">
 								<a-icon type="question-circle" class="help-icon"/>
 								<span style="float:right;">点我帮助</span>
 							</a>
-						</div>
-					</a-layout-header>
+						</div> -->
+					<!-- </a-layout-header> -->
 					<!-- 内容 -->
 					<a-layout-content>
-						<div class="content-msg">
+						<div style="font-size:16px;font-weight:700;color:#333333;text-align:left">客服消息</div>
+						<div class="content-msg"  style="box-shadow: 0px 1px 4px 0px #D7D7D7;padding:16px">
 							<p style="margin-bottom: 2px;">
 								1、与公众号互动的粉丝，在48小时内可以给粉丝推送客服消息，且不占用群发次数。但是为了避免对用户骚扰，禁止滥发消息，以免被封禁。建议单日对每位粉丝发送不超过5-10次。</p>
 							<p style="margin-bottom: 2px;">

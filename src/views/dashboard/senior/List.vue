@@ -40,20 +40,21 @@
 						class="scroll"
 				>
 					<!-- 头部 -->
-					<a-layout-header>
-						<label class="senior-title">高级群发</label>
-						<div class="help"
+					<!-- <a-layout-header>
+						<label class="senior-title">高级群发</label> -->
+						<!-- <div class="help"
 						     :class="showTransition == 0 ?'help-transition': (showTransition== 1 ? 'help-transition1' : '')">
 							<a href="https://support.qq.com/products/104790/faqs/57055"
 							   target="_blank">
 								<a-icon type="question-circle" class="help-icon"/>
 								<span style="float:right;">点我帮助</span>
 							</a>
-						</div>
-					</a-layout-header>
+						</div> -->
+					<!-- </a-layout-header> -->
 					<!-- 内容 -->
 					<a-layout-content>
-						<div class="content-msg">
+						<div style="font-size:16px;font-weight:700;color:#333333;text-align:left">高级群发</div>
+						<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7;padding:16px">
 							<p style="margin-bottom: 2px;">
 								1、对于认证服务号，每日可高级群发的次数最多100次，可针对所有粉丝、某单/多标签粉丝以及指定粉丝（需至少2个粉丝）进行群发，群发限制为每个粉丝一个月内最多收到 4
 								条群发消息（且与公众平台同步）。</p>

@@ -1,10 +1,12 @@
 <template>
 	<div style="width: 100%;max-height:100%;position: absolute;overflow-y: auto;padding-bottom: 30px;">
-		<div>
-			<a-card style="margin-bottom:20px;padding:10px 20px;">
+		<div id="components-layout-demo-basic">
+			<!-- <a-card style="margin-bottom:20px;padding:10px 20px;">
 				<label class="tpl-title">小程序管理</label>
-			</a-card>
-			<div class="content-msg">
+			</a-card> -->
+			<a-layout-content>
+				<div style="font-size:16px;font-weight:700;color:#333333;text-align:left">小程序管理</div>
+			<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7;padding:16px">
 				<p style="margin-bottom: 2px;">
 					1、小程序授权之后，可在【企业微信】模块下，进入【消息互通】，将授权的小程序与企业成员通过自建应用进行关联。关联后，用户通过小程序发送的所有消息，都会及时通过企业微信推送消息通知触达到指定的企业成员，点击消息通知，跳转到H5实时对话页，即可与小程序用户实时会话。
 				</p>
@@ -92,6 +94,7 @@
 					</div>
 				</a-spin>
 			</div>
+			</a-layout-content>
 		</div>
 		<!-- 点击添加小程序弹窗 -->
 		<authorize :show="showWxModal" @cancel="cancel"></authorize>
@@ -367,5 +370,14 @@
 		margin: 20px 0px 0px 20px;
 		text-align: left;
 
+	}
+
+	#components-layout-demo-basic .ant-layout-content {
+		margin: 0 20px 20px;
+		min-width: 885px;
+		padding-right: 40px;
+		background-color: #ffffff;
+		margin-top: 16px;
+		padding: 16px;
 	}
 </style>
