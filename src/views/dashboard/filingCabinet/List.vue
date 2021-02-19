@@ -1464,7 +1464,7 @@
 												     slot="cover"
 												/>
 												<template class="ant-card-actions" slot="actions">
-													<a-button type="link" @click="changeMaterial(item5.id, record.group_id)"
+													<a-button type="link" @click="changeMaterial(item5.id, item5.group_id)"
 																		v-has="'material-remove'">
 														移动
 													</a-button>
