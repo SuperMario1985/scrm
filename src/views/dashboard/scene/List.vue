@@ -29,9 +29,9 @@
 				<a-layout style="position: absolute;top:0;bottom:0;right:0; overflow-x: hidden; overflow-y: auto;"
 				          :style="wxLen > 1 ? {left: '250px'} : {left: '0px'}" class="scroll">
 					<!-- 头部 -->
-					<a-layout-header>
-						<label class="scene-title">渠道二维码</label>
-						<span style="margin-left: 10px;font-size:14px;color:#686868;">仅认证服务号可用</span>
+					<!-- <a-layout-header> -->
+						<!-- <label class="scene-title">渠道二维码</label> -->
+						<!-- <span style="margin-left: 10px;font-size:14px;color:#686868;">仅认证服务号可用</span> -->
 						<!-- <div class="help"
 						     :class="showTransition == 0 ?'help-transition': (showTransition== 1 ? 'help-transition1' : '')">
 							<a href="https://support.qq.com/products/104790/faqs/57054"
@@ -40,10 +40,14 @@
 								<span style="float:right;">点我帮助</span>
 							</a>
 						</div> -->
-					</a-layout-header>
+					<!-- </a-layout-header> -->
 					<!-- 内容 -->
 					<a-layout-content>
-						<div class="content-msg">
+						<div style="font-size:16px;font-weight:700;color:#333333;text-align:left">
+							渠道二维码
+							<span style="margin-left: 10px;font-size:14px;color:#686868;">仅认证服务号可用</span>
+						</div>
+						<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7;padding:16px">
 							渠道二维码主要应用于海报、图文、网页、传单、实体包装等渠道中，粉丝通过扫码关注后，收到相应渠道的专属回复内容，并自动为粉丝贴上标签。同时，可统计出不同渠道的扫码次数、新关注人数、取关数等数据，帮助企业分析渠道质量，查看推广效果，优化推广方案，节约推广成本。
 							<div>
 								<div>1、永久二维码最多创建 10万个，永不过期。若不够用，可以修改之前的二维码；</div>

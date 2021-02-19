@@ -30,10 +30,11 @@
 				          :style="wxLen > 1 ? {left: '250px'} : {left: '0px'}"
 				          class="scroll">
 					<!-- 头部 -->
-					<a-layout-header>标签管理</a-layout-header>
+					<!-- <a-layout-header>标签管理</a-layout-header> -->
 					<!-- 内容 -->
 					<a-layout-content>
-						<div class="content-msg">
+						<div style="font-size:16px;font-weight:700;color:#333333;text-align:left">标签管理</div>
+						<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7;padding:16px">
 							<p style="margin-bottom: 2px;">
 								1、在本系统内创建的标签会自动同步到微信公众平台，微信公众平台产生的标签需要进行手动同步到本系统内，标签的同步保证了粉丝数据的一致性。</p>
 							<p style="margin-bottom: 2px;">

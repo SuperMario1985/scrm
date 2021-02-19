@@ -30,8 +30,8 @@
 				          :style="wxLen > 1 ? {left: '250px'} : {left: '0px'}"
 				          class="scroll">
 					<!-- 头部 -->
-					<a-layout-header>
-						<label class="scene-title">关注回复</label>
+					<!-- <a-layout-header> -->
+						<!-- <label class="scene-title">关注回复</label> -->
 						<!-- <div class="help"
 						     :class="showTransition == 0 ?'help-transition': (showTransition== 1 ? 'help-transition1' : '')">
 							<a href="https://support.qq.com/products/104790/faqs/58001"
@@ -40,10 +40,11 @@
 								<span style="float:right;">点我帮助</span>
 							</a>
 						</div> -->
-					</a-layout-header>
+					<!-- </a-layout-header> -->
 					<!-- 内容 -->
 					<a-layout-content>
-						<div class="content-msg">
+						<div style="font-size:16px;font-weight:700;color:#333333;text-align:left">关注回复</div>
+						<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7;padding:16px">
 							<p style="margin-bottom: 2px;">每一个新关注的粉丝都会收到提前设定好的关注回复内容。</p>
 							<p style="margin-bottom: 2px;">1）向关注公众号的新粉丝立即自动推送消息，含图文、图片、文字（可添加超链接）、音频、视频等。</p>
 							<p style="margin-bottom: 2px;">2）在关注48小时内，根据关注时长，可向粉丝自动推送消息。</p>
@@ -52,7 +53,7 @@
 						</div>
 						<div class="content-hd">
 							<a-col style="float: right;">
-								<a-button type="primary"style="width: 150px;font-size:14px;"
+								<a-button type="primary" style="width: 150px;font-size:14px;"
 								          @click="replyAdd" v-has="'reply-add'">
 									创建推送计划
 								</a-button>

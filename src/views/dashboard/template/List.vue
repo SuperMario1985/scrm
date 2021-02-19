@@ -30,9 +30,9 @@
 				          :style="wxLen > 1 ? {left: '250px'} : {left: '0px'}"
 				          class="scroll">
 					<!-- 头部 -->
-					<a-layout-header>
+					<!-- <a-layout-header>
 						<label class="template-title">模板消息</label>
-						<span style="vertical-align: top;font-size: 14px;margin: 0 10px;">仅认证服务号可用</span>
+						<span style="vertical-align: top;font-size: 14px;margin: 0 10px;">仅认证服务号可用</span> -->
 						<!-- <div class="help"
 						     :class="showTransition == 0 ?'help-transition': (showTransition== 1 ? 'help-transition1' : '')">
 							<a href="https://support.qq.com/products/104790/faqs/57477"
@@ -42,10 +42,14 @@
 							</a>
 						</div> -->
 
-					</a-layout-header>
+					<!-- </a-layout-header> -->
 					<!-- 内容 -->
 					<a-layout-content>
-						<div class="content-msg">
+						<div style="font-size:16px;font-weight:700;color:#333333;text-align:left">
+							模板消息
+							<span style="margin-left: 10px;font-size:14px;color:#686868;">仅认证服务号可用</span>
+						</div>
+						<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7;padding:16px">
 							<p style="margin-bottom: 2px;">
 								1、不同行业可以使用的模板不一样，根据在微信公众号后台设置的行业，会默认对应可用的模板消息，也可以在公众平台后台提交新的模板，通过审核之后即可使用。</p>
 							<p style="margin-bottom: 2px;">

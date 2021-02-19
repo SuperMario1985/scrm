@@ -29,8 +29,8 @@
 				<a-layout style="position: absolute;top:0;bottom:0;right:0; overflow-x: hidden; overflow-y: auto;"
 				          :style="wxLen > 1 ? {left: '250px'} : {left: '0px'}" class="scroll">
 					<!-- 头部 -->
-					<a-layout-header>
-						<label class="scene-title">收到消息回复</label>
+					<!-- <a-layout-header> -->
+						<!-- <label class="scene-title">收到消息回复</label> -->
 						<!-- <div class="help"
 						     :class="showTransition == 0 ?'help-transition': (showTransition== 1 ? 'help-transition1' : '')">
 							<a href="https://support.qq.com/products/104790/faqs/58277"
@@ -39,10 +39,11 @@
 								<span style="float:right;">点我帮助</span>
 							</a>
 						</div> -->
-					</a-layout-header>
+					<!-- </a-layout-header> -->
 					<!-- 内容 -->
 					<a-layout-content>
-						<div class="content-msg">
+						<div style="font-size:16px;font-weight:700;color:#333333;text-align:left">收到消息回复</div>
+						<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7;padding:16px">
 							<p style="margin-bottom: 2px;">
 								收到消息自动回复针对某时间段内，粉丝向公众号发送消息后，自动回复提前设置好的标准回复内容，如有时候粉丝夜间向公众号发送信息，而工作人员早已下班，此时即可设置一个夜间留言提示，告知“等上班后，再回复您”等类似留言回复，这样粉丝就不用焦急等待了。</p>
 							<p style="margin-bottom: 2px;">1）粉丝向公众号发送消息后，立即收到消息回复，含图文、图片、文字（可添加超链接）、音频、视频等。</p>
