@@ -647,15 +647,15 @@
 																	v-has="'material-edit'">
 													编辑
 												</a-button>
-												<a-button v-if="record.is_appli!=1 && record.file_type == 4" type="link" @click="editText(index, 1)"
+												<a-button v-if="record.is_appli!=1 && record.file_type == 4" type="link" @click="editFilingCabinetSketch(index, 1)"
 																	v-has="'material-edit'">
 													编辑
 												</a-button>
-												<a-button v-if="record.file_type == 7" type="link" @click="editText(index, 1)"
+												<a-button v-if="record.file_type == 7" type="link" @click="editApplet(index, 1)"
 																	v-has="'material-edit'">
 													编辑
 												</a-button>
-												<a-button v-if="record.is_editor==1 && record.file_type == 4" type="link" @click="editText(index, 1)"
+												<a-button v-if="record.is_editor==1 && record.file_type == 4" type="link" @click="previewSketch(index, 1)"
 																	v-has="'material-edit'">
 													编辑
 												</a-button>
