@@ -267,7 +267,7 @@
 			},
 			// 点击菜单切换
 			activeMenu (type) {
-				this.isActive = type
+				// this.isActive = type
 				this.$store.dispatch('changeMenu',type)
 				if (type === 1) {
 					// 跳转到首页
@@ -281,6 +281,9 @@
 					console.log(newVal, 555)
 				},
 				deep: true
+			},
+			'$route'(newValue, oldValue) {
+				this.isActive = newValue.meta.isMenuIndex
 			},
 			'$store.state.isShowWX' (newValue, oldValue) {
 				this.showWorkLabel = newValue
@@ -301,7 +304,9 @@
 					}
 				}
 			})
-			this.isActive = this.$store.state.activeMenu;
+			// this.isActive = this.$store.state.activeMenu;
+			// console.log(this.$route.meta.isMenuIndex);
+			this.isActive = this.$route.meta.isMenuIndex; 
 			this.showWxLabel  = this.$store.state.isShowCgh;
 			this.showWorkLabel  = this.$store.state.isShowWX; 
 				 

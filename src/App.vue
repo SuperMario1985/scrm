@@ -87,7 +87,6 @@ export default {
             this.$router.push("/home");
           }
         }
-
         this.isRouterAlive = true;
       });
     },

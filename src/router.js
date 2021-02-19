@@ -58,7 +58,11 @@ var router = new Router({
 		{ path: '/register', component: Register },
 		{ path: '/regist', component: Regist },
 		{ path: '/chooseAccount', component: ChooseAccount },
-		{ path: '/index', component: IndexLayout },
+		{ path: '/index', component: IndexLayout ,
+		meta: {
+			isMenuIndex:1,
+		}
+	},
 		{
 			path: '/',
 			component: DashboardLayout,
@@ -71,7 +75,8 @@ var router = new Router({
 					// 授权页面显示与隐藏,false要展示，true不展示
 					meta: {
 						corpAlive: true,
-						agentAlive: true
+						agentAlive: true,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -87,7 +92,8 @@ var router = new Router({
 					name: 'push',
 					component: () => import('./views/dashboard/push/List.vue'),
 					meta: {
-						keepAlive: false
+						keepAlive: false,
+						isMenuIndex:3,
 					}
 				},
 				{
@@ -95,7 +101,8 @@ var router = new Router({
 					name: 'push',
 					component: () => import('./views/dashboard/push/Add.vue'),
 					meta: {
-						keepAlive: false
+						keepAlive: false,
+						isMenuIndex:3,
 					}
 				},
 				{
@@ -103,7 +110,8 @@ var router = new Router({
 					name: 'fans',
 					component: () => import('./views/dashboard/fans/List.vue'),
 					meta: {
-						keepAlive: false
+						keepAlive: false,
+						isMenuIndex:3,
 					}
 				},
 				{
@@ -111,7 +119,8 @@ var router = new Router({
 					name: 'account',
 					component: Account,
 					meta: {
-						keepAlive: true
+						keepAlive: true,
+						isMenuIndex:3,
 					}
 				},
 				{
@@ -119,7 +128,8 @@ var router = new Router({
 					name: 'mini',
 					component: () => import('./views/dashboard/AccountMini.vue'),
 					meta: {
-						keepAlive: true
+						keepAlive: true,
+						isMenuIndex:3,
 					}
 				},
 				{
@@ -129,7 +139,8 @@ var router = new Router({
 					meta: {
 						keepAlive: true,
 						corpAlive: true,
-						agentAlive: true
+						agentAlive: true,
+						isMenuIndex:2,
 					}
 				},
 				// {
@@ -147,7 +158,8 @@ var router = new Router({
 					name: 'tags',
 					component: () => import('./views/dashboard/tags/List.vue'),
 					meta: {
-						keepAlive: false
+						keepAlive: false,
+						isMenuIndex:3,
 					}
 				},
 				{
@@ -155,7 +167,8 @@ var router = new Router({
 					name: 'template',
 					component: () => import('./views/dashboard/template/List.vue'),
 					meta: {
-						keepAlive: false
+						keepAlive: false,
+						isMenuIndex:3,
 					}
 				},
 				{
@@ -163,7 +176,8 @@ var router = new Router({
 					name: 'template',
 					component: () => import('./views/dashboard/template/Add.vue'),
 					meta: {
-						keepAlive: false
+						keepAlive: false,
+						isMenuIndex:3,
 					}
 				},
 				{
@@ -171,7 +185,8 @@ var router = new Router({
 					name: 'fansMsg',
 					component: () => import('./views/dashboard/fans/msg.vue'),
 					meta: {
-						keepAlive: false
+						keepAlive: false,
+						isMenuIndex:3,
 					}
 				},
 				{
@@ -179,7 +194,8 @@ var router = new Router({
 					name: 'fans',
 					component: () => import('./views/dashboard/fans/detail.vue'),
 					meta: {
-						keepAlive: false
+						keepAlive: false,
+						isMenuIndex:3,
 					}
 				},
 				{
@@ -187,7 +203,8 @@ var router = new Router({
 					name: 'fansCustomerAttribute',
 					component: () => import('./views/dashboard/customerAttribute/Management.vue'),
 					meta: {
-						keepAlive: false
+						keepAlive: false,
+						isMenuIndex:3,
 					}
 				},
 				{
@@ -196,7 +213,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/customerAttribute/Management.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -206,7 +224,8 @@ var router = new Router({
 					meta: {
 						keepAlive: true,
 						corpAlive: true,
-						agentAlive: true
+						agentAlive: true,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -214,7 +233,8 @@ var router = new Router({
 					name: 'scene',
 					component: () => import('./views/dashboard/scene/List.vue'),
 					meta: {
-						keepAlive: false
+						keepAlive: false,
+						isMenuIndex:3,
 					}
 				},
 				{
@@ -222,7 +242,8 @@ var router = new Router({
 					name: 'scene',
 					component: () => import('./views/dashboard/scene/Add.vue'),
 					meta: {
-						keepAlive: false
+						keepAlive: false,
+						isMenuIndex:3,
 					}
 				},
 				{
@@ -230,7 +251,8 @@ var router = new Router({
 					name: 'scene',
 					component: () => import('./views/dashboard/scene/Statistics.vue'),
 					meta: {
-						keepAlive: false
+						keepAlive: false,
+						isMenuIndex:3,
 					}
 				},
 				{
@@ -238,7 +260,8 @@ var router = new Router({
 					name: 'material',
 					component: Material,
 					meta: {
-						keepAlive: false
+						keepAlive: false,
+						isMenuIndex:3,
 					}
 				},
 				{
@@ -246,7 +269,8 @@ var router = new Router({
 					name: 'senior',
 					component: () => import('./views/dashboard/senior/List.vue'),
 					meta: {
-						keepAlive: false
+						keepAlive: false,
+						isMenuIndex:3,
 					}
 				},
 				{
@@ -254,7 +278,8 @@ var router = new Router({
 					name: 'senior',
 					component: () => import('./views/dashboard/senior/Add.vue'),
 					meta: {
-						keepAlive: false
+						keepAlive: false,
+						isMenuIndex:3,
 					}
 				},
 				{
@@ -262,7 +287,8 @@ var router = new Router({
 					name: 'customer',
 					component: () => import('./views/dashboard/customer/List.vue'),
 					meta: {
-						keepAlive: false
+						keepAlive: false,
+						isMenuIndex:3,
 					}
 				},
 				{
@@ -270,7 +296,8 @@ var router = new Router({
 					name: 'customer',
 					component: () => import('./views/dashboard/customer/Add.vue'),
 					meta: {
-						keepAlive: false
+						keepAlive: false,
+						isMenuIndex:3,
 					}
 				},
 				{
@@ -278,7 +305,8 @@ var router = new Router({
 					name: 'reply',
 					component: () => import('./views/dashboard/reply/List.vue'),
 					meta: {
-						keepAlive: false
+						keepAlive: false,
+						isMenuIndex:3,
 					}
 				},
 				{
@@ -286,7 +314,8 @@ var router = new Router({
 					name: 'reply',
 					component: () => import('./views/dashboard/reply/Add.vue'),
 					meta: {
-						keepAlive: false
+						keepAlive: false,
+						isMenuIndex:3,
 					}
 				},
 				{
@@ -297,7 +326,8 @@ var router = new Router({
 					meta: {
 						keepAlive: true,
 						corpAlive: true,
-						agentAlive: true
+						agentAlive: true,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -307,7 +337,8 @@ var router = new Router({
 					meta: {
 						keepAlive: true,
 						corpAlive: true,
-						agentAlive: true
+						agentAlive: true,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -317,7 +348,8 @@ var router = new Router({
 					meta: {
 						keepAlive: true,
 						corpAlive: true,
-						agentAlive: true
+						agentAlive: true,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -327,7 +359,8 @@ var router = new Router({
 					meta: {
 						keepAlive: true,
 						corpAlive: true,
-						agentAlive: true
+						agentAlive: true,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -337,7 +370,8 @@ var router = new Router({
 					meta: {
 						keepAlive: true,
 						corpAlive: true,
-						agentAlive: true
+						agentAlive: true,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -347,7 +381,8 @@ var router = new Router({
 					meta: {
 						keepAlive: true,
 						corpAlive: true,
-						agentAlive: true
+						agentAlive: true,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -357,7 +392,8 @@ var router = new Router({
 					meta: {
 						keepAlive: true,
 						corpAlive: true,
-						agentAlive: true
+						agentAlive: true,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -367,7 +403,8 @@ var router = new Router({
 					meta: {
 						keepAlive: true,
 						corpAlive: true,
-						agentAlive: true
+						agentAlive: true,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -375,7 +412,8 @@ var router = new Router({
 					name: 'operationCenter',
 					component: Home,
 					meta: {
-						keepAlive: true
+						keepAlive: true,
+						isMenuIndex:3,
 					}
 				},
 				{
@@ -384,7 +422,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/staff/List.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -394,6 +433,7 @@ var router = new Router({
 					meta: {
 						corpAlive: false,
 						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -403,6 +443,7 @@ var router = new Router({
 					meta: {
 						corpAlive: false,
 						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -410,7 +451,8 @@ var router = new Router({
 					name: 'deleteCustomer',
 					component: () => import('./views/dashboard/delCustomer/List.vue'),
 					meta: {
-						corpAlive: false
+						corpAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -419,7 +461,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/customManage/List.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -427,7 +470,8 @@ var router = new Router({
 					name: 'customManage',
 					component: () => import('./views/dashboard/customManage/Detail.vue'),
 					meta: {
-						keepAlive: false
+						keepAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -435,7 +479,8 @@ var router = new Router({
 					name: 'customManage',
 					component: () => import('./views/dashboard/customManage/ThirdStore.vue'),
 					meta: {
-						keepAlive: false
+						keepAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -444,7 +489,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/customTags/List.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -453,7 +499,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/customRecord/List.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -462,7 +509,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/customRecord/Detail.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -471,7 +519,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/channelCode/List.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -480,7 +529,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/channelCode/Add.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -489,7 +539,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/channelCode/Statistics.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -498,7 +549,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/channelCode/StatisticsAll.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2, 
 					}
 				},
 				{
@@ -507,7 +559,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/channelCode/Baidu.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -516,7 +569,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/channelCode/BaiduAdd.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -524,7 +578,8 @@ var router = new Router({
 					name: 'wholeMarketFission',
 					component: () => import('./views/dashboard/wholeMarket/fission/List.vue'),
 					meta: {
-						corpAlive: false
+						corpAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -532,7 +587,8 @@ var router = new Router({
 					name: 'wxWholeMarketFission',
 					component: () => import('./views/dashboard/wholeMarket/fission/List.vue'),
 					meta: {
-						corpAlive: false
+						corpAlive: false,
+						isMenuIndex:3,
 					}
 				},
 				{
@@ -540,7 +596,8 @@ var router = new Router({
 					name: 'wholeMarketFission',
 					component: () => import('./views/dashboard/wholeMarket/fission/Add.vue'),
 					meta: {
-						corpAlive: false
+						corpAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -548,7 +605,8 @@ var router = new Router({
 					name: 'wxWholeMarketFission',
 					component: () => import('./views/dashboard/wholeMarket/fission/Add.vue'),
 					meta: {
-						corpAlive: false
+						corpAlive: false,
+						isMenuIndex:3,
 					}
 				},
 				{
@@ -556,7 +614,8 @@ var router = new Router({
 					name: 'wholeMarketFission',
 					component: () => import('./views/dashboard/wholeMarket/fission/Participants.vue'),
 					meta: {
-						corpAlive: false
+						corpAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -564,7 +623,8 @@ var router = new Router({
 					name: 'wxWholeMarketFission',
 					component: () => import('./views/dashboard/wholeMarket/fission/Participants.vue'),
 					meta: {
-						corpAlive: false
+						corpAlive: false,
+						isMenuIndex:3,
 					}
 				},
 				{
@@ -572,7 +632,8 @@ var router = new Router({
 					name: 'wholeMarketFission',
 					component: () => import('./views/dashboard/wholeMarket/fission/Statistic.vue'),
 					meta: {
-						corpAlive: false
+						corpAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -580,7 +641,8 @@ var router = new Router({
 					name: 'wxWholeMarketFission',
 					component: () => import('./views/dashboard/wholeMarket/fission/Statistic.vue'),
 					meta: {
-						corpAlive: false
+						corpAlive: false,
+						isMenuIndex:3,
 					}
 				},
 				{
@@ -624,7 +686,8 @@ var router = new Router({
 					name: 'redForNewList',
 					component: () => import('./views/dashboard/redForNew/List.vue'),
 					meta: {
-						corpAlive: false
+						corpAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -632,7 +695,8 @@ var router = new Router({
 					name: 'redForNewList',
 					component: () => import('./views/dashboard/redForNew/Add.vue'),
 					meta: {
-						corpAlive: false
+						corpAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -640,7 +704,8 @@ var router = new Router({
 					name: 'redForNewList',
 					component: () => import('./views/dashboard/redForNew/Participants.vue'),
 					meta: {
-						corpAlive: false
+						corpAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -648,7 +713,8 @@ var router = new Router({
 					name: 'redForNewList',
 					component: () => import('./views/dashboard/redForNew/Statistics.vue'),
 					meta: {
-						corpAlive: false
+						corpAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -656,7 +722,8 @@ var router = new Router({
 					name: 'redForNewRule',
 					component: () => import('./views/dashboard/redForNew/Rule.vue'),
 					meta: {
-						corpAlive: false
+						corpAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -664,7 +731,8 @@ var router = new Router({
 					name: 'redForNewRule',
 					component: () => import('./views/dashboard/redForNew/RuleAdd.vue'),
 					meta: {
-						corpAlive: false
+						corpAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -709,7 +777,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/raffle/List.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -718,7 +787,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/raffle/Add.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -727,7 +797,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/raffle/Participants.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -736,7 +807,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/raffle/DrawDetail.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -754,7 +826,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/welcome/List.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -763,7 +836,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/welcome/Add.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -772,7 +846,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/massMessage/List.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -781,7 +856,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/massMessage/Add.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -791,7 +867,8 @@ var router = new Router({
 					meta: {
 						keepAlive: true,
 						corpAlive: true,
-						agentAlive: true
+						agentAlive: true,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -801,7 +878,8 @@ var router = new Router({
 					meta: {
 						keepAlive: true,
 						corpAlive: true,
-						agentAlive: true
+						agentAlive: true,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -811,7 +889,8 @@ var router = new Router({
 					meta: {
 						keepAlive: true,
 						corpAlive: true,
-						agentAlive: true
+						agentAlive: true,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -821,7 +900,8 @@ var router = new Router({
 					meta: {
 						keepAlive: true,
 						corpAlive: true,
-						agentAlive: true
+						agentAlive: true,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -830,7 +910,8 @@ var router = new Router({
 					component: WechatManagement,
 					meta: {
 						corpAlive: true,
-						agentAlive: true
+						agentAlive: true,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -839,7 +920,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/agent/List.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: true
+						agentAlive: true,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -848,7 +930,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/sidebar/Detail.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -857,7 +940,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/archive/Message.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -867,7 +951,8 @@ var router = new Router({
 					meta: {
 						keepAlive: true,
 						corpAlive: true,
-						agentAlive: true
+						agentAlive: true,
+						isMenuIndex:2,
 					}
 				},
 				// 多余的路由
@@ -896,7 +981,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/archive/Msg.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -905,7 +991,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/archive/Sensitive'),
 					meta: {
 						corpAlive: true,
-						agentAlive: true
+						agentAlive: true,
+						isMenuIndex:2,
 					}
 				},
 
@@ -915,7 +1002,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/archive/ViolationsNotice'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -924,7 +1012,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/archive/UserNoticeAdd.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -933,7 +1022,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/archive/GroupNoticeAdd.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -942,7 +1032,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/archive/ChatTag.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -951,7 +1042,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/staff/Redirect.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -960,7 +1052,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/customImport/List.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -969,7 +1062,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/redPacket/Records.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -978,7 +1072,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/redPacket/Setting.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -987,7 +1082,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/redPacket/Reconciliation.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -996,7 +1092,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/redPacket/DetailRecords.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -1005,7 +1102,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/redPacket/EmployeeManagement.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -1014,7 +1112,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/redPacket/UserDetailRecords.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -1023,7 +1122,7 @@ var router = new Router({
 					component: () => import('./views/dashboard/thirdPartyStore/Store.vue'),
 					meta: {
 						corpAlive: true,
-						agentAlive: true
+						agentAlive: true,
 					}
 				},
 				{
@@ -1050,7 +1149,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/follow/List.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -1059,7 +1159,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/follow/Statistic.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -1068,7 +1169,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/follow/Add.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -1077,7 +1179,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/group/List.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -1086,7 +1189,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/group/Statistics.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				// {
@@ -1103,7 +1207,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/group/StatisticsAll.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -1112,7 +1217,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/group/AutoCreate.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -1121,7 +1227,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/group/TagsCreate.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -1130,7 +1237,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/group/Welcome.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -1139,7 +1247,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/group/WelcomeAdd.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -1148,7 +1257,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/group/Add.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -1157,7 +1267,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/group/TagsCreateAdd.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -1166,7 +1277,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/group/ClockIn.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -1175,7 +1287,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/group/ClockInAdd.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -1193,7 +1306,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/customCrm/Kanban.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -1202,7 +1316,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/highSeasCustomer/List.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -1211,7 +1326,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/highSeasCustomer/Detail.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -1220,7 +1336,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/highSeasCustomer/RecyclingRules.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -1229,7 +1346,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/customManage/NoCustomDetail.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				}, {
 					path: '/todoManagement/setting',
@@ -1237,7 +1355,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/todoManagement/Setting.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				}, {
 					path: '/todoManagement/customize',
@@ -1245,7 +1364,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/todoManagement/Customize.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				}, {
 					path: '/todoManagement/remind',
@@ -1253,7 +1373,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/todoManagement/Remind.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				}, {
 					path: '/todoManagement/kanban',
@@ -1261,7 +1382,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/todoManagement/Kanban.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -1270,7 +1392,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/circle/CircleOfFriends.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				},
 				{
@@ -1279,7 +1402,8 @@ var router = new Router({
 					component: () => import('./views/dashboard/circle/AddFriends.vue'),
 					meta: {
 						corpAlive: false,
-						agentAlive: false
+						agentAlive: false,
+						isMenuIndex:2,
 					}
 				}		
 			]
@@ -1316,7 +1440,6 @@ var judgeBindingState2 = async function (userToken) {
 
 //挂载路由导航守卫
 router.beforeEach((to, from, next) => {
-	console.log(to)
 	//to 将要访问的路径  from 代表从那个路径跳转而来
 	//next() 放行   next('./login') 强制跳转
 	let userToken = to.query.userToken

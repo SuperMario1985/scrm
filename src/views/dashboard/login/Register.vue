@@ -10,11 +10,11 @@
 			</div>
 			<div class="login-header-right">
 				已有账号，
-				<a href="/login">登录</a>
+				<a style="color:#01b065" href="/login">登录</a>
 			</div>
 		</div>
 		<div class="login-swiper">
-			<img src="../../../assets/login_head.png" alt/>
+			<!-- <img src="../../../assets/login_head.png" alt/> -->
 		</div>
 		<div class="alert" v-show="isShow">{{this.message}}</div>
 		<div class="login-body">
@@ -48,7 +48,7 @@
 			<a-button type="primary" block class="login-button" @click="sureRegister" :loading="iconLoading">确认注册
 			</a-button>
 		</div>
-		<div class="footer">Copyright © 安徽小猪科技有限公司 All Rights Reserved</div>
+		<div class="footer">Copyright © 云美来 All Rights Reserved</div>
 	</div>
 </template>
 
@@ -313,13 +313,13 @@
 		background-repeat: no-repeat;
 		padding-top: 8px;
 
-		img {
-			width: 482px;
-			height: 59px;
-			margin: 0 auto;
-			margin-top: 15px;
-			display: block;
-		}
+		// img {
+		// 	width: 482px;
+		// 	height: 59px;
+		// 	margin: 0 auto;
+		// 	margin-top: 15px;
+		// 	display: block;
+		// }
 	}
 
 	.login-body {
@@ -391,7 +391,7 @@
 	}
 
 	.border-blue {
-		border-bottom: 2px solid #4C69FC !important;
+		border-bottom: 2px solid #01b065 !important;
 	}
 
 	.border-grey {
@@ -400,7 +400,7 @@
 
 	.login-button {
 		height: 52px;
-		background-color: #4C69FC;
+		// background-color: #4C69FC;
 		font-family: MicrosoftYaHei;
 		font-size: 16px;
 		display: block;

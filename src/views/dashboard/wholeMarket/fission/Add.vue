@@ -40,9 +40,10 @@
 									企业微信+公众号模式，需客户关注公众号且添加员工企业微信为好友才算助力成功，所以需提前将公众号与企业微信进行授权绑定，便于确认客户身份
 								</p>
 								<p style="margin-bottom: 0px;">
-									<span style="color: #FF562D;">由于官方接口限制，当系统存在多个公众号和企业微信，在创建活动时，只能人工仔细选择对应的已绑定上的企业微信和公众号，否则所有参与人无法完成活动，造成活动无效。</span><a
+									<span style="color: #FF562D;">由于官方接口限制，当系统存在多个公众号和企业微信，在创建活动时，只能人工仔细选择对应的已绑定上的企业微信和公众号，否则所有参与人无法完成活动，造成活动无效。</span>
+									<!-- <a
 										target="_blank"
-										href="https://support.qq.com/products/104790/faqs/78374">如何配置</a>
+										href="https://support.qq.com/products/104790/faqs/78374">如何配置</a> -->
 								</p>
 							</div>
 							<a-form-item class="current0" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
@@ -103,9 +104,11 @@
 										<p style="height: 20px; line-height: 20px; margin-bottom: 2px">1、前往<a
 												target="_blank"
 												href="https://work.weixin.qq.com/wework_admin/loginpage_wx?from=myhome_baidu">
-											企业微信后台</a>创建自建应用。<a target="_blank"
+											企业微信后台</a>创建自建应用。
+											<!-- <a target="_blank"
 										                        href="https://support.qq.com/products/104790/faqs/63937">
-											教程</a></p>
+											教程</a> -->
+											</p>
 										<p style="line-height: 20px;height: 20px;margin-bottom: 0px;">
 											2、选择此应用，请确认已设置过应用的可信域名。
 											<a :href="$store.state.commonUrl+'/upload/slider.png'" target="_blank"
@@ -1207,9 +1210,11 @@
 										<p style="height: 20px; line-height: 20px; margin-bottom: 2px">1、前往<a
 												target="_blank"
 												href="https://work.weixin.qq.com/wework_admin/loginpage_wx?from=myhome_baidu">
-											企业微信后台</a>创建自建应用。<a target="_blank"
+											企业微信后台</a>创建自建应用。
+											<!-- <a target="_blank"
 										                        href="https://support.qq.com/products/104790/faqs/63937">
-											教程</a></p>
+											教程</a> -->
+											</p>
 										<p style="line-height: 20px;height: 20px;margin-bottom: 0px;">
 											2、选择此应用，请确认已设置过应用的可信域名。
 											<a :href="$store.state.commonUrl+'/upload/slider.png'" target="_blank"

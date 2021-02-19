@@ -29,9 +29,9 @@
 									上传文件
 								</a-button>
 							</a-upload>
-							<a-button type="primary" @click="handleSidebarOk">
+							<!-- <a-button type="primary" @click="handleSidebarOk">
 								查看使用教程
-							</a-button>
+							</a-button> -->
 						</template>
 						<p>Some contents...</p>
 					</a-modal>

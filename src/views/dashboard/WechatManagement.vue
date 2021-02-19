@@ -100,8 +100,8 @@
 					<a-input :disabled="corpid_disabled" v-model="corpid" style="width: calc(100% - 100px)"
 					         placeholder="请输入企业ID" :maxLength="20"/>
 					<!--					<div>-->
-					<a style="margin-left: 5px;" target="_blank"
-					   href="https://support.qq.com/products/104790/faqs/61151">如何获取？</a>
+					<!-- <a style="margin-left: 5px;" target="_blank"
+					   href="https://support.qq.com/products/104790/faqs/61151">如何获取？</a> -->
 					<!--					</div>-->
 				</a-form-item>
 				<!-- Token -->
@@ -138,8 +138,8 @@
 					<a-input :disabled="book_disabled" v-model="book_secret" style="width: calc(100% - 100px)"
 					         placeholder="请输入通讯录管理secret"/>
 					<!--					<div>-->
-					<a style="margin-left: 5px;" target="_blank"
-					   href="https://support.qq.com/products/104790/faqs/61151">如何获取？</a>
+					<!-- <a style="margin-left: 5px;" target="_blank"
+					   href="https://support.qq.com/products/104790/faqs/61151">如何获取？</a> -->
 					<!--					</div>-->
 				</a-form-item>
 				<!-- 通讯录管理事件 -->
@@ -168,8 +168,8 @@
 					<a-input :disabled="external_disabled" v-model="external_secret" style="width: calc(100% - 100px)"
 					         placeholder="请输入外部联系人管理secret"/>
 					<!--					<div>-->
-					<a style="margin-left: 5px;" target="_blank"
-					   href="https://support.qq.com/products/104790/faqs/61151">如何获取？</a>
+					<!-- <a style="margin-left: 5px;" target="_blank"
+					   href="https://support.qq.com/products/104790/faqs/61151">如何获取？</a> -->
 					<!--					</div>-->
 				</a-form-item>
 				<!-- 外部联系人管理事件 -->

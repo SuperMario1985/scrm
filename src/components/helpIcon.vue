@@ -1,10 +1,10 @@
 <template>
 	<div class="help"
 	     :class="showTransition == 0 ?'help-transition': (showTransition== 1 ? 'help-transition1' : '')">
-		<a :href="helpUrl" target="_blank">
+		<!-- <a :href="helpUrl" target="_blank">
 			<a-icon type="question-circle" class="help-icon"/>
 			<span style="float:right;">点我帮助</span>
-		</a>
+		</a> -->
 	</div>
 </template>
 
