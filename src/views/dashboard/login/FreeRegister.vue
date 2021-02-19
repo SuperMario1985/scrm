@@ -178,6 +178,7 @@
 			position: absolute;
 			top: 40%;
 			left: 50%;
+			background: #fff;
 			transform: translate(-50%,-50%);
 			.item{
 				flex: 1;
