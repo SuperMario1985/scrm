@@ -45,14 +45,14 @@
     <div class="table">
       <div class="form-box">
         <a-radio-group v-model="customerType" @change="getCustomerStatistics">
-          <a-radio-button value="2">新增库户数</a-radio-button>
+          <a-radio-button value="2">新增客户数</a-radio-button>
           <a-radio-button value="3">客户流失数</a-radio-button>
         </a-radio-group>
         <div>
           <a-select v-model="dateType" style="width: 105px;height:42px;" @change="changeData">
-            <a-select-option value="4">按月</a-select-option>
-            <a-select-option value="3">按周</a-select-option>
-            <a-select-option value="2">按天</a-select-option>
+            <a-select-option value="4">近30天</a-select-option>
+            <a-select-option value="3">近15天</a-select-option>
+            <a-select-option value="2">近7天</a-select-option>
           </a-select>
           <span style="margin-left:8px;">自定义：</span>
           <a-range-picker 
@@ -115,12 +115,14 @@ export default {
       dateType: "4",
       dataTime: [moment(moment().subtract(31, 'days').calendar(), 'YYYY-MM-DD'), moment(moment().subtract(1, 'days'), 'YYYY-MM-DD')],
       tableData:{
-        title     : '人数',
+        title     : '客户数',
         xAxisData : [],
+        groupIndex: 4,
         seriesData: [
           {
             data  : [],
-            type  : "line"
+            type  : "line",
+            name : "客户数"
           }
         ]
      },
@@ -203,10 +205,10 @@ export default {
         this.dataTime = [moment(moment().subtract(31, 'days').calendar(), 'YYYY-MM-DD'), moment(moment().subtract(1, 'days'), 'YYYY-MM-DD')];
       }
       if(this.dateType == 3) {
-        this.dataTime = [moment(moment().subtract(8, 'days').calendar(), 'YYYY-MM-DD'), moment(moment().subtract(1, 'days'), 'YYYY-MM-DD')];
+        this.dataTime = [moment(moment().subtract(16, 'days').calendar(), 'YYYY-MM-DD'), moment(moment().subtract(1, 'days'), 'YYYY-MM-DD')];
       }
       if(this.dateType == 2) {
-        this.dataTime = [moment(moment().subtract(1, 'days'), 'YYYY-MM-DD'), moment(moment().subtract(1, 'days'), 'YYYY-MM-DD')];
+        this.dataTime = [moment(moment().subtract(8, 'days').calendar(), 'YYYY-MM-DD'), moment(moment().subtract(1, 'days'), 'YYYY-MM-DD')];
       }
       this.getCustomerStatistics()
     },

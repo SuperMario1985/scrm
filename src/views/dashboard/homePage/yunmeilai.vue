@@ -47,23 +47,23 @@
           <div class="more">更多帮助></div>
         </div>
         <ul>
-          <li @click="goQuestionInfo">
+          <li @click="goQuestionInfo('https://shimo.im/docs/WhYT8D9VQgjRGWJ6#anchor-J6Ve')">
             <span class="text">如何注册企业微信？企业微信注册常见问题</span>
             <span>></span>
           </li>
-          <li @click="goQuestionInfo">
-            <span class="text">公众号授权相关事项和风险提醒</span>
+          <li @click="goQuestionInfo('https://shimo.im/docs/WhYT8D9VQgjRGWJ6#anchor-tstL')">
+            <span class="text">如何创建企业微信自建应用？</span>
             <span>></span>
           </li>
-          <li @click="goQuestionInfo">
+          <li @click="goQuestionInfo('https://shimo.im/docs/WhYT8D9VQgjRGWJ6#anchor-n6Ja')">
             <span class="text">如何进行【微信支付】的相关配置？</span>
             <span>></span>
           </li>
-          <li @click="goQuestionInfo">
+          <li @click="goQuestionInfo('https://shimo.im/docs/WhYT8D9VQgjRGWJ6#anchor-bygB')">
             <span class="text">关于企业微信客户朋友圈的那点事</span>
             <span>></span>
           </li>
-          <li @click="goQuestionInfo">
+          <li @click="goQuestionInfo('https://shimo.im/docs/WhYT8D9VQgjRGWJ6#anchor-BEgs')">
             <span class="text">社群变“死群” 教你如何起死回生【教程向】</span>
             <span>></span>
           </li>
@@ -115,10 +115,10 @@ export default {
       })
     },
     goYunmeilai(){
-      location.href = 'http://www.wemero.cn/'
+      window.open('http://www.wemero.cn/')
     },
-    goQuestionInfo(){
-       location.href = 'https://shimo.im/docs/WhYT8D9VQgjRGWJ6'
+    goQuestionInfo(link){
+      window.open(link)
     },
     //判断权限
     checkPower(link) {

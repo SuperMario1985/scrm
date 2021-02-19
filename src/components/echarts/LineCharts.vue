@@ -44,6 +44,9 @@
 								this.option.color[0] = '#3398DB'
 							}else if(newVal.groupIndex == 3){
 								this.option.color[0] = '#3398DB'
+							}else if(newVal.groupIndex == 4){
+								this.option.color[0] = '#01B065'
+								this.option.series[0].itemStyle.normal.lineStyle.color="#01B065"
 							}
 							this.$refs.lineCharts.resize()
 						} else {

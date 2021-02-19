@@ -47,9 +47,9 @@
         </a-radio-group>
         <div>
           <a-select v-model="dateType" style="width: 105px;height:42px;" @change="changeData">
-            <a-select-option value="4">按月</a-select-option>
-            <a-select-option value="3">按周</a-select-option>
-            <a-select-option value="2">按天</a-select-option>
+            <a-select-option value="4">近30天</a-select-option>
+            <a-select-option value="3">近15天</a-select-option>
+            <a-select-option value="2">近7天</a-select-option>
           </a-select>
           <span style="margin-left:8px;">自定义：</span>
           <a-range-picker 
@@ -116,12 +116,12 @@ export default {
       tableData:{
         title     : '粉丝数',
         xAxisData : [],
+        groupIndex: 4,
         seriesData: [
           {
             data  : [],
             type  : "line",
             name : "",
-            smooth: true,
           }
         ]
      },
@@ -185,15 +185,15 @@ export default {
       this.tableData.xAxisData = res.data.data.fans_data.map( item => item.hour)
       if (this.fansType==1) {
         this.tableData.seriesData[0].data = res.data.data.seriesData[2].data
-        this.tableData.seriesData[0].name = "新增关注"
+        this.tableData.seriesData[0].name = "新增人数"
       }
       if (this.fansType==2) {
         this.tableData.seriesData[0].data = res.data.data.seriesData[1].data
-        this.tableData.seriesData[0].name = "净增长"
+        this.tableData.seriesData[0].name = "取关人数"
       }
       if (this.fansType==3) {
         this.tableData.seriesData[0].data = res.data.data.seriesData[0].data
-        this.tableData.seriesData[0].name = "取消关注"
+        this.tableData.seriesData[0].name = "净增人数"
       }
     })
   },
@@ -202,10 +202,10 @@ export default {
       this.dataTime = [moment(moment().subtract(31, 'days').calendar(), 'YYYY-MM-DD'), moment(moment().subtract(1, 'days'), 'YYYY-MM-DD')];
     }
     if(this.dateType == 3) {
-      this.dataTime = [moment(moment().subtract(8, 'days').calendar(), 'YYYY-MM-DD'), moment(moment().subtract(1, 'days'), 'YYYY-MM-DD')];
+      this.dataTime = [moment(moment().subtract(16, 'days').calendar(), 'YYYY-MM-DD'), moment(moment().subtract(1, 'days'), 'YYYY-MM-DD')];
     }
     if(this.dateType == 2) {
-      this.dataTime = [moment(moment().subtract(1, 'days'), 'YYYY-MM-DD'), moment(moment().subtract(1, 'days'), 'YYYY-MM-DD')];
+      this.dataTime = [moment(moment().subtract(8, 'days').calendar(), 'YYYY-MM-DD'), moment(moment().subtract(1, 'days'), 'YYYY-MM-DD')];
     }
     this.getCustomerStatistics()
   },
@@ -414,5 +414,8 @@ export default {
 }
 .mine .right .ant-btn{
   width: 90px;
+}
+.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover{
+  color: #fff !important;
 }
 </style>
