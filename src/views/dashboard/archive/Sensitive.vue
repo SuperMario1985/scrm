@@ -422,7 +422,7 @@
                             height: 32px;
                             float: left;
                             line-height: 32px;
-                            margin: 20px 0px 0px 10px;
+                            margin: 3px 0px 0px 10px;
                           "
                         >
                           <a-checkbox
@@ -483,7 +483,7 @@
                         </div>
                         <div
                           class="pagination"
-                          style="height: 32px; float: right; margin: 20px"
+                          style="height: 32px; float: right; margin: 4px"
                           v-has="'sensitive-words-list'"
                         >
                           <a-pagination
