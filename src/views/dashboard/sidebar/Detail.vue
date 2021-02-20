@@ -634,10 +634,10 @@
 			},
 			//添加到企微侧边栏——查看使用教程
 			handleSidebarOk () {
-				window.open(
-					'https://support.qq.com/products/104790/faqs/59786',
-					"_blank"
-				);
+				// window.open(
+				// 	'https://support.qq.com/products/104790/faqs/59786',
+				// 	"_blank"
+				// );
 			},
 		},
 		created () {

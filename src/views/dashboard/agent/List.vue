@@ -439,8 +439,10 @@
 				<a-row class="agent-info-item" :gutter="16" style="margin-top: -8px;">
 					<a-col class="agent-info-label" :span="8" style="height: 36px;"></a-col>
 					<div style="color: rgb(153, 153, 153);font-size: 12px;">
-						可以在手机端查看客户、客户群、跟进统计、内容统计等信息，简单来说，将云美来SCRM后台搬到了手机上进行查看和管理。<a
-							href="https://support.qq.com/products/104790/faqs/80903" target="_blank">如何设置</a></div>
+						可以在手机端查看客户、客户群、跟进统计、内容统计等信息，简单来说，将云美来SCRM后台搬到了手机上进行查看和管理。
+						<!-- <a
+							href="https://support.qq.com/products/104790/faqs/80903" target="_blank">如何设置</a> -->
+							</div>
 				</a-row>
 			</div>
 		</a-modal>
@@ -461,8 +463,9 @@
 
 				<div class="content-msg" style="margin-bottom: 15px;">
 					<p style="margin-bottom: 0px;">
-						只需要绑定已有的微信支付商户号，即可在企业微信内使用支付能力，企业成员可以给客户发红包（直接付款到客户的微信零钱）。<a
-							href="https://support.qq.com/products/104790/faqs/66058" target="_blank">如何配置企业支付？</a>
+						只需要绑定已有的微信支付商户号，即可在企业微信内使用支付能力，企业成员可以给客户发红包（直接付款到客户的微信零钱）。
+						<!-- <a
+							href="https://support.qq.com/products/104790/faqs/66058" target="_blank">如何配置企业支付？</a> -->
 					</p>
 				</div>
 				<a-form-item
@@ -1111,10 +1114,10 @@
 			},
 			//添加到企微侧边栏——查看使用教程
 			handleSidebarOk () {
-				window.open(
-					'https://support.qq.com/products/104790/faqs/59786',
-					"_blank"
-				);
+				// window.open(
+				// 	'https://support.qq.com/products/104790/faqs/59786',
+				// 	"_blank"
+				// );
 			},
 			copyText (value) {
 				let that = this

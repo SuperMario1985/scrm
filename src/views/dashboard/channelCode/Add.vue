@@ -2773,7 +2773,7 @@
             在企业微信里发送小程序（必须在微信公众平台通过审核和发布的），请先将其关联到企业微信（
             <a
               target="_blank"
-              href="https://support.qq.com/products/104790/faqs/61672"
+              href="https://shimo.im/docs/p8TjkTVgkvJH9r3c/"
             >
               如何关联</a
             >
@@ -2783,7 +2783,7 @@
             如果没有微信小程序，请前往微信小程序进行注册。
             <a
               target="_blank"
-              href="https://support.qq.com/products/104790/faqs/61672"
+              href="https://mp.weixin.qq.com/cgi-bin/wx"
             >
               立即前往
             </a>

@@ -55,20 +55,23 @@
 									<p style="margin-bottom: 2px;">
 										2、登录<a
 											href="https://work.weixin.qq.com/wework_admin/loginpage_wx?from=myhome_baidu"
-											target="_blank">【企业微信后台】</a>开通企业支付，绑定已有商户号（<a
-											href="https://support.qq.com/products/104790/faqs/66072" target="_blank">查看教程</a>）
+											target="_blank">【企业微信后台】</a>开通企业支付，绑定已有商户号
+											（<a
+											href="https://shimo.im/docs/VYxdrYqp9PjjWdHJ" target="_blank">查看教程</a>）
 									</p>
 									<p style="margin-bottom: 2px;">
 										3、登录<a href="https://pay.weixin.qq.com/index.php/core/home/login?return_url=%2F"
-										       target="_blank">【微信支付商户平台】</a>开通【企业付款到零钱】（<a
-											href="https://support.qq.com/products/104790/faqs/66076" target="_blank">查看教程</a>）
+										       target="_blank">【微信支付商户平台】</a>开通【企业付款到零钱】
+													 （<a
+											href="https://shimo.im/docs/8GyqJGXpGkWtGxXk/" target="_blank">查看教程</a>）
 									</p>
 									<p style="margin-bottom: 2px;">
 										4、在本系统，进入【应用中心】--【企业支付】，点击，填入企业支付的应用ID和Secret
 									</p>
 									<p style="margin-bottom: 2px;">
-										5、在本系统，进入【应用中心】--【企业支付】，点击，完成支付配置。（<a
-											href="https://support.qq.com/products/104790/faqs/66058" target="_blank">查看教程</a>）
+										5、在本系统，进入【应用中心】--【企业支付】，点击，完成支付配置。
+										（<a
+											href="https://shimo.im/docs/rYGd6HJRrvxdTCRj/" target="_blank">查看教程</a>）
 									</p>
 								</a-collapse-panel>
 							</a-collapse>

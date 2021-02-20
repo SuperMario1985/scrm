@@ -48,7 +48,7 @@
         <a-checkbox @change="onChangeCheck" class="checkbox">
           授权即表示知晓并同意
           <a
-            href="https://support.qq.com/products/104790/faqs/57072"
+            href="https://shimo.im/docs/6xvRDHxwx39qqXqW/"
             target="_blank"
             >《授权相关事项和风险》</a
           >

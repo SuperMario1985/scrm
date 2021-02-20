@@ -16,7 +16,7 @@
 	                </span>
         <a-input v-model="corpid" style="width: calc(100% - 60px)" placeholder="请输入企业ID" :maxLength="20" />
 		<div>
-			<a target="_blank" href="https://support.qq.com/products/104790/faqs/61151">如何获取CorpId？</a>
+			<!-- <a target="_blank" href="https://support.qq.com/products/104790/faqs/61151">如何获取CorpId？</a> -->
 		</div>
       </a-form-item>
       <!-- 通讯录管理secret -->
@@ -26,7 +26,7 @@
 	                </span>
         <a-input v-model="book_secret" style="width: calc(100% - 60px)" placeholder="请输入通讯录管理secret" />
 		<div>
-			<a target="_blank" href="https://support.qq.com/products/104790/faqs/61151">如何获取secret？</a>
+			<!-- <a target="_blank" href="https://support.qq.com/products/104790/faqs/61151">如何获取secret？</a> -->
 		</div>
       </a-form-item>
       <!-- 外部联系人管理secret -->
@@ -36,7 +36,7 @@
 	                </span>
         <a-input v-model="external_secret" style="width: calc(100% - 60px)" placeholder="请输入外部联系人管理secret" />
 		<div>
-			<a target="_blank" href="https://support.qq.com/products/104790/faqs/61151">如何获取secret？</a>
+			<!-- <a target="_blank" href="https://support.qq.com/products/104790/faqs/61151">如何获取secret？</a> -->
 		</div>
       </a-form-item>
     </a-modal>
