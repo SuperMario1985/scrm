@@ -10,7 +10,7 @@
 		<div class="login-right">
 			<div class="content">
 				<div class="top">
-					<div class="back"><img src="~@/assets/logo_back.png" alt=""> 返回SCRM主页</div>
+					<div class="back"><img src="~@/assets/logo_back.png" alt=""><a href="https://iscrm.wemero.cn">返回SCRM主页</a></div>
 					<img src="~@/assets/login_logo.png" alt="">
 				</div>
 				<div class="form" >
@@ -363,6 +363,9 @@
 						font-size: 14px;
 						line-height: 28px;
 						cursor: pointer;
+						a{
+							color: #666;
+						}
 						img{
 							width: 14px;
 							height: 14px;
