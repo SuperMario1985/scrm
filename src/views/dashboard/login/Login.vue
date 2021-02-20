@@ -436,10 +436,9 @@
 			width: 37%;
 			display: flex;
 			justify-content: center;
-			align-items: center;
 			.content{
 				width: 320px;
-				margin-top: -10vh;
+				margin-top: 15vh;
 				.top{
 					display: flex;
 					justify-content: space-between;

@@ -15,7 +15,6 @@
 				</div>
 				<div class="form" >
 					<div class="title">重置密码</div>
-					<div class="register">已有账号？<a href="/login">立即登录</a></div>
 					<a-form :form="form" v-show="flag">
 						<a-form-item class="account">
 							<a-input
@@ -96,6 +95,7 @@
 						</a-form-item>
 						<a-button type="primary" @click="confirm" class="login-form-button">完成</a-button>
 					</a-form>
+					<div class="register">已有账号？<a href="/login">立即登录</a></div>
 				</div>
 			</div>
 		</div>
@@ -352,10 +352,9 @@
 			width: 37%;
 			display: flex;
 			justify-content: center;
-			align-items: center;
 			.content{
 				width: 320px;
-				margin-top: -10vh;
+				margin-top: 15vh;
 				.top{
 					display: flex;
 					justify-content: space-between;
@@ -457,10 +456,9 @@
 						margin-bottom: 12px;
 					}
 					.register{
-						margin-top: 6px;
+						margin-top: 24px;
 						color: #666;
 						font-size: 14px;
-						float: right;
 						a{
 							color: #01B065;
 						}
