@@ -214,14 +214,14 @@ export default {
           that.$router.push("/index");
 
           that.$nextTick(() => {
-            that.reload();
+            // that.reload();
           });
         } else {
           // that.$message.error('无权限', 1, () => {
           that.$router.push("/" + rLink);
 
           that.$nextTick(() => {
-            that.reload();
+            // that.reload();
           });
           // })
         }
@@ -464,7 +464,7 @@ export default {
       }
 
       this.$nextTick(() => {
-        this.reload();
+        // this.reload();
       });
     },
     //点击跳转公众号营销
@@ -478,7 +478,7 @@ export default {
       }
 
       this.$nextTick(() => {
-        this.reload();
+        // this.reload();
       });
     },
     init() {
