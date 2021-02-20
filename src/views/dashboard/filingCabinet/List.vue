@@ -2264,7 +2264,7 @@
 				<div class="content-msg1">
 					<p style="margin-bottom: 2px;">
 						在企业微信里发送小程序（必须在微信公众平台通过审核和发布的），请先将其关联到企业微信（
-						<a target="_blank" href="https://support.qq.com/products/104790/faqs/61672">
+						<a target="_blank" href="https://shimo.im/docs/p8TjkTVgkvJH9r3c/">
 							如何关联</a>
 						），再到本系统添加该小程序，否则发送失败，客户接收不到。
 					</p>

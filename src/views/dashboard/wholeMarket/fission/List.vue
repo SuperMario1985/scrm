@@ -23,19 +23,19 @@
 										</p>
 										<p style="margin-bottom: 2px;">
 											1、仅公众号裂变涨粉模式，即关注公众号即算助力成功；
-											<!-- <a target="_blank"
-											                             href="https://support.qq.com/products/104790/faqs/81376">操作文档</a> -->
+											<a target="_blank"
+											                             href="https://shimo.im/docs/cpkDWwJtjJ98JRJT/">操作文档</a>
 										</p>
 										<p style="margin-bottom: 2px;">
 											2、基于公众号+企业微信的裂变模式，即关注公众号并且加员工企业微信为好友才算助力成功，一箭双雕，不仅给公众号涨粉，还能给员工的企业微信号带来大量的客户，是一把引流的利器。
-											<!-- <a
+											<a
 												target="_blank"
-												href="https://support.qq.com/products/104790/faqs/81440">操作文档</a> -->
+												href="https://shimo.im/docs/vYPgxcktHppdDwyX/">操作文档</a>
 										</p>
 										<p style="margin-bottom: 2px;">
 											3、仅企业微信的裂变模式，即加员工企业微信为好友助力成功。
-											<!-- <a target="_blank"
-											                                href="https://support.qq.com/products/104790/faqs/81441">操作文档</a> -->
+											<a target="_blank"
+											                                href="https://shimo.im/docs/yVK6yRCWp3YtXTkD/ ">操作文档</a>
 										</p>
 										<div style="margin: 10px 0 2px;">自动发送欢迎语，可能失败的原因
 											<a-tooltip placement="bottom">
