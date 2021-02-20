@@ -2264,15 +2264,15 @@
 				<div class="content-msg1">
 					<p style="margin-bottom: 2px;">
 						在企业微信里发送小程序（必须在微信公众平台通过审核和发布的），请先将其关联到企业微信（
-						<a target="_blank" href="https://support.qq.com/products/104790/faqs/61672">
+						<a target="_blank" href="https://shimo.im/docs/p8TjkTVgkvJH9r3c/">
 							如何关联</a>
 						），再到本系统添加该小程序，否则发送失败，客户接收不到。
 					</p>
 					<p style="margin-bottom: 2px;">
 						如果没有微信小程序，请前往微信小程序进行注册。
-						<a target="_blank" href="https://mp.weixin.qq.com/cgi-bin/wx">
+						<!-- <a target="_blank" href="https://mp.weixin.qq.com/cgi-bin/wx">
 							立即前往
-						</a>
+						</a> -->
 					</p>
 					<p style="margin-bottom: 0px;color: #ff562D;">
 						通过聊天侧边栏发送小程序，员工请先将企业微信APP升级至3.1.0及以后版本，小程序路径必须以“.html”结尾。

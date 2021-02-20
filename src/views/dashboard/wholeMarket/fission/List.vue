@@ -23,19 +23,19 @@
 										</p>
 										<p style="margin-bottom: 2px;">
 											1、仅公众号裂变涨粉模式，即关注公众号即算助力成功；
-											<!-- <a target="_blank"
-											                             href="https://support.qq.com/products/104790/faqs/81376">操作文档</a> -->
+											<a target="_blank"
+											                             href="https://shimo.im/docs/cpkDWwJtjJ98JRJT/">操作文档</a>
 										</p>
 										<p style="margin-bottom: 2px;">
 											2、基于公众号+企业微信的裂变模式，即关注公众号并且加员工企业微信为好友才算助力成功，一箭双雕，不仅给公众号涨粉，还能给员工的企业微信号带来大量的客户，是一把引流的利器。
-											<!-- <a
+											<a
 												target="_blank"
-												href="https://support.qq.com/products/104790/faqs/81440">操作文档</a> -->
+												href="https://shimo.im/docs/vYPgxcktHppdDwyX/">操作文档</a>
 										</p>
 										<p style="margin-bottom: 2px;">
 											3、仅企业微信的裂变模式，即加员工企业微信为好友助力成功。
-											<!-- <a target="_blank"
-											                                href="https://support.qq.com/products/104790/faqs/81441">操作文档</a> -->
+											<a target="_blank"
+											                                href="https://shimo.im/docs/yVK6yRCWp3YtXTkD/">操作文档</a>
 										</p>
 										<div style="margin: 10px 0 2px;">自动发送欢迎语，可能失败的原因
 											<a-tooltip placement="bottom">
@@ -67,21 +67,21 @@
 										2、登录<a
 											href="https://work.weixin.qq.com/wework_admin/loginpage_wx?from=myhome_baidu"
 											target="_blank">【企业微信后台】</a>开通企业支付，绑定已有商户号
-											<!-- （<a
-											href="https://support.qq.com/products/104790/faqs/66072" target="_blank">查看教程</a>） -->
+											（<a
+											href="https://shimo.im/docs/VYxdrYqp9PjjWdHJ" target="_blank">查看教程</a>）
 									</p>
 									<p style="margin-bottom: 2px;">
 										3、登录<a href="https://pay.weixin.qq.com/index.php/core/home/login?return_url=%2F"
 										       target="_blank">【微信支付商户平台】</a>开通【企业付款到零钱】
-													 <!-- （<a
-											href="https://support.qq.com/products/104790/faqs/66076" target="_blank">查看教程</a>） -->
+													 （<a
+											href="https://shimo.im/docs/8GyqJGXpGkWtGxXk/" target="_blank">查看教程</a>）
 									</p>
 									<p style="margin-bottom: 2px;">
 										4、在本系统，进入【应用中心】--【企业支付】，点击，填入企业支付的应用ID和Secret
 									</p>
 									<p style="margin-bottom: 2px;">
 										5、在本系统，进入【应用中心】--【企业支付】，点击，完成支付配置。
-										<!-- （<a href="https://support.qq.com/products/104790/faqs/66058" target="_blank">查看教程</a>） -->
+										（<a href="https://shimo.im/docs/rYGd6HJRrvxdTCRj/" target="_blank">查看教程</a>）
 									</p>
 								</a-collapse-panel>
 							</a-collapse>

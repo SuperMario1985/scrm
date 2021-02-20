@@ -72,9 +72,9 @@
 												target="_blank"
 												href="https://work.weixin.qq.com/wework_admin/loginpage_wx?from=myhome_baidu">
 											企业微信后台</a>创建自建应用。
-											<!-- <a target="_blank"
-										                        href="https://support.qq.com/products/104790/faqs/63937">
-											教程</a> -->
+											<a target="_blank"
+										                        href="https://shimo.im/docs/8Jwkjq9KDW6cgkkJ/">
+											教程</a>
 											</p>
 										<p style="line-height: 20px;height: 20px;margin-bottom: 0px;">
 											2、选择此应用，请确认已设置过应用的可信域名。

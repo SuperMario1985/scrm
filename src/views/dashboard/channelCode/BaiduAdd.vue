@@ -918,17 +918,17 @@
 				<div class="content-msg">
 					<p style="margin-bottom: 2px;line-height: 20px;">
 						在企业微信里发送小程序（必须在微信公众平台通过审核和发布的），请先将其关联到企业微信
-						<!-- （
-						<a target="_blank" href="https://support.qq.com/products/104790/faqs/61672">
+						（
+						<a target="_blank" href="https://shimo.im/docs/p8TjkTVgkvJH9r3c/">
 							如何关联</a>
-						） -->
+						）
 						，再到本系统添加该小程序，否则发送失败，客户接收不到。
 					</p>
 					<p style="margin-bottom: 2px;line-height: 20px;">
 						如果没有微信小程序，请前往微信小程序进行注册。
-						<!-- <a target="_blank" href="https://support.qq.com/products/104790/faqs/61672">
+						<a target="_blank" href="https://mp.weixin.qq.com/cgi-bin/wx">
 							立即前往
-						</a> -->
+						</a>
 					</p>
 					<p style="margin-bottom: 0px;color: #FF562D;">
 						小程序路径必须以“.html”结尾。
