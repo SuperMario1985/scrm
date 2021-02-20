@@ -2,7 +2,7 @@
 	<div style="width: 100%;max-height:100%;position: absolute;overflow-y:auto;" id="components-layout-demo-basic">
 		<a-layout-content>	
 			<div style="font-size:16px;font-weight:700;color:#333333">自定义属性</div>
-			<div style="padding: 20px 20px 0 ;">
+			<div style="padding: 20px 20px 0 0;">
 				<span @click="changeTab('1')" class="tabBtn" :class="{activeBtn:tabKey == 1}"
 							v-has="hasHignAttribute">高级属性</span>
 				<span @click="changeTab('2')" class="tabBtn" :class="{activeBtn:tabKey == 2}"
@@ -1146,7 +1146,7 @@
 		border: 1px solid @border-color;
 		background: @color-bgc;
 		text-align: left;
-		margin: 0 20px 20px;
+		margin: 0 0 20px;
 	}
 
 	.optionVal-text {
