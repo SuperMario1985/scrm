@@ -151,7 +151,7 @@ export default {
     moment,
     getCustomertotal() {
       axios.post("/work-external-contact-follow-user/custom-list",{
-        isMasterAccount: 2,
+        isMasterAccount: localStorage.getItem("isMasterAccount"),
         sub_id: localStorage.getItem("sub_id"),
         corp_id: this.corpid
       }).then( res => {
