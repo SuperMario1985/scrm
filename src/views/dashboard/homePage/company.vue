@@ -4,7 +4,7 @@
       <div class="item">
         <div class="top">
           <span class="title">客户统计</span>
-          <span class="look" @click="$router.push('/customManage/list')">查看客户></span>
+          <span class="look" @click="goNewPage('customManage/list')">查看客户></span>
         </div>
         <div class="data">
           <div class="data-item">
@@ -24,7 +24,7 @@
       <div class="item">
         <div class="top">
           <span class="title">群统计</span>
-          <span class="look" @click="$router.push('/group/list')">查看客户群></span>
+          <span class="look" @click="goNewPage('group/list')">查看客户群></span>
         </div>
         <div class="data">
           <div class="data-item">
