@@ -4,7 +4,7 @@
       <div class="item">
         <div class="top">
           <span class="title">粉丝统计</span>
-          <span class="look" @click="$router.push('/fans/list')">查看粉丝></span>
+          <span class="look" @click="goNewPage('fans/list')">查看粉丝></span>
         </div>
         <div class="data">
           <div class="data-item">

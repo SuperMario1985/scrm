@@ -35,7 +35,7 @@
           </div>
         </div>
         <a-carousel autoplay>
-          <div class="banner-box"><img src="~@/assets/homePage/banner.png" alt=""></div>
+          <div class="banner-box"  @click="goYunmeilai"><img src="~@/assets/homePage/banner.png" alt=""></div>
         </a-carousel>
         <div class="disc" @click="goYunmeilai">云美来官网</div>
       </div>
@@ -44,26 +44,26 @@
       <div class="qustion">
         <div class="top">
           <div class="title">常见问题</div>
-          <div class="more">更多帮助></div>
+          <div class="more" @click="goQuestionInfo('https://shimo.im/docs/WhYT8D9VQgjRGWJ6')">更多帮助></div>
         </div>
         <ul>
-          <li @click="goQuestionInfo('https://shimo.im/docs/WhYT8D9VQgjRGWJ6#anchor-J6Ve')">
+          <li @click="goQuestionInfo('https://shimo.im/docs/hqrWVYcVvQWqtvhC/')">
             <span class="text">如何注册企业微信？企业微信注册常见问题</span>
             <span>></span>
           </li>
-          <li @click="goQuestionInfo('https://shimo.im/docs/WhYT8D9VQgjRGWJ6#anchor-tstL')">
+          <li @click="goQuestionInfo('https://shimo.im/docs/8Jwkjq9KDW6cgkkJ/')">
             <span class="text">如何创建企业微信自建应用？</span>
             <span>></span>
           </li>
-          <li @click="goQuestionInfo('https://shimo.im/docs/WhYT8D9VQgjRGWJ6#anchor-n6Ja')">
+          <li @click="goQuestionInfo('https://shimo.im/docs/rYGd6HJRrvxdTCRj/')">
             <span class="text">如何进行【微信支付】的相关配置？</span>
             <span>></span>
           </li>
-          <li @click="goQuestionInfo('https://shimo.im/docs/WhYT8D9VQgjRGWJ6#anchor-bygB')">
+          <li @click="goQuestionInfo('https://shimo.im/docs/QDw3V33JxRHVWyKC/')">
             <span class="text">关于企业微信客户朋友圈的那点事</span>
             <span>></span>
           </li>
-          <li @click="goQuestionInfo('https://shimo.im/docs/WhYT8D9VQgjRGWJ6#anchor-BEgs')">
+          <li @click="goQuestionInfo('https://shimo.im/docs/kcWYVtwjCwT3DVKT/')">
             <span class="text">社群变“死群” 教你如何起死回生【教程向】</span>
             <span>></span>
           </li>
@@ -101,10 +101,14 @@ export default {
   },
   methods:{
     goNewPage(link){
-      if (this.checkPower(link)){
+      if(link=='user/userUpdate'){
         this.$router.push("/" + link);
       }else{
-        this.$message.warning("您没有权限,请联系管理员")
+        if (this.checkPower(link)){
+          this.$router.push("/" + link);
+        }else{
+          this.$message.warning("您没有权限,请联系管理员")
+        }
       }
     },
     getValidateTime() {
@@ -291,5 +295,6 @@ export default {
   .banner-box img {
     width: 100%;
     height: 100%;
+    cursor: pointer;
   }
 </style>
