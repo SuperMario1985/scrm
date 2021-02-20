@@ -35,7 +35,7 @@
 										<p style="margin-bottom: 2px;">
 											3、仅企业微信的裂变模式，即加员工企业微信为好友助力成功。
 											<a target="_blank"
-											                                href="https://shimo.im/docs/yVK6yRCWp3YtXTkD/ ">操作文档</a>
+											                                href="https://shimo.im/docs/yVK6yRCWp3YtXTkD/">操作文档</a>
 										</p>
 										<div style="margin: 10px 0 2px;">自动发送欢迎语，可能失败的原因
 											<a-tooltip placement="bottom">
