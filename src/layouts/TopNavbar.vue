@@ -47,7 +47,7 @@
 						<a-icon type="user"/>ID：{{showUid(uid)}}
 						<a-icon type="down" style="margin-left: 6px"/>
 					</span>
-				<a-menu-item key="setting:1" @click="userUpdate">账号设置</a-menu-item>
+				<a-menu-item key="setting:1" v-if="$route.path !== '/index'" @click="userUpdate">账号设置</a-menu-item>
 				<a-menu-item key="setting:2" @click="changeAccount" v-show="accountNum > 1">切换账户</a-menu-item>
 				<a-menu-divider/>
 				<a-menu-item key="setting:5" @click="loginOut">退出</a-menu-item>
@@ -133,7 +133,10 @@
 				return 16800000 + parseInt(uid)
 			},
 			userUpdate () {
-				this.$router.push('/user/userUpdate')
+				// this.$router.push('/home')
+				// setTimeout(() => {
+					this.$router.push('/user/userUpdate')
+				// },1000)
 			},
 			//切换账户
 			changeAccount () {

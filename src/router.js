@@ -225,7 +225,6 @@ var router = new Router({
 						keepAlive: true,
 						corpAlive: true,
 						agentAlive: true,
-						isMenuIndex:2,
 					}
 				},
 				{
