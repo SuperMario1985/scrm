@@ -430,11 +430,11 @@
 						text: ""
 					},
 					anchorPreview: false,
-					paste        : {
-						forcePlainText : true,
-						cleanPastedHTML: true,
-						cleanAttrs     : ['class', 'style', 'dir', 'align', 'width', 'height', 'face', 'title', 'code', 'name', 'id', 'type', 'span', 'border', 'open', 'action', 'method', 'cols', 'for', 'rel', 'label', 'icon', 'value', 'max', 'min', 'classid']
-					}
+					// paste        : {
+					// 	forcePlainText : true,
+					// 	cleanPastedHTML: true,
+					// 	cleanAttrs     : ['class', 'style', 'dir', 'align', 'width', 'height', 'face', 'title', 'code', 'name', 'id', 'type', 'span', 'border', 'open', 'action', 'method', 'cols', 'for', 'rel', 'label', 'icon', 'value', 'max', 'min', 'classid']
+					// }
 				},
 				mediumEditor        : [], // editor对象
 				colorVisible        : false,

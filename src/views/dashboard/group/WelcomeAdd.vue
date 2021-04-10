@@ -8,8 +8,9 @@
 						<template v-if="typeof urlId == 'undefined'">新建</template>
 						<template v-if="typeof urlId != 'undefined'">修改</template>
 						群欢迎语
-						<router-link to="/group/welcome?isRefresh=1" style="font-size: 16px;float: right;margin-right: 15px;">
-							<a-button type="primary" >返回列表</a-button>
+						<router-link to="/group/welcome?isRefresh=1"
+						             style="font-size: 16px;float: right;margin-right: 15px;">
+							<a-button type="primary">返回列表</a-button>
 						</router-link>
 					</a-layout-header>
 					<a-layout class="fans-content">
@@ -24,7 +25,8 @@
 										<a-avatar
 												src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
 												:size="36" style="margin-right: 10px;float: left;"/>
-										<span v-html="textAreaValueHeader" class="item-info msg_content_txt" style="display:block;white-space: pre-wrap;word-wrap: break-word;"></span>
+										<span v-html="textAreaValueHeader" class="item-info msg_content_txt"
+										      style="display:block;white-space: pre-wrap;word-wrap: break-word;"></span>
 									</div>
 									<!--图片-->
 									<div v-if="img" class="mt">
@@ -43,7 +45,8 @@
 											<p class="url-title">{{inputTitle}}</p>
 											<div style="overflow: hidden;">
 												<div class="url-text">{{digest}}</div>
-												<img :src="commonUrl+msgUrl" alt="" style="object-fit: cover;" class="url-img">
+												<img :src="commonUrl+msgUrl" alt="" style="object-fit: cover;"
+												     class="url-img">
 											</div>
 										</div>
 									</div>
@@ -87,16 +90,17 @@
 								<div class="content-bd" style="padding-top: 20px;">
 									<a-form>
 										<!-- 内容 -->
-										<a-form-item label="群欢迎语内容" :label-col="{ span: 3 }" :wrapper-col="{ span: 21 }">
+										<a-form-item label="群欢迎语内容" :label-col="{ span: 3 }"
+										             :wrapper-col="{ span: 21 }">
 											<div class="pull-right fl">
 												<editor v-if="editorFlag" :text="textContent"
 												        :textValue="textAreaValueHeader"
-												        :isEmoji="false"
 												        @changeText="changeText">
 												</editor>
 												<div v-if="!img && !modalUrlOk && !modalAppletOk"
 												     style="margin: 10px 0;cursor: pointer;" :key='popoverKey'>
-													<a-popover trigger="click" v-model="popVisible" @visibleChange="visibleChange">
+													<a-popover trigger="click" v-model="popVisible"
+													           @visibleChange="visibleChange">
 														<template slot="content">
 															<div class="popover-menu" @click="choosePic(1)">
 																<a-icon type="picture"/>
@@ -166,7 +170,7 @@
 			<!-- 企业微信选择弹窗 -->
 			<WeChatModal :show="showModal2" :callback="modalVisibleChange" hasName="welcome-add"></WeChatModal>
 			<!-- 选择素材弹窗 -->
-			<chooseMsg :show="showModal3" :type="typeValue2" :comefrom="comefrom" :news_type="news_type"
+			<chooseMsg :show="showModal3" :showRadar="false" :type="typeValue2" :comefrom="comefrom" :news_type="news_type"
 			           :callback="modalVisibleChange2" :sketchType="'1'" :chooseId="chooseId"></chooseMsg>
 			<chooseMinipro :show="showModalMinipro" :type="typeValue2"
 			               :callback="modalVisibleChange2" :chooseId="chooseId"></chooseMinipro>
@@ -184,56 +188,91 @@
 					</a-radio-group>
 				</a-form-item>
 				<template v-if="sketchAddType == 1">
-					<a-form-item :label-col="{ span: 3 }"
-					             :wrapper-col="{ span: 21 }"
-					             v-show="closeShowModal3==false">
-						<template slot="label"><span
-								style="color: red">*</span>图片封面
-						</template>
-						<div class="upload-wrap"
-						     @click="choosePic(2)">
-							<a-icon type="plus" class="upload-plus"/>
-						</div>
-					</a-form-item>
-					<!-- 选中后 -->
-					<a-form-item :label-col="{ span: 3 }"
-					             :wrapper-col="{ span: 21 }"
-					             v-show="closeShowModal3">
-						<template slot="label"><span
-								style="color: red">*</span>图片封面
-						</template>
-						<div class="upload-wrap">
-							<img :src="commonUrl+msgUrl1" alt=""
-							     style="max-width: 100%;max-height: 100%;margin-left: 50%;margin-top: 50%;transform: translate(-50%, -50%);">
-						</div>
-						<span
-								style="color: blue;cursor: pointer;margin: 67px 0 0px 10px;float: left;"
-								@click="choosePic(2)">重新上传</span>
-					</a-form-item>
-					<!-- 填写标题 -->
+					<!-- 点击跳转 -->
 					<a-form-item :label-col="{ span: 3 }"
 					             :wrapper-col="{ span: 21 }">
 						<template slot="label"><span
-								style="color: red">*</span>填写标题
+								style="color: red">*</span>图文链接
 						</template>
-						<a-input v-model="inputTitle1"
-						         :maxLength="32">
-																	<span slot="suffix">
-	                    <span>{{inputTitle1.length}}</span>/32
-	                  </span>
+						<a-input
+								placeholder="请输入图文链接，且必须以http://或https://开头"
+								style="margin-bottom: 10px;"
+								v-model="url1" allow-clear @change="inputChange()">
 						</a-input>
-					</a-form-item>
-					<!-- 添加描述 -->
-					<a-form-item label="添加描述" :label-col="{ span: 3 }"
-					             :wrapper-col="{ span: 21 }">
-						<a-textarea placeholder="填写图文描述" :rows="4"
-						            style="resize: none;"
-						            v-model="digest1"
-						            :maxLength="128"/>
-						<div style="float:right;">
-							<span>{{digest1.length}}</span>/128
+						<div v-if="msgUrl1 != ''"
+						     class="content_input">
+							<div style="flex-grow: 1;height: 100px;">
+								<div class="input_text1">{{inputTitle1}}</div>
+								<div class="input_text2">
+									{{digest1}}
+								</div>
+							</div>
+							<div style="width: 100px;height: 100px;padding: 10px">
+								<img v-if="msgUrl1 != ''" class="input_img"
+								     :src="commonUrl + msgUrl1" alt=""/>
+								<img v-if="msgUrl1 == ''" class="input_img"
+								     src="../../../assets/url.png" alt=""/>
+							</div>
 						</div>
 					</a-form-item>
+					<a-form-item v-if="url1 !=''" label="高级设置"
+					             :label-col="{ span:3 }"
+					             :wrapper-col="{ span: 21 }">
+						<a-switch
+								v-model="setIsShow"/>
+					</a-form-item>
+					<template v-if="setIsShow">
+						<!-- 填写标题 -->
+						<a-form-item :label-col="{ span: 3 }"
+						             :wrapper-col="{ span: 21 }">
+							<template slot="label"><span
+									style="color: red">*</span>填写标题
+							</template>
+							<a-input v-model="inputTitle1"
+							         :maxLength="32">
+																		<span slot="suffix">
+		                    <span>{{inputTitle1.length}}</span>/32
+		                  </span>
+							</a-input>
+						</a-form-item>
+						<!-- 添加描述 -->
+						<a-form-item label="添加描述" :label-col="{ span: 3 }"
+						             :wrapper-col="{ span: 21 }">
+							<a-textarea placeholder="填写图文描述" :rows="4"
+							            style="resize: none;"
+							            v-model="digest1"
+							            :maxLength="128"/>
+							<div style="float:right;">
+								<span>{{digest1.length}}</span>/128
+							</div>
+						</a-form-item>
+						<a-form-item :label-col="{ span: 3 }"
+						             :wrapper-col="{ span: 21 }"
+						             v-show="closeShowModal3==false">
+							<template slot="label"><span
+									style="color: red">*</span>图片封面
+							</template>
+							<div class="upload-wrap"
+							     @click="choosePic(2)">
+								<a-icon type="plus" class="upload-plus"/>
+							</div>
+						</a-form-item>
+						<!-- 选中后 -->
+						<a-form-item :label-col="{ span: 3 }"
+						             :wrapper-col="{ span: 21 }"
+						             v-show="closeShowModal3">
+							<template slot="label"><span
+									style="color: red">*</span>图片封面
+							</template>
+							<div class="upload-wrap">
+								<img :src="commonUrl+msgUrl1" alt=""
+								     style="max-width: 100%;max-height: 100%;margin-left: 50%;margin-top: 50%;transform: translate(-50%, -50%);">
+							</div>
+							<span
+									style="color: blue;cursor: pointer;margin: 67px 0 0px 10px;float: left;"
+									@click="choosePic(2)">重新上传</span>
+						</a-form-item>
+					</template>
 					<a-form-item label="素材同步" :label-col="{ span: 3 }"
 					             :wrapper-col="{ span: 21 }">
 						<a-radio-group
@@ -258,18 +297,6 @@
 								</div>
 							</a-radio>
 						</a-radio-group>
-					</a-form-item>
-					<!-- 点击跳转 -->
-					<a-form-item :label-col="{ span: 3 }"
-					             :wrapper-col="{ span: 21 }">
-						<template slot="label"><span
-								style="color: red">*</span>点击跳转
-						</template>
-						<a-input
-								placeholder="请输入跳转链接，且必须以http://或https://开头"
-								style="margin-bottom: 10px;"
-								v-model="url1">
-						</a-input>
 					</a-form-item>
 				</template>
 				<template v-if="sketchAddType == 0">
@@ -467,84 +494,84 @@
 	import chooseMinipro from '@/components/FilingCabinet/Miniprogram.vue'
 	import cropperModal from '../../../components/picCropper/CropperModal'
 	import editor from '../../../components/editor/index'
+	import corpChooseTagModal from '@/components/corpChooseTag/CorpChooseTagModal.vue'
 
 	export default {
 		components: {
-			WeChatModal, chooseMsg, MyIcon, chooseMinipro, cropperModal,editor
+			WeChatModal, chooseMsg, MyIcon, chooseMinipro, cropperModal, editor
 		},
 		data () {
 			return {
-				editorFlag         : false,
-				textAreaValueHeader: '',
-				textContent        : '',
-				popoverKey         : 0, // 强刷图片/图文/小程序选择 popover组件
+				editorFlag          : false,
+				textAreaValueHeader : '',
+				textContent         : '',
+				popoverKey          : 0, // 强刷图片/图文/小程序选择 popover组件
 				//左侧
-				text               : '',//文本
-				material_id        : '',//选中的图片素材id
-				img                : '',//选中的图片素材url
-				fileName           : '',//选中的图片素材的名字
-				commonUrl          : this.$store.state.commonUrl, //公共的链接
-				isLoading          : false, //Loading 组件显示与隐藏
-				urlId              : '',//编辑时，地址栏的id
-				corpInfo           : [], //企业列表
-				suite_id           : 1,//应用ID
-				corpId             : '',//企业微信选中的id
-				corpName           : '',//企业微信选中的名字
-				showModal2         : false, //公众号组件弹窗显示与隐藏
-				createDisabled     : false,//控制创建欢迎语按钮的禁用
-				showModal3         : false,//选择图片弹窗的显示与隐藏
-				typeValue2         : 2,  // 1.图文 2.图片
-				material_id1       : '',
-				news_type          : 1,
-				chooseId           : 0,//选择的图片id
-				showModalUrl       : false,//网址弹窗
-				sketchAddType      : 1, // 新建或导入
-				sketchAddType1     : 1,
-				url                : '',//网址弹窗输入的网址
-				closeShowModal3    : false,//网址弹窗封面选没选好
-				msgUrl             : '',//网址弹窗封面选好的url
-				inputTitle         : '',//网址弹窗输入标题
-				digest             : '',//网址弹窗输入描述
-				confirmLoading     : false,//网址弹窗确认按钮的Loading
-				popVisible         : false,//控制选择图片、网址、小程序的popover的显示与隐藏
-				groupId            : [],//分组id
-				index              : 0,//判断是图片打开素材弹窗还是链接打开，1是图片，2是链接，3是小程序
-				modalUrlOk         : false,//判断网址弹窗关闭时是否成功选择
-				showModalApplet    : false,//小程序弹窗的显示与隐藏
-				miniproAddType     : 1, // 新建或导入
-				miniproAddType1    : 1,
-				material_id3       : '',
-				showModalMinipro   : false, // 导入框
-				appletUrl          : '',//小程序的封面链接
-				appletInputTitle   : '',//小程序的标题
-				appid              : '',//小程序的appid
-				pageUrl            : '',//小程序page路径
-				closeModalApplet   : false,//小程序弹窗封面选没选好
-				modalAppletOk      : false,//判断小程序弹窗关闭时是否成功选择
-				corpArr            : [],//企业微信数组
-				groupList          : [],
-				selectGroupId      : '',
-				disabledSync       : 0,
-				materialSync       : 0,
-				// 弹窗数据，避免影响页面数据
-				materialSync1      : 0,
-				disabledSync1      : 0,
+				text                : '',//文本
+				material_id         : '',//选中的图片素材id
+				img                 : '',//选中的图片素材url
+				fileName            : '',//选中的图片素材的名字
+				commonUrl           : this.$store.state.commonUrl, //公共的链接
+				isLoading           : false, //Loading 组件显示与隐藏
+				urlId               : '',//编辑时，地址栏的id
+				corpInfo            : [], //企业列表
+				suite_id            : 1,//应用ID
+				corpId              : '',//企业微信选中的id
+				corpName            : '',//企业微信选中的名字
+				showModal2          : false, //公众号组件弹窗显示与隐藏
+				createDisabled      : false,//控制创建欢迎语按钮的禁用
+				showModal3          : false,//选择图片弹窗的显示与隐藏
+				typeValue2          : 2,  // 1.图文 2.图片
+				material_id1        : '',
+				news_type           : 1,
+				chooseId            : 0,//选择的图片id
+				showModalUrl        : false,//网址弹窗
+				setIsShow           : false,
+				sketchAddType       : 1, // 新建或导入
+				sketchAddType1      : 1,
+				url                 : '',//网址弹窗输入的网址
+				closeShowModal3     : false,//网址弹窗封面选没选好
+				msgUrl              : '',//网址弹窗封面选好的url
+				inputTitle          : '',//网址弹窗输入标题
+				digest              : '',//网址弹窗输入描述
+				confirmLoading      : false,//网址弹窗确认按钮的Loading
+				popVisible          : false,//控制选择图片、网址、小程序的popover的显示与隐藏
+				groupId             : [],//分组id
+				index               : 0,//判断是图片打开素材弹窗还是链接打开，1是图片，2是链接，3是小程序
+				modalUrlOk          : false,//判断网址弹窗关闭时是否成功选择
+				showModalApplet     : false,//小程序弹窗的显示与隐藏
+				miniproAddType      : 1, // 新建或导入
+				miniproAddType1     : 1,
+				material_id3        : '',
+				showModalMinipro    : false, // 导入框
+				appletUrl           : '',//小程序的封面链接
+				appletInputTitle    : '',//小程序的标题
+				appid               : '',//小程序的appid
+				pageUrl             : '',//小程序page路径
+				closeModalApplet    : false,//小程序弹窗封面选没选好
+				modalAppletOk       : false,//判断小程序弹窗关闭时是否成功选择
+				corpArr             : [],//企业微信数组
+				groupList           : [],
+				selectGroupId       : '',
+				disabledSync        : 0,
+				materialSync        : 0,
+				materialSync1       : 0,
+				disabledSync1       : 0,
 
-				material_id0       : '',
+				material_id0             : '',
+				msgUrl1                  : '',
+				inputTitle1              : '',
+				digest1                  : '',
+				url1                     : '',
+				material_id11            : '',
+				selectGroupId1           : '',
 
-				msgUrl1            : '',
-				inputTitle1        : '',
-				digest1            : '',
-				url1               : '',
-				material_id11      : '',
-				selectGroupId1      : '',
-
-				appletUrl1         :  '',
+				appletUrl1       : '',
 				appletInputTitle1: '',
-				appid1: '',
-				pageUrl1: '',
-				material_id31      : '',
-				comefrom : ''
+				appid1           : '',
+				pageUrl1         : '',
+				material_id31    : '',
+				comefrom         : ''
 			}
 		},
 		methods   : {
@@ -553,13 +580,12 @@
 				if (this.materialSync1 == 1) {
 					this.getGroupList()
 				}
-
 			},
 			//获取分组列表
 			async getGroupList (key) {
 				const {data: res} = await this.axios.post("attachment/group", {
-					uid: localStorage.getItem('uid'),
-					is_channel : 1
+					uid       : localStorage.getItem('uid'),
+					is_channel: 1
 				});
 				if (res.error != 0) {
 					this.$message.error(res.error_msg);
@@ -574,17 +600,17 @@
 				}
 				this.showModal2 = true
 			},
-			visibleChange() {
+			visibleChange () {
 				this.popoverKey++
 			},
 			//选择图片、选择网址封面
 			choosePic (index) {
-				if(index == 3) {
+				if (index == 3) {
 					this.comefrom = '3'
 				} else {
 					this.comefrom = '1'
 				}
-				if(index == 1) {
+				if (index == 1) {
 					this.chooseId = Number(this.material_id || 0)
 				} else {
 					this.chooseId = Number(this.material_id0 || 0)
@@ -609,6 +635,42 @@
 				// this.modalUrlOk = false
 				this.material_id0 = ''
 				this.material_id11 = ''
+			},
+			inputChange () {
+				this.url1 = this.url1.trim()
+				this.setIsShow = false
+				if (this.url1 == '') {
+					this.inputTitle1 = ''
+					this.digest1 = ''
+					this.content_source_url = ''
+					this.closeShowModal3 = false
+				} else if (this.url1 != '') {
+					let that = this
+					clearTimeout(that.timeOut)
+					that.timeOut = setTimeout(function () {
+						that.getUrlInfo()
+					}, 1000)
+				}
+			},
+			async getUrlInfo () {
+				const {data: res} = await this.axios.post('moment/moments-images-text', {
+					corp_id: this.corpId,
+					url    : this.url1
+				})
+
+				if (res.error != 0) {
+					this.$message.error(res.error_msg);
+				} else {
+					this.inputTitle1 = res.data.title
+					this.digest1 = res.data.description
+					if (res.data.url != '') {
+						this.msgUrl1 = res.data.url.replace(this.commonUrl, '')
+						this.closeShowModal3 = true
+					} else {
+						this.closeShowModal3 = false
+						this.msgUrl1 = ''
+					}
+				}
 			},
 			changeMiniproAddType () {
 				if (this.sketchAddType == 0) {
@@ -643,7 +705,7 @@
 					this.materialSync = 0
 					this.disabledSync = 0
 				}
-				if(this.sketchAddType1 == 1 && this.msgUrl) {
+				if (this.sketchAddType1 == 1 && this.msgUrl) {
 					this.closeShowModal3 = true
 				}
 				this.msgUrl1 = this.msgUrl
@@ -711,6 +773,7 @@
 				this.material_id = this.material_id0
 				this.selectGroupId1 = this.selectGroupId
 				this.showModalUrl = false
+				this.setIsShow = false
 				this.modalUrlOk = true
 			},
 			handleCancelUrl () {
@@ -723,6 +786,7 @@
 					this.closeShowModal3 = false
 					this.index = 0
 				}
+				this.setIsShow = false
 				this.showModalUrl = false
 			},
 			modalVisibleChange2 (event, e, id, item) {
@@ -740,7 +804,7 @@
 					}
 				} else {
 					if (this.index == 1) {
-						if(!this.img) {
+						if (!this.img) {
 							this.index = 0
 						}
 					} else if (this.index == 2) {
@@ -754,7 +818,7 @@
 				this.showModalMinipro = false
 				this.showModal3 = false
 			},
-			cancleAppletPic() {
+			cancleAppletPic () {
 				this.showModalApplet = true
 			},
 			uploadAppletPic (id, url) {
@@ -765,7 +829,8 @@
 				const {data: res} = await this.axios.post("work-material/upload-media", {
 					corp_id      : this.corpId,
 					suite_id     : this.suite_id,
-					attachment_id: id
+					attachment_id: id,
+					type         : this.index == 1 ? 1 : (this.index == 2 ? 4 : '')
 				});
 				if (res.error != 0) {
 					this.$message.error(res.error_msg);
@@ -814,7 +879,7 @@
 					this.materialSync = 0
 					this.disabledSync = 0
 				}
-				if(this.miniproAddType1 == 1 && this.appletUrl) {
+				if (this.miniproAddType1 == 1 && this.appletUrl) {
 					this.closeModalApplet = true
 				}
 				this.appletUrl1 = this.appletUrl
@@ -829,8 +894,8 @@
 				this.disabledSync1 = this.disabledSync
 				this.index = index
 			},
-			checkout(title) {
-				if(title.length < 4) {
+			checkout (title) {
+				if (title.length < 4) {
 					this.$message.warning('小程序标题长度需在4-12个字符')
 				}
 			},
@@ -886,27 +951,28 @@
 			//创建、修改欢迎语
 			async createWelcome () {
 				const {data: res} = await this.axios.post("work-chat/chat-welcome-add", {
-					corp_id           : this.corpId,
-					id                : this.urlId,
-					add_type          : this.index,
-					text_content      : this.textContent,
-					media_id          : this.material_id,
-					link_title        : this.inputTitle,
-					link_attachment_id: this.material_id,
-					link_desc         : this.digest,
-					link_url          : this.url,
-					mini_title        : this.appletInputTitle,
-					mini_pic_media_id : this.material_id,
-					mini_appid        : this.appid,
-					mini_page         : this.pageUrl,
-					attachment_id     : this.material_id3 || this.material_id1,
-					materialSync      : this.materialSync,
-					groupId           : this.selectGroupId
+					corp_id                   : this.corpId,
+					id                        : this.urlId,
+					add_type                  : this.index,
+					text_content              : this.textContent,
+					media_id                  : this.material_id,
+					link_title                : this.inputTitle,
+					link_attachment_id        : this.material_id,
+					link_desc                 : this.digest,
+					link_url                  : this.url,
+					link_image                : this.msgUrl,
+					mini_title                : this.appletInputTitle,
+					mini_pic_media_id         : this.material_id,
+					mini_appid                : this.appid,
+					mini_page                 : this.pageUrl,
+					attachment_id             : this.material_id3 || this.material_id1,
+					materialSync              : this.materialSync,
+					groupId                   : this.selectGroupId,
 				});
 				if (res.error != 0) {
 					this.$message.error(res.error_msg);
 				} else {
-					if(typeof this.urlId == "undefined") {
+					if (typeof this.urlId == "undefined") {
 						this.$router.push("group/welcome")
 					} else {
 						this.$router.push("/group/welcome?isRefresh=1")
@@ -929,7 +995,6 @@
 					this.textAreaValueHeader = res.data.text_content.replace(/{nickname}/g,
 						'<span>&nbsp;<span contenteditable="false" class="ant-tag ant-tag-orange">客户名称</span>&nbsp;</span>'
 					).replace(/\n/g, '<br>')
-					this
 					this.index = res.data.add_type
 					if (res.data.add_type == 1) {
 						this.img = res.data.image_url
@@ -1036,6 +1101,7 @@
 	@import '../../../style/_style.less';
 	@import "../../../style/default.css";
 	@import "../../../style/medium-editor-toolbar.css";
+
 	.content-msg {
 		border: 1px solid @border-color;
 		background: @color-bgc;
@@ -1043,6 +1109,7 @@
 		margin: 0px 0px 15px 10px;
 		text-align: left;
 	}
+
 	.content-msg a:link {
 		color: #01b065;
 		text-decoration: none;
@@ -1053,6 +1120,7 @@
 		color: #01b065;
 		text-decoration: none;
 	}
+
 	.item-info {
 		/deep/ p {
 			margin: 0;
@@ -1403,5 +1471,43 @@
 		justify-content: center;
 		cursor: pointer;
 		margin-bottom: 10px;
+	}
+	/deep/ .ant-tag-checkable-checked {
+		background-color: #01b065 !important;
+	}
+	.content_input {
+		background: #F1F3F5;
+		min-width: 378px;
+		height: 100px;
+		margin-top: 5px;
+		display: flex;
+	}
+
+	.input_text1 {
+		width: 200px;
+		line-height: 30px;
+		margin: 15px 0 5px 15px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		word-break: break-all;
+		font-size: 18px;
+		color: #000
+	}
+
+	.input_text2 {
+		width: 250px;
+		line-height: 20px;
+		margin: 0 0 0 15px;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		word-break: break-all;
+		-webkit-line-clamp: 2;
+		overflow: hidden;
+	}
+
+	.input_img {
+		width: 80px;
+		height: 80px;
 	}
 </style>

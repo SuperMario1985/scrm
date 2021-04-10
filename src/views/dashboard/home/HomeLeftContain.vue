@@ -925,7 +925,7 @@
 
 				// 新增粉丝来源折线图
 				fansAttrAddSource        : {
-					title     : '新增粉丝来源',
+					title     : '',
 					legendData: ["公众号搜索", "公众号迁移", "名片分享", "扫描二维码", "图文页内名称点击", "图文页右上角菜单", "支付后关注", "其他"],
 					xAxisData : [],
 					seriesData: [
