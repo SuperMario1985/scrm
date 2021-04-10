@@ -1,32 +1,70 @@
 <template>
 	<div>
 		<!-- 选择消息弹窗 -->
-		<a-modal :visible="showVisible" class="msg-modal" title="选择素材" @ok="handleOk" @cancel="handleCancel"
+		<a-modal :visible="showVisible" :confirm-loading="confirmLoading" class="msg-modal" title="选择素材" @ok="handleOk"
+		         @cancel="handleCancel"
 		         width="888">
+			<div style="color: #FF562D; margin-bottom: 15px;" v-if="menuType != 0 && showRadar && type != 2">
+				温馨提示：图文包含带有雷达标识的视频/TXT/PDF等所有文件格式的素材，以图文链接的方式，向客户发送。
+			</div>
+			<div v-if="menuType != 0 && showRadar && type == 2" style="color: #FF562D; margin-bottom: 15px;">
+				温馨提示：带有雷达标识的图片，可追踪链接打开次数、停留时长以及给客户打上标签。反之，则直接向对话框推送一张图片，无法对客户进行追踪。
+			</div>
+
 			<div style="height: 600px;width: 840px;" class="choose-msg">
 				<a-spin tip="加载中..." size="large" :spinning="isLoading && type != 1">
-					<a-tree-select
-							style="width: 350px"
-							:dropdownStyle="{ maxHeight: '150px', overflow: 'auto' }"
-							:treeData="groupList"
-							placeholder='所有分组'
-							v-model="selectGroupId"
-							treeDefaultExpandAll
-							allowClear
-							@change="changeGroup"
-					>
-					</a-tree-select>
-					<a-input-search
-							placeholder="输入要搜索的内容"
-							@search="onSearch"
-							v-model="name"
-							:allowClear=true
-							enterButton="搜索"
-							style="width: 260px;margin-left: 10px;"
-					/>
-					<a-button @click="clearInput" style="margin-left: 10px;">
-						清空
-					</a-button>
+					<div style="margin-bottom: 10px;">
+						<a-tree-select
+								style="width: 160px"
+								:dropdownStyle="{ maxHeight: '150px', overflow: 'auto', width: '220px'}"
+								:treeData="groupList"
+								placeholder='所有分组'
+								v-model="selectGroupId"
+								treeDefaultExpandAll
+								allowClear
+								@change="changeGroup"
+						>
+						</a-tree-select>
+						<a-button style="margin-left: 10px;" @click="showSelectTag">
+							<template v-if="selectTagIds.length == 0">选择内容标签</template>
+							<template v-if="selectTagIds.length > 0">
+								已选择
+								<template v-if="getGroupNum(selectTagDetail) > 0">{{getGroupNum(selectTagDetail)}}个分组
+								</template>
+								<template
+										v-if="getGroupNum(selectTagDetail) > 0 && selectTagDetail.length != getGroupNum(selectTagDetail)">
+									，
+								</template>
+								<template v-if="selectTagDetail.length != getGroupNum(selectTagDetail)">
+									{{selectTagDetail.length - getGroupNum(selectTagDetail)}}个标签
+								</template>
+							</template>
+						</a-button>
+						<a-select
+								v-if="menuType != 0 && showRadar"
+								showSearch
+								optionFilterProp="children"
+								style="width: 120px;margin-left: 10px;"
+								@change="changeRadar"
+								v-model="isRadar"
+						>
+							<a-select-option :value="0">雷达状态</a-select-option>
+							<a-select-option :value="1">非雷达链接</a-select-option>
+							<a-select-option :value="2">雷达链接</a-select-option>
+						</a-select>
+						<a-input
+								placeholder="输入要搜索的内容"
+								v-model="name"
+								:allowClear=true
+								style="width: 160px;margin-left: 10px;"
+						></a-input>
+						<a-button type='primary' @click="onSearch" style="margin-left: 10px;">
+							搜索
+						</a-button>
+						<a-button @click="clearInput" style="margin-left: 10px;">
+							清空
+						</a-button>
+					</div>
 					<!-- 图文 -->
 					<div v-if="type == 1">
 						<div style="width: 100%;margin-top: 100px;" v-show="materialList.length == 0?true:false">
@@ -47,6 +85,9 @@
 									        style="margin-top: 10px;cursor: pointer;border-radius: 6px;"
 									        @click="chooseArt(item.id,index)">
 										<template slot="title">
+											<a-icon v-if="item.radar_status == 1 && item.radar_id > 0 && menuType == 1"
+											        type="radar-chart"
+											        style="vertical-align: top;font-size: 18px;color: #3CB371;"/>
 											<a-popover>
 												<template slot="content">
 													素材来源：{{item.group_name}}
@@ -57,7 +98,7 @@
 										<template v-for="(art, artIndex) in item.artList">
 											<template v-if="artIndex == 0">
 												<div
-														style="height: 30px;line-height: 30px;background: #0F0F0F;opacity: 0.3;color: #FFF;padding: 0 10px;margin-top: -30px;overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+														style="height: 30px;line-height: 30px;background: #0F0F0F;opacity: 0.7;color: #FFF;padding: 0 10px;margin-top: -30px;overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
 													{{art.title}}
 												</div>
 												<img v-if="sketchType == 0" alt="example"
@@ -83,7 +124,7 @@
 						</div>
 					</div>
 					<!-- 图片 -->
-					<div v-if="type == 2" style="overflow: hidden;float: right">
+					<div v-if="type == 2" style="overflow: hidden;" class="upload-botton">
 						<a-button @click="showModal">
 							<a-icon type="cloud-upload"/>
 							本地上传
@@ -100,22 +141,28 @@
 						<div style="margin-top: 15px;overflow: hidden;">
 							<div v-for="(item,index) in materialList" :key="item.id" class="imgSize"
 							     :class="materialList[index].id == id?'active' :''" @click="chooseArt(item.id,index)">
+
 								<a-popover>
 									<template slot="content">
 										素材来源：{{item.group_name}}
 									</template>
-									<div class="imgSize-title">素材来源：{{item.group_name}}</div>
+									<div class="imgSize-title">
+										<a-icon v-if="item.radar_status == 1 && item.radar_id > 0 && menuType == 1"
+										        type="radar-chart"
+										        style="vertical-align: top;font-size: 18px;color: #3CB371;"/>
+										素材来源：{{item.group_name}}
+									</div>
 								</a-popover>
 								<div class="imgSize-img"><img v-lazy="commonUrl+(item.s_local_path || item.local_path)"
 								                              style="object-fit: cover;" alt=""></div>
 								<div
-										style="height: 30px;line-height: 30px;background: #0F0F0F;opacity: 0.3;color: #FFF;padding: 0 10px;margin-top: -32px;overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+										style="height: 30px;line-height: 30px;background: #0F0F0F;opacity: 0.7;color: #FFF;padding: 0 10px;margin-top: -32px;overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
 								>{{item.file_name}}
 								</div>
 							</div>
 						</div>
 						<!-- 图片分页 -->
-						<div style="width: 100%;position: absolute;margin-top: 12px;">
+						<div v-if="total > 0" style="width: 100%;position: absolute;margin-top: 12px;">
 							<div class="pagination" style="height: 32px;float: right;">
 								<a-pagination :total="total" showSizeChanger :showQuickJumper="quickJumper"
 								              :current="page"
@@ -126,12 +173,12 @@
 						</div>
 					</div>
 					<!-- 音频、视频 -->
-					<div v-if="type == 3 || type == 4" style="overflow: hidden;float: right">
+					<div v-if="type == 3 || type == 4" style="overflow: hidden;" class="upload-botton">
 						<a-button @click="showModalVoice" v-if="type == 3">
 							<a-icon type="cloud-upload"/>
 							本地上传
 						</a-button>
-						<a-button @click="showModalVideo" style="float: left;" v-if="type == 4">
+						<a-button @click="showModalVideo" v-if="type == 4">
 							<a-icon type="cloud-upload"/>
 							本地上传
 						</a-button>
@@ -141,6 +188,9 @@
 						         :rowClassName="rowClassName"
 						         :rowSelection="{selectedRowKeys: selectedRowKeys,onChange: onSelectChange,type:'radio'}">
 							<template slot="file_name" slot-scope="text, record, index">
+								<a-icon v-if="record.radar_status == 1 && record.radar_id > 0 && menuType == 1"
+								        type="radar-chart"
+								        style="vertical-align: top;font-size: 18px;color: #3CB371;"/>
 								<template v-if="type == 3">
 									<img src="../assets/yuyin.png" style="width:16px;height:17px;">
 									{{record.file_name}}
@@ -161,8 +211,8 @@
 						</div>
 					</div>
 					<!-- 文件 -->
-					<div v-if="type == 5" style="overflow: hidden;float: right;">
-						<a-button @click="showModalFile" style="float: left;">
+					<div v-if="type == 5" style="overflow: hidden;" class="upload-botton">
+						<a-button @click="showModalFile">
 							<a-icon type="cloud-upload"/>
 							本地上传
 						</a-button>
@@ -179,17 +229,75 @@
 									<template slot="content">
 										素材来源：{{item.group_name}}
 									</template>
-									<div class="fileSize-title">素材来源：{{item.group_name}}</div>
+									<div class="fileSize-title">
+										<a-icon v-if="item.radar_status == 1 && item.radar_id > 0 && menuType == 1"
+										        type="radar-chart"
+										        style="vertical-align: top;font-size: 14px;margin-top: 4px;color: #3CB371;"/>
+										素材来源：{{item.group_name}}
+									</div>
 								</a-popover>
-								<a-card
-										hoverable
-										style="width: 90%;margin:auto;"
+								<a-card class="file-card"
+								        style="width: 100%;margin:auto; min-height: 66px; padding: 10px;"
 								>
 									<div>
 										<img
-												alt="example"
-												style="width: 60px;height: 80px;margin: 0 !important;"
-												src="../assets/fileicon.png"
+												alt="example" v-if="item.extension == 'doc'"
+												class="file-icon"
+												src="../assets/fileIcon/doc.png"
+												slot="cover"
+										/>
+										<img
+												alt="example" v-if="item.extension == 'docx'"
+												class="file-icon"
+												src="../assets/fileIcon/docx.png"
+												slot="cover"
+										/>
+										<img
+												alt="example" v-if="item.extension == 'xlsx'"
+												class="file-icon"
+												src="../assets/fileIcon/xlsx.png"
+												slot="cover"
+										/>
+										<img
+												alt="example" v-if="item.extension == 'xls'"
+												class="file-icon"
+												src="../assets/fileIcon/xls.png"
+												slot="cover"
+										/>
+										<img
+												alt="example" v-if="item.extension == 'csv'"
+												class="file-icon"
+												src="../assets/fileIcon/csv.png"
+												slot="cover"
+										/>
+										<img
+												alt="example" v-if="item.extension == 'pptx'"
+												class="file-icon"
+												src="../assets/fileIcon/pptx.png"
+												slot="cover"
+										/>
+										<img
+												alt="example" v-if="item.extension == 'ppt'"
+												class="file-icon"
+												src="../assets/fileIcon/ppt.png"
+												slot="cover"
+										/>
+										<img
+												alt="example" v-if="item.extension == 'txt'"
+												class="file-icon"
+												src="../assets/fileIcon/txt.png"
+												slot="cover"
+										/>
+										<img
+												alt="example" v-if="item.extension == 'pdf'"
+												class="file-icon"
+												src="../assets/fileIcon/pdf.png"
+												slot="cover"
+										/>
+										<img
+												alt="example" v-if="item.extension == 'xmind'"
+												class="file-icon"
+												src="../assets/fileIcon/xmind.png"
 												slot="cover"
 										/>
 										<div class="file-name">{{item.file_name}}</div>
@@ -199,6 +307,46 @@
 						</div>
 						<!-- 图片分页 -->
 						<div style="width: 100%;position: absolute;margin-top: 12px;">
+							<div class="pagination" style="height: 32px;float: right;">
+								<a-pagination :total="total" showSizeChanger :showQuickJumper="quickJumper"
+								              :current="page"
+								              :pageSize="pageSize" :pageSizeOptions="['15','30','50','100']"
+								              @change="changePage"
+								              @showSizeChange="showSizeChange"/>
+							</div>
+						</div>
+					</div>
+					<!--文本-->
+					<div v-if="type == 6" style="margin-top: 20px;">
+						<a-table :columns="textColomns" :dataSource="materialList" :pagination="false"
+						         :rowClassName="rowClassName"
+						         :rowSelection="{selectedRowKeys: selectedRowKeys,onChange: onSelectChange,type:'radio'}">
+							<span slot="content" slot-scope="text, record,index">
+								<a-popover placement="left">
+								    <template slot="content">
+								        <p style="max-width: 500px;max-height: 200px; overflow-y: auto; word-break:break-all;word-wrapL:break-word;margin-bottom: 0"
+								           v-html="text.replace(/\n/g, '<br/>')"></p>
+								    </template>
+								    <div class="inputTitle2">
+										<p style="margin-bottom: 0;" v-html="text.replace(/\n/g, '<br/>')"></p>
+									</div>
+								</a-popover>
+
+							</span>
+							<!--							<span slot="tag_name" slot-scope="text, record,index">-->
+							<!--								<span v-if="!record.tag_name || record.tag_name.length == 0">&#45;&#45;</span>-->
+							<!--								<a-popover placement="right"-->
+							<!--								           v-if="record.tag_name && record.tag_name.length > 0">-->
+							<!--									<div slot="content" style="max-width: 300px;">-->
+							<!--										<a-tag style="margin: 3px;" color="orange"-->
+							<!--										       v-for="tag in record.tag_name">{{tag.tagname}}</a-tag>-->
+							<!--									</div>-->
+							<!--									<span style="color: #01b065; cursor: pointer;">{{record.tag_name.length}}个</span>-->
+							<!--								</a-popover>-->
+							<!--							</span>-->
+						</a-table>
+						<!-- 音频分页 -->
+						<div style="width: 100%;margin-top: 20px;bottom:0;" v-show="total > 0">
 							<div class="pagination" style="height: 32px;float: right;">
 								<a-pagination :total="total" showSizeChanger :showQuickJumper="quickJumper"
 								              :current="page"
@@ -265,6 +413,41 @@
 								</a-radio>
 							</a-radio-group>
 						</a-form-item>
+						<template v-if="menuType == 1 && showRadar && materialPicSync == 1">
+							<a-form-item :label-col="{ span: 4 }"
+							             :wrapper-col="{ span: 20 }">
+								<template slot="label">
+									设为雷达链接
+								</template>
+								<!--								<div style="line-height: 20px;margin-top: 10px;"></div>-->
+								<a-switch :checked="radarOpen == 1" @click="changeRadarOpen"></a-switch>
+								<a-tooltip placement="bottom">
+									<template slot="title">
+										<span>开启后，带有雷达标识的图片，可追踪链接打开次数、停留时长以及给客户打上标签。反之，则直接向对话框推送一张图片，无法对客户进行追踪。</span>
+									</template>
+									<a-icon type="question-circle" style="margin-left:5px;"/>
+								</a-tooltip>
+							</a-form-item>
+							<a-form-item v-if="radarOpen == 1" :label-col="{ span: 4 }"
+							             :wrapper-col="{ span: 20 }">
+								<template slot="label">
+									客户标签
+								</template>
+								给点击雷达的客户打上选中的标签
+								<div>
+									<a-button icon="plus" @click="chooseTag">添加标签</a-button>
+								</div>
+								<a-tag v-for="(item, index) in tagName" color="orange">
+									{{item}}
+									<a-icon type="close"
+									        style="color: #FA8C16; vertical-align: inherit; cursor: pointer"
+									        @click="deleteTag(index)"></a-icon>
+								</a-tag>
+								<!--				<corpChooseTag :callback="chooseTags"-->
+								<!--				               :hasChoose="tag_arr"-->
+								<!--				               v-if="radarTagOpen == 1"></corpChooseTag>-->
+							</a-form-item>
+						</template>
 					</a-modal>
 
 					<!-- 上传音频弹窗 -->
@@ -468,6 +651,37 @@
 								</a-radio>
 							</a-radio-group>
 						</a-form-item>
+						<template v-if="menuType == 1 && showRadar && materialVideoSync == 1">
+							<a-form-item :label-col="{ span: 4 }"
+							             :wrapper-col="{ span: 20 }">
+								<template slot="label">
+									设为雷达链接
+								</template>
+								<a-switch :checked="radarOpen == 1" @click="changeRadarOpen"></a-switch>
+								<a-tooltip placement="bottom">
+									<template slot="title">
+										<span>开启后，带有雷达标识的视频，可追踪链接打开次数、停留时长以及给客户打上标签。反之，则直接向对话框推送一个视频，无法对客户进行追踪。</span>
+									</template>
+									<a-icon type="question-circle" style="margin-left:5px;"/>
+								</a-tooltip>
+							</a-form-item>
+							<a-form-item v-if="radarOpen == 1" :label-col="{ span: 4 }"
+							             :wrapper-col="{ span: 20 }">
+								<template slot="label">
+									客户标签
+								</template>
+								给点击雷达的客户打上选中的标签
+								<div>
+									<a-button icon="plus" @click="chooseTag">添加标签</a-button>
+								</div>
+								<a-tag v-for="(item, index) in tagName" color="orange">
+									{{item}}
+									<a-icon type="close"
+									        style="color: #FA8C16; vertical-align: inherit; cursor: pointer"
+									        @click="deleteTag(index)"></a-icon>
+								</a-tag>
+							</a-form-item>
+						</template>
 					</a-modal>
 
 					<!-- 上传文件 -->
@@ -503,7 +717,7 @@
 									</div>
 								</a-upload>
 								<span v-if="!fileName"
-								      style="float: right;width: 78%;margin-top: 50px;line-height: 26px;">
+								      style="float: right;line-height: 21px !important;">
 						（上传文件大小20MB，支持DOC、DOCX、XLS、XLSX、CSV、PPT、PPTX、TXT、PDF及Xmind格式。）
 					</span>
 								<div style="margin-left: 70px;">
@@ -525,7 +739,7 @@
 								</div>
 							</div>
 						</a-form-item>
-						<a-form-item label="素材同步" :label-col="{ span: 3 }" :wrapper-col="{ span: 21 }"
+						<a-form-item label="素材同步" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }"
 						             style="padding-top: 15px;">
 							<a-radio-group @change="changeFileMaterialSync" v-model="materialFileSync">
 								<a-radio :value="0">不同步</a-radio>
@@ -545,6 +759,40 @@
 								</a-radio>
 							</a-radio-group>
 						</a-form-item>
+						<template v-if="menuType == 1 && showRadar && materialFileSync == 1">
+							<a-form-item :label-col="{ span: 4 }"
+							             :wrapper-col="{ span: 20 }">
+								<template slot="label">
+									设为雷达链接
+								</template>
+								<a-switch :checked="radarOpen == 1" @click="changeRadarOpen"></a-switch>
+								<a-tooltip placement="bottom">
+									<template slot="title">
+										<span>开启后，带有雷达标识的PDF文件和TXT文件，可追踪链接打开次数、停留时长以及给客户打上标签。反之，则直接向对话框推送一个文件，无法对客户进行追踪。</span>
+									</template>
+									<a-icon type="question-circle" style="margin-left:5px;"/>
+								</a-tooltip>
+							</a-form-item>
+							<a-form-item v-if="radarOpen == 1" :label-col="{ span: 4 }"
+							             :wrapper-col="{ span: 20 }">
+								<template slot="label">
+									客户标签
+								</template>
+								给点击雷达的客户打上选中的标签
+								<div>
+									<a-button icon="plus" @click="chooseTag">添加标签</a-button>
+								</div>
+								<a-tag v-if="radarTagOpen == 1" v-for="(item, index) in tagName" color="orange">
+									{{item}}
+									<a-icon type="close"
+									        style="color: #FA8C16; vertical-align: inherit; cursor: pointer"
+									        @click="deleteTag(index)"></a-icon>
+								</a-tag>
+								<!--				<corpChooseTag :callback="chooseTags"-->
+								<!--				               :hasChoose="tag_arr"-->
+								<!--				               v-if="radarTagOpen == 1"></corpChooseTag>-->
+							</a-form-item>
+						</template>
 					</a-modal>
 				</a-spin>
 			</div>
@@ -555,12 +803,25 @@
 			        :spinning="isLoading && type == 1">
 			</a-spin>
 		</a-modal>
+		<tagCheckedBox ref="tagCheckedBox" @setGroupId="setGroupId" v-if="tagGroupVisible"
+		               :groupVisible="tagGroupVisible"
+		               :tagDetail="JSON.parse(JSON.stringify(selectTagDetail))"
+		               :tagIds="JSON.parse(JSON.stringify(selectTagIds))">
+		</tagCheckedBox>
+		<a-modal width="888px!important" title="客户标签" v-model="tagVisible" @ok="handleTag"
+		         @cancel="handleCancelTag">
+			<corpChooseTagModal v-if="tagVisible" :callback="chooseTags" :tagname="tagName2"
+			                    :hasChoose="tag_arr2"></corpChooseTagModal>
+		</a-modal>
 	</div>
 </template>
 
 <script>
 	import axios from "axios";
 	import {videoPlayer} from "vue-video-player"
+	import corpChooseTagModal from '@/components/corpChooseTag/CorpChooseTagModal.vue'
+	import TemplateList from "../views/dashboard/template/List";
+	import tagCheckedBox from './materialTagGroup/CheckboxIndex.vue'
 
 	const columns = [
 		{
@@ -593,7 +854,8 @@
 	export default {
 		name      : "chooseMsg",
 		components: {
-			videoPlayer
+			TemplateList,
+			videoPlayer, corpChooseTagModal, tagCheckedBox
 		},
 		props     : {
 			show       : {
@@ -635,63 +897,114 @@
 			sketchType : {
 				type   : String,
 				default: '0'
+			},
+			showRadar  : {
+				type   : Boolean,
+				default: false
 			}
 		},
 		data () {
 			return {
-				name              : '',
-				lastType          : 0, // 上次选择的
-				showVisible       : false, //弹窗显示与隐藏
-				materialList      : [], //获取素材数组
-				isLoading         : false,//加载的显示与隐藏
-				col               : 3,//图文瀑布流分几列
-				headers           : {
+				menuType                : localStorage.getItem('type'),
+				name                    : '',
+				selectTagIds            : [],
+				selectTagDetail         : [],
+				tagGroupVisible         : false,
+				confirmLoading          : false, // 提交按钮loading
+				lastType                : 0, // 上次选择的
+				showVisible             : false, //弹窗显示与隐藏
+				materialList            : [], //获取素材数组
+				isLoading               : false,//加载的显示与隐藏
+				col                     : 3,//图文瀑布流分几列
+				headers                 : {
 					authorization: 'authorization-text',
 				},
-				id                : 0,//选中的素材id值
-				choseItem         : {}, // 选中的素材item
+				id                      : 0,//选中的素材id值
+				choseItem               : {}, // 选中的素材item
 				//表格部分
 				columns,
 				//分页
-				page              : 1, //页数
-				pageSize          : 15, //每页个数
-				total             : 0, //总条数
-				quickJumper       : false, // 是否显示快速跳转的控件
-				commonUrl         : this.$store.state.commonUrl,//公共的链接
-				selectedRowKeys   : [],
-				groupList         : [], // 小组列表
-				groupList1        : [], // 同步素材小组列表
-				selectGroupId     : [],// 上传选择的分组id
-				material_type     : '6', //4图文，1图片，2音频，3视频, 7小程序，5文件，6文本
+				page                    : 1, //页数
+				pageSize                : 15, //每页个数
+				total                   : 0, //总条数
+				quickJumper             : false, // 是否显示快速跳转的控件
+				commonUrl               : this.$store.state.commonUrl,//公共的链接
+				selectedRowKeys         : [],
+				groupList               : [], // 小组列表
+				groupList1              : [], // 同步素材小组列表
+				selectGroupId           : [],// 上传选择的分组id
+				isRadar                 : 0,
+				showRadarVal            : localStorage.getItem('type') == 0 ? 0 : 1,
+				material_type           : '6', //4图文，1图片，2音频，3视频, 7小程序，5文件，6文本
 				//上传图片弹窗
-				visible2          : false, //上传图片弹窗显示与隐藏
-				loading4          : false, //上传图片弹窗加载显示与隐藏
-				imageUrl          : "",//上传图片的url
-				defaultValue      : 1, //默认上传素材类型，1为永久，0为临时
-				fileInfo          : {}, //上传图片的文件信息
-				materialPicSync   : 0,//0不同步，1同步
-				selectPicGroupId  : '',//上传图片的分组id
+				visible2                : false, //上传图片弹窗显示与隐藏
+				loading4                : false, //上传图片弹窗加载显示与隐藏
+				imageUrl                : "",//上传图片的url
+				defaultValue            : 1, //默认上传素材类型，1为永久，0为临时
+				fileInfo                : {}, //上传图片的文件信息
+				materialPicSync         : 0,//0不同步，1同步
+				selectPicGroupId        : '',//上传图片的分组id
 				//上传音频弹窗
-				voiceVisible      : false, // 上传音频弹窗显示与隐藏
-				voiceTitle        : '',//音频标题
-				voiceName         : '', // 音频文件名称
-				voiceUrl          : '', // 音频src
-				playVoice         : false,
-				t2                : '', // 上传音频播放计时器参数
-				playVoiceTime     : '',
-				materialAudioSync : 0,//0不同步，1同步
-				selectAudioGroupId: '',//上传音频的分组id
+				voiceVisible            : false, // 上传音频弹窗显示与隐藏
+				voiceTitle              : '',//音频标题
+				voiceName               : '', // 音频文件名称
+				voiceUrl                : '', // 音频src
+				playVoice               : false,
+				t2                      : '', // 上传音频播放计时器参数
+				playVoiceTime           : '',
+				materialAudioSync       : 0,//0不同步，1同步
+				selectAudioGroupId      : '',//上传音频的分组id
 				//上传视频弹窗
-				videoVisible      : false, // 上传音频弹窗
-				playerVideoOptions: {}, // 视频播放配置
-				videoTitle        : '', // 上传视频标题
-				videoUrl          : '', // 视频src
-				materialVideoSync : 0,//0不同步，1同步
-				selectVideoGroupId: '',//上传音频的分组id
-				materialFileSync  : 0,//0不同步，1同步
-				selectFileGroupId : '',//上传文件的分组id
-				fileVisible       : false, // 上传文件
-				fileName          : '',
+				videoVisible            : false, // 上传音频弹窗
+				playerVideoOptions      : {}, // 视频播放配置
+				videoTitle              : '', // 上传视频标题
+				videoUrl                : '', // 视频src
+				materialVideoSync       : 0,//0不同步，1同步
+				selectVideoGroupId      : '',//上传音频的分组id
+				materialFileSync        : 0,//0不同步，1同步
+				selectFileGroupId       : '',//上传文件的分组id
+				fileVisible             : false, // 上传文件
+				textColomns             : [
+					{
+						title    : "标题",
+						dataIndex: "file_name",
+						key      : "file_name",
+						width    : "180px",
+					},
+					{
+						title      : "内容",
+						dataIndex  : "content",
+						key        : "content",
+						width      : "25%",
+						scopedSlots: {customRender: "content"}
+					},
+					{
+						title    : "素材来源",
+						dataIndex: "group_name",
+						key      : "group_name",
+						width    : '180px'
+					},
+					{
+						title    : "添加时间",
+						dataIndex: "create_time",
+						key      : "create_time",
+						// width    : 20,
+					},
+				], // 文本表格列
+				fileName                : '',
+				radarOpen               : 1,
+				radarDynamicNotification: 1,
+				radarTagOpen            : 1,
+				tagVisible              : false,
+				tag_arr                 : [],
+				tagName                 : [],
+				radarTagIds             : '',
+				tag_arr1                : [],
+				radarTagIds1            : '',
+				tagName1                : [],
+				tag_arr2                : [],
+				radarTagIds2            : '',
+				tagName2                : [],
 			};
 		},
 		computed  : {
@@ -712,7 +1025,29 @@
 
 				return className;
 			},
+			setGroupId (even, ids, tags) {
+				if (even == 'ok') {
+					this.selectTagIds = ids
+					this.selectTagDetail = tags
+					this.$refs.tagCheckedBox.comfirmLoading = false
+				}
+				this.tagGroupVisible = false
+			},
+			getGroupNum (selectTagDetail) {
+				let count = 0
+				for (let i = 0; i < selectTagDetail.length; i++) {
+					if (!selectTagDetail[i].tag) {
+						count++
+					}
+				}
+				return count
+			},
+			// 选择内容标签
+			showSelectTag () {
+				this.tagGroupVisible = true
+			},
 			handleOk (e) {
+				this.confirmLoading = true
 				if (this.id !== 0) {
 					// this.showVisible = false;
 					if (this.callback !== null && typeof this.callback === "function") {
@@ -755,7 +1090,7 @@
 				}
 				// this.showVisible = false;
 			},
-			//获取素材
+			// 获取素材
 			async getMaterial (page = 1, pageSize = this.pageSize) {
 				// this.id = 0
 				// this.selectedRowKeys = []
@@ -765,15 +1100,18 @@
 					type = 1
 				}
 				const {data: res} = await this.axios.post("attachment/list", {
-					uid      : localStorage.getItem('uid'),
-					comefrom : this.comefrom,
-					group_id : this.selectGroupId,
-					file_type: type,
-					news_type: this.news_type,
-					page     : page,
-					pageSize : pageSize,
-					wx_id    : this.author_id,
-					name     : this.name
+					uid       : localStorage.getItem('uid'),
+					comefrom  : this.comefrom,
+					group_id  : this.selectGroupId,
+					file_type : type,
+					news_type : this.news_type,
+					page      : page,
+					pageSize  : pageSize,
+					wx_id     : this.author_id,
+					name      : this.name,
+					is_radar  : this.isRadar,
+					show_radar: this.showRadar ? 1 : 0,
+					tag_ids   : this.selectTagIds
 				});
 				if (res.error == 0) {
 					this.isLoading = false
@@ -831,14 +1169,19 @@
 				}
 				// console.log(res,222);
 			},
+			changeRadar () {
+				this.materialList = []
+				this.page = 1
+				this.pageSize = 15
+				this.getMaterial()
+			},
 			//改变分组
 			changeGroup (e) {
 				this.selectGroupId = e
 				this.materialList = []
 				this.getMaterial()
 			},
-			onSearch (value) {
-				this.name = value;
+			onSearch () {
 				this.materialList = []
 				this.page = 1
 				this.pageSize = 15
@@ -847,6 +1190,8 @@
 			// 清空按钮
 			clearInput () {
 				this.name = "";
+				this.selectTagIds = []
+				this.selectTagDetail = []
 				this.materialList = []
 				this.page = 1
 				this.pageSize = 15
@@ -862,6 +1207,8 @@
 			showModal () {
 				this.imageUrl = ''
 				this.fileInfo = {}
+				this.tagName1 = JSON.parse(JSON.stringify(this.tagName))
+				this.tag_arr1 = JSON.parse(JSON.stringify(this.tag_arr))
 				this.visible2 = true;
 				this.material_type = 1
 				this.showVisible = false
@@ -880,6 +1227,12 @@
 					source.cancel()
 				}
 				this.visible2 = false;
+				this.radarOpen = 1
+				this.radarDynamicNotification = 1
+				this.radarTagOpen = 1
+				this.tag_arr = []
+				this.tagName = []
+				this.radarTagIds = ''
 				this.defaultValue = 1;
 				this.imageUrl = "";
 				this.materialPicSync = 0
@@ -925,7 +1278,51 @@
 				this.selectPicGroupId = this.groupList1[0].key
 			},
 
-
+			changeRadarOpen () {
+				this.radarOpen = (this.radarOpen + 1) % 2
+			},
+			changeRadarDynamicNotification () {
+				this.radarDynamicNotification = (this.radarDynamicNotification + 1) % 2
+			},
+			changeRadarTagOpen () {
+				this.radarTagOpen = (this.radarTagOpen + 1) % 2
+			},
+			chooseTag () {
+				this.tag_arr2 = JSON.parse(JSON.stringify(this.tag_arr1))
+				this.radarTagIds2 = this.radarTagIds1
+				this.tagName2 = JSON.parse(JSON.stringify(this.tagName1))
+				this.tagVisible = true
+			},
+			deleteTag (index) {
+				this.tag_arr.splice(index, 1)
+				this.radarTagIds = this.tag_arr.join(',')
+				this.tagName.splice(index, 1)
+			},
+			handleTag () {
+				this.tag_arr = JSON.parse(JSON.stringify(this.tag_arr1))
+				this.radarTagIds = this.radarTagIds1
+				this.tagName = JSON.parse(JSON.stringify(this.tagName1))
+				this.tagVisible = false
+			},
+			handleCancelTag () {
+				this.tag_arr1 = []
+				this.radarTagIds1 = ''
+				this.tagName1 = []
+				this.tagVisible = false
+			},
+			chooseTags (event, arr, tagName) {
+				if (event == "ok") {
+					if (arr != '') {
+						this.tag_arr1 = arr.split(',')
+						this.radarTagIds1 = arr
+						this.tagName1 = JSON.parse(JSON.stringify(tagName))
+					} else {
+						this.tag_arr1 = []
+						this.radarTagIds1 = ''
+						this.tagName1 = []
+					}
+				}
+			},
 			// 上传音频
 			showModalVoice () {
 				this.getGroupList1()
@@ -940,7 +1337,7 @@
 			},
 			uploadVoice () {
 				this.loading4 = true;
-				if (!this.voiceTitle) {
+				if (this.voiceTitle.trim().length<=0) {
 					this.$message.warning('请填写标题！')
 					this.loading4 = false
 					return false
@@ -1050,7 +1447,7 @@
 			},
 			uploadVideo () {
 				this.loading4 = true;
-				if (!this.videoTitle) {
+				if (this.videoTitle.trim().length<=0) {
 					this.$message.warning('请填写标题！')
 					this.loading4 = false
 					return false
@@ -1073,6 +1470,12 @@
 				this.videoVisible = false
 				this.materialVideoSync = 0
 				this.selectVideoGroupId = ''
+				this.radarOpen = 1
+				this.radarDynamicNotification = 1
+				this.radarTagOpen = 1
+				this.tag_arr = []
+				this.tagName = []
+				this.radarTagIds = ''
 				this.showVisible = true
 			},
 			selfUploadVideo ({action, file, onSuccess, onError, onProgress}) {
@@ -1127,6 +1530,12 @@
 
 			cancelUploadFile () {
 				this.fileVisible = false
+				this.radarOpen = 1
+				this.radarDynamicNotification = 1
+				this.radarTagOpen = 1
+				this.tag_arr = []
+				this.tagName = []
+				this.radarTagIds = ''
 			},
 			uploadFile () {
 				this.loading4 = true;
@@ -1179,7 +1588,14 @@
 					params.append("fileInfo", materialData);
 					params.append("is_sync", this.materialPicSync);
 					if (this.materialPicSync == 1) {
-						params.append("group_id", this.selectPicGroupId);
+						params.append("group_id", this.selectPicGroupId)
+						if (this.menuType == 1 && this.showRadar) {
+							params.append("radar_open", this.radarOpen)
+						} else {
+							params.append("radar_open", 0);
+						}
+					} else {
+						params.append("radar_open", 0);
 					}
 				} else if (this.material_type == 2) {
 					//音频
@@ -1206,6 +1622,13 @@
 					params.append("is_sync", this.materialVideoSync);
 					if (this.materialVideoSync == 1) {
 						params.append("group_id", this.selectVideoGroupId);
+						if (this.menuType == 1 && this.showRadar) {
+							params.append("radar_open", this.radarOpen)
+						} else {
+							params.append("radar_open", 0);
+						}
+					} else {
+						params.append("radar_open", 0);
 					}
 				} else if (this.material_type == 5) {
 					params = new FormData();
@@ -1218,7 +1641,24 @@
 					params.append("is_sync", this.materialFileSync);
 					if (this.materialVideoSync == 1) {
 						params.append("group_id", this.selectVideoGroupId);
+						if (this.menuType == 1 && this.showRadar) {
+							params.append("radar_open", this.radarOpen)
+						} else {
+							params.append("radar_open", 0);
+						}
+					} else {
+						params.append("radar_open", 0);
 					}
+				}
+				if ((this.material_type == 3 || this.material_type == 5) && this.menuType == 1) {
+					params.append("radar_dynamic_notification", this.radarDynamicNotification);
+					if (this.radarTagIds.length == 0 && this.showRadar) {
+						this.radarTagOpen = 0
+					} else {
+						this.radarTagOpen = 1
+					}
+					params.append("radar_tag_open", this.radarTagOpen);
+					params.append("radar_tag_ids", this.radarTagIds);
 				}
 				const {data: res} = await this.axios.post("attachment/add", params, {cancelToken: source.token})
 				if (res.error == 0) {
@@ -1239,6 +1679,13 @@
 					this.fileVisible = false
 					this.materialFileSync = 0
 					this.selectFileGroupId = ''
+
+					this.radarOpen = 1
+					this.radarDynamicNotification = 1
+					this.radarTagOpen = 1
+					this.tag_arr = []
+					this.tagName = []
+					this.radarTagIds = ''
 					this.callback("ok", '', this.id, res.data.info);
 					this.loading4 = false
 					// this.showVisible = false
@@ -1313,10 +1760,13 @@
 
 		watch: {
 			show (newValue) {
+				this.confirmLoading = false
 				this.name = ''
 				this.showVisible = newValue;
 				this.choseItem = {};
 				this.materialList = []
+				this.selectTagIds = []
+				this.selectTagDetail = []
 				if (this.show) {
 					if (this.clearGroup) {
 						this.selectGroupId = []
@@ -1371,8 +1821,8 @@
 	.fileSize {
 		background-color: #FFF;
 		float: left;
-		width: 150px;
-		height: 120px;
+		width: 197px;
+		height: 96px;
 		margin-bottom: 15px;
 		margin-right: 13px;
 		overflow: hidden;
@@ -1395,12 +1845,13 @@
 
 	.file-name {
 		float: right;
-		max-width: calc(100% - 70px);
+		max-width: calc(100% - 60px);
 		word-break: break-all;
 		display: -webkit-box;
-		-webkit-line-clamp: 4;
+		-webkit-line-clamp: 3;
 		-webkit-box-orient: vertical;
 		overflow: hidden;
+		font-size: 12px;
 	}
 
 	.imgSize {
@@ -1509,6 +1960,7 @@
 	}
 
 	.audio {
+		float: none;
 		width: 100%;
 		height: 52px;
 	}
@@ -1598,4 +2050,45 @@
 		padding-right: 0;
 	}
 
+	.file-icon {
+		width: 50px;
+		height: 50px;
+		margin: 0 !important;
+	}
+
+	.file-card {
+		border: 0px !important;
+	}
+
+	.vue-waterfall {
+		min-width: 840px;
+	}
+
+	/deep/ .ant-input-affix-wrapper .ant-input:not(:last-child) {
+		padding-right: 43px !important;;
+	}
+
+	/deep/ .ant-input-affix-wrapper .ant-input-suffix {
+		right: 6px !important;
+	}
+
+	.inputTitle2 {
+		background: none;
+		max-height: 104px;
+		padding: 20px;
+		overflow: hidden;
+		text-overflow: -o-ellipsis-lastline;
+		text-overflow: ellipsis;
+		display: -webkit-box;
+		-webkit-line-clamp: 4;
+		line-clamp: 2;
+		-webkit-box-orient: vertical;
+		p {
+			margin-bottom: 0;
+		}
+	}
+
+	.upload-botton {
+		text-align: right;
+	}
 </style>

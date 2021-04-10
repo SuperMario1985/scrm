@@ -13,13 +13,31 @@
 <!--    <iframe style="width: 0;height: 0;" src="https://www.fastwhale.cn/crm/" frameborder="0"></iframe>-->
 <!--    <iframe style="width: 0;height: 0;" src="http://www.wemero.cn/" frameborder="0"></iframe>-->
 <!--    <iframe style="width: 0;height: 0;" src="http://www.fastwhale.cn/crm/" frameborder="0"></iframe>-->
-    <!-- built files will be auto injected -->
+<!-- built files will be auto injected -->
 
-    <script>
-      // 主页面监听message事件,
-      // window.addEventListener('message', function(e){
-      //   var data = e.data;
-      // }, false);
-    </script>
-  </body>
+<script>
+	// 主页面监听message事件,
+	// window.addEventListener('message', function(e){
+	//   var data = e.data;
+	// }, false);
+</script>
+<script type="text/javascript" src="<%= BASE_URL %>js/jq/jquery.js"></script>
+<script type="text/javascript" src="<%= BASE_URL %>moor/moor.js" djConfig="isDebug:false, parseOnLoad:false"></script>
+<script type="text/javascript" src="<%= BASE_URL %>js/m7Util.js"></script>
+<script type="text/javascript" src="<%= BASE_URL %>js/moortools.js"></script>
+<script type="text/javascript" src="<%= BASE_URL %>js/m7PhoneBar.js"></script>
+<script type="text/javascript" src="<%= BASE_URL %>js/objectDeclare.js"></script>
+<script src="<%= BASE_URL %>js/webPhoneSdk/webrtcVendor.js"></script>
+<script src="<%= BASE_URL %>js/webPhoneSdk/webPhoneSdk.js"></script>
+<script type="text/javascript" src="<%= BASE_URL %>js/recordError.js"></script>
+<!-- <script type="text/javascript" src="<%= BASE_URL %>js/m7Monitor.js"></script> -->
+<script type="text/javascript" src="<%= BASE_URL %>js/crypto/md5.min.js"></script>
+<script type="text/javascript" src="<%= BASE_URL %>js/crypto/base64.min.js"></script>
+
+<script>
+	var m7$ = $.noConflict()
+	var moorCall = window.moorCall || {}
+	moorCall.config = {}
+</script>
+</body>
 </html>

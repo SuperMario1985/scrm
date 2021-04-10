@@ -228,7 +228,9 @@
 					group_id : this.selectGroupId,
 					page     : page,
 					pageSize : pageSize,
-					name     : this.name
+					name     : this.name,
+					is_radar  : 0,
+					show_radar: 0
 				});
 				if (res.error == 0) {
 					this.isLoading = false

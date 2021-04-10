@@ -97,12 +97,36 @@ var router = new Router({
 					}
 				},
 				{
+					path     : 'message/publicAccoutMenu',
+					name     : 'publicAccoutMenu',
+					component: () => import('./views/dashboard/publicAccoutMenu/home.vue'),
+					meta     : {
+						keepAlive: false
+					}
+				},
+				{
 					path: '/push/add',
 					name: 'push',
 					component: () => import('./views/dashboard/push/Add.vue'),
 					meta: {
 						keepAlive: false,
 						isMenuIndex:3,
+					}
+				},
+				{
+					path     : 'keyword/list',
+					name     : 'keyword',
+					component: () => import('./views/dashboard/keyword/List.vue'),
+					meta     : {
+						keepAlive: false
+					}
+				},
+				{
+					path     : 'keyword/add',
+					name     : 'keyword',
+					component: () => import('./views/dashboard/keyword/Add.vue'),
+					meta     : {
+						keepAlive: false
 					}
 				},
 				{
@@ -480,6 +504,46 @@ var router = new Router({
 					meta: {
 						keepAlive: false,
 						isMenuIndex:2,
+					}
+				},
+				{
+					path     : 'sop/list',
+					name     : 'customSopList',
+					component: () => import('./views/dashboard/sop/sopCustomIndex.vue'),
+					meta     : {
+						keepAlive: true
+					}
+				},
+				{
+					path     : 'sop/addRules',
+					name     : 'customSopList',
+					component: () => import('./views/dashboard/sop/sopAddRules.vue'),
+					meta     : {
+						keepAlive: false
+					}
+				},
+				{
+					path     : 'chatSop/list',
+					name     : 'chatSopList',
+					component: () => import('./views/dashboard/sop/sopChatindex.vue'),
+					meta     : {
+						keepAlive: true
+					}
+				},
+				{
+					path     : 'chatSop/addRules',
+					name     : 'chatSopList',
+					component: () => import('./views/dashboard/sop/sopAddRules.vue'),
+					meta     : {
+						keepAlive: false
+					}
+				},
+				{
+					path     : 'chatSop/addRules',
+					name     : 'chatSopList',
+					component: () => import('./views/dashboard/sop/sopAddRules.vue'),
+					meta     : {
+						keepAlive: false
 					}
 				},
 				{
@@ -871,6 +935,16 @@ var router = new Router({
 					}
 				},
 				{
+					path     : 'filingCabinet/tag',
+					name     : 'filingCabinetTag',
+					component: () => import('./views/dashboard/filingCabinet/Tag.vue'),
+					meta     : {
+						keepAlive : true,
+						corpAlive : true,
+						agentAlive: true
+					}
+				},
+				{
 					path: '/filingCabinet/add',
 					name: 'filingCabinetList',
 					component: () => import('./views/dashboard/filingCabinet/Add.vue'),
@@ -952,6 +1026,16 @@ var router = new Router({
 						corpAlive: true,
 						agentAlive: true,
 						isMenuIndex:2,
+					}
+				},
+				{
+					path     : 'shopAppCenter/list',
+					name     : 'shopAppCenterList',
+					component: () => import('./views/dashboard/appCenter/List.vue'),
+					meta     : {
+						keepAlive : true,
+						corpAlive : true,
+						agentAlive: true
 					}
 				},
 				// 多余的路由
@@ -1396,15 +1480,138 @@ var router = new Router({
 					}
 				},
 				{
-					path: '/circle/addFriends',
-					name: 'circleOfFriends',
+					path     : 'circle/addFriends',
+					name     : 'circleOfFriends',
 					component: () => import('./views/dashboard/circle/AddFriends.vue'),
-					meta: {
-						corpAlive: false,
-						agentAlive: false,
-						isMenuIndex:2,
+					meta     : {
+						corpAlive : false,
+						agentAlive: false
 					}
-				}		
+				},
+				{
+					path     : 'store/list',
+					name     : 'storeList',
+					component: () => import('./views/dashboard/store/List.vue'),
+					meta     : {
+						corpAlive : false,
+						agentAlive: false
+					}
+				},
+				{
+					path     : 'smartRecommended/list',
+					name     : 'smartRecommended',
+					component: () => import('./views/dashboard/smartRecommended/List.vue'),
+					meta     : {
+						corpAlive: false,
+						agentAlive: false
+					}
+				},
+				{
+					path     : 'smartRecommended/ruleAdd',
+					name     : 'smartRecommendedRuleAdd',
+					component: () => import('./views/dashboard/smartRecommended/RuleAdd.vue'),
+					meta     : {
+						corpAlive: false,
+						agentAlive: false
+					}
+				},
+				{
+					path     : 'shopCustom/CustomManage',
+					name     : 'shopCustomManage',
+					component: () => import('./views/dashboard/shopCustom/CustomManage.vue'),
+					meta     : {
+						corpAlive: false
+					}
+				},
+				{
+					path     : 'shopCustom/CustomSet',
+					name     : 'customSet',
+					component: () => import('./views/dashboard/shopCustom/CustomSet.vue'),
+					meta     : {
+						corpAlive: false
+					}
+				},
+				{
+					path     : 'shopCustom/CustomOrder',
+					name     : 'customOrder',
+					component: () => import('./views/dashboard/shopCustom/CustomOrder.vue'),
+					meta     : {
+						corpAlive: false
+					}
+				},
+				{
+					path     : 'shopCustom/CustomStatis',
+					name     : 'customStatis',
+					component: () => import('./views/dashboard/shopCustom/CustomStatis.vue'),
+					meta     : {
+						corpAlive: false
+					}
+				},
+				{
+					path     : 'shopCustom/guideManage',
+					name     : 'guideManage',
+					component: () => import('./views/dashboard/shopGuide/guideManage.vue'),
+					meta     : {
+						corpAlive: false
+					}
+				},
+				{
+					path     : 'shopCustom/guideSet',
+					name     : 'guideSet',
+					component: () => import('./views/dashboard/shopGuide/guideSet.vue'),
+					meta     : {
+						corpAlive: false
+					}
+				},
+				{
+					path     : 'shopCustom/guideAchieve',
+					name     : 'guideAchieve',
+					component: () => import('./views/dashboard/shopGuide/guideAchieve.vue'),
+					meta     : {
+						corpAlive: false
+					}
+				},
+				{
+					path     : 'shopCustom/shopMaterial',
+					name     : 'shopMaterial',
+					component: () => import('./views/dashboard/shopCustom/shopMaterial.vue'),
+					meta     : {
+						corpAlive: false
+					}
+				},
+				{
+					path     : 'shopCustom/shareDetail',
+					name     : 'shareDetail',
+					component: () => import('./views/dashboard/shopCustom/shareDetail.vue'),
+					meta     : {
+						corpAlive: false
+					}
+				},
+				{
+					path     : 'call/callSeatManagement',
+					name     : 'callSeatManagement',
+					component: () => import('./views/dashboard/call/CallSeatManagement.vue'),
+				},
+				{
+					path     : 'call/callStatic',
+					name     : 'callStatic',
+					component: () => import('./views/dashboard/call/CallStatic.vue'),
+				},
+				{
+					path     : 'call/callRecord',
+					name     : 'callRecord',
+					component: () => import('./views/dashboard/call/CallRecord.vue'),
+				},
+				{
+					path     : 'call/callStaff',
+					name     : 'callStaff',
+					component: () => import('./views/dashboard/call/callStaff.vue'),
+				},
+				{
+					path     : 'call/accountBalance',
+					name     : 'callRecord',
+					component: () => import('./views/dashboard/call/accountBalance.vue'),
+				},		
 			]
 		}
 	]
