@@ -2,11 +2,70 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import {message} from "ant-design-vue"
+import {defaulImg} from "@/assets/img.png";
 
 Vue.use(Vuex)
+const news = {
+	id                : 0,
+	addSketchVisible  : true,//控制添加图文按钮显示与隐藏
+	addType           : 1,//添加方式
+	inputTitle        : '',//标题
+	digest            : '',//图文描述
+	content_source_url: '',//跳转链接
+	material_id       : '',//图文消息导入的素材id
+	local_path        : {
+		img  : defaulImg,
+		audio: ""
+	},
+	showTextContent   : false,
+	isAdvance         : false,
+	closeShowModal3   : false,//每个图文消息是否选好素材
+	materialSync      : 0,//素材是否同步，0不同步，1同步
+	selectGroupId     : '',// 上传选择的分组id
+}
+const templateObj = {
+	typeValue          : 2,//消息类型，5图文，2图片，1文字，3音频，4视频
+	typeName           : {
+		1: '文字',
+		2: '图片',
+		3: '音频',
+		4: '视频',
+		5: '图文',
+		6: '小程序'
+	},
+	id                 : 0,
+	closeShowModal3    : false,//是否选好素材
+	disabled           : false,//消息类型图文能否被选
+	file_name          : "", //手机上展示的素材标题
+	material_id        : "", //选中的素材id
+	local_path         : {
+		img  : "",
+		audio: ""
+	}, //手机上展示的图片、音频、视频链接
+	addType            : 1,
+	sketchList         : [JSON.parse(JSON.stringify(news))],//图文消息添加的数组
+	appletUrl          : '',// 小程序的封面链接
+	appletInputTitle   : '',// 小程序的标题
+	appid              : '',// 小程序的appid
+	pageUrl            : '',// 小程序page路径
+	materialSync       : 0, // 小程序是否同步，0不同步，1同步
+	selectGroupId      : '',// 上传选择的分组id
+	textAreaValueHeader: "", //模板展示的内容
+	textContent        : '',//编辑框传给后台的内容
+}
 
 export default new Vuex.Store({
 	state    : {
+		isSpecialMenuSet:3,//是否在个性化菜单设置界面 1在第一步 2在第二步，其余数字表示不在个性设置界面
+		specialTotalMenuList:[],//公众号下的个性化菜单
+		specialTotalMenuActive:0,//当前个性化菜单index
+		specialmenulist: [],//当前个性化菜单下的菜单列表
+		specialcurrentMenu: null,//性化菜单下的菜单列表下的当前选中的单个菜单
+		specialactiveMenu: 0,//性化菜单下的菜单列表下的当前选中的单个菜单的index
+
+		menulist: [],//公众号菜单
+		currentMenu: null,//当前被选中的公众号菜单
+		activeMenu: 0,//当前选中的菜单index
 		packageDetail           : {
 			name                 : '',
 			time                 : '',
@@ -56,10 +115,12 @@ export default new Vuex.Store({
 		wxNickName              : '',//选中的微信公众号名字
 		type                    : 0, // 选中的是公众号还是企业微信0：公众号；1：企业微信
 		permissionButton        : [],//子账户显示的权限按钮
+		txMapKey                : 'S6PBZ-D7BRQ-BNB5S-G2LBZ-PYAIO-DJF4K',
 		ignorePermission        : [
 			"/user/userUpdate",
 			"/scene/statistics",
 			"/reply/add",
+			"/keyword/add",
 			"/push/add",
 			"/scene/add",
 			"/customer/add",
@@ -120,7 +181,24 @@ export default new Vuex.Store({
 			"/highSeasCustomer/detail",
 			"/thirdPartyStore/store",
 			"/thirdPartyStore/order",
-			"/thirdPartyStore/members"
+			"/thirdPartyStore/members",
+			"/sop/addRules",
+			"/chatSop/addRules",
+			"/shopCustom/CustomManage",
+			"/shopCustom/CustomSet",
+			"/shopCustom/CustomOrder",
+			"/shopCustom/CustomStatis",
+			"/shopCustom/guideManage",
+			"/shopCustom/guideSet",
+			"/shopCustom/guideAchieve",
+			"/shopCustom/shopMaterial",
+			"/shopCustom/shareDetail",
+			"/call/callSeatManagement",
+			"/call/callStatic",
+			"/call/callRecord",
+			"/call/callStaff",
+			"/call/accountBalance",
+			"/smartRecommended/ruleAdd",
 		],
 		menuData                : [],// 菜单数据
 		raffleParticipantsTabKey: '1',//抽奖引流参与者页面的tabKey
@@ -377,7 +455,216 @@ export default new Vuex.Store({
 		isShowWX                :false, //是否显示微信
 		isShowCgh               :false, //是否显示公众号
 	},
+	getters: {
+		getMenuList: state => state.menulist,
+		getCurrentMenu: state => state.currentMenu,
+		getActiveMenu: state => state.activeMenu,
+
+		getSpecialMenuList: state => state.specialmenulist,
+		getSpecialCurrentMenu: state => state.specialcurrentMenu,
+		getSpecialActiveMenu: state => state.specialactiveMenu,
+		getSpecialTotalMenuList : state => state.specialTotalMenuList,
+		getIsSpecialMenuSet:state => state.isSpecialMenuSet,
+		getSpecialTotalMenuActive:state => state.specialTotalMenuActive,
+	},
 	mutations: {
+		updateSpecialTotalMenuActive(state, data){
+			state.specialTotalMenuActive = data
+		},
+		updateIsSpecialMenuSet(state, data){
+			state.isSpecialMenuSet = data
+		},
+		//更新总的个性化菜单数组数量
+		updateSpecialTotalMenuList(state, data){
+
+			if(Array.isArray(data)){
+				state.specialTotalMenuList=data
+			}else{ //如果是单个对象
+
+				let k =  state.specialTotalMenuList.findIndex(item=>{
+
+					return  item.special_menu_id == data.special_menu_id
+				})
+				if(k==-1){
+					state.specialTotalMenuList.push(data)
+				}else{
+					state.specialTotalMenuList[k]=data
+				}
+
+			}
+
+		},
+		updateSpecialMenuList(state, data){
+			state.specialmenulist = data
+		},
+		updateSpecialCurrentMenu(state,data){
+
+			//判断是否空对象
+			if(Object.keys(data).length==0){
+				state.specialcurrentMenu = data
+				return
+			}
+			if (!data.type) data.type = 'click'
+			if (data.leveltype == 'first') {
+				let check = state.specialmenulist.findIndex(item => {
+					return item.timeid == data.timeid
+				})
+
+				check != -1 ? state.specialmenulist[check] = data : state.specialmenulist.push(data)
+			} else {
+				let idx = state.specialactiveMenu;
+				state.specialmenulist[idx].sub_button ? '' : state.specialmenulist[idx].sub_button = []
+				let p = state.specialmenulist[idx].sub_button
+
+				let check = p.findIndex(item => {
+					return item.timeid == data.timeid
+				})
+
+				check == -1 ? p.push(data) : p[check] = data
+
+			}
+
+			state.specialcurrentMenu = data
+			this.commit('changeSpecialtype')
+		},
+		changeSpecialtype(state){
+			let c = state.specialcurrentMenu
+			switch (c.radiotype) {
+				case 'click':
+					c.message ? c.type = 'click' : ''
+					break;
+				case 'view':
+					c.link ? c.type = 'view' : ''
+					break;
+				case 'miniprogram':
+					c.events ? c.type = 'miniprogram' : ''
+					break;
+				default:
+			}
+		},
+		updateMenuList(state, data) {
+			state.menulist = data
+		},
+		clearSpecialMenuList(state){
+			state.specialmenulist=[]
+		},
+		clearMenuList(state){
+			state.menulist=[]
+		},
+		updateCurrentMenu(state, data) {
+
+			if (!data.type) data.type = 'click'
+			if (data.leveltype == 'first') {
+				let check = state.menulist.findIndex(item => {
+					return item.timeid == data.timeid
+				})
+
+				check != -1 ? state.menulist[check] = data : state.menulist.push(data)
+			} else {
+
+				let idx = state.activeMenu;
+				state.menulist[idx].sub_button ? '' : state.menulist[idx].sub_button = []
+				let p = state.menulist[idx].sub_button
+
+				let check = p.findIndex(item => {
+					return item.timeid == data.timeid
+				})
+
+				check == -1 ? p.push(data) : p[check] = data
+
+			}
+			state.currentMenu = data
+			this.commit('changetype')
+		},
+		clearCurrentMenu(state) {
+			state.currentMenu = null
+		},
+		clearSpecialCurrentMenu(state){
+			state.specialcurrentMenu = null
+		},
+		updateActiveMenu(state, data) {
+
+			state.activeMenu = data
+		},
+		updateSpecialactiveMenu(state, data){
+			state.specialactiveMenu = data
+		},
+		changetype(state) {
+			let c = state.currentMenu
+			switch (c.radiotype) {
+				case 'click':
+					c.message ? c.type = 'click' : ''
+					break;
+				case 'view':
+					c.link ? c.type = 'view' : ''
+					break;
+				case 'miniprogram':
+					c.events ? c.type = 'miniprogram' : ''
+					break;
+				default:
+			}
+		},
+		changeSpecialCom(state) {
+
+			if (state.specialcurrentMenu) {
+				this.commit('changeSpecialtype')
+				let c = _.cloneDeep(state.specialcurrentMenu)
+				switch (c.type) {
+					case 'click':
+						delete (c['events'])
+						delete (c['link'])
+						delete (c['url'])
+						delete (c['appid'])
+						delete (c['pagepath'])
+						break;
+					case 'view':
+						delete (c['events'])
+						delete (c['message'])
+						delete (c['key'])
+						delete (c['appid'])
+						delete (c['pagepath'])
+						break;
+					case 'miniprogram':
+						delete (c['message'])
+						delete (c['link'])
+						delete (c['key'])
+						break;
+					default:
+				}
+				this.commit('updateSpecialCurrentMenu', c)
+			}
+
+		},
+		changeCom(state) {
+			if (state.currentMenu) {
+				this.commit('changetype')
+				let c = _.cloneDeep(state.currentMenu)
+				switch (c.type) {
+					case 'click':
+						delete (c['events'])
+						delete (c['link'])
+						delete (c['url'])
+						delete (c['appid'])
+						delete (c['pagepath'])
+						break;
+					case 'view':
+						delete (c['events'])
+						delete (c['message'])
+						delete (c['key'])
+						delete (c['appid'])
+						delete (c['pagepath'])
+						break;
+					case 'miniprogram':
+						delete (c['message'])
+						delete (c['link'])
+						delete (c['key'])
+						break;
+					default:
+				}
+				this.commit('updateCurrentMenu', c)
+			}
+
+		},
 		//修改环境
 		changeProd (state, prod) {
 			state.prod = prod;

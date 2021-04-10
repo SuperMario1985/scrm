@@ -760,32 +760,34 @@
 			let codeFlag = JSON.parse(localStorage.getItem('twoHourCode')) ? JSON.parse(localStorage.getItem('twoHourCode')) : false
 			let codeTime = Number(localStorage.getItem('codeTime')) ? Number(localStorage.getItem('codeTime')) : Date.parse(new Date()) / 1000
 			return {
-				isMasterAccount     : 1,//登录账户，1主账户，2子账户
-				sub_id              : '',//登录账户的id
-				isLoading           : false, //启用Loading 组件显示与隐藏
-				isLoading2          : false, //未启用Loading 组件显示与隐藏
-				isDrawLoading       : false,//抽屉加载的显示与隐藏
-				commonUrl           : this.$store.state.commonUrl,//公共的链接
+				num            : 0,
+				subNum         : 0,
+				isMasterAccount: 1,//登录账户，1主账户，2子账户
+				sub_id         : '',//登录账户的id
+				isLoading      : false, //启用Loading 组件显示与隐藏
+				isLoading2     : false, //未启用Loading 组件显示与隐藏
+				isDrawLoading  : false,//抽屉加载的显示与隐藏
+				commonUrl      : this.$store.state.commonUrl,//公共的链接
 				//表格部分
 				columns,
-				masterAccountId     : '',//当前登录账户的主账户id
-				page                : 1, //页码
-				page_size           : 15, //每页数据量，默认15
+				masterAccountId: '',//当前登录账户的主账户id
+				page           : 1, //页码
+				page_size      : 15, //每页数据量，默认15
 				//分页
-				total               : 0, //总条数
-				quickJumper         : false, // 是否显示快速跳转的控件
+				total      : 0, //总条数
+				quickJumper: false, // 是否显示快速跳转的控件
 				//未启用
-				page2               : 1, //页码
-				page_size2          : 15, //每页数据量，默认15
+				page2     : 1, //页码
+				page_size2: 15, //每页数据量，默认15
 				//分页
-				total2              : 0, //总条数
-				quickJumper2        : false, // 是否显示快速跳转的控件
-				subAccountList      : [], //启用表格信息
-				subAccountList2     : [], //未启用表格信息
-				inputValue          : '',//启用搜索输入框的值
-				inputValue2         : '',//未启用搜索输入框的值
-				status              : 1,//1启用 2 未启用
-				actionId            : '',//被选择进行操作的账户id
+				total2         : 0, //总条数
+				quickJumper2   : false, // 是否显示快速跳转的控件
+				subAccountList : [], //启用表格信息
+				subAccountList2: [], //未启用表格信息
+				inputValue     : '',//启用搜索输入框的值
+				inputValue2    : '',//未启用搜索输入框的值
+				status         : 1,//1启用 2 未启用
+				actionId       : '',//被选择进行操作的账户id
 				//修改密码弹窗
 				passwordTitle       : '重置密码',//修改密码弹窗的标题
 				editPasswordVisible : false,//修改密码弹窗的显示与隐藏
@@ -799,55 +801,55 @@
 				codeFlag            : codeFlag,//记录2小时内有没有验证过验证码
 				timer               : null,//计时器的名称
 
-				isFlag             : 1,//1添加/修改，2详情展示
+				isFlag: 1,//1添加/修改，2详情展示
 				//修改、添加、员工详情弹窗
-				enterpriseName     : '',//主账户有无完善企业名称，0没有，1有
-				staffName          : '',//员工姓名
-				phoneNumber        : '',//手机号码
-				sex                : 1,//性别
-				department         : '',//部门
-				post               : '',//职务
-				addStatus          : 1,//状态
-				addStatus2         : 1,//未启用状态的显示状态
-				addPassword        : '',//密码
-				businessName       : '',//企业名称
-				imageUrl           : "",//企业logo
-				local_path         : '',//企业logo，接口返回的图片链接
-				fileInfo           : {}, //上传图片的文件信息
-				editFlag           : false,//true为修改，false为添加
-				enterType          : 1,//1修改进入，2详情、新增进入
-				passwordFlag       : false,//修改状态下密码框，true为出现，false为不出现
-				addSubAccountTitle : '添加子账户',//弹窗的标题
-				detailVisible      : false,//员工详情弹窗的显示与隐藏
-				detailAddTime      : '',//添加时间
-				record             : {},//详情时选择操作的那一行的数据
-				statusDisabled     : false,//状态的不可更改操作
+				enterpriseName    : '',//主账户有无完善企业名称，0没有，1有
+				staffName         : '',//员工姓名
+				phoneNumber       : '',//手机号码
+				sex               : 1,//性别
+				department        : '',//部门
+				post              : '',//职务
+				addStatus         : 1,//状态
+				addStatus2        : 1,//未启用状态的显示状态
+				addPassword       : '',//密码
+				businessName      : '',//企业名称
+				imageUrl          : "",//企业logo
+				local_path        : '',//企业logo，接口返回的图片链接
+				fileInfo          : {}, //上传图片的文件信息
+				editFlag          : false,//true为修改，false为添加
+				enterType         : 1,//1修改进入，2详情、新增进入
+				passwordFlag      : false,//修改状态下密码框，true为出现，false为不出现
+				addSubAccountTitle: '添加子账户',//弹窗的标题
+				detailVisible     : false,//员工详情弹窗的显示与隐藏
+				detailAddTime     : '',//添加时间
+				record            : {},//详情时选择操作的那一行的数据
+				statusDisabled    : false,//状态的不可更改操作
 				//单独点击禁用、启用按钮的判断
-				aloneChangeStatus  : false,
-				aloneStatus        : '',//单独点击禁用、启用按钮的状态
-				warnVisible        : false,//禁用确认框的显示与隐藏
-				startVisible       : false,//启用确认框的显示与隐藏
+				aloneChangeStatus: false,
+				aloneStatus      : '',//单独点击禁用、启用按钮的状态
+				warnVisible      : false,//禁用确认框的显示与隐藏
+				startVisible     : false,//启用确认框的显示与隐藏
 				//权限设置
-				tabType            : '1',//1公众号，2企业微信,3公共模块
-				tabType2           : '1',//1公众号，2小程序
-				wxInfo             : [], //微信公众号列表
-				changeBackground   : '', //微信公众号选中背景色
-				miniInfo           : [], //小程序列表
-				changeBackground4  : '', //小程序选中背景色
-				wxInfo2            : [], //企业微信列表
-				changeBackground2  : '', //企业微信选中背景色
-				checkedKeys1       : [],//公众号里公众号选中的权限id
-				checkedKeys2       : [],//企业微信选中的权限id
-				checkedKeys3       : [],//公共模块选中的权限id
-				checkedKeys4       : [],//公众号里小程序选中的权限id
-				accountTreeList    : [],//公众号树状图
-				wechatTreeList     : [],//企业微信树状图
-				commonTreeList     : [],//公共模块树状图
-				treeList           : [],//详情时总树状图数据
-				accountTreeList2   : [],//详情时公众号树状图
-				wechatTreeList2    : [],//详情时内容引擎树状图
-				commonTreeList2    : [],//详情时公共模块树状图
-				list               : [
+				tabType          : '1',//1公众号，2企业微信,3公共模块
+				tabType2         : '1',//1公众号，2小程序
+				wxInfo           : [], //微信公众号列表
+				changeBackground : '', //微信公众号选中背景色
+				miniInfo         : [], //小程序列表
+				changeBackground4: '', //小程序选中背景色
+				wxInfo2          : [], //企业微信列表
+				changeBackground2: '', //企业微信选中背景色
+				checkedKeys1     : [],//公众号里公众号选中的权限id
+				checkedKeys2     : [],//企业微信选中的权限id
+				checkedKeys3     : [],//公共模块选中的权限id
+				checkedKeys4     : [],//公众号里小程序选中的权限id
+				accountTreeList  : [],//公众号树状图
+				wechatTreeList   : [],//企业微信树状图
+				commonTreeList   : [],//公共模块树状图
+				treeList         : [],//详情时总树状图数据
+				accountTreeList2 : [],//详情时公众号树状图
+				wechatTreeList2  : [],//详情时内容引擎树状图
+				commonTreeList2  : [],//详情时公共模块树状图
+				list             : [
 					{
 						type: 1,//公众号
 						list: {
@@ -873,17 +875,110 @@
 						list: []
 					},
 				],//传给后台的权限
-				activeKey          : '1',//1基本信息，2权限设置，3数据可见范围
-				isEmpty            : false,//详情时权限空的显示与隐藏
-				isEmpty2           : false,//修改与添加时权限空的显示与隐藏
-				tabVisible         : false,//权限设置的显示与隐藏
-				accountTree        : ['fans-look', 'tag-list', 'reply-list', 'message-list', 'code-list', 'customer-list', 'senior-send-list', 'template-list', 'account-list', 'customerFansAttribute-list', 'followFansStatus-list', 'wxWholeMarketFission-list'],//公众号模块权限的关联关系
-				miniTree           : ['mini-list'],//小程序模块权限的关联关系
-				wechatTree         : ['staff-list', 'work-tag-group', 'work-tag-list', 'client-list', 'client-tag-group', 'client-tag-list', 'channel-list', 'welcome-list', 'group-sending-list', 'work-management-list', 'agent-list', 'channel-group-list', 'records-list', 'redPacket-list', 'employee-list', 'store-list', 'store-order-list', 'redirect-list', 'customerAttribute-list', 'followStatus-list', 'groupList-list', 'groupList-group', 'groupAutoCreate-list', 'groupAutoCreate-group', 'groupWelcome-list', 'follow-list', 'groupTags-list', 'sensitive-words-list', 'sensitive-words-group-list', 'violations-employee-list', 'violations-chat-list', 'channelCodeBaidu-list', 'chatTag-employee-list', 'chatTag-rule-list', 'highSeasCustomerRecyclingRules-list', 'highSeasCustomerList-list', 'deleteCustomer-list', 'wholeMarketFission-list', 'redFission-list', 'fission-list', 'raffle-list', 'redForNewList-list', 'redRuleList-list', 'circleOfFriends-list', 'todoManagementRemind-list', 'todoManagementSetting-look', 'todoLevel-list', 'todoManagementCustomizeNew-list', 'groupClockIn-list', 'customRecord-list'], //企业微信模块权限的关联关系
-				commonTree         : ['content-list', 'material-list', 'sending-list', 'user-list', 'sms-template-list', 'sign-list', 'subAccount-list', 'integration-list', 'customerAttribute-list', 'followStatus-list'],//公共模块权限的关联关系
+				activeKey        : '1',//1基本信息，2权限设置，3数据可见范围
+				isEmpty          : false,//详情时权限空的显示与隐藏
+				isEmpty2         : false,//修改与添加时权限空的显示与隐藏
+				tabVisible       : false,//权限设置的显示与隐藏
+				accountTree      : [
+					'fans-look',
+					'tag-list',
+					'reply-list',
+					'message-list',
+					'code-list',
+					'customer-list',
+					'senior-send-list',
+					'template-list',
+					'account-list',
+					'customerFansAttribute-list',
+					'followFansStatus-list',
+					'wxWholeMarketFission-list',
+					'publicAccoutMenu-list',
+					'keyword-list'
+				],
+				//公众号模块权限的关联关系
+				miniTree: [
+					'mini-list'
+				],
+				//小程序模块权限的关联关系
+				wechatTree: [
+					'staff-list',
+					'work-tag-group',
+					'work-tag-list',
+					'client-list',
+					'client-tag-group',
+					'client-tag-list',
+					'channel-list',
+					'welcome-list',
+					'group-sending-list',
+					'work-management-list',
+					'agent-list',
+					'channel-group-list',
+					'records-list',
+					'redPacket-list',
+					'employee-list',
+					'store-list',
+					'store-order-list',
+					'redirect-list',
+					'customerAttribute-list',
+					'followStatus-list',
+					'groupList-list',
+					'groupList-group',
+					'groupAutoCreate-list',
+					'groupAutoCreate-group',
+					'groupWelcome-list',
+					'follow-list',
+					'groupTags-list',
+					'sensitive-words-list',
+					'sensitive-words-group-list',
+					'violations-employee-list',
+					'violations-chat-list',
+					'channelCodeBaidu-list',
+					'chatTag-employee-list',
+					'chatTag-rule-list',
+					'highSeasCustomerRecyclingRules-list',
+					'highSeasCustomerList-list',
+					'deleteCustomer-list',
+					'wholeMarketFission-list',
+					'redFission-list',
+					'fission-list',
+					'raffle-list',
+					'redForNewList-list',
+					'redRuleList-list',
+					'circleOfFriends-list',
+					'todoManagementRemind-list',
+					'todoManagementSetting-look',
+					'todoLevel-list',
+					'todoManagementCustomizeNew-list',
+					'groupClockIn-list',
+					'customRecord-list',
+					'storeList-manage-groupList',
+					'storeList-manage-list',
+					'storeList-staff-groupList',
+					'storeList-staff-list',
+					'chatSopList-list',
+					'customSopList-list',
+					'smartRecommended-employee-list',
+					'smartRecommended-rule-list',
+					'shopCustomManage-list'
+				],
+				//企业微信模块权限的关联关系
+				commonTree: [
+					'content-list',
+					'material-list',
+					'sending-list',
+					'user-list',
+					'sms-template-list',
+					'sign-list',
+					'subAccount-list',
+					'integration-list',
+					'customerAttribute-list',
+					'followStatus-list',
+					'filingCabinetTag-group-list',
+					'filingCabinetTag-list'
+				],
+				//公共模块权限的关联关系
 				//数据可见范围
 				dataCorpId         : '',//企业微信id
-				partyList          : [], // 部门列表
 				showModalDepartment: false, //成员选择框显示与隐藏
 				chooseNum          : 0,//已选择的成员数量
 				chooseIndex        : 0,//选中的第几个可见范围
@@ -1010,7 +1105,7 @@
 				this.addStatus = record.status
 				this.addStatus2 = record.status
 				this.actionId = record.id
-				if (record.password == '') {
+				if (record.password == '' || record.password == null) {
 					this.passwordFlag = true
 				} else {
 					this.passwordFlag = false

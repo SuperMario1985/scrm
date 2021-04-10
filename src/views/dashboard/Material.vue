@@ -484,13 +484,6 @@
 														/>
 													</audio>
 												</div>
-												<div class="box" v-show="clickIndex == index3">
-													<div class="wifi-symbol">
-														<div class="wifi-circle first"></div>
-														<div class="wifi-circle second1"></div>
-														<div class="wifi-circle third1"></div>
-													</div>
-												</div>
 
 											</div>
 											<div

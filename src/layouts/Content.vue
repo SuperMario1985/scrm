@@ -59,6 +59,7 @@ export default {
         "wxWholeMarketFission",
         "groupClockIn",
         "customRecord",
+        "smartRecommendedList",
       ],
     };
   },
