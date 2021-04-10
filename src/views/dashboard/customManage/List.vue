@@ -14,7 +14,6 @@
 							<span @click="changeTab(2)" class="tabBtn" :class="{activeBtn:tabKey == 2}">非企微客户</span>
 						</div>
 						<div v-show="tabKey == 1" style="padding: 15px 20px;background: #FFF;">
-							<div style="font-size:16px;font-weight:700;color:#333333">客户管理</div>
 							<div class="content-msg"  style="box-shadow: 0px 1px 4px 0px #D7D7D7">
 								<p style="margin-bottom: 0px;">
 									1、企业成员在与外部联系人（客户）会话中，可通过侧边栏打开【客户详情页】页面，也可以点击外部联系人（客户）头像进入到系统页面【客户信息】，再打开【客户详情页】页面。
@@ -40,22 +39,14 @@
 							</div>
 							<div class="content-hd">
 								<div style="background-color: #FFFFFF;padding: 20px 0 10px 0;">
-								<span class="select-option" v-if="corpLen > 1">
-									<label style="margin-right: 5px;">企业微信：</label>
-									<a-select
-											v-if="corpLen > 1"
-											showSearch
-											optionFilterProp="children"
-											style="width: 210px;margin-right: 5px;"
-											@change="handleChange"
-											v-model="corpId"
-									>
-										<template v-for="item in corpInfo">
-											<a-select-option :value="item.corpid">{{item.corp_full_name ||
-												item.corp_name}}
-											</a-select-option>
-										</template>
-									</a-select>
+								<span class="select-option">
+										<label style="margin-right: 5px;">客户类型：</label>
+										<a-cascader :options="customerType"
+										            change-on-select
+										            v-model="corpType"
+										            :show-search="{ filter }"
+										            placeholder="请选择"
+										            style="margin-right: 5px;width: 210px;"/>
 								</span>
 									<span class="select-option">
 									<label style="margin-right: 5px;">关键词：</label>
@@ -218,8 +209,8 @@
 											@change="changeTime"
 									/>
 									<a-button type="primary" style="margin-right: 5px;"
-									          @click="searchStaff">查询</a-button>
-									<a-button style="margin-right: 10px;" @click="reset">重置</a-button>
+									          @click="searchStaff">查找</a-button>
+									<a-button style="margin-right: 10px;" @click="reset">清空</a-button>
 									<span style="margin-right: 5px;color: #01b065; cursor: pointer;"
 									      @click="seniorSelect">更多筛选</span>
 								</span>
@@ -334,7 +325,7 @@
 											</a-checkbox-group>
 										</a-spin>
 										<a-empty v-show="tagsList.length == 0"/>
-										<a-button @click="showAddTagModal()" type="primary"
+										<a-button  @click="showAddTagModal()" type="primary"
 										          v-has="'client-tag-add'">
 											新建标签
 										</a-button>
@@ -379,7 +370,7 @@
 											:rowClassName="rowClassName" v-has="'client-list'"
 									>
 										<div slot="customerInfo" slot-scope="text, record, index">
-											<div style="width: 200px;overflow: hidden;">
+											<div style="width: 240px;overflow: hidden;">
 												<a-avatar v-if="text.avatar" shape="square" :size="42"
 												          :src="text.avatar"
 												          style="float: left;"/>
@@ -413,6 +404,9 @@
 																style="color: #ED4997;"
 																v-if="text.gender=='女性'"
 														/>
+														<img style="width: 20px;height: 20px;margin-left: 2px;"
+														     v-if="record.dialout_phone&&record.dialout_exten"
+														     src="../../../assets/call.png"/>
 													</div>
 													<div>
 														<div v-if="record.chat_name.length == 0"
@@ -451,7 +445,9 @@
 													<div v-if="record.is_protect == 1">
 														<a-tag color="green">已保护</a-tag>
 													</div>
+
 												</div>
+
 											</div>
 										</div>
 										<div slot="add_way_info" slot-scope="text, record, index">
@@ -477,12 +473,23 @@
 										<div slot="tag_name" slot-scope="text, record, index">
 											<div style="width: 180px;">
 												<span v-if="record.tag_name.length == 0 && record.per_name.length == 0">--</span>
-												<span v-if="record.per_name.length == 0 && record.tag_name.length > 0">
-											<a-tag v-for="item in record.tag_name" style="margin-top: 5px;"
-											       color="blue">
-											{{item}}
-										</a-tag>
-										</span>
+
+                       <span  v-if="record.per_name.length == 0 && (record.tag_name.length > 0&&record.tag_name.length<5)">
+                            <a-tag v-for="item in record.tag_name" style="margin-top: 5px;"   color="blue">{{item}}</a-tag>
+                       </span>
+
+                        <span v-if="record.per_name.length == 0 && (record.tag_name.length > 5)">
+                            <a-popover>
+                                <span slot="content">
+                                    <div class="over-width"> <a-tag v-for="(item) in record.tag_name" style="margin-top: 5px;"   color="blue">{{item}}</a-tag></div>
+                                </span>
+                                <span v-for="(item1,index1) in record.tag_name" >
+                                     <a-tag v-if="index1<5" style="margin-top: 5px;"   color="blue">{{item1}}</a-tag>
+                                </span>
+                              <div>等{{record.tag_name.length}}个标签</div>
+                            </a-popover>
+                        </span>
+
 												<span v-if="record.tag_name.length == 0 && record.per_name.length > 0">
 											私有标签：<a-tag v-for="item in record.per_name" style="margin-top: 5px;"
 											            color="blue">
@@ -513,8 +520,8 @@
 											<a-tooltip placement="bottom">
 												<template slot="title">
 													<div>企业微信给客户打标签：分公有标签和私有标签</div>
-													<div>公有标签：即企业标签。管理员创建，所有员工可见。</div>
-													<div>私有标签：即个人标签。员工创建，仅自己可见。</div>
+													<div>1、公有标签：即企业标签。管理员创建，所有员工可见，在本系统定义为“公有标签”。</div>
+													<div>2、私有标签：即个人标签。员工创建，仅自己可见。在本系统定义为“私有标签”）。</div>
 												</template>
 												<a-icon type="question-circle" style="margin-left:5px;"/>
 											</a-tooltip>
@@ -537,12 +544,20 @@
 												<template slot="content">
 													<p style="margin-bottom: 0px;">
 														最后跟进时间：{{record.customerInfo.update_time
-														|| '--'}}</p>
+														|| '--'}}
+													</p>
+													<p style="margin-bottom: 0px;color:red">
+														输单原因：{{record.customerInfo.lose_msg
+														|| '--'}}
+													</p>
 												</template>
 												<span style="cursor: pointer;"
-												      v-if="record.customerInfo.update_time != ''">{{record.customerInfo.follow_status}}</span>
+												      v-if="record.customerInfo.update_time != ''">
+													<span>{{record.customerInfo.follow_status}}</span>
+												</span>
 											</a-popover>
 											<span style="cursor: pointer;" v-if="record.customerInfo.update_time == ''">{{record.customerInfo.follow_status}}</span>
+
 											<div>（跟进<span style="color: #01b065;">{{record.follow_num}}</span>次）</div>
 										</div>
 										<div slot="phone" slot-scope="text, record, index">
@@ -603,6 +618,10 @@
 	                                                         v-has="'other-store'">
                                                 第三方店铺
                                               </a-menu-item>
+	                                          <a-menu-item key="8" v-if="record.dialout_phone&&record.dialout_exten"
+	                                                       @click="contact(record,0)">
+                                                拨打电话
+                                              </a-menu-item>
                                             </a-menu>
 											<a-button style="margin-bottom: 5px;margin-right: 5px">更多操作</a-button>
 										</a-dropdown>
@@ -642,11 +661,11 @@
 										<!--分页 -->
 										<div class="pagination" style="margin: 20px 0px;overflow:hidden;"
 										     v-show="total > 0" v-has="'client-list'">
-<!--											<div style="display: inline-block;margin-right: 10px;line-height: 32px;vertical-align: top;float: left;">-->
-<!--												共-->
-<!--												<span style="color: blue">{{total}}</span>-->
-<!--												条-->
-<!--											</div>-->
+											<!--											<div style="display: inline-block;margin-right: 10px;line-height: 32px;vertical-align: top;float: left;">-->
+											<!--												共-->
+											<!--												<span style="color: blue">{{total}}</span>-->
+											<!--												条-->
+											<!--											</div>-->
 											<div class="pagination"
 											     style="display: inline-block;height: 32px;float: right;">
 												<a-pagination :total="total" showSizeChanger
@@ -672,15 +691,15 @@
 								</p>
 							</div>
 							<div class="content-hd">
-								<div style="background-color: #FFFFFF;padding: 20px 0 10px 0;">
+								<div style="display: flex;justify-content: flex-start;flex-wrap: wrap">
 									<span class="select-option">
 										<label style="margin-right: 5px;width: 105px;">关键词：</label>
-										<a-input style="width: 260px;" @keyup.enter="searchStaff2"
+										<a-input style="width: 210px;" @keyup.enter="searchStaff2"
 										         placeholder="客户姓名/手机号/微信号/QQ号/邮箱"
 										         v-model="number"></a-input>
 									</span>
 									<span class="select-option">
-										<label style="margin-right: 5px;">客户来源：</label>
+										<label style="width: 105px;margin-right: 5px;">客户来源：</label>
 										<a-select
 												showSearch
 												optionFilterProp="children"
@@ -728,7 +747,7 @@
 									<!--										</a-select>-->
 									<!--									</span>-->
 									<span class="select-option">
-										<label style="margin-right: 5px;">选择标签：</label>
+										<label style="margin-right: 5px;width: 105px;">选择标签：</label>
 									<a-button @click="showChooseTag"
 									          style="width: 210px;margin-right: 5px;">
 										<span v-if="tags.length > 0">已选择{{tags.length}}个标签</span>
@@ -750,7 +769,7 @@
 									<a-button type="primary" style="margin-right: 5px;"
 									          @click="searchStaff2">查找
 									</a-button>
-									<a-button style="margin-right: 10px;" @click="reset2">重置</a-button>
+									<a-button style="margin-right: 10px;" @click="reset2">清空</a-button>
 								</div>
 								<div style="height: 40px;line-height: 40px;margin-top: 6px;">
 								<span v-if="showCustomData">
@@ -794,6 +813,9 @@
 														style="color: #ED4997;"
 														v-if="record.gender=='女'"
 												/>
+												<img style="width: 20px;height: 20px;margin-left: 2px;"
+												     v-if="record.dialout_phone&&record.dialout_exten"
+												     src="../../../assets/call.png"/>
 											</div>
 											<div v-if="record.phone != ''">手机号：{{record.phone}}</div>
 											<div v-if="record.wx_num != ''">微信号：{{record.wx_num}}</div>
@@ -818,12 +840,21 @@
 										</div>
 										<div slot="tag_name" slot-scope="text, record, index">
 											<div v-if="record.tag_name.length == 0">--</div>
-											<div v-else style="max-width: 150px;">
-												<a-tag v-for="item in record.tag_name" style="margin-top: 5px;"
-												       color="blue">
-													{{item}}
-												</a-tag>
-											</div>
+                      <span  v-if="(record.tag_name.length > 0&&record.tag_name.length<5)">
+                            <a-tag v-for="item in record.tag_name" style="margin-top: 5px;"   color="blue">{{item}}</a-tag>
+                       </span>
+
+                      <span v-if="(record.tag_name.length > 5)">
+                            <a-popover>
+                                <span slot="content">
+                                    <div class="over-width"> <a-tag v-for="(item) in record.tag_name" style="margin-top: 5px;"   color="blue">{{item}}</a-tag></div>
+                                </span>
+                                <span v-for="(item1,index1) in record.tag_name" >
+                                     <a-tag v-if="index1<5" style="margin-top: 5px;"   color="blue">{{item1}}</a-tag>
+                                </span>
+                              <div>等{{record.tag_name.length}}个标签</div>
+                            </a-popover>
+                        </span>
 										</div>
 										<div slot="follow_status" slot-scope="text, record, index">
 											<div>{{record.follow_status}}</div>
@@ -846,8 +877,8 @@
                                               <template slot="title">
                                                 <span>永不进入公海池的客户数已达上限，无法再设置。</span>
                                               </template>
-										<span :disabled="record.is_rest != 1"
-										>设为保护对象</span>
+												<span :disabled="record.is_rest != 1"
+												>设为保护对象</span>
                                             </a-tooltip>
 	                                                <span :disabled="record.is_rest != 1" v-if="record.is_rest == 1">设为保护对象</span>
                                               </a-menu-item>
@@ -858,8 +889,13 @@
 													<p style="margin-bottom: 0px;">{{record.protect_str}}</p>
 												</template>
 												<span>取消保护</span>
-											</a-popover>
+												</a-popover>
 		                                           <span v-if="record.protect_str == ''">取消保护</span>
+                                              </a-menu-item>
+
+	                                            <a-menu-item key="8" v-if="record.dialout_phone&&record.dialout_exten"
+	                                                         @click="contact(record,1)">
+                                                拨打电话
                                               </a-menu-item>
                                             </a-menu>
 											<a-button style="margin-bottom: 5px;margin-right: 5px">更多操作</a-button>
@@ -960,20 +996,13 @@
 								:visible="seniorVisible"
 						>
 							<div class="sider-one">
-								<span class="sider-one-txt">企业微信</span>
-								<a-select
-										showSearch
-										optionFilterProp="children"
-										style="width: 270px;"
-										@change="handleChange"
-										v-model="corpId"
-								>
-									<template v-for="item in corpInfo">
-										<a-select-option :value="item.corpid">{{item.corp_full_name ||
-											item.corp_name}}
-										</a-select-option>
-									</template>
-								</a-select>
+								<span class="sider-one-txt">客户类型</span>
+								<a-cascader :options="customerType"
+								            v-model="corpType"
+								            change-on-select
+								            :show-search="{ filter }"
+								            placeholder="请选择"
+								            style="margin-right: 5px;width: 265px;text-align: left"/>
 								<span class="sider-one-txt">部门成员</span>
 								<a-button @click="showDepartmentList" style="width: 270px;">
 									<span style="text-align: center;" v-if="chooseNum > 0">已选择{{chooseUserNum}}名成员，{{chooseDepartmentNum}}个部门</span>
@@ -1387,8 +1416,8 @@
 											@change="changeTime1"
 									/>
 									<a-button type="primary" style="margin-right: 5px;"
-									          @click="searchStaff1">查询</a-button>
-									<a-button style="margin-right: 10px;" @click="reset1">重置</a-button>
+									          @click="searchStaff1">查找</a-button>
+									<a-button style="margin-right: 10px;" @click="reset1">清空</a-button>
 								</span>
 							</div>
 							<div class="content-bd" style="padding: 10px;">
@@ -1434,6 +1463,7 @@
 																style="color: #ED4997;"
 																v-if="text.gender=='女性'"
 														/>
+
 													</div>
 													<div>
 														<div v-if="record.chat_name.length == 0"
@@ -1470,6 +1500,9 @@
 														手机：{{record.customerInfo.phone}}
 													</div>
 												</div>
+												<img style="width: 20px;height: 20px;margin-left: 2px;"
+												     v-if="record.dialout_phone&&record.dialout_exten"
+												     src="../../../assets/call.png"/>
 											</div>
 										</div>
 										<div slot="chat_name" slot-scope="text, record, index">
@@ -1527,8 +1560,8 @@
 											<a-tooltip placement="bottom">
 												<template slot="title">
 													<div>企业微信给客户打标签：分公有标签和私有标签</div>
-													<div>公有标签：即企业标签。管理员创建，所有员工可见。</div>
-													<div>私有标签：即个人标签。员工创建，仅自己可见。</div>
+													<div>1、公有标签：即企业标签。管理员创建，所有员工可见，在本系统定义为“公有标签”。</div>
+													<div>2、私有标签：即个人标签。员工创建，仅自己可见。在本系统定义为“私有标签”）。</div>
 												</template>
 												<a-icon type="question-circle" style="margin-left:5px;"/>
 											</a-tooltip>
@@ -1642,7 +1675,7 @@
 
 		<!--选择群聊弹窗-->
 		<groupChat :corpId="corpId" :show="chatVisible" :chatArr="uniqueType == 0 ? chatArr : chatArr1"
-		           :callback="groupChatCallBack" :is_list="is_list"></groupChat>
+		           :callback="groupChatCallBack" :is_list="is_list" :isShowGroupOwner="1"></groupChat>
 
 		<!-- 导出进度条弹窗 -->
 		<a-modal v-model="progressVisible" title="导出进度" :footer="false" :closable="progressCloseable"
@@ -1883,11 +1916,11 @@
 				>提交
 				</a-button>
 			</template>
-<!--			<div class="content-msg" style="margin: 0 0 12px;">-->
-<!--				<p style="margin-bottom: 0px;">-->
-<!--					默认配置项可展示在其他员工端即内容可共享，若勾选则勾选内容不展示，仅自己可见-->
-<!--				</p>-->
-<!--			</div>-->
+			<!--			<div class="content-msg" style="margin: 0 0 12px;">-->
+			<!--				<p style="margin-bottom: 0px;">-->
+			<!--					默认配置项可展示在其他员工端即内容可共享，若勾选则勾选内容不展示，仅自己可见-->
+			<!--				</p>-->
+			<!--			</div>-->
 			<a-row class="checkbox-row">
 				<span style="font-weight: 700;">隐藏手机号：</span>
 				<a-switch v-model="isHidePhone" style="margin-right: 10px;vertical-align: top;"/>
@@ -1899,7 +1932,7 @@
 				</a-popover>
 			</a-row>
 			<a-row class="checkbox-row">
-				<span style="font-weight: 700">信息共享：</span><span style="color: #ff562D;">当同一个客户存在被多个员工归属时，当前默认不勾选，客户信息为共享可见或是编辑后共享。反之，客户信息独立。</span>
+				<span style="font-weight: 700">信息共享：</span><span style="color: #FF562D;">当同一个客户存在被多个员工归属时，当前默认不勾选，客户信息为共享可见或是编辑后共享。反之，客户信息独立。</span>
 				<a-popover placement="right">
 					<template slot="content">
 						<div style="width: 220px;word-break: break-all;">
@@ -1929,7 +1962,7 @@
 				<a-checkbox v-model="unshare_field" :disabled="unshare_field2 == 1">
 					客户画像
 				</a-checkbox>
-				<div style="color: #999;margin-top: 10px;">注意：为了避免来回勾选导致客户画像信息错乱，故勾选提交后，则不能再次操作。</div>
+				<div style="color: rgb(255, 86, 45);margin-top: 10px;">注意：为了避免来回勾选导致客户画像信息错乱，故勾选提交后，则不能再次操作。</div>
 			</a-row>
 		</a-modal>
 	</div>
@@ -1945,6 +1978,7 @@
 	import img from '../../../assets/chat.png'
 	import chooseStaffSelect from "@/components/ChooseStaffSelect.vue"
 	import corpChooseTag from "@/components/corpChooseTag/CorpChooseTag.vue"
+	import PubSub from 'pubsub-js';
 
 	const columns = [
 		{
@@ -2121,21 +2155,25 @@
 		data () {
 			let corpId = localStorage.getItem('corpId') ? localStorage.getItem('corpId') : "";
 			return {
+				customerType       : [],
+				corpType           : [0],
+				isRemind           : false,
+				actionId           : '',
 				img,
 				moment,
-				corpLen      : JSON.parse(localStorage.getItem('corpArr')).length,
-				corpInfo     : [], //企业微信列表
-				corpId       : corpId,//企业微信选中的id
-				is_hide_phone: 0,
-				customList   : [], //表格信息
-				isLoading    : true, //Loading 组件显示与隐藏
+				corpLen            : JSON.parse(localStorage.getItem('corpArr')).length,
+				corpInfo           : [], //企业微信列表
+				corpId             : corpId,//企业微信选中的id
+				is_hide_phone      : 0,
+				customList         : [], //表格信息
+				isLoading          : true, //Loading 组件显示与隐藏
 				//表格部分
 				columns,
 				columns1,
-				showCustomData: false,
-				uniqueCount   : 0,
+				showCustomData     : false,
+				uniqueCount        : 0,
 				// repeatCount        : 0,
-				fromUnique: 0,
+				fromUnique         : 0,
 				//分页
 				total              : 1, //总条数
 				quickJumper        : false, // 是否显示快速跳转的控件
@@ -2159,97 +2197,97 @@
 				confirmLoading     : false,//移除标签对话框的确认按钮加载
 				confirmLoading2    : false,//打标签对话框的确认按钮加载
 				// 标签
-				checked: [],
+				checked            : [],
 				//打标签
-				visible: false,
+				visible            : false,
 				//移除标签
-				visible1       : false,
-				tagCheckValue1 : [],//选中的tag
-				tagsList       : [], //标签列表
-				tagCheckValue  : [],//选中的tag
-				addTagVisible  : false,//新建标签弹窗显示与隐藏
-				confirmLoading3: false, //新建标签弹框加载
-				inputValue     : '',//新建标签输入框值
-				editGroupId    : '',//新建标签弹窗里的选中的分组id
-				keysArr        : [],//所有客户的键值
-				groupList      : [], // 小组列表
-				groupId        : '-1', // 选中的小组id
-				tagLoading     : false,//增加标签弹窗加载的显示与隐藏
+				visible1           : false,
+				tagCheckValue1     : [],//选中的tag
+				tagsList           : [], //标签列表
+				tagCheckValue      : [],//选中的tag
+				addTagVisible      : false,//新建标签弹窗显示与隐藏
+				confirmLoading3    : false, //新建标签弹框加载
+				inputValue         : '',//新建标签输入框值
+				editGroupId        : '',//新建标签弹窗里的选中的分组id
+				keysArr            : [],//所有客户的键值
+				groupList          : [], // 小组列表
+				groupId            : '-1', // 选中的小组id
+				tagLoading         : false,//增加标签弹窗加载的显示与隐藏
 				//客户跟进
-				followRecord: [],//跟进记录数据
+				followRecord       : [],//跟进记录数据
 				//滚动条
-				showTransition: 1,
-				mouseEnterFlag: false,
-				startY        : 0,
-				scrollFlag    : false,
-				scroRight     : true,
-				scrollOutFlag : false,
-				endOpen       : false,
-				group_id      : [],
-				follows       : [], // 跟进状态列表
-				follow_status : -1, // 跟进状态
-				chat_type     : 0,  // 持群数类型
-				leave         : 0,//1离职未分配 2离职已分配 0全部
-				add_way       : [], // 客户来源
-				wayList       : [], // 客户来源列表
-				way_id        : [], // 二维码id
-				codeList      : [], // 二维码列表
-				sexValue      : "-1", //性别,0未知，1男，2女
-				is_fans       : 0,//是否粉丝，0全部，1是，2否
-				other_way     : -1,//公海池认领，全部-1 是1 否0
-				is_protect    : -1, //是否保护，-1全部，1已保护，0未保护
-				joinTime      : null, //添加时间
-				followTime    : null, // 最后跟进时间
-				chatTime      : null,
-				s_time        : '',
-				e_time        : '',
-				customName    : '',//客户姓名/公司名称
-				phoneNumber   : '',//手机号
+				showTransition     : 1,
+				mouseEnterFlag     : false,
+				startY             : 0,
+				scrollFlag         : false,
+				scroRight          : true,
+				scrollOutFlag      : false,
+				endOpen            : false,
+				group_id           : [],
+				follows            : [], // 跟进状态列表
+				follow_status      : -1, // 跟进状态
+				chat_type          : 0,  // 持群数类型
+				leave              : 0,//1离职未分配 2离职已分配 0全部
+				add_way            : [], // 客户来源
+				wayList            : [], // 客户来源列表
+				way_id             : [], // 二维码id
+				codeList           : [], // 二维码列表
+				sexValue           : "-1", //性别,0未知，1男，2女
+				is_fans            : 0,//是否粉丝，0全部，1是，2否
+				other_way          : -1,//公海池认领，全部-1 是1 否0
+				is_protect         : -1, //是否保护，-1全部，1已保护，0未保护
+				joinTime           : null, //添加时间
+				followTime         : null, // 最后跟进时间
+				chatTime           : null,
+				s_time             : '',
+				e_time             : '',
+				customName         : '',//客户姓名/公司名称
+				phoneNumber        : '',//手机号
 				// followNum          : '',
-				followNum1   : '',
-				followNum2   : '',
-				signId       : [],
-				bindStoreList: [],
+				followNum1         : '',
+				followNum2         : '',
+				signId             : [],
+				bindStoreList      : [],
 				// 地域
 				cityData,
-				province1  : ["全部"],
-				province   : '',
-				city       : '',
-				tradeList  : [],//行业列表
-				defineField: [], // 客户筛选属性
-				fieldData  : [], // 客户选中筛选的属性
-				trade      : [],//选择的行业
-				work       : '',//选择的行业
+				province1          : ["全部"],
+				province           : '',
+				city               : '',
+				tradeList          : [],//行业列表
+				defineField        : [], // 客户筛选属性
+				fieldData          : [], // 客户选中筛选的属性
+				trade              : [],//选择的行业
+				work               : '',//选择的行业
 				//下拉菜单样式
-				style: {width: "200px"},
+				style              : {width: "200px"},
 				// 左侧标签
-				tagStyle          : '1',//标签或1，并集且2
-				tagsList2         : [], //标签列表
-				checked2          : [],
-				checked3          : false,
-				noTag             : 0,
-				tag_arr           : [], //标签值数组
-				tag_ids           : "", //标签值
-				tagCheckIndex     : 0,
-				initChecked       : [],
-				newChecked        : [],
-				diffChecked       : [],
-				userKey           : '', // 客户key
-				bindStoreVisible  : false, // 绑定店铺弹窗
-				loading           : false, // 确认绑定按钮加载
-				noData            : false, // 客户绑定搜索暂无数据
-				storeTypeList     : ['智慧店铺', '有赞', '淘宝/天猫'], // 店铺类型
+				tagStyle           : '1',//标签或1，并集且2
+				tagsList2          : [], //标签列表
+				checked2           : [],
+				checked3           : false,
+				noTag              : 0,
+				tag_arr            : [], //标签值数组
+				tag_ids            : "", //标签值
+				tagCheckIndex      : 0,
+				initChecked        : [],
+				newChecked         : [],
+				diffChecked        : [],
+				userKey            : '', // 客户key
+				bindStoreVisible   : false, // 绑定店铺弹窗
+				loading            : false, // 确认绑定按钮加载
+				noData             : false, // 客户绑定搜索暂无数据
+				storeTypeList      : ['智慧店铺', '有赞', '淘宝/天猫'], // 店铺类型
 				memberColumns,
-				memberLoading     : false, // 搜索弹窗加载
-				memberList        : [], // 绑定搜索表格信息
-				cardNo            : '', // 绑定搜索的手机号卡号订单号
-				selectedRowKeys1  : [], // 选中的店铺
-				unbindStoreVisible: false, // 解绑弹窗
-				storeList         : [],
-				selectKeys        : [],
-				seniorVisible     : false, // 高级筛选弹窗
-				customVisible     : false,
-				chooseNum1        : 0,
+				memberLoading      : false, // 搜索弹窗加载
+				memberList         : [], // 绑定搜索表格信息
+				cardNo             : '', // 绑定搜索的手机号卡号订单号
+				selectedRowKeys1   : [], // 选中的店铺
+				unbindStoreVisible : false, // 解绑弹窗
+				storeList          : [],
+				selectKeys         : [],
+				seniorVisible      : false, // 高级筛选弹窗
+				customVisible      : false,
+				chooseNum1         : 0,
 
 				chatVisible         : false,//群聊弹窗的显示与隐藏
 				is_list             : 0,//选择群聊弹窗是否做权限可见范围限制，1限制
@@ -2278,14 +2316,14 @@
 				chatArr1            : [],//选择的群聊数据
 				is_export           : 0,//是否导出客户，1导出，0不导
 				//导出进度条弹窗
-				progressVisible  : false,//进度条弹窗显示与隐藏
-				progressNum      : 0,//进度条进度
-				leftSiderWidth   : document.getElementsByClassName('menu-sider')[0].style.width,
-				downLoadUrl      : '',//下载链接
-				progressWidth    : 120,//进度条的宽度
-				progressCloseable: false,
+				progressVisible     : false,//进度条弹窗显示与隐藏
+				progressNum         : 0,//进度条进度
+				leftSiderWidth      : document.getElementsByClassName('menu-sider')[0].style.width,
+				downLoadUrl         : '',//下载链接
+				progressWidth       : 120,//进度条的宽度
+				progressCloseable   : false,
 				//切换tab
-				tabKey: 1,//1企微客户，2非企微客户
+				tabKey              : 1,//1企微客户，2非企微客户
 				//非企微客户
 				number              : '',//搜索的微信号
 				selectList          : [],//客户来源列表
@@ -2307,78 +2345,107 @@
 				tagStyle2           : '1',//标签或1，并集且2
 				tagType2            : '1',//做缓存，传给接口，标签或1，并集且2
 				//分页
-				total4      : 0, //总条数
-				quickJumper4: false, // 是否显示快速跳转的控件
-				page4       : 1, //页码
-				pageSize4   : 15, //每页数据条数
+				total4              : 0, //总条数
+				quickJumper4        : false, // 是否显示快速跳转的控件
+				page4               : 1, //页码
+				pageSize4           : 15, //每页数据条数
 				//详情
-				detailVisible: false,//详情显示与隐藏
-				detailTitle  : '',//详情标题
-				user_id      : 0,//当前账号对应的成员id
+				detailVisible       : false,//详情显示与隐藏
+				detailTitle         : '',//详情标题
+				user_id             : 0,//当前账号对应的成员id
 				//录入客户
-				recordVisible: false,//录入客户弹窗的显示与隐藏
-				recordLoading: false,//确认按钮加载
-				recordName   : '',//姓名
-				recordWx     : '',//微信号
-				recordQQ     : '',//QQ号
-				recordPhone  : '',//手机号
-				recordCompany: '',//公司名称
-				recordEmail  : '',//Email
-				recordSex    : 1,//性别
-				recordRemark : '',//备注
-				recordStatus : [],//客户来源id
-				recordStatus2: '',//客户来源名称
-				isShowTag    : false,
-				tag_arr2     : [], //标签值
-				tagData      : [],//标签数据
+				recordVisible       : false,//录入客户弹窗的显示与隐藏
+				recordLoading       : false,//确认按钮加载
+				recordName          : '',//姓名
+				recordWx            : '',//微信号
+				recordQQ            : '',//QQ号
+				recordPhone         : '',//手机号
+				recordCompany       : '',//公司名称
+				recordEmail         : '',//Email
+				recordSex           : 1,//性别
+				recordRemark        : '',//备注
+				recordStatus        : [],//客户来源id
+				recordStatus2       : '',//客户来源名称
+				isShowTag           : false,
+				tag_arr2            : [], //标签值
+				tagData             : [],//标签数据
 				// 地域
 				cityData2,
-				recordArea : [],
-				recordArea2: '',
-				id         : '',//编辑的id
+				recordArea          : [],
+				recordArea2         : '',
+				id                  : '',//编辑的id
 				//上传表格
-				upLoadShowModal: false,//弹窗的显示与隐藏
-				modalLoading   : false,//弹窗确认键的加载
-				fileInfo       : {}, //上传excel的文件信息
-				file_name      : '', //上传excel的名称
-				tag_arr3       : [], //标签值
+				upLoadShowModal     : false,//弹窗的显示与隐藏
+				modalLoading        : false,//弹窗确认键的加载
+				fileInfo            : {}, //上传excel的文件信息
+				file_name           : '', //上传excel的名称
+				tag_arr3            : [], //标签值
 				//上传进度条弹窗
-				progressVisible2: false,//进度条弹窗显示与隐藏
-				progressNum2    : 0,//进度条进度
-				leftSiderWidth2 : document.getElementsByClassName('menu-sider')[0].style.width,
-				successNum2     : 0,//成功上传人数
-				failNum2        : 0,//失败上传人数
-				notImportNum2   : 0,//待上传人数
+				progressVisible2    : false,//进度条弹窗显示与隐藏
+				progressNum2        : 0,//进度条进度
+				leftSiderWidth2     : document.getElementsByClassName('menu-sider')[0].style.width,
+				successNum2         : 0,//成功上传人数
+				failNum2            : 0,//失败上传人数
+				notImportNum2       : 0,//待上传人数
 				//成员转交
-				is_assign     : true,//客户转交按钮的显示与隐藏，针对权限
-				assignType    : 1,//0非企微客户、1企微客户
-				assignRecord  : '',//成员转交的该行信息
-				showModalStaff: false,//选择成员弹窗的显示与隐藏
-				userId        : [],//选择的成员id
-				userName      : [],//选择的成员name
+				is_assign           : true,//客户转交按钮的显示与隐藏，针对权限
+				assignType          : 1,//0非企微客户、1企微客户
+				assignRecord        : '',//成员转交的该行信息
+				showModalStaff      : false,//选择成员弹窗的显示与隐藏
+				userId              : [],//选择的成员id
+				userName            : [],//选择的成员name
 				//批量操作
-				batchTypeValue: false,//选择当前页，是否选中
-				checkArr      : [],//选择当前页，保存的key
-				is_rest       : 1,
-				is_show       : 1,
-				is_cancel     : 1,//批量取消保护，1显示，0不显示
-				isShowMoreBtn : true,//是否展示更多操作按钮
+				batchTypeValue      : false,//选择当前页，是否选中
+				checkArr            : [],//选择当前页，保存的key
+				is_rest             : 1,
+				is_show             : 1,
+				is_cancel           : 1,//批量取消保护，1显示，0不显示
+				isShowMoreBtn       : true,//是否展示更多操作按钮
 				//设置配置项弹窗
-				setOptionsVisible: false,//设置配置项弹窗的显示与隐藏
-				unshare_chat     : false,//不共享所在群1是0否
-				unshare_follow   : false,//不共享跟进记录1是0否
-				unshare_line     : false,//不共享互动轨迹1是0否
-				unshare_field    : false,//不共享客户画像1是0否
-				isHidePhone      : false,//是否隐藏手机号
-				unshare_chat2    : false,//缓存不共享所在群1是0否
-				unshare_follow2  : false,//缓存不共享跟进记录1是0否
-				unshare_line2    : false,//缓存不共享互动轨迹1是0否
-				unshare_field2   : false,//缓存不共享客户画像1是0否
-				isHidePhone2     : false,//缓存是否隐藏手机号
+				setOptionsVisible   : false,//设置配置项弹窗的显示与隐藏
+				unshare_chat        : false,//不共享所在群1是0否
+				unshare_follow      : false,//不共享跟进记录1是0否
+				unshare_line        : false,//不共享互动轨迹1是0否
+				unshare_field       : false,//不共享客户画像1是0否
+				isHidePhone         : false,//是否隐藏手机号
+				unshare_chat2       : false,//缓存不共享所在群1是0否
+				unshare_follow2     : false,//缓存不共享跟进记录1是0否
+				unshare_line2       : false,//缓存不共享互动轨迹1是0否
+				unshare_field2      : false,//缓存不共享客户画像1是0否
+				isHidePhone2        : false,//缓存是否隐藏手机号
 			};
 		},
 
 		methods : {
+			contact (record, type) {
+				let that = this
+				if (type == 1) {
+					record.customerInfo = {}
+					record.customerInfo.nickname = record.name
+					record.customerInfo.avatar = ''
+					record.customerInfo.phone = record.phone
+				}
+
+				this.$confirm({
+					title     : '是否拨打电话',
+					okText    : "确定",
+					okType    : "primary",
+					cancelText: "取消",
+					onOk () {
+						PubSub.publish('showCall', {
+							showCall : true,
+							avatar   : record.customerInfo.avatar,
+							nickname : record.customerInfo.nickname,
+							follow_id: record.key,
+							phone    : record.customerInfo.phone,
+							type     : type,
+							from     : type, // 来自企微
+						});
+					}
+				});
+			},
+
+
 			//录入客户
 			recordCustomer () {
 				this.detailTitle = '录入客户'
@@ -2835,6 +2902,35 @@
 				this.seniorVisible = false
 				this.getCustomList();
 			},
+
+			// 客戶类型
+			filter (inputValue, path) {
+				return path.some(option => option.label.toLowerCase().indexOf(inputValue.toLowerCase()) > -1)
+			},
+
+			// 获取企业微信
+			async getCorpWx () {
+				const {data: res} = await this.axios.post("work-external-contact-follow-user/enterprise-type", {
+					corp_id: this.corpId
+				});
+				if (res.error != 0) {
+					this.$message.error(res.error_msg);
+				} else {
+					this.customerType = [{value: 0, label: '全部',},
+						{value: 1, label: '个人微信',},
+						{
+							value: 2, label: '企业微信', children: [
+								{value: '', label: '全部'}
+							]
+						},]
+					for (let item of res.data) {
+						let {corp_full_name: label, corp_name: value} = item
+
+						this.customerType[2].children.push({value, label})
+						// console.log(this.customerType)
+					}
+				}
+			},
 			//点击确定搜索
 			searchStaff1 () {
 				this.getCustomList1();
@@ -2882,6 +2978,7 @@
 				this.chooseUserNum = 0
 				this.chooseDepartmentNum = 0
 				this.seniorVisible = false
+				this.corpType = [0]
 				this.getCustomList()
 			},
 			//点击重置条件
@@ -3039,6 +3136,8 @@
 					chat_time        : this.chatTime ? (this.chatTime.length > 1 ? [this.chatTime[0].format("YYYY-MM-DD HH:mm"), this.chatTime[1].format("YYYY-MM-DD HH:mm")] : null) : null,
 					is_export        : this.is_export,
 					selected_row_keys: this.selectedRowKeys,
+					corp_type        : this.corpType[0],
+					corp_name        : this.corpType[1],
 				});
 				if (res.error != 0) {
 					this.isLoading = false;
@@ -3303,7 +3402,7 @@
 			},
 			//客户跟进
 			handleShowFollow (id) {
-				console.log(id, '客户跟进')
+				// console.log(id, '客户跟进')
 			},
 			lookUniqueCustom () {
 				this.reset1()
@@ -3693,9 +3792,9 @@
 					this.newChecked = []
 					this.initChecked = []
 					if (this.tabKey == 1) {
-						this.getCustomList();
+						this.getCustomList(this.page, this.pageSize);
 					} else if (this.tabKey == 2) {
-						this.getNoCustomer()
+						this.getNoCustomer(this.page4,this.pageSize4)
 					}
 				}
 			},
@@ -4196,7 +4295,16 @@
 					this.showModalStaff = true
 				} else if (e.key == 2) {
 					//进入公海池
-					this.assignHighSea()
+					let that = this
+					that.$confirm({
+						title     : '确定退回公海池吗？',
+						okText    : "确定",
+						okType    : "primary",
+						cancelText: "取消",
+						onOk () {
+							that.assignHighSea()
+						},
+					});
 				} else if (e.key == 3) {
 					//设为保护对象
 					this.setProtect(type, record)
@@ -4287,7 +4395,7 @@
 					let that = this
 					that.$error({
 						title: res.error_msg,
-						onOk() {
+						onOk () {
 							that.userId = ''
 							that.userName = ''
 							that.assignRecord = ''
@@ -4298,13 +4406,16 @@
 					this.$success({
 						title: res.data.textHtml,
 					});
+					this.assignRecord = ''
+					this.selectedRowKeys = []
+					this.batchTypeValue = false
 					this.chooseStaffCancel()
 					if (this.assignType == 0) {
 						//非企微客户
-						this.getNoCustomer()
+						this.getNoCustomer(this.page4,this.pageSize4)
 					} else if (this.assignType == 1) {
 						//企微客户
-						this.getCustomList()
+						this.getCustomList(this.page,this.pageSize)
 					}
 				}
 			},
@@ -4337,10 +4448,10 @@
 					this.batchTypeValue = false
 					if (this.assignType == 0) {
 						//非企微客户
-						this.getNoCustomer()
+						this.getNoCustomer(this.page4,this.pageSize4)
 					} else if (this.assignType == 1) {
 						//企微客户
-						this.getCustomList()
+						this.getCustomList(this.page,this.pageSize)
 					}
 				}
 			},
@@ -4418,10 +4529,10 @@
 					this.batchTypeValue = false
 					if (this.assignType == 0) {
 						//非企微客户
-						this.getNoCustomer()
+						this.getNoCustomer(this.page4,this.pageSize4)
 					} else if (this.assignType == 1) {
 						//企微客户
-						this.getCustomList()
+						this.getCustomList(this.page, this.pageSize)
 					}
 				}
 			},
@@ -4467,10 +4578,10 @@
 					this.batchTypeValue = false
 					if (this.assignType == 0) {
 						//非企微客户
-						this.getNoCustomer()
+						this.getNoCustomer(this.page4,this.pageSize4)
 					} else if (this.assignType == 1) {
 						//企微客户
-						this.getCustomList()
+						this.getCustomList(this.page, this.pageSize)
 					}
 				}
 			},
@@ -4502,7 +4613,8 @@
 					this.getCustomList()
 				}
 			},
-		},
+		}
+		,
 		computed: {
 			rowSelection () {
 				const {selectedRowKeys} = this;
@@ -4542,7 +4654,8 @@
 					],
 					onSelection          : this.onSelection
 				};
-			},
+			}
+			,
 			rowSelection1 () {
 				const {selectedRowKeys1} = this;
 				return {
@@ -4558,8 +4671,11 @@
 						}
 					}
 				};
-			},
-		},
+			}
+			,
+
+		}
+		,
 		mounted () {
 			if (localStorage.getItem('permissionButton') == 'all') {
 				this.is_assign = true
@@ -4570,7 +4686,7 @@
 				} else {
 					this.is_assign = true
 				}
-				if(permissionButton.indexOf('other-store') == -1 && permissionButton.indexOf('client-bind') == -1 && permissionButton.indexOf('client-assign') == -1 && permissionButton.indexOf('client-backHighSea') == -1 && permissionButton.indexOf('client-protect') == -1){
+				if (permissionButton.indexOf('other-store') == -1 && permissionButton.indexOf('client-bind') == -1 && permissionButton.indexOf('client-assign') == -1 && permissionButton.indexOf('client-backHighSea') == -1 && permissionButton.indexOf('client-protect') == -1) {
 					this.isShowMoreBtn = false
 				} else {
 					this.isShowMoreBtn = true
@@ -4593,8 +4709,13 @@
 				this.getTradeList()
 				this.getFollowStatus()
 				this.getAddWay()
+				this.getCorpWx()
 			});
-		},
+			let that = this
+
+		}
+		,
+
 		beforeRouteEnter (to, from, next) {
 			// 在渲染该组件的对应路由被 confirm 前调用
 			// 不！能！获取组件实例 `this`
@@ -4690,13 +4811,16 @@
 			}
 
 			next()
-		},
+		}
+		,
 		beforeRouteLeave (to, form, next) {
 			this.ws.setCallback()
 			this.progressVisible = false
 			next()
-		},
-	};
+		}
+		,
+	}
+	;
 </script>
 
 <style lang='less' scoped>
@@ -4960,6 +5084,7 @@
 		width: 100px;
 	}
 
+
 	.download-progress /deep/ .ant-progress-inner {
 		transition: 0.5s;
 	}
@@ -4996,4 +5121,11 @@
 	/deep/ .ant-drawer-content {
 		height: calc(100% - 64px);
 	}
+
+    .over-width{
+    width: 500px!important;
+    max-height: 400px!important;
+    overflow-y: auto!important;
+  }
+
 </style>

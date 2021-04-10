@@ -11,22 +11,29 @@
 			<div v-show="tabKey == 1" style="height: calc(100% - 122px);">
 				<a-row style="margin:0 20px 20px;padding:20px 20px 5px;background: #FFF;line-height: 40px;"
 				       ref="searchArea">
-				<span class="select-option" v-if="corpLen > 1">
-					<label style="margin-right: 5px;">企业微信：</label>
-					<a-select
-							showSearch
-							optionFilterProp="children"
-							style="width: 210px;margin-right: 5px;"
-							@change="changeWx"
-							v-model="corpId"
-							v-if="corpLen > 1"
-					>
-						<template v-for="item in corpInfo">
-							<a-select-option :value="item.corpid">
-								{{item.corp_name}}
-							</a-select-option>
-						</template>
-					</a-select>
+				<span class="select-option">
+					<label style="margin-right: 5px;">客户类型：</label>
+					<a-cascader :options="customerType"
+					            v-model="corpType"
+					            change-on-select
+					            :show-search="{ filter }"
+					            placeholder="请选择"
+					            style="margin-right: 5px;width: 210px;"/>
+					<!--					<label style="margin-right: 5px;">企业微信：</label>-->
+					<!--					<a-select-->
+					<!--							showSearch-->
+					<!--							optionFilterProp="children"-->
+					<!--							style="width: 210px;margin-right: 5px;"-->
+					<!--							@change="changeWx"-->
+					<!--							v-model="corpId"-->
+					<!--							v-if="corpLen > 1"-->
+					<!--					>-->
+					<!--						<template v-for="item in corpInfo">-->
+					<!--							<a-select-option :value="item.corpid">-->
+					<!--								{{item.corp_name}}-->
+					<!--							</a-select-option>-->
+					<!--						</template>-->
+					<!--					</a-select>-->
 				</span>
 					<span class="select-option">
 					<label style="margin-right: 5px;">关键词：</label>
@@ -120,16 +127,16 @@
 							@change="changeTime"
 					/>
 				</span>
-					<a-button type="primary" style="margin: 0 10px 10px 0;" @click="find">查询</a-button>
-					<a-button @click="clear">重置</a-button>
+					<a-button type="primary" style="margin: 0 10px 10px 0;" @click="find">查找</a-button>
+					<a-button @click="clear">清空</a-button>
 				</a-row>
 
 				<!-- 表格部分 -->
 				<div class="content-bd" ref="scroll">
-					<a-spin tip="加载中..." size="large" :spinning="isLoading">
+					<a-spin tip="Loading..." size="large" :spinning="isLoading">
 						<a-empty v-show="list.length == 0" style="margin: 100px auto 0;"/>
 						<div class="part" v-for="(item,index) in list" :id="'part'+ item.id" v-show="list.length > 0">
-							<a-spin tip="加载中..." :spinning="item.isLoading">
+							<a-spin tip="Loading..." :spinning="item.isLoading">
 								<div class="part-title">
 									<span class="part-title-left">{{item.title}}（{{item.count}}）</span>
 									<a-tag color="red" v-if="item.status == 0" style="margin: 3px;">已删除</a-tag>
@@ -179,15 +186,15 @@
 											</div>
 											<a-progress type="circle" :percent="Number(part.close_rate)" :width="40"
 											            style="float: left;margin-left:5px;font-size:12px;margin-right: 5px;"/>
-											<a-popover placement="right" v-has="'client-info'">
+											<a-popover placement="right" v-if="isShowMore">
 												<template slot="content">
 													<div>
 														<p class="url-btn"
-														   @click="addRecord(part.cid,item.id,part.close_rate,part.nickname)"
-														   style="margin-bottom: 6px;">
+														   @click="addRecord(part.cid,item.id,part.close_rate,part.nickname,part)"
+														   style="margin-bottom: 6px;" v-has="'client-addFollow'">
 															添加跟进</p>
 														<p class="url-btn" @click="customDetail(part.cid,item.id)"
-														   style="margin-bottom: 6px;">
+														   style="margin-bottom: 6px;" v-has="'client-info'">
 															客户详情</p>
 														<p class="url-btn" @click="handleMenuClick(part,item.id,1)"
 														   style="margin-bottom: 6px;" v-if="part.is_protect == 0"
@@ -209,9 +216,33 @@
 												<a-icon type="more" style="font-size: 18px;"/>
 											</a-popover>
 										</div>
+										<div style="color:red;padding: 0 10px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden">
+											<span v-if="item.lose_one==1&&part.context&&part.context!=''">输单原因：{{part.context}}</span>
+										</div>
 										<template v-if="part.tag_name.length > 0 && part.per_name.length == 0">
-											<div style="width: 100%;padding: 0 10px;margin-bottom: 10px;white-space: normal;">
-												<a-tag color="blue" v-for="tag in part.tag_name"
+											<div style="cursor:pointer;width: 100%;padding: 0 10px;margin-bottom: 10px;white-space: normal;">
+												<a-popover v-if="part.tag_name.length>4">
+													<template slot="content">
+														  <div class="over-width-300">
+                                <a-tag color="blue"
+                                       v-for="tag in part.tag_name"
+                                       style="margin-bottom: 5px;">
+                                  {{tag}}
+                                </a-tag>
+                              </div>
+													</template>
+													<div>
+														<a-tag color="blue"
+														       v-for="(tag,i) in part.tag_name"
+														       v-if="i<4"
+														       style="margin-bottom: 5px;cursor: pointer">
+															{{tag}}
+														</a-tag>
+														<div>等{{part.tag_name.length}}个标签</div>
+													</div>
+												</a-popover>
+												<a-tag color="blue" v-if="part.tag_name.length<=4"
+												       v-for="tag in part.tag_name"
 												       style="margin-bottom: 5px;">
 													{{tag}}
 												</a-tag>
@@ -221,7 +252,26 @@
 											<div style="width: 100%;padding: 0 10px;margin-bottom: 10px;white-space: normal;"
 											     v-if="part.tag_name.length > 0">
 												公有标签：
-												<a-tag color="blue" v-for="tag in part.tag_name"
+												<a-popover v-if="part.tag_name.length>4">
+													<template slot="content">
+														<a-tag color="blue"
+														       v-for="tag in part.tag_name"
+														       style="margin-bottom: 5px;">
+															{{tag}}
+														</a-tag>
+													</template>
+													<div>
+														<a-tag color="blue"
+														       v-for="(tag,i) in part.tag_name"
+														       v-if="i<4"
+														       style="margin-bottom: 5px;cursor: pointer">
+															{{tag}}
+														</a-tag>
+														<div>等{{part.tag_name.length}}个标签</div>
+													</div>
+												</a-popover>
+												<a-tag color="blue" v-if="part.tag_name.length<=4"
+												       v-for="tag in part.tag_name"
 												       style="margin-bottom: 5px;">
 													{{tag}}
 												</a-tag>
@@ -229,7 +279,26 @@
 											<div style="width: 100%;padding: 0 10px;margin-bottom: 10px;white-space: normal;"
 											     v-if="part.per_name.length > 0">
 												私有标签：
-												<a-tag color="blue" v-for="tag in part.per_name"
+												<a-popover v-if="part.per_name.length>4">
+													<template slot="content">
+														<a-tag color="blue"
+														       v-for="tag in part.per_name"
+														       style="margin-bottom: 5px;">
+															{{tag}}
+														</a-tag>
+													</template>
+													<div>
+														<a-tag color="blue"
+														       v-for="(tag,i) in part.per_name"
+														       v-if="i<4"
+														       style="margin-bottom: 5px;cursor: pointer">
+															{{tag}}
+														</a-tag>
+														<div>等{{part.per_name.length}}个标签</div>
+													</div>
+												</a-popover>
+												<a-tag color="blue" v-if="part.per_name.length<=4"
+												       v-for="tag in part.per_name"
 												       style="margin-bottom: 5px;">
 													{{tag}}
 												</a-tag>
@@ -256,54 +325,50 @@
 				<a-row style="margin:0 20px 20px;padding:20px 20px 5px;background: #FFF;line-height: 40px;"
 				       ref="searchArea2">
 					<span class="select-option">
-					<label style="margin-right: 5px;">关键词：</label>
-				<a-input
-						@keyup.enter="find2"
-						placeholder="客户姓名/备注/公司名称"
-						style="width: 210px;margin-right: 5px;"
-						v-model="name2"
-				/>
-				</span>
+						<label style="margin-right: 5px;">关键词：</label>
+						<a-input
+								@keyup.enter="find2"
+								placeholder="客户姓名/备注/公司名称"
+								style="width: 210px;margin-right: 5px;"
+								v-model="name2"
+						/>
+					</span>
 					<span class="select-option">
-					<label style="margin-right: 5px;">手机号：</label>
-				<a-input
-						@keyup.enter="find2"
-						placeholder="请输入手机号码"
-						style="width: 210px;margin-right: 5px;"
-						v-model="phone2"
-				/>
-				</span>
+						<label style="margin-right: 5px;">手机号：</label>
+							<a-input
+									@keyup.enter="find2"
+									placeholder="请输入手机号码"
+									style="width: 210px;margin-right: 5px;"
+									v-model="phone2"
+							/>
+					</span>
 					<span class="select-option">
-					<label style="margin-right: 5px;">联系时间：</label>
-				<a-select
-						style="width: 210px;margin-right: 5px;"
-						v-model="timeType2"
-						:dropdownStyle="{width:'200px'}"
-				>
-					<a-select-option :value="0">全部客户</a-select-option>
-					<a-select-option :value="1">一直未沟通</a-select-option>
-					<a-select-option :value="2">近3天未联系</a-select-option>
-					<a-select-option :value="3">近7天未联系</a-select-option>
-					<a-select-option :value="4">近15天未联系</a-select-option>
-					<a-select-option :value="5">近30天未联系</a-select-option>
-					<a-select-option :value="6">近90天未联系</a-select-option>
-					<a-select-option :value="7">近180天未联系</a-select-option>
-					<a-select-option :value="8">近一年未联系</a-select-option>
-					<a-select-option :value="9">一年以上未联系</a-select-option>
-				</a-select>
-				</span>
+						<label style="margin-right: 5px;">联系时间：</label>
+							<a-select style="width: 210px;margin-right: 5px;"
+							          v-model="timeType2"
+							          :dropdownStyle="{width:'200px'}">
+								<a-select-option :value="0">全部客户</a-select-option>
+								<a-select-option :value="1">一直未沟通</a-select-option>
+								<a-select-option :value="2">近3天未联系</a-select-option>
+								<a-select-option :value="3">近7天未联系</a-select-option>
+								<a-select-option :value="4">近15天未联系</a-select-option>
+								<a-select-option :value="5">近30天未联系</a-select-option>
+								<a-select-option :value="6">近90天未联系</a-select-option>
+								<a-select-option :value="7">近180天未联系</a-select-option>
+								<a-select-option :value="8">近一年未联系</a-select-option>
+								<a-select-option :value="9">一年以上未联系</a-select-option>
+							</a-select>
+					</span>
 					<span class="select-option">
-					<label style="margin-right: 5px;">排序方式：</label>
-				<a-select
-						style="width: 210px;margin-right: 5px;"
-						v-model="sortType2"
-				>
-					<a-select-option :value="0">创建时间从近到远</a-select-option>
-					<a-select-option :value="1">创建时间从远到近</a-select-option>
-					<a-select-option :value="2">最后一次跟进时间从近到远</a-select-option>
-					<a-select-option :value="3">最后一次跟进时间从远到近</a-select-option>
-				</a-select>
-				</span>
+						<label style="margin-right: 5px;">排序方式：</label>
+							<a-select style="width: 210px;margin-right: 5px;"
+							          v-model="sortType2">
+								<a-select-option :value="0">创建时间从近到远</a-select-option>
+								<a-select-option :value="1">创建时间从远到近</a-select-option>
+								<a-select-option :value="2">最后一次跟进时间从近到远</a-select-option>
+								<a-select-option :value="3">最后一次跟进时间从远到近</a-select-option>
+							</a-select>
+					</span>
 					<span class="select-option">
 					<label style="margin-right: 5px;">是否保护：</label>
 				<a-select
@@ -334,16 +399,16 @@
 							@change="changeTime"
 					/>
 				</span>
-					<a-button type="primary" style="margin: 0 10px 10px 0;" @click="find2">查询</a-button>
-					<a-button @click="clear2">重置</a-button>
+					<a-button type="primary" style="margin: 0 10px 10px 0;" @click="find2">查找</a-button>
+					<a-button @click="clear2">清空</a-button>
 				</a-row>
 
 				<!-- 表格部分 -->
 				<div class="content-bd" ref="scroll2">
-					<a-spin tip="加载中..." size="large" :spinning="isLoading2">
+					<a-spin tip="Loading..." size="large" :spinning="isLoading2">
 						<a-empty v-show="list2.length == 0" style="margin: 100px auto 0;"/>
 						<div class="part" v-for="(item,index) in list2" :id="'part'+ item.id" v-show="list2.length > 0">
-							<a-spin tip="加载中..." :spinning="item.isLoading">
+							<a-spin tip="Loading..." :spinning="item.isLoading">
 								<div class="part-title">
 									<span class="part-title-left">{{item.title}}（{{item.count}}）</span>
 									<a-tag color="red" v-if="item.status == 0" style="margin: 3px;">已删除</a-tag>
@@ -386,15 +451,16 @@
 											</div>
 											<a-progress type="circle" :percent="Number(part.close_rate)" :width="40"
 											            style="float: left;margin-left:5px;font-size:12px;margin-right: 5px;"/>
-											<a-popover placement="right" v-has="'client-info'">
+											<a-popover placement="right" v-if="isShowMore">
 												<template slot="content">
 													<div>
 														<p class="url-btn"
 														   @click="addRecord(part.cid,item.id,part.close_rate,part.nickname)"
-														   style="margin-bottom: 6px;">
+														   style="margin-bottom: 6px;" v-has="'client-addFollow'">
 															添加跟进</p>
 														<p class="url-btn" style="margin-bottom: 6px;"
-														   @click="customDetail2(part.cid,item.id)">
+														   @click="customDetail2(part.cid,item.id)"
+														   v-has="'client-info'">
 															客户详情</p>
 														<p class="url-btn" @click="handleMenuClick(part,item.id,0)"
 														   style="margin-bottom: 6px;" v-if="part.is_protect == 0"
@@ -416,9 +482,33 @@
 												<a-icon type="more" style="font-size: 18px;"/>
 											</a-popover>
 										</div>
+										<div style="color:red;padding: 0 10px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden">
+											<span v-if="item.lose_one==1&&part.context&&part.context!=''">输单原因：{{part.context}}</span>
+										</div>
 										<template v-if="part.tag_name.length > 0">
 											<div style="width: 100%;padding: 0 10px;margin-bottom: 10px;white-space: normal;">
-												<a-tag color="blue" v-for="tag in part.tag_name"
+												<a-popover v-if="part.tag_name.length>4">
+													<template slot="content">
+														  <div class="over-width-300">
+                                <a-tag color="blue"
+                                       v-for="tag in part.tag_name"
+                                       style="margin-bottom: 5px;">
+                                  {{tag}}
+                                </a-tag>
+                              </div>
+													</template>
+													<div>
+														<a-tag color="blue"
+														       v-for="(tag,i) in part.tag_name"
+														       v-if="i<4"
+														       style="margin-bottom: 5px;cursor: pointer">
+															{{tag}}
+														</a-tag>
+														<div>等{{part.tag_name.length}}个标签</div>
+													</div>
+												</a-popover>
+												<a-tag color="blue" v-if="part.tag_name.length<=4"
+												       v-for="tag in part.tag_name"
 												       style="margin-bottom: 5px;">
 													{{tag}}
 												</a-tag>
@@ -453,11 +543,21 @@
 				<div style="height: calc(100% - 51px);overflow:auto;">
 					<div style="padding: 20px 20px 0;">
 						跟进状态：
-						<a-select style="width: 180px"
+						<a-select style="width: 220px" @change="changeState"
 						          v-model="status">
-							<a-select-option v-for="item in follows" :value="item.id"
+							<a-select-option v-for="(item,index) in follows" :value="item.id" :key="index"
 							                 :disabled="canEdit == 1 ? false : true">
 								{{item.title}}
+							</a-select-option>
+						</a-select>
+					</div>
+					<div style="margin: 20px 20px;" v-if="followItem.lose_one==1">
+						输单原因：
+						<a-select v-model="lose" style="width: 220px" placeholder="请选择输单原因"
+						          @change="changeLose">
+							<a-select-option v-for="(item,index) in loseReason"
+							                 :value="item.id">
+								{{item.context}}
 							</a-select-option>
 						</a-select>
 					</div>
@@ -555,6 +655,11 @@
 			let corpId =
 				localStorage.getItem('corpId') ? localStorage.getItem('corpId') : "";
 			return {
+				customerType       : [],
+				corpType           : [0],
+				lose               : undefined,
+				loseReason         : [],
+				followItem         : {},
 				moment,
 				corpInfo           : [], //企业微信列表
 				corpId             : corpId, //修改后的企业微信id值
@@ -661,9 +766,53 @@
 				userId                 : [],//选择的成员id
 				userName               : [],//选择的成员name
 				canEdit                : 1,//是否可以编辑客户跟进状态,1可以，0不可以
+				isShowMore             : true,//是否显示右上角更多操作按钮
 			};
 		},
 		methods   : {
+			// 获取企业微信
+			async getCorpWx () {
+				const {data: res} = await this.axios.post("work-external-contact-follow-user/enterprise-type", {
+					corp_id: this.corpId
+				});
+				if (res.error != 0) {
+					this.$message.error(res.error_msg);
+				} else {
+					this.customerType = [{value: 0, label: '全部',},
+						{value: 1, label: '个人微信',},
+						{
+							value: 2, label: '企业微信', children: [
+								{value: '', label: '全部'}
+							]
+						},]
+					for (let item of res.data) {
+						let {corp_full_name: label, corp_name: value} = item
+						this.customerType[2].children.push({value, label})
+					}
+				}
+			},
+			// 客戶类型
+			filter (inputValue, path) {
+				return path.some(option => option.label.toLowerCase().indexOf(inputValue.toLowerCase()) > -1)
+			},
+			changeState (item) {
+				let index = this.follows.findIndex(x => x.id == this.status)
+				this.followItem = this.follows[index]
+			},
+			changeLose () {
+
+			},
+			async getLoseReason () {
+				const {data: res} = await this.axios.post("custom-field/get-lose-msg", {
+						corp_id: localStorage.getItem("corpId"),
+					}
+				);
+				if (res.error != 0) {
+					this.$message.error(res.error_msg)
+				} else {
+					this.loseReason = res.data
+				}
+			},
 			//切换企业微信
 			changeWx (value) {
 				this.corpId = value;
@@ -735,6 +884,7 @@
 			//点击清空
 			clear () {
 				this.corpId = localStorage.getItem('corpId') ? localStorage.getItem('corpId') : "";
+				this.corpType = [0]
 				this.name = '';
 				this.id = '';
 				this.cid = ''
@@ -783,7 +933,7 @@
 				});
 			},
 			//添加跟进
-			addRecord (cid, id, close_rate, name) {
+			addRecord (cid, id, close_rate, name, part) {
 				if (this.tabKey == 1) {
 					this.cid = cid
 					this.id = id
@@ -817,19 +967,27 @@
 				}
 			},
 			async onSure () {
-				if (this.followMsg.trim() == '' && this.file2.length == 0) {
-					this.$message.error('跟进内容不能为空！')
-					return false
+				if (this.followItem.lose_one == 0) {
+					if (this.followMsg.trim() == '' && this.file2.length == 0) {
+						this.$message.error('跟进内容不能为空！')
+						return false
+					}
+					if (this.status == '') {
+						this.$message.warning('请选择跟进状态！')
+						return false
+					}
+					let reg = /^(?:0|[1-9][0-9]?|100)$/
+					if (this.close_rate != null && this.close_rate != '' && (this.close_rate < 0 || this.close_rate > 100 || !reg.test(this.close_rate))) {
+						this.$message.warning('成交率必须为0-100正整数')
+						return false
+					}
+				} else {
+					if (!this.lose) {
+						this.$message.error('输单原因不能为空！')
+						return false
+					}
 				}
-				if (this.status == '') {
-					this.$message.warning('请选择跟进状态！')
-					return false
-				}
-				let reg = /^(?:0|[1-9][0-9]?|100)$/
-				if (this.close_rate != null && this.close_rate != '' && (this.close_rate < 0 || this.close_rate > 100 || !reg.test(this.close_rate))) {
-					this.$message.warning('成交率必须为0-100正整数')
-					return false
-				}
+
 				let url = ''
 				let cid = ''
 				if (this.tabKey == 1) {
@@ -851,7 +1009,9 @@
 					follow_id      : this.status,
 					close_rate     : this.close_rate,
 					corp_id        : this.corpId,
-					tag_ids        : this.tag_arr
+					tag_ids        : this.tag_arr,
+					lose           : this.lose,
+
 				})
 
 				if (res.error != 0) {
@@ -877,6 +1037,7 @@
 					// this.status = 1
 					this.followMsg = ''
 					this.file2 = []
+					this.lose = undefined
 					this.imageUrl2 = []
 					this.imgNum2 = 0
 					this.close_rate = ''
@@ -897,6 +1058,7 @@
 				this.id2 = ''
 				this.cid = ''
 				this.cid2 = ''
+				this.lose = undefined
 			},
 			changeMsg2 (value) {
 				if (this.imageUrl2.indexOf(value.file) != -1) {
@@ -924,7 +1086,6 @@
 				} else {
 					this.$message.error(res.error_msg)
 				}
-				// console.log(this.file,'this.file')
 			},
 			beforeUpload2 (file) {
 				if (file.type != 'image/png' && file.type != 'image/jpg' && file.type != 'image/jpeg') {
@@ -1080,6 +1241,18 @@
 			},
 			//成员转交给公海池
 			async assignHighSea (record, id, type) {
+				let that = this
+				that.$confirm({
+					title     : '确定退回公海池吗？',
+					okText    : "确定",
+					okType    : "primary",
+					cancelText: "取消",
+					onOk () {
+						that.assignHighSea2(record, id, type)
+					},
+				});
+			},
+			async assignHighSea2 (record, id, type) {
 				if (type == 0) {
 					//非企微客户
 					this.id2 = id
@@ -1296,6 +1469,8 @@
 						cid            : this.cid,
 						start_time     : this.joinTime ? (this.joinTime.length > 1 ? this.joinTime[0].format("YYYY-MM-DD HH:mm:ss") : '') : '',
 						end_time       : this.joinTime ? (this.joinTime.length > 1 ? this.joinTime[1].format("YYYY-MM-DD HH:mm:ss") : '') : '',
+						corp_type      : this.corpType[0],
+						corp_name      : this.corpType[1],
 					}
 				);
 				if (res.error != 0) {
@@ -1466,16 +1641,19 @@
 					{
 						uid   : localStorage.getItem("uid"),
 						status: 1,
-						id    : id
+						// id    : id
 					}
 				);
 				if (res.error != 0) {
 					this.$message.error(res.error_msg);
 				} else {
+
 					this.follows = res.data.follow
+
 					for (let i = 0; i < this.follows.length; i++) {
 						if (this.follows[i].id == id) {
 							this.status = Number(id)
+							this.followItem = this.follows[i]
 							break
 						}
 					}
@@ -1484,6 +1662,7 @@
 					}
 					this.close_rate = close_rate
 					this.recordVisible = true
+					this.getLoseReason()
 					this.tag_arr = []
 					this.showTextArea = true
 					var all = document.getElementsByClassName('ant-popover')
@@ -1579,6 +1758,7 @@
 						cid            : this.cid2,
 						start_time     : this.joinTime2 ? (this.joinTime2.length > 1 ? this.joinTime2[0].format("YYYY-MM-DD HH:mm:ss") : '') : '',
 						end_time       : this.joinTime2 ? (this.joinTime2.length > 1 ? this.joinTime2[1].format("YYYY-MM-DD HH:mm:ss") : '') : '',
+						corp_type      : this.corpType,
 					}
 				);
 				if (res.error != 0) {
@@ -1760,12 +1940,18 @@
 					this.corpInfo = info
 					this.cid = ''
 					// this.getAccount()
+					this.getCorpWx()
 				});
 				if (localStorage.getItem('permissionButton') == 'all') {
 					this.isJumpCustomDetail = true
 				} else {
 					let permissionButton = localStorage.getItem('permissionButton').split(',')
 					this.isJumpCustomDetail = permissionButton.includes('client-info')
+					if (permissionButton.indexOf('client-addFollow') == -1 && permissionButton.indexOf('client-info') == -1 && permissionButton.indexOf('client-assign') == -1 && permissionButton.indexOf('client-backHighSea') == -1 && permissionButton.indexOf('client-protect') == -1) {
+						this.isShowMore = false
+					} else {
+						this.isShowMore = true
+					}
 				}
 			}
 		},
@@ -2070,4 +2256,9 @@
 		color: #01b065;
 		background: #FFF;
 	}
+  .over-width-300{
+    width: 300px!important;
+    max-height: 200px!important;
+    overflow-y: auto!important;
+  }
 </style>

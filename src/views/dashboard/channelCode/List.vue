@@ -16,7 +16,7 @@
 						<div style="font-size:16px;font-weight:700;color:#333333">渠道活码</div>
 						<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7">
 							<p style="margin-bottom: 2px;">
-								1、生成带参数的二维码名片，支持活码功能，即随机选取设置的活码成员推给用户。当客户加企业微信为好友后，可以给客户自动发送欢迎语和打标签。
+								1、可以生成带参数的二维码名片，支持活码功能，即随机选取设置的活码成员推给用户。加企业微信为好友后，可以给微信联系人自动回复相应欢迎消息和打标签。
 							</p>
 							<p style="margin-bottom: 2px;">
 								2、每创建一个渠道活码，该码则自动进入【内容引擎】--【图片类型】--分组【渠道码-企业微信】，以素材的方式通过聊天侧边栏快速发送给客户。
@@ -25,7 +25,7 @@
 								3、<span style="color: #F56C6C;">受限于官方，单人类型的渠道码创建后尽量不要再修改成员，否则会造成列表中，该二维码中间的头像与配置的成员头像不一致，但是并不影响功能使用。</span>
 							</p>
 							<p style="margin-bottom: 0px;">
-								4、<span style="color: #F56C6C;">如果在企业微信后台为相关成员配置了可用的欢迎语，第三方系统配置欢迎语则不会推送，优先推送企业微信官方的。</span>
+								4、<span style="color: #F56C6C;">如果企业在企业微信后台为相关成员配置了可用的欢迎语，使用第三方系统配置欢迎语，则均不起效，推送的还是企业微信官方的。</span>
 							</p>
 						</div>
 						<div class="content-hd">
@@ -41,14 +41,14 @@
 									<span v-if="chooseNum > 0">已选择{{chooseUserNum1}}名成员，{{chooseDepartmentNum1}}个部门</span>
 									<span v-else>选择成员</span>
 								</a-button>
-								<a-button style="margin-left: 10px;" @click="selectTitle" type="primary">查询</a-button>
-								<a-button style="margin-left: 10px;" @click="clearTitle">重置</a-button>
+								<a-button style="margin-left: 10px;" @click="selectTitle" type="primary">查找</a-button>
+								<a-button style="margin-left: 10px;" @click="clearTitle">清空</a-button>
 							</a-col>
 							<a-col style="float:right;z-index: 9999">
-								<a-button class="btn-primary"  @click="syncFollowUser">
+								<a-button class="btn-primary" @click="syncFollowUser">
 									同步配置了外部联系权限的联系人
 								</a-button>
-								<a-button class="btn-primary"@click="showModal('add')" type="primary"
+								<a-button class="btn-primary"  @click="showModal('add')" type="primary"
 								          v-has="'channel-add'">
 									新建
 								</a-button>
@@ -116,19 +116,18 @@
 					                </span>
 
 									<span slot="action" slot-scope="text, record">
-
 										<a-button v-show="false" v-if="record.add_num > 0"
 										          @click="getWayInfo(record.id)"
 										          class="actionBtn">详情</a-button>
 										<a-button @click="modifyWay(record.id)" class="actionBtn"
+										          v-if="record.package_del!==1"
 										          v-has="'channel-edit'">编辑</a-button>
 										<a-button @click="customer(record.id)" class="actionBtn"
 										          v-has="'channel-client'">客户</a-button>
 										<a-button @click="statistics(record.id, record.title)" class="actionBtn"
 										          v-has="'channel-statistic'">统计</a-button>
-										<a-button
-												@click="moveQrcode(record.id, record.way_group_id, 0)"
-												class="actionBtn" v-has="'channel-group-move'">移动</a-button>
+										<a-button @click="moveQrcode(record.id, record.way_group_id, 0)"
+										          class="actionBtn" v-has="'channel-group-move'">移动</a-button>
 										<!--				<a-button @click="downLoadWay(record.qr_code, record.remark)" class="actionBtn">下载</a-button>-->
 										<a-button :data-url="$store.state.commonUrl + record.local_path"
 										          :data-name="record.title"
@@ -136,7 +135,6 @@
 										          v-has="'channel-down'">下载</a-button>
 										<a-button @click="deleteList(record.id)" class="actionBtn"
 										          v-has="'channel-delete'">删除</a-button>
-
 									</span>
 								</a-table>
 								<!-- 分页 -->
@@ -171,19 +169,23 @@
 											</template>
 											<a-button style="margin-right: 5px"
 											          v-if="selectedRowKeys.length != 0" v-has="'channel-edit'">
+												<a-icon type="team"/>
 												批量编辑成员
 											</a-button>
 										</a-popover>
 										<a-button v-if="selectedRowKeys.length == 0" style="margin-right: 5px"
 										          :disabled="selectedRowKeys.length == 0" v-has="'channel-edit'">
+											<a-icon type="team"/>
 											批量编辑成员
 										</a-button>
 										<a-button @click="setUserLimit" style="margin-right: 5px"
 										          :disabled="selectedRowKeys.length == 0" v-has="'channel-edit'">
+											<a-icon type="to-top"/>
 											批量编辑成员上限
 										</a-button>
 										<a-button @click="batchEditWelCome()" style="margin-right: 5px"
 										          :disabled="selectedRowKeys.length == 0" v-has="'channel-edit'">
+											<a-icon type="message"/>
 											批量编辑欢迎语
 										</a-button>
 										<!--										<a-button @click="batchDelete" :disabled="selectedRowKeys.length == 0">-->
@@ -797,7 +799,7 @@
 						<div style="float: right;margin-right: 240px">
 							<a-button type="primary"
 							          style="height: 26px;width: 94px;padding: 0px 5px;margin-right: 10px; font-size: 12px;"
-							         v-show="index == specialDateList.length - 1 && batchEditType"
+							           v-show="index == specialDateList.length - 1 && batchEditType"
 							          @click="addSpecialDate(index)">
 								添加时期
 							</a-button>
@@ -1005,7 +1007,6 @@
 						<div class="pull-right fl" style="margin-left: 20px;">
 							<editor v-if="pushValue" :text="textContent" :key="editorKey"
 							        :textValue="textAreaValueHeader"
-							        :isEmoji="false"
 							        @changeText="changeText">
 							</editor>
 							<div v-if="!img && !modalUrlOk && !modalAppletOk"
@@ -1175,7 +1176,6 @@
 										         :idx="idx"
 										         :key="weekKey"
 										         :textValue="item.content.textAreaValueHeader"
-										         :isEmoji="false"
 										         @changeText="changeText1">
 										</cEditor>
 										<div v-if="!item.content.img && !item.content.modalUrlOk && !item.content.modalAppletOk"
@@ -1349,7 +1349,6 @@
 										         :idx="idx"
 										         :key="dateKey"
 										         :textValue="item.content.textAreaValueHeader"
-										         :isEmoji="false"
 										         @changeText="changeText1">
 										</cEditor>
 										<div v-if="!item.content.img && !item.content.modalUrlOk && !item.content.modalAppletOk"
@@ -1523,7 +1522,7 @@
 		<!-- 选择成员 -->
 		<chooseDepartment ref="user" :show="showModalDepartment" :is_from="7" :chooseNum="chooseDepartmentNum"
 		                  :callback="modalVisibleChange3"></chooseDepartment>
-		<chooseMsg :show="showModal3" :type="typeValue2" :news_type="news_type"
+		<chooseMsg :show="showModal3" :type="typeValue2" :news_type="news_type" :showRadar="true"
 		           :callback="modalVisibleChange2" :sketchType="'1'" :comefrom='comefrom'
 		           :chooseId="chooseId"></chooseMsg>
 		<chooseMinipro :show="showModalMinipro" :type="typeValue2"
@@ -1542,56 +1541,91 @@
 				</a-radio-group>
 			</a-form-item>
 			<template v-if="sketchAddType == 1">
-				<a-form-item :label-col="{ span: 3 }"
-				             :wrapper-col="{ span: 21 }"
-				             v-show="closeShowModal3==false">
-					<template slot="label"><span
-							style="color: red">*</span>图片封面
-					</template>
-					<div class="upload-wrap"
-					     @click="choosePic(2, welcomeType, weekIndex, wTimeIndex)">
-						<a-icon type="plus" class="upload-plus"/>
-					</div>
-				</a-form-item>
-				<!-- 选中后 -->
-				<a-form-item :label-col="{ span: 3 }"
-				             :wrapper-col="{ span: 21 }"
-				             v-show="closeShowModal3">
-					<template slot="label"><span
-							style="color: red">*</span>图片封面
-					</template>
-					<div class="upload-wrap">
-						<img :src="commonUrl+msgUrl1" alt=""
-						     style="max-width: 100%;max-height: 100%;margin-left: 50%;margin-top: 50%;transform: translate(-50%, -50%);">
-					</div>
-					<span
-							style="color: blue;cursor: pointer;margin: 67px 0 0px 10px;float: left;"
-							@click="choosePic(2, welcomeType, weekIndex, wTimeIndex)">重新上传</span>
-				</a-form-item>
-				<!-- 填写标题 -->
+				<!-- 点击跳转 -->
 				<a-form-item :label-col="{ span: 3 }"
 				             :wrapper-col="{ span: 21 }">
 					<template slot="label"><span
-							style="color: red">*</span>填写标题
+							style="color: red">*</span>图文链接
 					</template>
-					<a-input v-model="inputTitle1"
-					         :maxLength="32">
-																	<span slot="suffix">
-	                    <span>{{inputTitle1.length}}</span>/32
-	                  </span>
+					<a-input
+							placeholder="请输入图文链接，且必须以http://或https://开头"
+							style="margin-bottom: 10px;"
+							v-model="url1" allow-clear @change="inputChange()">
 					</a-input>
-				</a-form-item>
-				<!-- 添加描述 -->
-				<a-form-item label="添加描述" :label-col="{ span: 3 }"
-				             :wrapper-col="{ span: 21 }">
-					<a-textarea placeholder="填写图文描述" :rows="4"
-					            style="resize: none;"
-					            v-model="digest1"
-					            :maxLength="128"/>
-					<div style="float:right;">
-						<span>{{digest1.length}}</span>/128
+					<div v-if="msgUrl1 != ''"
+					     class="content_input">
+						<div style="flex-grow: 1;height: 100px;">
+							<div class="input_text1">{{inputTitle1}}</div>
+							<div class="input_text2">
+								{{digest1}}
+							</div>
+						</div>
+						<div style="width: 100px;height: 100px;padding: 10px">
+							<img v-if="msgUrl1 != ''" class="input_img"
+							     :src="commonUrl + msgUrl1" alt=""/>
+							<img v-if="msgUrl1 == ''" class="input_img"
+							     src="../../../assets/url.png" alt=""/>
+						</div>
 					</div>
 				</a-form-item>
+				<a-form-item v-if="url1 !=''" label="高级设置"
+				             :label-col="{ span:3 }"
+				             :wrapper-col="{ span: 21 }">
+					<a-switch
+							v-model="setIsShow"/>
+				</a-form-item>
+				<template v-if="setIsShow">
+					<!-- 填写标题 -->
+					<a-form-item :label-col="{ span: 3 }"
+					             :wrapper-col="{ span: 21 }">
+						<template slot="label"><span
+								style="color: red">*</span>填写标题
+						</template>
+						<a-input v-model="inputTitle1"
+						         :maxLength="32">
+																		<span slot="suffix">
+		                    <span>{{inputTitle1.length}}</span>/32
+		                  </span>
+						</a-input>
+					</a-form-item>
+					<!-- 添加描述 -->
+					<a-form-item label="添加描述" :label-col="{ span: 3 }"
+					             :wrapper-col="{ span: 21 }">
+						<a-textarea placeholder="填写图文描述" :rows="4"
+						            style="resize: none;"
+						            v-model="digest1"
+						            :maxLength="128"/>
+						<div style="float:right;">
+							<span>{{digest1.length}}</span>/128
+						</div>
+					</a-form-item>
+					<a-form-item :label-col="{ span: 3 }"
+					             :wrapper-col="{ span: 21 }"
+					             v-show="closeShowModal3==false">
+						<template slot="label"><span
+								style="color: red">*</span>图片封面
+						</template>
+						<div class="upload-wrap"
+						     @click="choosePic(2)">
+							<a-icon type="plus" class="upload-plus"/>
+						</div>
+					</a-form-item>
+					<!-- 选中后 -->
+					<a-form-item :label-col="{ span: 3 }"
+					             :wrapper-col="{ span: 21 }"
+					             v-show="closeShowModal3">
+						<template slot="label"><span
+								style="color: red">*</span>图片封面
+						</template>
+						<div class="upload-wrap">
+							<img :src="commonUrl+msgUrl1" alt=""
+							     style="max-width: 100%;max-height: 100%;margin-left: 50%;margin-top: 50%;transform: translate(-50%, -50%);">
+						</div>
+						<span
+								style="color: blue;cursor: pointer;margin: 67px 0 0px 10px;float: left;"
+								@click="choosePic(2, welcomeType, weekIndex, wTimeIndex)">重新上传</span>
+					</a-form-item>
+				</template>
 				<a-form-item label="素材同步" :label-col="{ span: 3 }"
 				             :wrapper-col="{ span: 21 }">
 					<a-radio-group
@@ -1617,17 +1651,19 @@
 						</a-radio>
 					</a-radio-group>
 				</a-form-item>
-				<!-- 点击跳转 -->
 				<a-form-item :label-col="{ span: 3 }"
 				             :wrapper-col="{ span: 21 }">
-					<template slot="label"><span
-							style="color: red">*</span>点击跳转
+					<template slot="label">
+						客户标签
 					</template>
-					<a-input
-							placeholder="请输入跳转链接，且必须以http://或https://开头"
-							style="margin-bottom: 10px;"
-							v-model="url1">
-					</a-input>
+					给点击雷达的客户打上选中的标签
+					<div>
+						<a-button  @click="chooseTag">添加标签</a-button>
+					</div>
+					<a-tag v-for="(item, index) in tagName1" color="orange">
+						{{item}}
+						<a-icon type="close" style="color: #fa8c16; vertical-align: inherit; cursor: pointer" @click="deleteTag(index)"></a-icon>
+					</a-tag>
 				</a-form-item>
 			</template>
 			<template v-if="sketchAddType == 0">
@@ -1814,6 +1850,11 @@
 		</a-modal>
 		<!-- 小程序封面图片裁剪 -->
 		<cropperModal ref="cropper" @ok="uploadAppletPic" @cancel="cancleAppletPic"></cropperModal>
+		<a-modal width="888px!important" title="客户标签" v-model="tagVisible" @ok="handleTag"
+		         @cancel="handleCancelTag">
+			<corpChooseTagModal :key="2" v-if="tagVisible" :callback="chooseTags" :tagname="tagName2"
+			                    :hasChoose="tag_arr2"></corpChooseTagModal>
+		</a-modal>
 	</div>
 </template>
 
@@ -1831,43 +1872,51 @@
 	import editor from '../../../components/editor/index'
 	import chooseStaffSelect from "@/components/ChooseStaffSelect"
 	import cEditor from '../../../components/editor/channelCodeEditor'
+	import corpChooseTagModal from '@/components/corpChooseTag/CorpChooseTagModal.vue'
 
 	const welcomeContent = {
-		img                : false, // 图片url
-		text               : "", // 文本内容
-		textAreaValueHeader: '',
-		textContent        : '',
-		material_id1       : '',
-		news_type          : 1,
-		sketchAddType      : 1, // 新建或导入
-		url                : '',//网址弹窗输入的网址
-		msgUrl             : '',//网址弹窗封面选好的url
-		inputTitle         : '',//网址弹窗输入标题
-		digest             : '',//网址弹窗输入描述
-		confirmLoading     : false,//网址弹窗确认按钮的Loading
-		popVisible         : false,//控制选择图片、网址、小程序的popover的显示与隐藏
-		groupId            : [],//分组id
-		index              : 0,//判断是图片打开素材弹窗还是链接打开，1是图片，2是链接，3是小程序
-		modalUrlOk         : false,//判断网址弹窗关闭时是否成功选择
-		showModalApplet    : false,//小程序弹窗的显示与隐藏
-		miniproAddType     : 1, // 新建或导入
-		miniproAddType1    : 1,
-		material_id3       : '',
-		showModalMinipro   : false, // 导入框
-		appletUrl          : '',//小程序的封面链接
-		appletInputTitle   : '',//小程序的标题
-		appid              : '',//小程序的appid
-		pageUrl            : '',//小程序page路径
-		closeModalApplet   : false,//小程序弹窗封面选没选好
-		modalAppletOk      : false,//判断小程序弹窗关闭时是否成功选择
-		checkedList        : [],//选择的成员id数组
-		corpArr            : [],//企业微信数组
-		chooseNum          : 0,//已选择的成员数量
-		chooseDepartmentNum: 0,
-		selectGroupId      : '',
-		sketchAddType1     : 1,
-		disabledSync       : 0,
-		materialSync       : 0,
+		img                       : false, // 图片url
+		text                      : "", // 文本内容
+		textAreaValueHeader       : '',
+		textContent               : '',
+		material_id1              : '',
+		news_type                 : 1,
+		sketchAddType             : 1, // 新建或导入
+		url                       : '',//网址弹窗输入的网址
+		msgUrl                    : '',//网址弹窗封面选好的url
+		inputTitle                : '',//网址弹窗输入标题
+		digest                    : '',//网址弹窗输入描述
+		confirmLoading            : false,//网址弹窗确认按钮的Loading
+		popVisible                : false,//控制选择图片、网址、小程序的popover的显示与隐藏
+		groupId                   : [],//分组id
+		index                     : 0,//判断是图片打开素材弹窗还是链接打开，1是图片，2是链接，3是小程序
+		modalUrlOk                : false,//判断网址弹窗关闭时是否成功选择
+		showModalApplet           : false,//小程序弹窗的显示与隐藏
+		miniproAddType            : 1, // 新建或导入
+		miniproAddType1           : 1,
+		material_id3              : '',
+		showModalMinipro          : false, // 导入框
+		appletUrl                 : '',//小程序的封面链接
+		appletInputTitle          : '',//小程序的标题
+		appid                     : '',//小程序的appid
+		pageUrl                   : '',//小程序page路径
+		closeModalApplet          : false,//小程序弹窗封面选没选好
+		modalAppletOk             : false,//判断小程序弹窗关闭时是否成功选择
+		checkedList               : [],//选择的成员id数组
+		corpArr                   : [],//企业微信数组
+		chooseNum                 : 0,//已选择的成员数量
+		chooseDepartmentNum       : 0,
+		selectGroupId             : '',
+		from_channel              : 2,
+		sketchAddType1            : 1,
+		disabledSync              : 0,
+		materialSync              : 0,
+		radar_tag_ids             : '',
+		radar_tag_ids_name        : [],
+		radar_tag_open            : 1,
+		radar_open                : 1,
+		radar_dynamic_notification: 1,
+		stag_arr                  : [],
 	};
 	const limitUserColumns = [
 		{
@@ -1987,7 +2036,9 @@
 			MyIcon,
 			chooseMinipro,
 			cropperModal,
-			editor, chooseStaffSelect
+			editor,
+			chooseStaffSelect,
+			corpChooseTagModal
 		},
 		data () {
 			let corpId = localStorage.getItem('corpId') ? localStorage.getItem('corpId') : "";
@@ -1997,28 +2048,28 @@
 				chooseDepartmentNum1 : 0,
 				user_ids             : [],
 				user_arr             : [],
-				editorKey            : 0,
-				textAreaValueHeader  : '',
-				textContent          : '',
-				popoverKey           : 0,
-				commonUrl            : this.$store.state.commonUrl, //公共的链接
-				groupVisible         : false,
-				groupLoading         : false,
-				groupList            : [],
-				group                : '',
-				qrCodeId             : '',
-				previewModal         : false,
-				specialType          : 1,
-				batchMoveType        : '',
-				editType             : 1,
-				specialModal         : false,
-				specialModalTitle    : '编辑成员',
-				specialTimeVisible   : false,
-				departmentDisabled   : 0,
-				showModalDepartment  : false,
-				chooseDepartmentNum  : 0,
-				addSpecialTimeLoading: false,
-				weekList             : [
+				editorKey                 : 0,
+				textAreaValueHeader       : '',
+				textContent               : '',
+				popoverKey                : 0,
+				commonUrl                 : this.$store.state.commonUrl, //公共的链接
+				groupVisible              : false,
+				groupLoading              : false,
+				groupList                 : [],
+				group                     : '',
+				qrCodeId                  : '',
+				previewModal              : false,
+				specialType               : 1,
+				batchMoveType             : '',
+				editType                  : 1,
+				specialModal              : false,
+				specialModalTitle         : '编辑成员',
+				specialTimeVisible        : false,
+				departmentDisabled        : 0,
+				showModalDepartment       : false,
+				chooseDepartmentNum       : 0,
+				addSpecialTimeLoading     : false,
+				weekList                  : [
 					{
 						key : 'mon',
 						name: '周一'
@@ -2048,8 +2099,8 @@
 						name: '周日'
 					}
 				],
-				weekDayKey           : [],
-				weelArr              : {
+				weekDayKey                : [],
+				weelArr                   : {
 					mon   : 0,
 					tues  : 1,
 					wednes: 2,
@@ -2058,10 +2109,10 @@
 					satur : 5,
 					sun   : 6
 				},
-				batchEditType        : false,
-				staffSelectDisabled  : false,//特殊时期选择成员下拉框禁选
-				weekChecked          : new Array(7).fill(false),
-				specialWeekColumns   : [
+				batchEditType             : false,
+				staffSelectDisabled       : false,//特殊时期选择成员下拉框禁选
+				weekChecked               : new Array(7).fill(false),
+				specialWeekColumns        : [
 					{
 						slots      : {title: 'mon'},
 						// title      : "周一",
@@ -2119,8 +2170,8 @@
 						scopedSlots: {customRender: "sun"}
 					},
 				],
-				specialTimeTitle     : '添加',
-				specialWeekList      : [
+				specialTimeTitle          : '添加',
+				specialWeekList           : [
 					{
 						mon   : [],
 						tues  : [],
@@ -2131,9 +2182,9 @@
 						sun   : [],
 					},
 				],
-				specialTime          : 0,
+				specialTime               : 0,
 				limitUserColumns,
-				previewUserColumns   : [
+				previewUserColumns        : [
 					{
 						title    : "名称",
 						dataIndex: "name",
@@ -2146,20 +2197,20 @@
 						scopedSlots: {customRender: "limit"}
 					}
 				],
-				is_limit             : 1,
-				userLimitList        : [],
-				spare_employee       : [],
-				userLimits           : [],
-				user_limit           : [],
-				pushValue            : true,
-				welcomeType          : '',
-				weekIndex            : '',
-				wTimeIndex           : '',
-				is_welcome_week      : 1,
-				is_welcome_date      : 1,
-				weekTabKey           : 0,
-				weekKey              : 0,
-				welcome_week_list    : [
+				is_limit                  : 1,
+				userLimitList             : [],
+				spare_employee            : [],
+				userLimits                : [],
+				user_limit                : [],
+				pushValue                 : true,
+				welcomeType               : '',
+				weekIndex                 : '',
+				wTimeIndex                : '',
+				is_welcome_week           : 1,
+				is_welcome_date           : 1,
+				weekTabKey                : 0,
+				weekKey                   : 0,
+				welcome_week_list         : [
 					{
 						date: [],
 						time: [
@@ -2171,9 +2222,9 @@
 						]
 					}
 				],
-				dateTabKey           : 0,
-				dateKey              : 0,
-				welcome_date_list    : [
+				dateTabKey                : 0,
+				dateKey                   : 0,
+				welcome_date_list         : [
 					{
 						date: [],
 						time: [
@@ -2185,10 +2236,10 @@
 						]
 					}
 				], // 特别时期欢迎语
-				limitVisible         : false,
-				limitLoading         : false,
-				text                 : '',
-				specialTimeList      : [
+				limitVisible              : false,
+				limitLoading              : false,
+				text                      : '',
+				specialTimeList           : [
 					{
 						startTime : moment('00:00', 'HH:mm'),
 						endTime   : moment('00:00', 'HH:mm'),
@@ -2198,7 +2249,7 @@
 						party     : []
 					},
 				], // 特殊时期成员
-				specialDateList      : [
+				specialDateList           : [
 					{
 						specialDate: [moment(new Date()), moment(new Date())],
 						date       : [moment(new Date()).format('YYYY-MM-DD'), moment(new Date()).format('YYYY-MM-DD')],
@@ -2214,88 +2265,106 @@
 						],
 					}
 				], // 周期成员
-				user                 : [],
-				party                : [],
-				type                 : 0,
-				title                : '',
-				corpId               : corpId,//企业微信选中的id
-				groupId              : '',
-				wayList              : [],
-				wayKeys              : [],
-				selectedRowKeys      : [], // 列表多选id
-				checkBoxValue        : [], // 列表多选显示
-				batchTypeValue       : false,
-				batchType            : '1', // 预览/批量编辑成员
-				wayInfo              : [],
-				isLoading            : true, //Loading 组件显示与隐藏
-				urlId                : '',//选中的二维码的id
+				user                      : [],
+				party                     : [],
+				type                      : 0,
+				title                     : '',
+				corpId                    : corpId,//企业微信选中的id
+				groupId                   : '',
+				wayList                   : [],
+				wayKeys                   : [],
+				selectedRowKeys           : [], // 列表多选id
+				checkBoxValue             : [], // 列表多选显示
+				batchTypeValue            : false,
+				batchType                 : '1', // 预览/批量编辑成员
+				wayInfo                   : [],
+				isLoading                 : true, //Loading 组件显示与隐藏
+				urlId                     : '',//选中的二维码的id
 				//表格部分
 				columns,
 				//分页
-				total                : 1, //总条数
-				quickJumper          : false, // 是否显示快速跳转的控件
-				page                 : 1, //页码
-				pageSize             : 15, //每页数据条数，默认15
-				usersVisible         : false,//用户列表弹窗的显示与隐藏
-				usersList            : [],//接口获取的用户列表
-				usersList2           : [],//页面显示的用户列表
+				total                     : 1, //总条数
+				quickJumper               : false, // 是否显示快速跳转的控件
+				page                      : 1, //页码
+				pageSize                  : 15, //每页数据条数，默认15
+				usersVisible              : false,//用户列表弹窗的显示与隐藏
+				usersList                 : [],//接口获取的用户列表
+				usersList2                : [],//页面显示的用户列表
 				//用户列表分页
-				page2                : 1, //页数
-				pageSize2            : 15, //每页个数
-				total2               : 0, //总条数
-				quickJumper2         : false, // 是否显示快速跳转的控件
+				page2                     : 1, //页数
+				pageSize2                 : 15, //每页个数
+				total2                    : 0, //总条数
+				quickJumper2              : false, // 是否显示快速跳转的控件
 				//用户列表表格部分
 				columns2,
-				isLoading3           : false,//用户列表页的加载
-				groupList1           : [], // 内容引擎分组
-				img                  : false, // 图片url
-				showModal3           : false,//选择图片弹窗的显示与隐藏
-				welComeVisible       : false,
-				typeValue2           : 2,  // 1.图文 2.图片
-				material_id1         : '',
-				news_type            : 1,
-				chooseId             : 0,//选择的图片id
-				showModalUrl         : false,//网址弹窗
-				sketchAddType        : 1, // 新建或导入
-				sketchAddType1       : 1,
-				url                  : '',//网址弹窗输入的网址
-				closeShowModal3      : false,//网址弹窗封面选没选好
-				msgUrl               : '',//网址弹窗封面选好的url
-				inputTitle           : '',//网址弹窗输入标题
-				digest               : '',//网址弹窗输入描述
-				confirmLoading       : false,//网址弹窗确认按钮的Loading
-				popVisible           : false,//控制选择图片、网址、小程序的popover的显示与隐藏
-				index                : 0,//判断是图片打开素材弹窗还是链接打开，1是图片，2是链接，3是小程序
-				modalUrlOk           : false,//判断网址弹窗关闭时是否成功选择
-				showModalApplet      : false,//小程序弹窗的显示与隐藏
-				miniproAddType       : 1, // 新建或导入
-				miniproAddType1      : 1,
-				material_id3         : '',
-				showModalMinipro     : false, // 导入框
-				appletUrl            : '',//小程序的封面链接
-				appletInputTitle     : '',//小程序的标题
-				appid                : '',//小程序的appid
-				pageUrl              : '',//小程序page路径
-				closeModalApplet     : false,//小程序弹窗封面选没选好
-				modalAppletOk        : false,//判断小程序弹窗关闭时是否成功选择
-				disabledSync         : 0,
-				materialSync         : 0,
-				materialSync1        : 0,
-				disabledSync1        : 0,
-				material_id0         : '',
-				msgUrl1              : '',
-				inputTitle1          : '',
-				digest1              : '',
-				url1                 : '',
-				material_id11        : '',
-				selectGroupId1       : '',
-				appletUrl1           : '',
-				appletInputTitle1    : '',
-				appid1               : '',
-				pageUrl1             : '',
-				material_id31        : '',
-				comefrom             : '',
-				isShowChoose         : true,//是否展示最下面的选择分页
+				isLoading3                : false,//用户列表页的加载
+				groupList1                : [], // 内容引擎分组
+				img                       : false, // 图片url
+				showModal3                : false,//选择图片弹窗的显示与隐藏
+				welComeVisible            : false,
+				typeValue2                : 2,  // 1.图文 2.图片
+				material_id1              : '',
+				news_type                 : 1,
+				chooseId                  : 0,//选择的图片id
+				showModalUrl              : false,//网址弹窗
+				sketchAddType             : 1, // 新建或导入
+				sketchAddType1            : 1,
+				url                       : '',//网址弹窗输入的网址
+				closeShowModal3           : false,//网址弹窗封面选没选好
+				msgUrl                    : '',//网址弹窗封面选好的url
+				inputTitle                : '',//网址弹窗输入标题
+				digest                    : '',//网址弹窗输入描述
+				confirmLoading            : false,//网址弹窗确认按钮的Loading
+				popVisible                : false,//控制选择图片、网址、小程序的popover的显示与隐藏
+				index                     : 0,//判断是图片打开素材弹窗还是链接打开，1是图片，2是链接，3是小程序
+				modalUrlOk                : false,//判断网址弹窗关闭时是否成功选择
+				showModalApplet           : false,//小程序弹窗的显示与隐藏
+				miniproAddType            : 1, // 新建或导入
+				miniproAddType1           : 1,
+				material_id3              : '',
+				showModalMinipro          : false, // 导入框
+				appletUrl                 : '',//小程序的封面链接
+				appletInputTitle          : '',//小程序的标题
+				appid                     : '',//小程序的appid
+				pageUrl                   : '',//小程序page路径
+				closeModalApplet          : false,//小程序弹窗封面选没选好
+				modalAppletOk             : false,//判断小程序弹窗关闭时是否成功选择
+				disabledSync              : 0,
+				materialSync              : 0,
+				materialSync1             : 0,
+				disabledSync1             : 0,
+				material_id0              : '',
+				setIsShow                 : false,
+				msgUrl1                   : '',
+				inputTitle1               : '',
+				digest1                   : '',
+				timeOut                   : 0,
+				url1                      : '',
+				material_id11             : '',
+				selectGroupId1            : '',
+				appletUrl1                : '',
+				radar_tag_ids             : '',
+				radar_tag_ids_name        : [],
+				radar_tag_open            : 1,
+				radar_open                : 1,
+				radar_dynamic_notification: 1,
+				stag_arr                  : [],
+				tagVisible                : false,
+				radarOpen1                : 1,     // 弹窗是否开启雷达链接
+				radarDynamicNotification1 : 1,     // 弹窗动态通知
+				radarTagOpen1             : 1,     // 弹窗雷达客户标签
+				tag_arr1                  : [],    // 弹窗标签数组
+				radarTagIds1              : '',    // 弹窗标签字符串
+				tagName1                  : [],    // 弹窗标签名
+				tag_arr2                  : [],    // 标签组件id数组
+				radarTagIds2              : '',    // 标签组件标签id字符串
+				tagName2                  : [],    // 标签组件选中标签名
+				appletInputTitle1         : '',
+				appid1                    : '',
+				pageUrl1                  : '',
+				material_id31             : '',
+				comefrom                  : '',
+				isShowChoose              : true,//是否展示最下面的选择分页
 			};
 		},
 
@@ -3664,6 +3733,12 @@
 						]
 					}
 				]
+				this.radar_tag_ids = ''
+				this.radar_tag_ids_name = []
+				this.radar_tag_open = 1
+				this.radar_open = 1
+				this.radar_dynamic_notification = 1
+				this.stag_arr = []
 				this.editorKey++
 				this.weekKey++
 				this.dateKey++
@@ -3692,6 +3767,54 @@
 			changeMaterialSync () {
 				if (this.materialSync1 == 1) {
 					this.getGroup()
+				}
+			},
+			changeRadarOpen () {
+				this.radarOpen1 = (this.radarOpen1 + 1) % 2
+			},
+			changeRadarDynamicNotification () {
+				this.radarDynamicNotification1 = (this.radarDynamicNotification1 + 1) % 2
+			},
+			changeRadarTagOpen () {
+				this.radarTagOpen1 = (this.radarTagOpen1 + 1) % 2
+			},
+			chooseTag () {
+				this.tag_arr2 = JSON.parse(JSON.stringify(this.tag_arr1))
+				this.radarTagIds2 = JSON.parse(JSON.stringify(this.radarTagIds1))
+				this.tagName2 = JSON.parse(JSON.stringify(this.tagName1))
+				this.tagVisible = true
+				this.showModalUrl = false
+			},
+			deleteTag(index) {
+				this.tag_arr1.splice(index, 1)
+				this.radarTagIds1 = this.tag_arr1.join(',')
+				this.tagName1.splice(index, 1)
+			},
+			handleTag () {
+				this.tag_arr1 = JSON.parse(JSON.stringify(this.tag_arr2))
+				this.radarTagIds1 = JSON.parse(JSON.stringify(this.radarTagIds2))
+				this.tagName1 = JSON.parse(JSON.stringify(this.tagName2))
+				this.tagVisible = false
+				this.showModalUrl = true
+			},
+			handleCancelTag () {
+				this.tag_arr2 = []
+				this.radarTagIds2 = ''
+				this.tagName2 = []
+				this.tagVisible = false
+				this.showModalUrl = true
+			},
+			chooseTags (event, arr, tagName) {
+				if (event == "ok") {
+					if(arr != '') {
+						this.tag_arr2 = arr.split(',')
+						this.radarTagIds2 = arr
+						this.tagName2 = tagName
+					} else {
+						this.tag_arr2 = []
+						this.radarTagIds2 = ''
+						this.tagName2 = []
+					}
 				}
 			},
 			//获取内容引擎分组列表
@@ -3862,6 +3985,7 @@
 				sendData.text_content = this.textContent
 				sendData.media_id = this.material_id
 				sendData.link_title = this.inputTitle
+				sendData.link_image = this.msgUrl
 				sendData.link_attachment_id = this.material_id
 				sendData.link_desc = this.digest
 				sendData.link_url = this.url
@@ -3875,6 +3999,10 @@
 				sendData.ids = this.selectedRowKeys
 				sendData.is_welcome_date = this.is_welcome_date
 				sendData.is_welcome_week = this.is_welcome_week
+				sendData.radar_open = this.radar_open
+				sendData.radar_dynamic_notification = this.radar_dynamic_notification
+				sendData.radar_tag_open = this.radar_tag_open
+				sendData.radar_tag_ids = this.radar_tag_ids
 				let welcome_week_list = []
 				if (sendData.is_welcome_week == 2) {
 					this.welcome_week_list.forEach(function (item) {
@@ -3885,20 +4013,24 @@
 									start_time: moment(t.startTime).format('HH:mm'),
 									end_time  : moment(t.endTime).format('HH:mm'),
 									content   : {
-										add_type          : t.content.index,
-										text_content      : t.content.textContent,
-										media_id          : t.content.material_id || '',
-										link_title        : t.content.inputTitle || '',
-										link_attachment_id: t.content.material_id || '',
-										link_desc         : t.content.digest || '',
-										link_url          : t.content.url || '',
-										mini_title        : t.content.appletInputTitle || '',
-										mini_pic_media_id : t.content.material_id || '',
-										mini_appid        : t.content.appid || '',
-										mini_page         : t.content.pageUrl || '',
-										attachment_id     : t.content.material_id3 || t.content.material_id1 || '',
-										materialSync      : t.content.materialSync || 0,
-										groupId           : t.content.selectGroupId || ''
+										add_type                  : t.content.index,
+										text_content              : t.content.textContent,
+										media_id                  : t.content.material_id || '',
+										link_title                : t.content.inputTitle || '',
+										link_attachment_id        : t.content.material_id || '',
+										link_desc                 : t.content.digest || '',
+										link_url                  : t.content.url || '',
+										mini_title                : t.content.appletInputTitle || '',
+										mini_pic_media_id         : t.content.material_id || '',
+										mini_appid                : t.content.appid || '',
+										mini_page                 : t.content.pageUrl || '',
+										attachment_id             : t.content.material_id3 || t.content.material_id1 || '',
+										materialSync              : t.content.materialSync || 0,
+										groupId                   : t.content.selectGroupId || '',
+										radar_tag_ids             : t.content.radar_tag_ids,
+										radar_tag_open            : t.content.radar_tag_open,
+										radar_open                : t.content.radar_open,
+										radar_dynamic_notification: t.content.radar_dynamic_notification,
 									}
 								}
 							)
@@ -3923,20 +4055,24 @@
 									start_time: moment(t.startTime).format('HH:mm'),
 									end_time  : moment(t.endTime).format('HH:mm'),
 									content   : {
-										add_type          : t.content.index,
-										text_content      : t.content.textContent || '',
-										media_id          : t.content.material_id || '',
-										link_title        : t.content.inputTitle || '',
-										link_attachment_id: t.content.material_id || '',
-										link_desc         : t.content.digest || '',
-										link_url          : t.content.url || '',
-										mini_title        : t.content.appletInputTitle,
-										mini_pic_media_id : t.content.material_id || '',
-										mini_appid        : t.content.appid || '',
-										mini_page         : t.content.pageUrl || '',
-										attachment_id     : t.content.material_id3 || t.content.material_id1 || '',
-										materialSync      : t.content.materialSync || 0,
-										groupId           : t.content.selectGroupId || ''
+										add_type                  : t.content.index,
+										text_content              : t.content.textContent || '',
+										media_id                  : t.content.material_id || '',
+										link_title                : t.content.inputTitle || '',
+										link_attachment_id        : t.content.material_id || '',
+										link_desc                 : t.content.digest || '',
+										link_url                  : t.content.url || '',
+										mini_title                : t.content.appletInputTitle,
+										mini_pic_media_id         : t.content.material_id || '',
+										mini_appid                : t.content.appid || '',
+										mini_page                 : t.content.pageUrl || '',
+										attachment_id             : t.content.material_id3 || t.content.material_id1 || '',
+										materialSync              : t.content.materialSync || 0,
+										groupId                   : t.content.selectGroupId || '',
+										radar_tag_ids             : t.content.radar_tag_ids,
+										radar_tag_open            : t.content.radar_tag_open,
+										radar_open                : t.content.radar_open,
+										radar_dynamic_notification: t.content.radar_dynamic_notification,
 									}
 								}
 							)
@@ -4026,6 +4162,46 @@
 				this.material_id0 = ''
 				this.material_id11 = ''
 			},
+			inputChange () {
+				this.url1 = this.url1.trim()
+				this.setIsShow = false
+				if (this.url1 == '') {
+					this.inputTitle1 = ''
+					this.digest1 = ''
+					this.msgUrl1 = ''
+					this.closeShowModal3 = false
+				} else if (this.url1 != '') {
+					let that = this
+					clearTimeout(that.timeOut)
+					that.timeOut = setTimeout(function () {
+						that.getUrlInfo()
+					}, 1000)
+				}
+			},
+			async getUrlInfo () {
+				const {data: res} = await this.axios.post('moment/moments-images-text', {
+					corp_id: this.corpId,
+					url    : this.url1
+				})
+
+				if (res.error != 0) {
+					this.$message.error(res.error_msg);
+				} else {
+					this.inputTitle1 = res.data.title
+					this.digest1 = res.data.description
+					if (res.data.url != '') {
+						this.msgUrl1 = res.data.url.replace(this.commonUrl, '')
+						if(this.msgUrl1 == '') {
+							this.setIsShow = true
+						}
+						this.closeShowModal3 = true
+					} else {
+						this.closeShowModal3 = false
+						this.setIsShow = true
+						this.msgUrl1 = ''
+					}
+				}
+			},
 			// 小程序新建/导入
 			changeMiniproAddType () {
 				if (this.sketchAddType == 0) {
@@ -4079,6 +4255,12 @@
 				if (content.sketchAddType1 == 1 && content.msgUrl) {
 					this.closeShowModal3 = true
 				}
+				this.radarOpen1 = content.radar_open
+				this.radarDynamicNotification1 = content.radar_dynamic_notification
+				this.radarTagOpen1 = content.radar_tag_open
+				this.tag_arr1 = JSON.parse(JSON.stringify(content.stag_arr))
+				this.radarTagIds1 = JSON.parse(JSON.stringify(content.radar_tag_ids))
+				this.tagName1 = JSON.parse(JSON.stringify(content.radar_tag_ids_name))
 				this.msgUrl1 = content.msgUrl
 				this.inputTitle1 = content.inputTitle
 				this.digest1 = content.digest
@@ -4143,6 +4325,11 @@
 				} else if (this.welcomeType == 2) {
 					content = this.welcome_date_list[this.weekIndex].time[this.wTimeIndex].content
 				}
+				if (this.tag_arr1.length == 0) {
+					this.radarTagOpen1 = 0
+				} else {
+					this.radarTagOpen1 = 1
+				}
 				content.sketchAddType1 = this.sketchAddType
 				content.msgUrl = this.msgUrl1
 				content.inputTitle = this.inputTitle1
@@ -4153,8 +4340,15 @@
 				content.material_id1 = this.material_id11
 				content.material_id = this.material_id0
 				content.selectGroupId1 = this.selectGroupId
+				content.radar_open = this.radarOpen1
+				content.radar_dynamic_notification = this.radarDynamicNotification1
+				content.radar_tag_open = this.radarTagOpen1
+				content.stag_arr = JSON.parse(JSON.stringify(this.tag_arr1))
+				content.radar_tag_ids = JSON.parse(JSON.stringify(this.radarTagIds1))
+				content.radar_tag_ids_name = JSON.parse(JSON.stringify(this.tagName1))
 				content.modalUrlOk = true
 				this.showModalUrl = false
+				this.setIsShow = false
 			},
 			// 图文弹窗取消啊
 			handleCancelUrl () {
@@ -4168,6 +4362,7 @@
 					this.index = 0
 				}
 				this.showModalUrl = false
+				this.setIsShow = false
 			},
 			// 选择小程序回调
 			modalVisibleChange2 (event, e, id, item) {
@@ -4219,10 +4414,17 @@
 			},
 			//上传素材，将素材传给企业微信
 			async uploadMedia (id) {
+				let content = this
+				if (this.welcomeType == 1) {
+					content = this.welcome_week_list[this.weekIndex].time[this.wTimeIndex].content
+				} else if (this.welcomeType == 2) {
+					content = this.welcome_date_list[this.weekIndex].time[this.wTimeIndex].content
+				}
 				const {data: res} = await this.axios.post("work-material/upload-media", {
 					corp_id      : this.corpId,
 					suite_id     : this.suite_id,
-					attachment_id: id
+					attachment_id: id,
+					type         : content.index == 1 ? 1 : (content.index == 2 && this.sketchAddType == 0 ? 4 : '')
 				});
 				if (res.error != 0) {
 					this.$message.error(res.error_msg);
@@ -4230,12 +4432,6 @@
 					if (isNaN(id) || id == '') {
 						this.$message.error('请选择素材')
 					} else {
-						let content = this
-						if (this.welcomeType == 1) {
-							content = this.welcome_week_list[this.weekIndex].time[this.wTimeIndex].content
-						} else if (this.welcomeType == 2) {
-							content = this.welcome_date_list[this.weekIndex].time[this.wTimeIndex].content
-						}
 						if (content.index == 1) {
 							//图片选择素材
 							content.material_id = res.data.id
@@ -4399,6 +4595,12 @@
 				content.material_id = ''
 				content.material_id1 = ''
 				content.material_id3 = ''
+				content.radar_tag_ids = ''
+				content.radar_tag_ids_name = []
+				content.radar_tag_open = 1
+				content.radar_open = 1
+				content.radar_dynamic_notification = 1
+				content.stag_arr = []
 			},
 			// 初始化文本信息的格式
 			initTextMsgContent (content) {
@@ -4600,35 +4802,25 @@
 				next(vm => {
 					vm.selectedRowKeys = []
 					if (typeof to.query.groupId == 'undefined' || vm.groupId.length != 0 && vm.groupId[0] != to.query.groupId) {
-						vm.type = 0
-						vm.title = ''
-						vm.isLoading = true
-						vm.page = 1
-						vm.pageSize = 15
-						vm.batchType = '1'
 						vm.groupId = []
 						vm.groupId.push(to.query.groupId)
-						vm.batchTypeValue = false
+						if (typeof to.query.id == 'undefined') {
+							//新建
+							vm.type = 0
+							vm.title = ''
+							vm.isLoading = true
+							vm.page = 1
+							vm.pageSize = 15
+							vm.batchType = '1'
+							vm.batchTypeValue = false
+						} else {
+							//编辑
+
+						}
 					}
 					vm.$refs.menu.id = to.query.groupId
-					vm.$refs.menu.getGroupList()
-					// vm.getWayList();
-				});
-			} else if (from.path == '/channelCode/add' && typeof to.query.isRefresh == 'undefined') {
-				next(vm => {
-					vm.selectedRowKeys = []
-					vm.type = 0
-					vm.title = ''
-					vm.isLoading = true
-					vm.page = 1
-					vm.pageSize = 15
-					vm.batchType = '1'
-					// vm.groupId = []
-					// vm.groupId.push(to.query.groupId)
-					vm.batchTypeValue = false
-					// vm.$refs.menu.id = to.query.groupId
 					// vm.$refs.menu.getGroupList()
-					vm.getWayList();
+					vm.getWayList(vm.page, vm.pageSize);
 				});
 			}
 			if (from.path != '/channelCode/add' && from.path != '/channelCode/statistics') {
@@ -4749,6 +4941,10 @@
 
 	#components-layout-demo-basic > .ant-layout:last-child {
 		margin: 0;
+	}
+
+	.list {
+		margin-left: 16px;
 	}
 
 	.list,
@@ -5023,5 +5219,41 @@
 			color: #01b065;
 			border-color: #01b065;
 		}
+	}
+
+	.content_input {
+		background: #F1F3F5;
+		min-width: 378px;
+		height: 100px;
+		margin-top: 5px;
+		display: flex;
+	}
+
+	.input_text1 {
+		width: 200px;
+		line-height: 30px;
+		margin: 15px 0 5px 15px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		word-break: break-all;
+		font-size: 18px;
+		color: #000
+	}
+
+	.input_text2 {
+		width: 250px;
+		line-height: 20px;
+		margin: 0 0 0 15px;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		word-break: break-all;
+		-webkit-line-clamp: 2;
+		overflow: hidden;
+	}
+
+	.input_img {
+		width: 80px;
+		height: 80px;
 	}
 </style>

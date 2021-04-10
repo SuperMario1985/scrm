@@ -4,7 +4,7 @@
 			<div style="height: 60px; line-height: 60px;background-color: #FFFFFF;border-bottom: 1px solid #E2E2E2;font-size: 16px;padding: 0px 20px;">
 				{{attachment.type}} 素材 {{attachment.title}}
 				<router-link to="/filingCabinet/list" style="font-size: 16px;float: right;">
-					<a-button type="primary" >返回列表</a-button>
+					<a-button type="primary">返回列表</a-button>
 				</router-link>
 			</div>
 			<div class="content-msg">
@@ -18,14 +18,14 @@
 						<a-row style="margin-bottom:20px;padding:0 20px;">
 							<a-col :span="24">
 								<a-card>
-<!--									<span slot="title">-->
-<!--										{{attachment.type}} 素材 {{attachment.title}}-->
-<!--									</span>-->
+									<!--									<span slot="title">-->
+									<!--										{{attachment.type}} 素材 {{attachment.title}}-->
+									<!--									</span>-->
 
 									<div style="padding: 32px 32px 20px 32px;">
 										<a-row :gutter="16">
 											<a-col :span="8" style="padding: 0px;">
-												<a-card :bodyStyle="{background: '#f9f9f9', padding: '24px !important'}">
+												<a-card :bodyStyle="{background: '#F9F9F9', padding: '24px !important'}">
 													<a-statistic
 															:value="searchNum"
 															:valueStyle="{ color: '#3F8600', textAlign: 'right'}"
@@ -36,18 +36,19 @@
 																<template slot="title">
 																	<span>被员工搜索的次数</span>
 																</template>
-																<a-icon type="question-circle" style="margin-left:5px;"/>
+																<a-icon type="question-circle"
+																        style="margin-left:5px;"/>
 															</a-tooltip>
 														</template>
 													</a-statistic>
 												</a-card>
 											</a-col>
 											<a-col :span="8" style="padding: 0px;">
-												<a-card :bodyStyle="{background: '#f9f9f9', padding: '24px !important'}">
+												<a-card :bodyStyle="{background: '#F9F9F9', padding: '24px !important'}">
 													<a-statistic
 															:value="sendNum"
 															:valueStyle="{ color: '#3F8600', textAlign: 'right'}"
-															style="background: #f9f9f9"
+															style="background: #F9F9F9"
 													>
 														<template slot="title">
 															发送次数
@@ -55,18 +56,20 @@
 																<template slot="title">
 																	<span>被员工发送的次数</span>
 																</template>
-																<a-icon type="question-circle" style="margin-left:5px;"/>
+																<a-icon type="question-circle"
+																        style="margin-left:5px;"/>
 															</a-tooltip>
 														</template>
 													</a-statistic>
 												</a-card>
 											</a-col>
-											<a-col :span="8" style="padding: 0px;" v-if="type == 4 || type == 1 || type == 3">
-												<a-card :bodyStyle="{background: '#f9f9f9', padding: '24px !important'}">
+											<a-col :span="8" style="padding: 0px;"
+											       v-if="isRadar == 1">
+												<a-card :bodyStyle="{background: '#F9F9F9', padding: '24px !important'}">
 													<a-statistic
 															:value="openNum"
 															:valueStyle="{ color: '#3F8600', textAlign: 'right'}"
-															style="background: #f9f9f9"
+															style="background: #F9F9F9"
 													>
 														<template slot="title">
 															打开次数
@@ -74,7 +77,8 @@
 																<template slot="title">
 																	<span>被同一客户打开多次，会重复计算</span>
 																</template>
-																<a-icon type="question-circle" style="margin-left:5px;"/>
+																<a-icon type="question-circle"
+																        style="margin-left:5px;"/>
 															</a-tooltip>
 														</template>
 													</a-statistic>
@@ -102,8 +106,11 @@
 																<a-timeline-item v-for="(item, key) in searchList"
 																                 :key="key">
 																	<div style="min-height: 40px;">
-																		<div class="time-line-time">{{item.event_time}}</div>
-																		<div class="time-line-title">{{item.content}}</div>
+																		<div class="time-line-time">
+																			{{item.event_time}}
+																		</div>
+																		<div class="time-line-title">{{item.content}}
+																		</div>
 																	</div>
 																</a-timeline-item>
 																<a-timeline-item v-if="searchNoMore" key="searchNoMore">
@@ -137,8 +144,11 @@
 																<a-timeline-item v-for="(item, key) in sendList"
 																                 :key="key">
 																	<div style="min-height: 40px;">
-																		<div class="time-line-time">{{item.event_time}}</div>
-																		<div class="time-line-title">{{item.content}}</div>
+																		<div class="time-line-time">
+																			{{item.event_time}}
+																		</div>
+																		<div class="time-line-title">{{item.content}}
+																		</div>
 																	</div>
 																</a-timeline-item>
 																<a-timeline-item v-if="sendNoMore" key="sendNoMore">
@@ -158,7 +168,8 @@
 													</div>
 												</a-spin>
 											</a-tab-pane>
-											<a-tab-pane :key="3" v-if="type == 4 || type == 1 || type == 3">
+											<a-tab-pane :key="3"
+											            v-if="isRadar == 1">
 												<span slot="tab">
 													<a-icon type="eye"/>
 													打开详情
@@ -231,6 +242,8 @@
 				openNoMore       : false,  // 是否还有打开信息
 				pending          : false, // 是否显示加载中
 				type             : '',
+				isRadar          : 0,
+				fileType         : '',
 			}
 		},
 		methods: {
@@ -305,6 +318,8 @@
 		created () {
 			this.attachmentId = this.$route.query.id
 			this.type = this.$route.query.type
+			this.isRadar = this.$route.query.is_radar
+			this.fileType = this.$route.query.file_type
 			if (typeof this.attachmentId != "undefined") {
 				this.getInfo()
 			} else {
@@ -318,6 +333,7 @@
 
 <style lang="less" scoped>
 	@import '../../../style/_style.less';
+
 	.time-line-time {
 		display: inline-block;
 		vertical-align: top;
@@ -326,15 +342,17 @@
 	}
 
 	.time-line-title {
-		display: inline-block ;
+		display: inline-block;
 		max-width: 80%;
 		text-align: left;
 		white-space: pre-line;
-		word-break: break-all;
+		word-break: break-word;
 		word-wrap: break-word;
 		margin-left: 30px;
 		color: rgba(0, 0, 0, 0.8);
+		vertical-align: text-top;
 	}
+
 	.content-msg {
 		min-width: 845px;
 		width: calc(100% - 40px);

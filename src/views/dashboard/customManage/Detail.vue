@@ -3,7 +3,7 @@
 		<div>
 			<a-card style="margin-bottom:20px;padding:10px 20px;">
 				<label class="tpl-title">客户详情</label>
-				<a-button type="primary"  style="font-size: 14px;float: right;" @click="goBack">返回列表
+				<a-button type="primary" style="font-size: 14px;float: right;" @click="goBack">返回列表
 				</a-button>
 			</a-card>
 
@@ -52,10 +52,34 @@
 								       v-if="followTitle">{{followTitle}}
 								</a-tag>
 							</div>
-							<div class="col" v-if="is_hide_phone != 1">
-								<label>
+							<div class="col">
+								<label v-if="is_hide_phone != 1">
 									手机：<span v-if="phone && phone != ''">{{phone}}</span><span v-else>暂无</span>
 								</label>
+								<span style="margin:0 1rem" v-if="dialout_exten&&dialout_phone">
+										<a-button type="primary" @click="contact">
+											联系TA
+										</a-button>
+									</span>
+
+								<span v-if="dialout_exten&&dialout_phone">
+										<a-tooltip placement="bottom">
+											<template slot="title">
+												<p>根据相关法律法规和监管部门的要求，拨打商业性电话前请您阅读并严格遵守以下内容：</p>
+												<p style="margin-bottom: 2px;font-size: 13px;">
+													1、禁止在非工作时间拨打商业性电话，具体可外呼时间段请咨询您所在企业管理员或线路服务商；</p>
+												<p style="margin-bottom: 10px;font-size: 13px;"></p>
+												<p style="margin-bottom: 2px;font-size: 13px;">
+													2、禁止对同一号码在24小时内发起多次呼叫，同一号码可被外呼频次请咨询您所在企业管理员或在用线路服务商；</p>
+												<p style="margin-bottom: 10px;font-size: 13px;"></p>
+												<p style="margin-bottom: 2px;font-size: 13px;">3、拨打商业性营销电话须事先经过用户本人同意，运营商可能会拦截对已申明不愿意接受商业性电话的用户外呼请求；</p>
+												<p style="margin-bottom: 10px;font-size: 13px;"></p>
+												<p style="margin-bottom: 0;font-size: 13px;">
+													4、禁止使用云呼叫功能开展分裂国家、传播宗教极端思想、煽动民族仇恨、破坏民族团结、扰乱社会秩序、传播封建迷信、诈骗等活动或其他违反国家法律法规、违背社会公序良俗的活动。</p>
+											</template>
+											<a-icon type="question-circle"/>
+										</a-tooltip>
+									</span>
 							</div>
 							<div class="col">
 								<label>
@@ -66,9 +90,24 @@
 								<span>
 									<label>标签：</label>
 									<span style="display: inline-block;width: calc(100% - 45px);vertical-align: text-top;">
-										<a-tag v-for="item in hasTagsValue" color="blue" style="margin-bottom: 5px;"
-										       v-if="hasTagsValue && hasTagsValue.length > 0">{{item}}</a-tag>
+<!--										<a-tag v-for="item in hasTagsValue" color="blue" style="margin-bottom: 5px;"-->
+<!--										       v-if="hasTagsValue && hasTagsValue.length > 0">{{item}}</a-tag>-->
 										<span v-if="hasTagsValue.length == 0">暂无</span>
+
+                    <span  v-if="hasTagsValue &&hasTagsValue.length > 5">
+                        <a-popover>
+                            <span slot="content">
+                                <div class="over-width"> <a-tag style="margin-bottom: 5px;"  color="blue" v-for="item in hasTagsValue">{{item}}</a-tag></div>
+                            </span>
+                            <span v-for="(item1,index1) in hasTagsValue">
+                                 <a-tag v-if="index1<5" style="margin-bottom: 5px;"  color="blue">{{item1}}</a-tag>
+                            </span>
+                        </a-popover>
+                        <span>等{{hasTagsValue.length}}个标签</span>
+                    </span>
+                    <span v-if="hasTagsValue &&hasTagsValue.length <=5">
+                           <a-tag style="margin-bottom: 5px;" color="blue" v-for="(item1) in hasTagsValue" >{{item1}}</a-tag>
+                    </span>
 										<a-icon @click="showModal" type="edit" style="margin-left: 5px;"
 										        v-if="isShowTag"/>
 									</span>
@@ -147,7 +186,7 @@
 								   v-if="chatName && chatName.length > 0">
 									<a-popover placement="top">
 										<template slot="content">
-											<div style="max-width: 300px;">
+											<div style="max-width: 300px;text-overflow: ellipsis;overflow: hidden auto;">
 												{{item.name}}（{{item.join_time}}）
 											</div>
 										</template>
@@ -221,15 +260,29 @@
 										<div v-has="'client-addFollow'">
 											<div style="margin: 20px 0;">
 												跟进状态：
-												<a-select style="width: 220px" v-model="follow_id">
-													<a-select-option v-for="item in follows" :value="item.id"
-													                 :disabled="canEdit == 1 ? false : true">
+												<a-select style="width: 220px" v-model="follow_id"
+												          @change="changeState">
+													<a-select-option :disabled="canEdit == 1 ? false : true"
+													                 v-for="item in follows" :value="item.id">
 														{{item.title}}
 													</a-select-option>
 												</a-select>
 											</div>
+											<div style="margin: 20px 0;" v-if="followItem.lose_one==1">
+												输单原因：
+												<a-select v-model="lose" style="width: 220px" placeholder="请选择输单原因"
+												          @change="changeLose">
+													<a-select-option v-for="(item,index) in loseReason" :key="index"
+													                 :value="item.id">
+														{{item.context}}
+													</a-select-option>
+												</a-select>
+											</div>
 											<div class="textArea">
+												<span style="color:red;display: inline-block;width: 2%;margin-bottom: 7%;"
+												      v-if="followItem.lose_one!=1"> * </span>
 												<a-textarea
+														style="display: inline-block;width: 95%"
 														v-model="msg"
 														@change="changeTextarea"
 														placeholder="添加跟进记录，1000字以内"
@@ -256,10 +309,7 @@
 														</a-button>
 													</div>
 												</a-upload>
-												<a-modal :visible="previewVisible" :footer="null"
-												         @cancel="handleCancel">
-													<img alt="example" style="width: 100%" :src="previewImage"/>
-												</a-modal>
+
 
 												<a-button type="primary" style="left: 50%;width: 110px;"
 												          :disabled="submitDisabled"
@@ -269,31 +319,88 @@
 											</div>
 										</div>
 										<a-timeline class="time-line">
-											<a-timeline-item v-for="item in followRecord">
+											<a-timeline-item v-for="(item,index) in followRecord">
 												<div class="time-line-time">{{item.time}}</div>
 												<img slot="dot" src="../../../assets/icon/8.png"
-												     style="width: 18px;"/>
-												<div style="margin: 10px 0;"><span
-														style="color: #1989FA;">{{item.name}}</span> 发表：
-													<span style="color: red;" v-if="item.follow_status != ''">【{{item.follow_status}}】</span>
-													<span style="float:right;"><a-icon type="edit"
-													                                   v-if="item.can_edit == 1"
-													                                   @click="editFollowRecord(item)"
-													                                   v-has="'client-addFollow'"/></span>
-												</div>
-												<div class="time-line-title">
-													{{item.record}}
-													<div v-if="item.file.length > 0"
-													     style="margin-top: 5px;overflow: hidden;">
-														<div v-for="url in item.file" class="preview-box">
-															<div class="preview-cover">
-																<img :src="commonUrl + url" alt="">
+												     style="width: 18px;" v-if="item.record_type!=1"/>
+												<img slot="dot" src="../../../assets/call.png"
+												     style="width: 18px;" v-if="item.record_type==1"/>
+												<div v-if="item.record_type!=1">
+													<div style="margin: 10px 0;"><span
+															style="color: #1989FA;">{{item.name}}</span> 发表：
+														<span style="color: red;" v-if="item.follow_status != ''">【{{item.follow_status}}】</span>
+														<span style="float:right;"><a-icon type="edit"
+														                                   v-if="item.can_edit == 1"
+														                                   @click="editFollowRecord(item)"
+														                                   v-has="'client-addFollow'"/></span>
+													</div>
+													<div class="time-line-title">
+														<p style="color: red;" v-if="item.context">
+															输单原因：{{item.context}}</p>
+														<p>{{item.record}}</p>
+														<div v-if="item.file.length > 0"
+														     style="margin-top: 5px;overflow: hidden;">
+															<div v-for="url in item.file" class="preview-box">
+																<div class="preview-cover">
+																	<img :src="commonUrl + url" alt="">
+																</div>
+																<span class="preview-cover-icon"
+																      @click="previewHasImg(commonUrl + url)"><a-icon
+																		type="eye"/></span>
 															</div>
-															<span class="preview-cover-icon"
-															      @click="previewHasImg(commonUrl + url)"><a-icon
-																	type="eye"/></span>
 														</div>
 													</div>
+												</div>
+												<div v-if="item.record_type==1">
+													<div style="margin: 10px 0;"><span
+															style="color: #1989FA;">{{item.name}}</span>
+														<span style="color:red">【打电话】</span>
+														<span>联系了他</span>
+													</div>
+													<div v-if="item.call_info.state == 0" style="color: red">
+														{{item.call_info.msg}}
+													</div>
+													<!--													<audio-player-->
+													<!--															v-if="item.call_info.state == 1"-->
+													<!--															ref="audioPlayer"-->
+													<!--															:show-prev-button="false"-->
+													<!--															:show-next-button="false"-->
+													<!--															:audio-list="[item.call_info.file]"-->
+													<!--															theme-color="#01b065"-->
+													<!--													/>-->
+													<div class="audio" v-if="item.call_info.state == 1">
+														<div class="audio_container">
+															<div class="audio">
+																<div class="audio_box" style="float: left;"
+																     @click="playMusic(index, true)"
+																     v-show="clickIndex != index">
+																	<div class="wifi-symbol">
+																		<div class="wifi-circle first"></div>
+																		<div class="wifi-circle second"></div>
+																		<div class="wifi-circle third"></div>
+																	</div>
+																	<audio :name="index" :data-index="index"
+																	       @canplay="oncanplay">
+																		<source
+																				:src="item.call_info.file"
+																				type="audio/mpeg"
+																		/>
+																	</audio>
+																</div>
+																<div class="audio_box" style="float: left;"
+																     v-show="clickIndex == index"
+																     @click="playMusic(index, false)">
+																	<div class="wifi-symbol">
+																		<div class="wifi-circle first"></div>
+																		<div class="wifi-circle second1"></div>
+																		<div class="wifi-circle third1"></div>
+																	</div>
+																</div>
+																<span>{{playTime[index] | dateFormat}}</span>
+															</div>
+														</div>
+													</div>
+
 												</div>
 											</a-timeline-item>
 										</a-timeline>
@@ -320,7 +427,7 @@
 										         @cancel="cancelFollowRecord" width="800px">
 											<div style="margin: 20px 0;">
 												跟进状态：
-												<a-select style="width: 220px"
+												<a-select style="width: 220px" @change="changeState1"
 												          v-model="status">
 													<a-select-option v-for="item in follows" :value="item.id"
 													                 :disabled="canEdit == 1 ? false : true">
@@ -328,8 +435,22 @@
 													</a-select-option>
 												</a-select>
 											</div>
+											<div style="margin: 20px 0;"
+											     v-if="followItem.lose_one==1">
+												输单原因：
+												<a-select v-model="followItem.lose_id" style="width: 220px"
+												          placeholder="请选择输单原因">
+													<a-select-option v-for="(item,index) in loseReason" :key="index"
+													                 :value="item.id">
+														{{item.context}}
+													</a-select-option>
+												</a-select>
+											</div>
 											<div class="textArea">
+												<span style="color:red;display: inline-block;width: 2%;margin-bottom: 12%;"
+												      v-if="followItem.lose_one!=1"> * </span>
 												<a-textarea
+														style="display: inline-block;width: 95%"
 														v-model="msg2"
 														placeholder="添加跟进记录，1000字以内"
 														:autoSize="{ minRows: 5, maxRows: 5 }"
@@ -366,30 +487,13 @@
 								<a-tab-pane tab="互动轨迹" key="2">
 									<a-timeline class="time-line" style="margin: 20px;">
 										<a-timeline-item v-for="item in interactList">
-											<img v-if="item.icon==1" slot="dot" src="../../../assets/icon/1.png"
-											     style="width: 22px;"/>
-											<img v-if="item.icon==2" slot="dot" src="../../../assets/icon/2.png"
-											     style="width: 22px;"/>
-											<img v-if="item.icon==3" slot="dot" src="../../../assets/icon/3.png"
-											     style="width: 22px;"/>
-											<img v-if="item.icon==4" slot="dot" src="../../../assets/icon/4.png"
-											     style="width: 26px;"/>
-											<img v-if="item.icon==5" slot="dot" src="../../../assets/icon/5.png"
-											     style="width: 26px;"/>
-											<img v-if="item.icon==6" slot="dot" src="../../../assets/icon/6.png"
-											     style="width: 18px;"/>
-											<img v-if="item.icon==8" slot="dot" src="../../../assets/icon/8.png"
-											     style="width: 18px;"/>
-											<img v-if="item.icon==10" slot="dot" src="../../../assets/icon/10.png"
-											     style="width: 18px;"/>
-											<img v-if="item.icon==11" slot="dot" src="../../../assets/icon/11.png"
-											     style="width: 18px;"/>
-											<img v-if="item.icon==12" slot="dot" src="../../../assets/icon/12.png"
-											     style="width: 16px;"/>
 											<a-icon type="pay-circle" slot="dot" v-if="item.icon==13"/>
 											<div style="min-height: 40px;">
 												<div class="time-line-time">{{item.event_time}}</div>
-												<div class="time-line-title">{{item.content}}</div>
+												<div class="time-line-title">{{item.content}}<a v-if="item.icon==20"
+												                                                class="time-line-detail"
+												                                                @click="toTimeLineDetail(item)">详情</a>
+												</div>
 											</div>
 										</a-timeline-item>
 									</a-timeline>
@@ -540,6 +644,176 @@
 		         :confirmLoading="confirmLoading2" @cancel="cancelVisible" width="800px">
 			<corpChooseTag :callback="modalVisibleChange4" :hasChoose="tagCheckValue"></corpChooseTag>
 		</a-modal>
+		<!--  查看浏览详情	-->
+		<div class="moment_detail">
+			<a-modal style="height:20rem;overflow:hidden!important;" :visible="momentDetailDialog" width="30%"
+			         title="查看浏览详情" @cancel="handleCancel4">
+				<template slot="footer">
+					<a-button key="back" @click="handleCancel4">取消
+					</a-button>
+				</template>
+				<div v-if="momentDetailDialog">
+					<a-row>
+						<a-col :span="3">
+							<a-avatar style="width: 50px;height: 50px" size="large" shape="square"
+							          :src="userMomentDetail.heard_img.substr(0,1)=='/'?commonUrl+userMomentDetail.heard_img:userMomentDetail.heard_img"/>
+						</a-col>
+						<a-col :span="19">
+							<div>
+								<a-row>
+									<span style=" font-size: 18px; color: #5077B7;font-weight: 900;">{{userMomentDetail.name}}
+									</span>
+								</a-row>
+								<a-row v-if="userMomentDetail.context"
+								       style="align-items:center;margin: 0 0 3px 0;white-space:pre-line">
+									<a-popover placement="top" style="margin-bottom: 6px;max-height: 10rem;">
+										<div style="overflow : hidden;text-overflow: ellipsis;
+													display: -webkit-box;-webkit-line-clamp: 6;
+													-webkit-box-orient: vertical;">{{userMomentDetail.context}}
+										</div>
+										<pre slot="content"
+										     style="white-space: pre-wrap;word-wrap: break-word;line-height: 20px;color: #000;max-width: 600px;margin-bottom: -3px">{{userMomentDetail.context}}</pre>
+									</a-popover>
+								</a-row>
+								<div class="covers" v-if="userMomentDetail.type==2">
+									<div class="cover" v-for="(item,index) in userMomentDetail.info" :key='index'
+									     v-if="item.local_path">
+										<img :src="item.s_local_path?commonUrl+item.s_local_path:commonUrl+item.local_path"
+										     @click="previewPic(userMomentDetail.info,index)"
+										     width="95%" class="min" alt="">
+									</div>
+								</div>
+							</div>
+							<div v-if="userMomentDetail.type==3" style="margin: 0 0 10px 0">
+								<a-form>
+									<a-form-item :label-col="{ span:3 }"
+									             :wrapper-col="{ span: 21 }">
+										<video-player
+												class="video-player vjs-custom-skin"
+												ref="videoPlayer"
+												style="width: 200px;"
+												:playsinline="true"
+												:options="playerOptions"
+										></video-player>
+									</a-form-item>
+								</a-form>
+							</div>
+							<div v-if="userMomentDetail.type==4" style="margin: 10px 0 10px 0">
+								<a-form>
+									<a-form-item :label-col="{ span:3 }"
+									             :wrapper-col="{ span: 22 }">
+										<div v-if="userMomentDetail.info!={} && userMomentDetail.info!=null"
+										     style="width: 100%;">
+											<div style="width: 100%; display: flex;height: 70px;background: #F1F3F5;">
+												<div style="width:70px;height: 70px;padding: 10px">
+													<img v-if="userMomentDetail.info[0].pic_url!=''"
+													     class="input_img2"
+													     :src="userMomentDetail.info[0].pic_url.substr(0,1)=='/'?commonUrl+userMomentDetail.info[0].pic_url:userMomentDetail.info[0].pic_url"
+													     alt=""/>
+													<img v-if="userMomentDetail.info[0].pic_url==''"
+													     class="input_img2"
+													     src="../../../assets/url.png" alt=""/>
+
+												</div>
+												<div style="flex-grow: 1;height: 70px;">
+													<div class="inp_title">
+														{{userMomentDetail.info[0].title}}
+													</div>
+													<div class="input_text3">
+														{{userMomentDetail.info[0].description}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</a-form-item>
+								</a-form>
+							</div>
+							<a-row>
+								<a-col :span="16">{{userMomentDetail.create_time}}</a-col>
+							</a-row>
+						</a-col>
+
+					</a-row>
+
+					<a-tabs default-active-key="1" class="moment_detail_tab">
+						<a-tab-pane key="1" tab="朋友圈"
+						            v-if="userMomentDetail.goods.name.length>0||userMomentDetail.reply.length>0">
+							<div class="moment_detail_zan" :class="userMomentDetail.goods.status==1?'':'no-active-zan'"
+							     v-if="userMomentDetail.goods.name.length>0">
+								<svg t="1609928721591" v-if="userMomentDetail.goods.status==1"
+								     class="icon moment_detail_zan_icon" viewBox="0 0 1024 1024" version="1.1"
+								     xmlns="http://www.w3.org/2000/svg" p-id="2698" width="16" height="16">
+									<path d="M705.403848 64.46829c-76.854389 0-148.311861 38.554084-195.34506 102.123912-47.007617-63.587224-118.448716-102.123912-195.344037-102.123912-138.54031 0-251.251348 123.228579-251.251348 274.711665 0 90.369194 40.368406 153.767106 72.820516 204.702172 94.311992 147.95268 331.443761 332.071048 341.487511 339.834872 9.676383 7.479345 20.989033 11.222599 32.275077 11.222599 11.31265 0 22.607904-3.744277 32.270984-11.222599 10.057053-7.763824 247.205195-191.882192 341.488535-339.834872 32.466436-50.939159 72.849168-114.332978 72.849168-204.702172C956.655196 187.69687 843.939041 64.46829 705.403848 64.46829L705.403848 64.46829zM837.929164 508.917802c-89.77056 140.875494-327.883679 324.878229-327.883679 324.878229s-238.086513-184.002734-327.887772-324.878229c-33.120328-52.005444-62.774719-101.438297-62.774719-169.736822 0-117.939109 87.443561-213.58447 195.331757-213.58447 79.730902 0 148.175761 52.308343 178.538279 127.194914l0-0.37146 0.080841 0c2.26253 7.806803 8.857738 13.501502 16.711614 13.501502 7.880481 0 14.474666-5.694699 16.720823-13.501502l0.230244 0c30.435173-74.66349 98.785887-126.823454 178.406273-126.823454 107.86159 0 195.331757 95.64536 195.331757 213.58447C900.734582 407.479505 871.075075 456.911334 837.929164 508.917802L837.929164 508.917802zM837.929164 508.917802"
+									      p-id="2699" fill="#6e7c9a"></path>
+								</svg>
+								<svg t="1610523854710" v-if="userMomentDetail.goods.status==0"
+								     class="icon moment_detail_zan_icon" viewBox="0 0 1024 1024" version="1.1"
+								     xmlns="http://www.w3.org/2000/svg" p-id="7763" width="16" height="16">
+									<path d="M705.386667 177.536c56.682667 0 109.546667 22.122667 148.8 62.272 76.522667 78.272 72.490667 207.232-9.002667 287.424L509.738667 857.493333 174.250667 527.253333c-81.472-80.213333-85.525333-209.152-9.002667-287.424 39.274667-40.170667 92.117333-62.272 148.8-62.272 55.189333 0 107.029333 21.12 145.962667 59.413334l49.706666 48.938666 49.706667-48.938666a206.741333 206.741333 0 0 1 145.962667-59.434667M314.069333 106.688c-72.512 0-144.981333 27.861333-199.488 83.605333-105.024 107.456-97.109333 282.048 9.962667 387.456L476.586667 924.288a47.125333 47.125333 0 0 0 66.261333 0l352.021333-346.538667c107.093333-105.408 114.986667-280.021333 9.962667-387.456-54.485333-55.744-126.997333-83.605333-199.488-83.605333-70.826667 0-141.610667 26.602667-195.648 79.786667-53.973333-53.205333-124.821333-79.786667-195.626667-79.786667z"
+									      fill="#c7c7c7" p-id="7764"></path>
+								</svg>
+								<div style="padding-left:12px;">
+									<i class="moment_detail_zan_name"
+									   v-for="(item,index) in userMomentDetail.goods.heard_img">
+										<img :src="item"/>
+									</i>
+								</div>
+							</div>
+							<div class="reply-all-box" v-show="userMomentDetail.reply.length>0">
+								<div class="reply-all-box-left">
+									<svg t="1611578413166" class="icon reply-icon" viewBox="0 0 1058 1024" version="1.1"
+									     xmlns="http://www.w3.org/2000/svg" p-id="1865" width="200" height="200">
+										<path d="M330.744242 885.372121l194.779798-129.861818 16.665859-11.106263h383.844848c36.486465 0 66.19798-29.659798 66.19798-66.146262v-529.19596c0-36.434747-29.711515-66.107475-66.19798-66.107475H132.305455c-36.486465 0-66.146263 29.659798-66.146263 66.107475v529.19596c0 36.486465 29.659798 66.146263 66.146263 66.146262h198.438787v140.968081m-66.146262 123.578182V810.550303H132.305455c-73.024646 0-132.305455-59.216162-132.305455-132.292525v-529.19596C0 76.024242 59.267879 16.808081 132.305455 16.808081h793.742222c73.076364 0 132.357172 59.216162 132.357171 132.240808v529.195959c0 73.076364-59.267879 132.292525-132.357171 132.292526h-363.830303L264.59798 1008.950303z m0 0"
+										      p-id="1866" fill="#6e7c9a"></path>
+									</svg>
+								</div>
+								<div class="reply-all-box-right">
+									<div class="moment_detail_list" v-for="item in userMomentDetail.reply">
+										<div v-if="item.reply_name==''" style="width:100%;">
+											<div class="flexBox">
+												<div class="leftBox"><img :src="item.reply_avatar"
+												                          class="reply_avatar"/></div>
+												<div style="margin-left:5px;width:100%;">
+													<p class="moment_name_box"><i class="moment_detail_list_name">{{item.one_name}}</i><i
+															style="margin-right:6px;">{{item.create_time}}</i></p>
+													<div style="margin-left:5px;width:100%;">
+														<p v-html="item.content.replace(/\#[\u4E00-\u9FA5]{1,3}\;/gi,emotion)"
+														   style="padding-right: 10px;float: left;width: 85%;"></p>
+														<p v-if="item.status==0"
+														   style="color: rgb(232, 100, 100);display: inline-block;width: 50px;">
+															已删除</p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div v-if="item.reply_name!=''" style="width:100%;">
+											<div class="flexBox">
+												<div class="leftBox"><img :src="item.reply_avatar"
+												                          class="reply_avatar"/></div>
+												<div style="padding-left: 5px;width: 100%;">
+													<div class="moment_name_box"><i class="moment_detail_list_name">{{item.one_name}}</i><i
+															style="margin-right:6px;">{{item.create_time}}</i></div>
+													<div style="width:100%" class="moment_name_box">
+														<div style="float: left;width: 86%;">
+															<i class="moment_detail_list_reply_text">回复</i>
+															<i class="moment_detail_list_name">{{item.reply_name}}</i>
+															<i v-html="item.content.replace(/\#[\u4E00-\u9FA5]{1,3}\;/gi,emotion)"></i>
+														</div>
+														<p v-if="item.status==0"
+														   style="color: rgb(232, 100, 100);display: inline-block;width: 46px;">
+															已删除</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</a-tab-pane>
+					</a-tabs>
+				</div>
+			</a-modal>
+		</div>
 	</div>
 </template>
 
@@ -548,6 +822,10 @@
 	import moment from "moment";
 	import "moment/locale/zh-cn";
 	import corpChooseTag from "@/components/corpChooseTag/CorpChooseTag.vue"
+	import {videoPlayer} from "vue-video-player";
+	import PubSub from 'pubsub-js';
+	import AudioPlayer from '@liripeng/vue-audio-player'
+	import '@liripeng/vue-audio-player/lib/vue-audio-player.css'
 
 	moment.locale("zh-cn");
 
@@ -561,10 +839,15 @@
 	}
 
 	export default {
-		components: {corpChooseTag},
+		components: {videoPlayer, corpChooseTag, AudioPlayer},
 		data () {
 			let corpId = localStorage.getItem('corpId') ? localStorage.getItem('corpId') : "";
 			return {
+				loseReason      : [],
+				lose            : undefined,
+				followItem      : {},
+				dialout_phone   : '',
+				dialout_exten   : '',
 				corpId          : corpId,//企业微信选中的id
 				is_hide_phone   : 0,
 				isLoading       : false, //Loading 组件显示与隐藏
@@ -590,6 +873,17 @@
 				hasTags         : [],//在别的地方打的已有的标签id
 				hasTagsValue    : [],//在别的地方打的已有的标签名称
 				tagCheckValue   : [],//该客户已有标签
+				tagCheckValue2  : [],//该客户已有标签
+				disabled        : [],//禁选标签
+				tagsList        : [], //标签列表
+				tagValue        : [],//新建标签的数组
+				addTagVisible   : false,//新建标签弹窗显示与隐藏
+				confirmLoading3 : false, //新建标签弹框加载
+				inputValue      : '',//新建标签输入框值
+				editGroupId     : '',//新建标签弹窗里的选中的分组id
+				groupList       : [], // 小组列表
+				groupId         : '-1', // 选中的小组id
+				tagLoading      : false,//增加标签弹窗加载的显示与隐藏
 				desVisible      : false,//修改描述弹窗的显示与隐藏
 				imageUrl3       : '',//修改描述弹窗中图片链接地址
 				file3           : '',//页面展示的修改描述图片链接地址
@@ -643,18 +937,149 @@
 				//互动轨迹
 				interactList   : [],//互动轨迹数据列表
 
-				picFile        : {},
-				isImg3         : true,
+				picFile           : {},
+				isImg3            : true,
 				//分页
-				page2          : 1, //页码
-				btnFlag        : 1,//1加载更多，2没有更多数据
-				tabKey         : '1',
-				isMasterAccount: localStorage.getItem('isMasterAccount'),
-				canEdit        : 1,//是否可以编辑客户跟进状态,1可以，0不可以
-				isShowTag      : true,//根据权限判断是否展示打标签或移除标签
+				page2             : 1, //页码
+				btnFlag           : 1,//1加载更多，2没有更多数据
+				tabKey            : '1',
+				isMasterAccount   : localStorage.getItem('isMasterAccount'),
+				canEdit           : 1,//是否可以编辑客户跟进状态,1可以，0不可以
+				momentDetailDialog: false,
+				userMomentDetail  : {},//当前用户互动轨迹详情
+				videoIndex        : null,
+				playerOptions     : [],
+				publicOptions     : {
+					playbackRates      : [0.7, 1.0, 1.5, 2.0], //播放速度
+					autoplay           : false, //如果true,浏览器准备好时开始回放。
+					muted              : false, // 默认情况下将会消除任何音频。
+					loop               : false, // 导致视频一结束就重新开始。
+					preload            : "auto", // 建议浏览器在<video>加载元素后是否应该开始下载视频数据。auto浏览器选择最佳行为,立即开始加载视频（如果浏览器支持）
+					language           : "zh-CN",
+					aspectRatio        : "16:9", // 将播放器置于流畅模式，并在计算播放器的动态大小时使用该值。值应该代表一个比例 - 用冒号分隔的两个数字（例如"16:9"或"4:3"）
+					fluid              : true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
+					notSupportedMessage: "此视频暂无法播放，请稍后再试", //允许覆盖Video.js无法播放媒体源时显示的默认信息。
+					controlBar         : {
+						timeDivider         : true,
+						durationDisplay     : true,
+						remainingTimeDisplay: false,
+						fullscreenToggle    : true //全屏按钮
+					}
+				},
+				isShowTag         : true,//根据权限判断是否展示打标签或移除标签
+				clickIndex        : -1,
+				flag              : false,
+				playTime          : [],
+				t1                : [],
 			};
 		},
-		methods   : {
+
+		methods: {
+			contact () {
+				let that = this
+				this.$confirm({
+					title     : '是否拨打电话',
+					okText    : "确定",
+					okType    : "primary",
+					cancelText: "取消",
+					onOk () {
+						PubSub.publish('showCall', {
+							showCall : true,
+							avatar   : that.avatar,
+							nickname : that.nickname,
+							follow_id: that.id,
+							phone    : that.phone,
+							type     : 0,
+							from     : 0, // 来自企微
+						});
+					}
+				});
+			},
+
+			//播放音频
+			playMusic (index, flag) {
+				clearInterval(this.t1);
+				if (this.clickIndex != -1) {
+					document.getElementsByName(index)[0].pause();
+				}
+				if (!flag) {
+					this.clickIndex = -1
+					this.flag = !this.flag
+					return
+				}
+				console.log(document.getElementsByName(index)[0])
+				document.getElementsByName(index)[0].play();
+				this.clickIndex = index;
+				this.t1 = setInterval(() => {
+					this.playTime[index]--;
+					this.$set(this.playTime, index, this.playTime[index]);
+					if (this.playTime[index] <= 0) {
+						this.clickIndex = -1
+						clearInterval(this.t1);
+						this.$set(
+							this.playTime,
+							index,
+							Math.ceil(document.getElementsByName(index)[0].duration)
+						);
+					}
+				}, 1000);
+			},
+			oncanplay (res) {
+				//   console.log(res.target.duration);
+				const audioIndex = res.target.dataset.index;
+				this.$set(this.playTime, audioIndex, Math.ceil(res.target.duration));
+			},
+
+			async getLoseReason () {
+				const {data: res} = await this.axios.post("custom-field/get-lose-msg", {
+						corp_id: localStorage.getItem("corpId"),
+					}
+				);
+				if (res.error != 0) {
+					this.$message.error(res.error_msg)
+				} else {
+					this.loseReason = res.data
+				}
+			},
+			emotion (res) {//处理评论的表情
+				let word = res.replace(/\#|\;/gi, '')
+				const list = ['微笑', '撇嘴', '色', '发呆', '得意', '流泪', '害羞', '闭嘴', '睡', '大哭', '尴尬', '发怒', '调皮', '呲牙', '惊讶', '难过', '酷', '冷汗', '抓狂', '吐', '偷笑', '可爱', '白眼', '傲慢', '饥饿', '困', '惊恐', '流汗', '憨笑', '大兵', '奋斗', '咒骂', '疑问', '嘘', '晕', '折磨', '衰', '骷髅', '敲打', '再见', '擦汗', '抠鼻', '鼓掌', '糗大了', '坏笑', '左哼哼', '右哼哼', '哈欠', '鄙视', '委屈', '快哭了', '阴险', '亲亲', '吓', '可怜', '菜刀', '西瓜', '啤酒', '篮球', '乒乓', '咖啡', '饭', '猪头', '玫瑰', '凋谢', '示爱', '爱心', '心碎', '蛋糕', '闪电', '炸弹', '刀', '足球', '瓢虫', '便便', '月亮', '太阳', '礼物', '拥抱', '强', '弱', '握手', '胜利', '抱拳', '勾引', '拳头', '差劲', '爱你', 'NO', 'OK', '爱情', '飞吻', '跳跳', '发抖', '怄火', '转圈', '磕头', '回头', '跳绳', '挥手']
+				let index = list.indexOf(word)
+				return `<img src="https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/${index}.gif" align="middle">`
+			},
+			handleCancel4 () {//点击详情的关闭按钮
+				this.momentDetailDialog = false
+			},
+			async toTimeLineDetail (item) {//点击跳转到当前轨迹的详情（只限历史朋友圈）
+				const {data: res} = await this.axios.post('moment/moment-info', {
+					corpid : localStorage.getItem('corpId'),
+					line_id: item.line_id,
+				})
+				if (res.error != 0) {
+					this.$message.error(res.error_msg);
+					this.isLoading = false
+				} else {
+					if (res.data.default_heard == 1) {
+						res.data.heard_img = this.commonUrl + res.data.heard_img
+					}
+					this.userMomentDetail = res.data
+					this.isLoading = false
+					this.momentDetailDialog = true
+					let obj = res.data.info
+					if (res.data.type == 3 && obj != null && obj != '' && obj != []) {
+						this.playerOptions = {
+							...this.publicOptions,
+							sources: [
+								{
+									src : obj[0].local_path.substr(0, 1) == '/' ? this.commonUrl + obj[0].local_path : obj[0].local_path, // 路径
+									type: "video/mp4" // 类型
+								}
+							]
+						};
+					}
+				}
+
+			},
 			goBack () {
 				this.$router.go(-1)
 			},
@@ -697,6 +1122,7 @@
 					if (this.follow_id == '') {
 						this.follow_id = this.follows[0] ? (this.follows[0].id ? this.follows[0].id : '') : ''
 					}
+
 					this.status = this.follow_id
 					this.followStatus = this.follow_id
 					this.close_rate = res.data.close_rate
@@ -706,6 +1132,8 @@
 					this.memberInfo = res.data.memberInfo
 					this.chatName = res.data.chat_name
 					this.is_hide_phone = res.data.is_hide_phone
+					this.dialout_phone = res.data.dialout_phone
+					this.dialout_exten = res.data.dialout_exten
 
 					this.getFollowStatus()
 
@@ -790,15 +1218,16 @@
 			},
 			// 打标签
 			showModal () {
+				this.groupId = '-1'
 				this.visible = true;
 				this.tagCheckValue = JSON.parse(JSON.stringify(this.hasTags))
 			},
 			//客户标签
 			modalVisibleChange4 (event, str) {
 				if (event == "ok") {
-					if(str == ''){
+					if (str == '') {
 						this.tagCheckValue = []
-					}else {
+					} else {
 						this.tagCheckValue = str.split(',')
 					}
 				}
@@ -1108,10 +1537,12 @@
 			},
 			//输入框
 			changeTextarea () {
-				if (this.msg == '' && this.file.length == 0) {
-					this.submitDisabled = true
-				} else {
-					this.submitDisabled = false
+				if (this.followItem.lose_one == 0) {
+					if (this.msg == '' && this.file.length == 0) {
+						this.submitDisabled = true
+					} else {
+						this.submitDisabled = false
+					}
 				}
 			},
 			//上传图片
@@ -1204,7 +1635,6 @@
 			}
 			,
 			async uploadMaterial (materialData) {
-				this.submitDisabled = true
 				let params = new FormData();
 				params.append("uid", localStorage.getItem('uid'));
 				params.append("fileInfo", materialData);
@@ -1212,11 +1642,19 @@
 				if (res.error == 0) {
 					if (res.data) {
 						this.file.push(res.data.local_path)
-						this.submitDisabled = false
+						if (this.followItem.lose_one == 1 && !this.lose) {
+							this.submitDisabled = true
+						} else {
+							this.submitDisabled = false
+						}
 					}
 				} else {
 					this.$message.error(res.error_msg)
-					this.submitDisabled = false
+					if (this.followItem.lose_one == 1 && !this.lose) {
+						this.submitDisabled = true
+					} else {
+						this.submitDisabled = false
+					}
 				}
 				// console.log(this.file,'this.file')
 			}
@@ -1246,8 +1684,34 @@
 			previewHasImg (url) {
 				this.previewImage = url;
 				this.previewVisible = true;
-			}
-			,
+			},
+			changeState (item) {
+				let index = this.follows.findIndex(x => x.id == this.follow_id)
+				this.followItem = this.follows[index]
+				this.submitDisabled = false
+				if (this.followItem.lose_one == 1 && (!this.lose || this.lose == '')) {
+					this.submitDisabled = true
+				} else if (this.followItem.lose_one == 0) {
+					if ((!this.msg && this.msg == '') && this.file.length <= 0) {
+						this.submitDisabled = true
+					} else {
+						this.submitDisabled = false
+					}
+				}
+			},
+			changeState1 (item) {
+				let index = this.follows.findIndex(x => x.id == this.status)
+				this.followItem.lose_one = this.follows[index].lose_one
+			},
+			changeLose () {
+				if (this.followItem.lose_one == 1) {
+					if (!this.lose || this.lose == '') {
+						this.submitDisabled = true
+					} else {
+						this.submitDisabled = false
+					}
+				}
+			},
 			//提交跟进记录
 			async submitFollowRecord () {
 				let record = ''
@@ -1256,24 +1720,37 @@
 					//新建
 					record = this.msg
 					file = this.file
-					if (record.trim() == '' && file.length == 0) {
-						this.$message.error('跟进内容和图片至少要填写一个！')
-						return false
-					}
 				} else {
 					//修改
 					record = this.msg2
 					file = this.file2
+				}
+				if (this.followItem.lose_one == 0) {
 					if (record.trim() == '' && file.length == 0) {
 						this.$message.error('跟进内容和图片至少要填写一个！')
 						return false
 					}
+				} else {
+					if (this.lose == '') {
+						this.$message.error('请选择原因！')
+						return false
+					}
 				}
 				let followStatus = 0
+				let lose
 				if (!this.editVisible) {
 					followStatus = this.follow_id
+					lose = this.followItem.lose_one == 1 ? this.lose : ''
 				} else {
 					followStatus = this.status
+					let index = this.follows.findIndex(x => x.id == this.status)
+					let item = this.follows[index]
+					lose = item.lose_one == 1 ? this.followItem.lose_id : ''
+
+					if (item.lose_one == 1 && (!lose || lose == '')) {
+						this.$message.error('请选择原因！')
+						return false
+					}
 				}
 				if (followStatus == '') {
 					this.$message.warning('请选择跟进状态！')
@@ -1300,7 +1777,8 @@
 					record_id      : this.record_id,
 					record         : record,
 					file           : file,
-					follow_id      : followStatus
+					follow_id      : followStatus,
+					lose           : lose,
 				})
 
 				if (res.error != 0) {
@@ -1315,6 +1793,7 @@
 					this.imgNum = 0
 					this.msg2 = ''
 					this.file2 = []
+					this.lose = undefined
 					this.imageUrl2 = []
 					this.imgNum2 = 0
 					this.editVisible = false
@@ -1322,10 +1801,15 @@
 					this.canEditFollow()
 					this.getInfo()
 				}
-			}
-			,
+			},
+
 			//修改跟进记录
 			editFollowRecord (item) {
+				this.followItem = item
+				this.status = parseInt(this.followItem.follow_id)
+				let index = this.follows.findIndex(x => x.id == this.status)
+				this.followItem.lose_one = this.follows[index].lose_one
+
 				this.editVisible = true
 				this.record_id = item.id
 				this.msg2 = item.record
@@ -1340,23 +1824,21 @@
 					this.imageUrl2.push(url)
 				})
 				this.imgNum2 = item.file.length
-			}
-			,
+			},
 			cancelFollowRecord () {
 				this.editVisible = false
 				this.record_id = ''
 				this.status = this.followStatus
 				this.msg2 = ''
 				this.file2 = []
+				this.lose = undefined
 				this.imageUrl2 = []
 				this.imgNum2 = 0
-			}
-			,
+			},
 			//上传图片
 			handleCancel2 () {
 				this.previewVisible2 = false;
-			}
-			,
+			},
 			async handlePreview2 (file) {
 				if (!file.url && !file.preview) {
 					file.preview = await getBase64(file.originFileObj);
@@ -1451,6 +1933,7 @@
 			//加载更多
 			loadMore () {
 				this.page2++
+				this.page2++
 				this.getInteract(this.page2)
 			}
 			,
@@ -1458,8 +1941,9 @@
 				const {data: res} = await this.axios.post(
 					"custom-field/follow",
 					{
-						uid   : localStorage.getItem("uid"),
-						status: 1
+						uid    : localStorage.getItem("uid"),
+						status : 1,
+						corp_id: localStorage.getItem("corpId"),
 					}
 				);
 				if (res.error != 0) {
@@ -1474,6 +1958,8 @@
 						}
 						this.follows.unshift(obj)
 					}
+					let index = this.follows.findIndex(x => x.id == this.follow_id)
+					this.followItem = this.follows[index]
 				}
 			}
 			,
@@ -1506,15 +1992,241 @@
 				}
 			}
 			this.id = this.$route.query.id
-			this.getInfo();
 			this.getFollowRecord()
 			this.canEditFollow()
+			this.getLoseReason()
+			this.getInfo();
+
 		}
 	}
 	;
 </script>
 
 <style lang='less' scoped>
+	@import '../../../style/_style.less';
+
+	.audio_box {
+		float: left;
+		overflow: auto;
+		cursor: pointer;
+	}
+
+	.wifi-symbol {
+		width: 20px;
+		height: 20px;
+		box-sizing: border-box;
+		overflow: hidden;
+		transform: rotate(132deg);
+		position: absolute;
+		left: 13px;
+		top: 6px;
+	}
+
+	.wifi-circle {
+		border: 2px solid #FFF;
+		border-radius: 50%;
+		position: absolute;
+	}
+
+	.first {
+		width: 5px;
+		height: 5px;
+		background: #FFF;
+		top: 15px;
+		left: 15px;
+	}
+
+	.second {
+		width: 15px;
+		height: 15px;
+		top: 10px;
+		left: 10px;
+	}
+
+	.third {
+		width: 24px;
+		height: 24px;
+		top: 5px;
+		left: 5px;
+	}
+
+	.second1 {
+		width: 15px;
+		height: 15px;
+		top: 10px;
+		left: 10px;
+		animation: fadeInOut 1s infinite 0.2s;
+	}
+
+	.third1 {
+		width: 24px;
+		height: 24px;
+		top: 5px;
+		left: 5px;
+		animation: fadeInOut 1s infinite 0.4s;
+	}
+
+	@keyframes fadeInOut {
+		0% {
+			opacity: 0;
+		}
+
+		100% {
+			opacity: 1;
+		}
+	}
+
+	.audio_container {
+		width: 140px;
+		height: 30px;
+		line-height: 30px;
+		background-color: #3291F8;
+		color: #FFF;
+		text-align: center;
+		border-radius: 10px;
+		position: relative;
+	}
+
+	.no-active-zan {
+		color: #C7C7C7 !important;
+	}
+
+	.covers {
+		display: flex;
+		justify-content: flex-start;
+		flex-wrap: wrap;
+	}
+
+	.cover {
+		display: flex;
+		justify-content: center;
+		width: 33%;
+		margin: 10px 0;
+	}
+
+	/deep/ .moment_detail_tab .ant-tabs-bar {
+		margin: 0 0 16px;
+		border-bottom: 1px solid #E8E8E8;
+		outline: none;
+		background: #FFF;
+	}
+
+	.moment_detail_tab {
+		padding: 15px 30px 0px 62px;
+	}
+
+	/deep/ .moment_detail_tab .ant-tabs-nav .ant-tabs-tab {
+		margin: 0;
+	}
+
+	.moment_detail_zan {
+		position: relative;
+		background: #F7F7F7;
+		color: #6C7A99;
+		padding: 5px;
+		padding-left: 30px;
+	}
+
+	.moment_detail_zan_icon {
+		position: absolute;
+		top: 18px;
+		left: 12px;
+	}
+
+	.moment_detail_zan_name {
+		margin: 0px 3px;
+		font-style: normal;
+	}
+
+	.moment_detail_list {
+		background: #F7F7F7;
+		padding: 10px 10px 0px 0px;
+		justify-content: space-between;
+		display: flex;
+		flex-wrap: wrap;
+		word-break: break-all;
+		position: relative;
+	}
+
+	.moment_detail_list i {
+		font-style: normal;
+	}
+
+	.moment_detail_list_name {
+		color: #6C7A99;
+		padding: 0px 3px;
+		font-weight: bold;
+	}
+
+	.moment_detail_list_reply_text {
+		margin: 2px;
+	}
+
+	.moment_detail_list_delbox {
+		color: #8A8A8A;
+		font-size: 14px;
+		cursor: pointer;
+	}
+
+	/deep/ .moment_detail_list_delbox.ant-popover-message {
+		padding: 4px 0 4px;
+	}
+
+	/deep/ .moment_detail_list_delbox p {
+		margin-bottom: 0em;
+	}
+
+	/deep/ .moment_detail_delbox .ant-popover-inner-content {
+		padding: 12px 14px 10px;
+	}
+
+	.moment_detail_list p {
+		margin-bottom: 0em;
+	}
+
+	.content-msg {
+		width: 100%;
+		border: 1px solid @border-color;
+		background: @color-bgc;
+		padding: 10px;
+		margin: 20px 0 0 0;
+	}
+
+	.title_lh {
+		line-height: 20px !important;
+		margin-top: 10px;
+		color: #000;
+	}
+
+	.input_img2 {
+		width: 50px;
+		height: 50px;
+	}
+
+	.input_text3 {
+		max-width: 200px;
+		line-height: 16px;
+		font-size: 12px;
+		display: -webkit-box;
+		/*margin-top: 15px;*/
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
+		overflow: hidden;
+		word-break: break-all;
+	}
+
+	.inp_title {
+		max-width: 138px;
+		line-height: 25px;
+		margin-top: 3px;
+		font-weight: bold;
+		color: #000;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		word-break: break-all;
+	}
+
 	/deep/ .ant-card-bordered {
 		border: 0;
 	}
@@ -1744,4 +2456,66 @@
 		color: rgba(0, 0, 0, 0.65);
 	}
 
+	.time-line-detail {
+		margin-left: 20px;
+	}
+
+	.moment_detail_zan_name {
+		font-style: normal;
+	}
+
+	.moment_detail_zan_name img {
+		width: 30px;
+		height: 30px;
+		border-radius: 3px;
+		margin: 5px 5px 5px 0px;
+	}
+
+	.reply_avatar {
+		wdith: 30px;
+		height: 30px;
+		border-radius: 3px;
+		margin-top: 5px;
+	}
+
+	.flexBox {
+		width: 100%;
+		display: flex;
+	}
+
+	.leftBox {
+		position: relative;
+	}
+
+	.reply-all-box-left {
+		width: 10%;
+		text-align: center;
+		padding-top: 23px;
+		background: #F7F7F7;
+	}
+
+	.reply-icon {
+		width: 13px;
+		height: 14px;
+	}
+
+	.reply-all-box-right {
+		width: 93%;
+		background: #F7F7F7;
+		padding: 0px 0px 10px 0px;
+	}
+
+	.reply-all-box {
+		display: flex;
+	}
+
+	.moment_name_box {
+		display: flex;
+		justify-content: space-between;
+	}
+  .over-width{
+    width: 500px!important;
+    max-height: 400px!important;
+    overflow-y: auto!important;
+  }
 </style>

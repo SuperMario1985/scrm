@@ -107,32 +107,34 @@
 						<label v-if="!this.urlId" class="template-title">添加素材</label>
 						<label v-if="this.urlId" class="template-title">编辑素材</label>
 						<router-link to="/filingCabinet/list" style="font-size: 16px;float: right;margin-right: 15px;">
-							<a-button type="primary" >返回列表</a-button>
+							<a-button type="primary">返回列表</a-button>
 						</router-link>
 					</a-layout-header>
 					<!-- 内容 -->
 					<a-layout-content style="height: calc(100% - 100px);">
-						<a-layout style="margin-top: 10px;height: 100%;">
-							<a-layout class="content">
-								<div style="margin: 100px 0px 10px 0px; padding: 0 10px;">
-									<a-input style="height: 50px;" v-model="sketchList[currentIndex].title"
-									         placeholder="输入文章标题（请勿输入特殊字符）"
-									         size="large"
-									         :maxLength="32">
+						<div style="margin: 10px 0px 10px 0px; padding: 0 10px;">
+							<a-input style="height: 50px;" v-model="sketchList[currentIndex].title"
+							         placeholder="输入文章标题（请勿输入特殊字符）"
+							         size="large"
+							         :maxLength="32">
 										<span slot="suffix">
 						                    <span>{{sketchList[currentIndex].title.length}}</span>/32
 					                    </span>
-									</a-input>
-								</div>
+							</a-input>
+						</div>
+						<a-layout style="margin-top: 10px;height: 100%;">
+							<a-layout class="content" style="position: relative">
 								<div class="ueditor"
-								     style="padding: 0px 10px;margin-top: 10px;height: calc(100% - 215px);overflow-y: auto; border-bottom: 1px solid #E2E2E2;">
-<!--									@paste.native="changeImageText"
--->
+								     style="padding: 0px 10px;margin-top: 10px;height: calc(100% - 215px); border-bottom: 1px solid #E2E2E2;">
+									<!--									@paste.native="changeImageText"
+									-->
 									<VueUeditorWrap class="filingCabinetUeditor" :config="myConfig"
 									                @beforeInit="addCustomButtom" @input="changeImageText"
 									                v-model="sketchList[currentIndex].image_text">
 									</VueUeditorWrap>
 								</div>
+
+
 								<div style="height: 50px;line-height: 54px;margin-left: 10px;position: absolute;bottom: 10px;z-index: 9999;">
 									<a-button style="margin-right: 10px;" :disable="createSketchDisable"
 									          @click="createSketch" type="primary">提交
@@ -158,6 +160,58 @@
 												v-model="selectGroupId"
 										>
 										</a-tree-select>
+									</div>
+									<div style="margin-top: 5px;">
+										内容标签
+										<div style="margin: 5px 0;">
+											<a-button icon="plus" type="primary"
+											          @click="showModalTags">选择标签
+											</a-button>
+										</div>
+										<a-popover placement="left" v-if="addTagDetail.length > 0">
+											<div class="popover-content" slot="content">
+												<template v-for="(tag, index) in addTagDetail">
+													<div style="display: inline-block;">
+														<a-tag style="margin: 3px 3px 3px 10px;" :color="tag.tag ? 'orange' : 'blue'">
+															{{tag.title}}
+															<a-icon type="close" style="color: #FF562D; vertical-align: inherit;"
+															        @click="deleteAddTag(index)"></a-icon>
+														</a-tag>
+
+													</div>
+												</template>
+											</div>
+											<span @click="showModalTags" style="color: #01b065;margin-left: 10px; cursor: pointer">
+												已选择
+												<template v-if="getGroupNum(addTagDetail) > 0">{{getGroupNum(addTagDetail)}}个分组</template>
+												<template
+														v-if="getGroupNum(addTagDetail) > 0 && addTagDetail.length != getGroupNum(addTagDetail)">，</template>
+												<template v-if="addTagDetail.length != getGroupNum(addTagDetail)">{{addTagDetail.length - getGroupNum(addTagDetail)}}个标签</template>
+											</span>
+										</a-popover>
+									</div>
+									<div style="margin-top: 5px;">
+										客户标签
+										<a-tooltip placement="bottom">
+											<template slot="title">
+												<span>给点击雷达的客户打上选中的标签</span>
+											</template>
+											<a-icon type="question-circle" style="margin-left:5px;"/>
+										</a-tooltip>
+										<div style="margin: 5px 0;">
+											<a-button icon="plus" type="primary"
+											          @click="chooseTag">添加标签
+											</a-button>
+										</div>
+										<a-tag
+										       v-for="(item, index) in sketchList[currentIndex].radar_tag_ids_name"
+										       color="orange" style="margin: 5px;">
+											{{item}}
+											<a-icon type="close" style="color: #fa8c16; vertical-align: inherit; cursor: pointer" @click="deleteTag(index)"></a-icon>
+										</a-tag>
+										<!--										<corpChooseTag :callback="chooseTags"-->
+										<!--										               :hasChoose="tag_arr"-->
+										<!--										               v-if="radarTagOpen == 1"></corpChooseTag>-->
 									</div>
 									<div style="margin-top: 10px;">
 										封面<span>（建议尺寸900*500）</span>
@@ -307,11 +361,21 @@
 				</a-spin>
 			</div>
 		</a-modal>
+		<a-modal width="888px!important" v-model="tagVisible" @ok="handleTag"
+		         @cancel="handleCancelTag">
+			<corpChooseTagModal v-if="tagVisible" :callback="chooseTags" :tagname="tagName1"
+			                    :hasChoose="tag_arr1"></corpChooseTagModal>
+		</a-modal>
 		<a-modal v-model="qrcodeVisible" @ok="handleQrCode" @cancel="handleCancelQrCode">
-			<div style="padding: 20px 0; width: 140px;margin: 0 auto;" ref="qrcode" id="qrcode">
+			<div style="padding: 20px 0; width: 140px;margin: 0 auto;" ref="qrcode1" id="qrcode1">
 
 			</div>
 		</a-modal>
+		<tagCheckedBox ref="tagCheckedBox" @setGroupId="setGroupId" v-if="tagGroupVisible"
+		               :groupVisible="tagGroupVisible"
+		               :tagDetail="JSON.parse(JSON.stringify(addTagDetail))"
+		               :tagIds="JSON.parse(JSON.stringify(addTagIds))">
+		</tagCheckedBox>
 	</div>
 </template>
 
@@ -325,15 +389,22 @@
 	// import WEmoji from "@/common/js/wechatEmoji.js"
 	import VueUeditorWrap from 'vue-ueditor-wrap' // ES6 Module
 	import QRCode from 'qrcodejs2'
+	import corpChooseTag from "@/components/corpChooseTag/CorpChooseTag.vue"
+	import corpChooseTagModal from '@/components/corpChooseTag/CorpChooseTagModal.vue'
 	// import qqmusic from '../../../components/qqmusic/qqmusic'
+	import tagCheckedBox from '../../../components/materialTagGroup/CheckboxIndex.vue'
 
 	export default {
 		components: {
 			MyIcon,
-			chooseMsg, chooseMsg1,
+			chooseMsg,
+			chooseMsg1,
+			corpChooseTag,
 			// 'medium-editor': editor,
 			// VEmojiPicker,
 			VueUeditorWrap,
+			corpChooseTagModal,
+			tagCheckedBox
 			// qqmusic
 		},
 		data () {
@@ -341,20 +412,33 @@
 				urlId              : '',  // id
 				groupList          : [],
 				selectGroupId      : '',
+				tag_arr1           : [],
+				tagName1           : [],
+				radarTagIds1       : '',
+				tagVisible         : false,
 				sketchList         : [
 					{
-						pic_url       : '',
-						title         : '',
-						attach_id     : 0,
-						qy_attach_id  : 0,
-						qy_local_path : '',
-						content       : '',
-						author        : '',
-						jump_url      : '',
-						image_text    : '',
-						show_cover_pic: false
+						pic_url             : '',
+						title               : '',
+						attach_id           : 0,
+						qy_attach_id        : 0,
+						qy_local_path       : '',
+						content             : '',
+						author              : '',
+						jump_url            : '',
+						image_text          : '',
+						show_cover_pic      : false,
+						radar_open          : 1,
+						radar_tag_open      : 1,
+						dynamic_notification: 1,
+						tag_arr             : [],
+						radar_tag_ids       : [],
+						radar_tag_ids_name  : []
 					}
 				], // 图文信息
+				addTagIds          : [],
+				addTagDetail       : [],
+				tagGroupVisible    : false,
 				picType            : 0, // 封面类型 0.封面(900*500) 1.企业微信封面(200*200)
 				currentIndex       : 0, // 当前图文下标
 				suite_id           : 1, // 应用id
@@ -370,7 +454,7 @@
 				createSketchDisable: false,
 				myConfig           : {
 					// 编辑器不自动被内容撑高
-					autoHeightEnabled : true,
+					autoHeightEnabled : false,
 					autoFloatEnabled  : false,
 					// 初始容器高度
 					initialFrameHeight: '600',
@@ -447,21 +531,21 @@
 			changeImageText () {
 				let that = this
 				this.sketchList[this.currentIndex].image_text.replace(/<img [^>]*src=['"][data:image]([^'"]+)[^>]*>/gi, function (match, src) {
-					that.uploadImgByBase64('d'+src)
+					that.uploadImgByBase64('d' + src)
 				})
 			},
-			async uploadImgByBase64(src) {
+			async uploadImgByBase64 (src) {
 				this.isLoading = true
 				const {data: res} = await this.axios.post("attachment/base64-pic", {
-					uid: localStorage.getItem('uid'),
+					uid       : localStorage.getItem('uid'),
 					base64Data: src
 				});
 				if (res.error != 0) {
 					this.$message.error(res.error_msg);
 				} else {
 					this.sketchList[this.currentIndex].image_text = this.sketchList[this.currentIndex].image_text.replace(/<img [^>]*src=['"][data:image]([^'"]+)[^>]*>/gi, function (match, url, word_img, other) {
-						if(src == 'd' + url) {
-							return '<img style="max-width: 100%;" src="'+ res.data.local_path +'"/>'
+						if (src == 'd' + url) {
+							return '<img style="max-width: 100%;" src="' + res.data.local_path + '"/>'
 						}
 					})
 				}
@@ -711,33 +795,134 @@
 				} else {
 					this.selectGroupId = res.data.group_id.toString()
 					this.getGroupList(this.selectGroupId)
+					this.addTagIds = []
+					this.addTagDetail = []
+					for (let i = 0; i < res.data.tag_name.length; i++) {
+						this.addTagIds.push(res.data.tag_name[i].id + '-s' )
+						this.addTagDetail.push({
+							id :res.data.tag_name[i].id + '-s',
+							tag: true,
+							title: res.data.tag_name[i].tagname
+						})
+					}
 					this.sketchList = res.data.data
 					if (this.sketchList.length == 1) {
 						this.single = true
 					} else {
 						this.single = false
 					}
+					for (let i = 0; i < this.sketchList.length; i++) {
+						this.sketchList[this.currentIndex].radar_open = this.sketchList[this.currentIndex].radar_status == 1 && this.sketchList[this.currentIndex].radar_id > 0 ? 1 : 0
+						this.sketchList[this.currentIndex].tag_arr = this.sketchList[this.currentIndex].radar_tag_ids ? this.sketchList[this.currentIndex].radar_tag_ids.split(',') : []
+					}
+				}
+			},
+			changeRadarOpen () {
+				this.sketchList[this.currentIndex].radar_open = (this.sketchList[this.currentIndex].radar_open + 1) % 2
+				this.sketchList = JSON.parse(JSON.stringify(this.sketchList))
+			},
+			changeRadarDynamicNotification () {
+				this.sketchList[this.currentIndex].dynamic_notification = (this.sketchList[this.currentIndex].dynamic_notification + 1) % 2
+				// this.sketchList = JSON.parse(JSON.stringify(this.sketchList))
+			},
+			changeRadarTagOpen () {
+				this.sketchList[this.currentIndex].radar_tag_open = (this.sketchList[this.currentIndex].radar_tag_open + 1) % 2
+				// this.sketchList = JSON.parse(JSON.stringify(this.sketchList))
+			},
+			showModalTags () {
+				this.tagGroupVisible = true
+			},
+			// 选择标签回调
+			async setGroupId (even, ids, tags) {
+				if (even == 'ok') {
+					this.addTagIds = ids
+					this.addTagDetail = tags
+					this.$refs.tagCheckedBox.comfirmLoading = false
+				}
+				this.tagGroupVisible = false
+			},
+			getGroupNum (addTagDetail) {
+				let count = 0
+				for (let i = 0; i < addTagDetail.length; i++) {
+					if (!addTagDetail[i].tag) {
+						count++
+					}
+				}
+				return count
+			},
+			deleteAddTag (index) {
+				this.addTagIds.splice(index, 1)
+				this.addTagDetail.splice(index, 1)
+			},
+			chooseTag () {
+				this.tag_arr1 = JSON.parse(JSON.stringify(this.sketchList[this.currentIndex].tag_arr))
+				this.radarTagIds1 = JSON.parse(JSON.stringify(this.sketchList[this.currentIndex].radar_tag_ids))
+				this.tagName1 = JSON.parse(JSON.stringify(this.sketchList[this.currentIndex].radar_tag_ids_name))
+				this.tagVisible = true
+			},
+			deleteTag(index) {
+				this.sketchList[this.currentIndex].tag_arr.splice(index, 1)
+				this.sketchList[this.currentIndex].radar_tag_ids = this.sketchList[this.currentIndex].tag_arr.join(',')
+				this.sketchList[this.currentIndex].radar_tag_ids_name.splice(index, 1)
+				this.sketchList = JSON.parse(JSON.stringify(this.sketchList))
+			},
+			handleTag () {
+				this.sketchList[this.currentIndex].tag_arr = JSON.parse(JSON.stringify(this.tag_arr1))
+				this.sketchList[this.currentIndex].radar_tag_ids = JSON.parse(JSON.stringify(this.radarTagIds1))
+				this.sketchList[this.currentIndex].radar_tag_ids_name = JSON.parse(JSON.stringify(this.tagName1))
+				this.tagVisible = false
+			},
+			handleCancelTag () {
+				this.tag_arr1 = []
+				this.radarTagIds1 = ''
+				this.tagName1 = []
+				this.tagVisible = false
+			},
+			chooseTags (event, arr, tagName) {
+				if (event == "ok") {
+					if (arr != '') {
+						this.tag_arr1 = arr.split(',')
+						this.radarTagIds1 = arr
+						this.tagName1 = tagName
+					} else {
+						this.tag_arr1 = []
+						this.radarTagIds1 = ''
+						this.tagName1 = []
+					}
 				}
 			},
 			// 创建图文
 			async createSketch () {
 				this.createSketchDisable = true
+				let flag = false
 				for (let i = 0; i < this.sketchList.length; i++) {
 					if (this.sketchList[i].title == '') {
 						this.$message.warning("请检查图文标题")
 						this.createSketchDisable = false
+						flag = true
 						return false
 					}
 					if (this.sketchList[i].pic_url == '') {
 						this.$message.warning("请检查图文封面")
 						this.createSketchDisable = false
+						flag = true
 						return false
 					}
 					if (this.sketchList[i].image_text == '') {
 						this.$message.warning("请检查图文正文")
 						this.createSketchDisable = false
+						flag = true
 						return false
 					}
+					if (this.sketchList[i].tag_arr.length == 0) {
+						this.sketchList[i].radar_tag_open = 0
+					} else {
+						this.sketchList[i].radar_tag_open = 1
+					}
+					this.sketchList[i].radar_open = 1
+				}
+				if (flag) {
+					return false
 				}
 				if (this.single) {
 					if (this.sketchList[0].qy_local_path == '') {
@@ -756,7 +941,8 @@
 					file_type      : 4,
 					group_id       : this.selectGroupId,
 					attachment_id  : this.urlId || '',
-					msgData        : this.sketchList
+					msgData        : this.sketchList,
+					tag_ids        : this.addTagIds
 				});
 				if (res.error != 0) {
 					this.createSketchDisable = false
@@ -800,7 +986,7 @@
 			},
 			// 二维码
 			qrcode (url) {
-				let qrcode = new QRCode('qrcode', {
+				let qrcode = new QRCode('qrcode1', {
 					width     : 140,
 					height    : 140,
 					text      : url, // 二维码地址
@@ -810,11 +996,11 @@
 			},
 			// 预览取消
 			handleQrCode () {
-				this.$refs.qrcode.innerHTML = ''
+				this.$refs.qrcode1.innerHTML = ''
 				this.qrcodeVisible = false
 			},
 			handleCancelQrCode () {
-				this.$refs.qrcode.innerHTML = ''
+				this.$refs.qrcode1.innerHTML = ''
 				this.qrcodeVisible = false
 			},
 			// showText () {
@@ -961,8 +1147,8 @@
 			async getGroupList (id) {
 				let that = this
 				const {data: res} = await this.axios.post("attachment/group", {
-					uid: localStorage.getItem('uid'),
-					is_channel : 1
+					uid       : localStorage.getItem('uid'),
+					is_channel: 1
 				});
 				if (res.error != 0) {
 					this.$message.error(res.error_msg);
@@ -1205,10 +1391,15 @@
 	}
 
 	.filingCabinetUeditor >>> .edui-editor-toolbarbox {
-		position: fixed;
-		top: 134px;
-		width: calc(100% - 762px);
+		top: 2px;
+		width: 100%;
 		z-index: 99999;
+		min-width: 670px;
+	}
+	.popover-content {
+		max-width: 500px;
+		max-height: 200px;
+		overflow-y: auto;
 	}
 </style>
 <style>

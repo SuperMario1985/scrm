@@ -152,7 +152,7 @@
 															            :autoSize="{ minRows: 9, maxRows: 9 }"
 															/>
 															<div style="float: right;line-height: 20px">
-																500
+																{{publishForm.context?publishForm.context.length:0}}/500
 															</div>
 														</div>
 													</div>
@@ -261,6 +261,7 @@
 																</span>
 															<a-input v-model.trim="uploadText.url"
 															         @blur="inputChange"
+															         @change="handleClearText"
 															         @keyup.enter="inputChange"
 															         placeholder="请输入图文链接,链接地址以http或https开头"
 															         allow-clear/>
@@ -419,9 +420,12 @@
 		                  :chooseNum="selectedMemberNum"
 		                  :callback="departmentReply"></chooseDepartment>
 		<!--素材库-->
-		<chooseMsg :show="showMaterialModel" :type="materialType"
-		           :callback="materialReply"
-		           :chooseId="publishForm.chooseId"></chooseMsg>
+		<chooseMsg
+				:show="showMaterialModel"
+				:type="materialType"
+				:callback="materialReply"
+				:chooseId="publishForm.chooseId"
+		></chooseMsg>
 	</div>
 </template>
 
@@ -633,7 +637,7 @@
 				}
 			},
 			changeAgent () {
-				if (this.isEdit == 1) return
+				// if (this.isEdit == 1) return
 				this.showAgent = true
 			},
 			agentReply (type, corpId, corpName) {
@@ -643,7 +647,7 @@
 						this.publishForm.corpName = corpName
 					}
 				}
-				this.showModal2 = false
+				this.showAgent = false
 			},
 			resetMember () {
 				this.publishForm.ownership = []
@@ -1003,6 +1007,11 @@
 					this.publishForm.advanced_setting = 1
 				} else {
 					this.publishForm.advanced_setting = 0
+				}
+			},
+			handleClearText () {
+				if (this.uploadText.url == '') {
+					this.showTextContent = false
 				}
 			},
 			inputChange () {
@@ -1736,8 +1745,8 @@
 
 	.audio {
 		width: 100%;
-		height: 150px;
-		padding: 50px 20px;
+		height: 65px;
+		padding: 10px 20px;
 		background: #FFF;
 	}
 

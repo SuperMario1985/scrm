@@ -48,8 +48,31 @@
 								<span>
 									<label>标签：</label>
 									<span style="display: inline-block;width: calc(100% - 45px);vertical-align: text-top;">
-										<a-tag v-for="item in hasTagsValue" color="blue" style="margin-bottom: 5px;"
-										       v-if="hasTagsValue && hasTagsValue.length > 0">{{item}}</a-tag>
+										<span  v-if="hasTagsValue && hasTagsValue.length > 5">
+											<a-popover>
+													<span slot="content">
+														<div class="over-width">
+															<a-tag v-for="item in hasTagsValue" color="blue" style="margin-bottom: 5px;"
+															>
+															{{item}}
+															</a-tag>
+														</div>
+													</span>
+													<span v-for="(item1,index1) in hasTagsValue">
+														<a-tag v-if="index1<5" color="blue" style="margin-bottom: 5px;"
+														>
+															{{item1}}
+															</a-tag>
+													</span>
+												<span>等{{hasTagsValue.length}}个标签</span>
+											</a-popover>
+										</span>
+										<span  v-if="hasTagsValue && hasTagsValue.length <5">
+											<a-tag v-for="item in hasTagsValue" color="blue" style="margin-bottom: 5px;"
+											>
+															{{item}}
+															</a-tag>
+										</span>
 										<span v-if="hasTagsValue.length == 0">暂无</span>
 									</span>
 								</span>

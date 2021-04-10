@@ -3,7 +3,7 @@
 		<div>
 			<a-card style="margin-bottom:20px;padding:10px 20px;">
 				<label class="tpl-title">客户详情</label>
-				<a-button type="primary"  style="font-size: 14px;float: right;" @click="goBack">返回列表
+				<a-button type="primary" style="font-size: 14px;float: right;" @click="goBack">返回列表
 				</a-button>
 			</a-card>
 
@@ -51,6 +51,30 @@
 							<div class="col">
 								<label>
 									手机：<span v-if="phone && phone != ''">{{phone}}</span><span v-else>暂无</span>
+									<span style="margin:0 1rem">
+										<a-button type="primary" @click="contact" v-if="dialout_exten&&dialout_phone">
+											联系TA
+										</a-button>
+									</span>
+									<span>
+										<a-tooltip placement="bottom">
+											<template slot="title">
+													<p>鼠标移入展示，移出隐藏</p>
+												<p>根据相关法律法规和监管部门的要求，拨打商业性电话前请您阅读并严格遵守以下内容：</p>
+												<p style="margin-bottom: 2px;font-size: 13px;">
+													1、禁止在非工作时间拨打商业性电话，具体可外呼时间段请咨询您所在企业管理员或线路服务商；</p>
+												<p style="margin-bottom: 10px;font-size: 13px;"></p>
+												<p style="margin-bottom: 2px;font-size: 13px;">
+													2、禁止对同一号码在24小时内发起多次呼叫，同一号码可被外呼频次请咨询您所在企业管理员或在用线路服务商；</p>
+												<p style="margin-bottom: 10px;font-size: 13px;"></p>
+												<p style="margin-bottom: 2px;font-size: 13px;">3、拨打商业性营销电话须事先经过用户本人同意，运营商可能会拦截对已申明不愿意接受商业性电话的用户外呼请求；</p>
+												<p style="margin-bottom: 10px;font-size: 13px;"></p>
+												<p style="margin-bottom: 0;font-size: 13px;">
+													4、禁止使用云呼叫功能开展分裂国家、传播宗教极端思想、煽动民族仇恨、破坏民族团结、扰乱社会秩序、传播封建迷信、诈骗等活动或其他违反国家法律法规、违背社会公序良俗的活动。</p>
+											</template>
+											<a-icon type="question-circle"/>
+										</a-tooltip>
+									</span>
 								</label>
 							</div>
 							<div class="col">
@@ -62,9 +86,23 @@
 								<span>
 									<label>标签：</label>
 									<span style="display: inline-block;width: calc(100% - 45px);vertical-align: text-top;">
-										<a-tag v-for="item in hasTagsValue" color="blue" style="margin-bottom: 5px;"
-										       v-if="hasTagsValue && hasTagsValue.length > 0">{{item}}</a-tag>
+<!--										<a-tag v-for="item in hasTagsValue" color="blue" style="margin-bottom: 5px;"-->
+<!--										       v-if="hasTagsValue && hasTagsValue.length > 0">{{item}}</a-tag>-->
 										<span v-if="hasTagsValue.length == 0">暂无</span>
+                    <span  v-if="hasTagsValue &&hasTagsValue.length > 5">
+                        <a-popover>
+                            <span slot="content">
+                                <div class="over-width"> <a-tag style="margin-bottom: 5px;"  color="blue" v-for="item in hasTagsValue">{{item}}</a-tag></div>
+                            </span>
+                            <span v-for="(item1,index1) in hasTagsValue">
+                                 <a-tag v-if="index1<5" style="margin-bottom: 5px;"  color="blue">{{item1}}</a-tag>
+                            </span>
+                        </a-popover>
+                        <span>等{{hasTagsValue.length}}个标签</span>
+                    </span>
+                    <span v-if="hasTagsValue &&hasTagsValue.length <=5">
+                           <a-tag style="margin-bottom: 5px;" color="blue" v-for="(item1) in hasTagsValue" >{{item1}}</a-tag>
+                    </span>
 										<a-icon @click="showModal" type="edit" style="margin-left: 5px;"
 										        v-if="isShowTag"/>
 									</span>
@@ -218,13 +256,24 @@
 									<div class="time">
 										<div style="margin: 20px 0;">
 											跟进状态：
-											<a-select style="width: 220px" v-model="follow_id">
+											<a-select @change="changeState" style="width: 220px" v-model="follow_id">
 												<a-select-option v-for="item in follows" :value="item.id"
 												                 :disabled="canEdit == 1 ? false : true">
 													{{item.title}}
 												</a-select-option>
 											</a-select>
 										</div>
+										<div style="margin: 20px 0;" v-if="followItem.lose_one==1">
+											输单原因：
+											<a-select v-model="lose" style="width: 220px" placeholder="请选择输单原因"
+											          @change="changeLose">
+												<a-select-option v-for="(item,index) in loseReason" :key="index"
+												                 :value="item.id">
+													{{item.context}}
+												</a-select-option>
+											</a-select>
+										</div>
+
 										<div class="textArea">
 											<a-textarea
 													v-model="msg"
@@ -249,7 +298,7 @@
 												<div v-if="imageUrl.length < 9">
 													<a-button>
 														<a-icon type="link"/>
-														附件 {{imgNum}}/9
+														图片 {{imgNum}}/9
 													</a-button>
 												</div>
 											</a-upload>
@@ -265,30 +314,80 @@
 											</a-button>
 										</div>
 										<a-timeline class="time-line">
-											<a-timeline-item v-for="item in followRecord">
+											<a-timeline-item v-for="(item,index) in followRecord">
 												<div class="time-line-time">{{item.time}}</div>
 												<img slot="dot" src="../../../assets/icon/8.png"
-												     style="width: 18px;"/>
-												<div style="margin: 10px 0;"><span
-														style="color: #1989FA;">{{item.name}}</span> 发表：
-													<span style="color: red;" v-if="item.follow_status != ''">【{{item.follow_status}}】</span>
-													<span style="float:right;"><a-icon type="edit"
-													                                   v-if="item.can_edit == 1"
-													                                   @click="editFollowRecord(item)"/></span>
-												</div>
-												<div class="time-line-title">
-													{{item.record}}
-													<div v-if="item.file.length > 0"
-													     style="margin-top: 5px;overflow: hidden;">
-														<div v-for="url in item.file" class="preview-box">
-															<div class="preview-cover">
-																<img :src="commonUrl + url" alt="">
+												     style="width: 18px;" v-if="item.record_type!=1"/>
+												<img slot="dot" src="../../../assets/call.png"
+												     style="width: 18px;" v-if="item.record_type==1"/>
+												<div v-if="item.record_type!=1">
+													<div style="margin: 10px 0;"><span
+															style="color: #1989FA;">{{item.name}}</span> 发表：
+														<span style="color: red;" v-if="item.follow_status != ''">【{{item.follow_status}}】</span>
+														<span style="float:right;"><a-icon type="edit"
+														                                   v-if="item.can_edit == 1"
+														                                   @click="editFollowRecord(item)"
+														                                   v-has="'client-addFollow'"/></span>
+													</div>
+													<div class="time-line-title">
+														<p style="color: red;" v-if="item.context">
+															输单原因：{{item.context}}</p>
+														<p>{{item.record}}</p>
+														<div v-if="item.file.length > 0"
+														     style="margin-top: 5px;overflow: hidden;">
+															<div v-for="url in item.file" class="preview-box">
+																<div class="preview-cover">
+																	<img :src="commonUrl + url" alt="">
+																</div>
+																<span class="preview-cover-icon"
+																      @click="previewHasImg(commonUrl + url)"><a-icon
+																		type="eye"/></span>
 															</div>
-															<span class="preview-cover-icon"
-															      @click="previewHasImg(commonUrl + url)"><a-icon
-																	type="eye"/></span>
 														</div>
 													</div>
+												</div>
+												<div v-if="item.record_type==1">
+													<div style="margin: 10px 0;"><span
+															style="color: #1989FA;">{{item.name}}</span>
+														<span style="color:red">【打电话】</span>
+														<span>联系了他</span>
+													</div>
+													<div v-if="item.call_info.state == 0" style="color: red">
+														{{item.call_info.msg}}
+													</div>
+													<div class="audio" v-if="item.call_info.state == 1">
+														<div class="audio_container">
+															<div class="audio">
+																<div class="audio_box" style="float: left;"
+																     @click="playMusic(index, true)"
+																     v-show="clickIndex != index">
+																	<div class="wifi-symbol">
+																		<div class="wifi-circle first"></div>
+																		<div class="wifi-circle second"></div>
+																		<div class="wifi-circle third"></div>
+																	</div>
+																	<audio :name="index" :data-index="index"
+																	       @canplay="oncanplay">
+																		<source
+																				:src="item.call_info.file"
+																				type="audio/mpeg"
+																		/>
+																	</audio>
+																</div>
+																<div class="audio_box" style="float: left;"
+																     v-show="clickIndex == index"
+																     @click="playMusic(index, false)">
+																	<div class="wifi-symbol">
+																		<div class="wifi-circle first"></div>
+																		<div class="wifi-circle second1"></div>
+																		<div class="wifi-circle third1"></div>
+																	</div>
+																</div>
+																<span>{{playTime[index] | dateFormat}}</span>
+															</div>
+														</div>
+													</div>
+
 												</div>
 											</a-timeline-item>
 										</a-timeline>
@@ -315,7 +414,7 @@
 										         @cancel="cancelFollowRecord" width="800px">
 											<div style="margin: 20px 0;">
 												跟进状态：
-												<a-select style="width: 220px"
+												<a-select style="width: 220px" @change="changeState1"
 												          v-model="status">
 													<a-select-option v-for="item in follows" :value="item.id"
 													                 :disabled="canEdit == 1 ? false : true">
@@ -323,8 +422,22 @@
 													</a-select-option>
 												</a-select>
 											</div>
+											<div style="margin: 20px 0;"
+											     v-if="followItem.lose_one==1">
+												输单原因：
+												<a-select v-model="followItem.lose_id" style="width: 220px"
+												          placeholder="请选择输单原因">
+													<a-select-option v-for="(item,index) in loseReason" :key="index"
+													                 :value="item.id">
+														{{item.context}}
+													</a-select-option>
+												</a-select>
+											</div>
 											<div class="textArea">
+												<span style="color:red;display: inline-block;width: 2%;margin-bottom: 12%;"
+												      v-if="followItem.lose_one!=1"> * </span>
 												<a-textarea
+														style="display: inline-block;width: 95%"
 														v-model="msg2"
 														placeholder="添加跟进记录，1000字以内"
 														:autoSize="{ minRows: 5, maxRows: 5 }"
@@ -346,7 +459,7 @@
 													<div v-if="imageUrl2.length < 9">
 														<a-button>
 															<a-icon type="link"/>
-															附件 {{imgNum2}}/9
+															图片 {{imgNum2}}/9
 														</a-button>
 													</div>
 												</a-upload>
@@ -361,26 +474,6 @@
 								<a-tab-pane tab="互动轨迹" key="2">
 									<a-timeline class="time-line" style="margin: 20px;">
 										<a-timeline-item v-for="item in interactList">
-											<img v-if="item.icon==1" slot="dot" src="../../../assets/icon/1.png"
-											     style="width: 22px;"/>
-											<img v-if="item.icon==2" slot="dot" src="../../../assets/icon/2.png"
-											     style="width: 22px;"/>
-											<img v-if="item.icon==3" slot="dot" src="../../../assets/icon/3.png"
-											     style="width: 22px;"/>
-											<img v-if="item.icon==4" slot="dot" src="../../../assets/icon/4.png"
-											     style="width: 26px;"/>
-											<img v-if="item.icon==5" slot="dot" src="../../../assets/icon/5.png"
-											     style="width: 26px;"/>
-											<img v-if="item.icon==6" slot="dot" src="../../../assets/icon/6.png"
-											     style="width: 18px;"/>
-											<img v-if="item.icon==8" slot="dot" src="../../../assets/icon/8.png"
-											     style="width: 18px;"/>
-											<img v-if="item.icon==10" slot="dot" src="../../../assets/icon/10.png"
-											     style="width: 18px;"/>
-											<img v-if="item.icon==11" slot="dot" src="../../../assets/icon/11.png"
-											     style="width: 18px;"/>
-											<img v-if="item.icon==12" slot="dot" src="../../../assets/icon/12.png"
-											     style="width: 16px;"/>
 											<a-icon type="pay-circle" slot="dot" v-if="item.icon==13"/>
 											<div style="min-height: 40px;">
 												<div class="time-line-time">{{item.event_time}}</div>
@@ -534,6 +627,11 @@
 		         :confirmLoading="confirmLoading2" @cancel="cancelVisible" width="800px">
 			<corpChooseTag :callback="modalVisibleChange4" :hasChoose="tagCheckValue"></corpChooseTag>
 		</a-modal>
+
+		<a-modal v-model="showAddPhone" title="Modal" ok-text="确认" cancel-text="取消" @ok="hideModal"
+		         @cancel="handleCancel">
+			<p>需要添加对方的个人微信吗？</p>
+		</a-modal>
 	</div>
 </template>
 
@@ -543,6 +641,7 @@
 	import "moment/locale/zh-cn";
 	import avatar from "../../../assets/userface.png"
 	import corpChooseTag from "@/components/corpChooseTag/CorpChooseTag.vue"
+	import PubSub from "pubsub-js";
 
 	moment.locale("zh-cn");
 
@@ -560,6 +659,12 @@
 		data () {
 			let corpId = localStorage.getItem('corpId') ? localStorage.getItem('corpId') : "";
 			return {
+				showAddPhone    : false,
+				dialout_phone   : '',
+				dialout_exten   : '',
+				loseReason      : [],
+				lose            : undefined,
+				followItem      : {},
 				corpId          : corpId,//企业微信选中的id
 				isLoading       : false, //Loading 组件显示与隐藏
 				commonUrl       : this.$store.state.commonUrl,//公共的链接
@@ -646,9 +751,91 @@
 				isMasterAccount: localStorage.getItem('isMasterAccount'),
 				canEdit        : 1,//是否可以编辑客户跟进状态,1可以，0不可以
 				isShowTag      : true,//根据权限判断是否展示打标签或移除标签
+				clickIndex     : -1,
+				flag           : false,
+				playTime       : [],
+				t1             : [],
 			};
 		},
 		methods   : {
+			contact () {
+				let that = this
+				this.$confirm({
+					title     : '是否拨打电话',
+					okText    : "确定",
+					okType    : "primary",
+					cancelText: "取消",
+					onOk () {
+						PubSub.publish('showCall', {
+							showCall : true,
+							avatar   : '',
+							nickname : that.nickname,
+							follow_id: that.id,
+							phone    : that.phone,
+							type     : 1,
+							from     : 1, //非企微
+						});
+					}
+				});
+			},
+			hideModal () {
+				this.$copyText(this.phone).then(
+					res => {
+						console.log(res)
+						this.$message.success("已成功复制，可直接去粘贴");
+					},
+					err => {
+						this.$message.error("复制失败");
+					}
+				)
+			},
+			handleCancel3 () {
+				this.showAddPhone = false
+			},
+			//播放音频
+			playMusic (index, flag) {
+				clearInterval(this.t1);
+				console.log(flag)
+				if (this.clickIndex != -1) {
+					document.getElementsByName(index)[0].pause();
+				}
+				if (!flag) {
+					this.clickIndex = -1
+					this.flag = !this.flag
+					return
+				}
+				document.getElementsByName(index)[0].play();
+				this.clickIndex = index;
+				this.t1 = setInterval(() => {
+					this.playTime[index]--;
+					this.$set(this.playTime, index, this.playTime[index]);
+					if (this.playTime[index] <= 0) {
+						this.clickIndex = -1
+						clearInterval(this.t1);
+						this.$set(
+							this.playTime,
+							index,
+							Math.ceil(document.getElementsByName(index)[0].duration)
+						);
+					}
+				}, 1000);
+			},
+			oncanplay (res) {
+				//   console.log(res.target.duration);
+				const audioIndex = res.target.dataset.index;
+				this.$set(this.playTime, audioIndex, Math.ceil(res.target.duration));
+			},
+			async getLoseReason () {
+				const {data: res} = await this.axios.post("custom-field/get-lose-msg", {
+						corp_id: localStorage.getItem("corpId"),
+					}
+				);
+				if (res.error != 0) {
+					this.$message.error(res.error_msg)
+				} else {
+					this.loseReason = res.data
+				}
+			},
 			goBack () {
 				this.$router.go(-1)
 			},
@@ -699,7 +886,8 @@
 					this.follow_num = res.data.follow_num
 					this.memberInfo = res.data.memberInfo
 					this.chatName = res.data.chat_name
-
+					this.dialout_phone = res.data.dialout_phone
+					this.dialout_exten = res.data.dialout_exten
 					this.getFollowStatus()
 
 					this.field_list = res.data.field_list
@@ -784,9 +972,9 @@
 			//客户标签
 			modalVisibleChange4 (event, str) {
 				if (event == "ok") {
-					if(str == ''){
+					if (str == '') {
 						this.tagCheckValue = []
-					}else {
+					} else {
 						this.tagCheckValue = str.split(',')
 					}
 				}
@@ -1094,10 +1282,12 @@
 			},
 			//输入框
 			changeTextarea () {
-				if (this.msg == '' && this.file.length == 0) {
-					this.submitDisabled = true
-				} else {
-					this.submitDisabled = false
+				if (this.followItem.lose_one == 0) {
+					if (this.msg == '' && this.file.length == 0) {
+						this.submitDisabled = true
+					} else {
+						this.submitDisabled = false
+					}
 				}
 			},
 			//上传图片
@@ -1187,10 +1377,8 @@
 				if (this.file.length == 0 && this.msg == '') {
 					this.submitDisabled = true
 				}
-			}
-			,
+			},
 			async uploadMaterial (materialData) {
-				this.submitDisabled = true
 				let params = new FormData();
 				params.append("uid", localStorage.getItem('uid'));
 				params.append("fileInfo", materialData);
@@ -1198,11 +1386,19 @@
 				if (res.error == 0) {
 					if (res.data) {
 						this.file.push(res.data.local_path)
-						this.submitDisabled = false
+						if (this.followItem.lose_one == 1 && !this.lose) {
+							this.submitDisabled = true
+						} else {
+							this.submitDisabled = false
+						}
 					}
 				} else {
 					this.$message.error(res.error_msg)
-					this.submitDisabled = false
+					if (this.followItem.lose_one == 1 && !this.lose) {
+						this.submitDisabled = true
+					} else {
+						this.submitDisabled = false
+					}
 				}
 				// console.log(this.file,'this.file')
 			}
@@ -1242,24 +1438,37 @@
 					//新建
 					record = this.msg
 					file = this.file
-					if (record.trim() == '' && file.length == 0) {
-						this.$message.error('跟进内容和附件至少要填写一个！')
-						return false
-					}
 				} else {
 					//修改
 					record = this.msg2
 					file = this.file2
+				}
+				if (this.followItem.lose_one == 0) {
 					if (record.trim() == '' && file.length == 0) {
-						this.$message.error('跟进内容和附件至少要填写一个！')
+						this.$message.error('跟进内容和图片至少要填写一个！')
+						return false
+					}
+				} else {
+					if (this.lose == '') {
+						this.$message.error('请选择原因！')
 						return false
 					}
 				}
 				let followStatus = 0
+				let lose
 				if (!this.editVisible) {
 					followStatus = this.follow_id
+					lose = this.followItem.lose_one == 1 ? this.lose : ''
 				} else {
 					followStatus = this.status
+					let index = this.follows.findIndex(x => x.id == this.status)
+					let item = this.follows[index]
+					lose = item.lose_one == 1 ? this.followItem.lose_id : ''
+
+					if (item.lose_one == 1 && (!lose || lose == '')) {
+						this.$message.error('请选择原因！')
+						return false
+					}
 				}
 				if (followStatus == '') {
 					this.$message.warning('请选择跟进状态！')
@@ -1286,7 +1495,8 @@
 					record_id      : this.record_id,
 					record         : record,
 					file           : file,
-					follow_id      : followStatus
+					follow_id      : followStatus,
+					lose           : lose,
 				})
 
 				if (res.error != 0) {
@@ -1301,6 +1511,7 @@
 					this.imgNum = 0
 					this.msg2 = ''
 					this.file2 = []
+					this.lose = undefined
 					this.imageUrl2 = []
 					this.imgNum2 = 0
 					this.editVisible = false
@@ -1312,6 +1523,11 @@
 			,
 			//修改跟进记录
 			editFollowRecord (item) {
+				this.followItem = item
+				this.status = parseInt(this.followItem.follow_id)
+				let index = this.follows.findIndex(x => x.id == this.status)
+				this.followItem.lose_one = this.follows[index].lose_one
+
 				this.editVisible = true
 				this.record_id = item.id
 				this.msg2 = item.record
@@ -1326,8 +1542,8 @@
 					this.imageUrl2.push(url)
 				})
 				this.imgNum2 = item.file.length
-			}
-			,
+			},
+
 			cancelFollowRecord () {
 				this.editVisible = false
 				this.record_id = ''
@@ -1336,8 +1552,34 @@
 				this.file2 = []
 				this.imageUrl2 = []
 				this.imgNum2 = 0
-			}
-			,
+			},
+			changeState (item) {
+				let index = this.follows.findIndex(x => x.id == this.follow_id)
+				this.followItem = this.follows[index]
+				this.submitDisabled = false
+				if (this.followItem.lose_one == 1 && (!this.lose || this.lose == '')) {
+					this.submitDisabled = true
+				} else if (this.followItem.lose_one == 0) {
+					if ((!this.msg && this.msg == '') && this.file.length <= 0) {
+						this.submitDisabled = true
+					} else {
+						this.submitDisabled = false
+					}
+				}
+			},
+			changeState1 (item) {
+				let index = this.follows.findIndex(x => x.id == this.status)
+				this.followItem.lose_one = this.follows[index].lose_one
+			},
+			changeLose () {
+				if (this.followItem.lose_one == 1) {
+					if (!this.lose || this.lose == '') {
+						this.submitDisabled = true
+					} else {
+						this.submitDisabled = false
+					}
+				}
+			},
 			//上传图片
 			handleCancel2 () {
 				this.previewVisible2 = false;
@@ -1443,14 +1685,16 @@
 				const {data: res} = await this.axios.post(
 					"custom-field/follow",
 					{
-						uid   : localStorage.getItem("uid"),
-						status: 1
+						uid    : localStorage.getItem("uid"),
+						status : 1,
+						corp_id: localStorage.getItem("corpId"),
 					}
 				);
 				if (res.error != 0) {
 					this.$message.error(res.error_msg);
 				} else {
 					this.follows = res.data.follow
+
 					if (this.is_follow_del == 1) {
 						let obj = {
 							id    : this.follow_id,
@@ -1459,6 +1703,8 @@
 						}
 						this.follows.unshift(obj)
 					}
+					let index = this.follows.findIndex(x => x.id == this.follow_id)
+					this.followItem = this.follows[index]
 				}
 			}
 			,
@@ -1477,6 +1723,7 @@
 					this.canEdit = res.data.can_edit_follow
 				}
 			},
+
 		},
 
 		created () {
@@ -1494,6 +1741,13 @@
 			this.getInfo();
 			this.getFollowRecord()
 			this.canEditFollow()
+			this.getLoseReason()
+			let that = this
+			PubSub.subscribe('closeCall', (event, data) => {
+				if (!data.showCall) {
+					this.showAddPhone = true
+				}
+			})
 		}
 	}
 	;
@@ -1502,6 +1756,88 @@
 <style lang='less' scoped>
 	/deep/ .ant-card-bordered {
 		border: 0;
+	}
+
+	.audio_box {
+		float: left;
+		overflow: auto;
+		cursor: pointer;
+	}
+
+	.wifi-symbol {
+		width: 20px;
+		height: 20px;
+		box-sizing: border-box;
+		overflow: hidden;
+		transform: rotate(132deg);
+		position: absolute;
+		left: 13px;
+		top: 6px;
+	}
+
+	.wifi-circle {
+		border: 2px solid #FFF;
+		border-radius: 50%;
+		position: absolute;
+	}
+
+	.first {
+		width: 5px;
+		height: 5px;
+		background: #FFF;
+		top: 15px;
+		left: 15px;
+	}
+
+	.second {
+		width: 15px;
+		height: 15px;
+		top: 10px;
+		left: 10px;
+	}
+
+	.third {
+		width: 24px;
+		height: 24px;
+		top: 5px;
+		left: 5px;
+	}
+
+	.second1 {
+		width: 15px;
+		height: 15px;
+		top: 10px;
+		left: 10px;
+		animation: fadeInOut 1s infinite 0.2s;
+	}
+
+	.third1 {
+		width: 24px;
+		height: 24px;
+		top: 5px;
+		left: 5px;
+		animation: fadeInOut 1s infinite 0.4s;
+	}
+
+	@keyframes fadeInOut {
+		0% {
+			opacity: 0;
+		}
+
+		100% {
+			opacity: 1;
+		}
+	}
+
+	.audio_container {
+		width: 140px;
+		height: 30px;
+		line-height: 30px;
+		background-color: #3291F8;
+		color: #FFF;
+		text-align: center;
+		border-radius: 10px;
+		position: relative;
 	}
 
 	.tpl-title {
@@ -1728,4 +2064,21 @@
 	/deep/ .ant-steps-item-finish > .ant-steps-item-container > .ant-steps-item-content > .ant-steps-item-description {
 		color: rgba(0, 0, 0, 0.65);
 	}
+
+	/deep/ .ant-tooltip-inner {
+		background-color: #FFF5A7 !important;
+		width: 640px !important;
+	}
+  .over-width{
+    width: 500px!important;
+    max-height: 400px!important;
+    overflow-y: auto!important;
+  }
+
+	/*/deep/ .ant-modal-close{*/
+	/*	display: flex;*/
+	/*	flex-direction: row-reverse;*/
+	/*	position: static;*/
+	/*	margin-left: 88%;*/
+	/*}*/
 </style>

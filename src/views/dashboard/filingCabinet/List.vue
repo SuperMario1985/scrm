@@ -11,6 +11,10 @@
 						style="position: absolute;left:250px;top:0;bottom:0;right:0;overflow-x: hidden; overflow-y: auto;"
 						class="scroll fans-content"
 				>
+					<!-- 头部 -->
+					<!-- <a-layout-header>
+						<label style="font-size: 16px;">内容引擎</label>
+					</a-layout-header> -->
 					<!--添加到企微侧边栏弹窗-->
 					<a-layout-content>
 						<div style="font-size:16px;font-weight:700;color:#333333">内容引擎</div>
@@ -29,21 +33,18 @@
 									上传文件
 								</a-button>
 							</a-upload>
-							<!-- <a-button type="primary" @click="handleSidebarOk">
+							<a-button type="primary" @click="handleSidebarOk">
 								查看使用教程
-							</a-button> -->
+							</a-button>
 						</template>
 						<p>Some contents...</p>
 					</a-modal>
-					<div class="content-msg" style="box-shadow: 0px 1px 4px 0px #D7D7D7;padding:16px">
+					<div class="content-msg">
 						<p style="margin-bottom: 2px;">
-							1、本系统仅支持创建单图文。
+							1、<span style="color: #FF562D;">针对图片/视频/TXT文件/PDF文件，若开启雷达链接，则意味着该素材可用图文链接的方式，被客户打开，可追踪链接打开次数、停留时长以及给客户打上标签。反之，则直接向对话框推送一张图片、一条视频，一个文件，也无法给客户自动打标签。</span>另外，本系统仅支持创建单图文。
 						</p>
 						<p style="margin-bottom: 2px;">
-							2、同步公众号单图文/多图文的区别：
-						</p>
-						<p style="margin-bottom: 2px;">
-							从某公众号同步过来的多图文，仅适用于在该公众号下进行发送，亦不可在企业微信里进行发送；而同步过来的单图文，可以在任何公众号和企业微信里发送。
+							2、<span style="font-weight: 700;">同步公众号单图文/多图文的区别：</span>从某公众号同步过来的多图文，仅适用于在该公众号下进行发送，不可在企业微信里进行发送；而同步过来的单图文，可以在任何公众号和企业微信里发送。
 						</p>
 						<p style="margin-bottom: 2px;">
 							3、对于同步到本系统的单/多图文，在本系统修改或是删除后，公众号均会保持实时一致。
@@ -74,12 +75,11 @@
 						<p style="margin-bottom: 2px;">
 							6、其他分组不可移入至【渠道码】分组里，但【渠道码】里的分组可以移入至其他分组里。
 						</p>
-						<p style="margin-bottom: 0px; color: #ff562d">
+						<p style="margin-bottom: 0px; color: #FF562D">
 							7、通过聊天侧边栏发送小程序，员工请先将企业微信APP升级至3.1.0及以后版本，小程序路径必须以“.html”结尾。
 						</p>
 					</div>
 					<!-- 内容 -->
-				
 						<!-- 表格部分 -->
 						<div class="content-bd">
 							<div class="account-filter">
@@ -144,373 +144,57 @@
 								</div>
 							</div>
 							<a-spin tip="加载中..." size="large" :spinning="isLoading">
-
-								<!-- 图文 -->
-								<div v-show="material_type == 4">
-									<div style="height: 32px;padding-left: 20px; margin-bottom:10px;display: inline-block;line-height: 32px;">
-										<a-tooltip placement="top">
-											<template slot="title">
-												<span>卡片展示</span>
-											</template>
-											<a-icon @click="changeSketchType(0)" style="font-size: 20px;"
-											        :class="sketchType == 0 ? 'sketch-type-activity' : ''"
-											        type="appstore"/>
-										</a-tooltip>
-										<a-tooltip placement="top">
-											<template slot="title">
-												<span>列表展示</span>
-											</template>
-											<a-icon @click="changeSketchType(1)" style="font-size: 20px;margin: 0 10px;"
-											        :class="sketchType == 1 ? 'sketch-type-activity' : ''"
-											        type="unordered-list"/>
-										</a-tooltip>
-										共有
-										<span style="color: blue">{{materialListTotal}}</span>个素材
-									</div>
-									<div class="content-hd">
-										<a-input-search
-												placeholder="输入要搜索的内容"
-												@search="onSearch"
-												v-model="name"
-												:allowClear=true
-												enterButton="搜索"
-												style="width: 260px;"
-										/>
-										<a-button @click="clearInput" style="margin-left: 10px;">
-											清空
-										</a-button>
-										<a-button style="float: right;margin-right: 10px;" 
-										          @click="showPop"
-										          :loading="sketchWxLoading" v-has="'material-sync'">
-											同步公众号
-										</a-button>
-										<a-button @click='addSketchList' style="float: right;margin-right: 10px;"
-										          type="primary"
-										         v-has="'material-add'">快速创建
-										</a-button>
-										<a-button @click='addFilingCabinetSketch'
-										          style="float: right;margin-right: 10px;" type="primary"
-										         v-has="'material-add'">添加图文
-										</a-button>
-										<!--										<a-popover v-show="sketchType == 0" placement="top">-->
-										<!--											<template slot="content">-->
-										<a-button @click="batchMove" style="float: right;margin-right: 10px;"
-										          :disabled="selectedRowKeys.length == 0"
-										          v-has="'material-remove'">
-											批量移动
-										</a-button>
-										<!--												<p @click="batchDelete" style="cursor: pointer;"-->
-										<!--												   :class="selectedRowKeys.length == 0 ? 'nokey': ''"-->
-										<!--												   v-has="'material-delete'">-->
-										<!--													<a-icon type="delete"/>-->
-										<!--													批量删除-->
-										<!--												</p>-->
-										<!--											</template>-->
-										<!--											<a-button :disabled="selectedRowKeys.length == 0"-->
-										<!--											          style="float: right;margin-right: 10px;"-->
-										<!--											          v-hasMore2one="'material-remove,material-delete'">-->
-										<!--												<a-icon type="diff"/>-->
-										<!--												批量操作-->
-										<!--											</a-button>-->
-										<!--										</a-popover>-->
-
-									</div>
-									<div
-											style="margin: 100px;height: 400px;text-align: center;"
-											v-show="materialListTotal == 0?true:false"
-									>
-										<img
-												src="../../../assets/null.png"
-												style="width: 150px;display: block;margin: auto"
-										/>
-										<p style="text-align: center;">暂无数据</p>
-									</div>
-									<div v-show="sketchType == 0">
-										<waterfall
-												:col="col"
-												:width="itemWidth"
-												:loadDistance="200"
-												:data="materialList"
-												@loadmore="loadMore"
-												@finish='finish'
-												@scroll="scroll"
-												:gutterWidth="gutterWidth"
-												v-if="materialListTotal !== 0">
-											<template>
-												<!--											draggable="true" :id="item.id" @dragstart="drag"-->
-												<div class="evenCard"
-												     v-for="(item,index) in materialList" v-has="'material-list'">
-													<!--单图文-->
-													<a-card
-															v-if="item.artList.length == 1"
-															hoverable
-															style="width: 90%;margin:auto;"
-													>
-														<div slot="title">
-															<span style="font-size: 14px; width: calc(100% - 50px); display: inline-block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{item.create_time}}</span>
-															<a-checkbox style="float: right"
-															            v-hasMore2one="'material-remove,material-delete'"
-															            v-model="checkBoxValue[index]"
-															            @click="changeSelectKey(item.key)"></a-checkbox>
-														</div>
-														<img
-																style="object-fit: contain;"
-																:style="itemHeight"
-																alt="example"
-																draggable="false"
-																:src="commonUrl+(item.artList[0].s_local_path || item.artList[0].local_path)"
-																slot="cover"
-														/>
-														<template class="ant-card-actions" slot="actions">
-															<!--														<a-button @click="phoneView(item.id)">-->
-															<!--															<a-icon type="eye"/>-->
-															<!--															手机预览-->
-															<!--															手机预览-->
-															<!--														</a-button>-->
-															<a-button type="link" @click="changeMaterial(item.id, item.group_id)"
-																          v-has="'material-remove'">
-																	移动
-																</a-button>
-															<div v-if="item.is_editor==1">
-																<a-button  type="link" v-if="item.is_appli!=1"
-																          @click="previewSketch(index)"
-																          v-has="'material-preview'">
-																	预览
-																</a-button>
-															</div>
-															<a-button type="link"
-																				@click="editFilingCabinetSketch(index)"
-																				v-has="'material-edit'">
-																编辑
-															</a-button>
-															<a-button type="link"
-																				@click="statistic(item.id, material_type)" v-has="'content-statistic'">
-																统计
-															</a-button>
-			
-														</template>
-														<div
-																style="height: 30px;line-height: 30px;background: #0F0F0F;opacity: 0.6;color: #FFF;padding: 0 10px;margin-top: -47px;overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
-														>{{item.artList[0].title}}
-														</div>
-														<div style="margin: 5px 0px 2px;width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
-															上传者：{{item.username}}
-														</div>
-														<a-tooltip placement="top">
-															<template slot="title">
-																<span>{{item.group_name}}</span>
-															</template>
-															<div style="width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
-																来源：{{item.group_name}}
-															</div>
-														</a-tooltip>
-
-													</a-card>
-													<!--多图文-->
-													<a-card
-															v-if="item.artList.length != 1"
-															hoverable
-															style="width: 90%; margin: auto;"
-													>
-														<div slot="title">
-															<span style="font-size: 14px;width: calc(100% - 50px); display: inline-block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{item.create_time}}</span>
-															<a-checkbox style="float: right"
-															            v-hasMore2one="'material-remove,material-delete'"
-															            v-model="checkBoxValue[index]"
-															            @click="changeSelectKey(item.key)"></a-checkbox>
-														</div>
-														<template v-for="(art, artIndex) in item.artList">
-															<template v-if="artIndex == 0">
-																<div
-																		style="height: 30px;line-height: 30px;background: #0F0F0F;opacity: 0.6;color: #FFF;padding: 0 10px;margin-top: -47px;overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
-																>{{art.title}}
-																</div>
-																<img
-																		style="object-fit: contain;"
-																		draggable="false"
-																		alt="example"
-																		:src="commonUrl+(art.s_local_path || art.local_path)"
-																		slot="cover"
-																/>
-															</template>
-															<template v-if="artIndex != 0">
-																<a-card-meta :title="art.title">
-																	<a-avatar
-																			style="object-fit: cover;"
-																			@mousedown="function(e) {e.preventDefault()}"
-																			slot="avatar"
-																			shape="square"
-																			:size="64"
-																			:src="commonUrl+(art.s_local_path || art.local_path)"
-																	/>
-																</a-card-meta>
-															</template>
-														</template>
-														<template class="ant-card-actions" slot="actions">
-															<!--														<a-button  @click="phoneView(item.id)">-->
-															<!--															<a-icon type="eye"/>-->
-															<!--															手机预览-->
-															<!--														</a-button>-->
-															<a-button type="link"
-																				@click="changeMaterial(item.id, item.group_id)"
-																				v-has="'material-remove'">
-																移动
-															</a-button>
-															<a-button type="link"
-																				@click="editFilingCabinetSketch(index)"
-																				v-has="'material-edit'">
-																编辑
-															</a-button>
-															<a-button type="link"
-																				@click="statistic(item.id, material_type)" v-has="'content-statistic'">
-																统计
-															</a-button>
-															<a-button type="link" @click="delPicTxt(item.id)"
-																          v-has="'material-delete'">
-																	删除
-																</a-button>
-														</template>
-														<div style="margin: 5px 0px 2px; width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
-															上传者：{{item.username}}
-														</div>
-														<a-tooltip placement="top">
-															<template slot="title">
-																<span>{{item.group_name}}</span>
-															</template>
-															<div style="width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
-																来源：{{item.group_name}}
-															</div>
-														</a-tooltip>
-
-													</a-card>
-												</div>
-											</template>
-										</waterfall>
-										<a-modal title="发送手机预览" v-model="visible">
-											<template slot="footer">
-												<a-button key="back" @click="handleCancel">取消</a-button>
-												<a-button
-														key="submit"
-														type="primary"
-														:loading="loading3"
-														@click="handleOk"
-												>发送预览
-												</a-button>
-											</template>
-											<p>关注公众号后，才能接收图文消息预览</p>
-											<a-input placeholder="请输入接收预览的个人微信号（需关注）"
-											         v-model="inputUsername"/>
-											<div class="phoneView-txt">
-												预览功能仅用于公众号查看文章效果，不适用于公众传播，预览链接会在短期内失效
-											</div>
-										</a-modal>
-									</div>
-									<div v-show="sketchType == 1">
-										<a-table v-show="materialListTotal > 0" :columns="sketchColomns"
-										         :dataSource="materialList"
-										         :pagination="false"
-										         style="margin:0 0 30px 0px;" rowKey="id"
-										         :rowClassName="rowClassName"
-										         v-has="'material-list'">
-											<span slot="checkedBox" slot-scope="text, record,index">
-												<a-checkbox style="float: right"
-												            v-hasMore2one="'material-remove,material-delete'"
-												            v-model="checkBoxValue[index]"
-												            @click="changeSelectKey(record.key)"></a-checkbox>
-											</span>
-											<span slot="file_name" slot-scope="text, record,index">
-												<div>
-													<p style="margin-bottom: 0px;"
-													   v-for="(item, index) in record.artList"><span v-if="record.artList.length && record.artList.length > 1">{{index + 1}}、</span>{{item.title}}</p>
-												</div>
-											</span>
-											<span slot="content" slot-scope="text, record,index">
-												<div style="display: inline-block; width: 100px;height: 100px;line-height: 100px;">
-													<img
-															style="max-width: 100px;max-height: 100px;"
-															:src="commonUrl + (record.artList[0].s_local_path ? record.artList[0].s_local_path : record.artList[0].local_path)"
-													/>
-												</div>
-											</span>
-											<span slot="action" slot-scope="text, record,index">
-												<a-button type="link" @click="changeMaterial(record.id, record.group_id)"
-													          v-has="'material-remove'">
-														移动
-													</a-button>
-												<a-button type="link" v-if="record.is_appli!=1"
-													          @click="previewSketch(index)"
-													          v-has="'material-preview'">
-														预览
-													</a-button>
-												<a-button type="link" v-if="record.is_appli!=1"
-													          @click="editFilingCabinetSketch(index)"
-													          v-has="'material-edit'">
-														编辑
-													</a-button>
-												<a-button type="link" @click="statistic(record.id, material_type)" v-has="'content-statistic'">
-														统计
-													</a-button>
-												<a-button type="link" @click="delPicTxt(record.id)" v-if="record.is_appli!=1"
-													          v-has="'material-delete'">
-														删除
-													</a-button>
-											</span>
-										</a-table>
-										<!-- 图文分页 -->
-										<div style="width: 100%;padding: 0 20px 20px;" v-show="materialListTotal>0"
-										     v-has="'material-list'">
-											<div style="height: 32px;display: inline-block;line-height: 32px;margin-bottom: 10px;">
-												<a-checkbox v-show="sketchType == 1" v-model="batchTypeValue"
-												            @click="batchTypeChange"></a-checkbox>
-												<a-select v-show="sketchType == 1" optionFilterProp="children"
-												          v-model="batchType"
-												          @change="changeBatchType" style="width: 150px; margin: 0 5px;">
-													<a-select-option value="0">选择当前页</a-select-option>
-													<a-select-option value="1">选择所有</a-select-option>
-												</a-select>
-												<a-button @click="batchMove" style="margin-right: 5px"
-												          :disabled="selectedRowKeys.length == 0"
-												          v-has="'material-remove'">
-													批量移动
-												</a-button>
-												<a-button @click="batchDelete" :disabled="selectedRowKeys.length == 0"
-												          v-has="'material-delete'">
-													批量删除
-												</a-button>
-											</div>
-											<div class="pagination" style="height: 32px;float: right;">
-												<a-pagination
-														:total="materialListTotal"
-														showSizeChanger
-														:showQuickJumper="quickJumper"
-														:current="sketchPage"
-														:pageSize="sketchPageSize"
-														:pageSizeOptions="['15','30','50','100']"
-														@change="changeSketchPage"
-														@showSizeChange="showSketchSizeChange"
-												/>
-											</div>
-										</div>
-									</div>
-								</div>
 								<!-- 所有 -->
 								<div v-if="material_type == 0">
-									<div style="height: 32px;padding-left: 20px; margin-bottom:10px;display: inline-block;line-height: 32px;">
+									<div
+											style="height: 32px;padding-left: 20px; margin-bottom:10px;display: inline-block;line-height: 32px;">
 										共有
-										<span style="color: blue">{{allTotal}}</span>个素材
+										<span style="color: blue">{{ allTotal }}</span>个素材
 									</div>
 									<div class="content-hd">
-										<a-input-search
+										<a-input
 												placeholder="输入要搜索的内容"
-												@search="onSearch"
 												v-model="name"
 												:allowClear=true
-												enterButton="搜索"
-												style="width: 260px;"
-										/>
+												style="width: 200px;"
+										></a-input>
+										<a-button style="margin-left: 10px;" @click="showSelectTag">
+											<template v-if="selectTagIds.length == 0">选择标签</template>
+											<template v-if="selectTagIds.length > 0">
+												已选择
+												<template v-if="getGroupNum(selectTagDetail) > 0">
+													{{ getGroupNum(selectTagDetail) }}个分组
+												</template>
+												<template
+														v-if="getGroupNum(selectTagDetail) > 0 && selectTagDetail.length != getGroupNum(selectTagDetail)">
+													，
+												</template>
+												<template v-if="selectTagDetail.length != getGroupNum(selectTagDetail)">
+													{{ selectTagDetail.length - getGroupNum(selectTagDetail) }}个标签
+												</template>
+											</template>
+										</a-button>
+										<a-select
+												showSearch
+												optionFilterProp="children"
+												style="width: 140px;margin-left: 10px;"
+												v-model="isRadar"
+										>
+											<a-select-option :value="0">雷达状态</a-select-option>
+											<a-select-option :value="1">非雷达链接</a-select-option>
+											<a-select-option :value="2">雷达链接</a-select-option>
+										</a-select>
+										<a-button @click="onSearch" type="primary" style="margin-left: 10px;">
+											查找
+										</a-button>
 										<a-button @click="clearInput" style="margin-left: 10px;">
 											清空
 										</a-button>
+										<!--                                        <a-button class="btn-primary1" @click="setOptions" type="primary"-->
+										<!--                                                  style="float: right"-->
+										<!--                                                   v-has="'client-setOptions'">-->
+										<!--                                            高级设置-->
+										<!--                                        </a-button>-->
 									</div>
 									<div
 											style="margin: 100px;height: 400px;text-align: center;"
@@ -576,7 +260,8 @@
 															</div>
 														</div>
 													</div>
-													<div style="text-align: left;padding: 0 5px;">{{playTime[index] | dateFormat}}</div>
+													<div
+															style="text-align: left;padding: 0 5px;">{{ playTime[index] | dateFormat }}</div>
 												</div>
 												<div style="height: 115px;line-height: 115px;"
 												     v-if="record.file_type == 3">
@@ -590,7 +275,8 @@
 												</div>
 												<div style="height: 150px;line-height: 150px;"
 												     v-if="record.file_type == 4">
-													<div style="display: inline-block; width: 100px;height: 100px;line-height: 100px;">
+													<div
+															style="display: inline-block; width: 100px;height: 100px;line-height: 100px;">
 														<img
 																style="max-width: 100px;max-height: 100px;"
 																:src="commonUrl + (record.artList[0].s_local_path ? record.artList[0].s_local_path : record.artList[0].local_path)"
@@ -601,19 +287,20 @@
 												     v-if="record.file_type == 5">
 													--
 												</div>
-												<div style="height: 150px;line-height: 30px;"
+												<div style="max-height: 150px;line-height: 30px;"
 												     v-if="record.file_type == 6">
-													<a-popover>
+													<a-popover placement="left">
 													    <template slot="content">
-													        <p style="max-width: 700px;word-break:break-all;word-wrapL:break-word;" v-html="text.replace(/\n/g, '<br/>')"></p>
+													        <p style="word-break:break-all;word-wrapL:break-word;" class="popover-content"
+													           v-html="text.replace(/\n/g, '<br/>')"></p>
 													    </template>
 													    <div class="inputTitle2">
 															<p v-html="text.replace(/\n/g, '<br/>')"></p>
 														</div>
 													</a-popover>
-<!--													<div class="inputTitle2">-->
-<!--														<p v-html="text.replace(/\n/g, '<br/>')"></p>-->
-<!--													</div>-->
+													<!--													<div class="inputTitle2">-->
+													<!--														<p v-html="text.replace(/\n/g, '<br/>')"></p>-->
+													<!--													</div>-->
 												</div>
 												<div style="height: 150px;line-height: 150px;"
 												     v-if="record.file_type == 7">
@@ -627,11 +314,29 @@
 												</div>
 											</span>
 											<span slot="file_name" slot-scope="text, record,index">
-												<div v-if="record.file_type != 4">{{record.file_name}}</div>
-												<div v-if="record.file_type == 4">
-													<p style="margin-bottom: 0px;"
-													   v-for="(item, index) in record.artList"><span v-if="record.artList.length && record.artList.length > 1">{{index + 1}}、</span>{{item.title}}</p>
-												</div>
+												<a-icon v-if="record.radar_status == 1 && record.radar_id > 0"
+												        type="radar-chart"
+												        style="vertical-align: top;font-size: 19px;color: #3CB371;"/>
+												<div
+														style="margin-left: 5px; width: calc(100% - 30px); display: inline-block;"
+														v-if="record.file_type != 4">{{ record.file_name }}</div>
+												<template v-if="record.file_type == 4">
+													<p style="margin-bottom: 0px; margin-left: 5px; width: calc(100% - 30px); display: inline-block;"
+													   v-for="(item, index) in record.artList"><span
+															v-if="record.artList.length && record.artList.length > 1">{{ index + 1 }}、</span>{{ item.title }}</p>
+												</template>
+											</span>
+											<span slot="tag_name" slot-scope="text, record,index">
+												<span v-if="!record.tag_name || record.tag_name.length == 0">--</span>
+												<a-popover placement="right"
+												           v-if="record.tag_name && record.tag_name.length > 0">
+													<div slot="content" class="popover-content">
+														<a-tag style="margin: 3px;" color="orange"
+														       v-for="tag in record.tag_name">{{ tag.tagname }}</a-tag>
+													</div>
+													<span
+															style="color: #01b065; cursor: pointer;">{{ record.tag_name.length }}个</span>
+												</a-popover>
 											</span>
 											<span slot="typeName" slot-scope="text, record,index">
 												<div v-if="record.file_type == 1">图片</div>
@@ -643,22 +348,91 @@
 												<div v-if="record.file_type == 7">小程序</div>
 											</span>
 											<span slot="action" slot-scope="text, record,index">
-												<a-button v-if="record.file_type == 6" type="link" @click="editText(index, 1)"
-																	v-has="'material-edit'">
-													编辑
-												</a-button>
-												<a-button v-if="record.is_appli!=1 && record.file_type == 4" type="link" @click="editFilingCabinetSketch(index, 1)"
-																	v-has="'material-edit'">
-													编辑
-												</a-button>
-												<a-button v-if="record.file_type == 7" type="link" @click="editApplet(index, 1)"
-																	v-has="'material-edit'">
-													编辑
-												</a-button>
-												<a-button v-if="record.is_editor==1 && record.file_type == 4" type="link" @click="previewSketch(index, 1)"
-																	v-has="'material-edit'">
-													编辑
-												</a-button>
+												<a-tooltip placement="top" v-if="record.file_type == 6"
+												           v-has="'material-edit'">
+													<template slot="title">
+														编辑
+													</template>
+													<a-button type="link" @click="editText(record.tag_name, index, 1)"
+													          v-has="'material-edit'">
+														<a-icon type="edit"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip placement="top" v-if="record.file_type== 1"
+												           v-has="'material-edit'">
+													<template slot="title">
+														编辑
+													</template>
+													<a-button type="link" @click="editPic(allMaterialList[index])"
+													          v-has="'material-edit'">
+														<a-icon type="edit"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip placement="top" v-if="record.file_type== 3"
+												           v-has="'material-edit'">
+													<template slot="title">
+														编辑
+													</template>
+													<a-button type="link" @click="editVideo(allMaterialList[index])"
+													          v-has="'material-edit'">
+														<a-icon type="edit"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip v-if="record.is_appli!=1 && record.file_type == 4"
+												           placement="top"
+												           v-has="'material-edit'">
+													<template slot="title">
+														编辑
+													</template>
+													<a-button type="link"
+													          @click="editFilingCabinetSketch(allMaterialList[index])"
+													          v-has="'material-edit'">
+														<a-icon type="edit"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip v-if="record.file_type== 5"
+												           placement="top"
+												           v-has="'material-edit'">
+													<template slot="title">
+														编辑
+													</template>
+													<a-button type="link" @click="editFile(allMaterialList[index])"
+													          v-has="'material-edit'">
+														<a-icon type="edit"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip placement="top" v-if="record.file_type == 7"
+												           v-has="'material-edit'">
+													<template slot="title">
+														编辑
+													</template>
+													<a-button type="link" @click="editApplet(record.tag_name, index, 1)"
+													          v-has="'material-edit'">
+														<a-icon type="edit"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip placement="top" v-has="'material-edit'">
+													<template slot="title">
+														编辑标签
+													</template>
+													<a-button type="link"
+													          @click="updateTags(record.id, record.tag_name)"
+													          v-has="'material-edit'">
+														<a-icon type="tags"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip placement="top"
+												           v-if="record.is_editor==1 && record.file_type == 4"
+												           v-has="'material-preview'">
+													<template slot="title">
+														预览
+													</template>
+													<a-button type="link"
+													          @click="previewSketch(index, 1)"
+													          v-has="'material-preview'">
+														<a-icon type="eye"/>
+													</a-button>
+												</a-tooltip>
 												<!-- 图片预览 -->
 												<a-modal :visible="previewAllVisible" :footer="null"
 												         @cancel="handleCancel3"
@@ -673,39 +447,106 @@
 															/>
 														</div>
 												</a-modal>
-												<a-button type="link" v-if="record.file_type== 1"  @click="previewPic1(index)"
-													          v-has="'material-preview'">
+												<a-tooltip placement="top" v-if="record.file_type== 1"
+												           style="margin-left: 5px;"
+												           v-has="'material-preview'">
+													<template slot="title">
 														预览
-												</a-button>
-												<a-button type="link" @click="changeMaterial(record.id, record.group_id)"
-																	v-has="'material-remove'">
-													移动
-												</a-button>
-												<a-button type="link"
-																	@click="statistic(record.id, record.file_type)" v-has="'content-statistic'">
-													统计
-												</a-button>
-												<a-button type="link" v-if="record.file_type == 6" @click="delText(record.id)">
-													删除
-												</a-button>
-												<a-button type="link" v-if="record.file_type == 2" @click="delText(record.id)">
-													删除
-												</a-button>
-												<a-button type="link" v-if="record.file_type == 3" @click="delText(record.id)">
-													删除
-												</a-button>
-												<a-button type="link" v-if="record.file_type == 5" @click="delText(record.id)">
-													删除
-												</a-button>
-												<a-button type="link" v-if="record.file_type == 7" @click="delText(record.id)">
-													删除
-												</a-button>
-												<a-button type="link" v-if="record.file_type == 1" @click="delText(record.id)">
-													删除
-												</a-button>
-												<a-button type="link" v-if="record.file_type == 1" @click="downLoadWay(record.file_name, record.local_path)">
-													下载
-												</a-button>
+													</template>
+													<a-button type="link" @click="previewPic1(index)"
+													          v-has="'material-preview'">
+														<a-icon type="eye"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip placement="top"
+												           v-has="'material-remove'">
+													<template slot="title">
+														移动
+													</template>
+													<a-button type="link"
+													          @click="changeMaterial(record.id, record.group_id)"
+													          v-has="'material-remove'">
+														<a-icon type="retweet"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip placement="top">
+													<template slot="title">
+														统计
+													</template>
+													<a-button type="link"
+													          @click="statistic(record, record.file_type)"
+													          v-has="'content-statistic'">
+														<a-icon type="rise"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip placement="top" v-if="record.file_type == 6"
+												           v-has="'material-delete'">
+													<template slot="title">
+														删除
+													</template>
+													<a-button type="link" @click="delText(record.id)">
+														<a-icon type="delete"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip placement="top" v-if="record.file_type == 2"
+												           v-has="'material-delete'">
+													<template slot="title">
+														删除
+													</template>
+													<a-button type="link" @click="delAudio(record.id)"
+													          v-has="'material-delete'">
+														<a-icon type="delete"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip placement="top" v-if="record.file_type == 3"
+												           v-has="'material-delete'">
+													<template slot="title">
+														删除
+													</template>
+													<a-button type="link" @click="delVideo(record.id)"
+													          v-has="'material-delete'">
+														<a-icon type="delete"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip placement="top" v-if="record.file_type == 5"
+												           v-has="'material-delete'">
+													<template slot="title">
+														删除
+													</template>
+													<a-button type="link" @click="delFile(record.id)"
+													          v-has="'material-delete'">
+														<a-icon type="delete"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip placement="top" v-if="record.file_type == 7"
+												           v-has="'material-delete'">
+													<template slot="title">
+														删除
+													</template>
+													<a-button type="link" @click="delMiniprogram(record.id)"
+													          v-has="'material-delete'">
+														<a-icon type="delete"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip placement="top" v-if="record.file_type == 1"
+												           v-has="'material-delete'">
+													<template slot="title">
+														删除
+													</template>
+													<a-button type="link" @click="delPic(record.id)"
+													          v-has="'material-delete'">
+														<a-icon type="delete"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip placement="top" v-if="record.file_type == 1">
+													<template slot="title">
+														下载
+													</template>
+													<a-button type="link"
+													          @click="downLoadWay(record.file_name, record.local_path)">
+														<a-icon type="download"/>
+													</a-button>
+												</a-tooltip>
 											</span>
 										</a-table>
 									</div>
@@ -723,7 +564,20 @@
 											</a-select>
 											<a-button @click="batchMove" style="margin-right: 5px"
 											          :disabled="selectedRowKeys.length == 0" v-has="'material-remove'">
+												
 												批量移动
+											</a-button>
+											<a-button @click="batchAddTags" style="margin-right: 5px;"
+											          v-has="'material-edit'"
+											          :disabled="selectedRowKeys.length == 0">
+												
+												批量打标签
+											</a-button>
+											<a-button @click="batchRemoveTags" style="margin-right: 5px;"
+											          v-has="'material-edit'"
+											          :disabled="selectedRowKeys.length == 0">
+												
+												批量移除标签
 											</a-button>
 										</div>
 										<div class="pagination" style="height: 32px;float: right;">
@@ -740,11 +594,597 @@
 										</div>
 									</div>
 								</div>
+								<!-- 图文 -->
+								<div v-show="material_type == 4">
+									<div
+											style="height: 32px;padding-left: 20px; margin-bottom:10px;display: inline-block;line-height: 32px;">
+										<a-tooltip placement="top">
+											<template slot="title">
+												<span>卡片展示</span>
+											</template>
+											<a-icon @click="changeSketchType(0)" style="font-size: 20px;"
+											        :class="sketchType == 0 ? 'sketch-type-activity' : ''"
+											        type="appstore"/>
+										</a-tooltip>
+										<a-tooltip placement="top">
+											<template slot="title">
+												<span>列表展示</span>
+											</template>
+											<a-icon @click="changeSketchType(1)" style="font-size: 20px;margin: 0 10px;"
+											        :class="sketchType == 1 ? 'sketch-type-activity' : ''"
+											        type="unordered-list"/>
+										</a-tooltip>
+										共有
+										<span style="color: blue">{{ materialListTotal }}</span>个素材
+									</div>
+									<div class="content-hd">
+										<a-input
+												placeholder="输入要搜索的内容"
+												v-model="name"
+												:allowClear=true
+												style="width: 200px;"
+										></a-input>
+										<a-button style="margin-left: 10px;" @click="showSelectTag">
+											<template v-if="selectTagIds.length == 0">选择标签</template>
+											<template v-if="selectTagIds.length > 0">
+												已选择
+												<template v-if="getGroupNum(selectTagDetail) > 0">
+													{{ getGroupNum(selectTagDetail) }}个分组
+												</template>
+												<template
+														v-if="getGroupNum(selectTagDetail) > 0 && selectTagDetail.length != getGroupNum(selectTagDetail)">
+													，
+												</template>
+												<template v-if="selectTagDetail.length != getGroupNum(selectTagDetail)">
+													{{ selectTagDetail.length - getGroupNum(selectTagDetail) }}个标签
+												</template>
+											</template>
+										</a-button>
+										<a-select
+												showSearch
+												optionFilterProp="children"
+												style="width: 140px;margin-left: 10px;"
+												v-model="isRadar"
+										>
+											<a-select-option :value="0">雷达状态</a-select-option>
+											<a-select-option :value="1">非雷达链接</a-select-option>
+											<a-select-option :value="2">雷达链接</a-select-option>
+										</a-select>
+										<a-button @click="onSearch" type="primary" style="margin-left: 10px;">
+											查找
+										</a-button>
+										<a-button @click="clearInput" style="margin-left: 10px;">
+											清空
+										</a-button>
+										<template v-if="sketchType != 0">
+											<a-button style="float: right;margin-right: 10px;" 
+											          @click="showPop"
+											          :loading="sketchWxLoading" v-has="'material-sync'">
+												同步公众号
+											</a-button>
+											<a-button @click='addSketchList' style="float: right;margin-right: 10px;"
+											          type="primary"
+											           v-has="'material-add'">快速创建
+											</a-button>
+											<a-button @click='addFilingCabinetSketch'
+											          style="float: right;margin-right: 10px;" type="primary"
+											           v-has="'material-add'">添加图文
+											</a-button>
+										</template>
+										<!--										<a-popover v-show="sketchType == 0" placement="top">-->
+										<!--											<template slot="content">-->
+										<!--                                        <a-button @click="batchMove" style="float: right;margin-right: 10px;"-->
+										<!--                                                  :disabled="selectedRowKeys.length == 0"-->
+										<!--                                                  v-has="'material-remove'">-->
+										<!--                                            <a-icon type="retweet"/>-->
+										<!--                                            批量移动-->
+										<!--                                        </a-button>-->
+										<!--												<p @click="batchDelete" style="cursor: pointer;"-->
+										<!--												   :class="selectedRowKeys.length == 0 ? 'nokey': ''"-->
+										<!--												   v-has="'material-delete'">-->
+										<!--													<a-icon type="delete"/>-->
+										<!--													批量删除-->
+										<!--												</p>-->
+										<!--											</template>-->
+										<!--											<a-button :disabled="selectedRowKeys.length == 0"-->
+										<!--											          style="float: right;margin-right: 10px;"-->
+										<!--											          v-hasMore2one="'material-remove,material-delete'">-->
+										<!--												<a-icon type="diff"/>-->
+										<!--												批量操作-->
+										<!--											</a-button>-->
+										<!--										</a-popover>-->
+
+									</div>
+									<div v-if="sketchType == 0"
+									     style="padding: 0 20px; margin-bottom: 20px; height: 23px;">
+										<a-button style="float: right;margin-right: 10px;" 
+										          @click="showPop"
+										          :loading="sketchWxLoading" v-has="'material-sync'">
+											同步公众号
+										</a-button>
+										<a-button @click='addSketchList' style="float: right;margin-right: 10px;"
+										          type="primary"
+										           v-has="'material-add'">快速创建
+										</a-button>
+										<a-button @click='addFilingCabinetSketch'
+										          style="float: right;margin-right: 10px;" type="primary"
+										           v-has="'material-add'">添加图文
+										</a-button>
+										<a-button @click="batchRemoveTags" style="float: right;margin-right: 10px;"
+										          v-has="'material-edit'"
+										          :disabled="selectedRowKeys.length == 0">
+											
+											批量移除标签
+										</a-button>
+										<a-button @click="batchAddTags" style="float: right;margin-right: 10px;"
+										          v-has="'material-edit'"
+										          :disabled="selectedRowKeys.length == 0">
+											
+											批量打标签
+										</a-button>
+										<a-button @click="batchMove" style="float: right;margin-right: 10px;"
+										          :disabled="selectedRowKeys.length == 0"
+										          v-has="'material-remove'">
+											
+											批量移动
+										</a-button>
+									</div>
+									<div
+											style="margin: 100px;height: 400px;text-align: center;"
+											v-show="materialListTotal == 0?true:false"
+									>
+										<img
+												src="../../../assets/null.png"
+												style="width: 150px;display: block;margin: auto"
+										/>
+										<p style="text-align: center;">暂无数据</p>
+									</div>
+									<div v-show="sketchType == 0">
+										<waterfall
+												:col="col"
+												:width="itemWidth"
+												:loadDistance="200"
+												:data="materialList"
+												@loadmore="loadMore"
+												@finish='finish'
+												@scroll="scroll"
+												:gutterWidth="gutterWidth"
+												v-if="materialListTotal !== 0">
+											<template>
+												<!--											draggable="true" :id="item.id" @dragstart="drag"-->
+												<div class="evenCard"
+												     v-for="(item,index) in materialList" v-has="'material-list'">
+													<!--单图文-->
+													<a-card
+															v-if="item.artList.length == 1"
+															hoverable
+															style="width: 90%;margin:auto;"
+													>
+														<div slot="title">
+                                                            <span
+		                                                            style="font-size: 14px; width: calc(100% - 50px); display: inline-block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{ item.create_time }}</span>
+															<a-icon v-if="item.radar_status == 1 && item.radar_id > 0"
+															        type="radar-chart"
+															        style="vertical-align: top;font-size: 19px;color: #3CB371;"/>
+															<a-checkbox style="float: right"
+															            v-hasMore2one="'material-remove,material-delete'"
+															            v-model="checkBoxValue[index]"
+															            @click="changeSelectKey(item.key)"></a-checkbox>
+														</div>
+														<img
+																style="object-fit: contain;"
+																:style="itemHeight"
+																alt="example"
+																draggable="false"
+																:src="commonUrl+(item.artList[0].s_local_path || item.artList[0].local_path)"
+																slot="cover"
+														/>
+														<template class="ant-card-actions" slot="actions">
+															<!--														<a-button @click="phoneView(item.id)">-->
+															<!--															<a-icon type="eye"/>-->
+															<!--															手机预览-->
+															<!--															手机预览-->
+															<!--														</a-button>-->
+															<a-tooltip placement="top"
+															           v-has="'material-remove'">
+																<template slot="title">
+																	移动
+																</template>
+																<a-button type="link"
+																          @click="changeMaterial(item.id, item.group_id)"
+																          v-has="'material-remove'">
+																	<a-icon type="retweet"/>
+																</a-button>
+															</a-tooltip>
+															<a-tooltip placement="top" v-if="item.is_editor==1"
+															           v-has="'material-preview'">
+																<template slot="title">
+																	预览
+																</template>
+																<a-button type="link" v-if="item.is_appli!=1"
+																          @click="previewSketch(index)"
+																          v-has="'material-preview'">
+																	<a-icon type="eye"/>
+																</a-button>
+															</a-tooltip>
+															<a-tooltip v-if="item.is_appli!=1" placement="top"
+															           v-has="'material-edit'">
+																<template slot="title">
+																	编辑
+																</template>
+																<a-button type="link"
+																          @click="editFilingCabinetSketch(materialList[index])"
+																          v-has="'material-edit'">
+																	<a-icon type="edit"/>
+																</a-button>
+															</a-tooltip>
+															<a-tooltip v-if="item.is_appli!=1" placement="top"
+															           v-has="'material-edit'">
+																<template slot="title">
+																	编辑标签
+																</template>
+																<a-button type="link"
+																          @click="updateTags(item.id, item.tag_name)"
+																          v-has="'material-edit'">
+																	<a-icon type="tags"/>
+																</a-button>
+															</a-tooltip>
+															<a-tooltip placement="top">
+																<template slot="title">
+																	统计
+																</template>
+																<a-button type="link"
+																          @click="statistic(item, material_type)"
+																          v-has="'content-statistic'">
+																	<a-icon type="rise"/>
+																</a-button>
+															</a-tooltip>
+														</template>
+														<div
+																style="height: 30px;line-height: 30px;background: #0F0F0F;opacity: 0.7;color: #FFF;padding: 0 10px;margin-top: -47px;overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+														>{{ item.artList[0].title }}
+														</div>
+														<div
+																style="margin: 5px 0px 2px;width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+															上传者：{{ item.username }}
+														</div>
+														<a-tooltip placement="top">
+															<template slot="title">
+																<span>{{ item.group_name }}</span>
+															</template>
+															<div
+																	style="width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+																来源：{{ item.group_name }}
+															</div>
+														</a-tooltip>
+														<div v-if="item.tag_name.length == 0">内容标签：--</div>
+														<a-popover v-if="item.tag_name.length > 0" placement="left">
+															<div slot="content" class="popover-content">
+																<a-tag color="orange" style="margin: 3px;"
+																       v-for="tag in item.tag_name">{{ tag.tagname }}
+																</a-tag>
+															</div>
+															<div
+																	style="width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+																内容标签：{{ item.tag_name.length }}个
+															</div>
+														</a-popover>
+													</a-card>
+													<!--多图文-->
+													<a-card
+															v-if="item.artList.length != 1"
+															hoverable
+															style="width: 90%; margin: auto;"
+													>
+														<div slot="title">
+                                                            <span
+		                                                            style="font-size: 14px;width: calc(100% - 50px); display: inline-block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{ item.create_time }}</span>
+															<a-icon v-if="item.radar_status == 1 && item.radar_id > 0"
+															        type="radar-chart"
+															        style="vertical-align: top;font-size: 19px;color: #3CB371;"/>
+															<a-checkbox style="float: right"
+															            v-hasMore2one="'material-remove,material-delete'"
+															            v-model="checkBoxValue[index]"
+															            @click="changeSelectKey(item.key)"></a-checkbox>
+														</div>
+														<template v-for="(art, artIndex) in item.artList">
+															<template v-if="artIndex == 0">
+																<div
+																		style="height: 30px;line-height: 30px;background: #0F0F0F;opacity: 0.7;color: #FFF;padding: 0 10px;margin-top: -47px;overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+																>{{ art.title }}
+																</div>
+																<img
+																		style="object-fit: contain;"
+																		draggable="false"
+																		alt="example"
+																		:src="commonUrl+(art.s_local_path || art.local_path)"
+																		slot="cover"
+																/>
+															</template>
+															<template v-if="artIndex != 0">
+																<a-card-meta :title="art.title">
+																	<a-avatar
+																			style="object-fit: cover;"
+																			@mousedown="function(e) {e.preventDefault()}"
+																			slot="avatar"
+																			shape="square"
+																			:size="64"
+																			:src="commonUrl+(art.s_local_path || art.local_path)"
+																	/>
+																</a-card-meta>
+															</template>
+														</template>
+														<template class="ant-card-actions" slot="actions">
+															<!--														<a-button  @click="phoneView(item.id)">-->
+															<!--															<a-icon type="eye"/>-->
+															<!--															手机预览-->
+															<!--														</a-button>-->
+															<a-tooltip placement="top">
+																<template slot="title">
+																	移动
+																</template>
+																<a-button type="link"
+																          @click="changeMaterial(item.id, item.group_id)"
+																          v-has="'material-remove'">
+																	<a-icon type="retweet"/>
+																</a-button>
+															</a-tooltip>
+															<a-tooltip placement="top">
+																<template slot="title">
+																	编辑
+																</template>
+																<a-button type="link"
+																          @click="editFilingCabinetSketch(materialList[index])"
+																          v-has="'material-edit'">
+																	<a-icon type="edit"/>
+																</a-button>
+															</a-tooltip>
+															<a-tooltip placement="top"
+															           v-has="'material-edit'">
+																<template slot="title">
+																	编辑标签
+																</template>
+																<a-button type="link"
+																          @click="updateTags(item.id, item.tag_name)"
+																          v-has="'material-edit'">
+																	<a-icon type="tags"/>
+																</a-button>
+															</a-tooltip>
+															<a-tooltip placement="top">
+																<template slot="title">
+																	统计
+																</template>
+																<a-button type="link"
+																          @click="statistic(item, material_type)"
+																          v-has="'content-statistic'">
+																	<a-icon type="rise"/>
+																</a-button>
+															</a-tooltip>
+															<a-tooltip placement="top">
+																<template slot="title">
+																	删除
+																</template>
+																<a-button type="link" @click="delPicTxt(item.id)"
+																          v-has="'material-delete'">
+																	<a-icon type="delete"/>
+																</a-button>
+															</a-tooltip>
+														</template>
+														<div
+																style="margin: 5px 0px 2px; width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+															上传者：{{ item.username }}
+														</div>
+														<a-tooltip placement="top">
+															<template slot="title">
+																<span>{{ item.group_name }}</span>
+															</template>
+															<div
+																	style="width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+																来源：{{ item.group_name }}
+															</div>
+														</a-tooltip>
+														<div v-if="item.tag_name.length == 0">内容标签：--</div>
+														<a-popover v-if="item.tag_name.length > 0" placement="left">
+															<div slot="content" class="popover-content">
+																<a-tag color="orange" style="margin: 3px;"
+																       v-for="tag in item.tag_name">{{ tag.tagname }}
+																</a-tag>
+															</div>
+															<div
+																	style="width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+																内容标签：{{ item.tag_name.length }}个
+															</div>
+														</a-popover>
+													</a-card>
+												</div>
+											</template>
+										</waterfall>
+										<a-modal title="发送手机预览" v-model="visible">
+											<template slot="footer">
+												<a-button key="back" @click="handleCancel">取消</a-button>
+												<a-button
+														key="submit"
+														type="primary"
+														:loading="loading3"
+														@click="handleOk"
+												>发送预览
+												</a-button>
+											</template>
+											<p>关注公众号后，才能接收图文消息预览</p>
+											<a-input placeholder="请输入接收预览的个人微信号（需关注）"
+											         v-model="inputUsername"/>
+											<div class="phoneView-txt">
+												预览功能仅用于公众号查看文章效果，不适用于公众传播，预览链接会在短期内失效
+											</div>
+										</a-modal>
+									</div>
+									<div v-show="sketchType == 1">
+										<a-table v-show="materialListTotal > 0" :columns="sketchColomns"
+										         :dataSource="materialList"
+										         :pagination="false"
+										         style="margin:0 0 30px 0px;" rowKey="id"
+										         :rowClassName="rowClassName"
+										         v-has="'material-list'">
+											<span slot="checkedBox" slot-scope="text, record,index">
+												<a-checkbox style="float: right"
+												            v-hasMore2one="'material-remove,material-delete'"
+												            v-model="checkBoxValue[index]"
+												            @click="changeSelectKey(record.key)"></a-checkbox>
+											</span>
+											<span slot="file_name" slot-scope="text, record,index">
+												<a-icon v-if="record.radar_status == 1 && record.radar_id > 0"
+												        type="radar-chart"
+												        style="vertical-align: top;font-size: 19px;color: #3CB371;"/>
+													<p style="margin-bottom: 0px; margin-left: 5px; width: calc(100% - 30px); display: inline-block;"
+													   v-for="(item, index) in record.artList"><span
+															v-if="record.artList.length && record.artList.length > 1">{{ index + 1 }}、</span>{{ item.title }}</p>
+											</span>
+											<span slot="tag_name" slot-scope="text, record,index">
+												<span
+														v-if="!record.tag_name || record.tag_name.length == 0">内容标签：--</span>
+												<a-popover placement="right"
+												           v-if="record.tag_name && record.tag_name.length > 0">
+													<div slot="content" class="popover-content">
+														<a-tag color="orange" style="margin: 3px;"
+														       v-for="tag in record.tag_name">{{ tag.tagname }}</a-tag>
+													</div>
+													<span
+															style="color: #01b065; cursor: pointer;">内容标签：{{ record.tag_name.length }}个</span>
+												</a-popover>
+											</span>
+											<span slot="content" slot-scope="text, record,index">
+												<div
+														style="display: inline-block; width: 100px;height: 100px;line-height: 100px;">
+													<img
+															style="max-width: 100px;max-height: 100px;"
+															:src="commonUrl + (record.artList[0].s_local_path ? record.artList[0].s_local_path : record.artList[0].local_path)"
+													/>
+												</div>
+											</span>
+											<span slot="action" slot-scope="text, record,index">
+												<a-tooltip placement="top"
+												           v-has="'material-remove'">
+													<template slot="title">
+														移动
+													</template>
+													<a-button type="link"
+													          @click="changeMaterial(record.id, record.group_id)"
+													          v-has="'material-remove'">
+														<a-icon type="retweet"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip placement="top" v-if="record.is_editor==1"
+												           v-has="'material-preview'">
+													<template slot="title">
+														预览
+													</template>
+													<a-button type="link" v-if="record.is_appli!=1"
+													          @click="previewSketch(index)"
+													          v-has="'material-preview'">
+														<a-icon type="eye"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip v-if="record.is_appli!=1" placement="top"
+												           v-has="'material-edit'">
+													<template slot="title">
+														编辑
+													</template>
+													<a-button type="link"
+													          @click="editFilingCabinetSketch(materialList[index])"
+													          v-has="'material-edit'">
+														<a-icon type="edit"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip placement="top" v-has="'material-edit'">
+													<template slot="title">
+														编辑标签
+													</template>
+													<a-button type="link"
+													          @click="updateTags(record.id, record.tag_name)"
+													          v-has="'material-edit'">
+														<a-icon type="tags"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip placement="top">
+													<template slot="title">
+														统计
+													</template>
+													<a-button type="link" @click="statistic(record, material_type)"
+													          v-has="'content-statistic'">
+														<a-icon type="rise"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip v-if="record.is_appli!=1" placement="top"
+												           v-has="'material-delete'">
+													<template slot="title">
+														删除
+													</template>
+													<a-button type="link" @click="delPicTxt(record.id)"
+													          v-has="'material-delete'">
+														<a-icon type="delete"/>
+													</a-button>
+												</a-tooltip>
+											</span>
+										</a-table>
+										<!-- 图文分页 -->
+										<div style="width: 100%;padding: 0 20px 20px;" v-show="materialListTotal>0"
+										     v-has="'material-list'">
+											<div
+													style="height: 32px;display: inline-block;line-height: 32px;margin-bottom: 10px;">
+												<a-checkbox v-show="sketchType == 1" v-model="batchTypeValue"
+												            @click="batchTypeChange"></a-checkbox>
+												<a-select v-show="sketchType == 1" optionFilterProp="children"
+												          v-model="batchType"
+												          @change="changeBatchType"
+												          style="width: 150px; margin: 0 5px;">
+													<a-select-option value="0">选择当前页</a-select-option>
+													<a-select-option value="1">选择所有</a-select-option>
+												</a-select>
+												<a-button @click="batchMove" style="margin-right: 5px"
+												          :disabled="selectedRowKeys.length == 0"
+												          v-has="'material-remove'">
+													
+													批量移动
+												</a-button>
+												<a-button @click="batchDelete" :disabled="selectedRowKeys.length == 0"
+												          v-has="'material-delete'" style="margin-right: 5px;">
+													
+													批量删除
+												</a-button>
+												<a-button @click="batchAddTags" style="margin-right: 5px;"
+												          v-has="'material-edit'"
+												          :disabled="selectedRowKeys.length == 0">
+													
+													批量打标签
+												</a-button>
+												<a-button @click="batchRemoveTags" style="margin-right: 5px;"
+												          v-has="'material-edit'"
+												          :disabled="selectedRowKeys.length == 0">
+													
+													批量移除标签
+												</a-button>
+											</div>
+											<div class="pagination" style="height: 32px;float: right;">
+												<a-pagination
+														:total="materialListTotal"
+														showSizeChanger
+														:showQuickJumper="quickJumper"
+														:current="sketchPage"
+														:pageSize="sketchPageSize"
+														:pageSizeOptions="['15','30','50','100']"
+														@change="changeSketchPage"
+														@showSizeChange="showSketchSizeChange"
+												/>
+											</div>
+										</div>
+									</div>
+								</div>
 								<!--图片-->
 								<div style="height: auto;" v-show="material_type == 1">
 									<div class="content-hd">
 										<div style="overflow: hidden;margin-bottom: 35px;">
-											<div style="height: 32px;margin-bottom:10px;display: inline-block;line-height: 32px;">
+											<div
+													style="height: 32px;margin-bottom:10px;display: inline-block;line-height: 32px;">
 												<a-tooltip placement="top">
 													<template slot="title">
 														<span>卡片展示</span>
@@ -763,17 +1203,46 @@
 													        type="unordered-list"/>
 												</a-tooltip>
 												共有
-												<span style="color: blue">{{total}}</span>个素材
+												<span style="color: blue">{{ total }}</span>个素材
 											</div>
 											<div>
-												<a-input-search
+												<a-input
 														placeholder="输入要搜索的内容"
-														@search="onSearch"
 														v-model="name"
 														:allowClear=true
-														enterButton="搜索"
-														style="width: 275px;"
-												/>
+														style="width: 200px;"
+												></a-input>
+												<a-button style="margin-left: 10px;" @click="showSelectTag">
+													<template v-if="selectTagIds.length == 0">选择标签</template>
+													<template v-if="selectTagIds.length > 0">
+														已选择
+														<template v-if="getGroupNum(selectTagDetail) > 0">
+															{{ getGroupNum(selectTagDetail) }}个分组
+														</template>
+														<template
+																v-if="getGroupNum(selectTagDetail) > 0 && selectTagDetail.length != getGroupNum(selectTagDetail)">
+															，
+														</template>
+														<template
+																v-if="selectTagDetail.length != getGroupNum(selectTagDetail)">
+															{{ selectTagDetail.length - getGroupNum(selectTagDetail)
+															}}个标签
+														</template>
+													</template>
+												</a-button>
+												<a-select
+														showSearch
+														optionFilterProp="children"
+														style="width: 140px;margin-left: 10px;"
+														v-model="isRadar"
+												>
+													<a-select-option :value="0">雷达状态</a-select-option>
+													<a-select-option :value="1">非雷达链接</a-select-option>
+													<a-select-option :value="2">雷达链接</a-select-option>
+												</a-select>
+												<a-button @click="onSearch" type="primary" style="margin-left: 10px;">
+													查找
+												</a-button>
 												<a-button @click="clearInput" style="margin-left: 10px;">
 													清空
 												</a-button>
@@ -786,6 +1255,7 @@
 												<a-button type="primary" @click="showModal"
 												          style="float: right;margin-right: 10px;"
 												          v-has="'material-add'">
+													
 													上传图片
 												</a-button>
 											</div>
@@ -811,7 +1281,11 @@
 
 											>
 												<div slot="title">
-													<span style="font-size: 14px;width: calc(100% - 50px); display: inline-block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{item2.create_time}}</span>
+                                                    <span
+		                                                    style="font-size: 14px;width: calc(100% - 50px); display: inline-block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{ item2.create_time }}</span>
+													<a-icon v-if="item2.radar_status == 1 && item2.radar_id > 0"
+													        type="radar-chart"
+													        style="vertical-align: top;font-size: 19px;color: #3CB371;"/>
 													<a-checkbox style="float: right" v-model="checkBoxValue[index]"
 													            v-hasMore2one="'material-remove,material-delete'"
 													            @click="changeSelectKey(item2.key)"></a-checkbox>
@@ -825,42 +1299,106 @@
 														@click="previewPic(index)"
 												/>
 												<template class="ant-card-actions" slot="actions">
-													<a-button type="link" @click="previewPic(index)"
-														          v-has="'material-preview'">
+													<a-tooltip placement="top" style="margin-left: 5px;"
+													           v-has="'material-preview'">
+														<template slot="title">
 															预览
+														</template>
+														<a-button type="link" @click="previewPic(index)"
+														          v-has="'material-preview'">
+															<a-icon type="eye"/>
 														</a-button>
-													<a-button type="link" @click="changeMaterial(item2.id, item2.group_id)"
-														          v-has="'material-remove'">
+													</a-tooltip>
+													<a-tooltip placement="top"
+													           v-has="'material-add'">
+														<template slot="title">
+															编辑
+														</template>
+														<a-button type="link" @click="editPic(materialList2[index])"
+														          v-has="'material-edit'">
+															<a-icon type="edit"/>
+														</a-button>
+													</a-tooltip>
+													<a-tooltip placement="top" v-has="'material-edit'">
+														<template slot="title">
+															编辑标签
+														</template>
+														<a-button type="link"
+														          @click="updateTags(item2.id, item2.tag_name)"
+														          v-has="'material-edit'">
+															<a-icon type="tags"/>
+														</a-button>
+													</a-tooltip>
+													<a-tooltip placement="top"
+													           v-has="'material-remove'">
+														<template slot="title">
 															移动
+														</template>
+														<a-button type="link"
+														          @click="changeMaterial(item2.id, item2.group_id)"
+														          v-has="'material-remove'">
+															<a-icon type="retweet"/>
 														</a-button>
-													<a-button type="link"
-														          @click="statistic(item2.id, material_type)" v-has="'content-statistic'">
+													</a-tooltip>
+													<a-tooltip placement="top">
+														<template slot="title">
 															统计
+														</template>
+														<a-button type="link"
+														          @click="statistic(item2, material_type)"
+														          v-has="'content-statistic'">
+															<a-icon type="rise"/>
 														</a-button>
-													<a-button type="link" @click="delPic(item2.id)"
-														          v-has="'material-delete'">
+													</a-tooltip>
+													<a-tooltip placement="top"
+													           v-has="'material-delete'">
+														<template slot="title">
 															删除
+														</template>
+														<a-button type="link" @click="delPic(item2.id)"
+														          v-has="'material-delete'">
+															<a-icon type="delete"/>
 														</a-button>
-													<a-button type="link"
-														          @click="downLoadWay(item2.file_name, item2.local_path)">
+													</a-tooltip>
+													<a-tooltip placement="top">
+														<template slot="title">
 															下载
+														</template>
+														<a-button type="link"
+														          @click="downLoadWay(item2.file_name, item2.local_path)">
+															<a-icon type="download"/>
 														</a-button>
+													</a-tooltip>
 												</template>
 												<div
-														style="height: 30px;line-height: 30px;background: #0F0F0F;opacity: 0.6;color: #FFF;padding: 0 10px;margin-top: -47px;overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
-												>{{item2.file_name}}
+														style="height: 30px;line-height: 30px;background: #0F0F0F;opacity: 0.7;color: #FFF;padding: 0 10px;margin-top: -47px;overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+												>{{ item2.file_name }}
 												</div>
-												<div style="margin: 5px 0px 2px;width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
-													上传者：{{item2.username}}
+												<div
+														style="margin: 5px 0px 2px;width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+													上传者：{{ item2.username }}
 												</div>
 												<a-tooltip placement="top">
 													<template slot="title">
-														<span>{{item2.group_name}}</span>
+														<span>{{ item2.group_name }}</span>
 													</template>
-													<div style="width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
-														来源：{{item2.group_name}}
+													<div
+															style="width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+														来源：{{ item2.group_name }}
 													</div>
 												</a-tooltip>
+												<div v-if="item2.tag_name.length == 0">内容标签：--</div>
+												<a-popover v-if="item2.tag_name.length > 0" placement="left">
+													<div slot="content" class="popover-content">
+														<a-tag color="orange" style="margin: 3px;"
+														       v-for="tag in item2.tag_name">{{ tag.tagname }}
+														</a-tag>
+													</div>
+													<div
+															style="width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+														内容标签：{{ item2.tag_name.length }}个
+													</div>
+												</a-popover>
 											</a-card>
 										</div>
 
@@ -915,8 +1453,29 @@
 												            v-model="checkBoxValue[index]"
 												            @click="changeSelectKey(record.key)"></a-checkbox>
 											</span>
+											<span slot="file_name" slot-scope="text, record,index">
+												<a-icon v-if="record.radar_status == 1 && record.radar_id > 0"
+												        type="radar-chart"
+												        style="vertical-align: top;font-size: 19px;color: #3CB371;"/>
+												<p style="margin-bottom: 0px; margin-left: 5px; width: calc(100% - 30px); display: inline-block;">
+													{{ record.file_name }}
+												</p>
+											</span>
+											<span slot="tag_name" slot-scope="text, record,index">
+												<span v-if="!record.tag_name || record.tag_name.length == 0">--</span>
+												<a-popover placement="right"
+												           v-if="record.tag_name && record.tag_name.length > 0">
+													<div slot="content" class="popover-content">
+														<a-tag color="orange" style="margin: 3px;"
+														       v-for="tag in record.tag_name">{{ tag.tagname }}</a-tag>
+													</div>
+													<span
+															style="color: #01b065; cursor: pointer;">{{ record.tag_name.length }}个</span>
+												</a-popover>
+											</span>
 											<span slot="content" slot-scope="text, record,index">
-												<div style="display: inline-block; width: 100px;height: 100px;line-height: 100px;">
+												<div
+														style="display: inline-block; width: 100px;height: 100px;line-height: 100px;">
 													<img
 															:id="record.id"
 															alt="example"
@@ -927,27 +1486,78 @@
 													/>
 												</div>
 											</span>
+
 											<span slot="action" slot-scope="text, record,index">
-												<a-button type="link" @click="previewPic(index)"
-																	v-has="'material-preview'">
-													预览
-												</a-button>
-												<a-button type="link" @click="changeMaterial(record.id, record.group_id)"
-																	v-has="'material-remove'">
-													移动
-												</a-button>
-												<a-button type="link"
-																	@click="statistic(record.id, material_type)" v-has="'content-statistic'">
-													统计
-												</a-button>
-												<a-button type="link" @click="delPic(record.id)"
-																		v-has="'material-delete'">
-														删除
-													</a-button>
-												<a-button type="link"
-																	@click="downLoadWay(record.file_name, record.local_path)">
-													下载
-												</a-button>
+												<a-tooltip placement="top" style="margin-left: 5px;"
+												           v-has="'material-preview'">
+														<template slot="title">
+															预览
+														</template>
+														<a-button type="link" @click="previewPic(index)"
+														          v-has="'material-preview'">
+															<a-icon type="eye"/>
+														</a-button>
+													</a-tooltip>
+												<a-tooltip placement="top"
+												           v-has="'material-add'">
+														<template slot="title">
+															编辑
+														</template>
+														<a-button type="link" @click="editPic(materialList2[index])"
+														          v-has="'material-edit'">
+															<a-icon type="edit"/>
+														</a-button>
+													</a-tooltip>
+													<a-tooltip placement="top" v-has="'material-edit'">
+														<template slot="title">
+															编辑标签
+														</template>
+														<a-button type="link"
+														          @click="updateTags(record.id, record.tag_name)"
+														          v-has="'material-edit'">
+															<a-icon type="tags"/>
+														</a-button>
+													</a-tooltip>
+													<a-tooltip placement="top"
+													           v-has="'material-remove'">
+														<template slot="title">
+															移动
+														</template>
+														<a-button type="link"
+														          @click="changeMaterial(record.id, record.group_id)"
+														          v-has="'material-remove'">
+															<a-icon type="retweet"/>
+														</a-button>
+													</a-tooltip>
+													<a-tooltip placement="top">
+														<template slot="title">
+															统计
+														</template>
+														<a-button type="link"
+														          @click="statistic(record, material_type)"
+														          v-has="'content-statistic'">
+															<a-icon type="rise"/>
+														</a-button>
+													</a-tooltip>
+													<a-tooltip placement="top"
+													           v-has="'material-delete'">
+														<template slot="title">
+															删除
+														</template>
+														<a-button type="link" @click="delPic(record.id)"
+														          v-has="'material-delete'">
+															<a-icon type="delete"/>
+														</a-button>
+													</a-tooltip>
+													<a-tooltip placement="top">
+														<template slot="title">
+															下载
+														</template>
+														<a-button type="link"
+														          @click="downLoadWay(record.file_name, record.local_path)">
+															<a-icon type="download"/>
+														</a-button>
+													</a-tooltip>
 											</span>
 										</a-table>
 									</div>
@@ -964,15 +1574,30 @@
 											</a-select>
 											<a-button @click="batchMove" style="margin-right: 5px"
 											          :disabled="selectedRowKeys.length == 0" v-has="'material-remove'">
+												
 												批量移动
 											</a-button>
 											<a-button @click="batchDelete" :disabled="selectedRowKeys.length == 0"
-											          v-has="'material-delete'">
+											          v-has="'material-delete'" style="margin-right: 5px;">
+											
 												批量删除
 											</a-button>
-											<a-button style="margin-left: 5px;" @click="batchUpload"
+											<a-button @click="batchUpload" style="margin-right: 5px;"
 											          :disabled="selectedRowKeys.length == 0">
+												
 												批量下载
+											</a-button>
+											<a-button @click="batchAddTags" style="margin-right: 5px;"
+											          v-has="'material-edit'"
+											          :disabled="selectedRowKeys.length == 0">
+												
+												批量打标签
+											</a-button>
+											<a-button @click="batchRemoveTags" style="margin-right: 5px;"
+											          v-has="'material-edit'"
+											          :disabled="selectedRowKeys.length == 0">
+											
+												批量移除标签
 											</a-button>
 										</div>
 										<div class="pagination" style="height: 32px;float: right;">
@@ -1011,17 +1636,35 @@
 												        type="unordered-list"/>
 											</a-tooltip>
 											共有
-											<span style="color: blue">{{total3}}</span>个素材
+											<span style="color: blue">{{ total3 }}</span>个素材
 										</div>
 										<div>
-											<a-input-search
+											<a-input
 													placeholder="输入要搜索的内容"
-													@search="onSearch"
 													v-model="name"
 													:allowClear=true
-													enterButton="搜索"
-													style="width: 275px;"
+													style="width: 200px;"
 											/>
+											<a-button style="margin-left: 10px;" @click="showSelectTag">
+												<template v-if="selectTagIds.length == 0">选择标签</template>
+												<template v-if="selectTagIds.length > 0">
+													已选择
+													<template v-if="getGroupNum(selectTagDetail) > 0">
+														{{ getGroupNum(selectTagDetail) }}个分组
+													</template>
+													<template
+															v-if="getGroupNum(selectTagDetail) > 0 && selectTagDetail.length != getGroupNum(selectTagDetail)">
+														，
+													</template>
+													<template
+															v-if="selectTagDetail.length != getGroupNum(selectTagDetail)">
+														{{ selectTagDetail.length - getGroupNum(selectTagDetail) }}个标签
+													</template>
+												</template>
+											</a-button>
+											<a-button @click="onSearch" type="primary" style="margin-left: 10px;">
+												查找
+											</a-button>
 											<a-button @click="clearInput" style="margin-left: 10px;">
 												清空
 											</a-button>
@@ -1032,6 +1675,7 @@
 											</a-button>
 											<a-button type="primary" @click="showModalVoice"
 											          style="float: right;margin-right: 10px;" v-has="'material-add'">
+												<a-icon type="upload"/>
 												上传音频
 											</a-button>
 										</div>
@@ -1049,8 +1693,10 @@
 									     :key="item3.id"
 									     v-has="'material-list'">
 										<a-card hoverable style="width: 90%;margin:auto;">
-											<div style="font-size: 14px;overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-												<span style="color: #999; font-weight: 500; font-size: 14px;width: calc(100% - 50px); display: inline-block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{item3.create_time}}</span>
+											<div
+													style="font-size: 14px;overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                                <span
+		                                                style="color: #999; font-weight: 500; font-size: 14px;width: calc(100% - 50px); display: inline-block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{ item3.create_time }}</span>
 												<a-checkbox v-hasMore2one="'material-remove,material-delete'"
 												            style="float: right" v-model="checkBoxValue[index3]"
 												            @click="changeSelectKey(item3.key)"></a-checkbox>
@@ -1080,38 +1726,82 @@
 												</div>
 												<div
 														style="text-align: right;padding: 0px 5px;float: right;margin-top: 10px;"
-												>{{playTime[index3] | dateFormat}}
+												>{{ playTime[index3] | dateFormat }}
 												</div>
 											</div>
 
 											<template class="ant-card-actions" slot="actions">
-												<a-button type="link" @click="changeMaterial(item3.id, item3.group_id)"
-																	v-has="'material-remove'">
-													移动
-												</a-button>
-												<a-button type="link" @click="statistic(item3.id, material_type)" v-has="'content-statistic'">
-													统计
-												</a-button>
-												<a-button type="link" @click="delAudio(item3.id)"
-																	v-has="'material-delete'">
-													删除
-												</a-button>
+												<a-tooltip placement="top"
+												           v-has="'material-edit'">
+													<template slot="title">
+														编辑标签
+													</template>
+													<a-button type="link"
+													          @click="updateTags(item3.id, item3.tag_name)"
+													          v-has="'material-edit'">
+														<a-icon type="tags"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip placement="top"
+												           v-has="'material-remove'">
+													<template slot="title">
+														移动
+													</template>
+													<a-button type="link"
+													          @click="changeMaterial(item3.id, item3.group_id)"
+													          v-has="'material-remove'">
+														<a-icon type="retweet"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip placement="top">
+													<template slot="title">
+														统计
+													</template>
+													<a-button type="link" @click="statistic(item3, material_type)"
+													          v-has="'content-statistic'">
+														<a-icon type="rise"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip placement="top"
+												           v-has="'material-delete'">
+													<template slot="title">
+														删除
+													</template>
+													<a-button type="link" @click="delAudio(item3.id)"
+													          v-has="'material-delete'">
+														<a-icon type="delete"/>
+													</a-button>
+												</a-tooltip>
 											</template>
-											<div style="height: 30px; line-height: 30px; font-size: 14px;background: #0F0F0F;opacity: 0.6;color: #FFF;padding: 0 10px;">
-												{{item3.file_name}}
+											<div
+													style="height: 30px; line-height: 30px; font-size: 14px;background: #0F0F0F;opacity: 0.7;color: #FFF;padding: 0 10px;">
+												{{ item3.file_name }}
 											</div>
-											<div style="margin: 5px 0px 2px;width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
-												上传者：{{item3.username}}
+											<div
+													style="margin: 5px 0px 2px;width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+												上传者：{{ item3.username }}
 											</div>
 											<a-tooltip placement="top">
 												<template slot="title">
-													<span>{{item3.group_name}}</span>
+													<span>{{ item3.group_name }}</span>
 												</template>
-												<div style="width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
-													来源：{{item3.group_name}}
+												<div
+														style="width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+													来源：{{ item3.group_name }}
 												</div>
 											</a-tooltip>
-
+											<div v-if="item3.tag_name.length == 0">内容标签：--</div>
+											<a-popover v-if="item3.tag_name.length > 0" placement="left">
+												<div slot="content" class="popover-content">
+													<a-tag color="orange" style="margin: 3px;"
+													       v-for="tag in item3.tag_name">{{ tag.tagname }}
+													</a-tag>
+												</div>
+												<div
+														style="width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+													内容标签：{{ item3.tag_name.length }}个
+												</div>
+											</a-popover>
 										</a-card>
 									</div>
 									<div v-show="showType == 1">
@@ -1155,21 +1845,63 @@
 												</div>
 												<div
 														style="text-align: left;padding: 0 5px;"
-												>{{playTime[index] | dateFormat}}
+												>{{ playTime[index] | dateFormat }}
 												</div>
 											</span>
+											<span slot="tag_name" slot-scope="text, record,index">
+												<span v-if="!record.tag_name || record.tag_name.length == 0">--</span>
+												<a-popover placement="right"
+												           v-if="record.tag_name && record.tag_name.length > 0">
+													<div slot="content" class="popover-content">
+														<a-tag color="orange" style="margin: 3px;"
+														       v-for="tag in record.tag_name">{{ tag.tagname }}</a-tag>
+													</div>
+													<span
+															style="color: #01b065; cursor: pointer;">{{ record.tag_name.length }}个</span>
+												</a-popover>
+											</span>
 											<span slot="action" slot-scope="text, record,index">
-												<a-button type="link" @click="changeMaterial(record.id, record.group_id)"
-																	v-has="'material-remove'">
-													移动
-												</a-button>
-												<a-button type="link" @click="statistic(record.id, material_type)" v-has="'content-statistic'">
-													统计
-												</a-button>
-												<a-button type="link" @click="delAudio(record.id)"
-																	v-has="'material-delete'">
-													删除
-												</a-button>
+												<a-tooltip placement="top"
+												           v-has="'material-edit'">
+													<template slot="title">
+														编辑标签
+													</template>
+													<a-button type="link"
+													          @click="updateTags(record.id, record.tag_name)"
+													          v-has="'material-edit'">
+														<a-icon type="tags"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip placement="top"
+												           v-has="'material-remove'">
+													<template slot="title">
+														移动
+													</template>
+													<a-button type="link"
+													          @click="changeMaterial(record.id, record.group_id)"
+													          v-has="'material-remove'">
+														<a-icon type="retweet"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip placement="top">
+													<template slot="title">
+														统计
+													</template>
+													<a-button type="link" @click="statistic(record, material_type)"
+													          v-has="'content-statistic'">
+														<a-icon type="rise"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip placement="top"
+												           v-has="'material-delete'">
+													<template slot="title">
+														删除
+													</template>
+													<a-button type="link" @click="delAudio(record.id)"
+													          v-has="'material-delete'">
+														<a-icon type="delete"/>
+													</a-button>
+												</a-tooltip>
 											</span>
 										</a-table>
 									</div>
@@ -1188,11 +1920,25 @@
 											</a-select>
 											<a-button @click="batchMove" style="margin-right: 5px"
 											          :disabled="selectedRowKeys.length == 0" v-has="'material-remove'">
+												
 												批量移动
 											</a-button>
 											<a-button @click="batchDelete" :disabled="selectedRowKeys.length == 0"
-											          v-has="'material-delete'">
+											          v-has="'material-delete'" style="margin-right: 5px;">
+											
 												批量删除
+											</a-button>
+											<a-button @click="batchAddTags" style="margin-right: 5px;"
+											          v-has="'material-edit'"
+											          :disabled="selectedRowKeys.length == 0">
+												
+												批量打标签
+											</a-button>
+											<a-button @click="batchRemoveTags" style="margin-right: 5px;"
+											          v-has="'material-edit'"
+											          :disabled="selectedRowKeys.length == 0">
+												
+												批量移除标签
 											</a-button>
 										</div>
 										<div class="pagination" style="height: 32px;float: right;">
@@ -1231,17 +1977,45 @@
 												        type="unordered-list"/>
 											</a-tooltip>
 											共有
-											<span style="color: blue">{{total4}}</span>个素材
+											<span style="color: blue">{{ total4 }}</span>个素材
 										</div>
 										<div>
-											<a-input-search
+											<a-input
 													placeholder="输入要搜索的内容"
-													@search="onSearch"
 													v-model="name"
 													:allowClear=true
-													enterButton="搜索"
-													style="width: 275px;"
-											/>
+													style="width: 200px;"
+											></a-input>
+											<a-button style="margin-left: 10px;" @click="showSelectTag">
+												<template v-if="selectTagIds.length == 0">选择标签</template>
+												<template v-if="selectTagIds.length > 0">
+													已选择
+													<template v-if="getGroupNum(selectTagDetail) > 0">
+														{{ getGroupNum(selectTagDetail) }}个分组
+													</template>
+													<template
+															v-if="getGroupNum(selectTagDetail) > 0 && selectTagDetail.length != getGroupNum(selectTagDetail)">
+														，
+													</template>
+													<template
+															v-if="selectTagDetail.length != getGroupNum(selectTagDetail)">
+														{{ selectTagDetail.length - getGroupNum(selectTagDetail) }}个标签
+													</template>
+												</template>
+											</a-button>
+											<a-select
+													showSearch
+													optionFilterProp="children"
+													style="width: 140px;margin-left: 10px;"
+													v-model="isRadar"
+											>
+												<a-select-option :value="0">雷达状态</a-select-option>
+												<a-select-option :value="1">非雷达链接</a-select-option>
+												<a-select-option :value="2">雷达链接</a-select-option>
+											</a-select>
+											<a-button @click="onSearch" type="primary" style="margin-left: 10px;">
+												查找
+											</a-button>
 											<a-button @click="clearInput" style="margin-left: 10px;">
 												清空
 											</a-button>
@@ -1252,6 +2026,7 @@
 											</a-button>
 											<a-button type="primary" @click="showModalVideo"
 											          style="float: right;margin-right: 10px;" v-has="'material-add'">
+												<a-icon type="upload"/>
 												上传视频
 											</a-button>
 										</div>
@@ -1270,7 +2045,11 @@
 										<!--										:id="item4.id" draggable="true" @dragstart="drag"-->
 										<a-card hoverable style="width: 90%;margin:auto;">
 											<div slot="title">
-												<span style="font-size: 14px;width: calc(100% - 50px); display: inline-block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{item4.create_time}}</span>
+                                                <span
+		                                                style="font-size: 14px;width: calc(100% - 50px); display: inline-block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{ item4.create_time }}</span>
+												<a-icon v-if="item4.radar_status == 1 && item4.radar_id > 0"
+												        type="radar-chart"
+												        style="vertical-align: top;font-size: 19px;color: #3CB371;"/>
 												<a-checkbox v-hasMore2one="'material-remove,material-delete'"
 												            style="float: right" v-model="checkBoxValue[index4]"
 												            @click="changeSelectKey(item4.key)"></a-checkbox>
@@ -1282,34 +2061,87 @@
 													:options="playerOptions[index4]"
 											></video-player>
 											<template class="ant-card-actions" slot="actions">
-												<a-button type="link" @click="changeMaterial(item4.id, item4.group_id)"
-																	v-has="'material-remove'">
-													移动
-												</a-button>
-												<a-button type="link" @click="statistic(item4.id, material_type)" v-has="'content-statistic'">
-													统计
-												</a-button>
-												<a-button type="link" @click="delVideo(item4.id)"
-																	v-has="'material-delete'">
-													删除
-												</a-button>
+												<a-tooltip placement="top"
+												           v-has="'material-add'">
+													<template slot="title">
+														编辑
+													</template>
+													<a-button type="link"
+													          @click="editVideo(materialList4[index4])"
+													          v-has="'material-edit'">
+														<a-icon type="edit"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip placement="top" v-has="'material-edit'">
+													<template slot="title">
+														编辑标签
+													</template>
+													<a-button type="link"
+													          @click="updateTags(item4.id, item4.tag_name)"
+													          v-has="'material-edit'">
+														<a-icon type="tags"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip placement="top"
+												           v-has="'material-remove'">
+													<template slot="title">
+														移动
+													</template>
+													<a-button type="link"
+													          @click="changeMaterial(item4.id, item4.group_id)"
+													          v-has="'material-remove'">
+														<a-icon type="retweet"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip placement="top">
+													<template slot="title">
+														统计
+													</template>
+													<a-button type="link" @click="statistic(item4, material_type)"
+													          v-has="'content-statistic'">
+														<a-icon type="rise"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip placement="top"
+												           v-has="'material-delete'">
+													<template slot="title">
+														删除
+													</template>
+													<a-button type="link" @click="delVideo(item4.id)"
+													          v-has="'material-delete'">
+														<a-icon type="delete"/>
+													</a-button>
+												</a-tooltip>
 											</template>
 											<div
-													style="height: 30px;line-height: 30px;background: #0F0F0F;opacity: 0.6;color: #FFF;padding: 0 10px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
-											>{{item4.file_name}}
+													style="height: 30px;line-height: 30px;background: #0F0F0F;opacity: 0.7;color: #FFF;padding: 0 10px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+											>{{ item4.file_name }}
 											</div>
-											<div style="margin: 5px 0px 2px;width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
-												上传者：{{item4.username}}
+											<div
+													style="margin: 5px 0px 2px;width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+												上传者：{{ item4.username }}
 											</div>
 											<a-tooltip placement="top">
 												<template slot="title">
-													<span>{{item4.group_name}}</span>
+													<span>{{ item4.group_name }}</span>
 												</template>
-												<div style="width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
-													来源：{{item4.group_name}}
+												<div
+														style="width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+													来源：{{ item4.group_name }}
 												</div>
 											</a-tooltip>
-
+											<div v-if="item4.tag_name.length == 0">内容标签：--</div>
+											<a-popover v-if="item4.tag_name.length > 0" placement="left">
+												<div slot="content" class="popover-content">
+													<a-tag color="orange" style="margin: 3px;"
+													       v-for="tag in item4.tag_name">{{ tag.tagname }}
+													</a-tag>
+												</div>
+												<div
+														style="width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+													内容标签：{{ item4.tag_name.length }}个
+												</div>
+											</a-popover>
 										</a-card>
 									</div>
 									<div v-if="showType == 1">
@@ -1325,6 +2157,14 @@
 												            v-model="checkBoxValue[index]"
 												            @click="changeSelectKey(record.key)"></a-checkbox>
 											</span>
+											<span slot="file_name" slot-scope="text, record,index">
+												<a-icon v-if="record.radar_status == 1 && record.radar_id > 0"
+												        type="radar-chart"
+												        style="vertical-align: top;font-size: 19px;color: #3CB371;"/>
+												<p style="margin-bottom: 0px; margin-left: 5px; width: calc(100% - 30px); display: inline-block;">
+													{{ record.file_name }}
+												</p>
+											</span>
 											<span slot="content" slot-scope="text, record,index">
 												<video-player
 														class="video-player vjs-custom-skin"
@@ -1334,18 +2174,70 @@
 														:options="playerOptions[index]"
 												></video-player>
 											</span>
+											<span slot="tag_name" slot-scope="text, record,index">
+												<span v-if="!record.tag_name || record.tag_name.length == 0">--</span>
+												<a-popover placement="right"
+												           v-if="record.tag_name && record.tag_name.length > 0">
+													<div slot="content" class="popover-content">
+														<a-tag color="orange" style="margin: 3px;"
+														       v-for="tag in record.tag_name">{{ tag.tagname }}</a-tag>
+													</div>
+													<span
+															style="color: #01b065; cursor: pointer;">{{ record.tag_name.length }}个</span>
+												</a-popover>
+											</span>
 											<span slot="action" slot-scope="text, record,index">
-												<a-button type="link" @click="changeMaterial(record.id, record.group_id)"
-																	v-has="'material-remove'">
-													移动
-												</a-button>
-												<a-button type="link" @click="statistic(record.id, material_type)" v-has="'content-statistic'">
-													统计
-												</a-button>
-												<a-button type="link" @click="delVideo(record.id)"
-																	v-has="'material-delete'">
-													删除
-												</a-button>
+												<a-tooltip placement="top"
+												           v-has="'material-add'">
+													<template slot="title">
+														编辑
+													</template>
+													<a-button type="link"
+													          @click="editVideo(materialList4[index])"
+													          v-has="'material-edit'">
+														<a-icon type="edit"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip placement="top" v-has="'material-edit'">
+													<template slot="title">
+														编辑标签
+													</template>
+													<a-button type="link"
+													          @click="updateTags(record.id, record.tag_name)"
+													          v-has="'material-edit'">
+														<a-icon type="tags"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip placement="top"
+												           v-has="'material-remove'">
+													<template slot="title">
+														移动
+													</template>
+													<a-button type="link"
+													          @click="changeMaterial(record.id, record.group_id)"
+													          v-has="'material-remove'">
+														<a-icon type="retweet"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip placement="top">
+													<template slot="title">
+														统计
+													</template>
+													<a-button type="link" @click="statistic(record, material_type)"
+													          v-has="'content-statistic'">
+														<a-icon type="rise"/>
+													</a-button>
+												</a-tooltip>
+												<a-tooltip placement="top"
+												           v-has="'material-delete'">
+													<template slot="title">
+														删除
+													</template>
+													<a-button type="link" @click="delVideo(record.id)"
+													          v-has="'material-delete'">
+														<a-icon type="delete"/>
+													</a-button>
+												</a-tooltip>
 											</span>
 										</a-table>
 									</div>
@@ -1364,11 +2256,25 @@
 											</a-select>
 											<a-button @click="batchMove" style="margin-right: 5px"
 											          :disabled="selectedRowKeys.length == 0" v-has="'material-remove'">
+												
 												批量移动
 											</a-button>
 											<a-button @click="batchDelete" :disabled="selectedRowKeys.length == 0"
 											          v-has="'material-delete'">
+												
 												批量删除
+											</a-button>
+											<a-button @click="batchAddTags" style="margin-right: 5px;"
+											          v-has="'material-edit'"
+											          :disabled="selectedRowKeys.length == 0">
+												
+												批量打标签
+											</a-button>
+											<a-button @click="batchRemoveTags" style="margin-right: 5px;"
+											          v-has="'material-edit'"
+											          :disabled="selectedRowKeys.length == 0">
+											
+												批量移除标签
 											</a-button>
 										</div>
 
@@ -1409,23 +2315,43 @@
 													        type="unordered-list"/>
 												</a-tooltip>
 												共有
-												<span style="color: blue">{{total5}}</span>个素材
+												<span style="color: blue">{{ total5 }}</span>个素材
 											</div>
 											<div style="float: left;">
-												<a-input-search
+												<a-input
 														placeholder="输入要搜索的内容"
-														@search="onSearch"
 														v-model="name"
 														:allowClear=true
-														enterButton="搜索"
-														style="width: 275px;"
+														style="width: 200px;"
 												/>
+												<a-button style="margin-left: 10px;" @click="showSelectTag">
+													<template v-if="selectTagIds.length == 0">选择标签</template>
+													<template v-if="selectTagIds.length > 0">
+														已选择
+														<template v-if="getGroupNum(selectTagDetail) > 0">
+															{{ getGroupNum(selectTagDetail) }}个分组
+														</template>
+														<template
+																v-if="getGroupNum(selectTagDetail) > 0 && selectTagDetail.length != getGroupNum(selectTagDetail)">
+															，
+														</template>
+														<template
+																v-if="selectTagDetail.length != getGroupNum(selectTagDetail)">
+															{{ selectTagDetail.length - getGroupNum(selectTagDetail)
+															}}个标签
+														</template>
+													</template>
+												</a-button>
+												<a-button @click="onSearch" type="primary" style="margin-left: 10px;">
+													查找
+												</a-button>
 												<a-button @click="clearInput" style="margin-left: 10px;">
 													清空
 												</a-button>
 											</div>
 											<a-button type="primary" @click="showModalMiniprogram"
 											          style="float: right;margin-right: 10px;" v-has="'material-add'">
+												
 												添加小程序
 											</a-button>
 										</div>
@@ -1452,7 +2378,8 @@
 													style="width: 90%;margin:auto;"
 											>
 												<div slot="title">
-													<span style="font-size: 14px;width: calc(100% - 50px); display: inline-block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{item5.create_time}}</span>
+                                                    <span
+		                                                    style="font-size: 14px;width: calc(100% - 50px); display: inline-block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{ item5.create_time }}</span>
 													<a-checkbox v-hasMore2one="'material-remove,material-delete'"
 													            style="float: right" v-model="checkBoxValue[index]"
 													            @click="changeSelectKey(item5.key)"></a-checkbox>
@@ -1464,42 +2391,92 @@
 												     slot="cover"
 												/>
 												<template class="ant-card-actions" slot="actions">
-													<a-button type="link" @click="changeMaterial(item5.id, item5.group_id)"
-																		v-has="'material-remove'">
-														移动
-													</a-button>
-													<a-button type="link" @click="editApplet(index)"
-																		v-has="'material-edit'">
-														编辑
-													</a-button>
-													<a-button type="link"
-																		@click="statistic(item5.id, material_type)" v-has="'content-statistic'">
-														统计
-													</a-button>
-													<a-button type="link" @click="delMiniprogram(item5.id)"
-																		v-has="'material-delete'">
-														删除
-													</a-button>
+													<a-tooltip placement="top"
+													           v-has="'material-remove'">
+														<template slot="title">
+															移动
+														</template>
+														<a-button type="link"
+														          @click="changeMaterial(item5.id, record.group_id)"
+														          v-has="'material-remove'">
+															<a-icon type="retweet"/>
+														</a-button>
+													</a-tooltip>
+													<a-tooltip placement="top"
+													           v-has="'material-edit'">
+														<template slot="title">
+															编辑
+														</template>
+														<a-button type="link"
+														          @click="editApplet(item5.tag_name, index)"
+														          v-has="'material-edit'">
+															<a-icon type="edit"/>
+														</a-button>
+													</a-tooltip>
+													<a-tooltip placement="top" v-has="'material-edit'">
+														<template slot="title">
+															编辑标签
+														</template>
+														<a-button type="link"
+														          @click="updateTags(item5.id, item5.tag_name)"
+														          v-has="'material-edit'">
+															<a-icon type="tags"/>
+														</a-button>
+													</a-tooltip>
+													<a-tooltip placement="top">
+														<template slot="title">
+															统计
+														</template>
+														<a-button type="link"
+														          @click="statistic(item5, material_type)"
+														          v-has="'content-statistic'">
+															<a-icon type="rise"/>
+														</a-button>
+													</a-tooltip>
+													<a-tooltip placement="top"
+													           v-has="'material-delete'">
+														<template slot="title">
+															删除
+														</template>
+														<a-button type="link" @click="delMiniprogram(item5.id)"
+														          v-has="'material-delete'">
+															<a-icon type="delete"/>
+														</a-button>
+													</a-tooltip>
 												</template>
-												<div style="height: 30px; line-height: 30px; font-size: 14px;background: #0F0F0F;opacity: 0.6;color: #FFF;padding: 0 10px;margin-top: -46px;">
-													{{item5.file_name}}
+												<div
+														style="height: 30px; line-height: 30px; font-size: 14px;background: #0F0F0F;opacity: 0.7;color: #FFF;padding: 0 10px;margin-top: -46px;">
+													{{ item5.file_name }}
 												</div>
 												<div style="margin-top: 5px;color: rgba(0,0,0,0.5)">
 													<MyIcon type="icon-miniapp"></MyIcon>
 													小程序
 												</div>
-												<div style="margin: 2px 0px; width: 90%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
-													上传者：{{item5.username}}
+												<div
+														style="margin: 2px 0px; width: 90%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+													上传者：{{ item5.username }}
 												</div>
 												<a-tooltip placement="top">
 													<template slot="title">
-														<span>{{item5.group_name}}</span>
+														<span>{{ item5.group_name }}</span>
 													</template>
-													<div style="width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
-														来源：{{item5.group_name}}
+													<div
+															style="width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+														来源：{{ item5.group_name }}
 													</div>
 												</a-tooltip>
-
+												<div v-if="item5.tag_name.length == 0">内容标签：--</div>
+												<a-popover v-if="item5.tag_name.length > 0" placement="left">
+													<div slot="content" class="popover-content">
+														<a-tag color="orange" style="margin: 3px;"
+														       v-for="tag in item5.tag_name">{{ tag.tagname }}
+														</a-tag>
+													</div>
+													<div
+															style="width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+														内容标签：{{ item5.tag_name.length }}个
+													</div>
+												</a-popover>
 											</a-card>
 										</div>
 										<div v-show="showType == 1">
@@ -1510,13 +2487,14 @@
 											         :rowClassName="rowClassName"
 											         v-has="'material-list'">
 												<span slot="checkedBox" slot-scope="text, record,index">
-												<a-checkbox style="float: right"
-												            v-hasMore2one="'material-remove,material-delete'"
-												            v-model="checkBoxValue[index]"
-												            @click="changeSelectKey(record.key)"></a-checkbox>
-											</span>
+													<a-checkbox style="float: right"
+													            v-hasMore2one="'material-remove,material-delete'"
+													            v-model="checkBoxValue[index]"
+													            @click="changeSelectKey(record.key)"></a-checkbox>
+												</span>
 												<span slot="content" slot-scope="text, record,index">
-													<div style="display: inline-block; width: 100px;height: 100px;line-height: 100px;">
+													<div
+															style="display: inline-block; width: 100px;height: 100px;line-height: 100px;">
 														<img
 																:id="record.id"
 																alt="example"
@@ -1527,23 +2505,72 @@
 														/>
 													</div>
 												</span>
+												<span slot="tag_name" slot-scope="text, record,index">
+													<span
+															v-if="!record.tag_name || record.tag_name.length == 0">--</span>
+													<a-popover placement="right"
+													           v-if="record.tag_name && record.tag_name.length > 0">
+														<div slot="content" class="popover-content">
+															<a-tag color="orange" style="margin: 3px;"
+															       v-for="tag in record.tag_name">{{ tag.tagname }}</a-tag>
+														</div>
+														<span
+																style="color: #01b065; cursor: pointer;">{{ record.tag_name.length }}个</span>
+													</a-popover>
+												</span>
 												<span slot="action" slot-scope="text, record,index">
-													<a-button type="link" @click="changeMaterial(record.id, record.group_id)"
-																		v-has="'material-remove'">
-														移动
-													</a-button>
-													<a-button type="link" @click="editApplet(index)"
-																		v-has="'material-edit'">
-														编辑
-													</a-button>
-													<a-button type="link"
-																		@click="statistic(record.id, material_type)" v-has="'content-statistic'">
-														统计
-													</a-button>
-													<a-button type="link" @click="delMiniprogram(record.id)"
-																		v-has="'material-delete'">
-														删除
-													</a-button>
+													<a-tooltip placement="top"
+													           v-has="'material-remove'">
+														<template slot="title">
+															移动
+														</template>
+														<a-button type="link"
+														          @click="changeMaterial(record.id, record.group_id)"
+														          v-has="'material-remove'">
+															<a-icon type="retweet"/>
+														</a-button>
+													</a-tooltip>
+													<a-tooltip placement="top"
+													           v-has="'material-edit'">
+														<template slot="title">
+															编辑
+														</template>
+														<a-button type="link"
+														          @click="editApplet(record.tag_name, index)"
+														          v-has="'material-edit'">
+															<a-icon type="edit"/>
+														</a-button>
+													</a-tooltip>
+													<a-tooltip placement="top" v-has="'material-edit'">
+														<template slot="title">
+															编辑标签
+														</template>
+														<a-button type="link"
+														          @click="updateTags(record.id, record.tag_name)"
+														          v-has="'material-edit'">
+															<a-icon type="tags"/>
+														</a-button>
+													</a-tooltip>
+													<a-tooltip placement="top">
+														<template slot="title">
+															统计
+														</template>
+														<a-button type="link"
+														          @click="statistic(record, material_type)"
+														          v-has="'content-statistic'">
+															<a-icon type="rise"/>
+														</a-button>
+													</a-tooltip>
+													<a-tooltip placement="top"
+													           v-has="'material-delete'">
+														<template slot="title">
+															删除
+														</template>
+														<a-button type="link" @click="delMiniprogram(record.id)"
+														          v-has="'material-delete'">
+															<a-icon type="delete"/>
+														</a-button>
+													</a-tooltip>
 												</span>
 											</a-table>
 										</div>
@@ -1564,11 +2591,25 @@
 											</a-select>
 											<a-button @click="batchMove" style="margin-right: 5px"
 											          :disabled="selectedRowKeys.length == 0" v-has="'material-remove'">
+												
 												批量移动
 											</a-button>
 											<a-button @click="batchDelete" :disabled="selectedRowKeys.length == 0"
-											          v-has="'material-delete'">
+											          v-has="'material-delete'" style="margin-right: 5px;">
+												
 												批量删除
+											</a-button>
+											<a-button @click="batchAddTags" style="margin-right: 5px;"
+											          v-has="'material-edit'"
+											          :disabled="selectedRowKeys.length == 0">
+												
+												批量打标签
+											</a-button>
+											<a-button @click="batchRemoveTags" style="margin-right: 5px;"
+											          v-has="'material-edit'"
+											          :disabled="selectedRowKeys.length == 0">
+												
+												批量移除标签
 											</a-button>
 										</div>
 										<div class="pagination" style="height: 32px;float: right;">
@@ -1608,23 +2649,53 @@
 													        type="unordered-list"/>
 												</a-tooltip>
 												共有
-												<span style="color: blue">{{total6}}</span>个素材
+												<span style="color: blue">{{ total6 }}</span>个素材
 											</div>
 											<div style="float: left;">
-												<a-input-search
+												<a-input
 														placeholder="输入要搜索的内容"
-														@search="onSearch"
 														v-model="name"
 														:allowClear=true
-														enterButton="搜索"
-														style="width: 275px;"
-												/>
+														style="width: 200px;"
+												></a-input>
+												<a-button style="margin-left: 10px;" @click="showSelectTag">
+													<template v-if="selectTagIds.length == 0">选择标签</template>
+													<template v-if="selectTagIds.length > 0">
+														已选择
+														<template v-if="getGroupNum(selectTagDetail) > 0">
+															{{ getGroupNum(selectTagDetail) }}个分组
+														</template>
+														<template
+																v-if="getGroupNum(selectTagDetail) > 0 && selectTagDetail.length != getGroupNum(selectTagDetail)">
+															，
+														</template>
+														<template
+																v-if="selectTagDetail.length != getGroupNum(selectTagDetail)">
+															{{ selectTagDetail.length - getGroupNum(selectTagDetail)
+															}}个标签
+														</template>
+													</template>
+												</a-button>
+												<a-select
+														showSearch
+														optionFilterProp="children"
+														style="width: 140px;margin-left: 10px;"
+														v-model="isRadar"
+												>
+													<a-select-option :value="0">雷达状态</a-select-option>
+													<a-select-option :value="1">非雷达链接</a-select-option>
+													<a-select-option :value="2">雷达链接</a-select-option>
+												</a-select>
+												<a-button @click="onSearch" type="primary" style="margin-left: 10px;">
+													查找
+												</a-button>
 												<a-button @click="clearInput" style="margin-left: 10px;">
 													清空
 												</a-button>
 											</div>
 											<a-button type="primary" @click="showModalFile"
 											          style="float: right; margin-right: 10px;" v-has="'material-add'">
+												
 												上传文件
 											</a-button>
 										</div>
@@ -1653,7 +2724,11 @@
 													style="width: 90%;margin:auto;"
 											>
 												<div slot="title">
-													<span style="font-size: 14px;width: calc(100% - 50px); display: inline-block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{item6.create_time}}</span>
+                                                    <span
+		                                                    style="font-size: 14px;width: calc(100% - 50px); display: inline-block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{ item6.create_time }}</span>
+													<a-icon v-if="item6.radar_status == 1 && item6.radar_id > 0"
+													        type="radar-chart"
+													        style="vertical-align: top;font-size: 19px;color: #3CB371;"/>
 													<a-checkbox v-hasMore2one="'material-remove,material-delete'"
 													            style="float: right" v-model="checkBoxValue[index]"
 													            @click="changeSelectKey(item6.key)"></a-checkbox>
@@ -1661,93 +2736,148 @@
 												<div>
 													<img
 															alt="example" v-if="item6.extension == 'doc'"
-															style="width: 80px;height: 80px;margin: 0 !important;"
+															style="width: 80px;height: 80px;margin: 0 !important;float: left"
 															src="../../../assets/fileIcon/doc.png"
 															slot="cover"
 													/>
 													<img
 															alt="example" v-if="item6.extension == 'docx'"
-															style="width: 80px;height: 80px;margin: 0 !important;"
+															style="width: 80px;height: 80px;margin: 0 !important;float: left"
 															src="../../../assets/fileIcon/docx.png"
 															slot="cover"
 													/>
 													<img
 															alt="example" v-if="item6.extension == 'xlsx'"
-															style="width: 80px;height: 80px;margin: 0 !important;"
+															style="width: 80px;height: 80px;margin: 0 !important;float: left"
 															src="../../../assets/fileIcon/xlsx.png"
 															slot="cover"
 													/>
 													<img
 															alt="example" v-if="item6.extension == 'xls'"
-															style="width: 80px;height: 80px;margin: 0 !important;"
+															style="width: 80px;height: 80px;margin: 0 !important;float: left"
 															src="../../../assets/fileIcon/xls.png"
 															slot="cover"
 													/>
 													<img
 															alt="example" v-if="item6.extension == 'csv'"
-															style="width: 80px;height: 80px;margin: 0 !important;"
+															style="width: 80px;height: 80px;margin: 0 !important;float: left"
 															src="../../../assets/fileIcon/csv.png"
 															slot="cover"
 													/>
 													<img
 															alt="example" v-if="item6.extension == 'pptx'"
-															style="width: 80px;height: 80px;margin: 0 !important;"
+															style="width: 80px;height: 80px;margin: 0 !important;float: left"
 															src="../../../assets/fileIcon/pptx.png"
 															slot="cover"
 													/>
 													<img
 															alt="example" v-if="item6.extension == 'ppt'"
-															style="width: 80px;height: 80px;margin: 0 !important;"
+															style="width: 80px;height: 80px;margin: 0 !important;float: left"
 															src="../../../assets/fileIcon/ppt.png"
 															slot="cover"
 													/>
 													<img
 															alt="example" v-if="item6.extension == 'txt'"
-															style="width: 80px;height: 80px;margin: 0 !important;"
+															style="width: 80px;height: 80px;margin: 0 !important;float: left"
 															src="../../../assets/fileIcon/txt.png"
 															slot="cover"
 													/>
 													<img
 															alt="example" v-if="item6.extension == 'pdf'"
-															style="width: 80px;height: 80px;margin: 0 !important;"
+															style="width: 80px;height: 80px;margin: 0 !important;float: left"
 															src="../../../assets/fileIcon/pdf.png"
 															slot="cover"
 													/>
 													<img
 															alt="example" v-if="item6.extension == 'xmind'"
-															style="width: 80px;height: 80px;margin: 0 !important;"
+															style="width: 80px;height: 80px;margin: 0 !important;float: left"
 															src="../../../assets/fileIcon/xmind.png"
 															slot="cover"
 													/>
 
-													<div class="file-name">{{item6.file_name}}</div>
+													<div class="file-name">{{ item6.file_name }}</div>
+													<div style="float: left;color: #FF562D;">{{ item6.file_length }}
+													</div>
 												</div>
 												<template class="ant-card-actions" slot="actions">
-													<a-button type="link" @click="changeMaterial(item6.id, item6.group_id)"
-														          v-has="'material-remove'">
+													<a-tooltip
+															placement="top"
+															v-has="'material-edit'">
+														<template slot="title">
+															编辑
+														</template>
+														<a-button type="link" @click="editFile(materialList6[index])"
+														          v-has="'material-preview'">
+															<a-icon type="edit"/>
+														</a-button>
+													</a-tooltip>
+													<a-tooltip placement="top" v-has="'material-edit'">
+														<template slot="title">
+															编辑标签
+														</template>
+														<a-button type="link"
+														          @click="updateTags(item6.id, item6.tag_name)"
+														          v-has="'material-edit'">
+															<a-icon type="tags"/>
+														</a-button>
+													</a-tooltip>
+													<a-tooltip placement="top"
+													           v-has="'material-remove'">
+														<template slot="title">
 															移动
+														</template>
+														<a-button type="link"
+														          @click="changeMaterial(item6.id, item6.group_id)"
+														          v-has="'material-remove'">
+															<a-icon type="retweet"/>
 														</a-button>
-													<a-button type="link"
-														          @click="statistic(item6.id, material_type)" v-has="'content-statistic'">
+													</a-tooltip>
+													<a-tooltip placement="top">
+														<template slot="title">
 															统计
+														</template>
+														<a-button type="link"
+														          @click="statistic(item6, material_type)"
+														          v-has="'content-statistic'">
+															<a-icon type="rise"/>
 														</a-button>
-													<a-button type="link" @click="delFile(item6.id)"
-														          v-has="'material-delete'">
+													</a-tooltip>
+													<a-tooltip placement="top"
+													           v-has="'material-delete'">
+														<template slot="title">
 															删除
+														</template>
+														<a-button type="link" @click="delFile(item6.id)"
+														          v-has="'material-delete'">
+															
 														</a-button>
+													</a-tooltip>
 												</template>
-												<div style="margin: 5px 0px 2px;width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
-													上传者：{{item6.username}}
+												<div
+														style="margin: 5px 0px 2px;width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+													上传者：{{ item6.username }}
 												</div>
 												<a-tooltip placement="top">
 													<template slot="title">
-														<span>{{item6.group_name}}</span>
+														<span>{{ item6.group_name }}</span>
 													</template>
-													<div style="width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
-														来源：{{item6.group_name}}
+													<div
+															style="width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+														来源：{{ item6.group_name }}
 													</div>
 												</a-tooltip>
-
+												<div v-if="item6.tag_name.length == 0">内容标签：--</div>
+												<a-popover v-if="item6.tag_name.length > 0" placement="left">
+													<div slot="content" class="popover-content">
+														<a-tag color="orange" style="margin: 3px;"
+														       v-for="tag in item6.tag_name">{{ tag.tagname }}
+														</a-tag>
+													</div>
+													<div
+															style="width: 90%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+														内容标签：{{ item6.tag_name.length }}个
+													</div>
+												</a-popover>
 											</a-card>
 										</div>
 										<div v-if="showType == 1">
@@ -1763,18 +2893,79 @@
 													            v-model="checkBoxValue[index]"
 													            @click="changeSelectKey(record.key)"></a-checkbox>
 												</span>
+												<span slot="file_name" slot-scope="text, record,index">
+													<a-icon v-if="record.radar_status == 1 && record.radar_id > 0"
+													        type="radar-chart"
+													        style="vertical-align: top;font-size: 19px;color: #3CB371;"/>
+													<p style="margin-bottom: 0px; margin-left: 5px; width: calc(100% - 30px); display: inline-block;">
+														{{ record.file_name }}
+													</p>
+												</span>
+												<span slot="tag_name" slot-scope="text, record,index">
+													<span
+															v-if="!record.tag_name || record.tag_name.length == 0">--</span>
+													<a-popover placement="right"
+													           v-if="record.tag_name && record.tag_name.length > 0">
+														<div slot="content" class="popover-content">
+															<a-tag style="margin: 3px;" color="orange"
+															       v-for="tag in record.tag_name">{{ tag.tagname }}</a-tag>
+														</div>
+														<span
+																style="color: #01b065; cursor: pointer;">{{ record.tag_name.length }}个</span>
+													</a-popover>
+												</span>
 												<span slot="action" slot-scope="text, record,index">
-													<a-button type="link" @click="changeMaterial(record.id, record.group_id)"
-														          v-has="'material-remove'">
-															移动
+													<a-tooltip
+															placement="top"
+															v-has="'material-edit'">
+														<template slot="title">
+															编辑
+														</template>
+														<a-button type="link" @click="editFile(materialList6[index])"
+														          v-has="'material-preview'">
+															<a-icon type="edit"/>
 														</a-button>
-													<a-button type="link" @click="statistic(record.id, material_type)" v-has="'content-statistic'">
+													</a-tooltip>
+													<a-tooltip placement="top" v-has="'material-edit'">
+														<template slot="title">
+															编辑标签
+														</template>
+														<a-button type="link"
+														          @click="updateTags(record.id, record.tag_name)"
+														          v-has="'material-edit'">
+															<a-icon type="tags"/>
+														</a-button>
+													</a-tooltip>
+													<a-tooltip placement="top"
+													           v-has="'material-remove'">
+														<template slot="title">
+															移动
+														</template>
+														<a-button type="link"
+														          @click="changeMaterial(record.id, record.group_id)"
+														          v-has="'material-remove'">
+															<a-icon type="retweet"/>
+														</a-button>
+													</a-tooltip>
+												<a-tooltip placement="top">
+													<template slot="title">
 														统计
+													</template>
+													<a-button type="link" @click="statistic(record, material_type)"
+													          v-has="'content-statistic'">
+														<a-icon type="rise"/>
 													</a-button>
-													<a-button type="link" @click="delFile(record.id)"
-																		v-has="'material-delete'">
-														删除
-													</a-button>
+												</a-tooltip>
+													<a-tooltip placement="top"
+													           v-has="'material-delete'">
+														<template slot="title">
+															删除
+														</template>
+														<a-button type="link" @click="delFile(record.id)"
+														          v-has="'material-delete'">
+															<a-icon type="delete"/>
+														</a-button>
+													</a-tooltip>
 												</span>
 											</a-table>
 										</div>
@@ -1795,11 +2986,25 @@
 											</a-select>
 											<a-button @click="batchMove" style="margin-right: 5px"
 											          :disabled="selectedRowKeys.length == 0" v-has="'material-remove'">
+												
 												批量移动
 											</a-button>
 											<a-button @click="batchDelete" :disabled="selectedRowKeys.length == 0"
-											          v-has="'material-delete'">
+											          v-has="'material-delete'" style="margin-right: 5px;">
+												
 												批量删除
+											</a-button>
+											<a-button @click="batchAddTags" style="margin-right: 5px;"
+											          v-has="'material-edit'"
+											          :disabled="selectedRowKeys.length == 0">
+												
+												批量打标签
+											</a-button>
+											<a-button @click="batchRemoveTags" style="margin-right: 5px;"
+											          v-has="'material-edit'"
+											          :disabled="selectedRowKeys.length == 0">
+												
+												批量移除标签
 											</a-button>
 										</div>
 										<div class="pagination" style="height: 32px;float: right;">
@@ -1822,17 +3027,44 @@
 										<div style="overflow: hidden;margin-bottom: 35px;">
 											<div style="height: 32px;margin-bottom: 10px;line-height: 32px;">
 												共有
-												<span style="color: blue">{{total7}}</span>个素材
+												<span style="color: blue">{{ total7 }}</span>个素材
 											</div>
 											<div style="float: left;">
-												<a-input-search
+												<a-input
 														placeholder="输入要搜索的标题或内容"
-														@search="onSearch"
 														v-model="name"
 														:allowClear=true
-														enterButton="搜索"
-														style="width: 275px;"
-												/>
+														style="width: 200px;"
+												></a-input>
+												<!--												<a-input-search-->
+												<!--														placeholder="输入要搜索的标题或内容"-->
+												<!--														@search="onSearch"-->
+												<!--														v-model="name"-->
+												<!--														:allowClear=true-->
+												<!--														enterButton="搜索"-->
+												<!--														style="width: 275px;"-->
+												<!--												/>-->
+												<a-button style="margin-left: 10px;" @click="showSelectTag">
+													<template v-if="selectTagIds.length == 0">选择标签</template>
+													<template v-if="selectTagIds.length > 0">
+														已选择
+														<template v-if="getGroupNum(selectTagDetail) > 0">
+															{{ getGroupNum(selectTagDetail) }}个分组
+														</template>
+														<template
+																v-if="getGroupNum(selectTagDetail) > 0 && selectTagDetail.length != getGroupNum(selectTagDetail)">
+															，
+														</template>
+														<template
+																v-if="selectTagDetail.length != getGroupNum(selectTagDetail)">
+															{{ selectTagDetail.length - getGroupNum(selectTagDetail)
+															}}个标签
+														</template>
+													</template>
+												</a-button>
+												<a-button @click="onSearch" type="primary" style="margin-left: 10px;">
+													查找
+												</a-button>
 												<a-button @click="clearInput" style="margin-left: 10px;">
 													清空
 												</a-button>
@@ -1840,10 +3072,12 @@
 
 											<a-button type="primary" @click="showModalText"
 											          style="float: right;margin-right: 10px;" v-has="'material-add'">
+												<a-icon type="plus"/>
 												添加文本
 											</a-button>
 											<a-button type="primary" @click="importExcel"
-											                     style="float: right;margin-right: 10px;" v-has="'material-add'">
+											          style="float: right;margin-right: 10px;" v-has="'material-add'">
+												<a-icon type="plus"/>
 												导入文本
 											</a-button>
 										</div>
@@ -1871,9 +3105,10 @@
 												            @click="changeSelectKey(record.key)"></a-checkbox>
 											</span>
 										<span slot="content" slot-scope="text, record,index">
-											<a-popover>
+											<a-popover placement="left">
 											    <template slot="content">
-											        <p style="max-width: 700px;word-break:break-all;word-wrapL:break-word;" v-html="text.replace(/\n/g, '<br/>')"></p>
+											        <p style="word-break:break-all;word-wrapL:break-word;" class="popover-content"
+											           v-html="text.replace(/\n/g, '<br/>')"></p>
 											    </template>
 											    <div class="inputTitle2">
 													<p v-html="text.replace(/\n/g, '<br/>')"></p>
@@ -1881,27 +3116,78 @@
 											</a-popover>
 
 										</span>
+										<span slot="tag_name" slot-scope="text, record,index">
+											<span v-if="!record.tag_name || record.tag_name.length == 0">--</span>
+											<a-popover placement="right"
+											           v-if="record.tag_name && record.tag_name.length > 0">
+												<div slot="content" class="popover-content">
+													<a-tag style="margin: 3px;" color="orange"
+													       v-for="tag in record.tag_name">{{ tag.tagname }}</a-tag>
+												</div>
+												<span
+														style="color: #01b065; cursor: pointer;">{{ record.tag_name.length }}个</span>
+											</a-popover>
+										</span>
 										<span slot="action" slot-scope="text, record,index">
-											<a-button type="link" @click="editText(index)"
-												          v-has="'material-edit'">
+											<a-tooltip placement="top" v-has="'material-edit'">
+												<template slot="title">
 													编辑
+												</template>
+												<a-button type="link" @click="editText(record.tag_name, index)"
+												          v-has="'material-edit'">
+													<a-icon type="edit"/>
 												</a-button>
-											<a-button type="link" @click="changeMaterial(record.id, record.group_id)"
-												          v-has="'material-remove'">
+											</a-tooltip>
+											<a-tooltip placement="top" v-has="'material-edit'">
+												<template slot="title">
+													编辑标签
+												</template>
+												<a-button type="link"
+												          @click="updateTags(record.id, record.tag_name)"
+												          v-has="'material-edit'">
+													<a-icon type="tags"/>
+												</a-button>
+											</a-tooltip>
+											<a-tooltip placement="top"
+											           v-has="'material-remove'">
+												<template slot="title">
 													移动
+												</template>
+												<a-button type="link"
+												          @click="changeMaterial(record.id, record.group_id)"
+												          v-has="'material-remove'">
+													<a-icon type="retweet"/>
 												</a-button>
-											<a-button type="link" @click="statistic(record.id, material_type)" v-has="'content-statistic'">
+											</a-tooltip>
+											<a-tooltip placement="top">
+												<template slot="title">
 													统计
+												</template>
+												<a-button type="link" @click="statistic(record, material_type)"
+												          v-has="'content-statistic'">
+													<a-icon type="rise"/>
 												</a-button>
-											<a-button type="link" @click="delText(record.id)">
+												<!--												<a-icon type="rise" style="color: #01b065;cursor: pointer;"-->
+												<!--												        @click="statistic(record.id, material_type)"/>-->
+											</a-tooltip>
+											<a-tooltip placement="top"
+											           v-has="'material-delete'">
+												<template slot="title">
 													删除
+												</template>
+												<a-button type="link" @click="delText(record.id)">
+													<a-icon type="delete"/>
 												</a-button>
+												<!--												<a-icon type="delete" style="color: #01b065;cursor: pointer;"-->
+												<!--												        @click="delText(record.id)"/>-->
+											</a-tooltip>
 										</span>
 									</a-table>
 									<!-- 文本分页 -->
 									<div style="width: 100%;padding: 0 20px 20px;" v-show="total7>0"
 									     v-has="'material-list'">
-										<div style="height: 32px;display: inline-block;line-height: 32px;margin-bottom: 10px;">
+										<div
+												style="height: 32px;display: inline-block;line-height: 32px;margin-bottom: 10px;">
 											<a-checkbox v-model="batchTypeValue"
 											            @click="batchTypeChange"></a-checkbox>
 											<a-select optionFilterProp="children"
@@ -1912,11 +3198,25 @@
 											</a-select>
 											<a-button @click="batchMove" style="margin-right: 5px"
 											          :disabled="selectedRowKeys.length == 0" v-has="'material-remove'">
+												
 												批量移动
 											</a-button>
 											<a-button @click="batchDelete" :disabled="selectedRowKeys.length == 0"
-											          v-has="'material-delete'">
+											          v-has="'material-delete'" style="margin-right: 5px;">
+												
 												批量删除
+											</a-button>
+											<a-button @click="batchAddTags" style="margin-right: 5px;"
+											          v-has="'material-edit'"
+											          :disabled="selectedRowKeys.length == 0">
+												
+												批量打标签
+											</a-button>
+											<a-button @click="batchRemoveTags" style="margin-right: 5px;"
+											          v-has="'material-edit'"
+											          :disabled="selectedRowKeys.length == 0">
+												
+												批量移除标签
 											</a-button>
 										</div>
 										<div class="pagination" style="height: 32px;float: right;">
@@ -1941,7 +3241,7 @@
 		</div>
 		<!--添加图文弹窗-->
 		<a-modal
-				title="新增图文"
+				:title="sketchTitle"
 				width="720px"
 				:visible="visibleSketchList"
 				@ok="handleAddSketchList"
@@ -1967,85 +3267,141 @@
 				<!-- 图文新建 -->
 				<!-- 图片封面 -->
 				<!-- 选中前 -->
-				<a-form-item :label-col="{ span: 3 }"
-				             :wrapper-col="{ span: 21 }"
-				             v-show="sketch.closeShowModal3==false">
-					<template slot="label"><span
-							style="color: red">*</span>图片封面
-					</template>
-					<div class="upload-wrap" style="display: inline-block;"
-					     @click="openShowModal(sketchIndex)">
-						<a-icon type="plus" class="upload-plus"/>
-					</div>
-					<span style="vertical-align: bottom;">（图片大小不超过2M，支持JPG、JPEG及PNG格式）</span>
-				</a-form-item>
-				<!-- 选中后 -->
-				<a-form-item :label-col="{ span: 3 }"
-				             :wrapper-col="{ span: 21 }"
-				             v-show="sketch.closeShowModal3">
-					<template slot="label"><span
-							style="color: red">*</span>图片封面
-					</template>
-					<div class="upload-wrap">
-						<img :src="commonUrl + sketch.local_path.img" alt=""
-						     style="max-width: 100%;max-height: 100%;margin-left: 50%;margin-top: 50%;transform: translate(-50%, -50%);">
-					</div>
-					<span
-							style="color: blue;position: absolute;bottom: 0;left: 110px;cursor: pointer;"
-							@click="openShowModal(sketchIndex,sketch.material_id)">重新上传</span>
-				</a-form-item>
-				<!-- 填写标题 -->
-				<a-form-item :label-col="{ span: 3 }"
-				             :wrapper-col="{ span: 21 }">
-					<template slot="label"><span
-							style="color: red">*</span>填写标题
-					</template>
-					<a-input v-model="sketch.inputTitle"
-					         :maxLength="32">
-																<span slot="suffix">
-                    <span>{{sketch.inputTitle.length}}</span>/32
-                  </span>
-					</a-input>
-				</a-form-item>
-				<!-- 添加描述 -->
-				<a-form-item style="margin-top: 5px" :label-col="{ span: 3 }"
-				             :wrapper-col="{ span: 21 }">
-					<template slot="label">添加描述</template>
-					<a-textarea placeholder="填写图文描述" :rows="4"
-					            style="resize: none;"
-					            v-model="sketch.digest"
-					            :maxLength="128"/>
-					<div style="float:right;">
-						<span>{{sketch.digest.length}}</span>/128
+				<a-form-item label="图文链接" :label-col="{ span: 3 }"
+				             :wrapper-col="{ span: 18 }">
+                    <span slot="label">
+                        <span style="color: red">*</span>图文链接
+                    </span>
+					<a-input v-model="sketch.content_source_url"
+					         placeholder="请输入图文链接,链接地址以http或https开头"
+					         allow-clear @change="inputChange(sketchIndex)"/>
+					<div v-if="sketch.local_path.img != ''"
+					     class="content_input">
+						<div style="flex-grow: 1;height: 100px;">
+							<div class="input_text1">{{ sketch.inputTitle }}</div>
+							<div class="input_text2">
+								{{ sketch.digest }}
+							</div>
+						</div>
+						<div v-if="sketch.local_path.img != ''" style="width: 100px;height: 100px;padding: 10px">
+							<img v-if="sketch.local_path.img != ''" class="input_img"
+							     :src="commonUrl + sketch.local_path.img" alt=""/>
+							<img v-if="sketch.local_path.img == ''" class="input_img"
+							     src="../../../assets/url.png" alt=""/>
+						</div>
 					</div>
 				</a-form-item>
-				<!-- 点击跳转 -->
+				<a-form-item v-if="sketch.content_source_url !=''" label="高级设置"
+				             :label-col="{ span:3 }"
+				             :wrapper-col="{ span: 18 }">
+					<a-switch
+							v-model="sketch.setIsShow"/>
+				</a-form-item>
+				<template v-if="sketch.setIsShow">
+					<a-form-item :label-col="{ span: 3 }"
+					             :wrapper-col="{ span: 21 }">
+						<template slot="label"><span
+								style="color: red">*</span>填写标题
+						</template>
+						<a-input v-model="sketch.inputTitle"
+						         :maxLength="32">
+							<span slot="suffix">
+			                    <span>{{ sketch.inputTitle.length }}</span>/32
+							</span>
+						</a-input>
+					</a-form-item>
+					<a-form-item style="margin-top: 5px" :label-col="{ span: 3 }"
+					             :wrapper-col="{ span: 21 }">
+						<template slot="label">添加描述</template>
+						<a-textarea placeholder="填写图文描述" :rows="4"
+						            style="resize: none;"
+						            v-model="sketch.digest"
+						            :maxLength="128"/>
+						<div style="float:right;">
+							<span>{{ sketch.digest.length }}</span>/128
+						</div>
+					</a-form-item>
+					<a-form-item :label-col="{ span: 3 }"
+					             :wrapper-col="{ span: 21 }"
+					             v-show="sketch.closeShowModal3==false">
+						<template slot="label"><span
+								style="color: red">*</span>图片封面
+						</template>
+						<div class="upload-wrap" style="display: inline-block;"
+						     @click="openShowModal(sketchIndex)">
+							<a-icon type="plus" class="upload-plus"/>
+						</div>
+						<span style="vertical-align: bottom;">（图片大小不超过2M，支持JPG、JPEG及PNG格式）</span>
+					</a-form-item>
+					<!-- 选中后 -->
+					<a-form-item :label-col="{ span: 3 }"
+					             :wrapper-col="{ span: 21 }"
+					             v-show="sketch.closeShowModal3">
+						<template slot="label"><span
+								style="color: red">*</span>图片封面
+						</template>
+						<div class="upload-wrap">
+							<img :src="commonUrl + sketch.local_path.img" alt=""
+							     style="max-width: 100%;max-height: 100%;margin-left: 50%;margin-top: 50%;transform: translate(-50%, -50%);">
+						</div>
+						<span style="color: blue;position: absolute;bottom: 0;left: 110px;cursor: pointer;"
+						      @click="openShowModal(sketchIndex,sketch.material_id)">重新上传</span>
+					</a-form-item>
+				</template>
 				<a-form-item :label-col="{ span: 3 }"
 				             :wrapper-col="{ span: 21 }">
-					<template slot="label"><span
-							style="color: red">*</span>点击跳转
+					<template slot="label">
+						内容标签
 					</template>
-					<a-input
-							placeholder="请输入跳转链接，且必须以http://或https://开头"
-							style="margin-bottom: 10px;"
-							v-model="sketch.content_source_url">
-					</a-input>
-					<!--					<a-button type="primary" ghost-->
-					<!--					          style="margin-right: 15px;"-->
-					<!--					          @click="addSketch()">-->
-					<!--						<a-icon type="plus"/>-->
-					<!--						添加图文-->
-					<!--					</a-button>-->
-					<a-button
-							@click="deleteSketch(sketchIndex)">
-						重置
+					<a-button  @click="showModalTags">
+						选择标签
 					</a-button>
+					<a-popover placement="bottom" v-if="addTagDetail.length > 0">
+						<div class="popover-content" slot="content">
+							<template v-for="(tag, index) in addTagDetail">
+								<div style="display: inline-block;">
+									<a-tag style="margin: 3px 3px 3px 10px;" :color="tag.tag ? 'orange' : 'blue'">
+										{{ tag.title }}
+										<a-icon type="close" style="color: #FF562D; vertical-align: inherit;"
+										        @click="deleteAddTag(index)"></a-icon>
+									</a-tag>
+
+								</div>
+							</template>
+						</div>
+						<span @click="showModalTags" style="color: #01b065;margin-left: 10px; cursor: pointer">
+							已选择
+							<template v-if="getGroupNum(addTagDetail) > 0">{{ getGroupNum(addTagDetail) }}个分组</template>
+							<template
+									v-if="getGroupNum(addTagDetail) > 0 && addTagDetail.length != getGroupNum(addTagDetail)">，</template>
+							<template
+									v-if="addTagDetail.length != getGroupNum(addTagDetail)">{{ addTagDetail.length - getGroupNum(addTagDetail) }}个标签</template>
+						</span>
+					</a-popover>
+				</a-form-item>
+				<a-form-item :label-col="{ span: 3 }"
+				             :wrapper-col="{ span: 21 }">
+					<template slot="label">
+						客户标签
+					</template>
+					给点击雷达的客户打上选中的标签
+					<div>
+						<a-button  @click="chooseTag">添加标签</a-button>
+					</div>
+					<a-tag v-for="(item, index) in tagName" color="orange">
+						{{ item }}
+						<a-icon type="close" style="color: #FA8C16; vertical-align: inherit; cursor: pointer"
+						        @click="deleteTag(index)"></a-icon>
+					</a-tag>
+					<!--					<corpChooseTag :callback="chooseTags"-->
+					<!--					               :hasChoose="tag_arr"-->
+					<!--					               v-if="radarTagOpen == 1"></corpChooseTag>-->
 				</a-form-item>
 			</div>
 		</a-modal>
 
 		<!-- 上传图片弹窗 -->
-		<a-modal v-model="visible2" width="720px" title="新建图片素材" @cancel="cancelUploadPic">
+		<a-modal v-model="visible2" width="720px" :title="picTitle" @cancel="cancelUploadPic">
 			<template slot="footer">
 				<a-button key="back" @click="cancelUploadPic">取消</a-button>
 				<a-button
@@ -2071,7 +3427,7 @@
 				>
 				</a-tree-select>
 			</a-form-item>
-			<a-form-item :label-col="{ span: 4 }"
+			<a-form-item v-if="!attachmentId" :label-col="{ span: 4 }"
 			             :wrapper-col="{ span: 20 }">
 				<template slot="label">
 					上传图片
@@ -2083,14 +3439,86 @@
 							:fileList="fileList"
 							@change="handleChangePic"
 					>
-						<a-button><a-icon type="upload"/>点击上传</a-button>
+						<a-button>
+							<a-icon type="upload"/>
+							点击上传
+						</a-button>
 					</a-upload>
 					<span style="color: #AAA;font-size: 12px;display: inline-block;vertical-align: bottom;">（图片大小不超过2M，图片名不能重复，支持JPG、JPEG及PNG格式）</span>
 					<p style="display: block;margin-bottom: 2px;line-height: 20px;" v-for="(item, index) in fileList">
-						{{item.name}}
-						<a-icon type="close" style="color: #F56C6C; cursor: pointer;" @click="deleteFileList(index)"></a-icon>
+						{{ item.name }}
+						<a-icon type="close" style="color: #F56C6C; cursor: pointer;"
+						        @click="deleteFileList(index)"></a-icon>
 					</p>
 				</div>
+			</a-form-item>
+			<a-form-item v-if="attachmentId" :label-col="{ span: 4 }"
+			             :wrapper-col="{ span: 20 }">
+				<template slot="label">
+					图片
+				</template>
+				<img :src="commonUrl + picUrl" style="max-width: 100px; max-height: 100px;"/>
+			</a-form-item>
+			<a-form-item :label-col="{ span: 4 }"
+			             :wrapper-col="{ span: 20 }">
+				<template slot="label">
+					内容标签
+				</template>
+				<a-button  @click="showModalTags">
+					选择标签
+				</a-button>
+				<a-popover placement="bottom" v-if="addTagDetail.length > 0">
+					<div class="popover-content" slot="content">
+						<template v-for="(tag, index) in addTagDetail">
+							<a-tag style="margin: 3px 3px 3px 10px;" :color="tag.tag ? 'orange' : 'blue'">
+								{{ tag.title }}
+								<a-icon type="close" style="color: #FF562D; vertical-align: inherit;"
+								        @click="deleteAddTag(index)"></a-icon>
+							</a-tag>
+						</template>
+					</div>
+					<span @click="showModalTags" style="color: #01b065;margin-left: 10px; cursor: pointer">
+						已选择
+							<template v-if="getGroupNum(addTagDetail) > 0">{{ getGroupNum(addTagDetail) }}个分组</template>
+							<template
+									v-if="getGroupNum(addTagDetail) > 0 && addTagDetail.length != getGroupNum(addTagDetail)">，</template>
+							<template
+									v-if="addTagDetail.length != getGroupNum(addTagDetail)">{{ addTagDetail.length - getGroupNum(addTagDetail) }}个标签</template>
+					</span>
+				</a-popover>
+			</a-form-item>
+			<a-form-item :label-col="{ span: 4 }"
+			             :wrapper-col="{ span: 20 }">
+				<template slot="label">
+					设为雷达链接
+				</template>
+				<div style="line-height: 20px;margin-top: 10px;">
+					<a-switch :checked="radarOpen == 1" @click="changeRadarOpen"></a-switch>
+					<a-tooltip placement="bottom">
+						<template slot="title">
+							<span>开启后，带有雷达标识的图片，可追踪链接打开次数、停留时长以及给客户打上标签。反之，则直接向对话框推送一张图片，无法对客户进行追踪。</span>
+						</template>
+						<a-icon type="question-circle" style="margin-left:5px;"/>
+					</a-tooltip>
+				</div>
+			</a-form-item>
+			<a-form-item v-if="radarOpen == 1" :label-col="{ span: 4 }"
+			             :wrapper-col="{ span: 20 }">
+				<template slot="label">
+					客户标签
+				</template>
+				给点击雷达的客户打上选中的标签
+				<div>
+					<a-button  @click="chooseTag">添加标签</a-button>
+				</div>
+				<a-tag v-for="(item, index) in tagName" color="orange">
+					{{ item }}
+					<a-icon type="close" style="color: #FA8C16; vertical-align: inherit; cursor: pointer"
+					        @click="deleteTag(index)"></a-icon>
+				</a-tag>
+				<!--				<corpChooseTag :callback="chooseTags"-->
+				<!--				               :hasChoose="tag_arr"-->
+				<!--				               v-if="radarTagOpen == 1"></corpChooseTag>-->
 			</a-form-item>
 		</a-modal>
 
@@ -2122,20 +3550,20 @@
 				>
 				</a-tree-select>
 			</a-form-item>
-<!--			<a-form-item :label-col="{ span: 3 }"-->
-<!--			             :wrapper-col="{ span: 21 }">-->
-<!--				<template slot="label"><span-->
-<!--						style="color: red">* </span>填写标题-->
-<!--				</template>-->
-<!--				<a-input v-model="voiceTitle"-->
-<!--				         :maxLength="64">-->
-<!--					<span slot="suffix">-->
-<!--						<span>{{voiceTitle.length}}</span>/64-->
-<!--                    </span>-->
-<!--				</a-input>-->
-<!--			</a-form-item>-->
+			<!--			<a-form-item :label-col="{ span: 3 }"-->
+			<!--			             :wrapper-col="{ span: 21 }">-->
+			<!--				<template slot="label"><span-->
+			<!--						style="color: red">* </span>填写标题-->
+			<!--				</template>-->
+			<!--				<a-input v-model="voiceTitle"-->
+			<!--				         :maxLength="64">-->
+			<!--					<span slot="suffix">-->
+			<!--						<span>{{voiceTitle.length}}</span>/64-->
+			<!--                    </span>-->
+			<!--				</a-input>-->
+			<!--			</a-form-item>-->
 			<a-form-item :label-col="{ span: 3 }"
-			             :wrapper-col="{ span: 21 }" style="height: 200px;margin-top: 5px;">
+			             :wrapper-col="{ span: 21 }" style="margin-top: 5px;">
 				<template slot="label">
 					<span style="color: red">* </span>上传音频
 				</template>
@@ -2146,60 +3574,51 @@
 						:fileList="fileList"
 						@change="handleChangeVoice"
 				>
-					<a-button><a-icon type="upload"/>点击上传</a-button>
+					<a-button>
+						<a-icon type="upload"/>
+						点击上传
+					</a-button>
 				</a-upload>
-				<span v-if="!voiceUrl" style="color: #AAA;font-size: 12px;display: inline-block;vertical-align: bottom;">（音频上传大小不超过2MB，播放长度不超过60s，支持AMR、MP3格式。）</span>
+				<span v-if="!voiceUrl"
+				      style="color: #AAA;font-size: 12px;display: inline-block;vertical-align: bottom;">（音频上传大小不超过2MB，播放长度不超过60s，支持AMR、MP3格式。）</span>
 				<p style="display: block;margin-bottom: 2px;line-height: 20px;" v-for="(item, index) in fileList">
-					{{item.name}}
-					<a-icon type="close" style="color: #F56C6C; cursor: pointer;" @click="deleteFileList(index)"></a-icon>
+					{{ item.name }}
+					<a-icon type="close" style="color: #F56C6C; cursor: pointer;"
+					        @click="deleteFileList(index)"></a-icon>
 				</p>
-<!--				<div class="audio" style="display: inline-block;width: 100px;" v-if="voiceUrl" @click="playMusic1()">-->
-<!--					<div class="box" style="float: left;">-->
-<!--						<div class="wifi-symbol" v-if="!playVoice">-->
-<!--							<div class="wifi-circle first"></div>-->
-<!--							<div class="wifi-circle second"></div>-->
-<!--							<div class="wifi-circle third"></div>-->
-<!--						</div>-->
-<!--						<div class="wifi-symbol" v-if="playVoice">-->
-<!--							<div class="wifi-circle first"></div>-->
-<!--							<div class="wifi-circle second1"></div>-->
-<!--							<div class="wifi-circle third1"></div>-->
-<!--						</div>-->
-<!--						<audio ref="audio1" @canplay="oncanplay1">-->
-<!--							<source-->
-<!--									:src="voiceUrl"-->
-<!--									type="audio/mp3"-->
-<!--							/>-->
-<!--						</audio>-->
-<!--						&lt;!&ndash;						<div v-if="voiceName">&ndash;&gt;-->
-<!--						&lt;!&ndash;							<span style="display: inline-block;margin-top: 36px;">{{voiceName}}</span>&ndash;&gt;-->
-<!--						&lt;!&ndash;						</div>&ndash;&gt;-->
-<!--						<div style="text-align: left;width: 100px;line-height: 10px;margin-top: 60px;">-->
-<!--							{{playVoiceTime | dateFormat}}-->
-<!--						</div>-->
-<!--					</div>-->
-<!--				</div>-->
-<!--				&lt;!&ndash;				音频重新上传&ndash;&gt;-->
-<!--				<a-upload-->
-<!--						v-if="voiceUrl"-->
-<!--						:showUploadList="false"-->
-<!--						action=""-->
-<!--						:beforeUpload="beforeUploadVoice"-->
-<!--						:customRequest="selfUploadVoice"-->
-<!--				>-->
-<!--					&lt;!&ndash;					<div v-if="voiceName">&ndash;&gt;-->
-<!--					&lt;!&ndash;						<span style="display: inline-block;margin-top: 30px;">{{voiceName}}</span>&ndash;&gt;-->
-<!--					&lt;!&ndash;					</div>&ndash;&gt;-->
-<!--					<div style="cursor: pointer;">-->
-<!--						<div class="ant-upload-text;">重新上传</div>-->
-<!--					</div>-->
-<!--				</a-upload>-->
 			</a-form-item>
-
+			<a-form-item :label-col="{ span: 3 }"
+			             :wrapper-col="{ span: 21 }">
+				<template slot="label">
+					内容标签
+				</template>
+				<a-button  @click="showModalTags">
+					选择标签
+				</a-button>
+				<a-popover placement="bottom" v-if="addTagDetail.length > 0">
+					<div class="popover-content" slot="content">
+						<template v-for="(tag, index) in addTagDetail">
+							<a-tag style="margin: 3px 3px 3px 10px;" :color="tag.tag ? 'orange' : 'blue'">
+								{{ tag.title }}
+								<a-icon type="close" style="color: #FF562D; vertical-align: inherit;"
+								        @click="deleteAddTag(index)"></a-icon>
+							</a-tag>
+						</template>
+					</div>
+					<span @click="showModalTags" style="color: #01b065;margin-left: 10px; cursor: pointer">
+						已选择
+							<template v-if="getGroupNum(addTagDetail) > 0">{{ getGroupNum(addTagDetail) }}个分组</template>
+							<template
+									v-if="getGroupNum(addTagDetail) > 0 && addTagDetail.length != getGroupNum(addTagDetail)">，</template>
+							<template
+									v-if="addTagDetail.length != getGroupNum(addTagDetail)">{{ addTagDetail.length - getGroupNum(addTagDetail) }}个标签</template>
+					</span>
+				</a-popover>
+			</a-form-item>
 		</a-modal>
 
 		<!-- 上传视频弹窗 -->
-		<a-modal v-model="videoVisible" title="新建视频素材" width="720px;" @cancel="cancelUploadVideo">
+		<a-modal v-model="videoVisible" :title="videoModalTitle" width="720px;" @cancel="cancelUploadVideo">
 			<template slot="footer">
 				<a-button key="back" @click="cancelUploadVideo">取消</a-button>
 				<a-button
@@ -2225,7 +3644,7 @@
 				>
 				</a-tree-select>
 			</a-form-item>
-			<a-form-item style="margin-top: 5px;" :label-col="{ span: 3 }"
+			<a-form-item v-if="!attachmentId" style="margin-top: 5px;" :label-col="{ span: 3 }"
 			             :wrapper-col="{ span: 21 }">
 				<template slot="label">
 					上传视频
@@ -2237,15 +3656,87 @@
 						:fileList="fileList"
 						@change="handleChangeVedio"
 				>
-					<a-button><a-icon type="upload"/>点击上传</a-button>
+					<a-button>
+						<a-icon type="upload"/>
+						点击上传
+					</a-button>
 				</a-upload>
 				<span style="color: #AAA;font-size: 12px;display: inline-block;vertical-align: bottom;">（视频上传大小不超过10M，支持MP4格式。）</span>
 				<p style="display: block;margin-bottom: 2px;line-height: 20px;" v-for="(item, index) in fileList">
-					{{item.name}}
-					<a-icon type="close" style="color: #F56C6C; cursor: pointer;" @click="deleteFileList(index)"></a-icon>
+					{{ item.name }}
+					<a-icon type="close" style="color: #F56C6C; cursor: pointer;"
+					        @click="deleteFileList(index)"></a-icon>
 				</p>
 			</a-form-item>
-
+			<a-form-item v-if="attachmentId" style="margin-top: 5px;" :label-col="{ span: 3 }"
+			             :wrapper-col="{ span: 21 }">
+				<template slot="label">
+					视频
+				</template>
+				<video-player
+						class="video-player vjs-custom-skin"
+						ref="videoPlayer"
+						style="width: 200px;"
+						:playsinline="true"
+						:options="videoOptions"
+				></video-player>
+			</a-form-item>
+			<a-form-item :label-col="{ span: 3 }"
+			             :wrapper-col="{ span: 21 }">
+				<template slot="label">
+					内容标签
+				</template>
+				<a-button  @click="showModalTags">
+					选择标签
+				</a-button>
+				<a-popover placement="bottom" v-if="addTagDetail.length > 0">
+					<div class="popover-content" slot="content">
+						<template v-for="(tag, index) in addTagDetail">
+							<a-tag style="margin: 3px 3px 3px 10px;" :color="tag.tag ? 'orange' : 'blue'">
+								{{ tag.title }}
+								<a-icon type="close" style="color: #FF562D; vertical-align: inherit;"
+								        @click="deleteAddTag(index)"></a-icon>
+							</a-tag>
+						</template>
+					</div>
+					<span @click="showModalTags" style="color: #01b065;margin-left: 10px; cursor: pointer">
+						已选择
+						<template v-if="getGroupNum(addTagDetail) > 0">{{ getGroupNum(addTagDetail) }}个分组</template>
+						<template
+								v-if="getGroupNum(addTagDetail) > 0 && addTagDetail.length != getGroupNum(addTagDetail)">，</template>
+						<template
+								v-if="addTagDetail.length != getGroupNum(addTagDetail)">{{ addTagDetail.length - getGroupNum(addTagDetail) }}个标签</template>
+					</span>
+				</a-popover>
+			</a-form-item>
+			<a-form-item :label-col="{ span: 3 }"
+			             :wrapper-col="{ span: 21 }">
+				<template slot="label">
+					设为雷达链接
+				</template>
+				<a-switch :checked="radarOpen == 1" @click="changeRadarOpen"></a-switch>
+				<a-tooltip placement="bottom">
+					<template slot="title">
+						<span>开启后，带有雷达标识的视频，可追踪链接打开次数、停留时长以及给客户打上标签。反之，则直接向对话框推送一个视频，无法对客户进行追踪。</span>
+					</template>
+					<a-icon type="question-circle" style="margin-left:5px;"/>
+				</a-tooltip>
+			</a-form-item>
+			<a-form-item v-if="radarOpen == 1" :label-col="{ span: 3 }"
+			             :wrapper-col="{ span: 21 }">
+				<template slot="label">
+					客户标签
+				</template>
+				给点击雷达的客户打上选中的标签
+				<div>
+					<a-button  @click="chooseTag">添加标签</a-button>
+				</div>
+				<a-tag v-for="(item, index) in tagName" color="orange">
+					{{ item }}
+					<a-icon type="close" style="color: #FA8C16; vertical-align: inherit; cursor: pointer"
+					        @click="deleteTag(index)"></a-icon>
+				</a-tag>
+			</a-form-item>
 		</a-modal>
 
 		<!-- 添加小程序弹窗 -->
@@ -2316,7 +3807,7 @@
 					<a-input v-model="miniprogram1.title"
 					         :maxLength="12" placeholder="请填写小程序标题（4-12个字符）" @blur="checkout(miniprogram1.title)">
 						<span slot="suffix">
-							<span>{{miniprogram1.title.length}}</span>/12
+							<span>{{ miniprogram1.title.length }}</span>/12
 	                    </span>
 					</a-input>
 				</a-form-item>
@@ -2347,9 +3838,38 @@
 							style="color: blue;position: absolute;bottom: 0;left: 110px;cursor: pointer;"
 							@click="openShowModal(-1,miniprogram1.material_id)">重新上传</span>
 				</a-form-item>
+				<a-form-item :label-col="{ span: 6 }"
+				             :wrapper-col="{ span: 18 }">
+					<template slot="label">
+						内容标签
+					</template>
+					<a-button @click="showModalTags">
+						选择标签
+					</a-button>
+					<a-popover placement="bottom" v-if="addTagDetail.length > 0">
+						<div class="popover-content" slot="content">
+							<template v-for="(tag, index) in addTagDetail">
+								<a-tag style="margin: 3px 3px 3px 10px;" :color="tag.tag ? 'orange' : 'blue'">
+									{{ tag.title }}
+									<a-icon type="close" style="color: #FF562D; vertical-align: inherit;"
+									        @click="deleteAddTag(index)"></a-icon>
+								</a-tag>
+							</template>
+						</div>
+						<span @click="showModalTags" style="color: #01b065;margin-left: 10px; cursor: pointer">
+							已选择
+							<template v-if="getGroupNum(addTagDetail) > 0">{{ getGroupNum(addTagDetail) }}个分组</template>
+							<template
+									v-if="getGroupNum(addTagDetail) > 0 && addTagDetail.length != getGroupNum(addTagDetail)">，</template>
+							<template
+									v-if="addTagDetail.length != getGroupNum(addTagDetail)">{{ addTagDetail.length - getGroupNum(addTagDetail) }}个标签</template>
+						</span>
+					</a-popover>
+				</a-form-item>
 			</div>
 			<div style="float: right; width: 45%;">
-				<div style="margin: 0 auto; vertical-align: middle; width: 240px; height: 284px; border: 1px solid #E2E2E2;border-radius: 3px;">
+				<div
+						style="margin: 0 auto; vertical-align: middle; width: 240px; height: 284px; border: 1px solid #E2E2E2;border-radius: 3px;">
 					<p style="padding: 5px 10px 0px 10px; margin-bottom: 0px;height: 35px; line-height: 35px;">
 						<img style="width: 18px;height: 18px; border-radius: 50%;" src="../../../assets/pigcms.png"/>
 						<span style="margin-left: 5px; font-size: 12px; color: rgba(0,0,0,0.4)">轻小店</span>
@@ -2368,7 +3888,7 @@
 		</a-modal>
 
 		<!-- 上传文件 -->
-		<a-modal v-model="fileVisible" title="新建文件素材" width="720px" @click="cancelUploadFile">
+		<a-modal v-model="fileVisible" :title="fileTitle" width="720px" @cancel="cancelUploadFile">
 			<template slot="footer">
 				<a-button key="back" @click="cancelUploadFile">取消</a-button>
 				<a-button
@@ -2394,7 +3914,7 @@
 				>
 				</a-tree-select>
 			</a-form-item>
-			<a-form-item :label-col="{ span: 4 }"
+			<a-form-item v-if="!attachmentId" :label-col="{ span: 4 }"
 			             :wrapper-col="{ span: 20 }">
 				<template slot="label">
 					上传文件
@@ -2406,14 +3926,82 @@
 							:fileList="fileList"
 							@change="handleChangeFile"
 					>
-						<a-button><a-icon type="upload"/>点击上传</a-button>
+						<a-button>
+							<a-icon type="upload"/>
+							点击上传
+						</a-button>
 					</a-upload>
-					<span style="color: #AAA;line-height: 20px;font-size: 12px;display: inline-block;vertical-align: bottom;">（上传文件大小不超过20MB，支持DOC、DOCX、XLS、XLSX、CSV、PPT、PPTX、TXT、PDF及Xmind格式。）</span>
+					<span
+							style="color: #AAA;line-height: 20px;font-size: 12px;display: inline-block;vertical-align: bottom;">（上传文件大小不超过20MB，支持DOC、DOCX、XLS、XLSX、CSV、PPT、PPTX、TXT、PDF及Xmind格式。）</span>
 					<p style="display: block;margin-bottom: 2px;line-height: 20px;" v-for="(item, index) in fileList">
-						{{item.name}}
-						<a-icon type="close" style="color: #F56C6C; cursor: pointer;" @click="deleteFileList(index)"></a-icon>
+						{{ item.name }}
+						<a-icon type="close" style="color: #F56C6C; cursor: pointer;"
+						        @click="deleteFileList(index)"></a-icon>
 					</p>
 				</div>
+			</a-form-item>
+			<a-form-item v-if="attachmentId" :label-col="{ span: 4 }"
+			             :wrapper-col="{ span: 20 }">
+				<template slot="label">
+					文件
+				</template>
+				<span>{{ fileName }}</span>
+			</a-form-item>
+			<a-form-item :label-col="{ span: 4 }"
+			             :wrapper-col="{ span: 20 }">
+				<template slot="label">
+					内容标签
+				</template>
+				<a-button  @click="showModalTags">
+					选择标签
+				</a-button>
+				<a-popover placement="bottom" v-if="addTagDetail.length > 0">
+					<div class="popover-content" slot="content">
+						<template v-for="(tag, index) in addTagDetail">
+							<a-tag style="margin: 3px 3px 3px 10px;" :color="tag.tag ? 'orange' : 'blue'">
+								{{ tag.title }}
+								<a-icon type="close" style="color: #FF562D; vertical-align: inherit;"
+								        @click="deleteAddTag(index)"></a-icon>
+							</a-tag>
+						</template>
+					</div>
+					<span @click="showModalTags" style="color: #01b065;margin-left: 10px; cursor: pointer">
+						已选择
+						<template v-if="getGroupNum(addTagDetail) > 0">{{ getGroupNum(addTagDetail) }}个分组</template>
+						<template
+								v-if="getGroupNum(addTagDetail) > 0 && addTagDetail.length != getGroupNum(addTagDetail)">，</template>
+						<template
+								v-if="addTagDetail.length != getGroupNum(addTagDetail)">{{ addTagDetail.length - getGroupNum(addTagDetail) }}个标签</template>
+					</span>
+				</a-popover>
+			</a-form-item>
+			<a-form-item :label-col="{ span: 4 }"
+			             :wrapper-col="{ span: 20 }">
+				<template slot="label">
+					设为雷达链接
+				</template>
+				<a-switch :checked="radarOpen == 1" @click="changeRadarOpen"></a-switch>
+				<a-tooltip placement="bottom">
+					<template slot="title">
+						<span>开启后，带有雷达标识的PDF文件和TXT文件，可追踪链接打开次数、停留时长以及给客户打上标签。反之，则直接向对话框推送一个文件，无法对客户进行追踪。</span>
+					</template>
+					<a-icon type="question-circle" style="margin-left:5px;"/>
+				</a-tooltip>
+			</a-form-item>
+			<a-form-item v-if="radarOpen == 1" :label-col="{ span: 4 }"
+			             :wrapper-col="{ span: 20 }">
+				<template slot="label">
+					客户标签
+				</template>
+				给点击雷达的客户打上选中的标签
+				<div>
+					<a-button  @click="chooseTag">添加标签</a-button>
+				</div>
+				<a-tag v-for="(item, index) in tagName" color="orange">
+					{{ item }}
+					<a-icon type="close" style="color: #FA8C16; vertical-align: inherit; cursor: pointer"
+					        @click="deleteTag(index)"></a-icon>
+				</a-tag>
 			</a-form-item>
 		</a-modal>
 
@@ -2451,7 +4039,8 @@
 				</template>
 				<a-input v-model="text_title" placeholder="请填写文本标题，仅供备注，不会发送给客户" :maxLength="50"
 				         style="width: 500px;"/>
-				<span style="display: inline-block; width: 50px; margin-left: 10px;">{{text_title === null ? 0 : text_title.length}} / 50</span>
+				<span
+						style="display: inline-block; width: 50px; margin-left: 10px;">{{ text_title === null ? 0 : text_title.length }} / 50</span>
 			</a-form-item>
 			<a-form-item :label-col="{ span: 4 }"
 			             :wrapper-col="{ span: 20 }">
@@ -2477,9 +4066,36 @@
 						        style="cursor: pointer;"/>
 					</a-popover>
 					<div style="float: right;">
-						{{wordNum}}/{{wordLimit}}
+						{{ wordNum }}/{{ wordLimit }}
 					</div>
 				</div>
+			</a-form-item>
+			<a-form-item :label-col="{ span: 4 }"
+			             :wrapper-col="{ span: 20 }">
+				<template slot="label">
+					内容标签
+				</template>
+				<a-button  @click="showModalTags">
+					选择标签
+				</a-button>
+				<a-popover placement="bottom" v-if="addTagDetail.length > 0">
+					<div style="max-width: 300px;" slot="content">
+						<template v-for="(tag, index) in addTagDetail">
+							<a-tag style="margin: 3px 3px 3px 10px;" :color="tag.tag ? 'orange' : 'blue'">
+								{{ tag.title }}
+								<a-icon type="close" style="color: #FF562D; vertical-align: inherit;"
+								        @click="deleteAddTag(index)"></a-icon>
+							</a-tag>
+						</template>
+					</div>
+					<span @click="showModalTags" style="color: #01b065;margin-left: 10px; cursor: pointer">
+						已选择<template v-if="getGroupNum(addTagDetail) > 0">{{ getGroupNum(addTagDetail) }}个分组</template>
+						<template
+								v-if="getGroupNum(addTagDetail) > 0 && addTagDetail.length != getGroupNum(addTagDetail)">，</template>
+						<template
+								v-if="addTagDetail.length != getGroupNum(addTagDetail)">{{ addTagDetail.length - getGroupNum(addTagDetail) }}个标签</template>
+					</span>
+				</a-popover>
 			</a-form-item>
 		</a-modal>
 
@@ -2503,7 +4119,7 @@
 				>
 					<template slot="custom" slot-scope="{title,key}">
 						<div style="width: 100%;" :dataKey="key">
-							<span :class="key== group ? 'active1': ''">{{title}}</span>
+							<span :class="key== group ? 'active1': ''">{{ title }}</span>
 						</div>
 					</template>
 				</a-tree>
@@ -2523,6 +4139,12 @@
 		</a-modal>
 		<!-- 小程序封面图片裁剪 -->
 		<cropperModal ref="cropper" @ok="uploadAppletPic" @cancel="cancleAppletPic"></cropperModal>
+		<a-modal :z-index="9999" width="888px!important" v-model="tagVisible" :hasChoose="tag_arr" :tagname="tagName"
+		         @ok="handleTag"
+		         @cancel="handleCancelTag">
+			<corpChooseTagModal v-if="tagVisible" :callback="chooseTags" :tagname="tagName1"
+			                    :hasChoose="tag_arr1"></corpChooseTagModal>
+		</a-modal>
 		<!-- 上传文本表格弹窗 -->
 		<a-modal
 				title="上传表格"
@@ -2549,7 +4171,7 @@
 						</a-button>
 					</a-upload>
 					<template v-if="fileName != ''">
-						<span style="margin-left: 5px;">{{fileName}}</span>
+						<span style="margin-left: 5px;">{{ fileName }}</span>
 						<a-icon type="close-circle" style="vertical-align: text-top;margin-left: 3px;"
 						        @click="closeExcel"/>
 					</template>
@@ -2567,7 +4189,71 @@
 				<div>
 					<img src="../../../assets/loadingGif.gif" alt="">
 				</div>
-				<p style="margin: 0 auto 20px;">已成功上传{{successNum}}个文本，失败{{failNum}}个文本，还有{{notImportNum}}个文本待上传</p>
+				<p style="margin: 0 auto 20px;">已成功上传{{ successNum }}个文本，失败{{ failNum }}个文本，还有{{ notImportNum
+					}}个文本待上传</p>
+			</div>
+		</a-modal>
+		<tagCheckedBox :noticeTitle="noticeTitle" ref="tagCheckedBox" @setGroupId="setGroupId" v-if="tagGroupVisible"
+		               :groupVisible="tagGroupVisible"
+		               :tagDetail="tagType == 1 ? JSON.parse(JSON.stringify(addTagDetail)) : (tagType == 2 ? JSON.parse(JSON.stringify(selectTagDetail)) : JSON.parse(JSON.stringify(tagsDetail)))"
+		               :tagsDisabled="tagsDisabled"
+		               :tagIds="tagType == 1 ? JSON.parse(JSON.stringify(addTagIds)) : (tagType == 2 ? JSON.parse(JSON.stringify(selectTagIds)) : JSON.parse(JSON.stringify(tagIds)))">
+		</tagCheckedBox>
+		<a-modal title="为筛选出的所有内容移除标签" v-model="moveTagGroupVisible" @ok="handleOkMove"
+		         @cancel="cancelMove"
+		         :confirmLoading="moveConfirmLoading" width="800px">
+			<label v-if="tagsDetail && tagsDetail.length>0"
+			       style="display: block; margin-bottom: 10px; color: #F56C6C;">显示的标签，是当前勾选上的所有内容的全部标签。</label>
+			<a-checkbox-group @change="onChange" v-model="tagCheckValue">
+				<a-row>
+					<a-col
+							:span="8"
+							style="margin-bottom: 10px;"
+							v-for="item in tagsDetail"
+							:key="item.id"
+					>
+						<a-checkbox :value="item.id">{{ item.title }}</a-checkbox>
+					</a-col>
+				</a-row>
+				<div v-show="tagsDetail.length == 0">
+					<img src="../../../assets/null.png" alt=""
+					     style="display: block;margin: auto;width: 150px;">
+					<p style="text-align: center;margin-top: 20px;">没有可移除的标签</p>
+				</div>
+			</a-checkbox-group>
+		</a-modal>
+
+		<!--		高级设置-->
+		<a-modal title="高级设置" :visible="setOptionsVisible" @cancel="cancelSetOptionsVisible" width="450px!important">
+			<template slot="footer">
+				<a-button key="back" @click="cancelSetOptionsVisible">取消</a-button>
+				<a-button
+						key="submit"
+						type="primary"
+						@click="confirmSetOptionsVisible"
+				>提交
+				</a-button>
+			</template>
+
+			<div class="advance-container">
+				<a-checkbox v-model="is_sync_image">
+					图片
+				</a-checkbox>
+			</div>
+			<div class="advance-container">
+				<a-checkbox v-model="is_sync_news">
+					图文
+				</a-checkbox>
+			</div>
+			<div class="advance-container">
+				<a-checkbox v-model="is_sync_voice">
+					音频
+				</a-checkbox>
+			</div>
+			<div class="advance-container">
+				<a-checkbox v-model="is_sync_video">
+					视频
+				</a-checkbox>
 			</div>
 		</a-modal>
 	</div>
@@ -2587,9 +4273,14 @@
 	import axios from 'axios'
 	import QRCode from 'qrcodejs2'
 	import cropperModal from '../../../components/picCropper/CropperModal'
-	import { VEmojiPicker } from "v-emoji-picker"
+	import {VEmojiPicker} from "v-emoji-picker"
 	import MyIcon from "@/components/MyIcon.vue"
 	import moment from "moment"
+	import corpChooseTag from "@/components/corpChooseTag/CorpChooseTag.vue"
+	import corpChooseTagModal from '@/components/corpChooseTag/CorpChooseTagModal.vue'
+	import tagCheckedBox from '../../../components/materialTagGroup/CheckboxIndex.vue'
+	import TemplateList from "../template/List";
+	import AccountMini from "../AccountMini";
 
 	const CancelToken = axios.CancelToken
 	const source = CancelToken.source()
@@ -2602,8 +4293,10 @@
 
 	let self = {}
 	export default {
-		name: "filingCabinetList",
+		name      : "filingCabinetList",
 		components: {
+			AccountMini,
+			TemplateList,
 			vuedraggable,
 			videoPlayer,
 			team,
@@ -2613,7 +4306,10 @@
 			'medium-editor': editor,
 			cropperModal,
 			VEmojiPicker,
-			MyIcon
+			MyIcon,
+			corpChooseTag,
+			corpChooseTagModal,
+			tagCheckedBox
 		},
 		inject    : ['getFileType'],
 		data () {
@@ -2732,15 +4428,37 @@
 				}
 			})
 			return {
+				selectTagIds            : [],
+				selectTagDetail         : [],
+				batchTag                : 0, // 是否批量打标签
+				updateTagVisible        : false, // 打标签弹窗是否显示
+				tagGroupVisible         : false, // 选择标签弹窗是否显示
+				moveTagGroupVisible     : false, // 移除标签弹窗是否显示
+				tagIds                  : [], // 选择的标签ids
+				tagsDetail              : [], // 标签详细信息
+				selectMaterialId        : '', // 单个编辑标签选中的内容id
+				noticeTitle             : '', // 打标签的提示语
+				tagsDisabled            : [], // 批量打标签时共有的标签
+				tagCheckValue           : [], // 移除标签选中的标签
+				moveConfirmLoading      : false, // 移除标签提交loading
+				tagType                 : 0, //0内容打标签的选择素材 1添加素材的选择标签
+				addTagIds               : [], // 添加素材的标签ids
+				addTagDetail            : [], // 添加素材的标签数组
 				// 同步按钮的loading
-				allPage           : 1,
-				allPageSize       : 15,
-				allMaterialList   : [], //所有类型素材
-				material          : {},
-				previewAllVisible : false,
-				allTotal          : 0,
-				allFileType       : 0,
-				allColomns        : [
+				setOptionsVisible       : false,//高级设置弹窗
+				is_sync_image           : false,
+				is_sync_video           : false,
+				is_sync_voice           : false,
+				is_sync_news            : false,
+				is_sync                 : 0,
+				allPage                 : 1,
+				allPageSize             : 15,
+				allMaterialList         : [], //所有类型素材
+				material                : {},
+				previewAllVisible       : false,
+				allTotal                : 0,
+				allFileType             : 0,
+				allColomns              : [
 					{
 						title      : "",
 						dataIndex  : "checkedBox",
@@ -2761,6 +4479,12 @@
 						key        : "content",
 						width      : '300px',
 						scopedSlots: {customRender: "content"}
+					},
+					{
+						title      : "内容标签",
+						dataIndex  : "tag_name",
+						key        : "tag_name",
+						scopedSlots: {customRender: "tag_name"}
 					},
 					{
 						title    : "上传者",
@@ -2789,37 +4513,40 @@
 						title      : "操作",
 						dataIndex  : "action",
 						key        : "action",
-						width      : '25%',
+						width      : '200px',
 						scopedSlots: {customRender: "action"}
 					}
 				],
-				sketchWxLoading   : false, // 图文
-				picWxLoading      : false, // 图本
-				voiceWxLoading    : false, // 音频
-				videoWxLoading    : false, // 视频
-				materialKeys      : [],    // 所有当前素材的key
-				selectedRowKeys   : [],    // 选中的素材key
-				checkBoxValue     : [],    // 多选框是否选中
-				batchFlag         : 1,     // 是否是批量移动
-				batchType         : '1',     // 0当前页 1所有
-				batchTypeValue    : false, // 当前页/所有 是否选中
-				showModal3        : false, // 选择素材弹窗
-				typeValue2        : 1,  // 2 图片
-				news_type         : 0,  // 1 单图文 2 多图文
-				sketchType        : '0', // 0图文卡片展示 1图文列表展示
-				showType          : '0', // 非图文文本  0卡片展示 1.列表展示
-				chooseId          : 0,  // 选中的素材id
-				currentSketch     : 0,  // -1 小程序图片封面 非-1 当前选中的图文封面
-				isLoading         : true, //Loading 组件显示与隐藏
-				groupId           : [], // 选中的小组id
-				isMoveType        : [], // 是否是渠道码 ""不是 1~6是
-				materialList      : [],//图文素材列表
-				single            : [], //单图文列表
-				double            : [], //多图文列表
-				materialListTotal : 0, //图文素材列表总条数
-				visibleSketchList : false, //新增图文弹窗
-				sketchList        : [
+				sketchWxLoading         : false, // 图文
+				picWxLoading            : false, // 图本
+				voiceWxLoading          : false, // 音频
+				videoWxLoading          : false, // 视频
+				materialKeys            : [],    // 所有当前素材的key
+				selectedRowKeys         : [],    // 选中的素材key
+				checkBoxValue           : [],    // 多选框是否选中
+				batchFlag               : 1,     // 是否是批量移动
+				batchType               : '1',     // 0当前页 1所有
+				batchTypeValue          : false, // 当前页/所有 是否选中
+				showModal3              : false, // 选择素材弹窗
+				typeValue2              : 1,  // 2 图片
+				news_type               : 0,  // 1 单图文 2 多图文
+				sketchType              : '0', // 0图文卡片展示 1图文列表展示
+				showType                : '0', // 非图文文本  0卡片展示 1.列表展示
+				chooseId                : 0,  // 选中的素材id
+				currentSketch           : 0,  // -1 小程序图片封面 非-1 当前选中的图文封面
+				isLoading               : true, //Loading 组件显示与隐藏
+				groupId                 : [], // 选中的小组id
+				isMoveType              : [], // 是否是渠道码 ""不是 1~6是
+				materialList            : [],//图文素材列表
+				single                  : [], //单图文列表
+				double                  : [], //多图文列表
+				materialListTotal       : 0, //图文素材列表总条数
+				visibleSketchList       : false, //新增图文弹窗
+				sketchTitle             : '新建图文',
+				timeOut                 : 0,
+				sketchList              : [
 					{
+						setIsShow         : false,
 						inputTitle        : '',//标题
 						digest            : '',//图文描述
 						content_source_url: '',//跳转链接
@@ -2831,11 +4558,11 @@
 						closeShowModal3   : false,//每个图文消息是否选好素材
 					}
 				], // 图文列表，目前是单图文，取[0]即可
-				page2             : 1, // 图文卡片分页
-				pageSize2         : 16, // 图文卡片页码
-				sketchPage        : 1, // 图文列表分页
-				sketchPageSize    : 15, // 图文列表页码
-				sketchColomns     : [
+				page2                   : 1, // 图文卡片分页
+				pageSize2               : 15, // 图文卡片页码
+				sketchPage              : 1, // 图文列表分页
+				sketchPageSize          : 15, // 图文列表页码
+				sketchColomns           : [
 					{
 						title      : "",
 						dataIndex  : "checkedBox",
@@ -2844,23 +4571,30 @@
 						scopedSlots: {customRender: "checkedBox"}
 					},
 					{
-						title    : "标题",
-						dataIndex: "file_name",
-						key      : "file_name",
-						width    : '180px',
+						title      : "标题",
+						dataIndex  : "file_name",
+						key        : "file_name",
+						width      : '180px',
 						scopedSlots: {customRender: "file_name"}
 					},
 					{
 						title      : "内容",
 						dataIndex  : "content",
 						key        : "content",
-						width      : "40%",
+						width      : "25%",
 						scopedSlots: {customRender: "content"}
+					},
+					{
+						title      : "内容标签",
+						dataIndex  : "tag_name",
+						key        : "tag_name",
+						scopedSlots: {customRender: "tag_name"}
 					},
 					{
 						title    : "上传者",
 						dataIndex: "username",
 						key      : "username",
+						width    : '180px'
 					},
 					{
 						title    : "素材来源",
@@ -2877,27 +4611,29 @@
 						title      : "操作",
 						dataIndex  : "action",
 						key        : "action",
-						width      : '25%',
+						width      : '200px;',
 						scopedSlots: {customRender: "action"}
 					}
 				],
-				qrcodeVisible     : false, // 预览二维码
-				confirmLoading    : false, //新增图文确定loading
-				materialList2     : [], //图片素材列表
-				materialList3     : [], //视频素材列表
-				materialList4     : [], //音频素材列表
-				material_type     : '0', //4图文，1图片，2音频，3视频, 7小程序，5文件，6文本
-				lastTime          : "", //最后同步时间
-				visible           : false, //手机预览弹窗显示与隐藏
-				loading3          : false, //手机预览确定按钮加载显示与隐藏
-				inputUsername     : "", //手机预览输入的微信号
-				materialId        : "", //素材id
-				visible2          : false, //上传图片弹窗显示与隐藏
-				loading4          : false, //上传图片弹窗加载显示与隐藏
+				qrcodeVisible           : false, // 预览二维码
+				confirmLoading          : false, //新增图文确定loading
+				materialList2           : [], //图片素材列表
+				materialList3           : [], //视频素材列表
+				materialList4           : [], //音频素材列表
+				material_type           : '0', //4图文，1图片，2音频，3视频, 7小程序，5文件，6文本
+				lastTime                : "", //最后同步时间
+				visible                 : false, //手机预览弹窗显示与隐藏
+				loading3                : false, //手机预览确定按钮加载显示与隐藏
+				inputUsername           : "", //手机预览输入的微信号
+				materialId              : "", //素材id
+				picUrl                  : '',
+				picTitle                : '新建图片素材',
+				visible2                : false, //上传图片弹窗显示与隐藏
+				loading4                : false, //上传图片弹窗加载显示与隐藏
 				//上传图片
-				imageUrl          : "",
-				defaultValue      : 1, //默认上传素材类型，1为永久，0为临时
-				imageColomns      : [
+				imageUrl                : "",
+				defaultValue            : 1, //默认上传素材类型，1为永久，0为临时
+				imageColomns            : [
 					{
 						title      : "",
 						dataIndex  : "checkedBox",
@@ -2906,16 +4642,23 @@
 						scopedSlots: {customRender: "checkedBox"}
 					},
 					{
-						title    : "标题",
-						dataIndex: "file_name",
-						key      : "file_name",
-						width    : '180px'
+						title      : "标题",
+						dataIndex  : "file_name",
+						key        : "file_name",
+						width      : '180px',
+						scopedSlots: {customRender: "file_name"}
 					},
 					{
 						title      : "内容",
 						dataIndex  : "content",
 						key        : "content",
 						scopedSlots: {customRender: "content"}
+					},
+					{
+						title      : "内容标签",
+						dataIndex  : "tag_name",
+						key        : "tag_name",
+						scopedSlots: {customRender: "tag_name"}
 					},
 					{
 						title    : "上传者",
@@ -2938,19 +4681,20 @@
 						title      : "操作",
 						dataIndex  : "action",
 						key        : "action",
-						width      : '25%',
+						width      : '200px',
 						scopedSlots: {customRender: "action"}
 					}
 				],
-				fileInfo          : {}, //上传图片的文件信息
-				previewVisible    : false, //预览图片的弹窗显示与隐藏
-				previewUrl        : this.$store.state.commonUrl + "/upload/previw.png", //预览图片地址
-				name              : "", //图片标题
-				page              : 1, //图片素材页数
-				pageSize          : 15, //图片素材每页个数
-				total             : 0, //图片素材总条数
-				quickJumper       : false, // 是否显示快速跳转的控件
-				voiceColomns      : [
+				fileInfo                : {}, //上传图片的文件信息
+				previewVisible          : false, //预览图片的弹窗显示与隐藏
+				previewUrl              : this.$store.state.commonUrl + "/upload/previw.png", //预览图片地址
+				name                    : "", //图片标题
+				isRadar                 : 0,
+				page                    : 1, //图片素材页数
+				pageSize                : 15, //图片素材每页个数
+				total                   : 0, //图片素材总条数
+				quickJumper             : false, // 是否显示快速跳转的控件
+				voiceColomns            : [
 					{
 						title      : "",
 						dataIndex  : "checkedBox",
@@ -2959,10 +4703,11 @@
 						scopedSlots: {customRender: "checkedBox"}
 					},
 					{
-						title    : "标题",
-						dataIndex: "file_name",
-						key      : "file_name",
-						width    : '180px'
+						title      : "标题",
+						dataIndex  : "file_name",
+						key        : "file_name",
+						width      : '180px',
+						scopedSlots: {customRender: "file_name"}
 					},
 					{
 						title      : "内容",
@@ -2971,9 +4716,16 @@
 						scopedSlots: {customRender: "content"}
 					},
 					{
+						title      : "内容标签",
+						dataIndex  : "tag_name",
+						key        : "tag_name",
+						scopedSlots: {customRender: "tag_name"}
+					},
+					{
 						title    : "上传者",
 						dataIndex: "username",
 						key      : "username",
+						width    : '180px'
 					},
 					{
 						title    : "素材来源",
@@ -2990,19 +4742,19 @@
 						title      : "操作",
 						dataIndex  : "action",
 						key        : "action",
-						width      : '20%',
+						width      : '200px',
 						scopedSlots: {customRender: "action"}
 					}
 				],
-				page3             : 1, //音频素材页数
-				pageSize3         : 15, //音频素材每页个数
-				total3            : 0, //音频素材总条数
-				quickJumper3      : false, //音频素材是否显示快速跳转的控件
-				page4             : 1, //视频素材页数
-				pageSize4         : 15, //视频素材每页个数
-				total4            : 0, //视频素材总条数
-				quickJumper4      : false, //视频素材是否显示快速跳转的控件
-				publicOptions     : {
+				page3                   : 1, //音频素材页数
+				pageSize3               : 15, //音频素材每页个数
+				total3                  : 0, //音频素材总条数
+				quickJumper3            : false, //音频素材是否显示快速跳转的控件
+				page4                   : 1, //视频素材页数
+				pageSize4               : 15, //视频素材每页个数
+				total4                  : 0, //视频素材总条数
+				quickJumper4            : false, //视频素材是否显示快速跳转的控件
+				publicOptions           : {
 					playbackRates      : [0.7, 1.0, 1.5, 2.0], //播放速度
 					autoplay           : false, //如果true,浏览器准备好时开始回放。
 					muted              : false, // 默认情况下将会消除任何音频。
@@ -3019,26 +4771,28 @@
 						fullscreenToggle    : true //全屏按钮
 					}
 				},
-				playerOptions     : [],
-				playTime          : [], //音频播放时间
-				t1                : [],
-				voiceVisible      : false, // 上传音频弹窗显示与隐藏
-				t2                : '', // 上传音频播放计时器参数
-				playVoice         : false,
-				voiceTitle        : '',
-				playVoiceTime     : '',
-				voiceName         : '', // 音频文件名称
-				voiceUrl          : '', // 音频src
-				videoVisible      : false, // 上传音频弹窗
-				playerVideoOptions: {}, // 视频播放配置
-				videoTitle        : '', // 上传视频标题
-				videoUrl          : '', // 视频src
-				clickIndex        : -1, //点击的音频序号，控制喇叭的显示与隐藏
-				commonUrl         : this.$store.state.commonUrl,//公共的链接
-				col               : 4,//图文瀑布流分几列
-				is_pull           : 0,//检查24小时内是否能同步，0同步，1检查
-				materialList5     : [], // 小程序素材
-				appletColomns     : [
+				playerOptions           : [],
+				playTime                : [], //音频播放时间
+				t1                      : [],
+				voiceVisible            : false, // 上传音频弹窗显示与隐藏
+				t2                      : '', // 上传音频播放计时器参数
+				playVoice               : false,
+				voiceTitle              : '',
+				playVoiceTime           : '',
+				voiceName               : '', // 音频文件名称
+				voiceUrl                : '', // 音频src
+				videoModalTitle         : '新建视频素材',
+				videoVisible            : false, // 上传音频弹窗
+				playerVideoOptions      : {}, // 视频播放配置
+				videoTitle              : '', // 上传视频标题
+				videoUrl                : '', // 视频src
+				videoOptions            : {},
+				clickIndex              : -1, //点击的音频序号，控制喇叭的显示与隐藏
+				commonUrl               : this.$store.state.commonUrl,//公共的链接
+				col                     : 4,//图文瀑布流分几列
+				is_pull                 : 0,//检查24小时内是否能同步，0同步，1检查
+				materialList5           : [], // 小程序素材
+				appletColomns           : [
 					{
 						title      : "",
 						dataIndex  : "checkedBox",
@@ -3059,6 +4813,12 @@
 						scopedSlots: {customRender: "content"}
 					},
 					{
+						title      : "内容标签",
+						dataIndex  : "tag_name",
+						key        : "tag_name",
+						scopedSlots: {customRender: "tag_name"}
+					},
+					{
 						title    : "上传者",
 						dataIndex: "username",
 						key      : "username",
@@ -3079,14 +4839,14 @@
 						title      : "操作",
 						dataIndex  : "action",
 						key        : "action",
-						width      : '25%',
+						width      : '200px',
 						scopedSlots: {customRender: "action"}
 					}
 				],
-				miniprogramVisible: false, // 小程序弹窗是否显示
-				appletDisabled    : false, //小程序弹窗部分禁选
-				appletTitle       : '新建小程序素材',
-				miniprogram       : {
+				miniprogramVisible      : false, // 小程序弹窗是否显示
+				appletDisabled          : false, //小程序弹窗部分禁选
+				appletTitle             : '新建小程序素材',
+				miniprogram             : {
 					appId      : '1',
 					linkUrl    : '',
 					title      : '',
@@ -3096,7 +4856,7 @@
 						audio: ""
 					},
 				}, // 文本链配置小程序
-				miniprogram1      : {
+				miniprogram1            : {
 					appId      : '',
 					linkUrl    : '',
 					title      : '',
@@ -3106,12 +4866,12 @@
 						audio: ""
 					},
 				}, // 上传小程序
-				page5             : 1, //小程序素材页数
-				pageSize5         : 15, //小程序素材每页个数
-				total5            : 0, //小程序素材总条数
-				quickJumper5      : false,
-				materialList6     : [], // 文件素材
-				fileColomns       : [
+				page5                   : 1, //小程序素材页数
+				pageSize5               : 15, //小程序素材每页个数
+				total5                  : 0, //小程序素材总条数
+				quickJumper5            : false,
+				materialList6           : [], // 文件素材
+				fileColomns             : [
 					{
 						title      : "",
 						dataIndex  : "checkedBox",
@@ -3120,16 +4880,23 @@
 						scopedSlots: {customRender: "checkedBox"}
 					},
 					{
-						title    : "文件名",
-						dataIndex: "file_name",
-						key      : "file_name",
-						width    : "15%",
+						title      : "文件名",
+						dataIndex  : "file_name",
+						key        : "file_name",
+						width      : "15%",
+						scopedSlots: {customRender: "file_name"}
+					},
+					{
+						title      : "内容标签",
+						dataIndex  : "tag_name",
+						key        : "tag_name",
+						scopedSlots: {customRender: "tag_name"}
 					},
 					{
 						title    : "上传者",
 						dataIndex: "username",
 						key      : "username",
-						// width    : 20,
+						width    : '180px'
 					},
 					{
 						title    : "素材来源",
@@ -3147,17 +4914,18 @@
 						title      : "操作",
 						dataIndex  : "action",
 						key        : "action",
-						width      : '20%',
+						width      : '200px',
 						scopedSlots: {customRender: "action"}
 					}
 				],
-				fileVisible       : false, // 上传文件弹窗
-				fileName          : '', // 上传文件名
-				page6             : 1, //文件素材页数
-				pageSize6         : 15, //文件素材每页个数
-				total6            : 0, //文件素材总条数
-				quickJumper6      : false,
-				textColomns       : [
+				fileVisible             : false, // 上传文件弹窗
+				fileTitle               : '新建文件素材',
+				fileName                : '', // 上传文件名
+				page6                   : 1, //文件素材页数
+				pageSize6               : 15, //文件素材每页个数
+				total6                  : 0, //文件素材总条数
+				quickJumper6            : false,
+				textColomns             : [
 					{
 						title      : "",
 						dataIndex  : "checkedBox",
@@ -3179,6 +4947,12 @@
 						scopedSlots: {customRender: "content"}
 					},
 					{
+						title      : "内容标签",
+						dataIndex  : "tag_name",
+						key        : "tag_name",
+						scopedSlots: {customRender: "tag_name"}
+					},
+					{
 						title    : "上传者",
 						dataIndex: "username",
 						key      : "username",
@@ -3200,11 +4974,11 @@
 						title      : "操作",
 						dataIndex  : "action",
 						key        : "action",
-						width      : '25%',
+						width      : '200px',
 						scopedSlots: {customRender: "action"}
 					}
 				], // 文本表格列
-				materialList7     : [
+				materialList7           : [
 					{
 						id         : 123,
 						content    : '3e2<a href="https://baidu.com">qewa</a>das\n',
@@ -3217,18 +4991,18 @@
 						create_time: '2020-1-7'
 					}
 				], // 文本
-				textVisible       : false, // 添加文本弹窗
+				textVisible             : false, // 添加文本弹窗
 				textImportVisible       : false, // 导入文本弹窗
-				progressVisible    : false, // 进度条弹窗
-				progressNum        : 0,//进度条进度
-				leftSiderWidth     : document.getElementsByClassName('menu-sider')[0].style.width,
-				successNum         : 0,//文本上传数
-				failNum            : 0,//文本失败上传数
-				notImportNum       : 0,//文本待上传数
-				modalLoading      : false,
-				mediumEditor      : [],   // 初始化的medium-editor
-				emojiShow         : false, // emoji 表情选择框是否显示
-				options           : {
+				progressVisible         : false, // 进度条弹窗
+				progressNum             : 0,//进度条进度
+				leftSiderWidth          : document.getElementsByClassName('menu-sider')[0].style.width,
+				successNum              : 0,//文本上传数
+				failNum                 : 0,//文本失败上传数
+				notImportNum            : 0,//文本待上传数
+				modalLoading            : false,
+				mediumEditor            : [],   // 初始化的medium-editor
+				emojiShow               : false, // emoji 表情选择框是否显示
+				options                 : {
 					toolbar      : false,
 					// 	{
 					// 	buttons: [
@@ -3263,33 +5037,250 @@
 						cleanAttrs     : ['class', 'style', 'dir', 'align', 'width', 'height', 'face', 'title', 'code', 'name', 'id', 'type', 'span', 'border', 'open', 'action', 'method', 'cols', 'for', 'rel', 'label', 'icon', 'value', 'max', 'min', 'classid']
 					}
 				},  // 文本链配置
-				wordNum           : 0,//编辑框的字数
-				wordLimit         : 1000, //  编辑框文字限制
-				textContent       : '',//编辑框传给后台的内容
-				textValue         : '', //文本内容
-				page7             : 1, //文本素材页数
-				pageSize7         : 15, //文本素材每页个数
-				total7            : 2, //文本素材总条数
-				textTitle         : '', // 文本弹窗标题
-				text_title        : '',//文本弹窗新建标题
-				quickJumper7      : false,
+				wordNum                 : 0,//编辑框的字数
+				wordLimit               : 1000, //  编辑框文字限制
+				textContent             : '',//编辑框传给后台的内容
+				textValue               : '', //文本内容
+				page7                   : 1, //文本素材页数
+				pageSize7               : 15, //文本素材每页个数
+				total7                  : 2, //文本素材总条数
+				textTitle               : '', // 文本弹窗标题
+				text_title              : '',//文本弹窗新建标题
+				quickJumper7            : false,
 				// 分组弹窗
-				groupVisible      : false,
-				attachmentId      : '', // 附件id
-				groupList         : [], // 小组列表
-				group             : '', // 同步分组弹窗的小组id
-				groupLoading      : false, // 提交按钮loding
+				groupVisible            : false,
+				attachmentId            : '', // 附件id
+				groupList               : [], // 小组列表
+				group                   : '', // 同步分组弹窗的小组id
+				groupLoading            : false, // 提交按钮loding
 				// 公众号弹窗
-				showWxModal       : false,
+				showWxModal             : false,
 				// 上传选择的分组id
-				selectGroupId     : '',
-				fileList          : [],
-				sidebarVisible    : false,//添加到企微侧边栏弹窗的显示与隐藏
-				comefrom          : ''
+				selectGroupId           : '',
+				radarOpen               : 1,
+				radarDynamicNotification: 1,
+				radarTagOpen            : 1,
+				tagVisible              : false,
+				tag_arr                 : [],
+				tagName                 : [],
+				radarTagIds             : '',
+				tag_arr1                : [],
+				radarTagIds1            : '',
+				tagName1                : [],
+				fileList                : [],
+				sidebarVisible          : false,//添加到企微侧边栏弹窗的显示与隐藏
+				comefrom                : ''
 			};
 		},
 
 		methods: {
+			showSelectTag () {
+				this.tagType = 2
+				this.tagGroupVisible = true
+			},
+			// 批量打标签按钮
+			async batchAddTags () {
+				this.tagType = 0
+				this.batchTag = 1
+				const {data: res} = await this.axios.post("work-user/get-user-tags", {
+					user_ids: this.selectedRowKeys,
+					type    : 5,
+					give    : 0
+				})
+				if (res.error != 0) {
+					this.$message.destroy()
+					this.$message.error(res.error_msg)
+				} else {
+					this.tagIds = []
+					this.tagsDisabled = []
+					this.tagsDetail = []
+					for (let i = 0; i < res.data.length; i++) {
+						this.tagIds.push(res.data[i].id + '-s')
+						this.tagsDisabled.push(res.data[i].id + '-s')
+						this.tagsDetail.push({
+							id   : res.data[i].id + '-s',
+							tag  : true,
+							title: res.data[i].tagname
+						})
+					}
+					this.noticeTitle = '对' + this.selectedRowKeys.length + '篇素材内容批量打标签，默认选中将共同的内容标签选中，在此基础上打上其他标签。'
+					this.tagGroupVisible = true
+				}
+			},
+			showModalTags () {
+				this.tagType = 1
+				this.tagGroupVisible = true
+			},
+			getGroupNum (addTagDetail) {
+				let count = 0
+				for (let i = 0; i < addTagDetail.length; i++) {
+					if (!addTagDetail[i].tag) {
+						count++
+					}
+				}
+				return count
+			},
+			resetAddTags () {
+				this.tagType = 0
+				this.addTagDetail = []
+				this.addTagIds = []
+			},
+			deleteAddTag (index) {
+				this.addTagIds.splice(index, 1)
+				this.addTagDetail.splice(index, 1)
+			},
+			// 批量移除标签按钮
+			async batchRemoveTags () {
+				const {data: res} = await this.axios.post("work-user/get-user-tags", {
+					user_ids: this.selectedRowKeys,
+					type    : 5,
+					give    : 1
+				})
+				if (res.error != 0) {
+					this.$message.destroy()
+					this.$message.error(res.error_msg)
+				} else {
+					this.tagCheckValue = []
+					this.tagsDetail = []
+					for (let i = 0; i < res.data.length; i++) {
+						this.tagsDetail.push({
+							id   : res.data[i].id + '-s',
+							tag  : true,
+							title: res.data[i].tagname
+						})
+					}
+					this.moveTagGroupVisible = true
+				}
+			},
+			async handleOkMove () {
+				if (this.tagCheckValue.length == 0) {
+					this.$message.destroy()
+					this.$message.error('请选择移除的标签')
+					return false
+				}
+				this.moveConfirmLoading = true
+				const {data: res} = await this.axios.post("work-user/give-user-tags", {
+					uid     : localStorage.getItem('uid'),
+					tag_ids : this.tagCheckValue,
+					type    : 1,
+					s_type  : 5,
+					user_ids: this.selectedRowKeys,
+				})
+				if (res.error != 0) {
+					this.$message.destroy()
+					this.$message.error(res.error_msg)
+					this.moveConfirmLoading = false
+				} else {
+					this.$message.destroy()
+					this.$message.info(res.error_msg)
+					this.selectedRowKeys = []
+					if (this.material_type != 0) {
+						let params = this.getPageAndPageSize1()
+						this.getMaterial(params.page, params.pageSize);
+					} else {
+						this.getAllMaterial(this.allPage, this.allPageSize)
+					}
+					this.moveTagGroupVisible = false
+					this.moveConfirmLoading = false
+					this.tagCheckValue = []
+				}
+			},
+			onChange (checkedValues) {
+				this.tagCheckValue = checkedValues;
+			},
+			cancelMove () {
+				this.moveTagGroupVisible = false
+				this.tagCheckValue = []
+			},
+			// 编辑标签
+			updateTags (id, tagName) {
+				this.tagType = 0
+				this.batchTag = 0
+				this.selectMaterialId = id
+				this.tagIds = []
+				this.tagsDetail = []
+				this.tagsDisabled = []
+				for (let tag of tagName) {
+					this.tagIds.push(tag.id + '-s')
+					this.tagsDetail.push({
+						id   : tag.id + '-s',
+						tag  : true,
+						title: tag.tagname
+					})
+				}
+				this.noticeTitle = ''
+				this.tagGroupVisible = true
+			},
+
+			// 选择标签回调
+			async setGroupId (even, ids, tags) {
+				if (even == 'ok') {
+					if (this.tagType == 1) {
+						this.addTagIds = ids
+						this.addTagDetail = tags
+						this.$refs.tagCheckedBox.comfirmLoading = false
+					} else if (this.tagType == 2) {
+						this.selectTagIds = ids
+						this.selectTagDetail = tags
+						this.$refs.tagCheckedBox.comfirmLoading = false
+					} else if (this.tagType == 0) {
+						if (this.batchTag == 0) {
+							this.tagIds = ids
+							this.tagsDetail = tags
+							const {data: res} = await this.axios.post("work-user/give-user-tags", {
+								bitch_all: 1,
+								s_type   : 5,
+								tag_ids  : ids,
+								type     : 0,
+								uid      : localStorage.getItem('uid'),
+								user_ids : this.selectMaterialId,
+							})
+							if (res.error != 0) {
+								this.$message.destroy()
+								this.$message.error(res.error_msg)
+								this.$refs.tagCheckedBox.comfirmLoading = false
+							} else {
+								if (this.material_type != 0) {
+									let params = this.getPageAndPageSize1()
+									this.getMaterial(params.page, params.pageSize);
+								} else {
+									this.getAllMaterial(this.allPage, this.allPageSize)
+								}
+								this.$refs.tagCheckedBox.comfirmLoading = false
+							}
+
+						} else {
+							this.tagIds = ids
+							this.tagsDetail = tags
+							const {data: res} = await this.axios.post("work-user/give-user-tags", {
+								tag_ids : ids,
+								type    : 0,
+								s_type  : 5,
+								uid     : localStorage.getItem('uid'),
+								user_ids: this.selectedRowKeys,
+							})
+							if (res.error != 0) {
+								this.$message.destroy()
+								this.$message.error(res.error_msg)
+								this.$refs.tagCheckedBox.comfirmLoading = false
+							} else {
+								this.$message.destroy()
+								this.$message.info(res.error_msg)
+								this.selectedRowKeys = []
+								if (this.material_type != 0) {
+									let params = this.getPageAndPageSize1()
+									this.getMaterial(params.page, params.pageSize);
+								} else {
+									this.getAllMaterial(this.allPage, this.allPageSize)
+								}
+								this.$refs.tagCheckedBox.comfirmLoading = false
+							}
+						}
+					}
+				}
+				this.tagsDisabled = []
+				this.tagGroupVisible = false
+			},
 			// 列表选择
 			onSelectChange (selectedRowKeys) {
 				this.selectedRowKeys = selectedRowKeys
@@ -3312,7 +5303,7 @@
 					// 添加
 					if (this.batchType == 0) {
 						// 当前页
-						if(this.material_type == 0) {
+						if (this.material_type == 0) {
 							this.addKey(this.allMaterialList)
 							this.setCheckedBox(this.allMaterialList)
 						} else if (this.material_type == 1) {
@@ -3362,6 +5353,9 @@
 						} else if (this.material_type == 5) {
 							this.removeKey(this.materialList6)
 							this.setCheckedBox(this.materialList6)
+						} else if (this.material_type == 6) {
+							this.removeKey(this.materialList7)
+							this.setCheckedBox(this.materialList7)
 						} else if (this.material_type == 7) {
 							this.removeKey(this.materialList5)
 							this.setCheckedBox(this.materialList5)
@@ -3374,8 +5368,8 @@
 					this.batchTypeValue = false
 				}
 			},
-			setBox() {
-				if(this.material_type == 0) {
+			setBox () {
+				if (this.material_type == 0) {
 					this.setCheckedBox(this.allMaterialList)
 				} else if (this.material_type == 1) {
 					this.setCheckedBox(this.materialList2)
@@ -3395,8 +5389,8 @@
 			},
 			// 当前/所有 类型选择框变化
 			changeBatchType () {
-				if(this.batchTypeValue) {
-					if(this.batchType == 0) {
+				if (this.batchTypeValue) {
+					if (this.batchType == 0) {
 						this.selectedRowKeys = []
 					}
 					this.batchTypeValue = false
@@ -3436,6 +5430,7 @@
 
 			// 左侧切换小组回调
 			changeGroupId (id, isMoveType) {
+				this.isLoading = true
 				this.isMoveType = isMoveType
 				if (isMoveType) {
 					this.material_type = '1'
@@ -3443,6 +5438,9 @@
 				this.groupId = id
 				this.resetBatch()
 				this.name = ''
+				this.selectTagIds = []
+				this.selectTagDetail = []
+				this.isRadar = 0
 				this.materialList = []
 				if (this.material_type != 0) {
 					let params = this.getPageAndPageSize3()
@@ -3452,7 +5450,6 @@
 					this.allPageSize = 15
 					this.getAllMaterial(this.allPage, this.allPageSize)
 				}
-
 			},
 			// 重置批量选择
 			resetBatch () {
@@ -3524,14 +5521,16 @@
 
 			// 添加图文按钮
 			addSketchList () {
+				this.tagType = 1
 				this.sketchList = [
 					{
+						setIsShow         : false,
 						inputTitle        : '',//标题
 						digest            : '',//图文描述
 						content_source_url: '',//跳转链接
 						material_id       : '',
 						local_path        : {
-							img: require('../../../assets/img.png'),
+							img: '',
 						},
 						closeShowModal3   : false,//每个图文消息是否选好素材
 					}
@@ -3541,64 +5540,59 @@
 					this.selectGroupId = this.groupId[0]
 				}
 				this.getGroupList()
+				this.sketchTitle = '新建图文'
 				this.visibleSketchList = true
 			},
 			// 跳转图文添加页
 			addFilingCabinetSketch () {
 				this.$router.push("add?t=" + this.material_type + "&g=" + (this.groupId[0] || ''))
 			},
-			editFilingCabinetSketch (index, type) {
-				if (type == 1) {
-					this.allFileType = 4
-					this.selectGroupId = this.allMaterialList[index].group_id
-					let material = this.allMaterialList[index]
-					if (material.is_editor == 0) {
-						this.attachmentId = material.id
-						this.sketchList = [
-							{
-								inputTitle        : material.artList[0].title,//标题
-								digest            : material.artList[0].digest,//图文描述
-								content_source_url: material.artList[0].jump_url,//跳转链接
-								material_id       : material.artList[0].attach_id || 0,
-								local_path        : {
-									img: material.artList[0].local_path,
-								},
-								closeShowModal3   : true,//每个图文消息是否选好素材
-							}
-						]
-						this.selectGroupId = this.allMaterialList[index].group_id
-						this.getGroupList()
-						this.visibleSketchList = true
-					} else {
-						this.$router.push("add?id=" + material.id + "&t=" + this.material_type + "&g=" + (this.allMaterialList[index].group_id || ''))
+			editFilingCabinetSketch (material) {
+				this.selectGroupId = material.group_id
+				if (material.is_editor == 0) {
+					this.attachmentId = material.id
+					this.sketchList = [
+						{
+							setIsShow         : false,
+							inputTitle        : material.artList[0].title,//标题
+							digest            : material.artList[0].digest,//图文描述
+							content_source_url: material.artList[0].jump_url,//跳转链接
+							material_id       : material.artList[0].attach_id || 0,
+							local_path        : {
+								img: material.artList[0].local_path,
+							},
+							closeShowModal3   : true,//每个图文消息是否选好素材
+						}
+					]
+					this.allFileType = material.file_type
+					this.addTagDetail = []
+					this.tagType = 1
+					this.addTagIds = []
+					for (let i = 0; i < material.tag_name.length; i++) {
+						this.addTagDetail.push({
+							id   : material.tag_name[i].id + '-s',
+							tag  : true,
+							title: material.tag_name[i].tagname
+						})
+						this.addTagIds.push(material.tag_name[i].id + '-s')
 					}
+					this.radarTagIds = material.radar_tag_ids
+					this.selectGroupId = material.group_id
+					this.radarOpen = material.radar_id > 0 && material.radar_status == 1 ? 1 : 0
+					this.radarDynamicNotification = material.dynamic_notification || 0
+					this.radarTagOpen = material.radar_tag_open
+					this.tag_arr = JSON.parse(JSON.stringify(material.radar_tag_ids ? material.radar_tag_ids.split(',') : []))
+					this.tagName = JSON.parse(JSON.stringify(material.radar_tag_ids_name))
+					this.getGroupList()
+					this.sketchTitle = '编辑图文'
+					this.visibleSketchList = true
 				} else {
-					this.selectGroupId = this.materialList[index].group_id
-					let material = this.materialList[index]
-					if (material.is_editor == 0) {
-						this.attachmentId = material.id
-						this.sketchList = [
-							{
-								inputTitle        : material.artList[0].title,//标题
-								digest            : material.artList[0].digest,//图文描述
-								content_source_url: material.artList[0].jump_url,//跳转链接
-								material_id       : material.artList[0].attach_id || 0,
-								local_path        : {
-									img: material.artList[0].local_path,
-								},
-								closeShowModal3   : true,//每个图文消息是否选好素材
-							}
-						]
-						this.selectGroupId = this.materialList[index].group_id
-						this.getGroupList()
-						this.visibleSketchList = true
-					} else {
-						this.$router.push("add?id=" + material.id + "&t=" + this.material_type + "&g=" + (this.materialList[index].group_id || ''))
-					}
+					this.$router.push("add?id=" + material.id + "&t=" + this.material_type + "&g=" + (material.group_id || ''))
 				}
 			},
-			statistic (index, type) {
-				this.$router.push("info?id=" + index + "&type=" + type)
+			statistic (item, type) {
+				let isRadar = item.radar_status == 1 && item.radar_id > 0 ? 1 : 0
+				this.$router.push("info?id=" + item.id + "&type=" + type + '&file_type=' + item.extension + '&is_radar=' + isRadar)
 			},
 			// 添加多图文；目前只支持单图文
 			addSketch () {
@@ -3606,6 +5600,7 @@
 					this.$message.error('最多添加8条图文')
 				} else {
 					this.sketchList.push({
+						setIsShow         : false,
 						inputTitle        : '',
 						digest            : '',
 						content_source_url: '',
@@ -3626,17 +5621,53 @@
 				} else {
 					this.sketchList = [
 						{
+							setIsShow         : false,
 							inputTitle        : '',//标题
 							digest            : '',//图文描述
 							content_source_url: '',//跳转链接
 							material_id       : '',
 							local_path        : {
-								img  : require('../../../assets/img.png'),
+								img  : '',
 								audio: ""
 							},
 							closeShowModal3   : false,//每个图文消息是否选好素材
 						}
 					]
+				}
+			},
+			inputChange (index) {
+				this.sketchList[index].content_source_url = this.sketchList[index].content_source_url.trim()
+				this.sketchList[index].setIsShow = false
+				if (this.sketchList[index].content_source_url.trim() == '') {
+					this.sketchList[index].inputTitle = ''
+					this.sketchList[index].digest = ''
+					this.sketchList[index].content_source_url = ''
+				} else if (this.sketchList[index].content_source_url.trim() != '') {
+					let that = this
+					clearTimeout(that.timeOut)
+					that.timeOut = setTimeout(function () {
+						that.getUrlInfo(index)
+					}, 1000)
+				}
+			},
+			async getUrlInfo (index) {
+				const {data: res} = await this.axios.post('moment/moments-images-text', {
+					// corp_id: localStorage.getItem('corpId'),
+					url: this.sketchList[index].content_source_url
+				})
+
+				if (res.error != 0) {
+					this.$message.error(res.error_msg);
+				} else {
+					this.sketchList[index].inputTitle = res.data.title
+					this.sketchList[index].digest = res.data.description
+					if (res.data.url != '') {
+						this.sketchList[index].local_path.img = res.data.url.replace(this.commonUrl, '')
+						this.sketchList[index].closeShowModal3 = true
+					} else {
+						this.sketchList[index].closeShowModal3 = false
+						this.sketchList[index].local_path.img = ''
+					}
 				}
 			},
 
@@ -3705,6 +5736,7 @@
 			},
 			// 上传素材
 			async uploadMaterial (materialData) {
+				let radarTagOpen = 1
 				let file_type = this.material_type
 				if (this.material_type == 0) {
 					file_type = this.allFileType
@@ -3718,17 +5750,28 @@
 					group_id       : this.selectGroupId,
 				}
 				if (this.material_type == 4 || this.allFileType == 4) {
+					if (this.radarTagIds.length == 0) {
+						radarTagOpen = 0
+					}
 					params['attachment_id'] = this.attachmentId
 					params['msgData'] = materialData
+					params["radar_open"] = this.radarOpen
+					params["radar_dynamic_notification"] = this.radarDynamicNotification
+					params["radar_tag_open"] = radarTagOpen
+					params["radar_tag_ids"] = this.radarTagIds
+					params["file_type"] = file_type
+					params['tag_ids'] = this.addTagIds.join(',')
 				} else if (this.material_type == 1 || this.allFileType == 1) {
 					params = new FormData();
+					params.append('attachment_id', this.attachmentId)
 					params.append("uid", localStorage.getItem('uid'));
 					params.append("sub_id", localStorage.getItem('sub_id'));
 					params.append("isMasterAccount", localStorage.getItem('isMasterAccount'));
 					params.append("group_id", this.selectGroupId);
-					params.append("file_type", this.material_type);
-					for(let i = 0; i < materialData.length; i++) {
-						params.append("fileInfo"+i, materialData[i].originFileObj);
+					params.append("file_type", file_type);
+					params.append("tag_ids", this.addTagIds);
+					for (let i = 0; i < materialData.length; i++) {
+						params.append("fileInfo" + i, materialData[i].originFileObj);
 					}
 				} else if (this.material_type == 2 || this.allFileType == 2) {
 					params = new FormData();
@@ -3737,36 +5780,55 @@
 					params.append("isMasterAccount", localStorage.getItem('isMasterAccount'));
 					params.append("group_id", this.selectGroupId);
 					params.append("file_type", this.material_type);
-					for(let i = 0; i < materialData.length; i++) {
-						params.append("fileInfo"+i, materialData[i].originFileObj);
+					params.append("tag_ids", this.addTagIds);
+					params.append("file_type", file_type);
+					for (let i = 0; i < materialData.length; i++) {
+						params.append("fileInfo" + i, materialData[i].originFileObj);
 					}
 				} else if (this.material_type == 3 || this.allFileType == 3) {
 					params = new FormData();
+					params.append('attachment_id', this.attachmentId)
 					params.append("uid", localStorage.getItem('uid'));
 					params.append("sub_id", localStorage.getItem('sub_id'));
 					params.append("isMasterAccount", localStorage.getItem('isMasterAccount'));
 					params.append("group_id", this.selectGroupId);
-					params.append("file_type", this.material_type);
-					for(let i = 0; i < materialData.length; i++) {
-						params.append("fileInfo"+i, materialData[i].originFileObj);
+					params.append("file_type", file_type);
+					params.append("tag_ids", this.addTagIds);
+					for (let i = 0; i < materialData.length; i++) {
+						params.append("fileInfo" + i, materialData[i].originFileObj);
 					}
 				} else if (this.material_type == 5 || this.allFileType == 5) {
 					params = new FormData();
+					params.append('attachment_id', this.attachmentId)
 					params.append("uid", localStorage.getItem('uid'));
 					params.append("sub_id", localStorage.getItem('sub_id'));
 					params.append("isMasterAccount", localStorage.getItem('isMasterAccount'));
 					params.append("group_id", this.selectGroupId);
-					params.append("file_type", this.material_type);
-					for(let i = 0; i < materialData.length; i++) {
-						params.append("fileInfo"+i, materialData[i].originFileObj);
+					params.append("file_type", file_type);
+					params.append("tag_ids", this.addTagIds);
+					for (let i = 0; i < materialData.length; i++) {
+						params.append("fileInfo" + i, materialData[i].originFileObj);
 					}
 				} else if (this.material_type == 6 || this.allFileType == 6) {
 					params['content'] = materialData
 					params['text_title'] = this.text_title
 					params['attachment_id'] = this.attachmentId
+					params['tag_ids'] = this.addTagIds.join(',')
+					params["file_type"] = file_type
 				} else if (this.material_type == 7 || this.allFileType == 7) {
 					params['appData'] = materialData
 					params['attachment_id'] = this.attachmentId
+					params['tag_ids'] = this.addTagIds.join(',')
+					params["file_type"] = file_type
+				}
+				if (this.material_type == 1 || this.allFileType == 1 || this.material_type == 3 || this.allFileType == 3 || this.material_type == 5 || this.allFileType == 5) {
+					params.append("radar_open", this.radarOpen);
+					params.append("radar_dynamic_notification", this.radarDynamicNotification);
+					if (this.radarTagIds.length == 0) {
+						radarTagOpen = 0
+					}
+					params.append("radar_tag_open", radarTagOpen);
+					params.append("radar_tag_ids", this.radarTagIds);
 				}
 				const {data: res} = await this.axios.post("attachment/add", params, {cancelToken: source.token})
 				if (res.error == 0) {
@@ -3780,15 +5842,22 @@
 					this.loading4 = false
 					this.attachmentId = ""
 					this.materialList = []
-
+					this.picUrl = ''
+					this.radarOpen = 1
+					this.radarDynamicNotification = 1
+					this.radarTagOpen = 1
+					this.tag_arr = []
+					this.radarTagIds = ''
+					this.tagName = []
 					this.resetBatch()
-					if (this.material_type == 0) {
-						this.getAllMaterial(this.allPage, this.allPageSize)
-					} else {
-						let pageParam = this.getPageAndPageSize1()
-						this.getMaterial(pageParam.page, pageParam.pageSize)
-					}
+					// if (this.material_type == 0) {
+					// 	this.getAllMaterial(this.allPage, this.allPageSize)
+					// } else {
+					// 	let pageParam = this.getPageAndPageSize1()
+					// 	this.getMaterial(pageParam.page, pageParam.pageSize)
+					// }
 					this.$refs.filemenu.getGroupList()
+					this.resetAddTags()
 				} else {
 					this.$message.error(res.error_msg)
 					this.loading4 = false
@@ -3802,6 +5871,13 @@
 				}
 				this.attachmentId = ''
 				this.visibleSketchList = false
+				this.radarOpen = 1
+				this.radarDynamicNotification = 1
+				this.radarTagOpen = 1
+				this.tag_arr = []
+				this.radarTagIds = ''
+				this.tagName = []
+				this.resetAddTags()
 			},
 			//打开上传页面
 			openShowModal (sketchIndex, id) {
@@ -3872,10 +5948,13 @@
 				if (this.material_type == 4) {
 					this.showType = this.sketchType
 				}
+				this.selectTagIds = []
+				this.selectTagDetail = []
 				this.allFileType = 0
 				this.resetBatch()
 				this.material_type = key;
 				this.name = ''
+				this.isRadar = 0
 				this.isLoading = true;
 				this.materialList = []
 				this.clickIndex = -1
@@ -3905,13 +5984,13 @@
 			// },
 
 			// 搜索按钮
-			onSearch (value) {
+			onSearch () {
 				if (this.clickIndex != -1) {
 					this.$refs.audio[this.clickIndex].pause();
 					clearInterval(this.t1)
 					this.clickIndex = -1
 				}
-				this.name = value;
+				// this.name = value;
 				this.materialList = []
 				// this.resetBatch()
 				if (this.material_type == 0) {
@@ -3919,6 +5998,30 @@
 				} else {
 					let params = this.getPageAndPageSize()
 					this.getMaterial(params.page, params.pageSize);
+				}
+			},
+
+			// 高级设置
+			setOptions () {
+				this.setOptionsVisible = true
+			},
+			cancelSetOptionsVisible () {
+				this.setOptionsVisible = false
+				this.getAllMaterial()
+			},
+			async confirmSetOptionsVisible () {
+				const {data: res} = await this.axios.post("user/user-sync", {
+					uid          : localStorage.getItem('uid'),
+					is_sync_image: this.is_sync_image,
+					is_sync_video: this.is_sync_video,
+					is_sync_voice: this.is_sync_voice,
+					is_sync_news : this.is_sync_news,
+				});
+				if (res.error != 0) {
+					this.$message.error(res.error_msg);
+				} else {
+					this.setOptionsVisible = false
+					this.getAllMaterial()
 				}
 			},
 			// 清空按钮
@@ -3929,6 +6032,9 @@
 					this.clickIndex = -1
 				}
 				this.name = "";
+				this.isRadar = 0
+				this.selectTagDetail = []
+				this.selectTagIds = []
 				this.materialList = []
 				if (this.material_type == 0) {
 					this.getAllMaterial(1, this.allPageSize)
@@ -4020,15 +6126,17 @@
 				this.isLoading = false;
 				this.materialList = []
 				this.resetBatch()
-				if (this.material_type != 0) {
-					let params = this.getPageAndPageSize2()
-					this.getMaterial(params.page, params.pageSize);
-				} else {
-					if(this.allMaterialList.length == 1 && this.allPage > 1) {
-						this.allPage -= 1
-					}
-					this.getAllMaterial(this.allPage, this.allPageSize)
-				}
+				// if (this.material_type != 0) {
+				// 	this.$refs.filemenu.getGroupList()
+				// 	// let params = this.getPageAndPageSize2()
+				// 	// this.getMaterial(params.page, params.pageSize);
+				// } else {
+				// if (this.allMaterialList.length == 1 && this.allPage > 1) {
+				// 	this.allPage -= 1
+				// }
+				// this.getAllMaterial(this.allPage, this.allPageSize)
+				this.$refs.filemenu.getGroupList()
+				// }
 				// this.$refs.filemenu.getGroupList()
 				this.selectedRowKeys = []
 			},
@@ -4042,14 +6150,14 @@
 					if (this.sketchType == 0) {
 						params = {
 							page    : 1,
-							pageSize: 16
+							pageSize: 15
 						}
 					}
 				}
 				this.page = 1
 				this.pageSize = 15
 				this.page2 = 1
-				this.pageSize2 = 16
+				this.pageSize2 = 15
 				this.page3 = 1
 				this.pageSize3 = 15
 				this.page4 = 1
@@ -4075,11 +6183,11 @@
 					params.page = this.page4
 					params.pageSize = this.pageSize4
 				} else if (this.material_type == 4) {
-					this.page2 = 1
-					this.sketchPage = 1
+					// this.page2 = 1
+					// this.sketchPage = 1
 					if (this.sketchType == 0) {
-						params.page = this.page2
-						params.pageSize = this.pageSize2
+						params.page = 1
+						params.pageSize = 15
 					} else {
 						params.page = this.sketchPage
 						params.pageSize = this.sketchPageSize
@@ -4099,49 +6207,49 @@
 			getPageAndPageSize2 () {
 				let params = {}
 				if (this.material_type == 1) {
-					if(this.materialList2.length == 1 && this.page > 1) {
+					if (this.materialList2.length == 1 && this.page > 1) {
 						this.page -= 1
 					}
 					params.page = this.page
 					params.pageSize = this.pageSize
 				} else if (this.material_type == 2) {
-					if(this.materialList3.length == 1 && this.page3 > 1) {
+					if (this.materialList3.length == 1 && this.page3 > 1) {
 						this.page3 -= 1
 					}
 					params.page = this.page3
 					params.pageSize = this.pageSize3
 				} else if (this.material_type == 3) {
-					if(this.materialList4.length == 1 && this.page4 > 1) {
+					if (this.materialList4.length == 1 && this.page4 > 1) {
 						this.page4 -= 1
 					}
 					params.page = this.page4
 					params.pageSize = this.pageSize4
 				} else if (this.material_type == 4) {
-					if(this.materialList.length == 1 && this.page2 > 1) {
+					if (this.materialList.length == 1 && this.page2 > 1) {
 						this.page2 -= 1
 						this.sketchPage -= 1
 					}
 					if (this.sketchType == 0) {
-						params.page = this.page2
-						params.pageSize = this.pageSize2
+						params.page = 1
+						params.pageSize = 15
 					} else {
 						params.page = this.sketchPage
 						params.pageSize = this.sketchPageSize
 					}
 				} else if (this.material_type == 7) {
-					if(this.materialList5.length == 1 && this.page5 > 1) {
+					if (this.materialList5.length == 1 && this.page5 > 1) {
 						this.page5 -= 1
 					}
 					params.page = this.page5
 					params.pageSize = this.pageSize5
 				} else if (this.material_type == 5) {
-					if(this.materialList6.length == 1 && this.page6 > 1) {
+					if (this.materialList6.length == 1 && this.page6 > 1) {
 						this.page6 -= 1
 					}
 					params.page = this.page6
 					params.pageSize = this.pageSize6
 				} else if (this.material_type == 6) {
-					if(this.materialList7.length == 1 && this.page7 > 1) {
+					if (this.materialList7.length == 1 && this.page7 > 1) {
 						this.page7 -= 1
 					}
 					params.page = this.page7
@@ -4169,12 +6277,12 @@
 					params.pageSize = this.pageSize4
 				} else if (this.material_type == 4) {
 					this.page2 = 1
-					this.pageSize2 = 16
+					this.pageSize2 = 15
 					this.sketchPage = 1
 					this.sketchPageSize = 15
 					if (this.sketchType == 0) {
-						params.page = this.page2
-						params.pageSize = this.pageSize2
+						params.page = 1
+						params.pageSize = 15
 					} else {
 						params.page = this.sketchPage
 						params.pageSize = this.sketchPageSize
@@ -4205,6 +6313,8 @@
 					file_type: this.material_type,
 					group_id : this.groupId.length > 0 ? this.groupId : "",
 					name     : this.name,
+					tag_ids  : this.selectTagIds,
+					is_radar : this.isRadar,
 					page     : page,
 					pageSize : pageSize,
 				});
@@ -4213,6 +6323,7 @@
 					this.$message.error(res.error_msg);
 				} else {
 					this.materialKeys = res.data.keys
+					this.is_sync = res.data.is_sync
 					if (this.material_type == 4) {
 						this.materialListTotal = parseInt(res.data.count)
 						// this.lastTime = res.data.pull_time;
@@ -4220,7 +6331,7 @@
 						this.double = res.data.attachment.double;
 						if (this.sketchType == 0) {
 							this.page2 = page
-							if(page == 1) {
+							if (page == 1) {
 								this.materialList = [...res.data.attachment.single.list, ...res.data.attachment.double.list]
 							} else {
 								this.materialList = this.materialList.concat([...res.data.attachment.single.list, ...res.data.attachment.double.list])
@@ -4295,7 +6406,7 @@
 						// 	this.trAddDraggableAndId()
 						// }
 					}
-					this.isLoading = false;
+					this.isLoading = false
 				}
 			},
 			async getAllMaterial (page, pageSize) {
@@ -4305,6 +6416,8 @@
 					group_id : this.groupId.length > 0 ? this.groupId : "",
 					file_type: this.material_type,
 					name     : this.name,
+					tag_ids  : this.selectTagIds,
+					is_radar : this.isRadar,
 					page     : page,
 					pageSize : pageSize,
 				});
@@ -4312,6 +6425,11 @@
 					this.isLoading = false;
 					this.$message.error(res.error_msg);
 				} else {
+					this.is_sync_image = res.data.is_sync_image
+					this.is_sync_news = res.data.is_sync_news
+					this.is_sync_video = res.data.is_sync_video
+					this.is_sync_voice = res.data.is_sync_voice
+
 					this.materialKeys = res.data.keys
 					this.allTotal = parseInt(res.data.count)
 					this.allPage = page
@@ -4337,7 +6455,7 @@
 			changeAllPage (page, pageSize) {
 				this.getAllMaterial(page, this.allPageSize)
 				this.$nextTick(() => {
-					document.getElementsByClassName('scroll')[0].scrollTo(0,220)
+					document.getElementsByClassName('scroll')[0].scrollTo(0, 220)
 				})
 			},
 			showAllSizeChange (page, pageSize) {
@@ -4408,6 +6526,33 @@
 					}
 				}
 			},
+			editPic (material) {
+				this.addTagDetail = []
+				this.tagType = 1
+				this.addTagIds = []
+				for (let i = 0; i < material.tag_name.length; i++) {
+					this.addTagDetail.push({
+						id   : material.tag_name[i].id + '-s',
+						tag  : true,
+						title: material.tag_name[i].tagname
+					})
+					this.addTagIds.push(material.tag_name[i].id + '-s')
+				}
+				this.allFileType = material.file_type
+				this.material = material
+				this.attachmentId = this.material.id
+				this.selectGroupId = this.material.group_id
+				this.getGroupList()
+				this.picUrl = this.material.local_path || this.material.s_local_path
+				this.radarOpen = this.material.radar_id > 0 && this.material.radar_status == 1 ? 1 : 0
+				this.radarDynamicNotification = this.material.dynamic_notification
+				this.radarTagOpen = this.material.radar_tag_open
+				this.radarTagIds = JSON.parse(JSON.stringify(this.material.radar_tag_ids))
+				this.tag_arr = this.material.radar_tag_ids != '' ? this.material.radar_tag_ids.split(',') : []
+				this.tagName = JSON.parse(JSON.stringify(this.material.radar_tag_ids_name))
+				this.picTitle = '编辑图片素材'
+				this.visible2 = true
+			},
 			handleCancel3 () {
 				this.previewAllVisible = false
 			},
@@ -4465,11 +6610,12 @@
 				this.imageUrl = ''
 				this.fileInfo = {}
 				this.fileList = []
+				this.picTitle = '新建图片素材'
 				this.visible2 = true;
 			},
 			uploadPic () {
 				this.loading4 = true;
-				if (this.fileList.length == 0) {
+				if (this.fileList.length == 0 && !this.attachmentId) {
 					this.$message.warning('请选择图片！')
 					this.loading4 = false
 					return false
@@ -4481,10 +6627,19 @@
 					source.cancel()
 				}
 				this.visible2 = false;
+				this.resetAddTags()
+				this.attachmentId = ''
+				this.radarOpen = 1
+				this.radarDynamicNotification = 1
+				this.radarTagOpen = 1
+				this.tag_arr = []
+				this.radarTagIds = ''
+				this.tagName = []
 				this.defaultValue = 1;
 				this.imageUrl = "";
+				this.picUrl = ''
 			},
-			handleChangePic(info) {
+			handleChangePic (info) {
 				let file = info.file
 				if (file.type != 'image/png' && file.type != 'image/jpg' && file.type != 'image/jpeg') {
 					this.$message.error("图片类型仅支持png、jpg、jpeg类型！");
@@ -4501,14 +6656,59 @@
 				let fileList = [...info.fileList]
 				this.fileList = fileList
 			},
-			deleteFileList(index) {
+			deleteFileList (index) {
 				this.fileList.splice(index, 1)
+			},
+			changeRadarOpen () {
+				this.radarOpen = (this.radarOpen + 1) % 2
+			},
+			changeRadarDynamicNotification () {
+				this.radarDynamicNotification = (this.radarDynamicNotification + 1) % 2
+			},
+			changeRadarTagOpen () {
+				this.radarTagOpen = (this.radarTagOpen + 1) % 2
+			},
+			chooseTag () {
+				this.tag_arr1 = JSON.parse(JSON.stringify(this.tag_arr))
+				this.radarTagIds1 = this.radarTagIds
+				this.tagName1 = JSON.parse(JSON.stringify(this.tagName))
+				this.tagVisible = true
+			},
+			handleTag () {
+				this.tag_arr = JSON.parse(JSON.stringify(this.tag_arr1))
+				this.radarTagIds = this.radarTagIds1
+				this.tagName = JSON.parse(JSON.stringify(this.tagName1))
+				this.tagVisible = false
+			},
+			handleCancelTag () {
+				this.tag_arr1 = []
+				this.radarTagIds1 = ''
+				this.tagName1 = []
+				this.tagVisible = false
+			},
+			chooseTags (event, arr, tagName) {
+				if (event == "ok") {
+					if (arr != '') {
+						this.tag_arr1 = arr.split(',')
+						this.radarTagIds1 = arr
+						this.tagName1 = JSON.parse(JSON.stringify(tagName))
+					} else {
+						this.tag_arr1 = []
+						this.radarTagIds1 = ''
+						this.tagName1 = []
+					}
+				}
+			},
+			deleteTag (index) {
+				this.tag_arr.splice(index, 1)
+				this.radarTagIds = this.tag_arr.join(',')
+				this.tagName.splice(index, 1)
 			},
 			// 图片分页
 			changePage (page, pageSize) {
 				this.getMaterial(page, pageSize);
 				this.$nextTick(() => {
-					document.getElementsByClassName('scroll')[0].scrollTo(0,220)
+					document.getElementsByClassName('scroll')[0].scrollTo(0, 220)
 				})
 			},
 			showSizeChange (page, pageSize) {
@@ -4516,6 +6716,7 @@
 			},
 			// 上传音频
 			showModalVoice () {
+				this.tagType = 1
 				if (this.clickIndex != -1) {
 					this.$refs.audio[this.clickIndex].pause();
 					clearInterval(this.t1)
@@ -4550,12 +6751,13 @@
 				}
 				clearInterval(this.t2);
 				this.voiceVisible = false;
+				this.resetAddTags()
 				this.voiceUrl = ""
 				this.playVoiceTime = ""
 				this.playVoice = false
 				this.voiceName = "";
 			},
-			handleChangeVoice(info) {
+			handleChangeVoice (info) {
 				let file = info.file
 				if (file.type != 'audio/mp3' && file.type != 'audio/amr' && file.type != 'audio/mpeg') {
 					this.$message.error("音频类型仅支持AMR、MP3类型！");
@@ -4578,7 +6780,7 @@
 				this.clickIndex = -1
 				this.getMaterial(page3, pageSize3);
 				this.$nextTick(() => {
-					document.getElementsByClassName('scroll')[0].scrollTo(0,220)
+					document.getElementsByClassName('scroll')[0].scrollTo(0, 220)
 				})
 			},
 			showSizeChange3 (page3, pageSize3) {
@@ -4587,6 +6789,7 @@
 
 			//上传视频
 			showModalVideo () {
+				this.tagType = 1
 				this.selectGroupId = ''
 				if (this.groupId.length != 0) {
 					this.selectGroupId = this.groupId[0]
@@ -4597,11 +6800,12 @@
 				this.fileList = []
 				this.videoUrl = ''
 				this.playerVideoOptions = {}
+				this.videoModalTitle = '新建视频素材'
 				this.videoVisible = true
 			},
 			uploadVideo () {
 				this.loading4 = true;
-				if (this.fileList.length == 0) {
+				if (this.fileList.length == 0 && !this.attachmentId) {
 					this.$message.warning('请选择视频！')
 					this.loading4 = false
 					return false
@@ -4613,8 +6817,18 @@
 					source.cancel()
 				}
 				this.videoVisible = false
+				this.resetAddTags()
+				this.videoUrl = ''
+				this.attachmentId = ''
+				this.radarOpen = 1
+				this.radarDynamicNotification = 1
+				this.radarTagOpen = 1
+				this.tag_arr = []
+				this.videoOptions = {}
+				this.radarTagIds = ''
+				this.tagName = []
 			},
-			handleChangeVedio(info) {
+			handleChangeVedio (info) {
 				let file = info.file
 				if (file.type != 'video/mp4') {
 					this.$message.error("视频类型仅支持mp4类型！");
@@ -4672,11 +6886,47 @@
 			changePage4 (page4, pageSize4) {
 				this.getMaterial(page4, pageSize4);
 				this.$nextTick(() => {
-					document.getElementsByClassName('scroll')[0].scrollTo(0,220)
+					document.getElementsByClassName('scroll')[0].scrollTo(0, 220)
 				})
 			},
 			showSizeChange4 (page4, pageSize4) {
 				this.getMaterial(1, pageSize4);
+			},
+			editVideo (material) {
+				this.addTagDetail = []
+				this.tagType = 1
+				this.addTagIds = []
+				for (let i = 0; i < material.tag_name.length; i++) {
+					this.addTagDetail.push({
+						id   : material.tag_name[i].id + '-s',
+						tag  : true,
+						title: material.tag_name[i].tagname
+					})
+					this.addTagIds.push(material.tag_name[i].id + '-s')
+				}
+				this.allFileType = material.file_type
+				this.material = material
+				this.attachmentId = this.material.id
+				this.selectGroupId = this.material.group_id
+				this.getGroupList()
+				this.videoUrl = this.material.local_path
+				this.videoOptions = {
+					...this.publicOptions,
+					sources: [
+						{
+							src : this.commonUrl + this.videoUrl, // 路径
+							type: "video/mp4" // 类型
+						}
+					]
+				};
+				this.radarOpen = this.material.radar_id > 0 && this.material.radar_status == 1 ? 1 : 0
+				this.radarDynamicNotification = this.material.dynamic_notification
+				this.radarTagOpen = this.material.radar_tag_open
+				this.radarTagIds = JSON.parse(JSON.stringify(this.material.radar_tag_ids))
+				this.tag_arr = this.material.radar_tag_ids ? this.material.radar_tag_ids.split(',') : []
+				this.tagName = JSON.parse(JSON.stringify(this.material.radar_tag_ids_name))
+				this.videoModalTitle = '编辑视频素材'
+				this.videoVisible = true
 			},
 			//删除视频
 			delVideo (id) {
@@ -4795,6 +7045,7 @@
 			},
 			//小程序弹窗
 			showModalMiniprogram () {
+				this.tagType = 1
 				this.appletTitle = '新建小程序素材'
 				this.appletDisabled = false
 				this.selectGroupId = ''
@@ -4817,6 +7068,7 @@
 			cancelUploadMiniprogram () {
 				this.attachmentId = ''
 				this.miniprogramVisible = false
+				this.resetAddTags()
 			},
 			checkout (title) {
 				if (title.length < 4) {
@@ -4854,8 +7106,19 @@
 				this.uploadMaterial(data)
 			},
 			// 编辑小程序
-			editApplet (index, type) {
+			editApplet (tagName, index, type) {
 				this.appletTitle = '编辑小程序素材'
+				this.addTagDetail = []
+				this.tagType = 1
+				this.addTagIds = []
+				for (let i = 0; i < tagName.length; i++) {
+					this.addTagDetail.push({
+						id   : tagName[i].id + '-s',
+						tag  : true,
+						title: tagName[i].tagname
+					})
+					this.addTagIds.push(tagName[i].id + '-s')
+				}
 				if (type == 1) {
 					this.allFileType = 7
 					this.attachmentId = this.allMaterialList[index].id
@@ -4895,7 +7158,7 @@
 			changePage5 (page5, pageSize5) {
 				this.getMaterial(page5, pageSize5);
 				this.$nextTick(() => {
-					document.getElementsByClassName('scroll')[0].scrollTo(0,220)
+					document.getElementsByClassName('scroll')[0].scrollTo(0, 220)
 				})
 			},
 			showSizeChange5 (page5, pageSize5) {
@@ -4904,6 +7167,8 @@
 
 			// 文件
 			showModalFile () {
+				this.material = ''
+				this.attachmentId = ''
 				this.selectGroupId = ''
 				if (this.groupId.length != 0) {
 					this.selectGroupId = this.groupId[0]
@@ -4912,21 +7177,31 @@
 				this.fileInfo = {}
 				this.fileList = []
 				this.fileName = ''
+				this.fileTitle = '新建文件素材'
 				this.fileVisible = true
 			},
 			cancelUploadFile () {
 				this.fileVisible = false
+				this.resetAddTags()
+				this.attachmentId = ''
+				this.radarOpen = 1
+				this.radarDynamicNotification = 1
+				this.radarTagOpen = 1
+				this.tag_arr = []
+				this.radarTagIds = ''
+				this.tagName = []
+				this.fileName = ''
 			},
 			uploadFile () {
 				this.loading4 = true;
-				if (this.fileList.length == 0) {
+				if (this.fileList.length == 0 && !this.attachmentId) {
 					this.$message.warning('请选择文件！')
 					this.loading4 = false
 					return false
 				}
 				this.uploadMaterial(this.fileList);
 			},
-			handleChangeFile(info) {
+			handleChangeFile (info) {
 				let file = info.file
 				let fileType = file.type
 				if (fileType.length == 0) {
@@ -4950,6 +7225,33 @@
 				let fileList = [...info.fileList]
 				this.fileList = fileList
 			},
+			editFile (material) {
+				this.addTagDetail = []
+				this.tagType = 1
+				this.addTagIds = []
+				for (let i = 0; i < material.tag_name.length; i++) {
+					this.addTagDetail.push({
+						id   : material.tag_name[i].id + '-s',
+						tag  : true,
+						title: material.tag_name[i].tagname
+					})
+					this.addTagIds.push(material.tag_name[i].id + '-s')
+				}
+				this.material = material
+				this.allFileType = material.file_type
+				this.attachmentId = this.material.id
+				this.selectGroupId = this.material.group_id
+				this.getGroupList()
+				this.fileName = this.material.file_name
+				this.radarOpen = this.material.radar_id > 0 && this.material.radar_status == 1 ? 1 : 0
+				this.radarDynamicNotification = this.material.dynamic_notification
+				this.radarTagOpen = this.material.radar_tag_open
+				this.radarTagIds = JSON.parse(JSON.stringify(this.material.radar_tag_ids))
+				this.tag_arr = this.material.radar_tag_ids.split(',')
+				this.tagName = JSON.parse(JSON.stringify(this.material.radar_tag_ids_name))
+				this.fileTitle = '编辑文件素材'
+				this.fileVisible = true
+			},
 			delFile (id) {
 				let that = this;
 				that.$confirm({
@@ -4965,7 +7267,7 @@
 			changePage6 (page6, pageSize6) {
 				this.getMaterial(page6, pageSize6);
 				this.$nextTick(() => {
-					document.getElementsByClassName('scroll')[0].scrollTo(0,220)
+					document.getElementsByClassName('scroll')[0].scrollTo(0, 220)
 				})
 			},
 			showSizeChange6 (page6, pageSize6) {
@@ -4973,6 +7275,7 @@
 			},
 			// 文本
 			showModalText () {
+				this.tagType = 1
 				this.selectGroupId = ''
 				if (this.groupId.length != 0) {
 					this.selectGroupId = this.groupId[0]
@@ -4985,7 +7288,7 @@
 				this.textVisible = true
 			},
 			// 导入文本
-			importExcel() {
+			importExcel () {
 				this.fileName = ''
 				this.fileInfo = {}
 				this.textImportVisible = true
@@ -5089,6 +7392,7 @@
 			cancelUploadText () {
 				this.attachmentId = ''
 				this.textVisible = false
+				this.resetAddTags()
 			},
 			uploadText () {
 				if (this.text_title == '') {
@@ -5113,8 +7417,19 @@
 					}
 				});
 			},
-			editText (index, type) {
+			editText (tagName, index, type) {
 				this.textTitle = '编辑文本素材'
+				this.addTagDetail = []
+				this.tagType = 1
+				this.addTagIds = []
+				for (let i = 0; i < tagName.length; i++) {
+					this.addTagDetail.push({
+						id   : tagName[i].id + '-s',
+						tag  : true,
+						title: tagName[i].tagname
+					})
+					this.addTagIds.push(tagName[i].id + '-s')
+				}
 				if (type == 1) {
 					this.allFileType = 6
 					this.text_title = this.allMaterialList[index].file_name
@@ -5139,7 +7454,7 @@
 			changePage7 (page7, pageSize7) {
 				this.getMaterial(page7, pageSize7);
 				this.$nextTick(() => {
-					document.getElementsByClassName('scroll')[0].scrollTo(0,220)
+					document.getElementsByClassName('scroll')[0].scrollTo(0, 220)
 				})
 			},
 			showSizeChange7 (page7, pageSize7) {
@@ -5224,7 +7539,7 @@
 			changeSketchPage (page, pageSize) {
 				this.getMaterial(page, this.sketchPageSize)
 				this.$nextTick(() => {
-					document.getElementsByClassName('scroll')[0].scrollTo(0,220)
+					document.getElementsByClassName('scroll')[0].scrollTo(0, 220)
 				})
 			},
 			showSketchSizeChange (page, pageSize) {
@@ -5514,9 +7829,9 @@
 				this.wordNum = self.lastNode.textContent.length
 				if (this.wordNum <= this.wordLimit) {
 					if (this.attachmentId) {
-						this.textContent = self.lastNode.innerHTML.replace(/<a([^>]*)>/g, '').replace(/<\/a>/g, '').replace(/<br([^>]*)>/g, '\n').replace(/&nbsp;<span contenteditable="false" class="ant-tag ant-tag-orange">粉丝昵称<\/span>&nbsp;/g, '{nickname}').replace(/([^<p>]+)<p([^>]*)>/g, "$1\n").replace(/<p([^>]*)>/g, '').replace(/<\/p>/g, '\n').replace(/<span([^>]*)>/g, '').replace(/<\/span>/g, '').replace(/&nbsp;/g, ' ').replace(/<div([^>]*)>/g, '\n').replace(/<\/div>/g, '').replace(/miniprogramappid/g, 'miniprogram-appid').replace(/miniprogrampath/g, 'miniprogram-path')
+						this.textContent = self.lastNode.innerHTML.replace(/<a([^>]*)>/g, '').replace(/<\/a>/g, '').replace(/<br([^>]*)>/g, '\n').replace(/&nbsp;<span contenteditable="false" class="ant-tag ant-tag-orange">粉丝昵称<\/span>&nbsp;/g, '{nickname}').replace(/([^<p>]+)<p([^>]*)>/g, "$1\n").replace(/<p([^>]*)>/g, '').replace(/<\/p>/g, '\n').replace(/<span([^>]*)>/g, '').replace(/<\/span>/g, '').replace(/&nbsp;/g, ' ').replace(/<div([^>]*)>/g, '\n').replace(/<\/div>/g, '').replace(/miniprogramappid/g, 'miniprogram-appid').replace(/miniprogrampath/g, 'miniprogram-path').replace(/&amp;/g, '&')
 					} else {
-						this.textContent = self.lastNode.innerHTML.replace(/<a([^>]*)>/g, '').replace(/<\/a>/g, '').replace(/<p([^>]*)>/g, '').replace(/<\/p>/g, '\n').replace(/&nbsp;<span contenteditable="false" class="ant-tag ant-tag-orange">粉丝昵称<\/span>&nbsp;/g, '{nickname}').replace(/<br([^>]*)>/g, '\n').replace(/<span([^>]*)>/g, '').replace(/<\/span>/g, '').replace(/&nbsp;/g, ' ').replace(/miniprogramappid/g, 'miniprogram-appid').replace(/miniprogrampath/g, 'miniprogram-path')
+						this.textContent = self.lastNode.innerHTML.replace(/<a([^>]*)>/g, '').replace(/<\/a>/g, '').replace(/<p([^>]*)>/g, '').replace(/<\/p>/g, '\n').replace(/&nbsp;<span contenteditable="false" class="ant-tag ant-tag-orange">粉丝昵称<\/span>&nbsp;/g, '{nickname}').replace(/<br([^>]*)>/g, '\n').replace(/<span([^>]*)>/g, '').replace(/<\/span>/g, '').replace(/&nbsp;/g, ' ').replace(/miniprogramappid/g, 'miniprogram-appid').replace(/miniprogrampath/g, 'miniprogram-path').replace(/&amp;/g, '&')
 					}
 					this.textValue = operation.api.origElements.innerHTML.replace(/<a([^>]*)>/g, '').replace(/<\/a>/g, '').replace(/<pre([^>]*)>/g, '<p>').replace(/<\/pre>/g, '<\/p>').replace(/<font([^>]*)>/g, '<p>').replace(/<\/font>/g, '<\/p>').replace(/<div([^>]*)>/g, '<p>').replace(/<\/div>/g, '<\/p>')
 					console.log(this.textValue)
@@ -5599,7 +7914,7 @@
 				this.wordNum = self.lastNode.textContent.length
 				if (this.wordNum <= this.wordLimit) {
 					this.textValue = self.lastNode.innerHTML.replace(/<pre([^>]*)>/g, '<p>').replace(/<\/pre>/g, '<\/p>').replace(/<font([^>]*)>/g, '<p>').replace(/<\/font>/g, '<\/p>').replace(/<div([^>]*)>/g, '<p>').replace(/<\/div>/g, '<\/p>')
-					this.textContent = self.lastNode.innerHTML.replace(/<br([^>]*)>/g, '\n').replace(/&nbsp;<span contenteditable="false" class="ant-tag ant-tag-orange">粉丝昵称<\/span>&nbsp;/g, '{nickname}').replace(/([^<p>]+)<p([^>]*)>/g, "$1\n").replace(/<p([^>]*)>/g, '').replace(/<\/p>/g, '\n').replace(/<span([^>]*)>/g, '').replace(/<\/span>/g, '').replace(/&nbsp;/g, ' ').replace(/<div([^>]*)>/g, '\n').replace(/<\/div>/g, '').replace(/miniprogramappid/g, 'miniprogram-appid').replace(/miniprogrampath/g, 'miniprogram-path')
+					this.textContent = self.lastNode.innerHTML.replace(/<br([^>]*)>/g, '\n').replace(/&nbsp;<span contenteditable="false" class="ant-tag ant-tag-orange">粉丝昵称<\/span>&nbsp;/g, '{nickname}').replace(/([^<p>]+)<p([^>]*)>/g, "$1\n").replace(/<p([^>]*)>/g, '').replace(/<\/p>/g, '\n').replace(/<span([^>]*)>/g, '').replace(/<\/span>/g, '').replace(/&nbsp;/g, ' ').replace(/<div([^>]*)>/g, '\n').replace(/<\/div>/g, '').replace(/miniprogramappid/g, 'miniprogram-appid').replace(/miniprogrampath/g, 'miniprogram-path').replace(/&amp;/g, '&')
 				}
 
 				let event = {
@@ -5611,7 +7926,12 @@
 			,
 			invlideText () {
 				const customNode = this.$refs.medium_editor.$el
-				const {startNode, startOffset, endNode, endOffset} = this.global.getRangeInfo(customNode, this.wordLimit);
+				const {
+					startNode,
+					startOffset,
+					endNode,
+					endOffset
+				} = this.global.getRangeInfo(customNode, this.wordLimit);
 
 				if (typeof startNode.nodeValue !== 'undefined') {
 					let newRange = document.createRange()
@@ -5623,9 +7943,9 @@
 
 					this.textValue = self.lastNode.innerHTML.replace(/<a([^>]*)>/g, '').replace(/<\/a>/g, '').replace(/<pre([^>]*)>/g, '<p>').replace(/<\/pre>/g, '<\/p>').replace(/<font([^>]*)>/g, '<p>').replace(/<\/font>/g, '<\/p>').replace(/<div([^>]*)>/g, '<p>').replace(/<\/div>/g, '<\/p>')
 					if (this.attachmentId) {
-						this.textContent = self.lastNode.innerHTML.replace(/<a([^>]*)>/g, '').replace(/<\/a>/g, '').replace(/<br([^>]*)>/g, '\n').replace(/&nbsp;<span contenteditable="false" class="ant-tag ant-tag-orange">粉丝昵称<\/span>&nbsp;/g, '{nickname}').replace(/([^<p>]+)<p([^>]*)>/g, "$1\n").replace(/<p([^>]*)>/g, '').replace(/<\/p>/g, '\n').replace(/<span([^>]*)>/g, '').replace(/<\/span>/g, '').replace(/&nbsp;/g, ' ').replace(/<div([^>]*)>/g, '\n').replace(/<\/div>/g, '').replace(/miniprogramappid/g, 'miniprogram-appid').replace(/miniprogrampath/g, 'miniprogram-path')
+						this.textContent = self.lastNode.innerHTML.replace(/<a([^>]*)>/g, '').replace(/<\/a>/g, '').replace(/<br([^>]*)>/g, '\n').replace(/&nbsp;<span contenteditable="false" class="ant-tag ant-tag-orange">粉丝昵称<\/span>&nbsp;/g, '{nickname}').replace(/([^<p>]+)<p([^>]*)>/g, "$1\n").replace(/<p([^>]*)>/g, '').replace(/<\/p>/g, '\n').replace(/<span([^>]*)>/g, '').replace(/<\/span>/g, '').replace(/&nbsp;/g, ' ').replace(/<div([^>]*)>/g, '\n').replace(/<\/div>/g, '').replace(/miniprogramappid/g, 'miniprogram-appid').replace(/miniprogrampath/g, 'miniprogram-path').replace(/&amp;/g, '&')
 					} else {
-						this.textContent = self.lastNode.innerHTML.replace(/<a([^>]*)>/g, '').replace(/<\/a>/g, '').replace(/<p([^>]*)>/g, '').replace(/<\/p>/g, '\n').replace(/&nbsp;<span contenteditable="false" class="ant-tag ant-tag-orange">粉丝昵称<\/span>&nbsp;/g, '{nickname}').replace(/<br([^>]*)>/g, '\n').replace(/<span([^>]*)>/g, '').replace(/<\/span>/g, '').replace(/&nbsp;/g, ' ').replace(/miniprogramappid/g, 'miniprogram-appid').replace(/miniprogrampath/g, 'miniprogram-path')
+						this.textContent = self.lastNode.innerHTML.replace(/<a([^>]*)>/g, '').replace(/<\/a>/g, '').replace(/<p([^>]*)>/g, '').replace(/<\/p>/g, '\n').replace(/&nbsp;<span contenteditable="false" class="ant-tag ant-tag-orange">粉丝昵称<\/span>&nbsp;/g, '{nickname}').replace(/<br([^>]*)>/g, '\n').replace(/<span([^>]*)>/g, '').replace(/<\/span>/g, '').replace(/&nbsp;/g, ' ').replace(/miniprogramappid/g, 'miniprogram-appid').replace(/miniprogrampath/g, 'miniprogram-path').replace(/&amp;/g, '&')
 					}
 					this.wordNum = this.wordLimit
 
@@ -5733,9 +8053,12 @@
 					//变量scrollHeight是滚动条的总高度
 					let scrollHeight = document.getElementsByClassName('fans-content')[0].scrollHeight || document.body.scrollHeight;
 					//滚动条到底部的条件
-					if (scrollTop + windowHeight == scrollHeight) {
+					if (scrollTop + windowHeight == scrollHeight && scrollTop != 0) {
 						if (that.sketchType == 0) {
-							if (Math.ceil(that.materialListTotal / 16.0) > that.page2) {
+							if (this.isLoading == true) {
+								return false
+							}
+							if (Math.ceil(that.materialListTotal / 15.0) > that.page2) {
 								that.getMaterial(that.page2 + 1, that.pageSize2)
 							}
 						}
@@ -5800,6 +8123,7 @@
 			-webkit-line-clamp: 4;
 			line-clamp: 2;
 			-webkit-box-orient: vertical;
+			margin-bottom: 0px;
 			/*float: left;*/
 		}
 	}
@@ -5857,7 +8181,7 @@
 		width: 100%;
 		min-width: 885px;
 		padding: 0 20px;
-		margin: 0 0 35px 0;
+		margin: 0 0 10px 0;
 		text-align: left;
 	}
 
@@ -5878,6 +8202,10 @@
 
 	#components-layout-demo-basic > .ant-layout:last-child {
 		margin: 0;
+	}
+
+	.list {
+		margin-left: 16px;
 	}
 
 	.list,
@@ -5905,7 +8233,7 @@
 	/*}*/
 
 	.active {
-		background: #01b065;
+		background: #1E90FF;
 		color: white;
 	}
 
@@ -6132,9 +8460,11 @@
 	.account-filter-item.active {
 		background: #FFF;
 		border: 1px solid #E9E9E9;
+		height: 56px;
+		margin-top: -8px;
 		border: 1px solid #E0E0E0;
 		border-bottom: 0;
-		padding-top: 14px;
+		padding-top: 19px;
 	}
 
 	.content-msg1 {
@@ -6241,11 +8571,11 @@
 	}
 
 	.file-name {
-		float: right;
-		max-width: calc(100% - 90px);
+		float: left;
+		width: calc(100% - 90px);
 		word-break: break-all;
 		display: -webkit-box;
-		-webkit-line-clamp: 4;
+		-webkit-line-clamp: 3;
 		-webkit-box-orient: vertical;
 		overflow: hidden;
 	}
@@ -6344,8 +8674,8 @@
 	}
 
 	/deep/ .ant-checkbox-inner {
-		width: 23px;
-		height: 23px;
+		width: 20px;
+		height: 20px;
 	}
 
 	/deep/ .ant-checkbox-inner:after {
@@ -6362,5 +8692,54 @@
 
 	.sketch-type-activity {
 		color: #01b065;
+	}
+
+	.advance-container {
+		text-align: left;
+		margin-bottom: 0.5rem;
+	}
+
+	.content_input {
+		background: #FFF;
+		border: 1px solid #E2E2E2;
+		min-width: 378px;
+		height: 100px;
+		margin-top: 5px;
+		display: flex;
+	}
+
+	.input_text1 {
+		width: 200px;
+		line-height: 30px;
+		margin: 15px 0 5px 15px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		word-break: break-all;
+		font-size: 18px;
+		color: #000
+	}
+
+	.input_text2 {
+		width: 250px;
+		line-height: 20px;
+		margin: 0 0 0 15px;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		word-break: break-all;
+		-webkit-line-clamp: 2;
+		overflow: hidden;
+	}
+
+	.input_img {
+		width: 80px;
+		height: 80px;
+	}
+
+	.popover-content {
+		max-width: 500px;
+		max-height: 200px;
+		overflow-y: auto;
+		margin-bottom: 0;
 	}
 </style>

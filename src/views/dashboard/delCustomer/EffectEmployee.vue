@@ -433,7 +433,13 @@
 			},
 			//部门选择弹窗组件
 			showDepartmentList () {
-				this.setUser(this.checkedList)
+				// this.setUser(this.checkedList)
+				let ids = []
+				for(let i = 0; i < this.checkedList.length; i++) {
+					ids.push(this.checkedList[i].id)
+				}
+				this.$refs.user.rightIdList = JSON.parse(JSON.stringify(ids))
+				this.$refs.user.rightList = JSON.parse(JSON.stringify(this.checkedList))
 				this.showModalDepartment = true
 			},
 			setUser (users) {
@@ -668,29 +674,40 @@
 					this.loading4 = false
 					return false
 				}
+
 				if(this.typeArr.length == 0) {
 					this.$message.destroy()
-					this.$message.warning('请选择跟进数据')
+					this.$message.warning('请设置哪些员工删人的数据')
 					this.createDisabled = false
 					this.loading4 = false
 					return false
 				}
-				if (this.typeArr.indexOf(1) > -1 && this.party.length == 0) {
-					this.$message.destroy()
-					this.$message.warning('请选择跟进数据部门')
-					this.createDisabled = false
-					this.loading4 = false
-					return false
-				} else if (this.typeArr.indexOf(2) > -1 && this.checkedList1.length == 0) {
-					this.$message.destroy()
-					this.$message.warning('请选择跟进数据员工')
-					this.createDisabled = false
-					this.loading4 = false
-					return false
+				if(this.is_edit == 1) {
+					if (this.party.length == 0 && this.typeArr.indexOf(2) > -1 && this.checkedList1.length == 0) {
+						this.$message.destroy()
+						this.$message.warning('请设置哪些员工删人的数据')
+						this.createDisabled = false
+						this.loading4 = false
+						return false
+					}
+				} else {
+					if (this.typeArr.indexOf(1) > -1 && this.party.length == 0) {
+						this.$message.destroy()
+						this.$message.warning('请设置哪些员工删人的数据')
+						this.createDisabled = false
+						this.loading4 = false
+						return false
+					} else if (this.typeArr.indexOf(2) > -1 && this.checkedList1.length == 0) {
+						this.$message.destroy()
+						this.$message.warning('请设置哪些员工删人的数据')
+						this.createDisabled = false
+						this.loading4 = false
+						return false
+					}
 				}
 				if(this.frequency.length == 0) {
 					this.$message.destroy()
-					this.$message.warning('请选择推送频率')
+					this.$message.warning('请选择通知频率')
 					this.createDisabled = false
 					this.loading4 = false
 					return false
@@ -742,6 +759,10 @@
 				this.typeArr = []
 				this.party = []
 				this.frequency = []
+				this.$refs.user.rightList = []
+				this.$refs.user.rightIdList = []
+				this.$refs.user1.rightList = []
+				this.$refs.user1.rightIdList = []
 			},
 			// 获取自建应用
 			async getAgentList (agentId) {

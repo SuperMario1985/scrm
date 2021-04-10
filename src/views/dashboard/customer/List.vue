@@ -175,7 +175,7 @@
 													</div>
 													<!-- 音频 -->
 													<div v-else-if="msg_type == 3">
-														<a-card hoverable style="height: 150px;">
+														<a-card hoverable style="height: 67px;">
 															<div class="audio">
 																<div style="float: left;">{{materialTitle}}</div>
 																<div class="box" v-show="isPlayMusic"
@@ -820,8 +820,8 @@
 
 	.audio {
 		width: 100%;
-		height: 50px;
-		padding: 50px 20px;
+		height: 65px;
+		padding: 10px 20px;
 	}
 
 	.box {
