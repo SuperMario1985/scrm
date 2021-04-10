@@ -214,7 +214,7 @@
 				template_data1  : [],
 				msgVisible      : false,
 				templateData1   : [],
-				templateId      : [],
+				templateId      : '',
 				templateName    : [], //选中的模板名字
 				templateList    : [], //选择模板下拉框选项
 				templateVisible : false,

@@ -6,8 +6,8 @@
 				<a-spin tip="加载中..." size="large" :spinning="isLoading">
 					<a-layout>
 						<a-layout-sider>
-							<FileMenu @changeGroupId='changeGroup' :comefrom="comefrom" :fileType='type'
-							          ref="filemenu"></FileMenu>
+							<FileMenuModal @changeGroupId='changeGroup' :comefrom="comefrom" :fileType='type'
+							          ref="filemenu"></FileMenuModal>
 						</a-layout-sider>
 						<a-layout-content>
 							<div style="background-color: rgb(255, 255, 255);min-height: calc(100% - 10px);padding: 10px;margin-top: 10px;">
@@ -27,10 +27,10 @@
 												清空
 											</a-button>
 										</div>
-										<a-button @click="showModal" style="float: right;">
-											<a-icon type="cloud-upload"/>
-											本地上传
-										</a-button>
+<!--										<a-button @click="showModal" style="float: right;">-->
+<!--											<a-icon type="cloud-upload"/>-->
+<!--											本地上传-->
+<!--										</a-button>-->
 										<!--										<div style="color:rgb(153, 153, 153);float: left;height: 32px;line-height: 32px;margin-left: 15px;">-->
 										<!--											请确保您选择的图片不会有版权纠纷，建议尺寸200px*200px以上-->
 										<!--										</div>-->
@@ -87,14 +87,14 @@
 												清空
 											</a-button>
 										</div>
-										<a-button @click="showModalVoice" style="float: right;" v-if="type == 2">
-											<a-icon type="cloud-upload"/>
-											本地上传
-										</a-button>
-										<a-button @click="showModalVideo" style="float: right;" v-if="type == 3">
-											<a-icon type="cloud-upload"/>
-											本地上传
-										</a-button>
+<!--										<a-button @click="showModalVoice" style="float: right;" v-if="type == 2">-->
+<!--											<a-icon type="cloud-upload"/>-->
+<!--											本地上传-->
+<!--										</a-button>-->
+<!--										<a-button @click="showModalVideo" style="float: right;" v-if="type == 3">-->
+<!--											<a-icon type="cloud-upload"/>-->
+<!--											本地上传-->
+<!--										</a-button>-->
 									</div>
 									<a-table :columns="columns" :dataSource="materialList" :pagination="false"
 									         :rowClassName="rowClassName"
@@ -136,10 +136,10 @@
 												清空
 											</a-button>
 										</div>
-										<a-button @click="showAppletModal" style="float: left;">
-											<a-icon type="cloud-upload"/>
-											本地上传
-										</a-button>
+<!--										<a-button @click="showAppletModal" style="float: left;">-->
+<!--											<a-icon type="cloud-upload"/>-->
+<!--											本地上传-->
+<!--										</a-button>-->
 										<a-radio-group style="margin-left: 20px;" name="radioGroup"
 										               v-model="appletType">
 											<a-radio :value="1">文字</a-radio>
@@ -597,10 +597,8 @@
 	import {videoPlayer} from "vue-video-player"
 	import vuedraggable from "vuedraggable";
 	import MyIcon from "@/components/MyIcon.vue"
-	// import team from "./fileTeam";
-	// import FileMenu from "../foldMenu/FileMenu";
 	import editor from "vue2-medium-editor";
-	import FileMenu from '../foldMenu/FileMenuModal'
+	import FileMenuModal from '../foldMenu/FileMenuModal'
 	import ChoosePic from "@/components/ChoosePic.vue"
 
 	const columns = [
@@ -634,7 +632,7 @@
 	export default {
 		name      : "ChooseMsg",
 		components: {
-			videoPlayer, FileMenu, ChoosePic, MyIcon
+			videoPlayer, FileMenuModal, ChoosePic, MyIcon
 		},
 		props     : {
 			show       : {

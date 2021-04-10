@@ -12,9 +12,13 @@
 		</div>
 		<div v-if="isNickName || isEmoji" style="padding: 0 15px;">
 			点击插入：
-			<a-button v-if="isNickName" class="ant-tag ant-tag-orange"
+			<a-button v-if="isNickName && type == 1" class="ant-tag ant-tag-orange"
 			          size="small"
 			          @click="addTag('客户名称')">客户名称
+			</a-button>
+			<a-button v-if="isNickName && type == 0" class="ant-tag ant-tag-orange"
+			          size="small"
+			          @click="addTag('粉丝昵称')">粉丝昵称
 			</a-button>
 			<a-button v-if="isRanking" class="ant-tag ant-tag-orange"
 			          size="small"
@@ -40,18 +44,31 @@
 	import editor from 'vue2-medium-editor'
 	import WEmoji from "@/common/js/wechatEmoji.js"
 	import { VEmojiPicker } from "v-emoji-picker"
+	import TemplateList from "../../views/dashboard/template/List";
 
 	export default {
 		name      : "index",
 		components: {
+			TemplateList,
 			VEmojiPicker, 'medium-editor': editor
 		},
 		watch: {
 			text: {
 				handler(newVal) {
 					this.textContent = newVal
-					let a = this.textContent.replace(/{nickname}/g, ' 昵称 ').replace(/{ranking}/g, ' 排行榜 ').replace(/{success}/g, ' 已完成任务量 ').replace(/{error}/g, ' 未完成任务量 ').replace(/{oneLevel}/g, ' 一阶任务剩余库存 ').replace(/{twoLevel}/g, ' 二阶任务剩余库存 ').replace(/{threeLevel}/g, ' 三阶任务剩余库存 ').replace(/\n/g, '').replace(/(<\/?a.*?>)/g, '')
-					this.wordNum = a.length
+					let a = this.textContent.replace(/{nickname}/g, this.type == 1 ? ' 客户名称 ' : ' 粉丝昵称 ').replace(/{ranking}/g, ' 排行榜 ').replace(/{success}/g, ' 已完成任务量 ').replace(/{error}/g, ' 未完成任务量 ').replace(/{oneLevel}/g, ' 一阶任务剩余库存 ').replace(/{twoLevel}/g, ' 二阶任务剩余库存 ').replace(/{threeLevel}/g, ' 三阶任务剩余库存 ').replace(/\n/g, '').replace(/(<\/?a.*?>)/g, '').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+
+          let tagStr =this.textContent.replace(/{nickname}/g, this.type == 1 ? ' 客户名称 ' : ' 粉丝昵称1 ')
+          if(this.isMenu){ //自定菜单使用该组件 一个粉丝昵称算16个字符
+            this.wordNum = a.length+(this.getLeng(tagStr)*10)
+            if( this.wordNum >this.wordLimit){
+              this.wordNum=this.wordLimit
+            }
+
+          }else {
+            this.wordNum = a.length
+          }
+
 				},
 				deep: true
 			},
@@ -63,6 +80,10 @@
 			}
 		},
 		props     : {
+      isMenu:{//是否是自定义菜单调用该组件
+        type:Boolean,
+        default:false
+      },
 			text     : {          // 纯文本数据
 				type   : String,
 				default: ''
@@ -82,27 +103,32 @@
 			isEmoji: {            // 是否显示表情 默认展示
 				type  : Boolean,
 				default: true,
-			}
+			},
+			wordLimit : {
+				type  : Number,
+				default: 1000,
+			},
 		},
 		data () {
 			return {
+        isTag:false,//是否插入粉丝昵称标签
+				type               : localStorage.getItem('type'),
 				textContent        : '', // 文本
 				textAreaValueHeader: '', // 带标签文本
 				emojiShow          : false, // 展示
 				wordNum            : 0, // 当前字数
-				wordLimit          : 1000, // 限制1000
 				mediumEditor       : '', // editor对象
 				options            : {  // 配置
 					toolbar      : false,
 					placeholder  : {
 						text: ""
 					},
-					anchorPreview: false,
-					paste        : {
-						forcePlainText : true,
-						cleanPastedHTML: true,
-						cleanAttrs     : ['class', 'style', 'dir', 'align', 'width', 'height', 'face', 'title', 'code', 'name', 'id', 'type', 'span', 'border', 'open', 'action', 'method', 'cols', 'for', 'rel', 'label', 'icon', 'value', 'max', 'min', 'classid']
-					}
+					// anchorPreview: false,
+					// paste        : {
+					// 	forcePlainText : true,
+					// 	cleanPastedHTML: true,
+					// 	cleanAttrs     : ['class', 'style', 'dir', 'align', 'width', 'height', 'face', 'title', 'code', 'name', 'id', 'type', 'span', 'border', 'open', 'action', 'method', 'cols', 'for', 'rel', 'label', 'icon', 'value', 'max', 'min', 'classid']
+					// }
 				},
 				keydownNode     : false,
 				keydownNodeIndex: 0,
@@ -111,14 +137,36 @@
 		mounted () {
 			let _this = this
 			this.textContent = this.text
-			let a =this.textContent.replace(/{nickname}/g, ' 客户名称 ').replace(/{ranking}/g, ' 排行榜 ').replace(/\n/g, '').replace(/(<\/?a.*?>)/g, '')
-			this.wordNum = a.length
+			let a =this.textContent.replace(/{nickname}/g, this.type == 1 ? ' 客户名称 ' : ' 粉丝昵称 ').replace(/{ranking}/g, ' 排行榜 ').replace(/\n/g, '').replace(/(<\/?a.*?>)/g, '').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+      let tagStr =this.textContent.replace(/{nickname}/g, this.type == 1 ? ' 客户名称 ' : ' 粉丝昵称1 ')
+      if(this.isMenu){ //自定菜单使用该组件 一个粉丝昵称算16个字符
+        this.wordNum = a.length+(this.getLeng(tagStr)*10)
+        if( this.wordNum >this.wordLimit){
+          this.wordNum=this.wordLimit
+        }
+
+      }else {
+        this.wordNum = a.length
+      }
 			this.textAreaValueHeader = "<p>" + this.textValue + '</p>'
 			document.addEventListener("selectionchange", function () {
 				_this.getCursor(self)
 			})
 		},
 		methods   : {
+		  //计算长度
+      getLeng(str){
+
+        let arr = str.split(' ')
+
+        let newArr =[]
+        arr.forEach(item=>{
+          if(item=='粉丝昵称1'){
+            newArr.push(item)
+          }
+        })
+        return newArr.length
+      },
 			// 初始化文本信息的格式
 			initTextMsgContent (content) {
 				const _this = this
@@ -222,12 +270,13 @@
 					doc.execCommand.callListeners(ecArgs, true)
 				}
 				this.wordNum = self.lastNode.textContent.length
+
 				if (this.wordNum <= this.wordLimit) {
 					this.textAreaValueHeader = self.lastNode.innerHTML.replace(/<pre([^>]*)>/g, '<p>').replace(/<\/pre>/g, '<\/p>').replace(/<font([^>]*)>/g, '<p>').replace(/<\/font>/g, '<\/p>').replace(/<div([^>]*)>/g, '<p>').replace(/<\/div>/g, '<\/p>')
 					if (typeof this.urlId == 'undefined') {
-						this.textContent = self.lastNode.innerHTML.replace(/(<p><span>)?<br([^>]*)>(<\/span>)?<\/p>/g, '</p>').replace(/<p([^>]*)>/g, '').replace(/<\/p>/g, '\n').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">客户名称<\/span>(&nbsp;)?/g, '{nickname}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">排行榜<\/span>(&nbsp;)?/g, '{ranking}').replace(/<br([^>]*)>/g, '\n').replace(/<span([^>]*)>/g, '').replace(/<\/span>/g, '').replace(/&nbsp;/g, ' ').replace(/miniprogramappid/g, 'miniprogram-appid').replace(/miniprogrampath/g, 'miniprogram-path')
+						this.textContent = self.lastNode.innerHTML.replace(/(<p><span>)?<br([^>]*)>(<\/span>)?<\/p>/g, '</p>').replace(/<p([^>]*)>/g, '').replace(/<\/p>/g, '\n').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">客户名称<\/span>(&nbsp;)?/g, '{nickname}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">粉丝昵称<\/span>(&nbsp;)?/g, '{nickname}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">排行榜<\/span>(&nbsp;)?/g, '{ranking}').replace(/<br([^>]*)>/g, '\n').replace(/<span([^>]*)>/g, '').replace(/<\/span>/g, '').replace(/&nbsp;/g, ' ').replace(/miniprogramappid/g, 'miniprogram-appid').replace(/miniprogrampath/g, 'miniprogram-path').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
 					} else {
-						this.textContent = self.lastNode.innerHTML.replace(/(<p><span>)?<br([^>]*)>(<\/span>)?<\/p>/g, '</p>').replace(/<br([^>]*)>/g, '\n').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">客户名称<\/span>(&nbsp;)?/g, '{nickname}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">排行榜<\/span>(&nbsp;)?/g, '{ranking}').replace(/([^<p>]+)<p([^>]*)>/g, "$1\n").replace(/<p([^>]*)>/g, '').replace(/<\/p>/g, '\n').replace(/<span([^>]*)>/g, '').replace(/<\/span>/g, '').replace(/&nbsp;/g, ' ').replace(/<div([^>]*)>/g, '\n').replace(/<\/div>/g, '').replace(/miniprogramappid/g, 'miniprogram-appid').replace(/miniprogrampath/g, 'miniprogram-path')
+						this.textContent = self.lastNode.innerHTML.replace(/(<p><span>)?<br([^>]*)>(<\/span>)?<\/p>/g, '</p>').replace(/<br([^>]*)>/g, '\n').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">客户名称<\/span>(&nbsp;)?/g, '{nickname}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">粉丝昵称<\/span>(&nbsp;)?/g, '{nickname}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">排行榜<\/span>(&nbsp;)?/g, '{ranking}').replace(/([^<p>]+)<p([^>]*)>/g, "$1\n").replace(/<p([^>]*)>/g, '').replace(/<\/p>/g, '\n').replace(/<span([^>]*)>/g, '').replace(/<\/span>/g, '').replace(/&nbsp;/g, ' ').replace(/<div([^>]*)>/g, '\n').replace(/<\/div>/g, '').replace(/miniprogramappid/g, 'miniprogram-appid').replace(/miniprogrampath/g, 'miniprogram-path').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
 					}
 				}
 
@@ -258,6 +307,7 @@
 			},
 			//监听键盘事件，超过300字，不让输入
 			editableKeydown (event) {
+
 				if (this.wordNum >= this.wordLimit && event.keyCode != 8 && event.keyCode != 37 && event.keyCode != 38 && event.keyCode != 39 && event.keyCode != 40 && !(event.keyCode == 65 && (event.metaKey || event.ctrlKey))) {
 					event.preventDefault();
 				}
@@ -306,9 +356,9 @@
 					this.textAreaValueHeader = self.lastNode.innerHTML.replace(/<pre([^>]*)>/g, '<p>').replace(/<\/pre>/g, '<\/p>').replace(/<font([^>]*)>/g, '<p>').replace(/<\/font>/g, '<\/p>').replace(/<div([^>]*)>/g, '<p>').replace(/<\/div>/g, '<\/p>')
 
 					if (typeof this.urlId == 'undefined') {
-						this.textContent = self.lastNode.innerHTML.replace(/(<p><span>)?<br([^>]*)>(<\/span>)?<\/p>/g, '</p>').replace(/<p([^>]*)>/g, '').replace(/<\/p>/g, '\n').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">客户名称<\/span>(&nbsp;)?/g, '{nickname}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">排行榜<\/span>(&nbsp;)?/g, '{ranking}').replace(/<br([^>]*)>/g, '\n').replace(/<span([^>]*)>/g, '').replace(/<\/span>/g, '').replace(/&nbsp;/g, ' ').replace(/miniprogramappid/g, 'miniprogram-appid').replace(/miniprogrampath/g, 'miniprogram-path')
+						this.textContent = self.lastNode.innerHTML.replace(/(<p><span>)?<br([^>]*)>(<\/span>)?<\/p>/g, '</p>').replace(/<p([^>]*)>/g, '').replace(/<\/p>/g, '\n').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">客户名称<\/span>(&nbsp;)?/g, '{nickname}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">粉丝昵称<\/span>(&nbsp;)?/g, '{nickname}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">排行榜<\/span>(&nbsp;)?/g, '{ranking}').replace(/<br([^>]*)>/g, '\n').replace(/<span([^>]*)>/g, '').replace(/<\/span>/g, '').replace(/&nbsp;/g, ' ').replace(/miniprogramappid/g, 'miniprogram-appid').replace(/miniprogrampath/g, 'miniprogram-path').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
 					} else {
-						this.textContent = self.lastNode.innerHTML.replace(/(<p><span>)?<br([^>]*)>(<\/span>)?<\/p>/g, '</p>').replace(/<br([^>]*)>/g, '\n').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">客户名称<\/span>(&nbsp;)?/g, '{nickname}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">排行榜<\/span>(&nbsp;)?/g, '{ranking}').replace(/([^<p>]+)<p([^>]*)>/g, "$1\n").replace(/<p([^>]*)>/g, '').replace(/<\/p>/g, '\n').replace(/<span([^>]*)>/g, '').replace(/<\/span>/g, '').replace(/&nbsp;/g, ' ').replace(/<div([^>]*)>/g, '\n').replace(/<\/div>/g, '').replace(/miniprogramappid/g, 'miniprogram-appid').replace(/miniprogrampath/g, 'miniprogram-path')
+						this.textContent = self.lastNode.innerHTML.replace(/(<p><span>)?<br([^>]*)>(<\/span>)?<\/p>/g, '</p>').replace(/<br([^>]*)>/g, '\n').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">客户名称<\/span>(&nbsp;)?/g, '{nickname}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">粉丝昵称<\/span>(&nbsp;)?/g, '{nickname}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">排行榜<\/span>(&nbsp;)?/g, '{ranking}').replace(/([^<p>]+)<p([^>]*)>/g, "$1\n").replace(/<p([^>]*)>/g, '').replace(/<\/p>/g, '\n').replace(/<span([^>]*)>/g, '').replace(/<\/span>/g, '').replace(/&nbsp;/g, ' ').replace(/<div([^>]*)>/g, '\n').replace(/<\/div>/g, '').replace(/miniprogramappid/g, 'miniprogram-appid').replace(/miniprogrampath/g, 'miniprogram-path').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
 					}
 
 					this.wordNum = this.wordLimit
@@ -317,28 +367,41 @@
 			}
 			,
 			changeContentInput (operation) {
+
+
+
 				if (operation.api.origElements.innerHTML == '' || operation.api.origElements.innerHTML == '<br>') {
 					operation.api.origElements.innerHTML = '<p><br/></p>'
 				}
 
 				//判断链接格式
-				var reg = /href="(?![a-zA-z]+:\/\/)[^"]*/g
-				if (reg.test(operation.api.origElements.innerHTML)) {
-					this.$message.error('请填写正确的链接')
-					this.mediumEditor.execAction('unlink')
-				}
+				// var reg = /href="(?![a-zA-z]+:\/\/)[^"]*/g
+				// if (reg.test(operation.api.origElements.innerHTML)) {
+				// 	this.$message.error('请填写正确的链接')
+				// 	this.mediumEditor.execAction('unlink')
+				// }
 
 				// var dom = this.mediumEditor.options.ownerDocument
 				// this.insertHTMLCommand(dom, '')
 				if (self.lastNode) {
 					// console.log(333, self.lastNode)
-					this.wordNum = self.lastNode.textContent.length
+          if(this.isMenu){ //处理自定义菜单用该组件时，粉丝昵称算16个字符的情况
+
+            let a = this.textContent.replace(/{nickname}/g, this.type == 1 ? ' 客户名称 ' : ' 粉丝昵称1 ')
+
+            this.wordNum = self.lastNode.textContent.length+(this.getLeng(a)*10)
+            if( this.wordNum>this.wordLimit){
+              this.wordNum=this.wordLimit
+            }
+          }else{
+            this.wordNum = self.lastNode.textContent.length
+          }
 					if (this.wordNum <= this.wordLimit) {
 						this.textAreaValueHeader = operation.api.origElements.innerHTML.replace(/<pre([^>]*)>/g, '<p>').replace(/<\/pre>/g, '<\/p>').replace(/<font([^>]*)>/g, '<p>').replace(/<\/font>/g, '<\/p>').replace(/<div([^>]*)>/g, '<p>').replace(/<\/div>/g, '<\/p>')
 						if (typeof this.urlId == 'undefined') {
-							this.textContent = self.lastNode.innerHTML.replace(/(<p><span>)?<br([^>]*)>(<\/span>)?<\/p>/g, '</p>').replace(/<p([^>]*)>/g, '').replace(/<\/p>/g, '\n').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">客户名称<\/span>(&nbsp;)?/g, '{nickname}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">排行榜<\/span>(&nbsp;)?/g, '{ranking}').replace(/<br([^>]*)>/g, '\n').replace(/<span([^>]*)>/g, '').replace(/<\/span>/g, '').replace(/&nbsp;/g, ' ').replace(/miniprogramappid/g, 'miniprogram-appid').replace(/miniprogrampath/g, 'miniprogram-path')
+							this.textContent = self.lastNode.innerHTML.replace(/(<p><span>)?<br([^>]*)>(<\/span>)?<\/p>/g, '</p>').replace(/<p([^>]*)>/g, '').replace(/<\/p>/g, '\n').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">客户名称<\/span>(&nbsp;)?/g, '{nickname}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">粉丝昵称<\/span>(&nbsp;)?/g, '{nickname}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">排行榜<\/span>(&nbsp;)?/g, '{ranking}').replace(/<br([^>]*)>/g, '\n').replace(/<span([^>]*)>/g, '').replace(/<\/span>/g, '').replace(/&nbsp;/g, ' ').replace(/miniprogramappid/g, 'miniprogram-appid').replace(/miniprogrampath/g, 'miniprogram-path').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
 						} else {
-							this.textContent = self.lastNode.innerHTML.replace(/(<p><span>)?<br([^>]*)>(<\/span>)?<\/p>/g, '</p>').replace(/<br([^>]*)>/g, '\n').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">客户名称<\/span>(&nbsp;)?/g, '{nickname}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">排行榜<\/span>(&nbsp;)?/g, '{ranking}').replace(/([^<p>]+)<p([^>]*)>/g, "$1\n").replace(/<p([^>]*)>/g, '').replace(/<\/p>/g, '\n').replace(/<span([^>]*)>/g, '').replace(/<\/span>/g, '').replace(/&nbsp;/g, ' ').replace(/<div([^>]*)>/g, '\n').replace(/<\/div>/g, '').replace(/miniprogramappid/g, 'miniprogram-appid').replace(/miniprogrampath/g, 'miniprogram-path')
+							this.textContent = self.lastNode.innerHTML.replace(/(<p><span>)?<br([^>]*)>(<\/span>)?<\/p>/g, '</p>').replace(/<br([^>]*)>/g, '\n').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">客户名称<\/span>(&nbsp;)?/g, '{nickname}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">粉丝昵称<\/span>(&nbsp;)?/g, '{nickname}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">排行榜<\/span>(&nbsp;)?/g, '{ranking}').replace(/([^<p>]+)<p([^>]*)>/g, "$1\n").replace(/<p([^>]*)>/g, '').replace(/<\/p>/g, '\n').replace(/<span([^>]*)>/g, '').replace(/<\/span>/g, '').replace(/&nbsp;/g, ' ').replace(/<div([^>]*)>/g, '\n').replace(/<\/div>/g, '').replace(/miniprogramappid/g, 'miniprogram-appid').replace(/miniprogrampath/g, 'miniprogram-path').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
 						}
 
 					    // console.log(111, this.textAreaValueHeader)
@@ -368,10 +431,6 @@
 				}
 				let html =
 					'<span>&nbsp;<span contenteditable="false" class="ant-tag ant-tag-orange">'+ title +'</span>&nbsp;</span>'
-				// if(this.textContent == '') {
-				// 	html =
-				// 		'<p><span>&nbsp;<span contenteditable="false" class="ant-tag ant-tag-orange">客户名称</span>&nbsp;</span></p>'
-				// }
 
 				if (this.wordLimit - this.wordNum >= 6) {
 					this.insertHTMLCommand(dom, html)

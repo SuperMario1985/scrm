@@ -5,7 +5,7 @@
 			<div style="height: 600px;width: 840px;" class="choose-msg">
 				<a-spin tip="加载中..." size="large" :spinning="isLoading">
 					<a-tree-select
-							style="width: 350px"
+							style="width: 280px"
 							:dropdownStyle="{ maxHeight: '150px', overflow: 'auto' }"
 							:treeData="groupList"
 							placeholder='所有分组'
@@ -14,14 +14,30 @@
 							@change="changeGroup"
 					>
 					</a-tree-select>
-					<a-input-search
+					<a-button style="margin-left: 10px;" @click="showSelectTag">
+						<template v-if="selectTagIds.length == 0">选择内容标签</template>
+						<template v-if="selectTagIds.length > 0">
+							已选择
+							<template v-if="getGroupNum(selectTagDetail) > 0">{{getGroupNum(selectTagDetail)}}个分组
+							</template>
+							<template
+									v-if="getGroupNum(selectTagDetail) > 0 && selectTagDetail.length != getGroupNum(selectTagDetail)">
+								，
+							</template>
+							<template v-if="selectTagDetail.length != getGroupNum(selectTagDetail)">
+								{{selectTagDetail.length - getGroupNum(selectTagDetail)}}个标签
+							</template>
+						</template>
+					</a-button>
+					<a-input
 							placeholder="输入要搜索的内容"
-							@search="onSearch"
 							v-model="name"
 							:allowClear=true
-							enterButton="搜索"
 							style="width: 260px;margin-left: 10px;"
-					/>
+					></a-input>
+					<a-button type='primary' @click="onSearch" style="margin-left: 10px;">
+						搜索
+					</a-button>
 					<a-button @click="clearInput" style="margin-left: 10px;">
 						清空
 					</a-button>
@@ -97,12 +113,18 @@
 				</a-spin>
 			</div>
 		</a-modal>
+		<tagCheckedBox ref="tagCheckedBox" @setGroupId="setGroupId" v-if="tagGroupVisible"
+		               :groupVisible="tagGroupVisible"
+		               :tagDetail="JSON.parse(JSON.stringify(selectTagDetail))"
+		               :tagIds="JSON.parse(JSON.stringify(selectTagIds))">
+		</tagCheckedBox>
 	</div>
 </template>
 
 <script>
 	import axios from "axios";
 	import MyIcon from "../MyIcon";
+	import tagCheckedBox from '../materialTagGroup/CheckboxIndex.vue'
 
 	const CancelToken = axios.CancelToken
 	const source = CancelToken.source()
@@ -116,7 +138,7 @@
 	export default {
 		name      : "chooseMsg",
 		components: {
-			MyIcon
+			MyIcon, tagCheckedBox
 		},
 		props     : {
 			show       : {
@@ -146,6 +168,9 @@
 		},
 		data () {
 			return {
+				selectTagIds      : [],
+				selectTagDetail   : [],
+				tagGroupVisible   : false,
 				id                : '',
 				choseItem         : {},
 				isLoading         : false,
@@ -182,6 +207,27 @@
 			}
 		},
 		methods   : {
+			setGroupId (even, ids, tags) {
+				if (even == 'ok') {
+					this.selectTagIds = ids
+					this.selectTagDetail = tags
+					this.$refs.tagCheckedBox.comfirmLoading = false
+				}
+				this.tagGroupVisible = false
+			},
+			getGroupNum (selectTagDetail) {
+				let count = 0
+				for (let i = 0; i < selectTagDetail.length; i++) {
+					if (!selectTagDetail[i].tag) {
+						count++
+					}
+				}
+				return count
+			},
+			// 选择内容标签
+			showSelectTag () {
+				this.tagGroupVisible = true
+			},
 			rowClassName (record, index) {
 				let className = 'dark-row';
 
@@ -245,6 +291,7 @@
 					group_id : this.selectGroupId,
 					file_type: this.type,
 					news_type: this.news_type,
+					tag_ids  : this.selectTagIds,
 					page     : page,
 					pageSize : pageSize,
 					name     : this.name
@@ -267,8 +314,7 @@
 				this.selectGroupId = e
 				this.getMaterial()
 			},
-			onSearch (value) {
-				this.name = value;
+			onSearch () {
 				this.materialList = []
 				this.page = 1
 				this.pageSize = 15
@@ -296,8 +342,8 @@
 			//获取分组列表
 			async getGroupList () {
 				const {data: res} = await this.axios.post("attachment/group", {
-					uid: localStorage.getItem('uid'),
-					is_channel : 1
+					uid       : localStorage.getItem('uid'),
+					is_channel: 1
 				});
 				if (res.error != 0) {
 					this.$message.error(res.error_msg);
@@ -325,6 +371,8 @@
 				this.name = ''
 				this.showVisible = newValue;
 				this.choseItem = {};
+				this.selectTagIds = []
+				this.selectTagDetail = []
 				if (this.show) {
 					// console.log(this.type, "type");
 					this.getMaterial();

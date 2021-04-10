@@ -117,6 +117,14 @@
 		mounted () {
 			let that = this
 			this.polar.color = this.color
+			if(that.options.data_Type == 1){
+				this.polar.toolbox.feature.saveAsImage.show = false
+				this.polar.title.show = false
+				this.polar.tooltip.show = false
+				this.polar.grid.show = false
+				this.polar.xAxis.show = false
+				this.polar.yAxis.show = false
+			}
 			that.option = that.getOptions(that.options)
 			this.$refs.lineCharts.resize()
 			window.addEventListener('resize', this.resizeHandle)
@@ -139,6 +147,9 @@
 					p["legend"] = JSON.parse(JSON.stringify(legend));
 				}
 				p.xAxis.data = options.xAxisData;
+				if(options.yAxisData){
+					p.yAxis = options.yAxisData;
+				}
 				let itemStyle = {
 					normal: {
 						lineStyle: {

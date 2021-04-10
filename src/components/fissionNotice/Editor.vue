@@ -149,7 +149,7 @@
 			text     : {
 				handler (newVal) {
 					this.textContent = newVal
-					let a = this.textContent.replace(/{nickname}/g, ' 昵称 ').replace(/{success}/g, ' 已完成任务量 ').replace(/{error}/g, ' 未完成任务量 ').replace(/{oneLevel}/g, ' 任务剩余库存 ').replace(/{twoLevel}/g, ' 二阶任务剩余库存 ').replace(/{threeLevel}/g, ' 三阶任务剩余库存 ').replace(/\n/g, '').replace(/(<\/?a.*?>)/g, '')
+					let a = this.textContent.replace(/{nickname}/g, ' 昵称 ').replace(/{success}/g, ' 已完成任务量 ').replace(/{error}/g, ' 未完成任务量 ').replace(/{oneLevel}/g, ' 任务剩余库存 ').replace(/{twoLevel}/g, ' 二阶任务剩余库存 ').replace(/{threeLevel}/g, ' 三阶任务剩余库存 ').replace(/\n/g, '').replace(/(<\/?a.*?>)/g, '').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
 					this.wordNum = a.length
 				},
 				deep: true
@@ -313,11 +313,11 @@
 					extensions   : {
 						miniProgram: new MiniProgramButton({})
 					},
-					paste        : {
-						forcePlainText : true,
-						cleanPastedHTML: true,
-						cleanAttrs     : ['class', 'style', 'dir', 'align', 'width', 'height', 'face', 'title', 'code', 'name', 'id', 'type', 'span', 'border', 'open', 'action', 'method', 'cols', 'for', 'rel', 'label', 'icon', 'value', 'max', 'min', 'classid']
-					}
+					// paste        : {
+					// 	forcePlainText : true,
+					// 	cleanPastedHTML: true,
+					// 	cleanAttrs     : ['class', 'style', 'dir', 'align', 'width', 'height', 'face', 'title', 'code', 'name', 'id', 'type', 'span', 'border', 'open', 'action', 'method', 'cols', 'for', 'rel', 'label', 'icon', 'value', 'max', 'min', 'classid']
+					// }
 				},
 				keydownNode        : false,
 				keydownNodeIndex   : 0,
@@ -331,7 +331,7 @@
 			localStorage.removeItem('editorIndex')
 			let _this = this
 			this.textContent = this.text
-			let a = this.textContent.replace(/{nickname}/g, ' 昵称 ').replace(/{success}/g, ' 已完成任务量 ').replace(/{error}/g, ' 未完成任务量 ').replace(/{oneLevel}/g, ' 任务剩余库存 ').replace(/{twoLevel}/g, ' 二阶任务剩余库存 ').replace(/{threeLevel}/g, ' 三阶任务剩余库存 ').replace(/\n/g, '').replace(/(<\/?a.*?>)/g, '')
+			let a = this.textContent.replace(/{nickname}/g, ' 昵称 ').replace(/{success}/g, ' 已完成任务量 ').replace(/{error}/g, ' 未完成任务量 ').replace(/{oneLevel}/g, ' 任务剩余库存 ').replace(/{twoLevel}/g, ' 二阶任务剩余库存 ').replace(/{threeLevel}/g, ' 三阶任务剩余库存 ').replace(/\n/g, '').replace(/(<\/?a.*?>)/g, '').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
 			this.wordNum = a.length
 			this.textAreaValueHeader = this.textValue
 			document.addEventListener("selectionchange", function () {
@@ -485,7 +485,7 @@
 				this.wordNum = self.lastNode.textContent.length
 				if (this.wordNum <= this.wordLimit) {
 					this.textAreaValueHeader = self.lastNode.innerHTML.replace(/<pre([^>]*)>/g, '<p>').replace(/<\/pre>/g, '<\/p>').replace(/<font([^>]*)>/g, '<p>').replace(/<\/font>/g, '<\/p>').replace(/<div([^>]*)>/g, '<p>').replace(/<\/div>/g, '<\/p>')
-					this.textContent = self.lastNode.innerHTML.replace(/(<p><span>)?<br([^>]*)>(<\/span>)?<\/p>/g, '</p>').replace(/<br([^>]*)>/g, '\n').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">昵称<\/span>(&nbsp;)?/g, '{nickname}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">已完成任务量<\/span>(&nbsp;)?/g, '{success}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">未完成任务量<\/span>(&nbsp;)?/g, '{error}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">任务剩余库存<\/span>(&nbsp;)?/g, '{oneLevel}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">二阶任务剩余库存<\/span>(&nbsp;)?/g, '{twoLevel}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">三阶任务剩余库存<\/span>(&nbsp;)?/g, '{threeLevel}').replace(/([^<p>]+)<p([^>]*)>/g, "$1\n").replace(/<p([^>]*)>/g, '').replace(/<\/p>/g, '\n').replace(/<span([^>]*)>/g, '').replace(/<\/span>/g, '').replace(/&nbsp;/g, ' ').replace(/<div([^>]*)>/g, '\n').replace(/<\/div>/g, '').replace(/miniprogramappid/g, 'miniprogram-appid').replace(/miniprogrampath/g, 'miniprogram-path')
+					this.textContent = self.lastNode.innerHTML.replace(/(<p><span>)?<br([^>]*)>(<\/span>)?<\/p>/g, '</p>').replace(/<br([^>]*)>/g, '\n').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">昵称<\/span>(&nbsp;)?/g, '{nickname}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">已完成任务量<\/span>(&nbsp;)?/g, '{success}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">未完成任务量<\/span>(&nbsp;)?/g, '{error}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">任务剩余库存<\/span>(&nbsp;)?/g, '{oneLevel}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">二阶任务剩余库存<\/span>(&nbsp;)?/g, '{twoLevel}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">三阶任务剩余库存<\/span>(&nbsp;)?/g, '{threeLevel}').replace(/([^<p>]+)<p([^>]*)>/g, "$1\n").replace(/<p([^>]*)>/g, '').replace(/<\/p>/g, '\n').replace(/<span([^>]*)>/g, '').replace(/<\/span>/g, '').replace(/&nbsp;/g, ' ').replace(/<div([^>]*)>/g, '\n').replace(/<\/div>/g, '').replace(/miniprogramappid/g, 'miniprogram-appid').replace(/miniprogrampath/g, 'miniprogram-path').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
 				}
 
 				this.mediumEditor.origElements.scrollTop = this.mediumEditor.origElements.scrollHeight
@@ -561,7 +561,7 @@
 					newRange.deleteContents()
 
 					this.textAreaValueHeader = self.lastNode.innerHTML.replace(/<pre([^>]*)>/g, '<p>').replace(/<\/pre>/g, '<\/p>').replace(/<font([^>]*)>/g, '<p>').replace(/<\/font>/g, '<\/p>').replace(/<div([^>]*)>/g, '<p>').replace(/<\/div>/g, '<\/p>')
-					this.textContent = self.lastNode.innerHTML.replace(/(<p><span>)?<br([^>]*)>(<\/span>)?<\/p>/g, '</p>').replace(/<br([^>]*)>/g, '\n').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">昵称<\/span>(&nbsp;)?/g, '{nickname}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">已完成任务量<\/span>(&nbsp;)?/g, '{success}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">未完成任务量<\/span>(&nbsp;)?/g, '{error}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">任务剩余库存<\/span>(&nbsp;)?/g, '{oneLevel}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">二阶任务剩余库存<\/span>(&nbsp;)?/g, '{twoLevel}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">三阶任务剩余库存<\/span>(&nbsp;)?/g, '{threeLevel}').replace(/([^<p>]+)<p([^>]*)>/g, "$1\n").replace(/<p([^>]*)>/g, '').replace(/<\/p>/g, '\n').replace(/<span([^>]*)>/g, '').replace(/<\/span>/g, '').replace(/&nbsp;/g, ' ').replace(/<div([^>]*)>/g, '\n').replace(/<\/div>/g, '').replace(/miniprogramappid/g, 'miniprogram-appid').replace(/miniprogrampath/g, 'miniprogram-path')
+					this.textContent = self.lastNode.innerHTML.replace(/(<p><span>)?<br([^>]*)>(<\/span>)?<\/p>/g, '</p>').replace(/<br([^>]*)>/g, '\n').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">昵称<\/span>(&nbsp;)?/g, '{nickname}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">已完成任务量<\/span>(&nbsp;)?/g, '{success}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">未完成任务量<\/span>(&nbsp;)?/g, '{error}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">任务剩余库存<\/span>(&nbsp;)?/g, '{oneLevel}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">二阶任务剩余库存<\/span>(&nbsp;)?/g, '{twoLevel}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">三阶任务剩余库存<\/span>(&nbsp;)?/g, '{threeLevel}').replace(/([^<p>]+)<p([^>]*)>/g, "$1\n").replace(/<p([^>]*)>/g, '').replace(/<\/p>/g, '\n').replace(/<span([^>]*)>/g, '').replace(/<\/span>/g, '').replace(/&nbsp;/g, ' ').replace(/<div([^>]*)>/g, '\n').replace(/<\/div>/g, '').replace(/miniprogramappid/g, 'miniprogram-appid').replace(/miniprogrampath/g, 'miniprogram-path').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
 					this.wordNum = this.wordLimit
 				}
 				this.$emit('changeText', this.textContent, this.textAreaValueHeader, this.index)
@@ -588,7 +588,7 @@
 					this.wordNum = self.lastNode.textContent.length
 					if (this.wordNum <= this.wordLimit) {
 						this.textAreaValueHeader = operation.api.origElements.innerHTML.replace(/<pre([^>]*)>/g, '<p>').replace(/<\/pre>/g, '<\/p>').replace(/<font([^>]*)>/g, '<p>').replace(/<\/font>/g, '<\/p>').replace(/<div([^>]*)>/g, '<p>').replace(/<\/div>/g, '<\/p>')
-						this.textContent = self.lastNode.innerHTML.replace(/(<p><span>)?<br([^>]*)>(<\/span>)?<\/p>/g, '</p>').replace(/<br([^>]*)>/g, '\n').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">昵称<\/span>(&nbsp;)?/g, '{nickname}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">已完成任务量<\/span>(&nbsp;)?/g, '{success}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">未完成任务量<\/span>(&nbsp;)?/g, '{error}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">任务剩余库存<\/span>(&nbsp;)?/g, '{oneLevel}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">二阶任务剩余库存<\/span>(&nbsp;)?/g, '{twoLevel}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">三阶任务剩余库存<\/span>(&nbsp;)?/g, '{threeLevel}').replace(/([^<p>]+)<p([^>]*)>/g, "$1\n").replace(/<p([^>]*)>/g, '').replace(/<\/p>/g, '\n').replace(/<span([^>]*)>/g, '').replace(/<\/span>/g, '').replace(/&nbsp;/g, ' ').replace(/<div([^>]*)>/g, '\n').replace(/<\/div>/g, '').replace(/miniprogramappid/g, 'miniprogram-appid').replace(/miniprogrampath/g, 'miniprogram-path')
+						this.textContent = self.lastNode.innerHTML.replace(/(<p><span>)?<br([^>]*)>(<\/span>)?<\/p>/g, '</p>').replace(/<br([^>]*)>/g, '\n').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">昵称<\/span>(&nbsp;)?/g, '{nickname}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">已完成任务量<\/span>(&nbsp;)?/g, '{success}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">未完成任务量<\/span>(&nbsp;)?/g, '{error}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">任务剩余库存<\/span>(&nbsp;)?/g, '{oneLevel}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">二阶任务剩余库存<\/span>(&nbsp;)?/g, '{twoLevel}').replace(/(&nbsp;)?<span contenteditable="false" class="ant-tag ant-tag-orange">三阶任务剩余库存<\/span>(&nbsp;)?/g, '{threeLevel}').replace(/([^<p>]+)<p([^>]*)>/g, "$1\n").replace(/<p([^>]*)>/g, '').replace(/<\/p>/g, '\n').replace(/<span([^>]*)>/g, '').replace(/<\/span>/g, '').replace(/&nbsp;/g, ' ').replace(/<div([^>]*)>/g, '\n').replace(/<\/div>/g, '').replace(/miniprogramappid/g, 'miniprogram-appid').replace(/miniprogrampath/g, 'miniprogram-path').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
 						this.$emit('changeText', this.textContent, this.textAreaValueHeader, this.index)
 					} else {
 						this.invlideText();

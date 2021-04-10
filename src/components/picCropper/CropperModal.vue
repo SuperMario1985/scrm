@@ -79,6 +79,15 @@
 		},
 		methods   : {
 			edit (record, fileName) {
+				let types = record.split('.')
+				if(fileName.indexOf('.') > -1) {
+					let names = fileName.split('.')
+					if(names[names.length - 1] != 'png' && names[names.length - 1] != 'jpeg' && names[names.length - 1] != 'jpg') {
+						fileName= fileName + '.' + types[types.length - 1]
+					}
+				} else {
+					fileName= fileName + '.' + types[types.length - 1]
+				}
 				let _this = this
 				this.visible = true;
 				let name = fileName.split('.')

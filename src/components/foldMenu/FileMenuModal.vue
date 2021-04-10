@@ -79,6 +79,7 @@
 
 <script>
 export default {
+  name: 'FileMenuModal',
   props: {
     comefrom: {
       type: String,
