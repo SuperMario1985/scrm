@@ -4,16 +4,25 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import { message} from 'ant-design-vue'
 import './plugins/ant-design-vue.js'
 //引入图片懒加载
 import VueLazyLoad from 'vue-lazyload'
 import png from './assets/fish.gif'
 import png2 from './assets/img.png'
+import './common/css/tailwind.css'
 
 Vue.use(VueLazyLoad, {
 	error  : png2,
 	loading: png
 })
+Vue.prototype.$message = message;
+
+message.config({
+	duration: 2,// 持续时间
+
+	maxCount: 1 // 最大显示数, 超过限制时，最早的消息会被自动关闭
+});
 // 引入perfect-scroller
 import PerfectScrollbar from "perfect-scrollbar"
 // 引入perfect-scroller的css文件
@@ -27,11 +36,16 @@ import websocket from './common/js/websocket.js';
 import './common/css/main.css'
 //引入公共js
 import Utils from './common/js/utils.js'
+//js 库
+import Test from './common/js/test.js'
 //引入瀑布流插件
 import waterfall from 'vue-waterfall2'
 
 Vue.use(waterfall)
+//引入复制内容到剪贴板
+import VueClipboard from 'vue-clipboard2'
 
+Vue.use(VueClipboard)
 // 全局参数配置
 Vue.prototype.global = Global
 // 全局参数配置
@@ -39,6 +53,7 @@ Vue.prototype.ws = websocket
 
 //注册公共js
 Vue.prototype.utils = Utils;
+Vue.prototype.$test = Test;
 
 Vue.prototype.axios = axios
 
