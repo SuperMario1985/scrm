@@ -650,8 +650,8 @@
 				this.value2[0] = getYearStartDate()
 				this.endValue = getYearEndDate()
 				this.value2[1] = getYearEndDate()
-				this.getList()
-				this.getData()
+				// this.getList()
+				// this.getData()
 			});
 		},
 		beforeRouteEnter (to, from, next) {

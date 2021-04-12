@@ -318,11 +318,11 @@
 																<a-radio-group name="radioGroup"
 																               v-model="element.typeValue"
 																               @change="changeTypeValue(index)">
+																	<a-radio :value="1">文字</a-radio>
+																	<a-radio :value="2">图片</a-radio>
 																	<a-radio :value="5">
 																		图文
 																	</a-radio>
-																	<a-radio :value="2">图片</a-radio>
-																	<a-radio :value="1">文字</a-radio>
 																	<a-radio :value="3">音频</a-radio>
 																	<a-radio :value="4">视频</a-radio>
 																</a-radio-group>
@@ -938,11 +938,6 @@
 					extensions   : {
 						miniProgram: new MiniProgramButton({})
 					},
-					paste        : {
-						forcePlainText : true,
-						cleanPastedHTML: true,
-						cleanAttrs     : ['class', 'style', 'dir', 'align', 'width', 'height', 'face', 'title', 'code', 'name', 'id', 'type', 'span', 'border', 'open', 'action', 'method', 'cols', 'for', 'rel', 'label', 'icon', 'value', 'max', 'min', 'classid']
-					}
 				},
 				urlId           : '', //地址栏参数id值
 				replyList       : [],//存详情的数组

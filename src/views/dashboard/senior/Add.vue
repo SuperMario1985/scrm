@@ -84,7 +84,7 @@
 							</div>
 							<!-- 音频素材 -->
 							<div style="padding: 20px;" v-show="typeValue == 3">
-								<a-card hoverable style="height: 150px;">
+								<a-card hoverable style="height: 67px;">
 									<!-- 选择前显示的 -->
 									<div class="audio" v-show="closeShowModal2==false">
 										<div class="box" v-show="isPlayMusic">
@@ -190,9 +190,9 @@
 										<!-- 消息类型 -->
 										<a-form-item label="消息类型" :label-col="{ span: 3 }" :wrapper-col="{ span: 15 }">
 											<a-radio-group @change="changeType" v-model="typeValue">
-												<a-radio :value="5">图文消息</a-radio>
-												<a-radio :value="2">图片消息</a-radio>
 												<a-radio :value="1">文字消息</a-radio>
+												<a-radio :value="2">图片消息</a-radio>
+												<a-radio :value="5">图文消息</a-radio>
 												<a-radio :value="3">语音消息</a-radio>
 												<a-radio :value="4">视频消息</a-radio>
 											</a-radio-group>
@@ -701,11 +701,11 @@
 					extensions   : {
 						miniProgram: new MiniProgramButton({})
 					},
-					paste        : {
-						forcePlainText : true,
-						cleanPastedHTML: true,
-						cleanAttrs     : ['class', 'style', 'dir', 'align', 'width', 'height', 'face', 'title', 'code', 'name', 'id', 'type', 'span', 'border', 'open', 'action', 'method', 'cols', 'for', 'rel', 'label', 'icon', 'value', 'max', 'min', 'classid']
-					}
+					// paste        : {
+					// 	forcePlainText : true,
+					// 	cleanPastedHTML: true,
+					// 	cleanAttrs     : ['class', 'style', 'dir', 'align', 'width', 'height', 'face', 'title', 'code', 'name', 'id', 'type', 'span', 'border', 'open', 'action', 'method', 'cols', 'for', 'rel', 'label', 'icon', 'value', 'max', 'min', 'classid']
+					// }
 				},
 				emojiShow       : false, // emoji 表情选择框是否显示
 				chooseId        : 0,//跳入组件时，选择好的id
@@ -1584,8 +1584,8 @@
 
 	.audio {
 		width: 100%;
-		height: 50px;
-		padding: 50px 20px;
+		height: 65px;
+		padding: 10px 20px;
 	}
 
 	.box {

@@ -312,11 +312,11 @@
 																<a-radio-group name="radioGroup"
 																               v-model="element.typeValue"
 																               @change="changeTypeValue(index)">
+																	<a-radio :value="1">文字</a-radio>
+																	<a-radio :value="2">图片</a-radio>
 																	<a-radio :value="5" :disabled="element.disabled">
 																		图文
 																	</a-radio>
-																	<a-radio :value="2">图片</a-radio>
-																	<a-radio :value="1">文字</a-radio>
 																	<a-radio :value="3">音频</a-radio>
 																	<a-radio :value="4">视频</a-radio>
 																</a-radio-group>
@@ -932,12 +932,6 @@
 					extensions   : {
 						miniProgram: new MiniProgramButton({})
 					},
-					paste        : {
-						forcePlainText : true,
-						cleanPastedHTML: true,
-						cleanAttrs     : ['class', 'style', 'dir', 'align', 'width', 'height', 'face', 'title', 'code', 'name', 'id', 'type', 'span', 'border', 'open', 'action', 'method', 'cols', 'for', 'rel', 'label', 'icon', 'value', 'max', 'min', 'classid'],
-						// cleanTags:['meta','pre','font','abbr','acronym','address','applet','area','article','aside','audio','b','base','basefont','bdi','bdo','big','blockquote','body','button','canvas','caption','center','cite','code','col','colgroup','command','datalist','dd','del','dt','details','dfn','dialog','dir','dl','dt','em','embed','fieldset','figcaption','figure','footer','form','frame','frameset','h1','h2','h3','h4','h5','h6','head','header','hr','html','i','iframe','img','input','ins','kbd','keygen','label','legend','li','link','main','map','mark','menu','menuitem','meter','nav','noframes','noscript','object','ol','optgroup','option','output','param','progress']
-					}
 				},
 				urlId         : '', //地址栏参数id值
 				replyList     : [],//存详情的数组
@@ -2542,8 +2536,8 @@
 
 	.audio {
 		width: 100%;
-		height: 150px;
-		padding: 50px 20px;
+		height: 65px;
+		padding: 10px 20px;
 		background: #FFF;
 	}
 

@@ -1155,8 +1155,8 @@
 
 	.audio {
 		width: 100%;
-		height: 150px;
-		padding: 50px 20px;
+		height: 65px;
+		padding: 10px 20px;
 		background: #FFF;
 	}
 

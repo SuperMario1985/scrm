@@ -1175,8 +1175,8 @@
 
 	.audio {
 		width: 83%;
-		height: 150px;
-		padding: 50px 20px;
+		height: 100px;
+		padding: 10px 20px;
 		background: #FFF;
 		float: left;
 	}

@@ -4,7 +4,7 @@
 			<label style="font-size: 16px;line-height: 32px;">
 				<span v-if="id == ''">新建</span>
 				<span v-else>编辑</span>抽奖引流</label>
-			<a-button type="primary"  style="font-size: 14px;float: right;" @click="goBack">返回列表
+			<a-button type="primary" style="font-size: 14px;float: right;" @click="goBack">返回列表
 			</a-button>
 		</a-card>
 		<div class="content-msg" style="margin: 0 20px;" v-if="raffleNum > 0">
@@ -267,7 +267,7 @@
 						<template slot="label">
 							<span style="color: red;">*</span>初始次数
 						</template>
-						<a-input-number :min="1" :max="99999999" v-model="init_num" :disabled="currentStatus == 1"/>
+						<a-input-number :min="1" :max="99999999" v-model="init_num" :disabled="currentStatus == 1" :formatter="limitNumber" :parser="limitNumber" />
 						次
 					</a-form-item>
 					<span style="border-left: 4px solid #01b065;padding-left: 10px;margin-left: 10px;">参与设置</span>
@@ -285,7 +285,7 @@
 							</a-radio-button>
 							<template v-if="apply_setting[0].limit == '1'">
 								<a-input-number :min="1" :max="99999999" v-model="apply_setting[0].total_num"
-								                :disabled="currentStatus == 1" style="width:80px;margin-left: 5px;"/>
+								                :disabled="currentStatus == 1" style="width:80px;margin-left: 5px;" :formatter="limitNumber" :parser="limitNumber" />
 								次
 							</template>
 						</a-radio-group>
@@ -296,7 +296,7 @@
 						</template>
 						每人每日参与
 						<a-input-number :min="1" :max="99999999" v-model="apply_setting[1].day_num"
-						                :disabled="currentStatus == 1" style="width:80px;margin-left: 5px;"/>
+						                :disabled="currentStatus == 1" style="width:80px;margin-left: 5px;" :formatter="limitNumber" :parser="limitNumber" />
 						次
 					</a-form-item>
 
@@ -318,7 +318,7 @@
 							</a-radio-button>
 							<template v-if="award_setting[0].limit == '1'">
 								<a-input-number :min="1" :max="99999999" v-model="award_setting[0].total_num"
-								                :disabled="currentStatus == 1" style="width:80px;margin-left: 5px;"/>
+								                :disabled="currentStatus == 1" style="width:80px;margin-left: 5px;" :formatter="limitNumber" :parser="limitNumber" />
 								次
 							</template>
 						</a-radio-group>
@@ -336,7 +336,7 @@
 							</a-radio-button>
 							<template v-if="award_setting[1].limit == '1'">
 								<a-input-number :min="1" :max="99999999" v-model="award_setting[1].day_num"
-								                :disabled="currentStatus == 1" style="width:80px;margin-left: 5px;"/>
+								                :disabled="currentStatus == 1" style="width:80px;margin-left: 5px;" :formatter="limitNumber" :parser="limitNumber" />
 								次
 							</template>
 						</a-radio-group>
@@ -355,7 +355,7 @@
 							<span style="color: red;">*</span>分享1次增加次数
 						</template>
 						<a-input-number :min="1" :max="99999999" v-model="share_setting[0].total_num"
-						                :disabled="currentStatus == 1" style="width:80px;margin-left: 5px;"/>
+						                :disabled="currentStatus == 1" style="width:80px;margin-left: 5px;" :formatter="limitNumber" :parser="limitNumber" />
 						次
 					</a-form-item>
 					<a-form-item class="current0" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }" v-if="isNeedShare">
@@ -371,7 +371,7 @@
 							</a-radio-button>
 							<template v-if="share_setting[1].limit == '1'">
 								<a-input-number :min="1" :max="99999999" v-model="share_setting[1].day_num"
-								                :disabled="currentStatus == 1" style="width:80px;margin-left: 5px;"/>
+								                :disabled="currentStatus == 1" style="width:80px;margin-left: 5px;" :formatter="limitNumber" :parser="limitNumber" />
 								次
 							</template>
 						</a-radio-group>
@@ -594,10 +594,10 @@
 									重新上传
 								</a-button>
 							</div>
-							<div style="margin-top: 10px;">
-								图片像素建议为1080px*1920px，格式为jpg、bmp、png，大小不超过2M
-							</div>
 						</a-upload>
+						<div style="margin-top: 10px;">
+							图片像素建议为1080px*1920px，格式为jpg、bmp、png，大小不超过2M
+						</div>
 					</a-form-item>
 					<a-form-item class="current0" :label-col="{ span: 3 }" :wrapper-col="{ span: 21 }">
 						<template slot="label">
@@ -688,7 +688,7 @@
 						<template slot="label">
 							引流设置
 						</template>
-						海报二维码自带对应参数，扫码后会将客户引流至对应的企业成员
+						海报将展示对应带参数的二维码， 扫码后将引流到对应的企业成员
 					</a-form-item>
 					<a-form-item class="current0" :label-col="{ span: 3 }" :wrapper-col="{ span: 21 }">
 						<template slot="label"><span
@@ -716,7 +716,6 @@
 						</template>
 						<editor v-if="editorFlag" :text="textContent"
 						        :textValue="textAreaValueHeader"
-						        :isEmoji="false"
 						        @changeText="changeText">
 						</editor>
 					</a-form-item>
@@ -1018,6 +1017,16 @@
 			}
 		},
 		methods   : {
+			/* 限制数字输入框只能输入整数 */
+			limitNumber(value){
+				if (typeof value === 'string') {
+					return !isNaN(Number(value)) ? value.replace(/^(0+)|[^\d]/g, '') : ''
+				} else if (typeof value === 'number') {
+					return !isNaN(value) ? String(value).replace(/^(0+)|[^\d]/g, '') : ''
+				} else {
+					return ''
+				}
+			},
 			goBack () {
 				localStorage.removeItem('notAllow')
 				localStorage.removeItem('backUrl')
@@ -1822,7 +1831,7 @@
 					this.textAreaValueHeader = res.data.welcome.text_content.replace(/{nickname}/g,
 						'<span>&nbsp;<span contenteditable="false" class="ant-tag ant-tag-orange">客户名称</span>&nbsp;</span>'
 					).replace(/\n/g, '<br>')
-					let a = this.textContent.replace(/{nickname}/g, ' 客户名称 ').replace(/\n/g, '').replace(/(<\/?a.*?>)/g, '')
+					let a = this.textContent.replace(/{nickname}/g, ' 客户名称 ').replace(/\n/g, '').replace(/(<\/?a.*?>)/g, '').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
 					this.wordNum = a.length
 					this.link_start_title = res.data.welcome.link_start_title
 					this.link_desc = res.data.welcome.link_desc
