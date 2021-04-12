@@ -227,8 +227,10 @@
 				})
 				if (res.error == 0) {
 					this.accountList = res.data.user_info
-					this.sub_id = this.accountList[0].id
-					this.isMasterAccount = this.accountList[0].type
+					if(this.accountList.length > 0){
+						this.sub_id = this.accountList[0].id
+						this.isMasterAccount = this.accountList[0].type
+					}
 				} else {
 					this.$message.error(res.error_msg)
 				}
@@ -252,6 +254,10 @@
 			//完成判断两次密码，成功进入登录页
 			async successSetPass () {
 				if (this.password == this.password2) {
+					if(this.isMasterAccount == '' || this.sub_id == ''){
+						this.$message.error("请检查输入的手机号是否正确");
+						return false
+					}
 					var {data: res} = await this.axios.post('login/forget-pwd', {
 						account        : this.account,
 						identifyCode   : this.identifyCode,

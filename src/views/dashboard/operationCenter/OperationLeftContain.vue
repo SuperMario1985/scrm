@@ -128,7 +128,7 @@
 														<a-range-picker
 																:allowClear='false'
 																:disabledDate="disabledDateDay"
-																:defaultValue="[moment(moment().subtract(8, 'days').calendar(), 'YYYY-MM-DD'), moment(moment().subtract(1, 'days'), 'YYYY-MM-DD')]"
+																:defaultValue="[moment(moment().subtract(7, 'days').calendar(), 'YYYY-MM-DD'), moment(moment().subtract(1, 'days'), 'YYYY-MM-DD')]"
 																format="YYYY-MM-DD"
 																v-if="timeType=='2'"
 																v-model="dayDate"
@@ -241,7 +241,7 @@
 														<a-range-picker
 																:allowClear='false'
 																:disabledDate="disabledDateDay"
-																:defaultValue="[moment(moment().subtract(8, 'days').calendar(), 'YYYY-MM-DD'), moment(moment().subtract(1, 'days'), 'YYYY-MM-DD')]"
+																:defaultValue="[moment(moment().subtract(7, 'days').calendar(), 'YYYY-MM-DD'), moment(moment().subtract(1, 'days'), 'YYYY-MM-DD')]"
 																format="YYYY-MM-DD"
 																v-if="timeType2=='2'"
 																v-model="dayDate2"
@@ -336,7 +336,7 @@
 														<a-range-picker
 																:allowClear='false'
 																:disabledDate="disabledDateDay"
-																:defaultValue="[moment(moment().subtract(8, 'days').calendar(), 'YYYY-MM-DD'), moment(moment().subtract(1, 'days'), 'YYYY-MM-DD')]"
+																:defaultValue="[moment(moment().subtract(7, 'days').calendar(), 'YYYY-MM-DD'), moment(moment().subtract(1, 'days'), 'YYYY-MM-DD')]"
 																format="YYYY-MM-DD"
 																v-if="timeType3=='2'"
 																v-model="dayDate3"
@@ -431,7 +431,7 @@
 														<a-range-picker
 																:allowClear='false'
 																:disabledDate="disabledDateDay"
-																:defaultValue="[moment(moment().subtract(8, 'days').calendar(), 'YYYY-MM-DD'), moment(moment().subtract(1, 'days'), 'YYYY-MM-DD')]"
+																:defaultValue="[moment(moment().subtract(7, 'days').calendar(), 'YYYY-MM-DD'), moment(moment().subtract(1, 'days'), 'YYYY-MM-DD')]"
 																format="YYYY-MM-DD"
 																v-if="timeType4=='2'"
 																v-model="dayDate4"
@@ -575,13 +575,13 @@
 				/* 成员TOP10 */
 				wheelFlag    : true,
 				fansAddTime  : {
-					ds_date: moment().subtract(8, 'days').format('YYYY-MM-DD'),
+					ds_date: moment().subtract(7, 'days').format('YYYY-MM-DD'),
 					de_date: moment().subtract(1, 'days').format('YYYY-MM-DD'),
 					ws_date: moment().subtract(7, 'days').weekday(0).format('YYYY-MM-DD'),
 					we_date: moment().subtract(7, 'days').weekday(6).format('YYYY-MM-DD'),
 					ws_week: moment(new Date()).week() - 1 || 52
 				},
-				dayDate      : [moment().subtract(8, 'days'), moment().subtract(1, 'days')],
+				dayDate      : [moment().subtract(7, 'days'), moment().subtract(1, 'days')],
 				weekStart    : moment().subtract(7, 'days'),
 				weekEnd      : moment().subtract(7, 'days'),
 				s_week       : '',
@@ -645,13 +645,13 @@
 				/* 发起申请数 */
 				wheelFlag2          : true,
 				fansAddTime2        : {
-					ds_date: moment().subtract(8, 'days').format('YYYY-MM-DD'),
+					ds_date: moment().subtract(7, 'days').format('YYYY-MM-DD'),
 					de_date: moment().subtract(1, 'days').format('YYYY-MM-DD'),
 					ws_date: moment().subtract(7, 'days').weekday(0).format('YYYY-MM-DD'),
 					we_date: moment().subtract(7, 'days').weekday(6).format('YYYY-MM-DD'),
 					ws_week: moment(new Date()).week() - 1 || 52
 				},
-				dayDate2            : [moment().subtract(8, 'days'), moment().subtract(1, 'days')],
+				dayDate2            : [moment().subtract(7, 'days'), moment().subtract(1, 'days')],
 				weekStart2          : moment().subtract(7, 'days'),
 				weekEnd2            : moment().subtract(7, 'days'),
 				s_week2             : '',
@@ -711,13 +711,13 @@
 				/* 新增客户数 */
 				wheelFlag3          : true,
 				fansAddTime3        : {
-					ds_date: moment().subtract(8, 'days').format('YYYY-MM-DD'),
+					ds_date: moment().subtract(7, 'days').format('YYYY-MM-DD'),
 					de_date: moment().subtract(1, 'days').format('YYYY-MM-DD'),
 					ws_date: moment().subtract(7, 'days').weekday(0).format('YYYY-MM-DD'),
 					we_date: moment().subtract(7, 'days').weekday(6).format('YYYY-MM-DD'),
 					ws_week: moment(new Date()).week() - 1 || 52
 				},
-				dayDate3            : [moment().subtract(8, 'days'), moment().subtract(1, 'days')],
+				dayDate3            : [moment().subtract(7, 'days'), moment().subtract(1, 'days')],
 				weekStart3          : moment().subtract(7, 'days'),
 				weekEnd3            : moment().subtract(7, 'days'),
 				s_week3             : '',
@@ -777,13 +777,13 @@
 				/* 被客户删除/拉黑人数 */
 				wheelFlag4          : true,
 				fansAddTime4        : {
-					ds_date: moment().subtract(8, 'days').format('YYYY-MM-DD'),
+					ds_date: moment().subtract(7, 'days').format('YYYY-MM-DD'),
 					de_date: moment().subtract(1, 'days').format('YYYY-MM-DD'),
 					ws_date: moment().subtract(7, 'days').weekday(0).format('YYYY-MM-DD'),
 					we_date: moment().subtract(7, 'days').weekday(6).format('YYYY-MM-DD'),
 					ws_week: moment(new Date()).week() - 1 || 52
 				},
-				dayDate4            : [moment().subtract(8, 'days'), moment().subtract(1, 'days')],
+				dayDate4            : [moment().subtract(7, 'days'), moment().subtract(1, 'days')],
 				weekStart4          : moment().subtract(7, 'days'),
 				weekEnd4            : moment().subtract(7, 'days'),
 				s_week4             : '',
