@@ -14,23 +14,14 @@
           "
           ref="searchArea"
         >
-          <span class="select-option" v-if="corpLen > 1">
-            <label style="margin-right: 5px">企业微信：</label>
-            <a-select
-              showSearch
-              optionFilterProp="children"
-              style="width: 210px; margin-right: 5px"
-              @change="changeWx"
-              v-model="corpId"
-              v-if="corpLen > 1"
-            >
-              <template v-for="item in corpInfo">
-                <a-select-option :value="item.corpid">
-                  {{ item.corp_name }}
-                </a-select-option>
-              </template>
-            </a-select>
-          </span>
+          <span class="select-option">
+						<label style="margin-right: 5px;">客户类型：</label>
+							<a-cascader :options="customerType"
+							            v-model="corpType"
+							            :show-search="{ filter }"
+							            placeholder="'请选择'"
+							            style="margin-right: 5px;width: 210px;"/>
+					</span>
           <span class="select-option">
             <label style="margin-right: 5px">关键词：</label>
             <a-input
@@ -634,6 +625,10 @@ export default {
     };
   },
   methods: {
+    // 客戶类型
+			filter (inputValue, path) {
+				return path.some(option => option.label.toLowerCase().indexOf(inputValue.toLowerCase()) > -1)
+			},
     //左右滚动
     scroLineDown(event) {
       this.startX = event.x; // 按下鼠标指针的x轴坐标

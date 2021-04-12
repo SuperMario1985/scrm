@@ -2,20 +2,30 @@
 	<div style="width: 100%; height: 100%; overflow-y: scroll;position: absolute" class="scroll">
 		<div class="page-title">
 			店铺订单
-			<a-button type="primary" style="font-size: 14px;float: right;margin-top: 9px;margin-right: 20px;" @click="goAppCenter" >返回</a-button>
+			<div style="float: right;margin-right: 20px;">
+				<a-space :space="15">
+					<a-button type="primary" @click="pullOrder" v-if="type == 5">拉取订单</a-button>
+					<a-button type="primary" @click="goAppCenter">返回</a-button>
+				</a-space>
+			</div>
+			
 		</div>
 		<div v-if="storeList.length == 0 && isShow" class="empty-img">
 			<img src="../../../assets/thirdPartyStore/empty.png" alt="">
 			<p class="empty-txt">绑定第三方店铺，目前支持淘宝、有赞和小猪智慧店铺。绑定后，可获取到该店铺的交易订单信息，在与客户对话中，可快速查看到该客户的历史订单记录。</p>
 			<a-button type="primary" class="empty-btn" @click="goStore">去绑定</a-button>
 		</div>
-		<div class="home-left-contain" v-if="storeList.length != 0">
+		<div class="home-left-contain" v-if="storeList.length != 0 || type == 5">
 			<a-spin :spinning="spinning" tip="加载中..." size="large"
-			        :class="spinning?'spinning-true':'spinning-false'">
+					:class="spinning?'spinning-true':'spinning-false'">
 				<div class="tabs-contain" style="margin-top: 20px">
-					<div class="account-filter" v-if="storeList && storeList.length > 0">
-						<a-tabs class="store-list-tab" type="card" v-model="bindId" @change="changeStoreId"
-						        style="width: 100%;">
+					<div class="account-filter" v-if="(storeList && storeList.length > 0) || type == 5">
+						<a-tabs class="store-list-tab" 
+								type="card" 
+								v-model="bindId" 
+								@change="changeStoreId"
+								style="width: 100%;" 
+								v-if="type != 5">
 							<a-tab-pane v-for="(item, index) in storeList" :key="item.key">
 								<div slot="tab">
 									<a-tooltip placement="top">
@@ -27,7 +37,15 @@
 								</div>
 							</a-tab-pane>
 						</a-tabs>
-						<div style="padding: 0 20px;">
+						<div style="padding: 0 20px;" :style="type == 5?{padding:'20px'}:{}">
+							<div class="content-msg" v-if="type == 5">
+								<p style="margin-bottom: 2px;">
+									1、请确认<router-link to="/shopAppCenter/list">【店铺设置】</router-link>已填写正确，点击 拉取订单 可以拉取店铺历史已支付订单。
+								</p>
+								<p style="margin-bottom: 2px;">
+									2、对接key及门店ID填写正确后，商城已支付订单可实时推送到scrm，但由于数据处理的延后性，可能不会实时显示在下方。
+								</p>
+							</div>
 							<div style="display: inline-block;">
 								<a-row>
 									<a-col class="select-col">
@@ -42,7 +60,7 @@
 									<a-col class="select-col">
 										<a-input
 												@keyup.enter="find"
-												v-if="type == 1 || type == 2"
+												v-if="type == 1 || type == 2 || type == 5"
 												allowClear
 												placeholder="手机号，支持尾号查询"
 												style="width: 200px;"
@@ -71,7 +89,7 @@
 									<a-col class="select-col">
 										<a-input
 												@keyup.enter="find"
-												v-if="type == 1 || type == 2"
+												v-if="type == 1 || type == 2 || type == 5"
 												allowClear
 												placeholder="昵称/姓名"
 												style="width: 200px;"
@@ -106,7 +124,7 @@
 											</a-select-option>
 										</a-select>
 									</a-col>
-									<a-col class="select-col" v-if="type == 1">
+									<a-col class="select-col" v-if="type == 1 || type == 5">
 										<a-select
 												allowClear
 												showSearch
@@ -135,7 +153,7 @@
 									</a-col>
 									<a-col class="select-col">
 										<a-select
-												v-if="type == 1 "
+												v-if="type == 1 || type == 5"
 												allowClear
 												showSearch
 												optionFilterProp="children"
@@ -143,7 +161,7 @@
 												style="width: 200px;"
 												v-model="payWay"
 										>
-											<a-select-option v-for="item in payWays" :value="item.key">
+											<a-select-option v-for="item in payWays" :value="type == 5?item.id:item.key">
 												<span :class="item.is_black== 1 ? (item.is_space == 1 ? 'name-weight-space': 'name-weight') : (item.is_space == 1 ? 'name-space': '')">{{item.name}}</span>
 											</a-select-option>
 										</a-select>
@@ -158,7 +176,7 @@
 												style="width: 200px;"
 												v-model="payWay"
 										>
-											<a-select-option v-for="item in refundStatusList" :value="item.key">
+											<a-select-option v-for="item in yzPayWay" :value="item.key">
 												<span>{{item.name}}</span>
 											</a-select-option>
 										</a-select>
@@ -186,8 +204,8 @@
 												v-model="payTime"
 												@change="changeTime"
 										/>
-										<a-button type="primary" style="margin: 0 15px;" @click="find">查询</a-button>
-										<a-button @click="clear">重置</a-button>
+										<a-button type="primary" style="margin: 0 15px;" @click="find">查找</a-button>
+										<a-button @click="clear">清空</a-button>
 									</a-col>
 								</a-row>
 							</div>
@@ -199,7 +217,7 @@
 										:beforeUpload="beforeUpload"
 								>
 									<a-button type="primary"
-									          style="margin-left: 10px;font-size: 14px;">导入订单
+											  style="margin-left: 10px;font-size: 14px;">导入订单
 									</a-button>
 								</a-upload>
 							</a-col>
@@ -209,7 +227,7 @@
 							<div class="content-bd">
 								<div class="spin-content">
 									<a-table
-											:columns="type == 1 ? columns : (type == 2 ? columnsYZ : columnsTB)"
+											:columns="type == 1 ? columns : (type == 2 ? columnsYZ : type == 5 ? columnsShop : columnsTB)"
 											:dataSource="orderList"
 											:pagination="false"
 											:rowClassName="rowClassName">
@@ -219,9 +237,17 @@
 											<p>{{record.phone}}</p>
 											<p v-if="type == 1">{{record.card_no}}</p>
 										</span>
+										<span slot="buy_name" slot-scope="text, record">
+											<p>{{text}}</p>
+											<p>{{record.buy_phone}}</p>
+										</span>
 										<span slot="receiverName" slot-scope="text, record">
 											<p>{{record.receiverName}}</p>
 											<p>{{record.receiverPhone}}</p>
+										</span>
+										<span slot="receiver_name" slot-scope="text, record">
+											<p>{{text}}</p>
+											<p>{{record.receiver_phone}}</p>
 										</span>
 
 										<span slot="goodName" slot-scope="text, record">
@@ -229,7 +255,7 @@
 											(x{{record.babyNum}})
 										</span>
 										<span slot="action" slot-scope="text, record">
-											<a-button @click="detial(record.id)">查看详情</a-button>
+											<a-button @click="detial(record.id,record)">查看详情</a-button>
 										</span>
 									</a-table>
 									<div style="width: 100%;margin-bottom: 10px;" v-show="total > 0">
@@ -476,6 +502,57 @@
 						</a-form-item>
 					</a-form>
 				</a-modal>
+				
+				<a-drawer
+					title="订单详情" 
+					placement="right" 
+					:destroyOnClose='true'
+					:width="500"
+					@close="cancelDetail" 
+					:visible="orderDetailVisible">
+					<div style="padding: 5px;">
+						<label style="font-size: 16px; font-weight: 700;" v-if="0">订单信息</label>
+						<a-form>
+							<a-form-item label="订单号" :label-col="{ span: 5 }" :wrapper-col="{ span: 19 }">{{detailData.order_no}}</a-form-item>
+							<a-form-item label="支付时间" :label-col="{ span: 5 }" :wrapper-col="{ span: 19 }">{{detailData.pay_time}}</a-form-item>
+							<a-form-item label="状态" :label-col="{ span: 5 }" :wrapper-col="{ span: 19 }">{{detailData.status}}</a-form-item>
+							<a-form-item label="订单金额" :label-col="{ span: 5 }" :wrapper-col="{ span: 19 }">￥{{detailData.payment_amount}}</a-form-item>
+							<a-form-item label="支付方式" :label-col="{ span: 5 }" :wrapper-col="{ span: 19 }">{{detailData.payment_method}}</a-form-item>
+							<a-form-item label="下单人" :label-col="{ span: 5 }" :wrapper-col="{ span: 19 }">{{detailData.buy_name}}({{detailData.buy_phone}})</a-form-item>
+							<a-form-item label="收货信息" :label-col="{ span: 5 }" :wrapper-col="{ span: 19 }">{{detailData.receiver_name}}({{detailData.receiver_phone}})</a-form-item>
+							<a-form-item label="收货地址" :label-col="{ span: 5 }" :wrapper-col="{ span: 19 }">{{detailData.receiver_address||"--"}}</a-form-item>
+							<a-form-item label="门店" :label-col="{ span: 5 }" :wrapper-col="{ span: 19 }">{{detailData.scrm_store_id}}</a-form-item>
+							<a-form-item 
+							label="商品信息" 
+							:label-col="{ span: 5 }" 
+							:wrapper-col="{ span: 19 }" 
+							style="margin-top: 20px;" 
+							v-if="orderDetail.length>0">
+								<a-table
+										:columns="detailColumns1"
+										:dataSource="orderDetail"
+										:rowClassName="rowClassName"
+										:pagination="false"
+								>
+								</a-table>
+							</a-form-item>
+						</a-form>
+					</div>
+					<div style="height: 117px;">
+						<div :style="{
+							position: 'absolute',
+							right: 0,
+							bottom: '64px',
+							width: '100%',
+							borderTop: '1px solid #e9e9e9',
+							padding: '10px 16px',
+							background: '#fff',
+							textAlign: 'right',
+							zIndex: 1,}">
+							<a-button type="primary" @click="cancelDetail">关闭</a-button>
+						</div>
+					</div>
+				</a-drawer>
 			</a-spin>
 		</div>
 	</div>
@@ -647,6 +724,62 @@
 			scopedSlots: {customRender: "action"}
 		}
 	];
+	const columnsShop = [
+		{
+			title    : "订单号",
+			dataIndex: "order_no",
+			key      : "order_no"
+		},
+		{
+			title    : "状态",
+			dataIndex: "status",
+			key      : "status"
+		},
+		{
+			title    : "订单金额",
+			dataIndex: "payment_amount",
+			key      : "payment_amount"
+		},
+		{
+			title    : "支付方式",
+			dataIndex: "payment_method",
+			key      : "payment_method"
+		},
+		{
+			title      : "下单人",
+			dataIndex  : "buy_name",
+			key        : "buy_name",
+			scopedSlots: {customRender: "buy_name"}
+		},
+		{
+			title    : "支付时间",
+			dataIndex: "pay_time",
+			key      : "pay_time"
+		},
+		{
+			title      : "收货信息",
+			dataIndex  : "receiver_name",
+			key        : "receiver_name",
+			scopedSlots: {customRender: "receiver_name"}
+		},
+		{
+			title      : "收货地",
+			dataIndex  : "receiver_address",
+			key        : "receiver_address",
+		},
+		{
+			title      : "订单归属",
+			dataIndex  : "scrm_store_name",
+			key        : "scrm_store_name",
+		},
+		{
+			title      : "操作",
+			dataIndex  : "action",
+			key        : "action",
+			width      : "140px",
+			scopedSlots: {customRender: "action"}
+		}
+	]
 	const detailColumns = [
 		{
 			title    : "名称",
@@ -664,6 +797,25 @@
 			key      : "price"
 		},
 	]
+	const detailColumns1 = [
+		{
+			title    : "商品名称",
+			dataIndex: "name",
+			key      : "name",
+			ellipsis: true,
+			width: '40%',
+		},
+		{
+			title    : "数量",
+			dataIndex: "product_number",
+			key      : "product_number"
+		},
+		{
+			title    : "单价",
+			dataIndex: "price",
+			key      : "price"
+		},
+	]
 	export default {
 		name      : 'HomeLeftContain',
 		components: {},
@@ -674,7 +826,7 @@
 				spinning        : false,
 				// 展示公众号id
 				bindId          : "",
-				type            : 1,  // 1智慧店铺 2有赞 3淘宝
+				type            : 1,  // 1智慧店铺 2有赞 3淘宝，5电商系统
 				// 企业微信列表
 				storeList       : [], // 店铺列表
 				orderStatus     : [], // 订单状态
@@ -682,6 +834,76 @@
 				orderCode       : '', // 订单号
 				payWays         : [], // 支付方式列表
 				payWay          : [], // 支付方式
+				yzPayWay        : [
+					{
+						key: 'WEIXIN',
+						name: '微信支付'
+					},
+					{
+						key: 'WEIXIN_DAIXIAO',
+						name: '微信代销支付'
+					},
+					{
+						key: 'ALIPAY',
+						name: '支付宝支付'
+					},
+					{
+						key: 'BANKCARDPAY',
+						name: '银行卡支付'
+					},
+					{
+						key: 'PEERPAY',
+						name: '代付'
+					},
+					{
+						key: 'CODPAY',
+						name: '货到付款'
+					},
+					{
+						key: 'BAIDUPAY',
+						name: '百度钱包支付'
+					},
+					{
+						key: 'PRESENTTAKE',
+						name: '直接领取赠品'
+					},
+					{
+						key: 'COUPONPAY',
+						name: '优惠券/码全额抵扣'
+					},
+					{
+						key: 'BULKPURCHASE',
+						name: '来自分销商的采购'
+					},
+					{
+						key: 'MERGEDPAY',
+						name: '合并付货款'
+					},
+					{
+						key: 'ECARD',
+						name: '有赞E卡支付'
+					},
+					{
+						key: 'PURCHASE_PAY',
+						name: '采购单支付'
+					},
+					{
+						key: 'MARKPAY',
+						name: '标记收款'
+					},
+					{
+						key: 'OFCASH',
+						name: '现金支付'
+					},
+					{
+						key: 'PREPAIDCARD',
+						name: '储值卡余额支付'
+					},
+					{
+						key: 'ENCHASHMENT_GIFT_CARD',
+						name: '礼品卡支付'
+					},
+				],
 				payTime         : null, // 支付时间
 				phone           : '', // 手机号
 				cardNo          : '', // 卡号
@@ -769,6 +991,7 @@
 				columns,
 				columnsYZ,
 				columnsTB,
+				columnsShop,
 				orderList       : [], // 订单列表
 				page            : 1,
 				pageSize        : 15,
@@ -778,15 +1001,23 @@
 				tbDetailVisible : false, // 淘宝详情弹窗
 				orderDetail     : {}, // 订单详情
 				detailColumns,
+				detailColumns1,
+				orderDetailVisible: false,//电商订单详情抽屉
+				detailData: {},//电商订单详情数据
 			}
 		},
 		created () {
 
 		},
 		mounted () {
-
-			this.getStore()
-			this.getOrderType()
+			this.type = this.$route.query.type
+			if(this.type == 5){
+				this.getOrder1()
+			}else{
+				this.getStore()
+				this.getOrderType()
+			}
+			
 		},
 		methods   : {
 			goAppCenter() {
@@ -920,6 +1151,35 @@
 					this.spinning = false
 				}
 			},
+			async getOrder1 (page = 1, pageSize = this.pageSize) {// 电商系统获取订单
+				this.spinning = true
+				let params = {
+					corp_id: localStorage.getItem('corpId') ? localStorage.getItem('corpId') : "",
+					page: page,
+					page_size: pageSize,
+					order_no: this.orderCode,
+					buy_phone: this.phone,
+					receiver_name: this.nickName,
+					order_status: this.orderStatus.length>0?this.orderStatus:'',
+					payment_method: typeof this.payWay == "undefined" ? '' : (this.payWay.length == 0 ? '' : this.payWay),
+					add_time_start: this.payTime ? (this.payTime.length > 1 ? this.payTime[0].format("YYYY-MM-DD HH:mm") : '') : '',
+					add_time_end: this.payTime ? (this.payTime.length > 1 ? this.payTime[1].format("YYYY-MM-DD HH:mm") : '') : '',
+				}
+				const {data: res} = await this.axios.post(
+					"shop-customer-order/third-order-list", params);
+				if (res.error != 0) {
+					this.spinning = false
+					this.$message.error(res.error_msg);
+				} else {
+					this.payWays = res.data.pay_type
+					this.orderList = res.data.result
+					this.total = parseInt(res.data.count)
+					this.page = page
+					this.pageSize = pageSize
+					this.spinning = false
+				}
+			},
+			
 			disabledDate (current) {
 				return current && current > moment().endOf('day');
 			},
@@ -932,7 +1192,12 @@
 				if (!this.payTime || this.payTime.length == 0) {
 					this.payTime = null
 				}
-				this.getOrder()
+				if(this.type == 5){
+					this.getOrder1()
+				}else{
+					this.getOrder()
+				}
+				
 			},
 			// 清除
 			clear () {
@@ -946,7 +1211,11 @@
 				this.cardNo = ''
 				this.phone = ''
 				this.nickName = ''
-				this.getOrder()
+				if(this.type == 5){
+					this.getOrder1()
+				}else{
+					this.getOrder()
+				}
 			},
 			downloadTemplate () {
 				let eleLink = document.createElement('a')
@@ -973,25 +1242,40 @@
 				} else {
 					this.$message.success(res.data.textHtml)
 					this.getTaoBaoOrderStatus()
-					this.getOrder()
+					if(this.type == 5){
+						this.getOrder1()
+					}else{
+						this.getOrder()
+					}
 				}
 			},
 			// 订单详情
-			async detial (id) {
-				const {data: res} = await this.axios.post(
-					"third-store/order-info",
-					{
+			async detial (id,item) {
+				let params,url;
+				if(this.type == 5){
+					params = {
+						corp_id: localStorage.getItem('corpId') ? localStorage.getItem('corpId') : "",
+						order_id: id,
+					}
+					url = "shop-customer-order/third-order-product"
+				}else{
+					params = {
 						bindId : this.bindId,
 						orderId: id,
 						type   : 2
 					}
-				);
+					url = "third-store/order-info"
+				}
+				const {data: res} = await this.axios.post(url,params);
 				if (res.error != 0) {
 					this.$message.error(res.error_msg)
 				} else {
 					this.orderDetail = res.data
 					if (this.type == 3 || this.type == 4) {
 						this.tbDetailVisible = true
+					}else if (this.type == 5) {
+						this.orderDetailVisible = true
+						this.detailData = item
 					} else {
 						this.detailVisible = true
 					}
@@ -1002,17 +1286,42 @@
 			cancelDetail () {
 				this.detailVisible = false
 				this.tbDetailVisible = false
+				this.orderDetailVisible = false
 			},
 			// 改变页数
 			changePage (page, pageSize) {
-				this.getOrder(page, this.pageSize)
+				if(this.type == 5){
+					this.getOrder1(page, pageSize)
+				}else{
+					this.getOrder(page, pageSize)
+				}
 				document.getElementsByClassName('scroll')[0].scrollTo(0, 0)
 			},
 			// 改变页码
 			showSizeChange (page, pageSize) {
-				this.getOrder(this.page, pageSize)
+				if(this.type == 5){
+					this.getOrder1(page, pageSize)
+				}else{
+					this.getOrder(page, pageSize)
+				}
 			},
+			
 			moment,
+			async pullOrder(){
+				const {data: res} = await this.axios.post("shop-customer-order/pull-order",
+					{
+						corp_id: localStorage.getItem('corpId') ? localStorage.getItem('corpId') : "",
+						method: 'pig_order',
+						page_size: 100,
+						day: 60
+					}
+				);
+				if (res.error != 0) {
+					this.$message.error(res.error_msg)
+				} else {
+					this.$message.success('拉取成功')
+				}
+			},
 		}
 	}
 </script>
@@ -1130,5 +1439,13 @@
 		height: 40px;
 		font-size: 16px;
 		line-height: 40px;
+	}
+	
+	.content-msg {
+		border: 1px solid #FFDDA6;
+		background: #FFF2DB;
+		padding: 10px;
+		text-align: left;
+		margin-bottom: 20px;
 	}
 </style>

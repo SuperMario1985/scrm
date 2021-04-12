@@ -260,10 +260,32 @@
 										</template>
 										<div slot="tag_name" slot-scope="text, record, index">
 											<span v-if="text.length == 0">--</span>
-											<a-tag v-if="text.length > 0" color="blue" v-for="item in text"
-											       style="margin-top: 5px;">
-												{{item}}
-											</a-tag>
+
+                      <span  v-if="text.length>5">
+                          <a-popover>
+                              <span slot="content">
+                                  <div class="over-width">
+                                      <a-tag v-if="text.length > 0" color="blue" v-for="item in text"
+                                             style="margin-top: 5px;">
+												                {{item}}
+										                	</a-tag>
+                                  </div>
+                              </span>
+                              <span  v-for="(item1,index) in text">
+                                    <a-tag v-if="index<5" color="blue"
+                                           style="margin-top: 5px;">
+												                {{item1}}
+										                	</a-tag>
+                              </span>
+                            <span>等{{text.length}}个标签</span>
+                          </a-popover>
+                      </span>
+                      <span v-if="text.length<=5">
+                           <a-tag v-if="text.length > 0" color="blue" v-for="item in text"
+                                  style="margin-top: 5px;">
+												                {{item}}
+										                	</a-tag>
+                      </span>
 										</div>
 										<template slot="action" slot-scope="text, record, index">
 											<a-button @click="edit" style="margin: 0 5px 5px 0">编辑</a-button>
