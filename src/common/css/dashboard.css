@@ -48,6 +48,7 @@
   margin-right: 12px;
   vertical-align: baseline;
 }
+
 .menu-sider .icon-base.icon-address {
   background: url(../../assets/menu/icon-address.png) center center no-repeat;
   background-size: 14px 14px;
@@ -88,6 +89,11 @@
   background: url(../../assets/menu/icon-home.png) center center no-repeat;
   background-size: 14px 14px;
 }
+.menu-sider /deep/ .icon-base.icon-homeDad {
+  background: url(../../assets/menu/icon-home.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+
 .menu-sider .icon-base.icon-manage {
   background: url(../../assets/menu/icon-manage.png) center center no-repeat;
   background-size: 14px 14px;
@@ -241,6 +247,10 @@
   background: #DEF0E8;
 }
 .menu-sider /deep/ .ant-menu-item-selected .icon-base.icon-home {
+  background: url(../../assets/menu/icon-home-active.png) center center no-repeat;
+  background-size: 14px 14px;
+}
+.menu-sider /deep/ .ant-menu-item-selected .icon-base.icon-homeDad {
   background: url(../../assets/menu/icon-home-active.png) center center no-repeat;
   background-size: 14px 14px;
 }

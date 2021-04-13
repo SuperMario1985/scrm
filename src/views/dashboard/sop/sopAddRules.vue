@@ -134,9 +134,9 @@
 				<div class='flex items-center'>
 					<div class="text-gray-900 text-14" v-if="!detailData.is_chat">设置规则后，将会通过应用通知去提醒所选部门成员发送内容</div>
 					<div class="text-gray-900 text-14" v-else>设置规则内容后，将会通过应用通知去提醒所选群聊群主发送内容</div>
-					<div class='text-14 text-gray-501 pl-10'><a target='_blank'
+					<!-- <div class='text-14 text-gray-501 pl-10'><a target='_blank'
 					                                            :href="detailData.is_chat==1?'https://support.qq.com/products/104790/faqs/89642':'https://support.qq.com/products/104790/faqs/89640'">如何发送</a>
-					</div>
+					</div> -->
 				</div>
 
 				<div class="mt-30  flex ss-rules-l">

@@ -103,7 +103,8 @@
 								6、近度，考量的是顾客最后一次主动会话或者是消费，距离当前的天数。
 							</p>
 							<p style="margin-bottom: 0px;">
-								7、额度，考量的是顾客平均消费客单价，为总消费额除以消费次数。开启了消费数据之后，顾客若没有消费记录，统一以额度为低来进行处理。详细的概念和使用说明可以点击 <a href="https://support.qq.com/products/104790/faqs/90393" target="_blank">说明文档</a>
+								7、额度，考量的是顾客平均消费客单价，为总消费额除以消费次数。开启了消费数据之后，顾客若没有消费记录，统一以额度为低来进行处理。详细的概念和使用说明可以点击 
+								<!-- <a href="https://support.qq.com/products/104790/faqs/90393" target="_blank">说明文档</a> -->
 							</p>
 						</div>
 						<div class="content-hd">

@@ -81,9 +81,7 @@
 													   href="https://mp.weixin.qq.com/cgi-bin/loginpage?t=wxm2-login&lang=zh_CN"
 													   target="_blank">微信公众平台</a>
 													开通模板功能。
-													<!-- <a style="text-decoration: underline;"
-													   href="https://support.qq.com/products/104790/faqs/57453"
-													   target="_blank">教程</a> -->
+													
 												</p>
 												
 												<p style="margin-bottom: 2px;line-height: 20px;">

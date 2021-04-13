@@ -3,7 +3,7 @@
 		<div class='flex flex-col h-full'>
 			<div class='bg-white px-16 py-15 sticky  b-line  ss-content-top top-0 flex items-center'>
 				<div class='text-16 text-gray-900'>{{is_chat?"客户群SOP":"客户SOP"}}</div>
-				<div class='text-14 text-gray-501 pl-10'><a target='_blank' :href="is_chat==1?'https://support.qq.com/products/104790/faqs/89642':'https://support.qq.com/products/104790/faqs/89640'">帮助文档</a></div>
+				<!-- <div class='text-14 text-gray-501 pl-10'><a target='_blank' :href="is_chat==1?'https://support.qq.com/products/104790/faqs/89642':'https://support.qq.com/products/104790/faqs/89640'">帮助文档</a></div> -->
 			</div>
 
 			<div class="flex h-full ">

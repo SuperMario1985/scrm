@@ -395,13 +395,8 @@
       <template v-if="msgObj.addType == 1">
         <div class="content-msg" style="margin-bottom: 10px;">
           <p style="margin-bottom: 2px;line-height: 20px;">
-	  在<template v-if="menuType == 1">企业微信</template><template v-else-if="menuType==0">公众号</template>里发送小程序（必须在微信公众平台通过审核和发布的），请先将其关联到<template v-if="menuType == 1">企业微信</template><template v-else-if="menuType==0">公众号</template>（
-	  <a v-if="menuType == 1" target="_blank" href="https://support.qq.com/products/104790/faqs/61672">
-	  如何关联</a>
-
-	  <a v-if="menuType == 0" target="_blank" href="https://support.qq.com/products/104790/faqs/90038">
-              如何关联</a>
-            ），再到本系统添加该小程序，否则发送失败，客户接收不到。
+	  在<template v-if="menuType == 1">企业微信</template><template v-else-if="menuType==0">公众号</template>里发送小程序（必须在微信公众平台通过审核和发布的），请先将其关联到<template v-if="menuType == 1">企业微信</template><template v-else-if="menuType==0">公众号</template>
+            ，再到本系统添加该小程序，否则发送失败，客户接收不到。
           </p>
           <p style="margin-bottom: 2px;line-height: 20px;">
             如果没有微信小程序，请前往微信小程序进行注册。
