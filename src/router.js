@@ -432,7 +432,7 @@ var router = new Router({
 				},
 				{
 					path: '/operationCenter',
-					name: 'operation',
+					name: 'operationCenter',
 					component: Home,
 					meta: {
 						keepAlive: true,
@@ -931,7 +931,7 @@ var router = new Router({
 						keepAlive: true,
 						corpAlive: true,
 						agentAlive: true,
-						isMenuIndex:2,
+						isMenuIndex:3,
 					}
 				},
 				{

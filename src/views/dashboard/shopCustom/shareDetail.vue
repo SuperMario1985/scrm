@@ -503,8 +503,8 @@
 				margin-left: 5px;
 			}
 			.caledar-btn-selected {
-				border: 1px solid #3B74FF;
-				background: #3B74FF;
+				border: 1px solid #01b065;
+				background: #01b065;
 				border-radius: 0;
 				color: #FFF;
 			}
