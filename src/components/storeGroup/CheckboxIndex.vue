@@ -19,7 +19,7 @@
 						<div class="spin-zhezhao" v-if="isLoading"></div>
 						<div class="store-item" @click="selectId(item.id + '-s', item.shop_name, item.status)" v-for="item in storeList">
 							{{item.shop_name}}<template v-if="item.status == 0">（门店已关闭）</template><span style="color: rgba(0, 0, 0, 0.3)">（{{item.name}}）</span>
-							<a-icon style="color: #1890FF;margin-left: 10px;" type="check" v-if="ids.includes(item.id + '-s')"></a-icon>
+							<a-icon style="color: #01b065;margin-left: 10px;" type="check" v-if="ids.includes(item.id + '-s')"></a-icon>
 						</div>
 
 					</div>
@@ -32,7 +32,7 @@
 					>
 						<template slot="custom" slot-scope="{title, count, key, store}">
 							{{title}}<template v-if="!store">（{{count}}）</template>
-							<a-icon style="color: #1890FF;margin-left: 10px;" type="check" v-if="ids.includes(key)"></a-icon>
+							<a-icon style="color: #01b065;margin-left: 10px;" type="check" v-if="ids.includes(key)"></a-icon>
 						</template>
 					</a-tree>
 				</div>
@@ -277,7 +277,7 @@
 	}
 
 	.active {
-		background-color: #1890FF;
+		background-color: #01b065;
 		color: #FFFFFF;
 	}
 
@@ -319,7 +319,7 @@
 	}
 
 	.more-operation:hover {
-		color: #1890FF;
+		color: #01b065;
 	}
 
 	/deep/ .ant-tree li .ant-tree-node-content-wrapper:hover {
@@ -351,7 +351,7 @@
 	}
 
 	.operation:hover {
-		color: #1890FF;
+		color: #01b065;
 	}
 	/deep/ li.ant-tree-treenode-disabled > .ant-tree-node-content-wrapper span {
 		color: rgba(0, 0, 0, 0.65) !important;

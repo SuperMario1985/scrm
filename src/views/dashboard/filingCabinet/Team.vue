@@ -3,7 +3,7 @@
 		<a-spin tip="Loading..." size="large" :spinning="isLoading">
 			<div class="team-add" style="margin-top: 0px;">
 				<span class="team-add-title" style="position:absolute; margin-left: 97px;">分组管理</span>
-				<span style="color: #1890FF;margin-left: 5px; cursor: pointer;position:absolute;margin-right: 10px; right: 10px;"
+				<span style="color: #01b065;margin-left: 5px; cursor: pointer;position:absolute;margin-right: 10px; right: 10px;"
 				      @click="addGroupModal('', [])" v-has="'filingCabinetTag-group-add'">
 					<a-tooltip placement="bottom">
 	                    <template slot="title">
@@ -736,8 +736,8 @@
 	}
 
 	.active {
-		/*background-color: #1890FF;*/
-		color: #1890FF;
+		/*background-color: #01b065;*/
+		color: #01b065;
 	}
 
 	.team-add {
@@ -778,7 +778,7 @@
 	}
 
 	.more-operation:hover {
-		color: #1890FF;
+		color: #01b065;
 	}
 
 	/deep/ .ant-tree li .ant-tree-node-content-wrapper:hover {
@@ -810,6 +810,6 @@
 	}
 
 	.operation:hover {
-		color: #1890FF;
+		color: #01b065;
 	}
 </style>

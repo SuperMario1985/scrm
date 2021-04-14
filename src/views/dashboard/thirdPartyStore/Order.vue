@@ -12,7 +12,8 @@
 		</div>
 		<div v-if="storeList.length == 0 && isShow" class="empty-img">
 			<img src="../../../assets/thirdPartyStore/empty.png" alt="">
-			<p class="empty-txt">绑定第三方店铺，目前支持淘宝、有赞和小猪智慧店铺。绑定后，可获取到该店铺的交易订单信息，在与客户对话中，可快速查看到该客户的历史订单记录。</p>
+			<!-- <p class="empty-txt">绑定第三方店铺，目前支持淘宝、有赞和小猪智慧店铺。绑定后，可获取到该店铺的交易订单信息，在与客户对话中，可快速查看到该客户的历史订单记录。</p> -->
+			<p class="empty-txt">绑定第三方店铺，目前支持淘宝、有赞。绑定后，可获取到该店铺的交易订单信息，在与客户对话中，可快速查看到该客户的历史订单记录。</p>
 			<a-button type="primary" class="empty-btn" @click="goStore">去绑定</a-button>
 		</div>
 		<div class="home-left-contain" v-if="storeList.length != 0 || type == 5">

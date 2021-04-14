@@ -5,7 +5,7 @@
 				<div class='flex items-center'>
 					<div class="text-gray-900 text-16">{{sop_id?'编辑SOP规则' : '添加SOP规则'}}</div>
 				</div>
-				<a-button type="primary" icon="rollback" @click="goBack(0)">返回列表</a-button>
+				<a-button type="primary" @click="goBack(0)">返回列表</a-button>
 			</div>
 
 			<div class="mx-20 p-30 bg-white mt-20">
@@ -560,8 +560,8 @@
 	}
 
 	.ss-add-btn {
-		border-color: #1890FF;
-		color: #1890FF
+		border-color: #01b065;
+		color: #01b065;
 	}
 
 	.z-100 {

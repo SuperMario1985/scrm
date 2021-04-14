@@ -857,7 +857,7 @@
 		margin-top: 6px;
 	}
 	.table-num span{
-		color: #1890FF;
+		color: #01b065;
 		margin: 0 3px;
 	}
 	

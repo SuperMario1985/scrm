@@ -21,9 +21,9 @@
 						<a-spin tip="Loading..." class="tag-spin" :spinning="isLoading"></a-spin>
 						<div class="spin-zhezhao" v-if="isLoading"></div>
 						<div class="tag-item" :class="tagsDisabled.includes(item.id + '-s') ? 'tag-disabled' : ''" @click="selectId(item.id + '-s', item.tagname)" v-for="item in tagList">
-							<a-icon type="tags" style="color: #1890FF;"></a-icon>
+							<a-icon type="tags" style="color: #01b065;"></a-icon>
 							{{item.tagname}}<span style="color: rgba(0, 0, 0, 0.3)">（{{item.group_name}}）</span>
-							<a-icon style="color: #1890FF;margin-left: 10px;" type="check"
+							<a-icon style="color: #01b065;margin-left: 10px;" type="check"
 							        v-if="ids.includes(item.id + '-s')"></a-icon>
 						</div>
 
@@ -37,12 +37,12 @@
 					>
 						<template slot="custom" slot-scope="{title, count, key, tag}">
 							<span :class="tagsDisabled.includes(key) ? 'tag-disabled' : ''">
-								<a-icon v-if="tag" type="tags" style="color: #1890FF;"></a-icon>
+								<a-icon v-if="tag" type="tags" style="color: #01b065;"></a-icon>
 								<img v-if="!tag" src="../../assets/team.png">
 								{{title}}
 								<template v-if="!tag">（{{count}}）</template>
 							</span>
-							<a-icon style="color: #1890FF;margin-left: 10px;" :class="tagsDisabled.includes(key) ? 'tag-disabled' : ''" type="check"
+							<a-icon style="color: #01b065;margin-left: 10px;" :class="tagsDisabled.includes(key) ? 'tag-disabled' : ''" type="check"
 							        v-if="ids.includes(key)"></a-icon>
 						</template>
 					</a-tree>
@@ -52,7 +52,7 @@
 			:style="{maxHeight : noticeTitle != '' ? '430px' : '386px'}">
 				已选择的标签
 				<div v-for="(item, index) in tags" style="margin: 10px 0">
-					<a-icon v-if="item.tag" type="tags" style="color: #1890FF;"></a-icon>
+					<a-icon v-if="item.tag" type="tags" style="color: #01b065;"></a-icon>
 					<img v-if="!item.tag" src="../../assets/team.png">
 					{{item.title}}
 					<a-icon @click="deleteStore(index)" v-if="!tagsDisabled.includes(item.id)"
@@ -310,7 +310,7 @@
 	}
 
 	.active {
-		background-color: #1890FF;
+		background-color: #01b065;
 		color: #FFFFFF;
 	}
 
@@ -352,7 +352,7 @@
 	}
 
 	.more-operation:hover {
-		color: #1890FF;
+		color: #01b065;
 	}
 
 	/deep/ .ant-tree li .ant-tree-node-content-wrapper:hover {
@@ -384,7 +384,7 @@
 	}
 
 	.operation:hover {
-		color: #1890FF;
+		color: #01b065;
 	}
 
 	/deep/ li.ant-tree-treenode-disabled > .ant-tree-node-content-wrapper span {

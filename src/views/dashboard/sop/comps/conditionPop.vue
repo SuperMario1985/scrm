@@ -214,5 +214,5 @@
 
 <style scoped>
 	.p-1rem{padding:0 1rem}
-	.ss-tag-item.active{background: #1890ff; color: #fff}
+	.ss-tag-item.active{background: #01b065; color: #fff}
 </style>

@@ -658,7 +658,7 @@
 		cursor: pointer;
 	}
 	.activeBtn {
-		color: #1890FF;
+		color: #01b065;
 		background: #FFF;
 	}
 	.content-msg {
@@ -744,7 +744,7 @@
 		fill: none;
 	}
 	.circle-color {
-		stroke: #1890ff;
+		stroke: #01b065;
 		stroke-width: 8px;
 		fill: none;
 		-webkit-transition: stroke-dashoffset 1s linear;
@@ -761,7 +761,7 @@
 		margin-right: 1px;
 	}
 	.ant-dropdown-menu-item{
-		color: #1890ff;
+		color: #01b065;
 	}
 	
 	.set-item{

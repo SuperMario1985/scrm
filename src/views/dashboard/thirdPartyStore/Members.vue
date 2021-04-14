@@ -6,8 +6,9 @@
 		</div>
 		<div v-if="storeList.length == 0 && isShow" class="empty-img">
 			<img src="../../../assets/thirdPartyStore/empty.png" alt="">
-			<p class="empty-txt">目前只针对小猪智慧店铺平台开放会员管理。</p>
-			<a-button type="primary" class="empty-btn" @click="goStore">去绑定</a-button>
+			<!-- <p class="empty-txt">目前只针对小猪智慧店铺平台开放会员管理。</p> -->
+			<p class="empty-txt">敬请期待</p>
+			<!-- <a-button type="primary" class="empty-btn" @click="goStore">去绑定</a-button> -->
 		</div>
 		<div class="home-left-contain" v-if="storeList.length != 0">
 			<a-spin :spinning="spinning" tip="加载中..." size="large"

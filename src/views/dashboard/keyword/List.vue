@@ -65,7 +65,7 @@
 										          @click="changeStatus(record.id,text)"/>
 									</span>
 									<span slot="preview" slot-scope="text, record,index">
-										<span style="color: #1890FF; cursor: pointer;"
+										<span style="color: #01b065; cursor: pointer;"
 										      @click="preview(record.id, record.title, record.contain_keyword, record.equal_keyword)">预览</span>
 									</span>
 									<span slot="contain_keyword" slot-scope="text, record,index">
@@ -80,7 +80,7 @@
 														</a-tag>
 													</div>
 												</span>
-												<span style="color: #1890FF; cursor: pointer;">模糊匹配：{{record.contain_keyword.length}}个</span>
+												<span style="color: #01b065; cursor: pointer;">模糊匹配：{{record.contain_keyword.length}}个</span>
 											</a-popover>
 										</p>
 
@@ -95,7 +95,7 @@
 														</a-tag>
 													</div>
 												</span>
-												<span style="color: #1890FF; cursor: pointer;">精准匹配：{{record.equal_keyword.length}}个</span>
+												<span style="color: #01b065; cursor: pointer;">精准匹配：{{record.equal_keyword.length}}个</span>
 											</a-popover>
 
 										</p>
@@ -170,7 +170,7 @@
 										{{item}}
 									</a-tag>
 								</template>
-								<span style="color: #1890FF; cursor: pointer;">等{{containKeyword.length}}个关键词</span>
+								<span style="color: #01b065; cursor: pointer;">等{{containKeyword.length}}个关键词</span>
 							</a-popover>
 						</div>
 					</div>
@@ -195,7 +195,7 @@
 											{{item}}
 										</a-tag>
 									</template>
-								<span style="color: #1890FF; cursor: pointer;">等{{equalKeyword.length}}个关键词</span>
+								<span style="color: #01b065; cursor: pointer;">等{{equalKeyword.length}}个关键词</span>
 							</a-popover>
 						</div>
 					</div>
@@ -927,7 +927,7 @@
 		border-radius: 50%;
 		box-sizing: border-box;
 		position: relative;
-		border: 2px solid #1890FF;
+		border: 2px solid #01b065;
 	}
 
 	.wifi-symbol {
@@ -942,7 +942,7 @@
 	}
 
 	.wifi-circle {
-		border: 2px solid #1890FF;
+		border: 2px solid #01b065;
 		border-radius: 50%;
 		position: absolute;
 	}
@@ -950,7 +950,7 @@
 	.first {
 		width: 5px;
 		height: 5px;
-		background: #1890FF;
+		background: #01b065;
 		top: 25px;
 		left: 25px;
 	}

@@ -914,7 +914,7 @@
 	}
 
 	/deep/ .ant-tag-checkable-checked {
-		background-color: #1890FF;
+		background-color: #01b065;
 	}
 
 	.pull-left {
@@ -933,7 +933,7 @@
 
 	.active {
 		background: #FFF;
-		color: #1890FF;
+		color: #01b065;
 		margin-right: -1px;
 	}
 
@@ -1020,7 +1020,7 @@
 		border-radius: 50%;
 		box-sizing: border-box;
 		position: relative;
-		border: 2px solid #1890FF;
+		border: 2px solid #01b065;
 	}
 
 	.wifi-symbol {
@@ -1035,7 +1035,7 @@
 	}
 
 	.wifi-circle {
-		border: 2px solid #1890FF;
+		border: 2px solid #01b065;
 		border-radius: 50%;
 		position: absolute;
 	}
@@ -1043,7 +1043,7 @@
 	.first {
 		width: 5px;
 		height: 5px;
-		background: #1890FF;
+		background: #01b065;
 		top: 25px;
 		left: 25px;
 	}
@@ -1198,8 +1198,8 @@
 	}
 
 	/deep/ .ant-tabs-extra-content .ant-tabs-new-tab {
-		color: #1890FF !important;
-		border: 1px solid #1890FF !important;
+		color: #01b065 !important;
+		border: 1px solid #01b065 !important;
 	}
 
 	.mt {

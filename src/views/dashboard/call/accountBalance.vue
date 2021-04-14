@@ -333,7 +333,7 @@
 					:isLoop="false"
 					:audio-list="[selectedRecord.file]"
 					@loadedmetadata="loadedmetadata"
-					theme-color="#1890ff"
+					theme-color="#01b065"
 			/>
 		</a-modal>
 

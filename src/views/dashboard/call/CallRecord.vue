@@ -279,7 +279,7 @@
 				              :show-next-button="false"
 				              :isLoop="false"
 				              :audio-list="[selectedRecord.file_name]"
-				              theme-color="#1890ff"/>
+				              theme-color="#01b065"/>
 			</div>
 		</a-modal>
 	</div>

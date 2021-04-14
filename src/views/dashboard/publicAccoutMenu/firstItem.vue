@@ -1,6 +1,6 @@
 <template>
   <div class="flex-1 firstitem cp ellipsis w80">
-    <div class="ellipsis"><a-icon type="align-left" style="color: #1890ff" />{{item.name}}</div>
+    <div class="ellipsis"><a-icon type="align-left" style="color: #01b065" />{{item.name}}</div>
     <slot name="secondMenu"></slot>
   </div>
 </template>

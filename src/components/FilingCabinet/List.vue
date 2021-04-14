@@ -1646,13 +1646,13 @@
 	}
 
 	.content-msg1 a:link {
-		color: #1890FF;
+		color: #01b065;
 		text-decoration: none;
 	}
 
 	//未访问：蓝色、无下划线
 	.content-msg1 a:visited {
-		color: #1890FF;
+		color: #01b065;
 		text-decoration: none;
 	}
 
@@ -1807,11 +1807,11 @@
 	}
 
 	/deep/ .wxtpl .ant-radio-button-wrapper-checked {
-		border: 2px solid #1890FF !important;
+		border: 2px solid #01b065 !important;
 	}
 
 	.active1 {
-		color: #1890FF;
+		color: #01b065;
 	}
 
 	/deep/ .ant-tree-switcher-icon {
@@ -1861,7 +1861,7 @@
 	}
 
 	.sketch-type-activity {
-		color: #1890FF;
+		color: #01b065;
 	}
 
 	.content_input {

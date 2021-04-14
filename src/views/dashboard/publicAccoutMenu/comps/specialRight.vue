@@ -578,7 +578,7 @@ export default {
 }
 .active {
   background: #FFF;
-  color: #1890FF;
+  color: #01b065;
   margin-right: -1px;
 }
 .push-type-item {

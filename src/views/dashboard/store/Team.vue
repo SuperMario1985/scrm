@@ -3,7 +3,7 @@
 		<a-spin tip="Loading..." size="large" :spinning="isLoading">
 			<div v-if="storeType == 0" class="team-add" style="margin-top: 0px;">
 				<span class="team-add-title" style="position:absolute;">分组管理</span>
-				<span style="color: #1890FF;margin-left: 5px; cursor: pointer;position:absolute;right: 10px;"
+				<span style="color: #01b065;margin-left: 5px; cursor: pointer;position:absolute;right: 10px;"
 				      @click="addGroupModal('', [])" v-has="'channel-group-add'">
 					<a-tooltip placement="bottom">
 	                    <template slot="title">
@@ -821,7 +821,7 @@
 	}
 
 	.active {
-		color: #1890FF;
+		color: #01b065;
 	}
 
 	.team-add {
@@ -862,7 +862,7 @@
 	}
 
 	.more-operation:hover {
-		color: #1890FF;
+		color: #01b065;
 	}
 
 	/deep/ .ant-tree li .ant-tree-node-content-wrapper:hover {
@@ -894,6 +894,6 @@
 	}
 
 	.operation:hover {
-		color: #1890FF;
+		color: #01b065;
 	}
 </style>

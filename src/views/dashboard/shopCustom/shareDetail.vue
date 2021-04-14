@@ -469,7 +469,7 @@
 		border-radius: 4px 4px 0 0;
 		cursor: pointer;
 		&.activeBtn {
-			color: #1890FF;
+			color: #01b065;
 			background: #FFF;
 		}
 	}
@@ -549,7 +549,7 @@
 		line-height: 32rpx;
 		margin-top: 6px;
 		span{
-			color: #1890FF;
+			color: #01b065;
 			margin: 0 3px;
 		}
 	}

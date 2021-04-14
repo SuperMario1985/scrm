@@ -158,7 +158,7 @@ var router = new Router({
 				},
 				{
 					path: '/subAccount',
-					name: 'subAccount',
+					name: 'subAccountDad',
 					component: SubAccount,
 					meta: {
 						keepAlive: true,
@@ -206,7 +206,7 @@ var router = new Router({
 				},
 				{
 					path: '/fans/msg',
-					name: 'fansMsg',
+					name: 'fansMsgDad',
 					component: () => import('./views/dashboard/fans/msg.vue'),
 					meta: {
 						keepAlive: false,
@@ -366,7 +366,7 @@ var router = new Router({
 				},
 				{
 					path: '/smsSend/list',
-					name: 'smsSend',
+					name: 'smsSend2',
 					component: () => import('./views/dashboard/smsSend/List.vue'),
 					meta: {
 						keepAlive: true,
@@ -377,7 +377,7 @@ var router = new Router({
 				},
 				{
 					path: '/smsSend/detail',
-					name: 'smsSend',
+					name: 'smsSend2',
 					component: () => import('./views/dashboard/smsSend/Detail.vue'),
 					meta: {
 						keepAlive: true,
@@ -388,7 +388,7 @@ var router = new Router({
 				},
 				{
 					path: '/smsSend/add',
-					name: 'smsSend',
+					name: 'smsSend2',
 					component: () => import('./views/dashboard/smsSend/Add.vue'),
 					meta: {
 						keepAlive: true,
@@ -399,7 +399,7 @@ var router = new Router({
 				},
 				{
 					path: '/smsSend/order',
-					name: 'smsSend',
+					name: 'smsSend2',
 					component: () => import('./views/dashboard/smsSend/Order.vue'),
 					meta: {
 						keepAlive: true,
@@ -432,7 +432,7 @@ var router = new Router({
 				},
 				{
 					path: '/operationCenter',
-					name: 'operationCenter',
+					name: 'operation',
 					component: Home,
 					meta: {
 						keepAlive: true,
@@ -885,7 +885,7 @@ var router = new Router({
 				},
 				{
 					path: '/welcome/list',
-					name: 'welcome',
+					name: 'welcomeDad',
 					component: () => import('./views/dashboard/welcome/List.vue'),
 					meta: {
 						corpAlive: false,
@@ -895,7 +895,7 @@ var router = new Router({
 				},
 				{
 					path: '/welcome/add',
-					name: 'welcome',
+					name: 'welcomeDad',
 					component: () => import('./views/dashboard/welcome/Add.vue'),
 					meta: {
 						corpAlive: false,
@@ -905,7 +905,7 @@ var router = new Router({
 				},
 				{
 					path: '/massMessage/list',
-					name: 'massMessage',
+					name: 'massMessageDad',
 					component: () => import('./views/dashboard/massMessage/List.vue'),
 					meta: {
 						corpAlive: false,
@@ -915,7 +915,7 @@ var router = new Router({
 				},
 				{
 					path: '/massMessage/add',
-					name: 'massMessage',
+					name: 'massMessageDad',
 					component: () => import('./views/dashboard/massMessage/Add.vue'),
 					meta: {
 						corpAlive: false,
@@ -979,7 +979,7 @@ var router = new Router({
 				},
 				{
 					path: '/wechatManagement',
-					name: 'wechatManagement',
+					name: 'wechatManagementDad',
 					component: WechatManagement,
 					meta: {
 						corpAlive: true,
@@ -989,7 +989,7 @@ var router = new Router({
 				},
 				{
 					path: '/agent/list',
-					name: 'agent',
+					name: 'agentDad',
 					component: () => import('./views/dashboard/agent/List.vue'),
 					meta: {
 						corpAlive: false,
@@ -999,7 +999,7 @@ var router = new Router({
 				},
 				{
 					path: '/sidebar/detail',
-					name: 'sidebar',
+					name: 'sidebarDad',
 					component: () => import('./views/dashboard/sidebar/Detail.vue'),
 					meta: {
 						corpAlive: false,
@@ -1019,7 +1019,7 @@ var router = new Router({
 				},
 				{
 					path: '/appCenter/list',
-					name: 'appCenterList',
+					name: 'appCenterListDad',
 					component: () => import('./views/dashboard/appCenter/List.vue'),
 					meta: {
 						keepAlive: true,
@@ -1121,7 +1121,7 @@ var router = new Router({
 				},
 				{
 					path: '/staff/redirect',
-					name: 'redirect',
+					name: 'redirectDad',
 					component: () => import('./views/dashboard/staff/Redirect.vue'),
 					meta: {
 						corpAlive: false,
@@ -1471,7 +1471,7 @@ var router = new Router({
 				},
 				{
 					path: '/circle/circleOfFriends',
-					name: 'circleOfFriends',
+					name: 'circleOfFriendsDad',
 					component: () => import('./views/dashboard/circle/CircleOfFriends.vue'),
 					meta: {
 						corpAlive: false,
@@ -1481,7 +1481,7 @@ var router = new Router({
 				},
 				{
 					path     : 'circle/addFriends',
-					name     : 'circleOfFriends',
+					name     : 'circleOfFriendsDad',
 					component: () => import('./views/dashboard/circle/AddFriends.vue'),
 					meta     : {
 						corpAlive : false,

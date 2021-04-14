@@ -170,7 +170,7 @@
 	}
 
 	.active {
-		color: #1890FF;
+		color: #01b065;
 	}
 
 	.team-add {
@@ -211,7 +211,7 @@
 	}
 
 	.more-operation:hover {
-		color: #1890FF;
+		color: #01b065;
 	}
 
 	/deep/ .ant-tree li .ant-tree-node-content-wrapper:hover {
@@ -243,7 +243,7 @@
 	}
 
 	.operation:hover {
-		color: #1890FF;
+		color: #01b065;
 	}
 
 	/deep/ li.ant-tree-treenode-disabled > .ant-tree-node-content-wrapper span {

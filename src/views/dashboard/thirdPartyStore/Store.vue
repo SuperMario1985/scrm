@@ -134,7 +134,7 @@
 							style="width: 300px;margin-bottom: 10px;"
 							v-model="storeType"
 					>
-						<a-select-option :value="'1'">小猪智慧店铺</a-select-option>
+						<!-- <a-select-option :value="'1'">小猪智慧店铺</a-select-option> -->
 						<a-select-option :value="'2'">有赞</a-select-option>
 						<a-select-option :value="'3'">淘宝</a-select-option>
 						<a-select-option :value="'4'">天猫</a-select-option>

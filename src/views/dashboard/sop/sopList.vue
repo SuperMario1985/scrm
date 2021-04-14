@@ -107,11 +107,10 @@
 
 						<div class='flex justify-end mb-20' >
 							<div>
-								<a-button icon="reload" @click="syncFollowUser">同步配置了外部联系权限的联系人</a-button>
+								<a-button @click="syncFollowUser">同步配置了外部联系权限的联系人</a-button>
 							</div>
 							<a-button type="primary" @click='toCustomSopAddRules()' class='ml-10' v-has="is_chat==1? 'chatSopList-addRules':'customSopList-addRules'">
 								<div>
-									<a-icon type="plus" :style="{color: '#fff'}" />
 									<span>创建SOP规则</span>
 								</div>
 							</a-button>
@@ -649,7 +648,7 @@
 	.ss-content-top{z-index: 100}
 	.ss-content{top: 52px;  position: absolute; overflow: auto; bottom: 0}
 	.ss-type-tabs{}
-	.ss-type-tabs.active{color: #fff; background: #1890ff}
+	.ss-type-tabs.active{color: #fff; background: #01b065}
 	.ss-usernames{max-width: 800px;}
 	>>> .ant-spin-container{height: 100%}
 </style>

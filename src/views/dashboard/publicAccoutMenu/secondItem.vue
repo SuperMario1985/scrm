@@ -1,6 +1,6 @@
 <template>
   <div class="cp seconditem ellipsis">
-    <a-icon type="align-left" style="color: #1890ff" />{{item.name}}
+    <a-icon type="align-left" style="color: #01b065" />{{item.name}}
   </div>
 </template>
 

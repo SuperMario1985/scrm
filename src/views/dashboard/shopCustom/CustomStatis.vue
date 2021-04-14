@@ -1077,10 +1077,10 @@
 						margin-top: 12px;
 					}
 					&.active{
-						border-top: 2px solid #1890ff;
+						border-top: 2px solid #01b065;
 						.progress-r{
 							.circle-color{
-								stroke: #1890ff;
+								stroke: #01b065;
 							}
 						}
 					}

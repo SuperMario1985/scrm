@@ -61,7 +61,7 @@
 										{{item}}
 									</a-tag>
 								</template>
-								<span style="color: #1890FF; cursor: pointer;">等{{record.keywords.length}}个</span>
+								<span style="color: #01b065; cursor: pointer;">等{{record.keywords.length}}个</span>
 							</a-popover>
 							关键词推荐相关内容
 						</span>
@@ -81,7 +81,7 @@
 											{{tag}}
 										</a-tag>
 									</div>
-									<span style="color: #1890FF; cursor: pointer;">{{item.tag_num}}个标签：</span>
+									<span style="color: #01b065; cursor: pointer;">{{item.tag_num}}个标签：</span>
 								</a-popover>
 								<span style="margin-right: 4px;" v-if="item['1']">{{item['1']}}文本</span>
 								<span style="margin-right: 4px;" v-if="item['5']">{{item['5']}}图文</span>
